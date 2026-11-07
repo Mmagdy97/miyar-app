@@ -175,107 +175,39 @@ function App() {
         <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#C5A36B]/8 blur-[130px]" />
       </div>
 
-      {/* 1. Mobile Top Navbar (Visible only on mobile < md) */}
-      <div className="flex md:hidden items-center justify-between p-4 bg-white/95 backdrop-blur-md border-b border-[#E5E6DF] z-30 shrink-0">
-        <button
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="p-2 -mr-2 rounded-lg text-[#202923] hover:bg-[#F5F3ED] transition-colors cursor-pointer"
-          aria-label="القائمة الجانبية"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+      {/* Mobile Drawer Backdrop Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
 
-        {/* App Logo */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#183C35] text-white shadow-sm">
-            <Building2 className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-base font-black text-[#202923] tracking-tight">
-            معيار
-          </span>
-        </div>
-
-        {/* Current Role Badge & Install Action if eligible */}
-        <div className="flex items-center gap-2">
-          {isInstallable && (
-            <button
-              onClick={handleInstallClick}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium bg-[#183C35] text-white hover:bg-[#202923] transition-all cursor-pointer shadow-2xs active:scale-95"
-              title="تثبيت التطبيق على جهازك"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>تثبيت</span>
-            </button>
-          )}
-          <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[#F5F3ED] text-[#202923] border border-[#E5E6DF] shadow-2xs">
-            {ROLE_TITLES[currentRole] || currentRole}
-          </span>
-        </div>
-      </div>
-
-      {/* 2. Desktop Standard Sidebar (Hidden on mobile) */}
-      <div className="hidden md:flex md:w-64 md:flex-col shrink-0">
+      {/* Sidebar: Slide-over Drawer on Mobile (< md), Static on Desktop (md:) */}
+      <div
+        className={`fixed inset-y-0 right-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:block ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        } ${sidebarCollapsed ? "md:w-[72px]" : "md:w-64"} w-72 shrink-0 h-full`}
+      >
         <Sidebar
           currentRole={currentRole}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={(tab) => {
+            setActiveTab(tab);
+            setIsMobileMenuOpen(false);
+          }}
           collapsed={sidebarCollapsed}
           toggleSidebar={toggleSidebar}
+          onCloseMobile={() => setIsMobileMenuOpen(false)}
+          onItemClick={() => setIsMobileMenuOpen(false)}
           isInstallable={isInstallable}
           onInstallClick={handleInstallClick}
+          onRoleChange={handleRoleChange}
         />
       </div>
 
-      {/* 3. Mobile Sidebar Drawer Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex md:hidden" dir="rtl">
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-[#202923]/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-
-          {/* Drawer (Anchored to Right in RTL - Forest Green Miyar Theme) */}
-          <div className="relative w-64 bg-[#183C35] text-white h-full p-4 flex flex-col shadow-xl z-10 animate-in slide-in-from-right duration-200 border-l border-[#5D8C70]/20">
-            <div className="flex items-center justify-between pb-3 mb-2 border-b border-[#5D8C70]/20">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#5D8C70]/30 text-white shadow-sm">
-                  <Building2 className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-sm font-black text-white">معيار</span>
-              </div>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-1.5 rounded-lg text-[#EFEEE8]/70 hover:text-white hover:bg-[#5D8C70]/20 transition-colors cursor-pointer"
-                aria-label="إغلاق القائمة"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Sidebar inside drawer */}
-            <div className="flex-1 overflow-y-auto">
-              <Sidebar
-                currentRole={currentRole}
-                activeTab={activeTab}
-                setActiveTab={(tab) => {
-                  setActiveTab(tab);
-                  setIsMobileMenuOpen(false);
-                }}
-                collapsed={false}
-                toggleSidebar={() => setIsMobileMenuOpen(false)}
-                onItemClick={() => setIsMobileMenuOpen(false)}
-                hideHeader={true}
-                isInstallable={isInstallable}
-                onInstallClick={handleInstallClick}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Main Area: Navbar + Content */}
-      <div className="flex flex-col flex-1 min-w-0 overflow-hidden relative">
+      <div className="flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden relative h-full">
         <Navbar
           currentRole={currentRole}
           onRoleChange={handleRoleChange}
@@ -285,6 +217,9 @@ function App() {
             setIsAuthenticated(false);
             setCurrentRole("");
           }}
+          onToggleMobileMenu={() => setIsMobileMenuOpen((prev) => !prev)}
+          isInstallable={isInstallable}
+          onInstallClick={handleInstallClick}
         />
         <MainContent
           currentRole={currentRole}

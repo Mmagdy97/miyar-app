@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, Building2, X } from "lucide-react";
 import { ROLE_CONFIG, ROLE_TITLES } from "../config/roles";
 
 function Sidebar({
@@ -9,6 +9,8 @@ function Sidebar({
   collapsed = false,
   toggleSidebar,
   onItemClick,
+  onCloseMobile,
+  onRoleChange,
   hideHeader = false,
   isInstallable = false,
   onInstallClick,
@@ -43,32 +45,52 @@ function Sidebar({
       ref={sidebarRef}
       className={`relative flex flex-col h-full bg-[#183C35] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
         hideHeader ? "w-full border-none" : "border-l border-[#5D8C70]/20"
-      } ${!hideHeader && (collapsed ? "w-[72px]" : "w-64")}`}
+      } ${!hideHeader && (collapsed ? "md:w-[72px]" : "w-full md:w-64")}`}
     >
-      {/* Sidebar Header (Hidden in mobile drawer) */}
+      {/* Sidebar Header */}
       {!hideHeader && (
         <div
           className={`flex items-center h-16 px-4 border-b border-[#5D8C70]/20 ${
             collapsed ? "justify-center" : "justify-between"
           }`}
         >
-          {!collapsed && (
-            <span className="text-[11px] font-bold text-[#EFEEE8]/80 uppercase tracking-widest font-ibm">
-              القائمة الرئيسية
-            </span>
-          )}
-          <button
-            onClick={toggleSidebar}
-            className="flex items-center justify-center w-8 h-8 rounded-lg text-[#EFEEE8]/70 hover:text-white hover:bg-[#5D8C70]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
-            aria-label={collapsed ? "توسيع القائمة الجانبية" : "تصغير القائمة الجانبية"}
-            title={collapsed ? "توسيع القائمة" : "تصغير القائمة"}
-          >
-            {collapsed ? (
-              <ChevronLeft className="w-4 h-4" />
-            ) : (
-              <ChevronRight className="w-4 h-4" />
+          {/* Mobile Header: Logo + Close Drawer Button */}
+          <div className="flex md:hidden items-center justify-between w-full">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#5D8C70]/30 text-white shadow-2xs">
+                <Building2 className="w-4 h-4 text-white" />
+              </div>
+              <span className="text-base font-black text-white tracking-tight">معيار</span>
+            </div>
+            <button
+              onClick={onCloseMobile || onItemClick}
+              className="p-1.5 rounded-lg text-[#EFEEE8]/80 hover:text-white hover:bg-[#5D8C70]/20 transition-colors cursor-pointer"
+              aria-label="إغلاق القائمة"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Desktop Header: Label + Collapse Toggle */}
+          <div className="hidden md:flex items-center justify-between w-full">
+            {!collapsed && (
+              <span className="text-[11px] font-bold text-[#EFEEE8]/80 uppercase tracking-widest font-ibm">
+                القائمة الرئيسية
+              </span>
             )}
-          </button>
+            <button
+              onClick={toggleSidebar}
+              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#EFEEE8]/70 hover:text-white hover:bg-[#5D8C70]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
+              aria-label={collapsed ? "توسيع القائمة الجانبية" : "تصغير القائمة الجانبية"}
+              title={collapsed ? "توسيع القائمة" : "تصغير القائمة"}
+            >
+              {collapsed ? (
+                <ChevronLeft className="w-4 h-4" />
+              ) : (
+                <ChevronRight className="w-4 h-4" />
+              )}
+            </button>
+          </div>
         </div>
       )}
 

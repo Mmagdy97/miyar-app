@@ -164,7 +164,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#E5E6DF]">
         <div>
@@ -813,7 +813,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

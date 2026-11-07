@@ -301,7 +301,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-7 max-w-7xl mx-auto w-full bg-transparent min-h-screen">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden bg-transparent min-h-screen">
       {/* Toast Notification for Solution Sent */}
       {solutionSuccessToast && (
         <div className="sticky top-4 z-40 p-4 rounded-lg bg-emerald-700 text-white shadow-xl shadow-emerald-600/25 border border-emerald-500 animate-in fade-in slide-in-from-top-4 flex items-center justify-between gap-3">
@@ -1003,7 +1003,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

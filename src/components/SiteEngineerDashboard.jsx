@@ -194,7 +194,7 @@ function SiteEngineerDashboard({ setActionItems }) {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-3 sm:p-5 md:p-8 bg-transparent min-h-screen">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent min-h-screen w-full max-w-full overflow-x-hidden">
       {/* Constrain layout to a mobile/tablet-friendly container */}
       <div className="max-w-2xl mx-auto space-y-5 pb-12">
         {/* Temporary Success Toast Message (Auto-hides after 3 seconds) */}
@@ -698,7 +698,7 @@ function SiteEngineerDashboard({ setActionItems }) {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

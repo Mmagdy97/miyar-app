@@ -165,7 +165,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-10 space-y-8 max-w-7xl mx-auto w-full">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Premium Header (Welcome Banner) */}
       <div className="relative rounded-2xl p-6 sm:p-8 md:p-10 bg-[#183C35] text-white shadow-sm border border-[#14322c] overflow-hidden">
         {/* Subtle Ambient Glows */}
@@ -291,7 +291,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* Horizontal Timeline Stepper */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
           {PROJECT_PHASES.map((phase, index) => {
             const isCompleted = phase.status === "completed";
             const isActive = phase.status === "active";
@@ -834,7 +834,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

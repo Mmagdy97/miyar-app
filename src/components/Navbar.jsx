@@ -6,10 +6,21 @@ import {
   ChevronDown,
   Inbox,
   LogOut,
+  Menu,
+  Download,
 } from "lucide-react";
 import { ROLES, ROLE_TITLES } from "../config/roles";
 
-function Navbar({ currentRole, onRoleChange, actionItems = [], setSelectedItem, onLogout }) {
+function Navbar({
+  currentRole,
+  onRoleChange,
+  actionItems = [],
+  setSelectedItem,
+  onLogout,
+  onToggleMobileMenu,
+  isInstallable = false,
+  onInstallClick,
+}) {
   // Role switcher dropdown state
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -44,37 +55,62 @@ function Navbar({ currentRole, onRoleChange, actionItems = [], setSelectedItem, 
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 md:px-6 bg-white/95 backdrop-blur-md border-b border-[#E5E6DF]">
-      {/* Right in RTL: Logo & Platform Identity */}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#183C35] text-white shadow-xs transition-transform hover:scale-105 cursor-pointer">
-          <Building2 className="w-5 h-5 text-white" />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-base md:text-lg font-black text-[#202923] tracking-tight leading-tight flex items-center gap-1.5">
-            <span>معيار</span>
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-[#F5F3ED] text-[#183C35] border border-[#E5E6DF] hidden sm:inline">
-              MIYAR
+    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-3 sm:px-4 md:px-6 bg-white/95 backdrop-blur-md border-b border-[#E5E6DF] w-full max-w-full">
+      {/* Right in RTL: Mobile Menu Toggle + Logo & Platform Identity */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Hamburger Menu Toggle (Visible on Mobile < md) */}
+        <button
+          onClick={onToggleMobileMenu}
+          className="md:hidden p-1.5 -mr-1 rounded-lg text-[#202923] hover:bg-[#F5F3ED] transition-colors cursor-pointer"
+          aria-label="القائمة الجانبية"
+        >
+          <Menu className="w-6 h-6 text-[#183C35]" />
+        </button>
+
+        {/* Brand Icon + Name */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#183C35] text-white shadow-xs transition-transform hover:scale-105 cursor-pointer">
+            <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-base sm:text-lg font-black text-[#202923] tracking-tight leading-tight flex items-center gap-1.5">
+              <span>معيار</span>
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-[#F5F3ED] text-[#183C35] border border-[#E5E6DF] hidden sm:inline">
+                MIYAR
+              </span>
             </span>
-          </span>
-          <span className="text-[10px] text-[#526257] font-medium hidden sm:inline leading-none">
-            استوديو المقاولات والتصميم المعماري
-          </span>
+            <span className="text-[10px] text-[#526257] font-medium hidden sm:inline leading-none">
+              استوديو المقاولات والتصميم المعماري
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Left in RTL: Notifications Bell + Role Switcher + User Profile */}
-      <div className="flex items-center gap-3">
+      {/* Left in RTL: PWA Install + Bell + Role Switcher (Desktop) + Avatar */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        {/* Compact PWA Install Button (Responsive: small on mobile) */}
+        {isInstallable && (
+          <button
+            onClick={onInstallClick}
+            className="inline-flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold bg-[#183C35] text-white hover:bg-[#202923] transition-all cursor-pointer shadow-2xs active:scale-95"
+            title="تثبيت التطبيق على جهازك"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span className="text-[11px] sm:text-xs">تثبيت</span>
+          </button>
+        )}
+
         {/* Interactive Notification Bell with Dropdown */}
         <div className="relative" ref={notificationsRef}>
           <button
             onClick={() => setIsNotificationsOpen((prev) => !prev)}
-            className={`relative flex items-center justify-center w-9 h-9 rounded-lg transition-colors cursor-pointer ${
+            className={`relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg transition-colors cursor-pointer ${
               isNotificationsOpen
                 ? "bg-[#F5F3ED] text-[#183C35] border border-[#E5E6DF]"
                 : "text-[#526257] hover:text-[#183C35] hover:bg-[#F5F3ED]"
             }`}
             title={`الإشعارات (${roleNotifications.length})`}
+            aria-label="الإشعارات والتنبيهات"
           >
             <Bell className="w-4 h-4" />
             {roleNotifications.length > 0 && (
@@ -84,9 +120,9 @@ function Navbar({ currentRole, onRoleChange, actionItems = [], setSelectedItem, 
             )}
           </button>
 
-          {/* Minimalist Notifications Dropdown Card */}
+          {/* Minimalist Notifications Dropdown Card (Constrained so it NEVER bleeds off-screen) */}
           {isNotificationsOpen && (
-            <div className="absolute left-0 mt-2 w-80 sm:w-96 bg-white rounded-xl shadow-lg border border-[#E5E6DF] py-3 z-50 text-right animate-in fade-in slide-in-from-top-1">
+            <div className="fixed sm:absolute top-16 sm:top-auto left-2 right-2 sm:left-0 sm:right-auto mt-2 w-[90vw] sm:w-80 max-w-[calc(100vw-1rem)] mx-auto sm:mx-0 bg-white rounded-xl shadow-lg border border-[#E5E6DF] py-3 z-50 text-right animate-in fade-in slide-in-from-top-1">
               {/* Dropdown Header */}
               <div className="px-4 pb-3 border-b border-[#E5E6DF] flex items-center justify-between">
                 <div>
@@ -202,13 +238,13 @@ function Navbar({ currentRole, onRoleChange, actionItems = [], setSelectedItem, 
           )}
         </div>
 
-        {/* Role Switcher */}
-        <div className="relative" ref={dropdownRef}>
+        {/* Role Switcher (Hidden on mobile < md as instructed) */}
+        <div className="relative hidden md:block" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
             className="flex items-center gap-2 px-3 py-1.5 md:px-3.5 md:py-2 text-xs md:text-sm font-semibold text-[#202923] bg-[#F5F3ED] hover:bg-white rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-[#183C35] border border-[#E5E6DF] shadow-2xs cursor-pointer"
           >
-            <span className="text-[#526257] hidden sm:inline font-normal">
+            <span className="text-[#526257] font-normal">
               الدور:
             </span>
             <span className="text-[#202923] font-bold">
@@ -255,15 +291,16 @@ function Navbar({ currentRole, onRoleChange, actionItems = [], setSelectedItem, 
           )}
         </div>
 
-        {/* Divider */}
-        <div className="w-px h-7 bg-[#E5E6DF]" />
+        {/* Divider (Hidden on mobile < md) */}
+        <div className="w-px h-6 bg-[#E5E6DF] hidden md:block" />
 
-        {/* User Avatar */}
-        <div className="flex items-center gap-2.5">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#F5F3ED] text-[#183C35] font-extrabold text-xs border border-[#E5E6DF] shadow-2xs">
+        {/* User Avatar & Profile */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#F5F3ED] text-[#183C35] font-extrabold text-xs border border-[#E5E6DF] shadow-2xs shrink-0">
             م.أ
           </div>
-          <div className="hidden lg:block text-right">
+          {/* Profile Name & Role (Hidden on mobile < md as instructed) */}
+          <div className="hidden md:block text-right">
             <p className="text-xs font-bold text-[#202923] leading-tight">
               م. محمد أحمد
             </p>
@@ -277,7 +314,7 @@ function Navbar({ currentRole, onRoleChange, actionItems = [], setSelectedItem, 
         {onLogout && (
           <button
             onClick={onLogout}
-            className="flex items-center justify-center w-9 h-9 rounded-lg text-[#526257] hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
+            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-[#526257] hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
             title="تسجيل الخروج والعودة للرئيسية"
             aria-label="تسجيل الخروج"
           >

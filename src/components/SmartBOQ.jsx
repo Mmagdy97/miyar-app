@@ -206,7 +206,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
   const categories = ["الكل", ...new Set(boqItems.map((i) => i.category))];
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm" dir="rtl">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {saveToast && (
         <div className="fixed bottom-28 left-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -262,7 +262,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Mini KPI Highlights */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-white rounded-lg p-5 border border-[#E5E6DF] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#526257] block mb-1">عدد البنود المدرجة</span>
           <div className="flex items-baseline justify-between">
