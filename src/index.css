@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --font-ibm: 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --default-font-family: var(--font-ibm);
+  --color-miyar-bg: #F5F3ED;
+  --color-miyar-primary: #183C35;
+  --color-miyar-secondary: #5D8C70;
+  --color-miyar-accent: #C5A36B;
+  --color-miyar-text-primary: #202923;
+  --color-miyar-text-secondary: #526257;
+  --color-miyar-border: #E5E6DF;
+}
+
+* {
+  font-family: 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  direction: rtl;
+  text-align: right;
+  background-color: #F5F3ED;
+  color: #202923;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Miyar Architectural Typography Hierarchy - line heights and tracking only, NO forced colors */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+p {
+  line-height: 1.65;
+}
+
+/* Page / Tab Fluid Entrance Animation */
+@keyframes pageFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-page-transition {
+  animation: pageFadeSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* Custom Minimalist Restful Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D5D8D0;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5D8C70;
+}
+
+/* Miyar Studio Card Utilities */
+.studio-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E6DF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  border-radius: 0.75rem;
+}
+
+.studio-card-dark {
+  background-color: #183C35;
+  border: 1px solid #14322c;
+  box-shadow: 0 4px 20px rgba(24, 60, 53, 0.18);
+  border-radius: 0.75rem;
+  color: #FFFFFF;
+}
+
+.studio-card-interactive {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-card-interactive:hover {
+  border-color: #5D8C70;
+  box-shadow: 0 4px 16px rgba(24, 60, 53, 0.08);
+}
+
+/* Global Border & Background Harmonization for Miyar */
+.border-neutral-200\/60,
+.border-neutral-200,
+.border-slate-200,
+.border-slate-200\/60,
+.border-slate-200\/80,
+.border-\[\#EAE5DF\] {
+  border-color: #E5E6DF;
+}
+
+.border-neutral-100,
+.border-slate-100,
+.border-\[\#F3EFEA\] {
+  border-color: #EFEEE8;
+}
+
+.bg-neutral-50,
+.bg-slate-50,
+.bg-\[\#F8F6F2\],
+.bg-\[\#F8FAFC\] {
+  background-color: #F5F3ED;
+}
+
+.bg-neutral-100,
+.bg-slate-100,
+.bg-\[\#F3EFEA\] {
+  background-color: #EFEEE8;
+}
+
+.shadow-\[0_8px_30px_rgba\(45\,36\,34\,0\.04\)\] {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}

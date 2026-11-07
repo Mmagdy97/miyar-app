@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="sageGrad192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5C7E60"/>
+      <stop offset="100%" stop-color="#3A533C"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="48" fill="url(#sageGrad192)"/>
+  
+  <g>
+    <polygon points="96,40 146,69 146,128 96,157 46,128 46,69" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
+    <polygon points="96,40 146,69 96,98 46,69" fill="#FFFFFF" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round"/>
+    <line x1="96" y1="98" x2="96" y2="157" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+    <line x1="96" y1="98" x2="146" y2="69" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+    <line x1="96" y1="98" x2="46" y2="69" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="96" cy="98" r="6" fill="#FFFFFF"/>
+  </g>
+</svg>

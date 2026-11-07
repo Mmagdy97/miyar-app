@@ -1,0 +1,189 @@
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { ROLE_CONFIG, ROLE_TITLES } from "../config/roles";
+
+function Sidebar({
+  currentRole,
+  activeTab,
+  setActiveTab,
+  collapsed = false,
+  toggleSidebar,
+  onItemClick,
+  hideHeader = false,
+  isInstallable = false,
+  onInstallClick,
+}) {
+  const items = ROLE_CONFIG[currentRole] || [];
+  const roleTitle = ROLE_TITLES[currentRole] || currentRole;
+  const [tooltip, setTooltip] = useState({ visible: false, text: "", top: 0 });
+  const sidebarRef = useRef(null);
+
+  // Reset tooltip when expanding
+  useEffect(() => {
+    if (!collapsed) setTooltip({ visible: false, text: "", top: 0 });
+  }, [collapsed]);
+
+  const handleMouseEnter = (e, label) => {
+    if (!collapsed) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const sidebarRect = sidebarRef.current?.getBoundingClientRect();
+    setTooltip({
+      visible: true,
+      text: label,
+      top: rect.top - (sidebarRect?.top || 0) + rect.height / 2,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTooltip({ visible: false, text: "", top: 0 });
+  };
+
+  return (
+    <aside
+      ref={sidebarRef}
+      className={`relative flex flex-col h-full bg-[#183C35] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
+        hideHeader ? "w-full border-none" : "border-l border-[#5D8C70]/20"
+      } ${!hideHeader && (collapsed ? "w-[72px]" : "w-64")}`}
+    >
+      {/* Sidebar Header (Hidden in mobile drawer) */}
+      {!hideHeader && (
+        <div
+          className={`flex items-center h-16 px-4 border-b border-[#5D8C70]/20 ${
+            collapsed ? "justify-center" : "justify-between"
+          }`}
+        >
+          {!collapsed && (
+            <span className="text-[11px] font-bold text-[#EFEEE8]/80 uppercase tracking-widest font-ibm">
+              القائمة الرئيسية
+            </span>
+          )}
+          <button
+            onClick={toggleSidebar}
+            className="flex items-center justify-center w-8 h-8 rounded-lg text-[#EFEEE8]/70 hover:text-white hover:bg-[#5D8C70]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
+            aria-label={collapsed ? "توسيع القائمة الجانبية" : "تصغير القائمة الجانبية"}
+            title={collapsed ? "توسيع القائمة" : "تصغير القائمة"}
+          >
+            {collapsed ? (
+              <ChevronLeft className="w-4 h-4" />
+            ) : (
+              <ChevronRight className="w-4 h-4" />
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* Role Badge inside Sidebar (Pure White & Light Cream on Dark) */}
+      {!collapsed && (
+        <div className="mx-3 mt-3 mb-2 p-3.5 rounded-xl bg-white/10 border border-white/15 shadow-2xs">
+          <p className="text-xs text-[#EFEEE8]/70 font-medium">
+            الدور الحالي للنظام
+          </p>
+          <p className="text-sm font-bold text-white mt-0.5 truncate tracking-tight">
+            {roleTitle}
+          </p>
+        </div>
+      )}
+
+      {/* Nav Items */}
+      <nav className="flex-1 px-2.5 mt-2 space-y-1.5 overflow-y-auto">
+        {items.map((item) => {
+          const { id, label, name, icon: Icon } = item;
+          const itemName = name || label || id;
+
+          // Robust check for active tab:
+          const isItemDashboard =
+            itemName === "لوحة التحكم" || id === "Dashboard" || label === "لوحة التحكم";
+          const isCurrentDashboard =
+            activeTab === "لوحة التحكم" || activeTab === "Dashboard";
+
+          const isActive =
+            (isCurrentDashboard && isItemDashboard) ||
+            activeTab === itemName ||
+            activeTab === id ||
+            activeTab === label;
+
+          return (
+            <button
+              key={id || itemName}
+              onClick={() => {
+                setActiveTab(itemName);
+                if (onItemClick) onItemClick();
+              }}
+              onMouseEnter={(e) => handleMouseEnter(e, label)}
+              onMouseLeave={handleMouseLeave}
+              className={`group relative flex items-center w-full rounded-xl text-sm transition-all duration-150 focus:outline-none cursor-pointer ${
+                collapsed ? "justify-center px-2 py-3" : "px-3.5 py-2.5 gap-3"
+              } ${
+                isActive
+                  ? "bg-[#5D8C70] text-white font-bold shadow-sm"
+                  : "text-[#EFEEE8]/80 hover:bg-white/5 hover:text-white"
+              }`}
+            >
+              <Icon
+                className={`shrink-0 transition-colors duration-150 ${
+                  collapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
+                } ${
+                  isActive
+                    ? "text-white"
+                    : "text-[#EFEEE8]/80 group-hover:text-white"
+                }`}
+              />
+              {!collapsed && (
+                <span className="truncate leading-normal tracking-tight">{label}</span>
+              )}
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Tooltip for collapsed state (popping to the LEFT in RTL) */}
+      {collapsed && tooltip.visible && (
+        <div
+          className="absolute right-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#202923] border border-[#5D8C70]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
+          style={{ top: tooltip.top, transform: "translateY(-50%)" }}
+        >
+          {tooltip.text}
+          <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#202923] border-t border-r border-[#5D8C70]/30 rotate-45" />
+        </div>
+      )}
+
+      {/* PWA Install Button (Visible in desktop sidebar and mobile drawer) */}
+      {isInstallable && (
+        <div className={`px-3 py-2 border-t border-[#5D8C70]/20 ${collapsed ? "flex justify-center" : ""}`}>
+          <button
+            onClick={onInstallClick}
+            onMouseEnter={(e) => handleMouseEnter(e, "تثبيت التطبيق على جهازك")}
+            onMouseLeave={handleMouseLeave}
+            className={`flex items-center justify-center gap-2 rounded-lg bg-[#5D8C70]/20 text-white border border-[#5D8C70]/30 font-medium text-xs hover:bg-[#5D8C70]/35 transition-all cursor-pointer shadow-2xs active:scale-95 group ${
+              collapsed ? "w-10 h-10 p-0" : "w-full px-3.5 py-2.5"
+            }`}
+            title="تثبيت التطبيق على جهازك (PWA)"
+          >
+            <Download className="w-4 h-4 shrink-0 transition-transform group-hover:-translate-y-0.5" />
+            {!collapsed && <span>تثبيت التطبيق</span>}
+          </button>
+        </div>
+      )}
+
+      {/* Bottom section */}
+      {!hideHeader && (
+        <div className={`p-4 border-t border-[#5D8C70]/20 ${collapsed ? "text-center" : ""}`}>
+          {!collapsed ? (
+            <div className="text-center">
+              <p className="text-[11px] font-bold text-white">
+                معيار — استوديو التصميم والمقاولات
+              </p>
+              <p className="text-[10px] text-[#EFEEE8]/60 mt-0.5 font-medium">
+                حلول المقاولات والعمارة الداخلية
+              </p>
+            </div>
+          ) : (
+            <p className="text-[10px] font-bold text-[#EFEEE8]/60">v1.0</p>
+          )}
+        </div>
+      )}
+    </aside>
+  );
+}
+
+export default Sidebar;

@@ -1,0 +1,244 @@
+import { useState } from "react";
+import ProgressBar from "./ProgressBar";
+import {
+  TrendingUp,
+  CheckCircle2,
+  Clock,
+  Building2,
+  Sparkles,
+  Zap,
+  Droplets,
+  Paintbrush,
+  Hammer,
+  Layers,
+  ShieldCheck,
+  Check,
+} from "lucide-react";
+
+const DISCIPLINES_PROGRESS = [
+  {
+    id: 1,
+    name: "أعمال السباكة وتغذية المياه",
+    percentage: 100,
+    status: "مكتمل بالكامل ومختبر ✓",
+    statusBadge: "bg-emerald-50 text-emerald-800 border-emerald-200",
+    color: "bg-emerald-700",
+    icon: Droplets,
+    details: "تم اختبار شبكة التغذية على ٨ بار وعزل الحمامات كيميائياً بالكامل.",
+  },
+  {
+    id: 2,
+    name: "أعمال الكهرباء والإنارة المعمارية",
+    percentage: 90,
+    status: "متقدم - جاري سحب الأسلاك",
+    statusBadge: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    color: "bg-[#183C35]",
+    icon: Zap,
+    details: "تأسيس الشرب، علب ماجيك، ومسارات كابلات السويدي المعتمدة.",
+  },
+  {
+    id: 3,
+    name: "أعمال المحارة والأسمنت",
+    percentage: 85,
+    status: "مكتمل بؤج وأوتار وتأكيس",
+    statusBadge: "bg-[#EFEEE8] text-[#202923] border-[#E5E6DF]",
+    color: "bg-[#202923]",
+    icon: Layers,
+    details: "استلام استواء الحوائط والزوايا بشبك فايبر ضد الترييح والشروخ.",
+  },
+  {
+    id: 4,
+    name: "أعمال الجبسوم بورد والتجليد الخشبي",
+    percentage: 40,
+    status: "قيد التنفيذ - شاسيهات صاج",
+    statusBadge: "bg-amber-50 text-amber-800 border-amber-200",
+    color: "bg-amber-600",
+    icon: Hammer,
+    details: "تركيب ألواح كناوف خضراء مقاومة للرطوبة وتجهيز ممرات الليد بروفايل.",
+  },
+  {
+    id: 5,
+    name: "أعمال الأرضيات ورخام الاستقبال",
+    percentage: 60,
+    status: "قيد التوريد والتركيب",
+    statusBadge: "bg-amber-50 text-amber-800 border-amber-200",
+    color: "bg-amber-700",
+    icon: Sparkles,
+    details: "توريد رخام تريستا بيج مصقول وجاري التركيب بمونة مفلفلة.",
+  },
+  {
+    id: 6,
+    name: "الدهانات الديكورية والتشطيب النهائي",
+    percentage: 25,
+    status: "مرحلة المعجون والبطانة الأولى",
+    statusBadge: "bg-[#EFEEE8] text-[#526257] border-[#E5E6DF]",
+    color: "from-[#5D8C70] to-[#183C35]",
+    icon: Paintbrush,
+    details: "دهانات جوتن فينوماتيك مخملية ناعمة جاري تحضير بطانتها.",
+  },
+];
+
+function ClientProgress() {
+  const overallPercentage = 75;
+
+  return (
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm" dir="rtl">
+      <div className="max-w-5xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2.5 flex-wrap mb-1">
+              <h1 className="text-2xl md:text-3xl font-black text-[#202923] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#EFEEE8] border border-[#E5E6DF] flex items-center justify-center text-[#202923]">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <span>تفاصيل نسب الإنجاز</span>
+              </h1>
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                مشروع: فيلا الياسمين
+              </span>
+            </div>
+            <p className="text-xs md:text-sm text-[#526257]">
+              تقرير تفصيلي لنسب الإنجاز المرحلي لكل بند من بنود الديكور والتشطيب الداخلي.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>مطابق للكود الهندسي</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Hero Section: Large Circular Progress Ring (75%) */}
+        <div className="bg-[#183C35] rounded-xl p-6 md:p-8 text-white shadow-sm border border-[#14322c] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="relative z-10 space-y-3 max-w-lg text-center md:text-right">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-md border border-white/20">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
+              <span>مرحلة التشطيبات المعمارية الكبرى</span>
+            </span>
+            <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">
+              مشروعك تجاوز مرحلة التأسيس بنجاح وفي طريقه للتسليم
+            </h2>
+            <p className="text-xs md:text-sm text-[#EFEEE8] leading-relaxed">
+              تم إنجاز كافة أعمال التأسيس للمرافق بنسبة ١٠٠٪، والعمل جاري حالياً على الرخام والجبس بورد لإعداد الفيلا لمرحلة الدهانات النهائية.
+            </p>
+
+            <div className="pt-2 flex items-center justify-center md:justify-start gap-4 text-xs text-[#EFEEE8]">
+              <span>تاريخ البدء: <strong>سبتمبر ٢٠٢٦</strong></span>
+              <span>•</span>
+              <span>الموعد المتوقع: <strong className="text-white">ديسمبر ٢٠٢٦</strong></span>
+            </div>
+          </div>
+
+          {/* Large Circular Progress Ring */}
+          <div className="relative shrink-0 flex items-center justify-center">
+            <svg className="w-44 h-44 -rotate-90">
+              {/* Background circle track */}
+              <circle
+                cx="88"
+                cy="88"
+                r="72"
+                stroke="currentColor"
+                strokeWidth="14"
+                className="text-white/10"
+                fill="transparent"
+              />
+              {/* Progress stroke with 75% calculation: 2 * pi * 72 ≈ 452.39 */}
+              <circle
+                cx="88"
+                cy="88"
+                r="72"
+                stroke="url(#progressGradient)"
+                strokeWidth="14"
+                strokeDasharray={452.4}
+                strokeDashoffset={452.4 * (1 - overallPercentage / 100)}
+                strokeLinecap="round"
+                fill="transparent"
+                className="transition-all duration-1000 ease-out"
+              />
+              <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#5D8C70" />
+                  <stop offset="100%" stopColor="#C5A36B" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            {/* Inner Ring Text */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-3xl md:text-4xl font-black tracking-tight text-white font-mono">
+                %{overallPercentage}
+              </span>
+              <span className="text-[11px] font-bold text-[#C5A36B] mt-0.5">
+                إنجاز كلي للمشروع
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Detailed Breakdown for each Discipline */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-extrabold text-[#202923] flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#202923]" />
+              <span>تفصيل البنود التخصصية بالموقع (Disciplines Breakdown)</span>
+            </h3>
+            <span className="text-xs text-[#526257]">محدثة وفق اليوميات الميدانية</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {DISCIPLINES_PROGRESS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.id}
+                  className="bg-white rounded-lg p-5 border border-[#E5E6DF] shadow-xs hover:shadow-md transition-all space-y-3.5"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-lg bg-[#EFEEE8] text-[#202923] flex items-center justify-center border border-[#E5E6DF] shrink-0">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-extrabold text-[#202923] leading-tight">
+                          {item.name}
+                        </h4>
+                        <span className="text-[10px] text-[#526257] mt-0.5 block">
+                          {item.details}
+                        </span>
+                      </div>
+                    </div>
+
+                    <span
+                      className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border shrink-0 ${item.statusBadge}`}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
+
+                  {/* Progress Track */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-[11px] font-bold text-[#526257]">نسبة الإنجاز</span>
+                      <span className="text-xs font-bold text-[#202923] tracking-wide font-mono">
+                        %{item.percentage}
+                      </span>
+                    </div>
+                    <ProgressBar
+                      value={item.percentage}
+                      isCompleted={item.percentage === 100}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default ClientProgress;

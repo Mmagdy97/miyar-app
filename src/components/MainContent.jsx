@@ -1,0 +1,258 @@
+import AdminDashboard from "./AdminDashboard";
+import SiteEngineerDashboard from "./SiteEngineerDashboard";
+import SiteEngineerTasks from "./SiteEngineerTasks";
+import SiteEngineerSnagList from "./SiteEngineerSnagList";
+import SiteEngineerMaterialRequests from "./SiteEngineerMaterialRequests";
+import ClientPortal from "./ClientPortal";
+import ClientProjects from "./ClientProjects";
+import ClientProgress from "./ClientProgress";
+import ClientInvoices from "./ClientInvoices";
+import ClientTimeline from "./ClientTimeline";
+import TechnicalOfficeDashboard from "./TechnicalOfficeDashboard";
+import TechnicalOfficeBlueprints from "./TechnicalOfficeBlueprints";
+import TechnicalOfficeSettings from "./TechnicalOfficeSettings";
+import SmartBOQ from "./SmartBOQ";
+import FinancialsDashboard from "./FinancialsDashboard";
+import TeamManagement from "./TeamManagement";
+import ProjectsManagement from "./ProjectsManagement";
+import ModulePlaceholder from "./ModulePlaceholder";
+
+function MainContent({
+  currentRole,
+  activeTab,
+  setActiveTab,
+  actionItems,
+  setActionItems,
+  setSelectedItem,
+}) {
+  const renderScreen = () => {
+    // Logic Structure:
+    // IF activeTab is "لوحة التحكم" (or "Dashboard"):
+    //   - If Role is "Admin" -> render <AdminDashboard />
+    //   - If Role is "Site Engineer" -> render <SiteEngineerDashboard />
+    //   - If Role is "Technical Office" -> render <TechnicalOfficeDashboard />
+    //   - If Role is "Client" -> render <ClientPortal />
+    const isDashboard =
+      activeTab === "لوحة التحكم" ||
+      activeTab === "Dashboard" ||
+      activeTab === "لوحة التحكم الميدانية" ||
+      activeTab === "لوحة التحكم الهندسية" ||
+      activeTab === "بوابة العميل";
+
+    if (isDashboard) {
+      if (currentRole === "Admin") {
+        return (
+          <AdminDashboard
+            actionItems={actionItems}
+            setActionItems={setActionItems}
+            setSelectedItem={setSelectedItem}
+          />
+        );
+      }
+
+      if (currentRole === "Site Engineer") {
+        return (
+          <SiteEngineerDashboard
+            setActionItems={setActionItems}
+          />
+        );
+      }
+
+      if (currentRole === "Technical Office") {
+        return (
+          <TechnicalOfficeDashboard
+            actionItems={actionItems}
+            setActionItems={setActionItems}
+            setSelectedItem={setSelectedItem}
+          />
+        );
+      }
+
+      if (currentRole === "Client") {
+        return (
+          <ClientPortal
+            actionItems={actionItems}
+            setActionItems={setActionItems}
+            setSelectedItem={setSelectedItem}
+          />
+        );
+      }
+    }
+
+    // Client Dedicated Role Navigation Routing
+    if (currentRole === "Client") {
+      if (activeTab === "مشاريعي" || activeTab === "My Projects") {
+        return <ClientProjects />;
+      }
+
+      if (activeTab === "نسب الإنجاز" || activeTab === "Progress Overview") {
+        return <ClientProgress />;
+      }
+
+      if (activeTab === "الفواتير والدفعات" || activeTab === "Invoices & Payments") {
+        return <ClientInvoices />;
+      }
+
+      if (activeTab === "الجدول الزمني" || activeTab === "Schedule") {
+        return <ClientTimeline />;
+      }
+
+      // Default Client fallback
+      return (
+        <ClientPortal
+          actionItems={actionItems}
+          setActionItems={setActionItems}
+          setSelectedItem={setSelectedItem}
+        />
+      );
+    }
+
+    // Site Engineer Sub-Components Routing
+    const isTasksTab =
+      activeTab === "مهامي الميدانية" ||
+      activeTab === "My Tasks";
+
+    if (isTasksTab) {
+      return <SiteEngineerTasks />;
+    }
+
+    const isSnagListTab =
+      activeTab === "قائمة الملاحظات" ||
+      activeTab === "قائمة الملاحظات (Snag List)" ||
+      activeTab === "Snag List";
+
+    if (isSnagListTab) {
+      return <SiteEngineerSnagList />;
+    }
+
+    const isMaterialRequestsTab =
+      activeTab === "طلبات تشوين المواد" ||
+      activeTab === "Material Requests";
+
+    if (isMaterialRequestsTab) {
+      return (
+        <SiteEngineerMaterialRequests
+          actionItems={actionItems}
+          setActionItems={setActionItems}
+          setSelectedItem={setSelectedItem}
+        />
+      );
+    }
+
+    const isDailyReportsTab =
+      activeTab === "التقارير اليومية" ||
+      activeTab === "Daily Reports";
+
+    if (isDailyReportsTab) {
+      return <SiteEngineerDashboard setActionItems={setActionItems} />;
+    }
+
+    // Technical Office Sub-Components Routing
+    const isBlueprintsTab =
+      activeTab === "المخططات والمستندات" ||
+      activeTab === "Drawings & Docs";
+
+    if (isBlueprintsTab) {
+      return (
+        <TechnicalOfficeBlueprints
+          actionItems={actionItems}
+          setActionItems={setActionItems}
+          setSelectedItem={setSelectedItem}
+        />
+      );
+    }
+
+    const isSettingsTab =
+      activeTab === "الإعدادات والنماذج" ||
+      activeTab === "Settings" ||
+      activeTab === "الإعدادات";
+
+    if (isSettingsTab) {
+      return <TechnicalOfficeSettings />;
+    }
+
+    // Projects Management Tab Routing for "المشاريع الجارية"
+    const isProjectsTab =
+      activeTab === "المشاريع الجارية" ||
+      activeTab === "Projects" ||
+      activeTab === "مشاريعي" ||
+      activeTab === "My Projects" ||
+      activeTab === "متابعة التنفيذ" ||
+      activeTab === "Project Tracking";
+
+    if (isProjectsTab) {
+      return (
+        <ProjectsManagement
+          actionItems={actionItems}
+          setActionItems={setActionItems}
+          setSelectedItem={setSelectedItem}
+        />
+      );
+    }
+
+    // SmartBOQ Tab Routing for "المقايسات والاعتمادات" & "إدارة المقايسات"
+    const isBOQTab =
+      activeTab === "المقايسات والاعتمادات" ||
+      activeTab === "BOQ & Approvals" ||
+      activeTab === "إدارة المقايسات" ||
+      activeTab === "BOQ Management";
+
+    if (isBOQTab) {
+      return (
+        <SmartBOQ
+          actionItems={actionItems}
+          setActionItems={setActionItems}
+          setSelectedItem={setSelectedItem}
+        />
+      );
+    }
+
+    // Financials & Petty Cash Tab Routing for "الحسابات والعهد"
+    const isFinancialsTab =
+      activeTab === "الحسابات والعهد" ||
+      activeTab === "Financials & Petty Cash" ||
+      activeTab === "الحسابات" ||
+      activeTab === "الفواتير والدفعات";
+
+    if (isFinancialsTab) {
+      return (
+        <FinancialsDashboard
+          actionItems={actionItems}
+          setActionItems={setActionItems}
+          setSelectedItem={setSelectedItem}
+        />
+      );
+    }
+
+    // Team Management Tab Routing for "فريق العمل"
+    const isTeamTab =
+      activeTab === "فريق العمل" ||
+      activeTab === "Team";
+
+    if (isTeamTab) {
+      return (
+        <TeamManagement />
+      );
+    }
+
+    // ELSE: Render the premium Glassmorphic Placeholder Component for any other tab
+    return (
+      <ModulePlaceholder
+        activeTab={activeTab}
+        currentRole={currentRole}
+        setActiveTab={setActiveTab}
+      />
+    );
+  };
+
+  return (
+    <div
+      key={`${currentRole}-${activeTab}`}
+      className="flex-1 flex flex-col min-h-0 overflow-hidden tab-page-transition"
+    >
+      {renderScreen()}
+    </div>
+  );
+}
+
+export default MainContent;

@@ -1,0 +1,61 @@
+import {
+  LayoutDashboard,
+  FolderKanban,
+  DollarSign,
+  ClipboardCheck,
+  Users,
+  ListTodo,
+  FileText,
+  AlertTriangle,
+  PackageSearch,
+  Settings,
+  Briefcase,
+  Eye,
+  CreditCard,
+  CalendarDays,
+} from "lucide-react";
+
+/**
+ * Role-based sidebar configuration for Arabic RTL.
+ * Each item has id, name, label, icon.
+ * The primary dashboard tab across all roles has name: "لوحة التحكم".
+ */
+export const ROLE_CONFIG = {
+  Admin: [
+    { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم", icon: LayoutDashboard },
+    { id: "Projects", name: "المشاريع الجارية", label: "المشاريع الجارية", icon: FolderKanban },
+    { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
+    { id: "BOQ & Approvals", name: "المقايسات والاعتمادات", label: "المقايسات والاعتمادات", icon: ClipboardCheck },
+    { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
+  ],
+  "Site Engineer": [
+    { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم الميدانية", icon: LayoutDashboard },
+    { id: "My Tasks", name: "مهامي الميدانية", label: "مهامي الميدانية", icon: ListTodo },
+    { id: "Daily Reports", name: "التقارير اليومية", label: "التقارير اليومية", icon: FileText },
+    { id: "Snag List", name: "قائمة الملاحظات", label: "قائمة الملاحظات (Snag List)", icon: AlertTriangle },
+    { id: "Material Requests", name: "طلبات تشوين المواد", label: "طلبات تشوين المواد", icon: PackageSearch },
+  ],
+  "Technical Office": [
+    { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم الهندسية", icon: LayoutDashboard },
+    { id: "BOQ Management", name: "إدارة المقايسات", label: "إدارة المقايسات (BOQ)", icon: ClipboardCheck },
+    { id: "Drawings & Docs", name: "المخططات والمستندات", label: "المخططات والمستندات", icon: FileText },
+    { id: "Project Tracking", name: "متابعة التنفيذ", label: "متابعة التنفيذ", icon: FolderKanban },
+    { id: "Settings", name: "الإعدادات والنماذج", label: "الإعدادات والنماذج", icon: Settings },
+  ],
+  Client: [
+    { id: "Dashboard", name: "لوحة التحكم", label: "بوابة العميل", icon: LayoutDashboard },
+    { id: "My Projects", name: "مشاريعي", label: "مشاريعي", icon: Briefcase },
+    { id: "Progress Overview", name: "نسب الإنجاز", label: "نسب الإنجاز", icon: Eye },
+    { id: "Invoices & Payments", name: "الفواتير والدفعات", label: "الفواتير والدفعات", icon: CreditCard },
+    { id: "Schedule", name: "الجدول الزمني", label: "الجدول الزمني", icon: CalendarDays },
+  ],
+};
+
+export const ROLE_TITLES = {
+  Admin: "مدير تنفيذي (Admin)",
+  "Site Engineer": "مهندس موقع (Site Engineer)",
+  "Technical Office": "المكتب الفني (Technical Office)",
+  Client: "العميل (Client)",
+};
+
+export const ROLES = Object.keys(ROLE_CONFIG);
