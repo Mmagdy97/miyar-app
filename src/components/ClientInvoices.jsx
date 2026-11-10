@@ -1,3 +1,4 @@
+import { invoicesStore } from "../data/stores";
 import { useState, useMemo } from "react";
 import {
   CreditCard,
@@ -15,10 +16,9 @@ import {
 } from "lucide-react";
 import { CLIENT_INVOICES } from "../data/seed";
 
-const INITIAL_INVOICES = CLIENT_INVOICES;
 
 function ClientInvoices() {
-  const [invoices, setInvoices] = useState(INITIAL_INVOICES);
+  const [invoices, setInvoices] = invoicesStore.use();
   const [payingInvoice, setPayingInvoice] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);

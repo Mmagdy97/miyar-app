@@ -1,3 +1,4 @@
+import { invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -27,7 +28,6 @@ import {
 import { clientProject, getClientPayments, formatNumber, formatDateAr, formatMonthYearAr, toAr } from "../data/seed";
 
 const PROJECT = clientProject();
-const PAY = getClientPayments();
 
 // Project Phases Stepper Data
 const PROJECT_PHASES = [
@@ -110,6 +110,8 @@ const SITE_UPDATES = [
 ];
 
 function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
+  const [invoiceRows] = invoicesStore.use();
+  const PAY = getClientPayments(invoiceRows);
   // Client Approvals State
   const [approvalsState, setApprovalsState] = useState({
     marble: "pending", // "pending" | "approved" | "rejected"

@@ -1,3 +1,4 @@
+import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
 import {
   FileSpreadsheet,
@@ -21,58 +22,6 @@ import {
 } from "lucide-react";
 
 // Default interior design BOQ items
-const INITIAL_BOQ_ITEMS = [
-  {
-    id: 1,
-    category: "أعمال الكهرباء",
-    name: "تأسيس وتوريد علب ماجيك ومواسير وخراطيم علاء الدين المعتمدة",
-    unit: "مقطوعية",
-    quantity: 1,
-    unitCost: 15000,
-    margin: 25,
-    note: "شاملة اللوحات التوزيعية الفرعية وكابلات السويدي معتمدة",
-  },
-  {
-    id: 2,
-    category: "أعمال السباكة والصحي",
-    name: "شبكة تغذية بولي بروبلين (BR) وصرف بي في سي الشريف ٤ بوصة",
-    unit: "متر طولي",
-    quantity: 85,
-    unitCost: 320,
-    margin: 22,
-    note: "شاملة عزل أرضيات الحمامات كيميائياً واختبار الضغط بالبار",
-  },
-  {
-    id: 3,
-    category: "أعمال المحارة والتشطيبات",
-    name: "بياض محارة تأكيس وتربيع وبؤج وأوتار للحوائط والأسقف",
-    unit: "متر مربع",
-    quantity: 380,
-    unitCost: 95,
-    margin: 20,
-    note: "رمل حرش وأسمنت بورتلاندي مع شبك فايبر عند التقاء الخرسانة",
-  },
-  {
-    id: 4,
-    category: "الأسقف المعلقة والجبسوم بورد",
-    name: "توريد وتركيب ألواح كناوف خضراء مقاومة للرطوبة مع بيت نور",
-    unit: "متر مربع",
-    quantity: 140,
-    unitCost: 340,
-    margin: 28,
-    note: "شاملة قطاعات صاج معالجة ٠.٥ مم وممرات ليد بروفايل مدمجة",
-  },
-  {
-    id: 5,
-    category: "الأرضيات والرخام",
-    name: "توريد وتركيب رخام تريستا بيج مصقول أرضيات الاستقبال والصالون",
-    unit: "متر مربع",
-    quantity: 65,
-    unitCost: 720,
-    margin: 30,
-    note: "شاملة الجلي والمعالجة بالكريستال وتوريد الوزرات المطابقة",
-  },
-];
 
 const CATEGORY_COLORS = {
   "أعمال الكهرباء": "bg-amber-50 text-amber-800 border-amber-200",
@@ -84,7 +33,7 @@ const CATEGORY_COLORS = {
 };
 
 function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
-  const [boqItems, setBoqItems] = useState(INITIAL_BOQ_ITEMS);
+  const [boqItems, setBoqItems] = boqStore.use();
   const [filterCategory, setFilterCategory] = useState("الكل");
   const [saveToast, setSaveToast] = useState(false);
   const [sendSuccessModal, setSendSuccessModal] = useState(false);
@@ -114,7 +63,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
   // Reset to sample initial items
   const handleResetDefaults = () => {
-    setBoqItems(INITIAL_BOQ_ITEMS);
+    boqStore.reset();
   };
 
   // Add new item

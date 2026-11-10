@@ -232,20 +232,20 @@ export const getTotals = () => {
 };
 
 /** Payment summary for a client-portal project. */
-export const getClientPayments = () => {
+export const getClientPayments = (invoices = CLIENT_INVOICES) => {
   const project = clientProject();
-  const total = sum(CLIENT_INVOICES, (i) => i.amount);
+  const total = sum(invoices, (i) => i.amount);
   const paid = sum(
-    CLIENT_INVOICES.filter((i) => i.status === "مدفوع"),
+    invoices.filter((i) => i.status === "مدفوع"),
     (i) => i.amount
   );
-  const next = CLIENT_INVOICES.find((i) => i.status !== "مدفوع") || null;
+  const next = invoices.find((i) => i.status !== "مدفوع") || null;
   return {
     project,
     total,
     paid,
     paidPct: Math.round((paid / total) * 100),
-    paidCount: CLIENT_INVOICES.filter((i) => i.status === "مدفوع").length,
+    paidCount: invoices.filter((i) => i.status === "مدفوع").length,
     next,
   };
 };

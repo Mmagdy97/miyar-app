@@ -1,4 +1,4 @@
-import { cashStore, cashTotals } from "../data/stores";
+import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -33,6 +33,8 @@ import {
   formatNumber,
   toAr,
   getTotals,
+  getClientPayments,
+  clientProject,
 } from "../data/seed";
 
 // Team members per project and project cards (single source: src/data/seed.js)
@@ -77,9 +79,14 @@ const MONTHLY_FINANCIALS = [
 
 function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
   const [cashRows] = cashStore.use();
+  const [invoiceRows] = invoicesStore.use();
+  const clientPaid = getClientPayments(invoiceRows).paid;
+  const collectedTotal = BASE_TOTALS.collectedTotal - clientProject().collected + clientPaid;
   const cash = cashTotals(cashRows);
   const TOTALS = {
     ...BASE_TOTALS,
+    collectedTotal,
+    collectedPct: Math.round((collectedTotal / BASE_TOTALS.contractTotal) * 100),
     cashGiven: cash.given,
     cashSpent: cash.spent,
     cashRemaining: cash.remaining,
