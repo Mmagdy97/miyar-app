@@ -1,4 +1,5 @@
 import { currencySymbol, intlLocale } from "../i18n";
+import { tr_ as T } from "../i18n";
 import { expensesStore } from "../data/stores";
 import { ENGINEER_CASH, personById, projectById, formatNumber } from "../data/seed";
 import { useState } from "react";
@@ -230,7 +231,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               <span>{toastMessage}</span>
             </div>
             <span className="text-xs bg-emerald-700/80 px-2 py-0.5 rounded-full font-bold">
-              مباشر الآن
+              {T("se.1")}
             </span>
           </div>
         )}
@@ -245,10 +246,10 @@ function SiteEngineerDashboard({ setActionItems }) {
               <div>
                 <div className="flex items-center gap-2">
                   <h1 className="text-lg sm:text-xl font-black text-[#1E2429] tracking-tight">
-                    مرحباً يا هندسة، محمد
+                    {T("se.2")}
                   </h1>
                   <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-                    ميداني
+                    {T("se.3")}
                   </span>
                 </div>
                 <p className="text-xs text-[#5A646E] mt-0.5 flex items-center gap-1.5 font-medium">
@@ -260,7 +261,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
             <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] text-xs text-[#5A646E] font-semibold">
               <Sun className="w-4 h-4 text-amber-500" />
-              <span>٢٦° م القاهرة</span>
+              <span>{T("se.4")}</span>
             </div>
           </div>
 
@@ -272,7 +273,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm active:scale-[0.98] transition-all text-center"
             >
               <Plus className="w-4 h-4 shrink-0" />
-              <span>+ إضافة تقرير يومي</span>
+              <span>{T("se.5")}</span>
             </a>
 
             {/* Button B: Settle Petty Cash */}
@@ -281,7 +282,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-lg text-xs sm:text-sm font-extrabold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] hover:border-[#D9480F] shadow-xs active:scale-[0.98] transition-all text-center"
             >
               <DollarSign className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>💸 تسوية عهدة</span>
+              <span>{T("se.6")}</span>
             </button>
           </div>
         </div>
@@ -291,11 +292,11 @@ function SiteEngineerDashboard({ setActionItems }) {
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A646E] uppercase tracking-wider flex items-center gap-1.5">
               <Building className="w-4 h-4 text-[#5A646E]" />
-              موقع العمل المسند لك اليوم
+              {T("se.7")}
             </span>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 inline-flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              موقعك الحالي
+              {T("se.8")}
             </span>
           </div>
 
@@ -304,25 +305,25 @@ function SiteEngineerDashboard({ setActionItems }) {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="text-base sm:text-lg font-black text-[#1E2429] leading-snug">
-                  فيلا الياسمين - التجمع الخامس
+                  {T("se.9")}
                 </h2>
                 <p className="text-xs text-[#5A646E] mt-1 flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                  <span>حي النرجس، قطعة ٤٢، بجوار كمبوند الدبلوماسيين</span>
+                  <span>{T("se.10")}</span>
                 </p>
               </div>
 
               <div className="text-end shrink-0">
                 <span className="px-2.5 py-1 rounded-lg text-xs font-black bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] inline-block">
-                  مرحلة التأسيس (MEP)
+                  {T("se.11")}
                 </span>
               </div>
             </div>
 
             {/* Quick Metrics */}
             <div className="mt-4 pt-3 border-t border-[#DDE1E5] flex items-center justify-between text-xs text-[#5A646E] font-medium">
-              <span>نسبة تقدم المشروع: <strong className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">٧٨٪</strong></span>
-              <span className="text-[#5A646E]">الاستشاري: <strong className="text-[#1E2429]">م. طارق يوسف</strong></span>
+              <span>{T("se.12")} <strong className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">٧٨٪</strong></span>
+              <span className="text-[#5A646E]">{T("se.14")} <strong className="text-[#1E2429]">{T("se.15")}</strong></span>
             </div>
 
             {/* Progress bar */}
@@ -340,18 +341,18 @@ function SiteEngineerDashboard({ setActionItems }) {
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#2B3138]" />
               <h2 className="text-base sm:text-lg font-black text-[#1E2429]">
-                نموذج التقرير اليومي السريع
+                {T("se.16")}
               </h2>
             </div>
             <p className="text-xs text-[#5A646E] mt-0.5">
-              سجل حالة الموقع اليومية والعمالة والأعمال المنفذة فوراً من الهاتف
+              {T("se.17")}
             </p>
           </div>
 
           {/* Section A: حالة الطقس والعوائق */}
           <div className="space-y-2.5">
             <label className="block text-xs font-bold text-[#5A646E] uppercase tracking-wider">
-              حالة الطقس والعوائق الميدانية
+              {T("se.18")}
             </label>
             <div className="grid grid-cols-2 gap-2">
               {WEATHER_OPTIONS.map((opt) => {
@@ -382,10 +383,10 @@ function SiteEngineerDashboard({ setActionItems }) {
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-[#5A646E] uppercase tracking-wider flex items-center gap-1.5">
                 <Users className="w-4 h-4 text-[#5A646E]" />
-                حصر العمالة المتواجدة اليوم
+                {T("se.19")}
               </label>
               <span className="text-xs font-black text-[#1E2429] bg-[#ECEEF0] px-2.5 py-0.5 rounded-lg border border-[#DDE1E5]">
-                إجمالي: {totalWorkers} عمال
+                {T("se.20", { v0: totalWorkers })}
               </span>
             </div>
 
@@ -393,8 +394,8 @@ function SiteEngineerDashboard({ setActionItems }) {
               {/* Plumbers */}
               <div className="p-3 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E2429] block">سباك / صحي</span>
-                  <span className="text-[11px] text-[#5A646E]">شبكة التغذية</span>
+                  <span className="text-xs font-bold text-[#1E2429] block">{T("se.21")}</span>
+                  <span className="text-[11px] text-[#5A646E]">{T("se.22")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -420,8 +421,8 @@ function SiteEngineerDashboard({ setActionItems }) {
               {/* Helpers / Cleaning */}
               <div className="p-3 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E2429] block">عمال نظافة وتشوين</span>
-                  <span className="text-[11px] text-[#5A646E]">مساعدون</span>
+                  <span className="text-xs font-bold text-[#1E2429] block">{T("se.23")}</span>
+                  <span className="text-[11px] text-[#5A646E]">{T("se.24")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -447,8 +448,8 @@ function SiteEngineerDashboard({ setActionItems }) {
               {/* Tilers */}
               <div className="p-3 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E2429] block">مبلط رخام وسيراميك</span>
-                  <span className="text-[11px] text-[#5A646E]">الأرضيات</span>
+                  <span className="text-xs font-bold text-[#1E2429] block">{T("se.25")}</span>
+                  <span className="text-[11px] text-[#5A646E]">{T("se.26")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -474,8 +475,8 @@ function SiteEngineerDashboard({ setActionItems }) {
               {/* Electricians */}
               <div className="p-3 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E2429] block">كهربائي تمديدات</span>
-                  <span className="text-[11px] text-[#5A646E]">سحب أسلاك</span>
+                  <span className="text-xs font-bold text-[#1E2429] block">{T("se.27")}</span>
+                  <span className="text-[11px] text-[#5A646E]">{T("se.28")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -503,7 +504,7 @@ function SiteEngineerDashboard({ setActionItems }) {
           {/* Section C: الأعمال المنجزة (Completed Works Checklist & Notes) */}
           <div className="space-y-3">
             <label className="block text-xs font-bold text-[#5A646E] uppercase tracking-wider">
-              الأعمال المنجزة والمهام الفنية اليوم
+              {T("se.29")}
             </label>
 
             {/* Checklist items */}
@@ -537,13 +538,13 @@ function SiteEngineerDashboard({ setActionItems }) {
             {/* Textarea for additional notes */}
             <div className="pt-2">
               <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                ملاحظات وتوجيهات هندسية إضافية:
+                {T("se.30")}
               </label>
               <textarea
                 rows={3}
                 value={customNotes}
                 onChange={(e) => setCustomNotes(e.target.value)}
-                placeholder="اكتب ملاحظات الموقع والتوجيهات الفنية أو استلامات الاستشاري..."
+                placeholder={T("se.31")}
                 className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs sm:text-sm text-[#1E2429] leading-relaxed placeholder:text-[#5A646E]"
               />
             </div>
@@ -554,10 +555,10 @@ function SiteEngineerDashboard({ setActionItems }) {
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-[#5A646E] uppercase tracking-wider flex items-center gap-1.5">
                 <Camera className="w-4 h-4 text-[#5A646E]" />
-                التوثيق البصري وصور الموقع
+                {T("se.32")}
               </label>
               <span className="text-xs text-[#5A646E] font-medium">
-                {photos.length} صور ملتقطة
+                {T("se.33", { v0: photos.length })}
               </span>
             </div>
 
@@ -570,10 +571,10 @@ function SiteEngineerDashboard({ setActionItems }) {
                 <Camera className="w-6 h-6" />
               </div>
               <p className="text-xs sm:text-sm font-black text-[#1E2429]">
-                التقط أو ارفع صور الموقع هنا
+                {T("se.34")}
               </p>
               <p className="text-[11px] text-[#5A646E] mt-1">
-                اضغط لتشغيل كاميرا الهاتف أو اختيار لقطات من المعرض (JPG / PNG)
+                {T("se.35")}
               </p>
             </div>
 
@@ -603,7 +604,7 @@ function SiteEngineerDashboard({ setActionItems }) {
                       type="button"
                       onClick={() => handleRemovePhoto(photo.id)}
                       className="text-[#5A646E] hover:text-rose-600 p-1.5 transition-colors"
-                      title="حذف الصورة"
+                      title={T("se.36")}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -620,10 +621,10 @@ function SiteEngineerDashboard({ setActionItems }) {
               className="w-full flex items-center justify-center gap-2 p-4 rounded-xl text-sm font-black text-white bg-[#2B3138] hover:bg-[#1E2429] shadow-sm active:scale-[0.98] transition-all cursor-pointer"
             >
               <Send className="w-4 h-4 shrink-0" />
-              <span>إرسال التقرير للمدير التنفيذي</span>
+              <span>{T("se.37")}</span>
             </button>
             <p className="text-center text-[11px] text-[#5A646E] mt-2 font-medium">
-              سيتم إشعار الإدارة فوراً وإضافة التقرير لمركز المهام العاجلة
+              {T("se.38")}
             </p>
           </div>
         </form>
@@ -639,7 +640,7 @@ function SiteEngineerDashboard({ setActionItems }) {
                   💸
                 </span>
                 <h3 className="text-base font-black text-[#1E2429]">
-                  تسوية عهدة الموقع
+                  {T("se.39")}
                 </h3>
               </div>
               <button
@@ -654,7 +655,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-center py-6">
                 <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto mb-2" />
                 <p className="font-black text-emerald-900 text-sm">
-                  تم تقديم طلب تسوية العهدة بنجاح!
+                  {T("se.40")}
                 </p>
                 <p className="text-xs text-emerald-700 mt-1">
                   تمت إضافتها في مركز اعتمادات المدير بلحظية "الآن".
@@ -664,7 +665,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               <form onSubmit={handlePettyCashSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                    المبلغ المنصرف ({currencySymbol()})
+                    {T("se.41", { v0: currencySymbol() })}
                   </label>
                   <input
                     type="number"
@@ -677,23 +678,23 @@ function SiteEngineerDashboard({ setActionItems }) {
 
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                    بند الصرف
+                    {T("se.42")}
                   </label>
                   <select
                     value={cashCategory}
                     onChange={(e) => setCashCategory(e.target.value)}
                     className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] text-sm font-bold text-[#1E2429] bg-white"
                   >
-                    <option value="نقل وتشوين خامات">نقل وتشوين خامات</option>
-                    <option value="شراء عدد وأدوات طارئة">شراء عدد وأدوات طارئة</option>
-                    <option value="يوميات عمالة إضافية">يوميات عمالة إضافية</option>
-                    <option value="ضيافة واستقبال عميل">ضيافة واستقبال عميل</option>
+                    <option value="نقل وتشوين خامات">{T("se.43")}</option>
+                    <option value="شراء عدد وأدوات طارئة">{T("se.44")}</option>
+                    <option value="يوميات عمالة إضافية">{T("se.45")}</option>
+                    <option value="ضيافة واستقبال عميل">{T("se.46")}</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                    ملاحظات الفاتورة أو إيصال الصرف
+                    {T("se.47")}
                   </label>
                   <textarea
                     rows={2}
@@ -708,14 +709,14 @@ function SiteEngineerDashboard({ setActionItems }) {
                     type="submit"
                     className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#1E2429] active:scale-95 transition-all shadow-sm"
                   >
-                    إرسال طلب التسوية
+                    {T("se.48")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setPettyCashModalOpen(false)}
                     className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#5A646E] bg-[#ECEEF0] hover:bg-[#DDE1E5] text-[#5A646E]"
                   >
-                    إلغاء
+                    {T("se.124")}
                   </button>
                 </div>
               </form>
