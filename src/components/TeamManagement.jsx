@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   Users,
   UserPlus,
@@ -398,7 +398,7 @@ function TeamManagement() {
                   : "bg-[#ECEEF0] text-[#5A646E] hover:bg-[#DDE1E5]"
               }`}
             >
-              {role}
+              {E(role)}
             </button>
           ))}
         </div>
@@ -514,7 +514,7 @@ function TeamManagement() {
                               : "bg-[#5A646E]"
                           }`}
                         />
-                        <span>{member.status}</span>
+                        <span>{E(member.status)}</span>
                       </button>
                     </td>
 

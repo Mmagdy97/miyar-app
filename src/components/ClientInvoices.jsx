@@ -1,4 +1,4 @@
-import { currencySymbol, intlLocale } from "../i18n";
+import { currencySymbol, intlLocale, E } from "../i18n";
 import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState, useMemo } from "react";
@@ -218,7 +218,7 @@ function ClientInvoices() {
                               isPaid ? "bg-emerald-600" : "bg-amber-500 animate-pulse"
                             }`}
                           />
-                          <span>{inv.status}</span>
+                          <span>{E(inv.status)}</span>
                         </span>
                       </td>
 

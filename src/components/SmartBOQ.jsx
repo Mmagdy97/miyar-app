@@ -1,4 +1,4 @@
-import { currencySymbol, intlLocale, currencyName } from "../i18n";
+import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
@@ -270,7 +270,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 : "bg-white text-[#1E2429] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
             }`}
           >
-            {cat} {cat === "الكل" ? `(${boqItems.length})` : ""}
+            {E(cat)} {cat === "الكل" ? `(${boqItems.length})` : ""}
           </button>
         ))}
       </div>
@@ -336,7 +336,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                           <span
                             className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold border ${categoryClass}`}
                           >
-                            {item.category}
+                            {E(item.category)}
                           </span>
                         </div>
                         <span className="font-extrabold text-[#1E2429] leading-snug">
@@ -353,7 +353,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     {/* Unit */}
                     <td className="py-3.5 px-3 text-center">
                       <span className="inline-block px-2.5 py-1 rounded-lg bg-[#ECEEF0] text-[#1E2429] font-bold text-xs border border-[#DDE1E5]">
-                        {item.unit}
+                        {E(item.unit)}
                       </span>
                     </td>
 

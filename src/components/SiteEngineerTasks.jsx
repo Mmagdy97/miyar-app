@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   ListTodo,
   CheckCircle2,
@@ -206,7 +206,7 @@ function SiteEngineerTasks() {
                   : "bg-white text-[#5A646E] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
               }`}
             >
-              {tab}
+              {E(tab)}
             </button>
           ))}
         </div>
@@ -249,7 +249,7 @@ function SiteEngineerTasks() {
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${priorityClass}`}
                       >
-                        {task.priority}
+                        {E(task.priority)}
                       </span>
                       <span className="text-[11px] text-[#5A646E] flex items-center gap-1">
                         <Clock className="w-3 h-3 text-[#5A646E]" />

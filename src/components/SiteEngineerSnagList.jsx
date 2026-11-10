@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   AlertTriangle,
   Plus,
@@ -203,7 +203,7 @@ function SiteEngineerSnagList() {
                   : "bg-white text-[#5A646E] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
               }`}
             >
-              {tab}
+              {E(tab)}
             </button>
           ))}
         </div>

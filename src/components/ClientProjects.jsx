@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
   Briefcase,
@@ -138,7 +138,7 @@ function ClientProjects() {
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border backdrop-blur-md shadow-xs ${unit.badgeColor}`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                    <span>{unit.phase}</span>
+                    <span>{E(unit.phase)}</span>
                   </span>
                 </div>
 
@@ -159,7 +159,7 @@ function ClientProjects() {
                     <MapPin className="w-3.5 h-3.5 text-[#5A646E] shrink-0" />
                     <span className="truncate">{unit.location}</span>
                   </div>
-                  <p className="text-xs font-bold text-[#5A646E]">{unit.type}</p>
+                  <p className="text-xs font-bold text-[#5A646E]">{E(unit.type)}</p>
                 </div>
 
                 {/* Progress Track */}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   FileText,
   Download,
@@ -166,7 +166,7 @@ function TechnicalOfficeSettings() {
                       {tmpl.code}
                     </span>
                     <span className="text-[10px] font-bold text-[#5A646E] bg-[#ECEEF0] px-2 py-0.5 rounded-md">
-                      {tmpl.category}
+                      {E(tmpl.category)}
                     </span>
                   </div>
 

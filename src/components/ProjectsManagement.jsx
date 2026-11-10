@@ -1,4 +1,4 @@
-import { currencySymbol } from "../i18n";
+import { currencySymbol, E } from "../i18n";
 import { tr_ as T } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
@@ -305,7 +305,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   : "bg-[#ECEEF0] text-[#1E2429] hover:bg-[#DDE1E5]"
               }`}
             >
-              {status}
+              {E(status)}
             </button>
           ))}
         </div>
@@ -358,7 +358,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border shrink-0 ${statusBadgeClass}`}
                 >
                   <span className={`w-2 h-2 rounded-full ${statusDotClass}`} />
-                  <span>{project.status}</span>
+                  <span>{E(project.status)}</span>
                 </span>
               </div>
 

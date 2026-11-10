@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
   TrendingUp,
@@ -216,7 +216,7 @@ function ClientProgress() {
                     <span
                       className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border shrink-0 ${item.statusBadge}`}
                     >
-                      {item.status}
+                      {E(item.status)}
                     </span>
                   </div>
 

@@ -1,4 +1,4 @@
-import { currencySymbol, intlLocale } from "../i18n";
+import { currencySymbol, intlLocale, E } from "../i18n";
 import { tr_ as T } from "../i18n";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -729,7 +729,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     {item.description}
                   </td>
                   <td className="py-3.5 px-3.5 text-center text-[#5A646E] font-bold">
-                    {item.unit}
+                    {E(item.unit)}
                   </td>
                   <td className="py-3.5 px-3.5 text-center font-extrabold text-[#1E2429] font-mono">
                     {item.contractQty.toLocaleString(intlLocale())}
@@ -757,7 +757,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                           : "bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]"
                       }`}
                     >
-                      {item.status}
+                      {E(item.status)}
                     </span>
                   </td>
                 </tr>

@@ -1,4 +1,4 @@
-import { currencySymbol } from "../i18n";
+import { currencySymbol, E } from "../i18n";
 import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState } from "react";
@@ -530,7 +530,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   </div>
 
                   <span className="text-xs font-extrabold text-[#1E2429] bg-white/95 px-3 py-1 rounded-full shadow-xs mt-3 backdrop-blur-sm">
-                    {photo.category}
+                    {E(photo.category)}
                   </span>
 
                   {/* Top Heart and Date Badge */}
@@ -690,7 +690,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <Camera className="w-8 h-8" />
               </div>
               <span className="mt-4 px-4 py-1 rounded-full text-xs font-extrabold bg-[#2B3138] text-white shadow-sm">
-                {activePhoto.category}
+                {E(activePhoto.category)}
               </span>
 
               <button

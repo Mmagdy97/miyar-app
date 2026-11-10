@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   PackageSearch,
   Send,
@@ -324,7 +324,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border shrink-0 ${statusClass}`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                      <span>{req.status}</span>
+                      <span>{E(req.status)}</span>
                     </span>
                   </div>
 

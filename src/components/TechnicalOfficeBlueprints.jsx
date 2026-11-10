@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   FileText,
   UploadCloud,
@@ -309,7 +309,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                   : "bg-[#ECEEF0] text-[#1E2429] hover:bg-[#DDE1E5]"
               }`}
             >
-              {disc}
+              {E(disc)}
             </button>
           ))}
         </div>
@@ -349,7 +349,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                             {dwg.name}
                           </h4>
                           <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#5A646E]">
-                            <span className="text-[#5A646E] font-semibold">{dwg.discipline}</span>
+                            <span className="text-[#5A646E] font-semibold">{E(dwg.discipline)}</span>
                             <span>•</span>
                             <span>{dwg.fileSize}</span>
                             <span>•</span>
@@ -392,7 +392,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                             isAfc ? "bg-emerald-600" : "bg-amber-500 animate-pulse"
                           }`}
                         />
-                        <span>{dwg.status}</span>
+                        <span>{E(dwg.status)}</span>
                       </span>
                     </td>
 

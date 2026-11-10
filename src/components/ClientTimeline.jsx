@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tr_ as T } from "../i18n";
+import { tr_ as T, E } from "../i18n";
 import {
   CalendarDays,
   CheckCircle2,
@@ -147,7 +147,7 @@ function ClientTimeline() {
                           isActive ? "text-emerald-600 font-black" : "text-[#1E2429]"
                         }`}
                       >
-                        {step.phase}
+                        {E(step.phase)}
                       </h3>
                       {isActive && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 animate-pulse">
@@ -165,7 +165,7 @@ function ClientTimeline() {
                           : "bg-[#ECEEF0] text-[#5A646E] border-[#DDE1E5]"
                       }`}
                     >
-                      {step.status}
+                      {E(step.status)}
                     </span>
                   </div>
 
