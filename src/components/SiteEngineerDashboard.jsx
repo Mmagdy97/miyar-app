@@ -1,3 +1,5 @@
+import { expensesStore } from "../data/stores";
+import { ENGINEER_CASH, personById, projectById, formatNumber } from "../data/seed";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -132,8 +134,8 @@ function SiteEngineerDashboard({ setActionItems }) {
       id: Date.now(),
       title: "تقرير يومي جديد: فيلا الياسمين",
       subtitle: `حضور ${totalWorkers} عمال بالموقع • ${worksChecklist.filter((w) => w.done).length} مهام منجزة • ${photos.length} صور توثيقية`,
-      user: "م. محمد (الموقع)",
-      project: "فيلا الياسمين - التجمع",
+      user: eng.displayName,
+      project: proj.name,
       category: "تقرير يومي",
       amount: "اعتماد فني",
       timestamp: "الآن",
@@ -163,6 +165,28 @@ function SiteEngineerDashboard({ setActionItems }) {
   // Engineer Submit Petty Cash Settlement
   const handlePettyCashSubmit = (e) => {
     e.preventDefault();
+    const amountNum = Number(cashAmount);
+    if (!(amountNum > 0)) return;
+
+    // Demo session = the engineer assigned to the client's project (single source: seed)
+    const cashRow = ENGINEER_CASH.find((c) => c.projectId === 1) || ENGINEER_CASH[0];
+    const eng = personById(cashRow.engineerId);
+    const proj = projectById(cashRow.projectId);
+
+    expensesStore.set((prev) => [
+      {
+        id: Date.now(),
+        engId: cashRow.id,
+        engName: `${eng.displayName} (${proj.name})`,
+        description: cashNotes || "طلب تسوية عهدة ميدانية",
+        amount: amountNum,
+        date: "الآن",
+        category: cashCategory,
+        receiptNumber: `REC-${String(Date.now()).slice(-4)}`,
+        invoiceImg: "",
+      },
+      ...prev,
+    ]);
 
     const newExpenseItem = {
       id: Date.now(),
@@ -171,7 +195,7 @@ function SiteEngineerDashboard({ setActionItems }) {
       user: "م. محمد (الموقع)",
       project: "فيلا الياسمين - التجمع",
       category: "تسوية عهدة",
-      amount: `${Number(cashAmount).toLocaleString("ar-EG")} ج.م`,
+      amount: `${formatNumber(amountNum)} ج.م`,
       timestamp: "الآن",
       time: "الآن",
       targetRole: "Admin",

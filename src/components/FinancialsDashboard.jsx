@@ -484,11 +484,15 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
             {/* Receipt Image Mock */}
             <div className="relative bg-[#ECEEF0] h-56 overflow-hidden flex items-center justify-center">
-              <img
-                src={selectedReceipt.invoiceImg}
-                alt="Receipt Mock"
-                className="w-full h-full object-cover"
-              />
+              {selectedReceipt.invoiceImg ? (
+                <img
+                  src={selectedReceipt.invoiceImg}
+                  alt="صورة الفاتورة"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <Receipt className="w-12 h-12 text-[#5A646E]/40" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#1E2429]/70 via-transparent to-transparent flex items-end p-4">
                 <span className="text-white text-xs font-bold flex items-center gap-1.5 bg-[#1E2429]/50 backdrop-blur-xs px-2.5 py-1 rounded-lg">
                   <Receipt className="w-3.5 h-3.5 text-emerald-400" />
