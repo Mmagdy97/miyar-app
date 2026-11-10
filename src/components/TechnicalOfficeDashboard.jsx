@@ -1,4 +1,5 @@
 import { currencySymbol, intlLocale } from "../i18n";
+import { tr_ as T } from "../i18n";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -308,10 +309,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
         <div className="sticky top-4 z-40 p-4 rounded-lg bg-emerald-700 text-white shadow-xl shadow-emerald-600/25 border border-emerald-500 animate-in fade-in slide-in-from-top-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 font-black text-sm">
             <CheckCircle2 className="w-5 h-5 text-emerald-200 shrink-0" />
-            <span>تم إرسال الحل الهندسي لمهندس الموقع بنجاح وإشعاره فوراً!</span>
+            <span>{T("to.1")}</span>
           </div>
           <span className="text-xs bg-emerald-700/80 px-2 py-0.5 rounded-full font-bold">
-            محدث الآن
+            {T("to.2")}
           </span>
         </div>
       )}
@@ -322,13 +323,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] inline-flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-[#5A646E]" />
-              إدارة الوثائق والمخططات الهندسية
+              {T("to.3")}
             </span>
             <span className="text-xs text-[#5A646E] font-semibold font-mono">BIM & CAD Studio</span>
           </div>
 
           <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#1E2429] mt-1.5">
-            مرحباً يا هندسة، قسم المكتب الفني
+            {T("to.4")}
           </h1>
 
           <p className="text-xs md:text-sm text-[#5A646E] mt-1 flex items-center gap-2 flex-wrap">
@@ -350,7 +351,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm active:scale-95 transition-all cursor-pointer"
           >
             <UploadCloud className="w-4 h-4 shrink-0" />
-            <span>رفع مخطط جديد / تحديث لوحة</span>
+            <span>{T("to.6")}</span>
           </button>
         </div>
       </div>
@@ -362,7 +363,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A646E] uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#1E2429]" />
-              مخططات بانتظار الاعتماد
+              {T("to.7")}
             </span>
             <div className="w-8 h-8 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
               <FileCode className="w-4 h-4" />
@@ -373,7 +374,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               ٥
             </span>
             <span className="text-xs font-bold text-[#1E2429] bg-[#ECEEF0] border border-[#DDE1E5] px-2 py-0.5 rounded-full text-[#1E2429]">
-              لوحات Shop Drawings
+              {T("to.9")}
             </span>
           </div>
           <p className="text-xs text-[#5A646E] mt-2 font-medium">
@@ -390,7 +391,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
               </span>
-              استفسارات وتعارضات الموقع (RFI)
+              {T("to.11")}
             </span>
             <div className="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-center font-bold">
               <AlertTriangle className="w-4 h-4" />
@@ -401,11 +402,11 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               ٢
             </span>
             <span className="text-xs font-black text-rose-800 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-              عاجل جداً
+              {T("to.13")}
             </span>
           </div>
           <p className="text-xs text-amber-800/80 mt-2 font-medium">
-            تعارضات كمرات وتكييف تتطلب حلولاً بديلة
+            {T("to.14")}
           </p>
         </div>
 
@@ -414,7 +415,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A646E] uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              مقايسات قيد التسعير
+              {T("to.15")}
             </span>
             <div className="w-8 h-8 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
               <ClipboardList className="w-4 h-4" />
@@ -425,7 +426,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               ٣
             </span>
             <span className="text-xs font-bold text-emerald-700 bg-[#ECEEF0] border border-[#DDE1E5] px-2 py-0.5 rounded-full text-[#1E2429]">
-              حصر كميات BOQ
+              {T("to.17")}
             </span>
           </div>
           <p className="text-xs text-[#5A646E] mt-2 font-medium">
@@ -438,7 +439,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A646E] uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-              أوامر التغيير المطلوبة
+              {T("to.19")}
             </span>
             <div className="w-8 h-8 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
               <FileEdit className="w-4 h-4" />
@@ -449,11 +450,11 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               ١
             </span>
             <span className="text-xs font-bold text-purple-700 bg-[#ECEEF0] border border-[#DDE1E5] px-2 py-0.5 rounded-full text-[#1E2429]">
-              قيد المراجعة الفنية
+              {T("to.21")}
             </span>
           </div>
           <p className="text-xs text-[#5A646E] mt-2 font-medium">
-            ترقية رخام كلكتا جولد (+٨٥ ألف {currencySymbol()})
+            {T("to.22", { v0: currencySymbol() })}
           </p>
         </div>
       </div>
@@ -467,10 +468,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               <div>
                 <h2 className="text-base font-bold text-[#1E2429] flex items-center gap-2">
                   <FileCode className="w-4 h-4 text-[#1E2429]" />
-                  آخر المخططات الهندسية (Document Control)
+                  {T("to.23")}
                 </h2>
                 <p className="text-xs text-[#5A646E] mt-0.5">
-                  سجل لوحات الورشة التنفيذية والمراجعات المعتمدة
+                  {T("to.24")}
                 </p>
               </div>
 
@@ -480,7 +481,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="بحث في المخططات..."
+                  placeholder={T("to.25")}
                   className="py-1.5 ps-8 pe-3 rounded-lg border border-[#DDE1E5] text-xs focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-[#1E2429] placeholder:text-[#5A646E] w-44"
                 />
                 <Search className="w-3.5 h-3.5 text-[#5A646E] absolute start-2.5 top-1/2 -translate-y-1/2" />
@@ -517,9 +518,9 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                         </div>
 
                         <p className="text-xs text-[#5A646E] mt-1 flex items-center gap-2 flex-wrap">
-                          <span>المشروع: <strong className="text-[#5A646E]">{dwg.project}</strong></span>
+                          <span>{T("to.26")} <strong className="text-[#5A646E]">{dwg.project}</strong></span>
                           <span>•</span>
-                          <span>التخصص: {dwg.discipline}</span>
+                          <span>{T("to.27", { v0: dwg.discipline })}</span>
                           <span>•</span>
                           <span className="text-[#5A646E] text-[11px]">{dwg.date}</span>
                         </p>
@@ -551,14 +552,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     {/* Action Download / View */}
                     <div className="flex items-center gap-1 shrink-0 pt-1">
                       <button
-                        title="معاينة المخطط"
+                        title={T("to.28")}
                         onClick={() => alert(`معاينة المخطط: ${dwg.name} (${dwg.code})`)}
                         className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button
-                        title="تحميل ملف PDF"
+                        title={T("to.29")}
                         onClick={() => alert(`جاري تنزيل الملف المعتمد: ${dwg.name}.pdf`)}
                         className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors"
                       >
@@ -572,8 +573,8 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
 
           <div className="p-3.5 bg-[#F3F4F6] border-t border-[#ECEEF0] text-[#5A646E] flex items-center justify-between text-xs text-[#5A646E]">
-            <span>إجمالي المخططات المفهرسة: {drawings.length} لوحة</span>
-            <span className="font-bold text-[#5A646E]">جميع اللوحات مطابقة لأحدث معايير الكود</span>
+            <span>{T("to.30", { v0: drawings.length })}</span>
+            <span className="font-bold text-[#5A646E]">{T("to.31")}</span>
           </div>
         </div>
 
@@ -584,10 +585,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               <div>
                 <h2 className="text-base font-bold text-[#1E2429] flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-700" />
-                  استفسارات وتعارضات الموقع (Site RFIs)
+                  {T("to.32")}
                 </h2>
                 <p className="text-xs text-[#5A646E] mt-0.5">
-                  تعارضات الورشة والاستفسارات الفنية الواردة من مهندسي المواقع
+                  {T("to.33")}
                 </p>
               </div>
 
@@ -644,8 +645,8 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     </p>
 
                     <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#5A646E]">
-                      <span>الموقع: <strong className="text-[#1E2429]">{rfi.location}</strong></span>
-                      <span>السائل: <strong className="text-[#5A646E]">{rfi.submitter}</strong></span>
+                      <span>{T("to.34")} <strong className="text-[#1E2429]">{rfi.location}</strong></span>
+                      <span>{T("to.35")} <strong className="text-[#5A646E]">{rfi.submitter}</strong></span>
                     </div>
 
                     {/* Action or Resolution */}
@@ -656,7 +657,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                           className="px-4 py-1.5 rounded-xl text-xs font-black text-white bg-[#2B3138] hover:bg-[#1E2429] active:scale-95 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer text-white"
                         >
                           <Send className="w-3.5 h-3.5" />
-                          <span>إرسال حل هندسي</span>
+                          <span>{T("to.36")}</span>
                         </button>
                       ) : (
                         <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
@@ -666,7 +667,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                       )}
 
                       <span className="text-[10px] text-[#5A646E]">
-                        متابعة مع مهندس الموقع
+                        {T("to.38")}
                       </span>
                     </div>
                   </div>
@@ -676,8 +677,8 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
 
           <div className="p-3.5 bg-[#F3F4F6] border-t border-[#ECEEF0] text-[#5A646E] flex items-center justify-between text-xs text-[#5A646E]">
-            <span>معدل الرد على استفسارات الموقع: أقل من ٣ ساعات</span>
-            <span className="font-bold text-[#5A646E]">مباشر</span>
+            <span>{T("to.39")}</span>
+            <span className="font-bold text-[#5A646E]">{T("to.40")}</span>
           </div>
         </div>
       </div>
@@ -689,7 +690,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             <div className="flex items-center gap-2">
               <ClipboardList className="w-5 h-5 text-[#1E2429]" />
               <h2 className="text-base sm:text-lg font-black text-[#1E2429]">
-                المقايسات النشطة ومطابقة التنفيذ الميداني (Active BOQs)
+                {T("to.41")}
               </h2>
             </div>
             <p className="text-xs text-[#5A646E] mt-0.5">
@@ -709,13 +710,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           <table className="w-full text-start text-xs">
             <thead className="bg-[#F3F4F6] text-[#5A646E] font-extrabold border-b border-[#DDE1E5]">
               <tr>
-                <th className="py-3 px-3.5 font-mono">الكود</th>
-                <th className="py-3 px-3.5">البند وتوصيف الأعمال</th>
-                <th className="py-3 px-3.5 text-center">الوحدة</th>
-                <th className="py-3 px-3.5 text-center">الكمية التعاقدية</th>
-                <th className="py-3 px-3.5 text-center">المنفذ فعلياً</th>
-                <th className="py-3 px-3.5 min-w-[150px]">نسبة الإنجاز بالموقع</th>
-                <th className="py-3 px-3.5 text-center">الحالة الفنية</th>
+                <th className="py-3 px-3.5 font-mono">{T("to.44")}</th>
+                <th className="py-3 px-3.5">{T("to.45")}</th>
+                <th className="py-3 px-3.5 text-center">{T("to.46")}</th>
+                <th className="py-3 px-3.5 text-center">{T("to.47")}</th>
+                <th className="py-3 px-3.5 text-center">{T("to.48")}</th>
+                <th className="py-3 px-3.5 min-w-[150px]">{T("to.49")}</th>
+                <th className="py-3 px-3.5 text-center">{T("to.50")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#ECEEF0]">
@@ -739,8 +740,8 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   <td className="py-3.5 px-3.5">
                     <div className="space-y-1">
                       <div className="flex items-center justify-between text-[11px] font-bold">
-                        <span className="text-[#5A646E]">الإنجاز:</span>
-                        <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">{item.progress}٪</span>
+                        <span className="text-[#5A646E]">{T("to.51")}</span>
+                        <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">{T("to.52", { v0: item.progress })}</span>
                       </div>
                       <ProgressBar
                         value={item.progress}
@@ -784,10 +785,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 </div>
                 <div>
                   <h3 className="text-base font-black text-[#1E2429]">
-                    رفع مخطط هندسي تنفيذي جديد
+                    {T("to.53")}
                   </h3>
                   <p className="text-xs text-[#5A646E]">
-                    تحديث لوحات الورشة واعتماد إصدارات Shop Drawings
+                    {T("to.54")}
                   </p>
                 </div>
               </div>
@@ -804,24 +805,24 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               <div className="p-8 text-center space-y-2">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto animate-bounce" />
                 <h4 className="font-black text-[#1E2429] text-base">
-                  تم رفع وفهرسة المخطط الهندسي بنجاح!
+                  {T("to.55")}
                 </h4>
                 <p className="text-xs text-[#5A646E]">
-                  تم إشعار مهندس الموقع والإدارة وتحديث سجل الـ Document Control.
+                  {T("to.56")}
                 </p>
               </div>
             ) : (
               <form onSubmit={handleUploadSubmit} className="p-6 space-y-4 text-xs sm:text-sm">
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                    اسم اللوحة الهندسية
+                    {T("to.57")}
                   </label>
                   <input
                     type="text"
                     required
                     value={newDwgName}
                     onChange={(e) => setNewDwgName(e.target.value)}
-                    placeholder="مثال: لوحة توزيع الإنارة الذكية - الدور الأول"
+                    placeholder={T("to.58")}
                     className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs sm:text-sm font-bold text-[#1E2429]"
                   />
                 </div>
@@ -829,7 +830,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                      كود اللوحة (Drawing Code)
+                      {T("to.59")}
                     </label>
                     <input
                       type="text"
@@ -843,17 +844,17 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
                   <div>
                     <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                      رقم المراجعة (Revision)
+                      {T("to.60")}
                     </label>
                     <select
                       value={newDwgRev}
                       onChange={(e) => setNewDwgRev(e.target.value)}
                       className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs font-bold text-[#1E2429] bg-white"
                     >
-                      <option value="Rev. 00">Rev. 00 (مبدئي)</option>
-                      <option value="Rev. 01">Rev. 01 (أول مراجعة)</option>
-                      <option value="Rev. 02">Rev. 02 (محدث للتنفيذ)</option>
-                      <option value="Rev. 03">Rev. 03 (تعديل استشاري)</option>
+                      <option value="Rev. 00">{T("to.114")}</option>
+                      <option value="Rev. 01">{T("to.62")}</option>
+                      <option value="Rev. 02">{T("to.63")}</option>
+                      <option value="Rev. 03">{T("to.64")}</option>
                     </select>
                   </div>
                 </div>
@@ -861,34 +862,34 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                      التخصص الهندسي
+                      {T("to.115")}
                     </label>
                     <select
                       value={newDwgDiscipline}
                       onChange={(e) => setNewDwgDiscipline(e.target.value)}
                       className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs font-bold text-[#1E2429] bg-white"
                     >
-                      <option value="معماري وديكور">معماري وديكور</option>
-                      <option value="إنشائي">إنشائي وهيكل</option>
-                      <option value="كهرباء وإنارة">كهرباء وإنارة</option>
-                      <option value="صحي ومياه">صحي ومياه</option>
-                      <option value="تكييف وميكانيكا">تكييف وميكانيكا</option>
+                      <option value="معماري وديكور">{T("to.116")}</option>
+                      <option value="إنشائي">{T("to.67")}</option>
+                      <option value="كهرباء وإنارة">{T("to.68")}</option>
+                      <option value="صحي ومياه">{T("to.119")}</option>
+                      <option value="تكييف وميكانيكا">{T("to.70")}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                      المشروع التابع له
+                      {T("to.71")}
                     </label>
                     <select
                       value={newDwgProject}
                       onChange={(e) => setNewDwgProject(e.target.value)}
                       className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs font-bold text-[#1E2429] bg-white"
                     >
-                      <option value="فيلا الياسمين - التجمع">فيلا الياسمين - التجمع</option>
-                      <option value="مقر إداري - الشيخ زايد">مقر إداري - الشيخ زايد</option>
-                      <option value="دوبلكس نيو جيزة">دوبلكس نيو جيزة</option>
-                      <option value="شاليه مراسي 14B">شاليه مراسي 14B</option>
+                      <option value="فيلا الياسمين - التجمع">{T("to.72")}</option>
+                      <option value="مقر إداري - الشيخ زايد">{T("to.73")}</option>
+                      <option value="دوبلكس نيو جيزة">{T("to.74")}</option>
+                      <option value="شاليه مراسي 14B">{T("to.75")}</option>
                     </select>
                   </div>
                 </div>
@@ -897,10 +898,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <div className="p-4 border-2 border-dashed border-[#CBD0D6] rounded-lg bg-[#F3F4F6] text-center cursor-pointer hover:bg-[#ECEEF0] transition-colors">
                   <UploadCloud className="w-8 h-8 text-[#5A646E] mx-auto mb-1" />
                   <p className="text-xs font-bold text-[#1E2429]">
-                    اسحب ملف المخطط بصيغة PDF أو DWG هنا
+                    {T("to.76")}
                   </p>
                   <p className="text-[10px] text-[#5A646E] mt-0.5">
-                    الحد الأقصى للملف: ٥٠ ميجابايت
+                    {T("to.77")}
                   </p>
                 </div>
 
@@ -909,14 +910,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     type="submit"
                     className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#1E2429] text-white active:scale-95 transition-all shadow-sm"
                   >
-                    اعتماد ونشر المخطط
+                    {T("to.78")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setUploadModalOpen(false)}
                     className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#5A646E] bg-[#ECEEF0] hover:bg-[#DDE1E5] text-[#5A646E]"
                   >
-                    إلغاء
+                    {T("to.126")}
                   </button>
                 </div>
               </form>
@@ -943,10 +944,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 </div>
                 <div>
                   <h3 className="text-base font-black text-[#1E2429]">
-                    تقديم حل هندسي معتمد لـ {solvingRfi.id}
+                    {T("to.80", { v0: solvingRfi.id })}
                   </h3>
                   <p className="text-xs text-[#5A646E]">
-                    حل تعارض الموقع وإرسال التوجيه الفني لمهندس الموقع
+                    {T("to.81")}
                   </p>
                 </div>
               </div>
@@ -962,24 +963,24 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             <form onSubmit={handleSolveRfi} className="p-6 space-y-4 text-xs sm:text-sm">
               <div className="p-3.5 rounded-lg bg-amber-50/60 border border-amber-200 text-xs space-y-1">
                 <span className="font-extrabold text-amber-900 block">
-                  التعارض المطلوب حله: {solvingRfi.title}
+                  {T("to.82", { v0: solvingRfi.title })}
                 </span>
                 <p className="text-amber-800">{solvingRfi.details}</p>
                 <p className="text-[10px] text-amber-700 font-medium pt-1">
-                  الموقع: {solvingRfi.location} • السائل: {solvingRfi.submitter}
+                  {T("to.83", { v0: solvingRfi.location, v1: solvingRfi.submitter })}
                 </p>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                  الحل الهندسي والتوجيه الفني المعتمد:
+                  {T("to.84")}
                 </label>
                 <textarea
                   rows={4}
                   required
                   value={solutionText}
                   onChange={(e) => setSolutionText(e.target.value)}
-                  placeholder="اكتب التوجيه الفني المعتمد أو رقم اللوحة المعدلة (مثال: تم اعتماد تعديل مسار الدكت وتمريره أسفل الكمرة مع تخفيض عمق الجبس بورد ١٠ سم واستخدام جريلات جانبية Side-Wall)..."
+                  placeholder={T("to.85")}
                   className="w-full p-3 rounded-lg border border-[#DDE1E5] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs sm:text-sm text-[#1E2429] leading-relaxed placeholder:text-[#5A646E]"
                 />
               </div>
@@ -990,14 +991,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#1E2429] text-white active:scale-95 transition-all shadow-sm flex items-center justify-center gap-1.5"
                 >
                   <Send className="w-4 h-4" />
-                  <span>إرسال الحل للموقع واعتماده</span>
+                  <span>{T("to.86")}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setSolvingRfi(null)}
                   className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#5A646E] bg-[#ECEEF0] hover:bg-[#DDE1E5] text-[#5A646E]"
                 >
-                  إلغاء
+                  {T("to.126")}
                 </button>
               </div>
             </form>
