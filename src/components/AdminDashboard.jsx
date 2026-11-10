@@ -1,4 +1,4 @@
-import { currencySymbol, intlLocale } from "../i18n";
+import { currencySymbol, intlLocale, useI18n } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -69,16 +69,28 @@ const INITIAL_PROJECTS = SEED_PROJECTS.map((p) => ({
 
 const BASE_TOTALS = getTotals();
 
+// month = 1-12; the label is rendered per locale (Intl) so it follows the UI language.
 const MONTHLY_FINANCIALS = [
-  { month: "يونيو", revenue: 580, expenses: 380, label: "٥٨٠ ألف / ٣٨٠ ألف" },
-  { month: "يوليو", revenue: 720, expenses: 490, label: "٧٢٠ ألف / ٤٩٠ ألف" },
-  { month: "أغسطس", revenue: 890, expenses: 540, label: "٨٩٠ ألف / ٥٤٠ ألف" },
-  { month: "سبتمبر", revenue: 950, expenses: 620, label: "٩٥٠ ألف / ٦٢٠ ألف" },
-  { month: "أكتوبر", revenue: 1120, expenses: 710, label: "١.١٢ مليون / ٧١٠ ألف" },
-  { month: "نوفمبر", revenue: 1160, expenses: 680, label: "١.١٦ مليون / ٦٨٠ ألف" },
-];
+  { m: 6, revenue: 580, expenses: 380 },
+  { m: 7, revenue: 720, expenses: 490 },
+  { m: 8, revenue: 890, expenses: 540 },
+  { m: 9, revenue: 950, expenses: 620 },
+  { m: 10, revenue: 1120, expenses: 710 },
+  { m: 11, revenue: 1160, expenses: 680 },
+].map((x) => ({
+  ...x,
+  get month() {
+    return new Intl.DateTimeFormat(intlLocale(), { month: "long", timeZone: "UTC" }).format(Date.UTC(2026, x.m - 1, 1));
+  },
+}));
+
+const rich = (str) =>
+  str.split(/<\/?b>/).map((part, i) =>
+    i % 2 ? <strong key={i} className="text-[#1E2429]">{part}</strong> : part
+  );
 
 function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
+  const { t } = useI18n();
   const [cashRows] = cashStore.use();
   const [invoiceRows] = invoicesStore.use();
   const clientPaid = getClientPayments(invoiceRows).paid;
@@ -159,13 +171,13 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-[#5A646E]" />
-              استوديو الإدارة التنفيذية
+              {t("adm.studio")}
             </span>
-            <span className="text-xs text-[#5A646E] font-semibold">استوديو القاهرة</span>
+            <span className="text-xs text-[#5A646E] font-semibold">{t("adm.site")}</span>
           </div>
 
           <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#1E2429] mt-1.5">
-            نظرة عامة على الأداء
+            {t("adm.title")}
           </h1>
 
           <p className="text-xs md:text-sm text-[#5A646E] mt-1 flex items-center gap-2 flex-wrap">
@@ -175,7 +187,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </span>
             <span className="text-[#7B848E]">•</span>
             <span className="text-[#5A646E]">
-              متابعة مباشرة لـ <strong className="text-[#1E2429]">{toAr(TOTALS.projectCount)} مشاريع قيد التنفيذ</strong> في نطاق القاهرة الكبرى
+              {rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}
             </span>
           </p>
         </div>
@@ -187,7 +199,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7B848E] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D9480F]/150" />
             </span>
-            <span>مزامنة مباشرة مع مواقع التنفيذ</span>
+            <span>{t("adm.sync")}</span>
           </div>
         </div>
       </div>
@@ -200,11 +212,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
-                الإيرادات المتوقعة
+                {t("adm.k1")}
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#27734E]/10 text-[#27734E]">
                 <ArrowUpRight className="w-3.5 h-3.5" />
-                +١٤.٢٪
+                +{toAr(14.2)}{t("sym.pct")}
               </span>
             </div>
 
@@ -214,15 +226,15 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
-              إجمالي القيمة التعاقدية لـ {toAr(TOTALS.projectCount)} مشاريع
+              {t("adm.k1d", { n: toAr(TOTALS.projectCount) })}
             </p>
           </div>
 
           {/* Sparkline */}
           <div className="mt-5 pt-3 border-t border-[#ECEEF0]">
             <div className="flex items-center justify-between text-xs text-[#5A646E] mb-1">
-              <span>مسار النمو (آخر ٦ شهور)</span>
-              <span className="text-[#27734E] font-bold">+٦٧٠ ألف {currencySymbol()}</span>
+              <span>{t("adm.trend")}</span>
+              <span className="text-[#27734E] font-bold">+{formatCompact(670000)} {currencySymbol()}</span>
             </div>
             <div className="h-10 w-full relative">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
@@ -246,10 +258,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
-                إجمالي المحصل
+                {t("adm.k2")}
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#27734E]/10 text-[#27734E]">
-                {toAr(TOTALS.collectedPct)}٪
+                {toAr(TOTALS.collectedPct)}{t("sym.pct")}
               </span>
             </div>
 
@@ -259,14 +271,14 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
-              مودعة بالحسابات البنكية للمكتب
+              {t("adm.k2d")}
             </p>
           </div>
 
           <div className="mt-5 pt-3 border-t border-[#ECEEF0]">
             <div className="flex items-center justify-between text-xs text-[#5A646E] mb-1">
-              <span>سرعة التدفقات النقدية</span>
-              <span className="text-[#1E2429] font-bold">٤٢٠ ألف {currencySymbol()}/شهر</span>
+              <span>{t("adm.velocity")}</span>
+              <span className="text-[#1E2429] font-bold">{formatCompact(420000)} {currencySymbol()}/{t("unit.month")}</span>
             </div>
             <div className="h-10 w-full relative">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
@@ -290,10 +302,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B83F3F]" />
-                مستحقات متأخرة
+                {t("adm.k3")}
               </span>
               <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#B83F3F]/10 text-[#B83F3F]">
-                متابعة عاجلة
+                {t("adm.urgent")}
               </span>
             </div>
 
@@ -303,18 +315,18 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
-              {toAr(TOTALS.overdueCount)} فواتير ومستخلصات تجاوزت موعد الاستحقاق
+              {t("adm.k3d", { n: toAr(TOTALS.overdueCount) })}
             </p>
           </div>
 
           <div className="mt-5 pt-3 border-t border-[#ECEEF0] space-y-2">
             <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
-              <span className="truncate">مستخلص {TOTALS.topOverdue.projectName}</span>
-              <span className="shrink-0 text-xs font-bold text-[#B83F3F]">{formatCompact(TOTALS.topOverdue.amount)} {currencySymbol()} ({toAr(TOTALS.topOverdue.pctOfOverdue)}٪)</span>
+              <span className="truncate">{t("adm.claim", { name: TOTALS.topOverdue.projectName })}</span>
+              <span className="shrink-0 text-xs font-bold text-[#B83F3F]">{formatCompact(TOTALS.topOverdue.amount)} {currencySymbol()} ({toAr(TOTALS.topOverdue.pctOfOverdue)}{t("sym.pct")})</span>
             </div>
             <ProgressBar value={TOTALS.topOverdue.pctOfOverdue} customFillClass="bg-[#B83F3F]" />
             <p className="text-xs text-[#5A646E] font-medium">
-              متوسط التأخير: {toAr(TOTALS.overdueAvgDays)} يوماً
+              {t("adm.avgDelay", { n: toAr(TOTALS.overdueAvgDays) })}
             </p>
           </div>
         </div>
@@ -325,10 +337,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
-                عهد مهندسين نشطة
+                {t("adm.k4")}
               </span>
               <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#7B848E]/15 text-[#B45309]">
-                بالمواقع ({toAr(TOTALS.cashUsedPct)}٪)
+                {t("adm.onSite", { p: toAr(TOTALS.cashUsedPct) })}
               </span>
             </div>
 
@@ -338,19 +350,19 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
-              في حوزة {toAr(TOTALS.cashEngineerCount)} مهندسي مواقع للمشتريات
+              {t("adm.k4d", { n: toAr(TOTALS.cashEngineerCount) })}
             </p>
           </div>
 
           <div className="mt-5 pt-3 border-t border-[#ECEEF0] space-y-2.5">
             <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
-              <span>نسبة استخدام سقف العهد</span>
-              <span className="text-xs font-bold text-[#1E2429] font-mono">{toAr(TOTALS.cashUsedPct)}٪</span>
+              <span>{t("adm.ceiling")}</span>
+              <span className="text-xs font-bold text-[#1E2429] font-mono">{toAr(TOTALS.cashUsedPct)}{t("sym.pct")}</span>
             </div>
             <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#2B3138]" />
             <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
-              <span>إجمالي العهد المسلّمة: {formatNumber(TOTALS.cashGiven)} {currencySymbol()}</span>
-              <span className="text-[#27734E] font-bold">السيولة آمنة</span>
+              <span>{t("adm.given", { amt: `${formatNumber(TOTALS.cashGiven)} ${currencySymbol()}` })}</span>
+              <span className="text-[#27734E] font-bold">{t("adm.liquidity")}</span>
             </div>
           </div>
         </div>
@@ -362,14 +374,14 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-base font-bold text-[#1E2429]">
-                التدفقات النقدية والأداء المالي
+                {t("adm.cfTitle")}
               </h2>
               <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#D9480F]/15 text-[#2B3138] border border-[#D9480F]/30">
-                هامش الربح التشغيلي: ٣٩.٤٪
+                {t("adm.margin", { p: toAr(39.4) })}
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-0.5">
-              مقارنة شهرية بين المستخلصات المحصلة وتكاليف التشوين ومصروفات المواقع
+              {t("adm.cfSub")}
             </p>
           </div>
 
@@ -378,11 +390,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center gap-4 text-xs font-medium text-[#5A646E]">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-sm bg-[#2B3138]" />
-                التدفقات الداخلة (الإيراد)
+                {t("adm.inflows")}
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-sm bg-[#DDE1E5]" />
-                مصروفات المواقع
+                {t("adm.siteExp")}
               </span>
             </div>
 
@@ -395,7 +407,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     : "text-[#5A646E] hover:text-[#1E2429]"
                 }`}
               >
-                آخر ٦ شهور
+                {t("adm.last6")}
               </button>
               <button
                 onClick={() => setTimeframe("YTD")}
@@ -405,7 +417,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     : "text-[#5A646E] hover:text-[#1E2429]"
                 }`}
               >
-                السنة بالكامل
+                {t("adm.fullYear")}
               </button>
             </div>
           </div>
@@ -416,21 +428,21 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
             {activeHoverBar ? (
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] text-[#1E2429] animate-in fade-in">
-                <span>{activeHoverBar.month} ٢٠٢٦:</span>
+                <span>{activeHoverBar.month} {toAr(2026)}:</span>
                 <span className="text-[#1E2429] font-bold">
-                  إيراد: {activeHoverBar.revenue} ألف {currencySymbol()}
+                  {t("adm.revenue", { amt: `${formatCompact(activeHoverBar.revenue * 1000)} ${currencySymbol()}` })}
                 </span>
                 <span className="text-[#5A646E]">|</span>
                 <span className="text-[#5A646E]">
-                  مصروف: {activeHoverBar.expenses} ألف {currencySymbol()}
+                  {t("adm.expense", { amt: `${formatCompact(activeHoverBar.expenses * 1000)} ${currencySymbol()}` })}
                 </span>
                 <span className="text-[#2B3138]">
-                  (صافي +{Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)}٪)
+                  {t("adm.net", { p: toAr(Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)) })}
                 </span>
               </span>
             ) : (
               <span className="text-[#5A646E] text-xs font-medium">
-                مرر الفأرة فوق الأعمدة لعرض التفاصيل وصافي أرباح كل شهر
+                {t("adm.hover")}
               </span>
             )}
           </div>
@@ -471,23 +483,23 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#5A646E] pt-1">
             <div className="flex items-center gap-6">
               <div>
-                <span className="text-[#5A646E] block text-[11px] font-semibold">إجمالي إيراد ٦ أشهر</span>
-                <span className="font-extrabold text-[#1E2429] text-sm">٥,٤٢٠,٠٠٠ {currencySymbol()}</span>
+                <span className="text-[#5A646E] block text-[11px] font-semibold">{t("adm.rev6")}</span>
+                <span className="font-extrabold text-[#1E2429] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
               </div>
               <div className="h-6 w-px bg-[#DDE1E5]" />
               <div>
-                <span className="text-[#5A646E] block text-[11px] font-semibold">تكاليف التشوين والمواقع</span>
-                <span className="font-extrabold text-[#1E2429] text-sm">٣,٤٢٠,٠٠٠ {currencySymbol()}</span>
+                <span className="text-[#5A646E] block text-[11px] font-semibold">{t("adm.cost6")}</span>
+                <span className="font-extrabold text-[#1E2429] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
               <div className="h-6 w-px bg-[#DDE1E5]" />
               <div>
-                <span className="text-[#5A646E] block text-[11px] font-semibold">صافي أرباح المقاولات</span>
-                <span className="font-extrabold text-[#2B3138] text-sm">+٢,٠٠٠,٠٠٠ {currencySymbol()}</span>
+                <span className="text-[#5A646E] block text-[11px] font-semibold">{t("adm.profit6")}</span>
+                <span className="font-extrabold text-[#2B3138] text-sm">+{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000 - MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
             </div>
 
             <span className="text-[11px] text-[#5A646E] font-medium">
-              البيانات مطابقة لسجلات الفواتير الإلكترونية المعتمدة
+              {t("adm.einv")}
             </span>
           </div>
         </div>
@@ -503,16 +515,16 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div className="flex items-center gap-2">
                   <h2 className="text-base font-bold text-[#1E2429] flex items-center gap-2">
                     <Building2 className="w-4 h-4 text-[#1E2429]" />
-                    حالة المشاريع والتنفيذ
+                    {t("adm.projTitle")}
                   </h2>
                 </div>
                 <p className="text-xs text-[#5A646E] mt-0.5">
-                  نسب الإنجاز الميداني ومراحل التصميم والمهندسون المشرفون
+                  {t("adm.projSub")}
                 </p>
               </div>
 
               <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-                {INITIAL_PROJECTS.length} مواقع قيد العمل
+                {t("adm.sitesActive", { n: toAr(INITIAL_PROJECTS.length) })}
               </span>
             </div>
 
@@ -552,7 +564,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                         </div>
 
                         <p className="text-xs text-[#5A646E] mt-1">
-                          العميل: <span className="text-[#1E2429] font-bold">{project.client}</span> • القيمة التعاقدية: <span className="text-[#1E2429] font-extrabold">{project.contractValue}</span>
+                          {t("adm.client")} <span className="text-[#1E2429] font-bold">{project.client}</span> • {t("adm.contract")} <span className="text-[#1E2429] font-extrabold">{project.contractValue}</span>
                         </p>
                       </div>
 
@@ -576,10 +588,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     <div className="mt-3">
                       <div className="flex items-center justify-between text-xs mb-1.5 font-semibold">
                         <span className="text-[#5A646E]">
-                          المرحلة: <span className="text-[#1E2429] font-bold">{project.phase}</span>
+                          {t("adm.phase")} <span className="text-[#1E2429] font-bold">{project.phase}</span>
                         </span>
                         <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
-                          {project.progress}٪ مكتمل
+                          {t("adm.complete", { p: toAr(project.progress) })}
                         </span>
                       </div>
 
@@ -594,7 +606,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                         {project.phaseDetail}
                       </span>
                       <span className="shrink-0 font-bold text-[#5A646E]">
-                        التسليم: {project.dueDate}
+                        {t("adm.due", { d: project.dueDate })}
                       </span>
                     </div>
                   </div>
@@ -605,10 +617,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
           <div className="p-4 bg-[#F3F4F6]/70 border-t border-[#ECEEF0] flex items-center justify-between text-xs">
             <span className="text-[#5A646E] font-medium">
-              جميع الأعمال متوافقة مع الكود الهندسي المصري ٢٠٢٦
+              {t("adm.codeOk")}
             </span>
             <button className="font-bold text-[#1E2429] hover:text-amber-800 inline-flex items-center gap-1 transition-colors">
-              عرض سجل المشاريع
+              {t("adm.register")}
               <ChevronLeft className="ltr:-scale-x-100 w-3.5 h-3.5" />
             </button>
           </div>
@@ -621,10 +633,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               <div>
                 <h2 className="text-base font-bold text-[#1E2429] flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 text-[#1E2429]" />
-                  المهام والاعتمادات العاجلة
+                  {t("adm.tasksTitle")}
                 </h2>
                 <p className="text-xs text-[#5A646E] mt-0.5">
-                  اضغط على أي عنصر لعرض التفاصيل والصور الميدانية
+                  {t("adm.tasksSub")}
                 </p>
               </div>
 
@@ -635,7 +647,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     : "bg-[#ECEEF0] text-[#5A646E] border-[#DDE1E5]"
                 }`}
               >
-                {pendingCount} قيد الانتظار
+                {t("adm.pending", { n: toAr(pendingCount) })}
               </span>
             </div>
 
@@ -644,7 +656,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               {adminActionItems.length === 0 ? (
                 <div className="text-center py-12 text-[#5A646E]">
                   <ClipboardCheck className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                  <p className="text-xs font-bold">لا توجد مهام معلقة حالياً</p>
+                  <p className="text-xs font-bold">{t("adm.noTasks")}</p>
                 </div>
               ) : (
                 adminActionItems.map((item) => {
@@ -677,14 +689,14 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2">
                               <span className="text-[11px] font-bold text-[#5A646E] uppercase tracking-wider">
-                                {item.category || "إشعار"} • {item.project || "الموقع"}
+                                {item.category || t("adm.notice")} • {item.project || t("adm.theSite")}
                               </span>
 
                               {/* Subtle badge if timestamp is "الآن" */}
                               {isJustNow && isPending && (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D9480F]/15 text-[#2B3138] border border-[#D9480F]/30">
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
-                                  جديد الآن
+                                  {t("adm.newNow")}
                                 </span>
                               )}
                             </div>
@@ -712,12 +724,12 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                           )}
 
                           <div className="mt-2 text-[11px] text-[#5A646E] font-medium">
-                            المصدر:{" "}
+                            {t("adm.source")}{" "}
                             <span className="text-[#1E2429] font-bold">
                               {item.user || item.submitter}
                             </span>
                             <span className="text-[#1E2429] ms-2 font-bold hover:underline">
-                              (اضغط لعرض التفاصيل والصور)
+                              {t("adm.clickDetails")}
                             </span>
                           </div>
 
@@ -733,7 +745,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                   className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
                                 >
                                   <Check className="w-3.5 h-3.5" />
-                                  اعتماد
+                                  {t("adm.approve")}
                                 </button>
                                 <button
                                   onClick={(e) => {
@@ -743,7 +755,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 active:scale-95 transition-all"
                                 >
                                   <X className="w-3.5 h-3.5" />
-                                  رفض
+                                  {t("adm.reject")}
                                 </button>
                               </div>
                             ) : (
@@ -758,12 +770,12 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                   {item.status === "approved" ? (
                                     <>
                                       <CheckCircle2 className="w-3.5 h-3.5 text-[#D9480F]" />
-                                      تم الاعتماد والموافقة
+                                      {t("adm.approvedMsg")}
                                     </>
                                   ) : (
                                     <>
                                       <XCircle className="w-3.5 h-3.5 text-rose-600" />
-                                      تم الرفض والإعادة
+                                      {t("adm.rejectedMsg")}
                                     </>
                                   )}
                                 </span>
@@ -775,14 +787,14 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                   }}
                                   className="text-[11px] font-bold text-[#5A646E] hover:text-[#5A646E] underline"
                                 >
-                                  تراجع
+                                  {t("adm.undo")}
                                 </button>
                               </div>
                             )}
 
                             {isPending && (
                               <span className="text-[11px] text-[#5A646E] hidden sm:inline font-medium">
-                                يتطلب مراجعة الشريك
+                                {t("adm.partner")}
                               </span>
                             )}
                           </div>
@@ -796,8 +808,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
 
           <div className="p-4 bg-[#F3F4F6]/70 border-t border-[#ECEEF0] flex items-center justify-between text-xs text-[#5A646E] font-medium">
-            <span>تسجيل وتوثيق كافة العمليات في السجل الرقابي للمكتب</span>
-            <span className="font-bold text-[#5A646E]">محدث الآن</span>
+            <span>{t("adm.audit")}</span>
+            <span className="font-bold text-[#5A646E]">{t("adm.updated")}</span>
           </div>
         </div>
       </div>

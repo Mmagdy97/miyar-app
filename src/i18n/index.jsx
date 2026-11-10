@@ -22,7 +22,8 @@ let current = load();
 export const getLocale = () => current.locale;
 export const getCurrency = () => current.currency;
 export const intlLocale = () => INTL[current.locale];
-export const tr_ = (key) => DICTS[current.locale][key] ?? DICTS.ar[key] ?? key;
+const fill = (str, vars) => (vars ? str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : str);
+export const tr_ = (key, vars) => fill(DICTS[current.locale][key] ?? DICTS.ar[key] ?? key, vars);
 export const money = (n, opts) => formatMoney(n, current.currency, intlLocale(), opts);
 export const currencySymbol = () => {
   const parts = new Intl.NumberFormat(intlLocale(), { style: "currency", currency: current.currency }).formatToParts(0);
@@ -54,7 +55,7 @@ export function I18nProvider({ children }) {
     dir: LOCALES[settings.locale].dir,
     setLocale: (locale) => update({ locale }),
     setCurrency: (currency) => update({ currency }),
-    t: (key) => DICTS[settings.locale][key] ?? DICTS.ar[key] ?? key,
+    t: (key, vars) => fill(DICTS[settings.locale][key] ?? DICTS.ar[key] ?? key, vars),
   }), [settings, update]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
