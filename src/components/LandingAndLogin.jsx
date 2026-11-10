@@ -1,3 +1,4 @@
+import { PricingSection, LegalPage } from "./PublicPages";
 import { useState } from "react";
 import {
   Building2,
@@ -77,6 +78,7 @@ const DEMO_ROLES = [
 ];
 
 export default function LandingAndLogin({ onLogin }) {
+  const [legalPage, setLegalPage] = useState(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [email, setEmail] = useState("architect@miyar.eg");
   const [password, setPassword] = useState("••••••••");
@@ -115,6 +117,10 @@ export default function LandingAndLogin({ onLogin }) {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  if (legalPage) {
+    return <LegalPage kind={legalPage} onBack={() => setLegalPage(null)} />;
+  }
 
   return (
     <div
@@ -170,10 +176,10 @@ export default function LandingAndLogin({ onLogin }) {
               لماذا نحن؟
             </button>
             <button
-              onClick={() => scrollToSection("cta")}
+              onClick={() => scrollToSection("pricing")}
               className="hover:text-[#2B3138] transition-colors cursor-pointer"
             >
-              الاشتراك
+              الأسعار
             </button>
           </nav>
 
@@ -910,6 +916,8 @@ export default function LandingAndLogin({ onLogin }) {
       </section>
 
       {/* 5. Final CTA Banner & Footer */}
+      <PricingSection onStart={() => openModal("Admin")} />
+
       <section id="cta" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="bg-[#2B3138] text-white rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden border border-[#20262C]">
           {/* Subtle Ambient Decorative Glow */}
@@ -975,6 +983,12 @@ export default function LandingAndLogin({ onLogin }) {
             </button>
             <button onClick={() => openModal("Client")} className="hover:text-[#2B3138] cursor-pointer">
               بوابة العميل
+            </button>
+            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#2B3138] cursor-pointer">
+              الخصوصية
+            </button>
+            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#2B3138] cursor-pointer">
+              الشروط
             </button>
           </div>
 
