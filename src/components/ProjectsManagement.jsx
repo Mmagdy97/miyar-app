@@ -1,3 +1,4 @@
+import { currencySymbol } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -121,7 +122,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       phase: "تصميم",
       startDate: todayStr,
       deadline: newDeadline || "2027-03-31",
-      budget: newBudget.trim() ? `${newBudget.trim()} ج.م` : "٣,٥٠٠,٠٠٠ ج.م",
+      budget: newBudget.trim() ? `${newBudget.trim()} ${currencySymbol()}` : `${formatEGP(3500000)}`,
       location: newLocation.trim() || "القاهرة الجديدة",
       image:
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
@@ -182,7 +183,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   };
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -594,7 +595,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                    الميزانية التقديرية (ج.م)
+                    الميزانية التقديرية ({currencySymbol()})
                   </label>
                   <input
                     type="text"

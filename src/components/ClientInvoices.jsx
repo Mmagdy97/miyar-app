@@ -1,3 +1,4 @@
+import { currencySymbol, intlLocale } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState, useMemo } from "react";
 import {
@@ -47,7 +48,7 @@ function ClientInvoices() {
             ? {
                 ...inv,
                 status: "مدفوع",
-                paidDate: new Date().toLocaleDateString("ar-EG"),
+                paidDate: new Date().toLocaleDateString(intlLocale()),
               }
             : inv
         )
@@ -57,8 +58,8 @@ function ClientInvoices() {
       setPayingInvoice(null);
       setToastMessage(
         `تمت معالجة الدفع بنجاح عبر Stripe بقيمة ${payingInvoice.amount.toLocaleString(
-          "ar-EG"
-        )} ج.م ✓`
+          intlLocale()
+        )} ${currencySymbol()} ✓`
       );
       setTimeout(() => setToastMessage(null), 3500);
     }, 1200);
@@ -71,7 +72,7 @@ function ClientInvoices() {
   };
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -114,9 +115,9 @@ function ClientInvoices() {
             <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">إجمالي قيمة التعاقد</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-[#1E2429] tracking-tight">
-                {totalContract.toLocaleString("ar-EG")}
+                {totalContract.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#ECEEF0]/80">ج.م</span>
+              <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] text-[#5A646E] mt-2 block">
               شامل التوريد والتنفيذ والضمان
@@ -127,9 +128,9 @@ function ClientInvoices() {
             <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">إجمالي المدفوع حتى الآن</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-emerald-600 tracking-tight">
-                {totalPaid.toLocaleString("ar-EG")}
+                {totalPaid.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#ECEEF0]/80">ج.م</span>
+              <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-2">
               %{Math.round((totalPaid / totalContract) * 100)} مسدد بالكامل
@@ -140,9 +141,9 @@ function ClientInvoices() {
             <span className="text-xs font-bold text-[#ECEEF0] block mb-1">المتبقي للاستحقاق</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-white tracking-tight">
-                {totalDue.toLocaleString("ar-EG")}
+                {totalDue.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#ECEEF0]/80">ج.م</span>
+              <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] text-[#ECEEF0] mt-2 block">
               مقسم على الدفعات المتبقية وفق جدول التسليم
@@ -192,9 +193,9 @@ function ClientInvoices() {
                       {/* Amount */}
                       <td className="py-4 px-4 text-center">
                         <span className="font-mono font-black text-[#1E2429] text-sm md:text-base">
-                          {inv.amount.toLocaleString("ar-EG")}
+                          {inv.amount.toLocaleString(intlLocale())}
                         </span>
-                        <span className="text-[10px] text-[#5A646E] block font-sans">ج.م</span>
+                        <span className="text-[10px] text-[#5A646E] block font-sans">{currencySymbol()}</span>
                       </td>
 
                       {/* Due Date */}
@@ -279,7 +280,7 @@ function ClientInvoices() {
               <div className="flex justify-between">
                 <span className="text-[#5A646E]">المبلغ المطلوب:</span>
                 <span className="font-black text-[#1E2429] text-base">
-                  {payingInvoice.amount.toLocaleString("ar-EG")} ج.م
+                  {payingInvoice.amount.toLocaleString(intlLocale())} {currencySymbol()}
                 </span>
               </div>
             </div>
@@ -338,7 +339,7 @@ function ClientInvoices() {
                   <span>
                     {isProcessing
                       ? "جاري التأكيد مع البنك..."
-                      : `تأكيد دفع ${payingInvoice.amount.toLocaleString("ar-EG")} ج.م`}
+                      : `تأكيد دفع ${payingInvoice.amount.toLocaleString(intlLocale())} ${currencySymbol()}`}
                   </span>
                 </button>
               </div>

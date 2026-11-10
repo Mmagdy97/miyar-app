@@ -1,3 +1,4 @@
+import { currencySymbol } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -612,7 +613,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               إجمالي قيمة العقد
             </span>
             <div className="text-2xl sm:text-3xl font-black text-[#1E2429] font-ibm">
-              {formatNumber(PAY.total)} <span className="text-sm font-bold text-[#5A646E]">ج.م</span>
+              {formatNumber(PAY.total)} <span className="text-sm font-bold text-[#5A646E]">{currencySymbol()}</span>
             </div>
             <p className="text-[11px] text-[#5A646E]">
               شامل كافة بنود التوريدات وأعمال الديكور
@@ -630,7 +631,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               </span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-[#1E2429] font-ibm">
-              {formatNumber(PAY.paid)} <span className="text-sm font-bold text-[#ECEEF0]/80">ج.م</span>
+              {formatNumber(PAY.paid)} <span className="text-sm font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             {/* Horizontal progress bar */}
             <ProgressBar value={PAY.paidPct} />
@@ -651,7 +652,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </span>
               </div>
               <div style={{ color: '#FFFFFF' }} className="text-2xl sm:text-3xl font-black font-ibm mt-1">
-                {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span style={{ color: '#ECEEF0' }} className="text-sm font-bold opacity-80">ج.م</span>
+                {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span style={{ color: '#ECEEF0' }} className="text-sm font-bold opacity-80">{currencySymbol()}</span>
               </div>
               <p style={{ color: '#ECEEF0' }} className="text-[11px] mt-1">
                 {PAY.next ? `تستحق في ${formatDateAr(PAY.next.dueIso)}` : "لا توجد دفعات مستحقة"}
@@ -676,7 +677,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           onClick={() => setActivePhoto(null)}
         >
           <div
-            dir="rtl"
+           
             className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-xl w-full overflow-hidden border border-[#DDE1E5] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
@@ -757,7 +758,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           onClick={() => setPaymentModalOpen(false)}
         >
           <div
-            dir="rtl"
+           
             className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-lg w-full overflow-hidden border border-[#DDE1E5] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
@@ -789,7 +790,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div>
                   <span className="text-[#5A646E] text-xs block">المبلغ المطلوب سداده:</span>
                   <span className="text-2xl font-black text-[#1E2429] font-ibm">
-                    {PAY.next ? formatNumber(PAY.next.amount) : "٠"} ج.م
+                    {PAY.next ? formatNumber(PAY.next.amount) : "٠"} {currencySymbol()}
                   </span>
                 </div>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#1E2429] border border-[#DDE1E5] shadow-xs">

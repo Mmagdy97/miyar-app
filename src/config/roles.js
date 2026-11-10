@@ -59,3 +59,9 @@ export const ROLE_TITLES = {
 };
 
 export const ROLES = Object.keys(ROLE_CONFIG);
+
+/** Localized display helpers (tab routing still uses the stable Arabic `name`). */
+import { tr_ } from "../i18n";
+export const navLabel = (role, item) => tr_(`nav.${role}.${item.id}`);
+export const roleTitle = (role) => tr_(`role.${role}`);
+export const roleShort = (role) => tr_(`role.short.${role}`);

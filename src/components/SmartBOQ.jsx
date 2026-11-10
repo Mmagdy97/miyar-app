@@ -1,3 +1,4 @@
+import { currencySymbol, intlLocale } from "../i18n";
 import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
 import {
@@ -103,11 +104,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       const boqAction = {
         id: Date.now(),
         title: "اعتماد المقايسة التقديرية - فيلا الياسمين",
-        subtitle: `إجمالي المقايسة: ${totalPrice.toLocaleString("ar-EG")} ج.م (${boqItems.length} بند تشطيبات)`,
+        subtitle: `إجمالي المقايسة: ${totalPrice.toLocaleString(intlLocale())} ${currencySymbol()} (${boqItems.length} بند تشطيبات)`,
         user: "المكتب الفني / الإدارة المالية",
         project: "فيلا الياسمين - التجمع",
         category: "مقايسة تعاقدية",
-        amount: `${totalPrice.toLocaleString("ar-EG")} ج.م`,
+        amount: `${totalPrice.toLocaleString(intlLocale())} ${currencySymbol()}`,
         timestamp: "الآن",
         time: "الآن",
         targetRole: "Client",
@@ -155,7 +156,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
   const categories = ["الكل", ...new Set(boqItems.map((i) => i.category))];
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {saveToast && (
         <div className="fixed bottom-28 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -226,9 +227,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي التكلفة المباشرة</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">
-              {Math.round(totalCost).toLocaleString("ar-EG")}
+              {Math.round(totalCost).toLocaleString(intlLocale())}
             </span>
-            <span className="text-[11px] font-bold text-[#5A646E]">ج.م</span>
+            <span className="text-[11px] font-bold text-[#5A646E]">{currencySymbol()}</span>
           </div>
         </div>
 
@@ -236,7 +237,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <span className="text-[11px] font-bold text-[#5A646E] block mb-1">الربح الصافي المتوقع</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-emerald-700">
-              +{Math.round(totalProfit).toLocaleString("ar-EG")}
+              +{Math.round(totalProfit).toLocaleString(intlLocale())}
             </span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded-md border border-emerald-200">
               %{averageMargin}
@@ -249,9 +250,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <span className="text-[11px] font-bold text-[#ECEEF0] block mb-1">عرض السعر للعميل</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-white">
-              {Math.round(totalPrice).toLocaleString("ar-EG")}
+              {Math.round(totalPrice).toLocaleString(intlLocale())}
             </span>
-            <span className="text-[11px] font-bold text-[#ECEEF0]/80">ج.م</span>
+            <span className="text-[11px] font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
           </div>
         </div>
       </div>
@@ -300,9 +301,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <th className="py-3.5 px-4 min-w-[240px]">البند والمواصفة الفنية</th>
                 <th className="py-3.5 px-3 w-28 text-center">الوحدة</th>
                 <th className="py-3.5 px-3 w-32 text-center">الكمية (Qty)</th>
-                <th className="py-3.5 px-3 w-40 text-center">سعر الوحدة - تكلفة (ج.م)</th>
+                <th className="py-3.5 px-3 w-40 text-center">سعر الوحدة - تكلفة ({currencySymbol()})</th>
                 <th className="py-3.5 px-3 w-32 text-center">هامش الربح %</th>
-                <th className="py-3.5 px-4 min-w-[150px] text-end">الإجمالي للعميل (ج.م)</th>
+                <th className="py-3.5 px-4 min-w-[150px] text-end">الإجمالي للعميل ({currencySymbol()})</th>
                 <th className="py-3.5 px-3 w-14 text-center">حذف</th>
               </tr>
             </thead>
@@ -381,7 +382,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                           className="w-full text-center pe-7 ps-2 py-1.5 rounded-lg border border-[#DDE1E5] bg-white font-bold text-[#1E2429] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all shadow-2xs hover:border-[#D9480F]"
                         />
                         <span className="absolute end-2.5 text-[10px] font-bold text-[#5A646E] pointer-events-none">
-                          ج.م
+                          {currencySymbol()}
                         </span>
                       </div>
                     </td>
@@ -408,11 +409,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     <td className="py-3.5 px-4 text-end">
                       <div className="flex flex-col items-end">
                         <span className="font-black text-[#1E2429] text-sm md:text-base tracking-tight">
-                          {Math.round(rowTotal).toLocaleString("ar-EG")}{" "}
-                          <span className="text-xs font-bold text-[#5A646E]">ج.م</span>
+                          {Math.round(rowTotal).toLocaleString(intlLocale())}{" "}
+                          <span className="text-xs font-bold text-[#5A646E]">{currencySymbol()}</span>
                         </span>
                         <span className="text-[10px] font-semibold text-emerald-700">
-                          ربح: +{Math.round(rowProfit).toLocaleString("ar-EG")} ج.م
+                          ربح: +{Math.round(rowProfit).toLocaleString(intlLocale())} {currencySymbol()}
                         </span>
                       </div>
                     </td>
@@ -472,8 +473,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex flex-col">
               <span className="text-[11px] font-bold text-[#5A646E]">إجمالي التكلفة</span>
               <span className="text-sm md:text-base font-extrabold text-[#5A646E]">
-                {Math.round(totalCost).toLocaleString("ar-EG")}{" "}
-                <span className="text-xs font-normal text-[#5A646E]">ج.م</span>
+                {Math.round(totalCost).toLocaleString(intlLocale())}{" "}
+                <span className="text-xs font-normal text-[#5A646E]">{currencySymbol()}</span>
               </span>
             </div>
 
@@ -484,8 +485,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <span>إجمالي الربح المتوقع</span>
               </span>
               <span className="text-sm md:text-base font-extrabold text-emerald-700">
-                +{Math.round(totalProfit).toLocaleString("ar-EG")}{" "}
-                <span className="text-xs font-normal text-[#5A646E]">ج.م</span>
+                +{Math.round(totalProfit).toLocaleString(intlLocale())}{" "}
+                <span className="text-xs font-normal text-[#5A646E]">{currencySymbol()}</span>
               </span>
             </div>
 
@@ -500,7 +501,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               </span>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight">
-                  {Math.round(totalPrice).toLocaleString("ar-EG")}
+                  {Math.round(totalPrice).toLocaleString(intlLocale())}
                 </span>
                 <span className="text-xs font-bold text-amber-800">جنيه مصري</span>
               </div>
@@ -665,8 +666,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     (parseFloat(newItemQty) || 0) *
                       (parseFloat(newItemCost) || 0) *
                       (1 + (parseFloat(newItemMargin) || 0) / 100)
-                  ).toLocaleString("ar-EG")}{" "}
-                  ج.م
+                  ).toLocaleString(intlLocale())}{" "}
+                  {currencySymbol()}
                 </span>
               </div>
 
@@ -706,7 +707,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               تم إشعار العميل (أ. محمد) بمقايسة مشروع{" "}
               <strong className="text-[#1E2429]">فيلا الياسمين</strong> بإجمالي{" "}
               <strong className="text-[#1E2429]">
-                {Math.round(totalPrice).toLocaleString("ar-EG")} ج.م
+                {Math.round(totalPrice).toLocaleString(intlLocale())} {currencySymbol()}
               </strong>
               ، مع إتاحة خيار الاعتماد الإلكتروني المباشر من حسابه.
             </p>
@@ -718,7 +719,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               </div>
               <div className="flex justify-between">
                 <span className="text-[#5A646E]">إجمالي التكلفة:</span>
-                <span className="font-bold">{Math.round(totalCost).toLocaleString("ar-EG")} ج.م</span>
+                <span className="font-bold">{Math.round(totalCost).toLocaleString(intlLocale())} {currencySymbol()}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-[#5A646E]">متوسط هامش الربح:</span>

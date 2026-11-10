@@ -1,4 +1,6 @@
 import { PricingSection, LegalPage } from "./PublicPages";
+import SettingsSwitcher from "./SettingsSwitcher";
+import { useI18n } from "../i18n";
 import { useState } from "react";
 import {
   Building2,
@@ -78,6 +80,7 @@ const DEMO_ROLES = [
 ];
 
 export default function LandingAndLogin({ onLogin }) {
+  const { t } = useI18n();
   const [legalPage, setLegalPage] = useState(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [email, setEmail] = useState("architect@miyar.eg");
@@ -124,7 +127,7 @@ export default function LandingAndLogin({ onLogin }) {
 
   return (
     <div
-      dir="rtl"
+     
       className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F3F4F6] text-[#1E2429] selection:bg-[#2B3138] selection:text-white overflow-x-hidden"
     >
       {/* Ambient Restful Sage & Slate Glow Orbs */}
@@ -161,36 +164,37 @@ export default function LandingAndLogin({ onLogin }) {
               onClick={() => scrollToSection("features")}
               className="hover:text-[#2B3138] transition-colors cursor-pointer"
             >
-              المميزات الرئيسية
+              {t("landing.features")}
             </button>
             <button
               onClick={() => scrollToSection("pillars")}
               className="hover:text-[#2B3138] transition-colors cursor-pointer"
             >
-              أركان المنصة
+              {t("landing.pillars")}
             </button>
             <button
               onClick={() => scrollToSection("comparison")}
               className="hover:text-[#2B3138] transition-colors cursor-pointer"
             >
-              لماذا نحن؟
+              {t("landing.why")}
             </button>
             <button
               onClick={() => scrollToSection("pricing")}
               className="hover:text-[#2B3138] transition-colors cursor-pointer"
             >
-              الأسعار
+              {t("landing.pricing")}
             </button>
           </nav>
 
           {/* Action button (Left in RTL) */}
           <div className="flex items-center gap-3">
+            <div className="hidden sm:block"><SettingsSwitcher compact /></div>
             <button
               onClick={() => openModal("Admin")}
               className="px-6 py-2.5 rounded-full bg-[#2B3138] hover:bg-[#1E2429] text-white text-xs sm:text-sm font-medium rounded-lg shadow-sm transition-all cursor-pointer active:scale-95 flex items-center gap-2"
             >
               <LogIn className="w-4 h-4" />
-              <span>تسجيل الدخول</span>
+              <span>{t("landing.login")}</span>
             </button>
           </div>
         </div>
@@ -973,22 +977,22 @@ export default function LandingAndLogin({ onLogin }) {
 
           <div className="flex items-center gap-6 text-xs font-bold text-[#5A646E]">
             <button onClick={() => scrollToSection("features")} className="hover:text-[#2B3138] cursor-pointer">
-              المميزات
+              {t("landing.footerFeatures")}
             </button>
             <button onClick={() => scrollToSection("pillars")} className="hover:text-[#2B3138] cursor-pointer">
-              الأركان
+              {t("landing.footerPillars")}
             </button>
             <button onClick={() => scrollToSection("comparison")} className="hover:text-[#2B3138] cursor-pointer">
-              المقارنة
+              {t("landing.footerCompare")}
             </button>
             <button onClick={() => openModal("Client")} className="hover:text-[#2B3138] cursor-pointer">
-              بوابة العميل
+              {t("landing.clientPortal")}
             </button>
             <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#2B3138] cursor-pointer">
-              الخصوصية
+              {t("landing.privacy")}
             </button>
             <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#2B3138] cursor-pointer">
-              الشروط
+              {t("landing.terms")}
             </button>
           </div>
 
@@ -1002,7 +1006,7 @@ export default function LandingAndLogin({ onLogin }) {
       {isLoginModalOpen && (
         <div className="fixed inset-0 z-50 bg-[#2B3138]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
-            dir="rtl"
+           
             className="bg-white rounded-3xl shadow-2xl border border-[#DDE1E5] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
           >
             {/* Modal Ambient Corner */}

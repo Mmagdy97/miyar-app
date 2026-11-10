@@ -5,44 +5,51 @@
  * When the Supabase backend is added, this file is replaced by queries.
  */
 
-/* ───────────── Formatting helpers (Arabic digits) ───────────── */
+/* ───────────── Formatting helpers (locale + currency aware) ───────────── */
+
+import { getLocale, intlLocale, currencySymbol } from "../i18n";
 
 const AR_DIGITS = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
 
+/** Arabic-Indic digits only when the UI language is Arabic. */
 export const toAr = (value) =>
-  String(value).replace(/\d/g, (d) => AR_DIGITS[Number(d)]);
+  getLocale() === "ar" ? String(value).replace(/\d/g, (d) => AR_DIGITS[Number(d)]) : String(value);
 
-/** 5400000 -> "٥,٤٠٠,٠٠٠" */
-export const formatNumber = (n) => toAr(Math.round(n).toLocaleString("en-US"));
+/** 5400000 -> "٥,٤٠٠,٠٠٠" (ar) | "5,400,000" (en) | "5.400.000" (tr) */
+export const formatNumber = (n) =>
+  getLocale() === "ar"
+    ? toAr(Math.round(n).toLocaleString("en-US"))
+    : Math.round(n).toLocaleString(intlLocale());
 
-/** 5400000 -> "٥,٤٠٠,٠٠٠ ج.م" */
-export const formatEGP = (n) => `${formatNumber(n)} ج.م`;
+/** Amount + the office currency symbol (name kept for existing callers). */
+export const formatEGP = (n) => `${formatNumber(n)} ${currencySymbol()}`;
 
-/** 15550000 -> "١٥.٥٥ مليون", 580000 -> "٥٨٠ ألف" */
+const COMPACT = {
+  ar: { m: "مليون", k: "ألف" },
+  en: { m: "M", k: "K" },
+  tr: { m: "Mn", k: "B" },
+};
+
+/** 15550000 -> "15.55 M" / "١٥.٥٥ مليون", 580000 -> "580 K" / "٥٨٠ ألف" */
 export const formatCompact = (n) => {
+  const w = COMPACT[getLocale()];
   if (n >= 1_000_000) {
     const m = Math.round((n / 1_000_000) * 100) / 100;
-    return `${toAr(m)} مليون`;
+    return `${toAr(m)} ${w.m}`;
   }
-  return `${toAr(Math.round(n / 1000))} ألف`;
+  return `${toAr(Math.round(n / 1000))} ${w.k}`;
 };
 
-const MONTHS_AR = [
-  "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-  "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر",
-];
-
-/** "2026-12-30" -> "٣٠ ديسمبر ٢٠٢٦" */
-export const formatDateAr = (iso) => {
+const dateFmt = (opts) => (iso) => {
   const [y, m, d] = iso.split("-").map(Number);
-  return `${toAr(d)} ${MONTHS_AR[m - 1]} ${toAr(y)}`;
+  return new Intl.DateTimeFormat(intlLocale(), { ...opts, timeZone: "UTC" }).format(Date.UTC(y, m - 1, d));
 };
 
-/** "2026-12-30" -> "ديسمبر ٢٠٢٦" */
-export const formatMonthYearAr = (iso) => {
-  const [y, m] = iso.split("-").map(Number);
-  return `${MONTHS_AR[m - 1]} ${toAr(y)}`;
-};
+/** "2026-12-30" -> "٣٠ ديسمبر ٢٠٢٦" / "30 December 2026" (name kept for existing callers) */
+export const formatDateAr = dateFmt({ day: "numeric", month: "long", year: "numeric" });
+
+/** "2026-12-30" -> "ديسمبر ٢٠٢٦" / "December 2026" */
+export const formatMonthYearAr = dateFmt({ month: "long", year: "numeric" });
 
 /* ───────────── People ───────────── */
 

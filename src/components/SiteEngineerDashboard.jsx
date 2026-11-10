@@ -1,3 +1,4 @@
+import { currencySymbol, intlLocale } from "../i18n";
 import { expensesStore } from "../data/stores";
 import { ENGINEER_CASH, personById, projectById, formatNumber } from "../data/seed";
 import { useState } from "react";
@@ -83,7 +84,7 @@ function SiteEngineerDashboard({ setActionItems }) {
   const [cashCategory, setCashCategory] = useState("نقل وتشوين خامات");
   const [cashNotes, setCashNotes] = useState("نولون سيارة نصف نقل لنقل خامات العزل عاجلاً");
 
-  const todayArabic = new Intl.DateTimeFormat("ar-EG", {
+  const todayArabic = new Intl.DateTimeFormat(intlLocale(), {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -195,7 +196,7 @@ function SiteEngineerDashboard({ setActionItems }) {
       user: "م. محمد (الموقع)",
       project: "فيلا الياسمين - التجمع",
       category: "تسوية عهدة",
-      amount: `${formatNumber(amountNum)} ج.م`,
+      amount: `${formatNumber(amountNum)} ${currencySymbol()}`,
       timestamp: "الآن",
       time: "الآن",
       targetRole: "Admin",
@@ -663,7 +664,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               <form onSubmit={handlePettyCashSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                    المبلغ المنصرف (ج.م)
+                    المبلغ المنصرف ({currencySymbol()})
                   </label>
                   <input
                     type="number"

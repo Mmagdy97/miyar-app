@@ -1,3 +1,4 @@
+import { currencySymbol, intlLocale } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -63,7 +64,7 @@ const INITIAL_PROJECTS = SEED_PROJECTS.map((p) => ({
   progress: p.progress,
   status: p.status,
   dueDate: formatDateAr(p.deadline),
-  contractValue: `${formatCompact(p.contractValue)} ج.م`,
+  contractValue: `${formatCompact(p.contractValue)} ${currencySymbol()}`,
 }));
 
 const BASE_TOTALS = getTotals();
@@ -113,7 +114,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
   );
   const pendingCount = adminActionItems.filter((a) => a.status === "pending").length;
 
-  const todayArabic = new Intl.DateTimeFormat("ar-EG", {
+  const todayArabic = new Intl.DateTimeFormat(intlLocale(), {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -209,7 +210,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4">
               <span className="text-3xl font-bold tracking-tight text-[#1E2429] font-ibm">
-                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
+                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#5A646E]">{currencySymbol()}</span>
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
@@ -221,7 +222,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="mt-5 pt-3 border-t border-[#ECEEF0]">
             <div className="flex items-center justify-between text-xs text-[#5A646E] mb-1">
               <span>مسار النمو (آخر ٦ شهور)</span>
-              <span className="text-[#27734E] font-bold">+٦٧٠ ألف ج.م</span>
+              <span className="text-[#27734E] font-bold">+٦٧٠ ألف {currencySymbol()}</span>
             </div>
             <div className="h-10 w-full relative">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
@@ -254,7 +255,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4 flex items-baseline gap-2">
               <span className="text-3xl font-bold tracking-tight text-[#1E2429] font-ibm">
-                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
+                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#5A646E]">{currencySymbol()}</span>
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
@@ -265,7 +266,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="mt-5 pt-3 border-t border-[#ECEEF0]">
             <div className="flex items-center justify-between text-xs text-[#5A646E] mb-1">
               <span>سرعة التدفقات النقدية</span>
-              <span className="text-[#1E2429] font-bold">٤٢٠ ألف ج.م/شهر</span>
+              <span className="text-[#1E2429] font-bold">٤٢٠ ألف {currencySymbol()}/شهر</span>
             </div>
             <div className="h-10 w-full relative">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
@@ -298,7 +299,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4">
               <span className="text-3xl font-bold tracking-tight text-[#B83F3F] font-ibm">
-                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
+                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#5A646E]">{currencySymbol()}</span>
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
@@ -309,7 +310,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="mt-5 pt-3 border-t border-[#ECEEF0] space-y-2">
             <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
               <span className="truncate">مستخلص {TOTALS.topOverdue.projectName}</span>
-              <span className="shrink-0 text-xs font-bold text-[#B83F3F]">{formatCompact(TOTALS.topOverdue.amount)} ج.م ({toAr(TOTALS.topOverdue.pctOfOverdue)}٪)</span>
+              <span className="shrink-0 text-xs font-bold text-[#B83F3F]">{formatCompact(TOTALS.topOverdue.amount)} {currencySymbol()} ({toAr(TOTALS.topOverdue.pctOfOverdue)}٪)</span>
             </div>
             <ProgressBar value={TOTALS.topOverdue.pctOfOverdue} customFillClass="bg-[#B83F3F]" />
             <p className="text-xs text-[#5A646E] font-medium">
@@ -333,7 +334,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4 flex items-baseline gap-2">
               <span className="text-3xl font-bold tracking-tight text-[#1E2429] font-ibm">
-                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
+                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#5A646E]">{currencySymbol()}</span>
               </span>
             </div>
             <p className="text-xs text-[#5A646E] mt-1">
@@ -348,7 +349,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </div>
             <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#2B3138]" />
             <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
-              <span>إجمالي العهد المسلّمة: {formatNumber(TOTALS.cashGiven)} ج.م</span>
+              <span>إجمالي العهد المسلّمة: {formatNumber(TOTALS.cashGiven)} {currencySymbol()}</span>
               <span className="text-[#27734E] font-bold">السيولة آمنة</span>
             </div>
           </div>
@@ -417,11 +418,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] text-[#1E2429] animate-in fade-in">
                 <span>{activeHoverBar.month} ٢٠٢٦:</span>
                 <span className="text-[#1E2429] font-bold">
-                  إيراد: {activeHoverBar.revenue} ألف ج.م
+                  إيراد: {activeHoverBar.revenue} ألف {currencySymbol()}
                 </span>
                 <span className="text-[#5A646E]">|</span>
                 <span className="text-[#5A646E]">
-                  مصروف: {activeHoverBar.expenses} ألف ج.م
+                  مصروف: {activeHoverBar.expenses} ألف {currencySymbol()}
                 </span>
                 <span className="text-[#2B3138]">
                   (صافي +{Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)}٪)
@@ -471,17 +472,17 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center gap-6">
               <div>
                 <span className="text-[#5A646E] block text-[11px] font-semibold">إجمالي إيراد ٦ أشهر</span>
-                <span className="font-extrabold text-[#1E2429] text-sm">٥,٤٢٠,٠٠٠ ج.م</span>
+                <span className="font-extrabold text-[#1E2429] text-sm">٥,٤٢٠,٠٠٠ {currencySymbol()}</span>
               </div>
               <div className="h-6 w-px bg-[#DDE1E5]" />
               <div>
                 <span className="text-[#5A646E] block text-[11px] font-semibold">تكاليف التشوين والمواقع</span>
-                <span className="font-extrabold text-[#1E2429] text-sm">٣,٤٢٠,٠٠٠ ج.م</span>
+                <span className="font-extrabold text-[#1E2429] text-sm">٣,٤٢٠,٠٠٠ {currencySymbol()}</span>
               </div>
               <div className="h-6 w-px bg-[#DDE1E5]" />
               <div>
                 <span className="text-[#5A646E] block text-[11px] font-semibold">صافي أرباح المقاولات</span>
-                <span className="font-extrabold text-[#2B3138] text-sm">+٢,٠٠٠,٠٠٠ ج.م</span>
+                <span className="font-extrabold text-[#2B3138] text-sm">+٢,٠٠٠,٠٠٠ {currencySymbol()}</span>
               </div>
             </div>
 

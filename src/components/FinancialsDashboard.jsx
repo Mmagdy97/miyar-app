@@ -1,3 +1,4 @@
+import { currencySymbol, intlLocale } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -72,12 +73,12 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     // 4. Update actionItems if linked
     if (setActionItems) {
       setActionItems((prev) =>
-        prev.filter((item) => !item.amount?.includes(amount.toLocaleString("ar-EG")))
+        prev.filter((item) => !item.amount?.includes(amount.toLocaleString(intlLocale())))
       );
     }
 
     // 5. Show toast notification
-    setToastMessage(`تم اعتماد فاتورة: "${description}" بمبلغ ${amount.toLocaleString("ar-EG")} ج.م بنجاح`);
+    setToastMessage(`تم اعتماد فاتورة: "${description}" بمبلغ ${amount.toLocaleString(intlLocale())} ${currencySymbol()} بنجاح`);
     setTimeout(() => setToastMessage(null), 3500);
   };
 
@@ -114,12 +115,12 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     );
 
     setTopUpModalOpen(false);
-    setToastMessage(`تم صرف دفعة عهدة إضافية بقيمة ${amountNum.toLocaleString("ar-EG")} ج.م بنجاح`);
+    setToastMessage(`تم صرف دفعة عهدة إضافية بقيمة ${amountNum.toLocaleString(intlLocale())} ${currencySymbol()} بنجاح`);
     setTimeout(() => setToastMessage(null), 3500);
   };
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-20 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-20 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -181,7 +182,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight transition-all duration-300">
-              {totalGiven.toLocaleString("ar-EG")}
+              {totalGiven.toLocaleString(intlLocale())}
             </span>
             <span className="text-xs font-bold text-[#5A646E]">جنيه مصري</span>
           </div>
@@ -203,7 +204,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight transition-all duration-300">
-              {totalSpent.toLocaleString("ar-EG")}
+              {totalSpent.toLocaleString(intlLocale())}
             </span>
             <span className="text-xs font-bold text-[#5A646E]">جنيه مصري</span>
           </div>
@@ -225,7 +226,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl md:text-3xl font-black text-white tracking-tight transition-all duration-300">
-              {remainingInField.toLocaleString("ar-EG")}
+              {remainingInField.toLocaleString(intlLocale())}
             </span>
             <span className="text-xs font-bold text-[#ECEEF0]/80">جنيه مصري</span>
           </div>
@@ -305,8 +306,8 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                           الرصيد المتاح
                         </span>
                         <span className="text-sm md:text-base font-black text-[#1E2429] tracking-tight">
-                          {available.toLocaleString("ar-EG")}{" "}
-                          <span className="text-[11px] font-normal text-[#5A646E]">ج.م</span>
+                          {available.toLocaleString(intlLocale())}{" "}
+                          <span className="text-[11px] font-normal text-[#5A646E]">{currencySymbol()}</span>
                         </span>
                       </div>
                     </div>
@@ -317,9 +318,9 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                         <span className="text-[11px] text-[#5A646E]">
                           المنصرف:{" "}
                           <strong className="text-[#1E2429] font-bold">
-                            {eng.spent.toLocaleString("ar-EG")} ج.م
+                            {eng.spent.toLocaleString(intlLocale())} {currencySymbol()}
                           </strong>{" "}
-                          من أصل {eng.totalGiven.toLocaleString("ar-EG")} ج.م
+                          من أصل {eng.totalGiven.toLocaleString(intlLocale())} {currencySymbol()}
                         </span>
                         <span className="text-xs font-bold text-[#1E2429] tracking-wide">
                           %{ratio} مستهلك
@@ -396,7 +397,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     {/* Amount */}
                     <div className="text-end shrink-0">
                       <span className="text-sm md:text-base font-black text-rose-700 block">
-                        {expense.amount.toLocaleString("ar-EG")}
+                        {expense.amount.toLocaleString(intlLocale())}
                       </span>
                       <span className="text-[10px] font-bold text-[#5A646E]">جنيه مصري</span>
                     </div>
@@ -518,7 +519,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               <div className="flex justify-between items-center text-sm pt-1">
                 <span className="font-bold text-[#5A646E]">المبلغ الإجمالي:</span>
                 <span className="text-lg font-black text-rose-700">
-                  {selectedReceipt.amount.toLocaleString("ar-EG")} ج.م
+                  {selectedReceipt.amount.toLocaleString(intlLocale())} {currencySymbol()}
                 </span>
               </div>
             </div>
@@ -580,7 +581,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  مبلغ الدفعة الإضافية (ج.م)
+                  مبلغ الدفعة الإضافية ({currencySymbol()})
                 </label>
                 <input
                   type="number"

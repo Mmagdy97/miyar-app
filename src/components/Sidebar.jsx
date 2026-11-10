@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Download, Building2, X } from "lucide-react";
-import { ROLE_CONFIG, ROLE_TITLES } from "../config/roles";
+import { ROLE_CONFIG, roleTitle as roleTitleOf, navLabel } from "../config/roles";
+import { useI18n } from "../i18n";
 
 function Sidebar({
   currentRole,
@@ -16,7 +17,8 @@ function Sidebar({
   onInstallClick,
 }) {
   const items = ROLE_CONFIG[currentRole] || [];
-  const roleTitle = ROLE_TITLES[currentRole] || currentRole;
+  const { t } = useI18n();
+  const roleTitle = roleTitleOf(currentRole) || currentRole;
   const [tooltip, setTooltip] = useState({ visible: false, text: "", top: 0 });
   const sidebarRef = useRef(null);
 
@@ -60,12 +62,12 @@ function Sidebar({
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#D9480F]/30 text-white shadow-2xs">
                 <Building2 className="w-4 h-4 text-white" />
               </div>
-              <span className="text-base font-black text-white tracking-tight">معيار</span>
+              <span className="text-base font-black text-white tracking-tight">{t("brand")}</span>
             </div>
             <button
               onClick={onCloseMobile || onItemClick}
               className="p-1.5 rounded-lg text-[#ECEEF0]/80 hover:text-white hover:bg-[#D9480F]/20 transition-colors cursor-pointer"
-              aria-label="إغلاق القائمة"
+              aria-label={t("menu.close")}
             >
               <X className="w-5 h-5" />
             </button>
@@ -75,14 +77,14 @@ function Sidebar({
           <div className="hidden md:flex items-center justify-between w-full">
             {!collapsed && (
               <span className="text-[11px] font-bold text-[#ECEEF0]/80 uppercase tracking-widest font-ibm">
-                القائمة الرئيسية
+                {t("menu.main")}
               </span>
             )}
             <button
               onClick={toggleSidebar}
               className="flex items-center justify-center w-8 h-8 rounded-lg text-[#ECEEF0]/70 hover:text-white hover:bg-[#D9480F]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
-              aria-label={collapsed ? "توسيع القائمة الجانبية" : "تصغير القائمة الجانبية"}
-              title={collapsed ? "توسيع القائمة" : "تصغير القائمة"}
+              aria-label={collapsed ? t("menu.expand") : t("menu.collapse")}
+              title={collapsed ? t("menu.expand") : t("menu.collapse")}
             >
               {collapsed ? (
                 <ChevronLeft className="ltr:-scale-x-100 w-4 h-4" />
@@ -98,7 +100,7 @@ function Sidebar({
       {!collapsed && (
         <div className="mx-3 mt-3 mb-2 p-3.5 rounded-xl bg-white/10 border border-white/15 shadow-2xs">
           <p className="text-xs text-[#ECEEF0]/70 font-medium">
-            الدور الحالي للنظام
+            {t("menu.currentRole")}
           </p>
           <p className="text-sm font-bold text-white mt-0.5 truncate tracking-tight">
             {roleTitle}
@@ -109,12 +111,13 @@ function Sidebar({
       {/* Nav Items */}
       <nav className="flex-1 px-2.5 mt-2 space-y-1.5 overflow-y-auto">
         {items.map((item) => {
-          const { id, label, name, icon: Icon } = item;
-          const itemName = name || label || id;
+          const { id, name, icon: Icon } = item;
+          const label = navLabel(currentRole, item);
+          const itemName = name || id;
 
           // Robust check for active tab:
           const isItemDashboard =
-            itemName === "لوحة التحكم" || id === "Dashboard" || label === "لوحة التحكم";
+            itemName === "لوحة التحكم" || id === "Dashboard";
           const isCurrentDashboard =
             activeTab === "لوحة التحكم" || activeTab === "Dashboard";
 
@@ -174,15 +177,15 @@ function Sidebar({
         <div className={`px-3 py-2 border-t border-[#D9480F]/20 ${collapsed ? "flex justify-center" : ""}`}>
           <button
             onClick={onInstallClick}
-            onMouseEnter={(e) => handleMouseEnter(e, "تثبيت التطبيق على جهازك")}
+            onMouseEnter={(e) => handleMouseEnter(e, t("pwa.installTip"))}
             onMouseLeave={handleMouseLeave}
             className={`flex items-center justify-center gap-2 rounded-lg bg-[#D9480F]/20 text-white border border-[#D9480F]/30 font-medium text-xs hover:bg-[#D9480F]/35 transition-all cursor-pointer shadow-2xs active:scale-95 group ${
               collapsed ? "w-10 h-10 p-0" : "w-full px-3.5 py-2.5"
             }`}
-            title="تثبيت التطبيق على جهازك (PWA)"
+            title={t("pwa.installTip")}
           >
             <Download className="w-4 h-4 shrink-0 transition-transform group-hover:-translate-y-0.5" />
-            {!collapsed && <span>تثبيت التطبيق</span>}
+            {!collapsed && <span>{t("pwa.install")}</span>}
           </button>
         </div>
       )}
@@ -193,10 +196,10 @@ function Sidebar({
           {!collapsed ? (
             <div className="text-center">
               <p className="text-[11px] font-bold text-white">
-                معيار — استوديو التصميم والمقاولات
+                {t("brand.footer1")}
               </p>
               <p className="text-[10px] text-[#ECEEF0]/60 mt-0.5 font-medium">
-                حلول المقاولات والعمارة الداخلية
+                {t("brand.footer2")}
               </p>
             </div>
           ) : (

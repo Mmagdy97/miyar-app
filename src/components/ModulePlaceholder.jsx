@@ -11,7 +11,7 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
   const roleDisplay = ROLE_TITLES[currentRole] || currentRole;
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent w-full max-w-full overflow-x-hidden" dir="rtl">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent w-full max-w-full overflow-x-hidden">
       <div className="flex items-center justify-center min-h-[calc(100vh-8.5rem)]">
         <div className="w-full max-w-2xl">
           {/* Architectural Luxury Card */}

@@ -1,3 +1,4 @@
+import { currencySymbol, intlLocale } from "../i18n";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -196,7 +197,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
   const [solutionText, setSolutionText] = useState("");
   const [solutionSuccessToast, setSolutionSuccessToast] = useState(false);
 
-  const todayArabic = new Intl.DateTimeFormat("ar-EG", {
+  const todayArabic = new Intl.DateTimeFormat(intlLocale(), {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -452,7 +453,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             </span>
           </div>
           <p className="text-xs text-[#5A646E] mt-2 font-medium">
-            ترقية رخام كلكتا جولد (+٨٥ ألف ج.م)
+            ترقية رخام كلكتا جولد (+٨٥ ألف {currencySymbol()})
           </p>
         </div>
       </div>
@@ -730,10 +731,10 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     {item.unit}
                   </td>
                   <td className="py-3.5 px-3.5 text-center font-extrabold text-[#1E2429] font-mono">
-                    {item.contractQty.toLocaleString("ar-EG")}
+                    {item.contractQty.toLocaleString(intlLocale())}
                   </td>
                   <td className="py-3.5 px-3.5 text-center font-extrabold text-[#1E2429] font-mono">
-                    {item.executedQty.toLocaleString("ar-EG")}
+                    {item.executedQty.toLocaleString(intlLocale())}
                   </td>
                   <td className="py-3.5 px-3.5">
                     <div className="space-y-1">
@@ -772,7 +773,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           onClick={() => setUploadModalOpen(false)}
         >
           <div
-            dir="rtl"
+           
             className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#DDE1E5] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
@@ -931,7 +932,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           onClick={() => setSolvingRfi(null)}
         >
           <div
-            dir="rtl"
+           
             className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#DDE1E5] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >

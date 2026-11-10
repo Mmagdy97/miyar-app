@@ -1,4 +1,3 @@
-import { DEFAULT_LOCALE, LOCALES } from "./config/locale";
 import { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -83,9 +82,12 @@ const INITIAL_ACTION_ITEMS = [
 ];
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentRole, setCurrentRole] = useState("");
-  const [activeTab, setActiveTab] = useState("لوحة التحكم");
+  const saved = (() => {
+    try { return JSON.parse(sessionStorage.getItem("miyar:session")) || {}; } catch { return {}; }
+  })();
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(saved.auth));
+  const [currentRole, setCurrentRole] = useState(saved.role || "");
+  const [activeTab, setActiveTab] = useState(saved.tab || "لوحة التحكم");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -141,10 +143,10 @@ function App() {
   };
 
   useEffect(() => {
-    const l = LOCALES[DEFAULT_LOCALE];
-    document.documentElement.lang = l.lang;
-    document.documentElement.dir = l.dir;
-  }, []);
+    try {
+      sessionStorage.setItem("miyar:session", JSON.stringify({ auth: isAuthenticated, role: currentRole, tab: activeTab }));
+    } catch { /* ignore */ }
+  }, [isAuthenticated, currentRole, activeTab]);
 
   const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 

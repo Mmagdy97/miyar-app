@@ -14,7 +14,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
       onClick={onClose}
     >
       <div
-        dir="rtl"
+       
         className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden border border-[#DDE1E5] text-start animate-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >

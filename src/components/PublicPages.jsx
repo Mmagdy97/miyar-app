@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Check, ArrowRight } from "lucide-react";
 import { CURRENCIES, formatMoney } from "../lib/currency";
+import { useI18n, intlLocale } from "../i18n";
 
 // DRAFT pricing (indicative, to be validated with first customers before launch).
 const PRICES = {
@@ -14,33 +15,20 @@ const PRICES = {
 };
 
 const PLANS = [
-  {
-    name: "مجاني",
-    tagline: "للتجربة ومكاتب المشروع الواحد",
-    features: ["مشروع واحد نشط", "مستخدمان", "بوابة العميل الأساسية", "تقارير الموقع اليومية"],
-  },
-  {
-    name: "احترافي",
-    tagline: "للمكاتب الصغيرة والمتوسطة",
-    highlight: true,
-    features: ["حتى ١٠ مشاريع", "حتى ١٠ مستخدمين", "العهد النقدية والمقايسات الذكية", "الدفعات والمستخلصات", "دعم عبر واتساب"],
-  },
-  {
-    name: "المكتب",
-    tagline: "للشركات متعددة المواقع",
-    features: ["مشاريع غير محدودة", "حتى ٣٠ مستخدماً", "هوية مكتبك في بوابة العميل", "صلاحيات متقدمة", "دعم أولوية"],
-  },
+  { key: "free", n: 4 },
+  { key: "pro", n: 5, highlight: true },
+  { key: "office", n: 5 },
 ];
 
-
 export function PricingSection({ onStart }) {
-  const [cur, setCur] = useState("EGP");
+  const { t, currency } = useI18n();
+  const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
       <div className="text-center mb-10">
-        <h2 className="text-3xl sm:text-4xl font-black text-[#1E2429] mb-3">أسعار واضحة تناسب حجم مكتبك</h2>
-        <p className="text-[#5A646E] mb-6">ابدأ مجاناً، وترقّى عندما يكبر عدد مشاريعك. الأسعار شهرية.</p>
-        <div role="group" aria-label="العملة" className="inline-flex flex-wrap justify-center gap-1 p-1 rounded-xl bg-white border border-[#DDE1E5]">
+        <h2 className="text-3xl sm:text-4xl font-black text-[#1E2429] mb-3">{t("pricing.title")}</h2>
+        <p className="text-[#5A646E] mb-6">{t("pricing.sub")}</p>
+        <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap justify-center gap-1 p-1 rounded-xl bg-white border border-[#DDE1E5]">
           {Object.keys(PRICES).map((k) => (
             <button
               key={k}
@@ -63,21 +51,21 @@ export function PricingSection({ onStart }) {
               p.highlight ? "border-[#D9480F] shadow-lg ring-1 ring-[#D9480F]/30" : "border-[#DDE1E5]"
             }`}
           >
-            {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#D9480F] text-white">الأكثر طلباً</span>}
-            <h3 className="text-xl font-black text-[#1E2429]">{p.name}</h3>
-            <p className="text-xs text-[#5A646E] mb-4">{p.tagline}</p>
+            {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#D9480F] text-white">{t("pricing.popular")}</span>}
+            <h3 className="text-xl font-black text-[#1E2429]">{t(`plan.${p.key}`)}</h3>
+            <p className="text-xs text-[#5A646E] mb-4">{t(`plan.${p.key}.tag`)}</p>
             <p className="mb-5">
               {PRICES[cur][i] === 0 ? (
-                <span className="text-4xl font-black text-[#1E2429]">مجاناً</span>
+                <span className="text-4xl font-black text-[#1E2429]">{t("pricing.free")}</span>
               ) : (
                 <>
-                  <span className="text-4xl font-black text-[#1E2429]">{formatMoney(PRICES[cur][i], cur, "ar-EG", { compact: true })}</span>{" "}
-                  <span className="text-sm font-bold text-[#5A646E]">/ شهرياً</span>
+                  <span className="text-4xl font-black text-[#1E2429]">{formatMoney(PRICES[cur][i], cur, intlLocale(), { compact: true })}</span>{" "}
+                  <span className="text-sm font-bold text-[#5A646E]">{t("pricing.perMonth")}</span>
                 </>
               )}
             </p>
             <ul className="space-y-2.5 mb-6 flex-1">
-              {p.features.map((f) => (
+              {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-[#1E2429]">
                   <Check className="w-4 h-4 mt-0.5 text-[#D9480F] shrink-0" /> {f}
                 </li>
@@ -89,12 +77,12 @@ export function PricingSection({ onStart }) {
                 p.highlight ? "bg-[#D9480F] text-white hover:bg-[#B93C0B]" : "bg-[#2B3138] text-white hover:bg-[#1E2429]"
               }`}
             >
-              {i === 0 ? "ابدأ مجاناً" : "جرّب النظام"}
+              {i === 0 ? t("pricing.startFree") : t("pricing.try")}
             </button>
           </div>
         ))}
       </div>
-      <p className="text-center text-xs text-[#5A646E] mt-6">الأسعار استرشادية وقد تتغير قبل الإطلاق التجاري. الضريبة المحلية (VAT) غير مشمولة.</p>
+      <p className="text-center text-xs text-[#5A646E] mt-6">{t("pricing.note")}</p>
     </section>
   );
 }
@@ -129,7 +117,7 @@ const LEGAL = {
 export function LegalPage({ kind, onBack }) {
   const doc = LEGAL[kind];
   return (
-    <main className="min-h-screen bg-[#F3F4F6] py-12 px-4 sm:px-6" dir="rtl">
+    <main className="min-h-screen bg-[#F3F4F6] py-12 px-4 sm:px-6">
       <article className="max-w-3xl mx-auto bg-white border border-[#DDE1E5] rounded-2xl p-6 sm:p-10">
         <button onClick={onBack} className="flex items-center gap-2 text-sm font-bold text-[#5A646E] hover:text-[#2B3138] mb-6 cursor-pointer">
           <ArrowRight className="w-4 h-4 ltr:-scale-x-100 rtl:scale-x-100" /> العودة للصفحة الرئيسية
