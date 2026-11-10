@@ -25,6 +25,7 @@ export const intlLocale = () => INTL[current.locale];
 const fill = (str, vars) => (vars ? str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : str);
 export const tr_ = (key, vars) => fill(DICTS[current.locale][key] ?? DICTS.ar[key] ?? key, vars);
 export const money = (n, opts) => formatMoney(n, current.currency, intlLocale(), opts);
+export const currencyName = () => new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(current.currency);
 export const currencySymbol = () => {
   const parts = new Intl.NumberFormat(intlLocale(), { style: "currency", currency: current.currency }).formatToParts(0);
   return parts.find((p) => p.type === "currency")?.value ?? current.currency;

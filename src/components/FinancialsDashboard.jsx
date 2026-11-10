@@ -1,4 +1,5 @@
-import { currencySymbol, intlLocale } from "../i18n";
+import { currencySymbol, intlLocale, useI18n, currencyName } from "../i18n";
+import { toAr } from "../data/seed";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -26,6 +27,7 @@ import {
 import { cashStore, expensesStore } from "../data/stores";
 
 function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
+  const { t } = useI18n();
   const [engineersCash, setEngineersCash] = cashStore.use();
   const [pendingExpenses, setPendingExpenses] = expensesStore.use();
   const [selectedReceipt, setSelectedReceipt] = useState(null);
@@ -78,7 +80,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     }
 
     // 5. Show toast notification
-    setToastMessage(`تم اعتماد فاتورة: "${description}" بمبلغ ${amount.toLocaleString(intlLocale())} ${currencySymbol()} بنجاح`);
+    setToastMessage(t("fin.toastApproved", { desc: description, amt: `${amount.toLocaleString(intlLocale())} ${currencySymbol()}` }));
     setTimeout(() => setToastMessage(null), 3500);
   };
 
@@ -88,7 +90,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     if (selectedReceipt && selectedReceipt.id === id) {
       setSelectedReceipt(null);
     }
-    setToastMessage("تم رفض الفاتورة وإعادتها للمهندس للمراجعة");
+    setToastMessage(t("fin.toastRejected"));
     setTimeout(() => setToastMessage(null), 3500);
   };
 
@@ -96,7 +98,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
   const handleResetData = () => {
     cashStore.reset();
     expensesStore.reset();
-    setToastMessage("تمت استعادة البيانات الافتراضية للعهد والمصروفات");
+    setToastMessage(t("fin.toastReset"));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -115,7 +117,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     );
 
     setTopUpModalOpen(false);
-    setToastMessage(`تم صرف دفعة عهدة إضافية بقيمة ${amountNum.toLocaleString(intlLocale())} ${currencySymbol()} بنجاح`);
+    setToastMessage(t("fin.toastTopUp", { amt: `${amountNum.toLocaleString(intlLocale())} ${currencySymbol()}` }));
     setTimeout(() => setToastMessage(null), 3500);
   };
 
@@ -139,14 +141,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                 <Banknote className="w-5 h-5" />
               </div>
-              <span>إدارة العهد النقدية والمصروفات</span>
+              <span>{t("fin.title")}</span>
             </h1>
             <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
-              نظام الصرف المالي اللحظي
+              {t("fin.badge")}
             </span>
           </div>
           <p className="text-xs md:text-sm text-[#5A646E]">
-            متابعة أرصدة العهد الميدانية المفتوحة، وتدقيق فواتير المصروفات النثرية للمواقع واعتمادها فوراً.
+            {t("fin.intro")}
           </p>
         </div>
 
@@ -155,17 +157,17 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
           <button
             onClick={handleResetData}
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#1E2429] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs cursor-pointer"
-            title="استعادة البيانات الأصلية"
+            title={t("fin.resetTip")}
           >
             <RefreshCw className="w-3.5 h-3.5" />
-            <span>إعادة ضبط</span>
+            <span>{t("fin.reset")}</span>
           </button>
           <button
             onClick={() => setTopUpModalOpen(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>+ صرف دفعة عهدة جديدة</span>
+            <span>{t("fin.topUpBtn")}</span>
           </button>
         </div>
       </div>
@@ -175,7 +177,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         {/* Card 1: Total Given (إجمالي العهد المفتوحة) */}
         <div className="relative bg-white rounded-lg p-6 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#5A646E]">إجمالي العهد المفتوحة</span>
+            <span className="text-xs font-bold text-[#5A646E]">{t("fin.openTotal")}</span>
             <div className="w-10 h-10 rounded-lg bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center border border-[#DDE1E5]">
               <Wallet className="w-5 h-5" />
             </div>
@@ -184,20 +186,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight transition-all duration-300">
               {totalGiven.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#5A646E]">جنيه مصري</span>
+            <span className="text-xs font-bold text-[#5A646E]">{currencyName()}</span>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] text-[#5A646E]">
             <span className="font-bold text-[#1E2429] bg-[#ECEEF0] px-2 py-0.5 rounded-md border border-[#DDE1E5]">
-              {engineersCash.length} مهندسين
+              {t("fin.engineers", { n: toAr(engineersCash.length) })}
             </span>
-            <span>بمواقع العمل المختلفة</span>
+            <span>{t("fin.onSites")}</span>
           </div>
         </div>
 
         {/* Card 2: Total Spent (إجمالي المنصرف المعتمد) */}
         <div className="relative bg-white rounded-lg p-6 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#5A646E]">إجمالي المنصرف المعتمد</span>
+            <span className="text-xs font-bold text-[#5A646E]">{t("fin.spentTotal")}</span>
             <div className="w-10 h-10 rounded-lg bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center border border-[#DDE1E5]">
               <CheckCircle2 className="w-5 h-5" />
             </div>
@@ -206,20 +208,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight transition-all duration-300">
               {totalSpent.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#5A646E]">جنيه مصري</span>
+            <span className="text-xs font-bold text-[#5A646E]">{currencyName()}</span>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] text-[#5A646E]">
             <span className="font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-              %{overallSpentRatio} نسبة الصرف
+              {t("fin.spentRatio", { p: `${toAr(overallSpentRatio)}${t("sym.pct")}` })}
             </span>
-            <span>فواتير وإيصالات معتمدة</span>
+            <span>{t("fin.approvedDocs")}</span>
           </div>
         </div>
 
         {/* Card 3: Remaining in Field (الرصيد المتبقي بالمواقع) */}
         <div className="relative bg-[#2B3138] text-white rounded-xl p-6 border border-[#20262C] shadow-sm overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#ECEEF0]">الرصيد المتبقي بالمواقع</span>
+            <span className="text-xs font-bold text-[#ECEEF0]">{t("fin.remaining")}</span>
             <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center border border-white/20">
               <Coins className="w-5 h-5" />
             </div>
@@ -228,13 +230,13 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-black text-white tracking-tight transition-all duration-300">
               {remainingInField.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#ECEEF0]/80">جنيه مصري</span>
+            <span className="text-xs font-bold text-[#ECEEF0]/80">{currencyName()}</span>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] text-[#ECEEF0]">
             <span className="font-bold text-white bg-white/15 px-2 py-0.5 rounded-md border border-white/20 text-white">
-              سيولة متاحة
+              {t("fin.liquid")}
             </span>
-            <span>جاهزة للمصروفات النثرية الطارئة</span>
+            <span>{t("fin.readyEmergency")}</span>
           </div>
         </div>
       </div>
@@ -248,14 +250,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               <div>
                 <h2 className="text-base md:text-lg font-black text-[#1E2429] flex items-center gap-2">
                   <Wallet className="w-5 h-5 text-[#1E2429]" />
-                  <span>أرصدة المهندسين ومتابعة العهد (Engineers Balances)</span>
+                  <span>{t("fin.balancesTitle")}</span>
                 </h2>
                 <p className="text-xs text-[#5A646E] mt-0.5">
-                  نسبة استهلاك كل مهندس للعهدة المالية المسلمة له ورصيده النقدي المتبقي
+                  {t("fin.balancesSub")}
                 </p>
               </div>
               <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5]">
-                {engineersCash.length} مهندسين
+                {t("fin.engineers", { n: toAr(engineersCash.length) })}
               </span>
             </div>
 
@@ -303,7 +305,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       {/* Available Balance Tag */}
                       <div className="text-end">
                         <span className="text-[10px] font-bold text-[#5A646E] block">
-                          الرصيد المتاح
+                          {t("fin.available")}
                         </span>
                         <span className="text-sm md:text-base font-black text-[#1E2429] tracking-tight">
                           {available.toLocaleString(intlLocale())}{" "}
@@ -316,14 +318,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
                         <span className="text-[11px] text-[#5A646E]">
-                          المنصرف:{" "}
+                          {t("fin.spentLabel")}{" "}
                           <strong className="text-[#1E2429] font-bold">
                             {eng.spent.toLocaleString(intlLocale())} {currencySymbol()}
                           </strong>{" "}
-                          من أصل {eng.totalGiven.toLocaleString(intlLocale())} {currencySymbol()}
+                          {t("fin.outOf", { amt: `${eng.totalGiven.toLocaleString(intlLocale())} ${currencySymbol()}` })}
                         </span>
                         <span className="text-xs font-bold text-[#1E2429] tracking-wide">
-                          %{ratio} مستهلك
+                          {t("fin.consumed", { p: `${toAr(ratio)}${t("sym.pct")}` })}
                         </span>
                       </div>
 
@@ -348,7 +350,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <div className="mt-5 p-3 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center gap-2.5 text-xs text-[#5A646E]">
               <Sparkles className="w-4 h-4 text-amber-700 shrink-0" />
               <span>
-                يتم تحديث نسب الاستهلاك والأرصدة الحرة في ثوانٍ بمجرد قيامك باعتماد أي فاتورة جديدة.
+                {t("fin.liveNote")}
               </span>
             </div>
           </div>
@@ -361,14 +363,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               <div>
                 <h2 className="text-base md:text-lg font-black text-[#1E2429] flex items-center gap-2">
                   <Receipt className="w-5 h-5 text-amber-700" />
-                  <span>فواتير بانتظار الاعتماد</span>
+                  <span>{t("fin.pendingTitle")}</span>
                 </h2>
                 <p className="text-xs text-[#5A646E] mt-0.5">
-                  فواتير نقدية وإيصالات تم رفعها من المواقع وتنتظر الموافقة المالية
+                  {t("fin.pendingSub")}
                 </p>
               </div>
               <span className="text-xs font-black px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-                {pendingExpenses.length} معلقة
+                {t("fin.pendingCount", { n: toAr(pendingExpenses.length) })}
               </span>
             </div>
 
@@ -399,7 +401,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       <span className="text-sm md:text-base font-black text-rose-700 block">
                         {expense.amount.toLocaleString(intlLocale())}
                       </span>
-                      <span className="text-[10px] font-bold text-[#5A646E]">جنيه مصري</span>
+                      <span className="text-[10px] font-bold text-[#5A646E]">{currencyName()}</span>
                     </div>
                   </div>
 
@@ -409,10 +411,10 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     <button
                       onClick={() => setSelectedReceipt(expense)}
                       className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
-                      title="معاينة صورة الفاتورة"
+                      title={t("fin.previewTip")}
                     >
                       <Eye className="w-3.5 h-3.5" />
-                      <span>معاينة الإيصال</span>
+                      <span>{t("fin.preview")}</span>
                     </button>
 
                     {/* Action Buttons: Reject & Approve */}
@@ -420,7 +422,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       <button
                         onClick={() => handleRejectExpense(expense.id)}
                         className="p-1.5 rounded-lg text-[#5A646E] hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
-                        title="رفض الفاتورة"
+                        title={t("fin.rejectTip")}
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -431,7 +433,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors font-bold text-xs shadow-sm transition-all cursor-pointer"
                       >
                         <Check className="w-3.5 h-3.5" />
-                        <span>اعتماد</span>
+                        <span>{t("fin.approveBtn")}</span>
                       </button>
                     </div>
                   </div>
@@ -445,17 +447,17 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <h4 className="text-sm font-extrabold text-[#1E2429] mb-1">
-                    رائع! تم اعتماد جميع الفواتير المعلقة
+                    {t("fin.allDone")}
                   </h4>
                   <p className="text-xs text-[#5A646E] max-w-xs mx-auto mb-4">
-                    لا توجد فواتير أو إيصالات بانتظار التدقيق المالي في الوقت الحالي.
+                    {t("fin.allDoneSub")}
                   </p>
                   <button
                     onClick={handleResetData}
                     className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white border border-[#DDE1E5] text-xs font-bold text-[#1E2429] hover:bg-[#F3F4F6] transition-colors cursor-pointer"
                   >
                     <RefreshCw className="w-3 h-3" />
-                    <span>إعادة تجربة التدقيق المالي</span>
+                    <span>{t("fin.retry")}</span>
                   </button>
                 </div>
               )}
@@ -471,7 +473,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <div className="p-4 border-b border-[#ECEEF0] flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-black text-[#1E2429]">
-                  معاينة إيصال: {selectedReceipt.receiptNumber}
+                  {t("fin.receiptTitle", { no: selectedReceipt.receiptNumber })}
                 </h3>
                 <p className="text-[11px] text-[#5A646E]">{selectedReceipt.engName}</p>
               </div>
@@ -488,7 +490,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               {selectedReceipt.invoiceImg ? (
                 <img
                   src={selectedReceipt.invoiceImg}
-                  alt="صورة الفاتورة"
+                  alt={t("fin.receiptAlt")}
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -497,7 +499,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#1E2429]/70 via-transparent to-transparent flex items-end p-4">
                 <span className="text-white text-xs font-bold flex items-center gap-1.5 bg-[#1E2429]/50 backdrop-blur-xs px-2.5 py-1 rounded-lg">
                   <Receipt className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>فاتورة إلكترونية موثقة من الموقع</span>
+                  <span>{t("fin.einvoice")}</span>
                 </span>
               </div>
             </div>
@@ -505,19 +507,19 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             {/* Details Body */}
             <div className="p-5 space-y-3">
               <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">وصف المصروف:</span>
+                <span className="text-[#5A646E]">{t("fin.desc")}</span>
                 <span className="font-bold text-[#1E2429]">{selectedReceipt.description}</span>
               </div>
               <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">التصنيف المحاسبي:</span>
+                <span className="text-[#5A646E]">{t("fin.category")}</span>
                 <span className="font-bold text-[#1E2429]">{selectedReceipt.category}</span>
               </div>
               <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">تاريخ التحرير:</span>
+                <span className="text-[#5A646E]">{t("fin.date")}</span>
                 <span className="font-bold text-[#1E2429]">{selectedReceipt.date}</span>
               </div>
               <div className="flex justify-between items-center text-sm pt-1">
-                <span className="font-bold text-[#5A646E]">المبلغ الإجمالي:</span>
+                <span className="font-bold text-[#5A646E]">{t("fin.totalAmt")}</span>
                 <span className="text-lg font-black text-rose-700">
                   {selectedReceipt.amount.toLocaleString(intlLocale())} {currencySymbol()}
                 </span>
@@ -530,14 +532,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 onClick={() => setSelectedReceipt(null)}
                 className="w-1/3 py-2.5 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
               >
-                إغلاق
+                {t("fin.close")}
               </button>
               <button
                 onClick={() => handleApproveExpense(selectedReceipt)}
                 className="w-2/3 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-1.5"
               >
                 <Check className="w-4 h-4" />
-                <span>اعتماد الفاتورة الآن</span>
+                <span>{t("fin.approveNow")}</span>
               </button>
             </div>
           </div>
@@ -551,7 +553,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
               <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
                 <Plus className="w-5 h-5 text-[#1E2429]" />
-                <span>صرف دفعة عهدة نقدية جديدة للمهندس</span>
+                <span>{t("fin.topUpTitle")}</span>
               </h3>
               <button
                 onClick={() => setTopUpModalOpen(false)}
@@ -564,7 +566,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <form onSubmit={handleTopUpSubmit} className="space-y-4 mt-4">
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  اختر المهندس والموقع
+                  {t("fin.pickEng")}
                 </label>
                 <select
                   value={topUpEngId}
@@ -581,7 +583,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  مبلغ الدفعة الإضافية ({currencySymbol()})
+                  {t("fin.topUpAmt", { cur: currencySymbol() })}
                 </label>
                 <input
                   type="number"
@@ -596,8 +598,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
               <div className="p-3 bg-amber-50/60 rounded-lg border border-amber-200 text-xs text-amber-900">
                 <p>
-                  سيتم تحويل المبلغ لحساب العهدة الخاص بالمهندس وستنعكس الزيادة في شاشة الجوال
-                  الميدانية فوراً.
+                  {t("fin.topUpNote")}
                 </p>
               </div>
 
@@ -607,13 +608,13 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                   onClick={() => setTopUpModalOpen(false)}
                   className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] cursor-pointer"
                 >
-                  إلغاء
+                  {t("fin.cancel")}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm cursor-pointer"
                 >
-                  تأكيد صرف العهدة
+                  {t("fin.confirmTopUp")}
                 </button>
               </div>
             </form>
