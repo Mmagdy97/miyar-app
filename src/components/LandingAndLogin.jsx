@@ -126,13 +126,13 @@ export default function LandingAndLogin({ onLogin }) {
         aria-hidden="true"
         className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-[-6%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#5D8C70]/10 blur-[140px]" />
-        <div className="absolute top-[35%] left-[-10%] w-[680px] h-[680px] rounded-full bg-[#C5A36B]/8 blur-[150px]" />
-        <div className="absolute bottom-[5%] right-[10%] w-[550px] h-[550px] rounded-full bg-[#5D8C70]/10 blur-[130px]" />
+        <div className="absolute top-[-6%] start-[-5%] w-[600px] h-[600px] rounded-full bg-[#5D8C70]/10 blur-[140px]" />
+        <div className="absolute top-[35%] end-[-10%] w-[680px] h-[680px] rounded-full bg-[#C5A36B]/8 blur-[150px]" />
+        <div className="absolute bottom-[5%] start-[10%] w-[550px] h-[550px] rounded-full bg-[#5D8C70]/10 blur-[130px]" />
       </div>
 
       {/* 1. Floating Glass Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-white/70 backdrop-blur-xl border-b border-[#E5E6DF] transition-all duration-300">
+      <header className="fixed top-0 end-0 start-0 z-40 bg-white/70 backdrop-blur-xl border-b border-[#E5E6DF] transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
           {/* Logo (Right in RTL) */}
           <div className="flex items-center gap-3">
@@ -215,7 +215,7 @@ export default function LandingAndLogin({ onLogin }) {
             className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#183C35] text-white font-medium text-sm sm:text-base hover:bg-[#202923] rounded-lg hover:scale-105 active:scale-95 transition-all duration-300 shadow-md flex items-center justify-center gap-3 cursor-pointer"
           >
             <span>ابدأ تجربتك مجاناً</span>
-            <ArrowLeft className="w-4 h-4 text-white" />
+            <ArrowLeft className="ltr:-scale-x-100 w-4 h-4 text-white" />
           </button>
 
           <button
@@ -249,7 +249,7 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="w-full max-w-5xl mx-auto mt-14 sm:mt-20 relative">
           {/* Main App Container Mockup */}
           <div className="relative rounded-3xl bg-[#E5E6DF]/60 p-2 sm:p-4 backdrop-blur-2xl border border-[#D5D8D0] shadow-2xl shadow-slate-900/10">
-            <div className="bg-white rounded-2xl border border-[#E5E6DF] overflow-hidden shadow-inner text-right">
+            <div className="bg-white rounded-2xl border border-[#E5E6DF] overflow-hidden shadow-inner text-start">
               {/* Window Header Bar */}
               <div className="px-4 py-3 bg-[#F5F3ED] border-b border-[#E5E6DF] flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -341,7 +341,7 @@ export default function LandingAndLogin({ onLogin }) {
           </div>
 
           {/* Floating Satellite Glass Card 1 (Top Right Corner - Approval Action) */}
-          <div className="hidden lg:flex absolute -top-8 -right-6 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E5E6DF] shadow-xl max-w-xs text-right animate-in fade-in slide-in-from-right duration-1000">
+          <div className="hidden lg:flex absolute -top-8 -start-6 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E5E6DF] shadow-xl max-w-xs text-start animate-in fade-in slide-in-from-right duration-1000">
             <div className="flex items-start gap-3">
               <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center shrink-0">
                 <CheckCircle2 className="w-5 h-5 text-[#5D8C70]" />
@@ -361,7 +361,7 @@ export default function LandingAndLogin({ onLogin }) {
           </div>
 
           {/* Floating Satellite Glass Card 2 (Bottom Left Corner - Instant Cash Control) */}
-          <div className="hidden lg:flex absolute -bottom-8 -left-6 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E5E6DF] shadow-xl max-w-xs text-right animate-in fade-in slide-in-from-left duration-1000">
+          <div className="hidden lg:flex absolute -bottom-8 -end-6 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E5E6DF] shadow-xl max-w-xs text-start animate-in fade-in slide-in-from-left duration-1000">
             <div className="flex items-start gap-3">
               <div className="w-9 h-9 rounded-xl bg-[#EFEEE8] text-[#202923] flex items-center justify-center shrink-0">
                 <Wallet className="w-5 h-5" />
@@ -404,7 +404,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Pillar 1: المقايسات الذكية (Smart BOQ) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Description (7 Cols in RTL) */}
-            <div className="lg:col-span-6 space-y-4 text-right">
+            <div className="lg:col-span-6 space-y-4 text-start">
               <div className="w-12 h-12 rounded-2xl bg-[#EFEEE8] text-[#202923] flex items-center justify-center font-bold shadow-2xs">
                 <Calculator className="w-6 h-6" />
               </div>
@@ -439,7 +439,7 @@ export default function LandingAndLogin({ onLogin }) {
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#202923] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
                   <span>استكشف شاشة المقايسات الذكية كمهندس مكتب فني</span>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -537,7 +537,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Text Description (6 Cols) */}
-            <div className="lg:col-span-6 space-y-4 text-right order-1 lg:order-2">
+            <div className="lg:col-span-6 space-y-4 text-start order-1 lg:order-2">
               <div className="w-12 h-12 rounded-2xl bg-[#EFEEE8] text-[#202923] flex items-center justify-center font-bold shadow-2xs">
                 <Wallet className="w-6 h-6" />
               </div>
@@ -572,7 +572,7 @@ export default function LandingAndLogin({ onLogin }) {
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#202923] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
                   <span>جرب لوحة إدارة العهد النقدية كمدير تنفيذي</span>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -581,7 +581,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Pillar 3: بوابة العميل الفاخرة (Client Portal) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Description */}
-            <div className="lg:col-span-6 space-y-4 text-right">
+            <div className="lg:col-span-6 space-y-4 text-start">
               <div className="w-12 h-12 rounded-2xl bg-[#EFEEE8] text-[#202923] flex items-center justify-center font-bold shadow-2xs">
                 <ShieldCheck className="w-6 h-6" />
               </div>
@@ -616,7 +616,7 @@ export default function LandingAndLogin({ onLogin }) {
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#202923] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
                   <span>شاهد ما يراه العميل في جناحه الخاص الآن</span>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -699,7 +699,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Text Description */}
-            <div className="lg:col-span-6 space-y-4 text-right order-1 lg:order-2">
+            <div className="lg:col-span-6 space-y-4 text-start order-1 lg:order-2">
               <div className="w-12 h-12 rounded-2xl bg-[#EFEEE8] text-[#202923] flex items-center justify-center font-bold shadow-2xs">
                 <Layers className="w-6 h-6" />
               </div>
@@ -734,7 +734,7 @@ export default function LandingAndLogin({ onLogin }) {
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#202923] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
                   <span>جرب شاشة التقارير والملاحظات كمهندس موقع</span>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -758,7 +758,7 @@ export default function LandingAndLogin({ onLogin }) {
 
         {/* The Table Container */}
         <div className="bg-white rounded-3xl shadow-sm border border-[#E5E6DF] overflow-hidden overflow-x-auto">
-          <table className="w-full text-right border-collapse min-w-[700px]">
+          <table className="w-full text-start border-collapse min-w-[700px]">
             <thead>
               <tr className="border-b border-[#E5E6DF] text-sm">
                 <th className="p-5 sm:p-6 font-black text-[#202923] w-1/4">الميزة الهندسية والمالية</th>
@@ -913,8 +913,8 @@ export default function LandingAndLogin({ onLogin }) {
       <section id="cta" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="bg-[#183C35] text-white rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden border border-[#14322c]">
           {/* Subtle Ambient Decorative Glow */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#5D8C70]/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#C5A36B]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-24 -start-24 w-96 h-96 bg-[#5D8C70]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -end-24 w-96 h-96 bg-[#C5A36B]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto">
             <span
@@ -952,7 +952,7 @@ export default function LandingAndLogin({ onLogin }) {
 
       {/* Footer */}
       <footer className="border-t border-[#E5E6DF] bg-white/80 py-10 px-4 sm:px-8 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-[#183C35] text-white flex items-center justify-center font-bold">
               <Building2 className="w-5 h-5 text-white" />
@@ -989,10 +989,10 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="fixed inset-0 z-50 bg-[#183C35]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
             dir="rtl"
-            className="bg-white rounded-3xl shadow-2xl border border-[#E5E6DF] max-w-md w-full p-6 sm:p-8 text-right animate-in zoom-in-95 duration-200 relative overflow-hidden"
+            className="bg-white rounded-3xl shadow-2xl border border-[#E5E6DF] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
           >
             {/* Modal Ambient Corner */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute top-0 start-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
 
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE8] relative z-10">
@@ -1024,7 +1024,7 @@ export default function LandingAndLogin({ onLogin }) {
                   البريد الإلكتروني
                 </label>
                 <div className="relative">
-                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#526257]">
+                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#526257]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <input
@@ -1032,7 +1032,7 @@ export default function LandingAndLogin({ onLogin }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-[#E5E6DF] bg-[#F5F3ED]/50 text-xs sm:text-sm font-medium text-[#202923] focus:outline-none focus:ring-2 border-[#D5D8D0] focus:border-[#183C35] focus:ring-1 focus:ring-[#183C35] transition-all"
+                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#E5E6DF] bg-[#F5F3ED]/50 text-xs sm:text-sm font-medium text-[#202923] focus:outline-none focus:ring-2 border-[#D5D8D0] focus:border-[#183C35] focus:ring-1 focus:ring-[#183C35] transition-all"
                     placeholder="architect@miyar.eg"
                   />
                 </div>
@@ -1044,7 +1044,7 @@ export default function LandingAndLogin({ onLogin }) {
                   كلمة المرور
                 </label>
                 <div className="relative">
-                  <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#526257]">
+                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#526257]">
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
@@ -1052,7 +1052,7 @@ export default function LandingAndLogin({ onLogin }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-[#E5E6DF] bg-[#F5F3ED]/50 text-xs sm:text-sm font-medium text-[#202923] focus:outline-none focus:ring-2 border-[#D5D8D0] focus:border-[#183C35] focus:ring-1 focus:ring-[#183C35] transition-all"
+                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#E5E6DF] bg-[#F5F3ED]/50 text-xs sm:text-sm font-medium text-[#202923] focus:outline-none focus:ring-2 border-[#D5D8D0] focus:border-[#183C35] focus:ring-1 focus:ring-[#183C35] transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -1095,7 +1095,7 @@ export default function LandingAndLogin({ onLogin }) {
                         key={r.id}
                         type="button"
                         onClick={() => handleQuickLogin(r.id)}
-                        className={`p-2.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer text-right flex items-center justify-between ${
+                        className={`p-2.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer text-start flex items-center justify-between ${
                           selectedRole === r.id ? "bg-[#183C35] text-white border-[#183C35] shadow-xs" : "bg-[#F5F3ED] text-[#202923] border-[#E5E6DF] hover:border-[#5D8C70]"
                         }`}
                       >
@@ -1104,7 +1104,7 @@ export default function LandingAndLogin({ onLogin }) {
                           <span className="truncate">{r.title}</span>
                         </div>
                         {selectedRole === r.id && (
-                          <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 mr-1" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 ms-1" />
                         )}
                       </button>
                     );

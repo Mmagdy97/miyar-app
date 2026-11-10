@@ -287,7 +287,7 @@ function SiteEngineerDashboard({ setActionItems }) {
                 </p>
               </div>
 
-              <div className="text-left shrink-0">
+              <div className="text-end shrink-0">
                 <span className="px-2.5 py-1 rounded-lg text-xs font-black bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF] inline-block">
                   مرحلة التأسيس (MEP)
                 </span>
@@ -336,7 +336,7 @@ function SiteEngineerDashboard({ setActionItems }) {
                     key={opt.id}
                     type="button"
                     onClick={() => setWeatherSelected(opt.id)}
-                    className={`px-3 py-2.5 rounded-lg text-xs font-bold border transition-all text-right flex items-center justify-between ${
+                    className={`px-3 py-2.5 rounded-lg text-xs font-bold border transition-all text-start flex items-center justify-between ${
                       isSelected
                         ? "bg-[#EFEEE8] border-[#183C35] text-[#202923] shadow-xs"
                         : "bg-white border-[#E5E6DF] text-[#526257] hover:bg-[#F5F3ED]"
@@ -607,7 +607,7 @@ function SiteEngineerDashboard({ setActionItems }) {
       {/* Petty Cash Settlement Modal */}
       {pettyCashModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#202923]/40 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-md w-full p-6 md:p-8 text-right space-y-4 animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-md w-full p-6 md:p-8 text-start space-y-4 animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between pb-3 border-b border-[#EFEEE8]">
               <div className="flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-[#EFEEE8] text-[#202923] flex items-center justify-center font-bold">

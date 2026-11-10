@@ -261,12 +261,14 @@ function MainContent({
   };
 
   return (
-    <div
+    <main
+      id="main-content"
+      tabIndex={-1}
       key={`${currentRole}-${activeTab}`}
-      className="flex-1 flex flex-col min-h-0 min-w-0 w-full max-w-full overflow-hidden tab-page-transition"
+      className="flex-1 flex flex-col min-h-0 min-w-0 w-full max-w-full overflow-hidden tab-page-transition outline-none"
     >
       {renderScreen()}
-    </div>
+    </main>
   );
 }
 

@@ -382,7 +382,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
         {/* Card 2: طلبات استفسار الموقع (RFIs) - Warning/Urgent Style */}
         <div className="bg-white rounded-lg border border-[#E5E6DF] p-5 shadow-xs transition-all flex flex-col justify-between relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-amber-700" />
+          <div className="absolute top-0 end-0 start-0 h-1 bg-amber-700" />
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#202923] flex items-center gap-1.5">
               <span className="relative flex h-2 w-2">
@@ -480,9 +480,9 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="بحث في المخططات..."
-                  className="py-1.5 pr-8 pl-3 rounded-lg border border-[#E5E6DF] text-xs focus:outline-none focus:ring-2 focus:ring-[#183C35]/10 focus:border-[#183C35] text-[#202923] placeholder:text-[#526257] w-44"
+                  className="py-1.5 ps-8 pe-3 rounded-lg border border-[#E5E6DF] text-xs focus:outline-none focus:ring-2 focus:ring-[#183C35]/10 focus:border-[#183C35] text-[#202923] placeholder:text-[#526257] w-44"
                 />
-                <Search className="w-3.5 h-3.5 text-[#526257] absolute right-2.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-3.5 h-3.5 text-[#526257] absolute start-2.5 top-1/2 -translate-y-1/2" />
               </div>
             </div>
 
@@ -705,7 +705,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
         {/* Clean Structured Data Table */}
         <div className="overflow-x-auto w-full rounded-lg border border-[#E5E6DF] shadow-sm">
-          <table className="w-full text-right text-xs">
+          <table className="w-full text-start text-xs">
             <thead className="bg-[#F5F3ED] text-[#526257] font-extrabold border-b border-[#E5E6DF]">
               <tr>
                 <th className="py-3 px-3.5 font-mono">الكود</th>
@@ -773,7 +773,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
         >
           <div
             dir="rtl"
-            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#E5E6DF] text-right animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#E5E6DF] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-6 border-b border-[#EFEEE8] bg-[#F5F3ED]">
@@ -932,7 +932,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
         >
           <div
             dir="rtl"
-            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#E5E6DF] text-right animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#E5E6DF] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-6 border-b border-[#EFEEE8] bg-[#F5F3ED]">

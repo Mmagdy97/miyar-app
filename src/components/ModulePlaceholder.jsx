@@ -19,7 +19,7 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
             {/* Icon Header */}
             <div className="relative inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-[#EFEEE8] border border-[#E5E6DF] text-[#202923] shadow-xs">
               <Construction className="w-8 h-8" />
-              <span className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5">
+              <span className="absolute -bottom-1 -start-1 flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
               </span>
@@ -48,7 +48,7 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
             </p>
 
             {/* Feature Preview Box */}
-            <div className="bg-[#F5F3ED] rounded-lg border border-[#E5E6DF] p-5 mb-8 text-right">
+            <div className="bg-[#F5F3ED] rounded-lg border border-[#E5E6DF] p-5 mb-8 text-start">
               <div className="flex items-center gap-2 mb-3 text-xs font-bold text-[#202923]">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
                 <span>المميزات المجدولة لهذه الشاشة في التحديث القادم:</span>

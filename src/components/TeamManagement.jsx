@@ -279,7 +279,7 @@ function TeamManagement() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 left-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -375,13 +375,13 @@ function TeamManagement() {
       <div className="bg-white rounded-lg border border-[#E5E6DF] p-3.5 mb-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-[#526257] absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#526257] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="بحث بالاسم أو الصلاحية أو البريد الإلكتروني..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pr-10 pl-4 py-2 rounded-lg border border-[#E5E6DF] bg-[#F5F3ED] text-xs md:text-sm font-semibold text-[#202923] placeholder-[#526257]/50 focus:outline-none focus:ring-1 focus:ring-[#183C35] focus:border-[#183C35] transition-all"
+            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E5E6DF] bg-[#F5F3ED] text-xs md:text-sm font-semibold text-[#202923] placeholder-[#526257]/50 focus:outline-none focus:ring-1 focus:ring-[#183C35] focus:border-[#183C35] transition-all"
           />
         </div>
 
@@ -406,7 +406,7 @@ function TeamManagement() {
       {/* Main Team Table in a Glassmorphic Card */}
       <div className="bg-white rounded-lg border border-[#E5E6DF] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-right border-collapse">
+          <table className="w-full text-start border-collapse">
             <thead>
               <tr className="bg-[#F5F3ED] text-[#526257] text-xs font-bold border-b border-[#E5E6DF]">
                 <th className="py-4 px-5 min-w-[240px]">الاسم وبيانات الاتصال</th>
@@ -446,7 +446,7 @@ function TeamManagement() {
                           {/* Clickable Employee Name (Requirement 1) */}
                           <button
                             onClick={() => handleOpenEditModal(member)}
-                            className="text-right group-hover:text-amber-800 transition-colors cursor-pointer block"
+                            className="text-start group-hover:text-amber-800 transition-colors cursor-pointer block"
                             title="انقر لتعديل بيانات العضو والصلاحيات"
                           >
                             <h4 className="font-extrabold text-[#202923] group-hover:text-amber-800 transition-colors leading-snug flex items-center gap-1.5">
@@ -582,7 +582,7 @@ function TeamManagement() {
       {/* Add / Edit Glassmorphic Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-[#202923]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-right animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
             {/* Dynamic Modal Header (Requirement 1) */}
             <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE8]">
               <h3 className="text-lg font-black text-[#202923] flex items-center gap-2">

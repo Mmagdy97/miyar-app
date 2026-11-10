@@ -114,7 +114,7 @@ function ClientProgress() {
 
         {/* Hero Section: Large Circular Progress Ring (75%) */}
         <div className="bg-[#183C35] rounded-xl p-6 md:p-8 text-white shadow-sm border border-[#14322c] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="relative z-10 space-y-3 max-w-lg text-center md:text-right">
+          <div className="relative z-10 space-y-3 max-w-lg text-center md:text-start">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-md border border-white/20">
               <Sparkles className="w-3.5 h-3.5 text-white" />
               <span>مرحلة التشطيبات المعمارية الكبرى</span>

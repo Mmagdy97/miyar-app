@@ -524,9 +524,9 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             }`}
                           >
                             {isOnTrack ? (
-                              <CheckCircle2 className="w-3 h-3 ml-1 text-[#5D8C70]" />
+                              <CheckCircle2 className="w-3 h-3 me-1 text-[#5D8C70]" />
                             ) : (
-                              <ShieldAlert className="w-3 h-3 ml-1 text-rose-600" />
+                              <ShieldAlert className="w-3 h-3 me-1 text-rose-600" />
                             )}
                             {project.status}
                           </span>
@@ -590,7 +590,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </span>
             <button className="font-bold text-[#202923] hover:text-amber-800 inline-flex items-center gap-1 transition-colors">
               عرض سجل المشاريع
-              <ChevronLeft className="w-3.5 h-3.5" />
+              <ChevronLeft className="ltr:-scale-x-100 w-3.5 h-3.5" />
             </button>
           </div>
         </div>
@@ -697,7 +697,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             <span className="text-[#202923] font-bold">
                               {item.user || item.submitter}
                             </span>
-                            <span className="text-[#202923] mr-2 font-bold hover:underline">
+                            <span className="text-[#202923] ms-2 font-bold hover:underline">
                               (اضغط لعرض التفاصيل والصور)
                             </span>
                           </div>

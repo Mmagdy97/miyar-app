@@ -105,7 +105,7 @@ function ClientTimeline() {
         </div>
 
         {/* Vertical Stepper Container */}
-        <div className="relative border-r-2 border-[#E5E6DF] mr-4 sm:mr-6 pr-6 sm:pr-8 space-y-8 py-2">
+        <div className="relative border-e-2 border-[#E5E6DF] ms-4 sm:ms-6 ps-6 sm:ps-8 space-y-8 py-2">
           {TIMELINE_STEPS.map((step, idx) => {
             const isCompleted = step.statusType === "completed";
             const isActive = step.statusType === "active";
@@ -115,7 +115,7 @@ function ClientTimeline() {
               <div key={step.id} className="relative group">
                 {/* Stepper Node Icon on the vertical border */}
                 <div
-                  className={`absolute -right-[35px] sm:-right-[43px] top-4 w-9 h-9 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                  className={`absolute -start-[35px] sm:-start-[43px] top-4 w-9 h-9 rounded-full flex items-center justify-center text-xs font-black transition-all ${
                     isCompleted || isActive
                       ? "bg-[#183C35] text-white border-4 border-white shadow-sm ring-1 ring-[#E5E6DF]"
                       : "bg-[#EFEEE8] text-[#526257] border-4 border-white shadow-sm"

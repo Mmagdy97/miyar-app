@@ -44,7 +44,7 @@ function Sidebar({
     <aside
       ref={sidebarRef}
       className={`relative flex flex-col h-full bg-[#183C35] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
-        hideHeader ? "w-full border-none" : "border-l border-[#5D8C70]/20"
+        hideHeader ? "w-full border-none" : "border-s border-[#5D8C70]/20"
       } ${!hideHeader && (collapsed ? "md:w-[72px]" : "w-full md:w-64")}`}
     >
       {/* Sidebar Header */}
@@ -85,9 +85,9 @@ function Sidebar({
               title={collapsed ? "توسيع القائمة" : "تصغير القائمة"}
             >
               {collapsed ? (
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="ltr:-scale-x-100 w-4 h-4" />
               ) : (
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="ltr:-scale-x-100 w-4 h-4" />
               )}
             </button>
           </div>
@@ -161,11 +161,11 @@ function Sidebar({
       {/* Tooltip for collapsed state (popping to the LEFT in RTL) */}
       {collapsed && tooltip.visible && (
         <div
-          className="absolute right-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#202923] border border-[#5D8C70]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
+          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#202923] border border-[#5D8C70]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
           style={{ top: tooltip.top, transform: "translateY(-50%)" }}
         >
           {tooltip.text}
-          <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#202923] border-t border-r border-[#5D8C70]/30 rotate-45" />
+          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#202923] border-t border-e border-[#5D8C70]/30 rotate-45" />
         </div>
       )}
 

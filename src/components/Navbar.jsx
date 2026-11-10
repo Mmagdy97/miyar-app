@@ -61,7 +61,7 @@ function Navbar({
         {/* Hamburger Menu Toggle (Visible on Mobile < md) */}
         <button
           onClick={onToggleMobileMenu}
-          className="md:hidden p-1.5 -mr-1 rounded-lg text-[#202923] hover:bg-[#F5F3ED] transition-colors cursor-pointer"
+          className="md:hidden p-1.5 -ms-1 rounded-lg text-[#202923] hover:bg-[#F5F3ED] transition-colors cursor-pointer"
           aria-label="القائمة الجانبية"
         >
           <Menu className="w-6 h-6 text-[#183C35]" />
@@ -114,7 +114,7 @@ function Navbar({
           >
             <Bell className="w-4 h-4" />
             {roleNotifications.length > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#183C35] text-white font-extrabold text-[10px] flex items-center justify-center ring-2 ring-white shadow-xs">
+              <span className="absolute -top-1 -start-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#183C35] text-white font-extrabold text-[10px] flex items-center justify-center ring-2 ring-white shadow-xs">
                 {roleNotifications.length}
               </span>
             )}
@@ -122,7 +122,7 @@ function Navbar({
 
           {/* Minimalist Notifications Dropdown Card (Constrained so it NEVER bleeds off-screen) */}
           {isNotificationsOpen && (
-            <div className="fixed sm:absolute top-16 sm:top-auto left-2 right-2 sm:left-0 sm:right-auto mt-2 w-[90vw] sm:w-80 max-w-[calc(100vw-1rem)] mx-auto sm:mx-0 bg-white rounded-xl shadow-lg border border-[#E5E6DF] py-3 z-50 text-right animate-in fade-in slide-in-from-top-1">
+            <div className="fixed sm:absolute top-16 sm:top-auto end-2 start-2 sm:end-0 sm:right-auto mt-2 w-[90vw] sm:w-80 max-w-[calc(100vw-1rem)] mx-auto sm:mx-0 bg-white rounded-xl shadow-lg border border-[#E5E6DF] py-3 z-50 text-start animate-in fade-in slide-in-from-top-1">
               {/* Dropdown Header */}
               <div className="px-4 pb-3 border-b border-[#E5E6DF] flex items-center justify-between">
                 <div>
@@ -259,7 +259,7 @@ function Navbar({
 
           {/* Role Dropdown Menu */}
           {dropdownOpen && (
-            <div className="absolute left-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-[#E5E6DF] py-2 z-50 animate-in fade-in slide-in-from-top-1">
+            <div className="absolute end-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-[#E5E6DF] py-2 z-50 animate-in fade-in slide-in-from-top-1">
               <div className="px-3.5 py-1.5 mb-1 border-b border-[#E5E6DF]">
                 <p className="text-[11px] font-bold text-[#526257] uppercase tracking-wider">
                   تبديل الصلاحية والدور
@@ -274,7 +274,7 @@ function Navbar({
                       onRoleChange(role);
                       setDropdownOpen(false);
                     }}
-                    className={`w-full text-right px-3.5 py-2.5 text-xs md:text-sm font-semibold flex items-center justify-between transition-colors duration-150 cursor-pointer ${
+                    className={`w-full text-start px-3.5 py-2.5 text-xs md:text-sm font-semibold flex items-center justify-between transition-colors duration-150 cursor-pointer ${
                       isSelected
                         ? "bg-[#183C35] text-white font-bold rounded-lg shadow-xs"
                         : "text-[#526257] hover:bg-[#F5F3ED] hover:text-[#202923]"
@@ -300,7 +300,7 @@ function Navbar({
             م.أ
           </div>
           {/* Profile Name & Role (Hidden on mobile < md as instructed) */}
-          <div className="hidden md:block text-right">
+          <div className="hidden md:block text-start">
             <p className="text-xs font-bold text-[#202923] leading-tight">
               م. محمد أحمد
             </p>

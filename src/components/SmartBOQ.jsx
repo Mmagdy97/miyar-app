@@ -209,11 +209,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {saveToast && (
-        <div className="fixed bottom-28 left-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-28 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
             <CheckCircle2 className="w-5 h-5" />
           </div>
-          <div className="text-right">
+          <div className="text-start">
             <p className="text-xs font-bold">تم حفظ المسودة بنجاح</p>
             <p className="text-[11px] text-[#EFEEE8]">تم تحديث بيانات المقايسة التقديرية محلياً</p>
           </div>
@@ -344,7 +344,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
         {/* The Responsive Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-right border-collapse">
+          <table className="w-full text-start border-collapse">
             <thead>
               <tr className="bg-[#F5F3ED] text-[#526257] text-xs font-bold border-b border-[#E5E6DF]">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
@@ -353,7 +353,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <th className="py-3.5 px-3 w-32 text-center">الكمية (Qty)</th>
                 <th className="py-3.5 px-3 w-40 text-center">سعر الوحدة - تكلفة (ج.م)</th>
                 <th className="py-3.5 px-3 w-32 text-center">هامش الربح %</th>
-                <th className="py-3.5 px-4 min-w-[150px] text-left">الإجمالي للعميل (ج.م)</th>
+                <th className="py-3.5 px-4 min-w-[150px] text-end">الإجمالي للعميل (ج.م)</th>
                 <th className="py-3.5 px-3 w-14 text-center">حذف</th>
               </tr>
             </thead>
@@ -429,9 +429,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                           step="any"
                           value={item.unitCost}
                           onChange={(e) => handleUpdateItem(item.id, "unitCost", e.target.value)}
-                          className="w-full text-center pl-7 pr-2 py-1.5 rounded-lg border border-[#E5E6DF] bg-white font-bold text-[#202923] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#183C35] focus:border-[#183C35] transition-all shadow-2xs hover:border-[#5D8C70]"
+                          className="w-full text-center pe-7 ps-2 py-1.5 rounded-lg border border-[#E5E6DF] bg-white font-bold text-[#202923] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#183C35] focus:border-[#183C35] transition-all shadow-2xs hover:border-[#5D8C70]"
                         />
-                        <span className="absolute left-2.5 text-[10px] font-bold text-[#526257] pointer-events-none">
+                        <span className="absolute end-2.5 text-[10px] font-bold text-[#526257] pointer-events-none">
                           ج.م
                         </span>
                       </div>
@@ -447,16 +447,16 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                           step="1"
                           value={item.margin}
                           onChange={(e) => handleUpdateItem(item.id, "margin", e.target.value)}
-                          className="w-full text-center pl-6 pr-2 py-1.5 rounded-lg border border-[#E5E6DF] bg-white font-bold text-amber-800 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#183C35] focus:border-[#183C35] transition-all shadow-2xs hover:border-[#5D8C70]"
+                          className="w-full text-center pe-6 ps-2 py-1.5 rounded-lg border border-[#E5E6DF] bg-white font-bold text-amber-800 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#183C35] focus:border-[#183C35] transition-all shadow-2xs hover:border-[#5D8C70]"
                         />
-                        <span className="absolute left-2 text-[11px] font-extrabold text-amber-700 pointer-events-none">
+                        <span className="absolute end-2 text-[11px] font-extrabold text-amber-700 pointer-events-none">
                           %
                         </span>
                       </div>
                     </td>
 
                     {/* Auto-Calculated Total Price for Client */}
-                    <td className="py-3.5 px-4 text-left">
+                    <td className="py-3.5 px-4 text-end">
                       <div className="flex flex-col items-end">
                         <span className="font-black text-[#202923] text-sm md:text-base tracking-tight">
                           {Math.round(rowTotal).toLocaleString("ar-EG")}{" "}
@@ -515,7 +515,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Floating Summary & Action Sticky Dock */}
-      <div className="fixed bottom-0 right-0 left-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E5E6DF] shadow-lg px-4 md:px-8 py-4">
+      <div className="fixed bottom-0 start-0 end-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E5E6DF] shadow-lg px-4 md:px-8 py-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Summary Figures */}
           <div className="flex items-center gap-5 sm:gap-8 flex-wrap">
@@ -584,7 +584,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       {/* Add New Item Modal */}
       {showAddItemModal && (
         <div className="fixed inset-0 z-50 bg-[#202923]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full p-6 md:p-8 text-right animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE8]">
               <h3 className="text-lg font-black text-[#202923] flex items-center gap-2">
                 <Plus className="w-5 h-5 text-[#202923]" />
@@ -762,7 +762,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               ، مع إتاحة خيار الاعتماد الإلكتروني المباشر من حسابه.
             </p>
 
-            <div className="bg-[#F5F3ED] rounded-lg p-3 border border-[#E5E6DF] text-xs text-[#526257] text-right space-y-1 mb-5">
+            <div className="bg-[#F5F3ED] rounded-lg p-3 border border-[#E5E6DF] text-xs text-[#526257] text-start space-y-1 mb-5">
               <div className="flex justify-between">
                 <span className="text-[#526257]">عدد البنود:</span>
                 <span className="font-bold">{boqItems.length} بنود</span>

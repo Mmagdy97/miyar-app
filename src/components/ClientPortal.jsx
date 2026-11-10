@@ -530,7 +530,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   </span>
 
                   {/* Top Heart and Date Badge */}
-                  <div className="absolute top-3 right-3 left-3 flex items-center justify-between">
+                  <div className="absolute top-3 start-3 end-3 flex items-center justify-between">
                     <span className="text-[10px] font-bold text-[#526257] bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md">
                       {photo.date}
                     </span>
@@ -675,7 +675,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         >
           <div
             dir="rtl"
-            className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-xl w-full overflow-hidden border border-[#E5E6DF] text-right animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-xl w-full overflow-hidden border border-[#E5E6DF] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image Placeholder Frame */}
@@ -691,7 +691,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
               <button
                 onClick={() => setActivePhoto(null)}
-                className="absolute top-4 left-4 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#526257] flex items-center justify-center font-bold text-sm shadow-md"
+                className="absolute top-4 end-4 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#526257] flex items-center justify-center font-bold text-sm shadow-md"
               >
                 ✕
               </button>
@@ -756,7 +756,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         >
           <div
             dir="rtl"
-            className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full overflow-hidden border border-[#E5E6DF] text-right animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full overflow-hidden border border-[#E5E6DF] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-6 border-b border-[#EFEEE8] bg-[#F5F3ED]">

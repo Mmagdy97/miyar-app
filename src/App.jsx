@@ -1,3 +1,4 @@
+import { DEFAULT_LOCALE, LOCALES } from "./config/locale";
 import { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -139,6 +140,12 @@ function App() {
     setIsMobileMenuOpen(false);
   };
 
+  useEffect(() => {
+    const l = LOCALES[DEFAULT_LOCALE];
+    document.documentElement.lang = l.lang;
+    document.documentElement.dir = l.dir;
+  }, []);
+
   const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   // Requirement 5: Modal Approval Logic filters out item from actionItems and closes modal
@@ -163,16 +170,18 @@ function App() {
 
   return (
     <div
-      dir="rtl"
       className="min-h-screen w-full relative isolate flex flex-col md:flex-row h-screen overflow-hidden font-ibm bg-[#F5F3ED] text-[#202923] selection:bg-[#183C35] selection:text-white"
     >
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#183C35] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+        تخطي إلى المحتوى
+      </a>
       {/* Ambient Restful Studio Glow Orbs */}
       <div
         aria-hidden="true"
         className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#5D8C70]/10 blur-[130px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#C5A36B]/8 blur-[130px]" />
+        <div className="absolute top-[-10%] start-[-5%] w-[500px] h-[500px] rounded-full bg-[#5D8C70]/10 blur-[130px]" />
+        <div className="absolute bottom-[-10%] end-[-10%] w-[600px] h-[600px] rounded-full bg-[#C5A36B]/8 blur-[130px]" />
       </div>
 
       {/* Mobile Drawer Backdrop Overlay */}
@@ -185,7 +194,7 @@ function App() {
 
       {/* Sidebar: Slide-over Drawer on Mobile (< md), Static on Desktop (md:) */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:block ${
+        className={`fixed inset-y-0 start-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:block ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         } ${sidebarCollapsed ? "md:w-[72px]" : "md:w-64"} w-72 shrink-0 h-full`}
       >

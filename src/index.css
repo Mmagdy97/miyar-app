@@ -18,8 +18,6 @@
 
 body {
   font-family: 'IBM Plex Sans Arabic', sans-serif;
-  direction: rtl;
-  text-align: right;
   background-color: #F5F3ED;
   color: #202923;
   -webkit-font-smoothing: antialiased;
@@ -128,4 +126,27 @@ p {
 
 .shadow-\[0_8px_30px_rgba\(45\,36\,34\,0\.04\)\] {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* Accessibility: visible keyboard focus, reduced motion, comfortable touch targets */
+:focus-visible {
+  outline: 2px solid #183C35;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (pointer: coarse) {
+  button, [role="button"], select, input[type="checkbox"], input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }

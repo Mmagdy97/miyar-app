@@ -15,7 +15,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
     >
       <div
         dir="rtl"
-        className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden border border-[#E5E6DF] text-right animate-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
+        className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden border border-[#E5E6DF] text-start animate-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
@@ -53,7 +53,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
                 {selectedItem.user || selectedItem.submitter || "م. محمد (الموقع)"}
               </span>
             </div>
-            <div className="text-left">
+            <div className="text-end">
               <span className="text-[#526257] block text-[10px] font-semibold">توقيت الإرسال</span>
               <span className="font-bold text-[#202923] font-mono">
                 {selectedItem.timestamp || selectedItem.time || "الآن"}

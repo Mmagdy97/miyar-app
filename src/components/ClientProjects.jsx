@@ -80,7 +80,7 @@ function ClientProjects() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 left-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -132,7 +132,7 @@ function ClientProjects() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#202923]/80 via-transparent to-transparent" />
 
                 {/* Status Badge in Photo */}
-                <div className="absolute top-3.5 right-3.5">
+                <div className="absolute top-3.5 start-3.5">
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border backdrop-blur-md shadow-xs ${unit.badgeColor}`}
                   >
@@ -142,7 +142,7 @@ function ClientProjects() {
                 </div>
 
                 {/* Progress bar overlay at bottom of cover photo */}
-                <div className="absolute bottom-3 right-3 left-3 flex items-center justify-between text-white">
+                <div className="absolute bottom-3 start-3 end-3 flex items-center justify-between text-white">
                   <span className="text-xs font-black">{unit.name}</span>
                   <span className="text-xs font-mono font-bold text-amber-300">
                     %{unit.progress} إنجاز
