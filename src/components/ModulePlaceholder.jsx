@@ -1,3 +1,4 @@
+import { tr_ as T } from "../i18n";
 import {
   Construction,
   Clock,
@@ -29,46 +30,46 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
             <div className="flex items-center justify-center gap-2 flex-wrap mb-4">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                الدور الحالي: {roleDisplay}
+                {T("ld.180", { v0: roleDisplay })}
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5]">
                 <Clock className="w-3.5 h-3.5 text-[#5A646E]" />
-                التبويب المطلوب: {activeTab}
+                {T("ld.181", { v0: activeTab })}
               </span>
             </div>
 
             {/* Primary Heading */}
             <h2 className="text-2xl sm:text-3xl font-black text-[#1E2429] tracking-tight mb-3">
-              وحدة [{activeTab}] قيد التطوير
+              {T("ld.182", { v0: activeTab })}
             </h2>
 
             {/* Subtitle */}
             <p className="text-[#5A646E] text-sm sm:text-base leading-relaxed max-w-lg mx-auto mb-8 font-medium">
-              سيتم تفعيل هذه الشاشة قريباً في النسخة النهائية
+              {T("ld.183")}
             </p>
 
             {/* Feature Preview Box */}
             <div className="bg-[#F3F4F6] rounded-lg border border-[#DDE1E5] p-5 mb-8 text-start">
               <div className="flex items-center gap-2 mb-3 text-xs font-bold text-[#1E2429]">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
-                <span>المميزات المجدولة لهذه الشاشة في التحديث القادم:</span>
+                <span>{T("ld.184")}</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#5A646E]">
                 <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#DDE1E5]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>تصفية وعرض البيانات المباشرة</span>
+                  <span>{T("ld.185")}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#DDE1E5]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>تصدير التقارير بصيغة PDF وExcel</span>
+                  <span>{T("ld.186")}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#DDE1E5]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>الربط اللحظي مع الحسابات والموقع</span>
+                  <span>{T("ld.187")}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#DDE1E5]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>نظام الصلاحيات وسجلات التدقيق</span>
+                  <span>{T("ld.188")}</span>
                 </div>
               </div>
             </div>
@@ -80,7 +81,7 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#2B3138] text-white hover:bg-[#1E2429] transition-colors shadow-sm rounded-lg font-bold text-sm cursor-pointer"
               >
                 <LayoutDashboard className="w-4 h-4" />
-                <span>العودة إلى لوحة التحكم</span>
+                <span>{T("ld.189")}</span>
               </button>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { PricingSection, LegalPage } from "./PublicPages";
+import { tr_ as T } from "../i18n";
 import SettingsSwitcher from "./SettingsSwitcher";
 import { useI18n } from "../i18n";
 import { useState } from "react";
@@ -150,10 +151,10 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
             <div>
               <span className="text-xl font-black text-[#1E2429] tracking-tight">
-                معيار
+                {T("ld.1")}
               </span>
               <span className="hidden sm:block text-[10px] text-[#5A646E] font-medium leading-none mt-0.5">
-                منصة الإدارة الذكية لمشاريع الديكور والمقاولات
+                {T("ld.2")}
               </span>
             </div>
           </div>
@@ -205,17 +206,17 @@ export default function LandingAndLogin({ onLogin }) {
         {/* Subtle Architectural Pill Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D9480F]/15 border border-[#D9480F]/30 shadow-xs text-xs font-bold text-[#2B3138] mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
           <Sparkles className="w-3.5 h-3.5 text-[#D9480F]" />
-          <span>المنصة السحابية الأولى المخصصة لمكاتب التصميم الداخلي والمقاولات الفاخرة</span>
+          <span>{T("ld.3")}</span>
         </div>
 
         {/* Massive Tight-Leading Typography */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#1E2429] leading-[1.18] sm:leading-[1.15] max-w-5xl tracking-tight animate-in fade-in duration-900">
-          أدر مشاريع التشطيبات بعقلية هندسية ومالية ذكية.
+          {T("ld.4")}
         </h1>
 
         {/* Subtitle */}
         <p className="mt-6 text-base sm:text-xl lg:text-2xl text-[#5A646E] max-w-3xl leading-relaxed font-normal animate-in fade-in duration-1000">
-          وداعاً لفوضى الواتساب وجداول الإكسيل المعقدة. منصة سحابية متكاملة تربط الإدارة، الموقع، والعميل في مكان واحد.
+          {T("ld.5")}
         </p>
 
         {/* CTAs */}
@@ -224,7 +225,7 @@ export default function LandingAndLogin({ onLogin }) {
             onClick={() => openModal("Admin")}
             className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#2B3138] text-white font-medium text-sm sm:text-base hover:bg-[#1E2429] rounded-lg hover:scale-105 active:scale-95 transition-all duration-300 shadow-md flex items-center justify-center gap-3 cursor-pointer"
           >
-            <span>ابدأ تجربتك مجاناً</span>
+            <span>{T("ld.6")}</span>
             <ArrowLeft className="ltr:-scale-x-100 w-4 h-4 text-white" />
           </button>
 
@@ -232,7 +233,7 @@ export default function LandingAndLogin({ onLogin }) {
             onClick={() => scrollToSection("comparison")}
             className="w-full sm:w-auto px-7 py-4 rounded-full bg-white hover:bg-[#F3F4F6] text-[#1E2429] border border-[#DDE1E5] text-sm sm:text-base font-medium rounded-lg shadow-xs hover:border-[#CBD0D6] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>لماذا نحن الأفضل لمكتبك؟</span>
+            <span>{T("ld.7")}</span>
             <ArrowDown className="w-4 h-4 text-[#5A646E]" />
           </button>
         </div>
@@ -241,17 +242,17 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="mt-8 flex items-center justify-center flex-wrap gap-4 sm:gap-8 text-xs font-bold text-[#5A646E]">
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-[#D9480F]" />
-            تجربة فورية بدون بطاقة ائتمان
+            {T("ld.8")}
           </span>
           <span className="hidden sm:inline text-[#7B848E]">•</span>
           <span className="flex items-center gap-1.5">
             <Smartphone className="w-4 h-4 text-[#D9480F]" />
-            تطبيق PWA يعمل في الموقع بلا إنترنت
+            {T("ld.9")}
           </span>
           <span className="hidden sm:inline text-[#7B848E]">•</span>
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-[#D9480F]" />
-            متوافق مع الكود الهندسي والممارسات الخليجية
+            {T("ld.10")}
           </span>
         </div>
 
@@ -272,7 +273,7 @@ export default function LandingAndLogin({ onLogin }) {
                   <span>{HERO_PROJECT.name} ({HERO_PROJECT.code})</span>
                 </div>
                 <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                  مباشر من الموقع
+                  {T("ld.11")}
                 </span>
               </div>
 
@@ -281,34 +282,34 @@ export default function LandingAndLogin({ onLogin }) {
                 {/* 4 Mini KPI Cards */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#5A646E] block">قيمة التعاقد</span>
+                    <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.12")}</span>
                     <span className="text-base sm:text-lg font-black text-[#1E2429] mt-0.5 block">{formatEGP(HERO_PROJECT.contractValue)}</span>
-                    <span className="text-[10px] text-[#D9480F] font-bold">شامل التوريد والتركيب</span>
+                    <span className="text-[10px] text-[#D9480F] font-bold">{T("ld.13")}</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#5A646E] block">المنصرف الفعلي بالمواقع</span>
+                    <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.14")}</span>
                     <span className="text-base sm:text-lg font-black text-[#1E2429] mt-0.5 block">{formatEGP(HERO_PROJECT.spentActual)}</span>
-                    <span className="text-[10px] text-[#5A646E] font-bold">فواتير معتمدة لحظياً</span>
+                    <span className="text-[10px] text-[#5A646E] font-bold">{T("ld.15")}</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-[#2B3138] text-white border border-[#20262C] shadow-2xs">
-                    <span style={{ color: '#ECEEF0' }} className="text-[10px] font-bold text-[#ECEEF0] block">رصيد العهد المتاح بالموقع</span>
+                    <span style={{ color: '#ECEEF0' }} className="text-[10px] font-bold text-[#ECEEF0] block">{T("ld.16")}</span>
                     <span style={{ color: '#FFFFFF' }} className="text-base sm:text-lg font-black text-white mt-0.5 block">{formatEGP(HERO_CASH.totalGiven - HERO_CASH.spent)}</span>
-                    <span style={{ color: '#7B848E' }} className="text-[10px] text-[#7B848E] font-bold">جاهز للصرف الطارئ</span>
+                    <span style={{ color: '#7B848E' }} className="text-[10px] text-[#7B848E] font-bold">{T("ld.17")}</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#5A646E] block">نسبة الإنجاز الفعلي</span>
+                    <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.18")}</span>
                     <span className="text-base sm:text-lg font-black text-[#1E2429] mt-0.5 block">{toAr(HERO_PROJECT.progress)}٪</span>
-                    <span className="text-[10px] text-[#D9480F] font-bold">وفق الجدول الزمني المعتمد</span>
+                    <span className="text-[10px] text-[#D9480F] font-bold">{T("ld.20")}</span>
                   </div>
                 </div>
 
                 {/* Milestone Progress Bar Simulation */}
                 <div className="p-4 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-[#1E2429]">المرحلة الحالية: تشطيبات الرخام والتجاليد</span>
+                    <span className="font-bold text-[#1E2429]">{T("ld.21")}</span>
                     <span className="font-bold text-[#1E2429] font-mono">{toAr(HERO_PROJECT.progress)}٪</span>
                   </div>
                   <div className="w-full h-2.5 bg-[#ECEEF0] rounded-full overflow-hidden">
@@ -322,12 +323,12 @@ export default function LandingAndLogin({ onLogin }) {
                     <div className="flex items-center justify-between font-bold text-[#1E2429] border-b border-[#ECEEF0] pb-1.5">
                       <span className="flex items-center gap-1.5">
                         <HardHat className="w-3.5 h-3.5 text-[#1E2429]" />
-                        يوميات الموقع المعتمدة
+                        {T("ld.22")}
                       </span>
                       <span className="text-[10px] text-[#5A646E]">اليوم، ١١:٣٠ ص</span>
                     </div>
                     <p className="text-[#5A646E] text-[11px] leading-relaxed">
-                      تم إنهاء عزل الحمامات كيميائياً واختبار الضغط على ٨ بار بنجاح بحضور الاستشاري.
+                      {T("ld.24")}
                     </p>
                   </div>
 
@@ -335,10 +336,10 @@ export default function LandingAndLogin({ onLogin }) {
                     <div className="flex items-center justify-between font-bold text-[#1E2429] border-b border-[#ECEEF0] pb-1.5">
                       <span className="flex items-center gap-1.5">
                         <Coins className="w-3.5 h-3.5 text-[#1E2429]" />
-                        تسوية عهدة فورية
+                        {T("ld.25")}
                       </span>
                       <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
-                        تم الاعتماد
+                        {T("ld.26")}
                       </span>
                     </div>
                     <p className="text-[#5A646E] text-[11px] leading-relaxed">
@@ -358,13 +359,13 @@ export default function LandingAndLogin({ onLogin }) {
               </div>
               <div>
                 <p className="text-xs font-black text-[#1E2429] leading-snug">
-                  اعتماد عينة رخام الاستقبال
+                  {T("ld.28")}
                 </p>
                 <p className="text-[11px] text-[#5A646E] mt-0.5">
                   العميل أ. محمد عبد الرحمن اعتمد العينة بنقرة واحدة
                 </p>
                 <span className="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-extrabold">
-                  وفرت ٤ أيام عمل من الانتظار
+                  {T("ld.30")}
                 </span>
               </div>
             </div>
@@ -379,15 +380,15 @@ export default function LandingAndLogin({ onLogin }) {
               <div>
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-xs font-black text-[#1E2429]">
-                    طلب صرف دفعة عهدة
+                    {T("ld.31")}
                   </p>
                   <span className="text-xs font-black text-[#1E2429] font-mono">+٥٠,٠٠٠ ج.م</span>
                 </div>
                 <p className="text-[11px] text-[#5A646E] mt-0.5">
-                  انعكست في محفظة المهندس بالموقع فوراً
+                  {T("ld.33")}
                 </p>
                 <span className="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold">
-                  تحكم بنسبة ١٠٠٪ في السيولة
+                  {T("ld.34")}
                 </span>
               </div>
             </div>
@@ -399,13 +400,13 @@ export default function LandingAndLogin({ onLogin }) {
       <section id="features" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs font-extrabold text-[#D9480F] uppercase tracking-widest block mb-2">
-            منظومة متكاملة لبيئة العمل المعمارية
+            {T("ld.35")}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1E2429] tracking-tight leading-tight">
-            كل ما يحتاجه مكتبك المعماري في منصة واحدة
+            {T("ld.36")}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
-            صُممت كل أداة لتسد فجوة حقيقية تعاني منها شركات التشطيب والتصميم الداخلي، لتتحول من إدارة النزاعات اليومية إلى قيادة منظومة عمل احترافية ومربحة.
+            {T("ld.37")}
           </p>
         </div>
 
@@ -419,27 +420,27 @@ export default function LandingAndLogin({ onLogin }) {
                 <Calculator className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                الركن الأول • التسعير والهندسة
+                {T("ld.38")}
               </span>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
-                المقايسات الذكية (Smart BOQ): تسعير تلقائي وهوامش ربح مضمونة
+                {T("ld.39")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
-                توقف عن استخدام ملفات الإكسيل التي تحتوي على معادلات خاطئة تؤدي لتآكل أرباحك. تتيح لك المقايسات الذكية تسعير البنود المعمارية بدقة متناهية، وحساب نسب الهالك، وهوامش الربح الحقيقية، وتصدير عروض أسعار فاخرة للعميل في ثوانٍ معدودة.
+                {T("ld.40")}
               </p>
 
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-[#1E2429] font-bold">
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>احتساب فوري للتكلفة المباشرة (خامات، مصنعيات، ونولون) مع هامش ربح محدد.</span>
+                  <span>{T("ld.41")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>إصدار أوامر التغيير (Variation Orders) المعتمدة فورياً لحماية حقوق المكتب.</span>
+                  <span>{T("ld.42")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>تصدير عرض السعر للعميل بملف رسمي فاخر وبضغطة زر واحدة.</span>
+                  <span>{T("ld.43")}</span>
                 </li>
               </ul>
 
@@ -448,7 +449,7 @@ export default function LandingAndLogin({ onLogin }) {
                   onClick={() => openModal("Technical Office")}
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#1E2429] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
-                  <span>استكشف شاشة المقايسات الذكية كمهندس مكتب فني</span>
+                  <span>{T("ld.44")}</span>
                   <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
@@ -459,7 +460,7 @@ export default function LandingAndLogin({ onLogin }) {
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
-                  <span className="text-xs font-black text-[#1E2429]">عينة بند مقايسة: أرضيات ريسبشن</span>
+                  <span className="text-xs font-black text-[#1E2429]">{T("ld.45")}</span>
                 </div>
                 <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                   هامش الربح: +٣٠٪
@@ -468,29 +469,29 @@ export default function LandingAndLogin({ onLogin }) {
 
               <div className="space-y-2.5 text-xs">
                 <div className="flex justify-between text-[#5A646E]">
-                  <span>البند: توريد وتركيب رخام كلكتا إيطالي</span>
+                  <span>{T("ld.47")}</span>
                   <span className="font-bold text-[#1E2429]">١٢٠ م²</span>
                 </div>
                 <div className="flex justify-between text-[#5A646E]">
-                  <span>سعر التكلفة المباشرة للوحدة:</span>
+                  <span>{T("ld.49")}</span>
                   <span className="font-mono font-bold text-[#1E2429]">١,٤٠٠ ج.م/م²</span>
                 </div>
                 <div className="flex justify-between text-[#5A646E]">
-                  <span>سعر البيع المقترح للعميل:</span>
+                  <span>{T("ld.51")}</span>
                   <span className="font-mono font-bold text-[#1E2429]">١,٨٢٠ ج.م/م²</span>
                 </div>
                 <div className="p-3 bg-[#F3F4F6] rounded-xl border border-[#DDE1E5] flex items-center justify-between font-black text-[#1E2429]">
-                  <span>إجمالي قيمة البند للعميل:</span>
+                  <span>{T("ld.53")}</span>
                   <span className="text-sm font-black text-[#1E2429] font-mono">٢١٨,٤٠٠ ج.م</span>
                 </div>
               </div>
 
               <div className="pt-2 flex items-center gap-2">
                 <span className="flex-1 text-center py-2 rounded-xl bg-[#ECEEF0] text-[#5A646E] text-xs font-bold">
-                  تصدير PDF رسمي
+                  {T("ld.55")}
                 </span>
                 <span className="flex-1 text-center py-2 rounded-xl bg-[#2B3138] text-white text-xs font-medium rounded-lg shadow-xs hover:bg-[#1E2429]">
-                  إرسال للعميل للاعتماد
+                  {T("ld.56")}
                 </span>
               </div>
             </div>
@@ -511,27 +512,27 @@ export default function LandingAndLogin({ onLogin }) {
                   </div>
                 </div>
                 <span className="text-[11px] font-black text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                  عهدة نشطة
+                  {T("ld.60")}
                 </span>
               </div>
 
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-[#5A646E]">إجمالي العهدة المسلمة:</span>
+                  <span className="text-[#5A646E]">{T("ld.61")}</span>
                   <span className="font-bold text-[#1E2429] font-mono">٥٠,٠٠٠ ج.م</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#5A646E]">المنصرف بفواتير معتمدة:</span>
+                  <span className="text-[#5A646E]">{T("ld.63")}</span>
                   <span className="font-bold text-[#1E2429] font-mono">٣٥,٠٠٠ ج.م</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#5A646E]">الرصيد الحر المتبقي:</span>
+                  <span className="text-[#5A646E]">{T("ld.65")}</span>
                   <span className="font-bold text-emerald-700 font-mono">١٥,٠٠٠ ج.م</span>
                 </div>
 
                 <div className="pt-1">
                   <div className="flex justify-between text-[11px] mb-1 font-bold">
-                    <span className="text-[#5A646E]">نسبة الاستهلاك</span>
+                    <span className="text-[#5A646E]">{T("ld.67")}</span>
                     <span className="text-[#1E2429] font-mono">٧٠٪</span>
                   </div>
                   <div className="w-full h-2 bg-[#ECEEF0] rounded-full overflow-hidden">
@@ -552,27 +553,27 @@ export default function LandingAndLogin({ onLogin }) {
                 <Wallet className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                الركن الثاني • الإدارة المالية والسيولة
+                {T("ld.70")}
               </span>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
-                الرقابة المالية والعهد (Petty Cash): إيقاف النزيف المالي الميداني
+                {T("ld.71")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
-                النزيف المالي في مشاريع الديكور ينشأ عادة من المصروفات النثرية غير الموثقة في المواقع. يتيح نظام معيار للمهندس تسجيل المصروف ورفع الفاتورة فوراً من هاتفه، لتظهر في لوحة المدير للاعتماد بنقرة واحدة، مع تحديث فوري للأرصدة.
+                {T("ld.72")}
               </p>
 
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-[#1E2429] font-bold">
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>متابعة لحظية لسقف استهلاك عهدة كل مهندس موقع ومتبقي السيولة لديه.</span>
+                  <span>{T("ld.73")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>منع صرف أي مبالغ جديدة إلا بعد تصفية وإرفاق إيصالات الدفعات السابقة.</span>
+                  <span>{T("ld.74")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>تغذية فورية لرصيد العهدة (Top-Up) تنعكس في شاشة جوال المهندس فوراً.</span>
+                  <span>{T("ld.75")}</span>
                 </li>
               </ul>
 
@@ -581,7 +582,7 @@ export default function LandingAndLogin({ onLogin }) {
                   onClick={() => openModal("Admin")}
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#1E2429] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
-                  <span>جرب لوحة إدارة العهد النقدية كمدير تنفيذي</span>
+                  <span>{T("ld.76")}</span>
                   <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
@@ -596,27 +597,27 @@ export default function LandingAndLogin({ onLogin }) {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                الركن الثالث • تجربة العميل وبناء الثقة
+                {T("ld.77")}
               </span>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
-                بوابة العميل الفاخرة (Client Portal): شفافية تبهر عملاءك وتحميك
+                {T("ld.78")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
-                تخلص من مئات الاتصالات والرسائل الأسبوعية من العملاء القلقين. امنح عميلك رابطاً خاصاً به يحمل اسم مشروعك لمتابعة نسب الإنجاز بالصور الميدانية الحية، جدول الدفعات المالية المعتمدة، واعتماد العينات بضغطة زر موثقة.
+                {T("ld.79")}
               </p>
 
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-[#1E2429] font-bold">
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>اعتماد العينات الديكورية (رخام، دهانات، تجاليد) إلكترونياً وتوثيق التاريخ.</span>
+                  <span>{T("ld.80")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>جدول دفعات تعاقدية واضح يربط كل دفعة بمرحلة إنجاز ملموسة بالموقع.</span>
+                  <span>{T("ld.81")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>معرض صور وتوثيق عالي الجودة للأعمال المنفذة يخلق انطباعاً فائق الفخامة.</span>
+                  <span>{T("ld.82")}</span>
                 </li>
               </ul>
 
@@ -625,7 +626,7 @@ export default function LandingAndLogin({ onLogin }) {
                   onClick={() => openModal("Client")}
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#1E2429] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
-                  <span>شاهد ما يراه العميل في جناحه الخاص الآن</span>
+                  <span>{T("ld.83")}</span>
                   <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
@@ -635,7 +636,7 @@ export default function LandingAndLogin({ onLogin }) {
             <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#DDE1E5] shadow-md space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
                 <div>
-                  <span className="text-[10px] font-bold text-[#5A646E] block">جناح العميل الخاص</span>
+                  <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.84")}</span>
                   <h4 className="text-sm font-black text-[#1E2429]">مشروع فيلا الياسمين — أ. محمد عبد الرحمن</h4>
                 </div>
                 <span className="px-3 py-1 rounded-full text-xs font-black bg-[#2B3138] text-white">
@@ -645,27 +646,27 @@ export default function LandingAndLogin({ onLogin }) {
 
               <div className="p-4 rounded-2xl bg-[#F3F4F6] border border-[#DDE1E5] space-y-3">
                 <div className="flex items-center justify-between text-xs font-bold text-[#1E2429]">
-                  <span>طلب اعتماد عينة: رخام أرضيات صالون الاستقبال</span>
+                  <span>{T("ld.86")}</span>
                   <span className="text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-                    بانتظار القرار
+                    {T("ld.87")}
                   </span>
                 </div>
                 <p className="text-[11px] text-[#5A646E] leading-relaxed">
-                  عينة رخام كلكتا جولد سمك ٢٠ مم معالجة ضد التبقع — مطابقة للمخطط المعماري المعتمد.
+                  {T("ld.88")}
                 </p>
                 <div className="grid grid-cols-2 gap-2 pt-1">
                   <button className="py-2 rounded-xl bg-[#2B3138] text-white text-xs font-medium rounded-lg shadow-xs hover:bg-[#1E2429]">
-                    ✓ اعتماد العينة رسمياً
+                    {T("ld.89")}
                   </button>
                   <button className="py-2 rounded-xl bg-white border border-[#DDE1E5] text-[#1E2429] text-xs font-bold">
-                    طلب عينة بديلة
+                    {T("ld.90")}
                   </button>
                 </div>
               </div>
 
               <div className="flex items-center justify-between text-xs text-[#5A646E] pt-1">
                 <span>الدفعة القادمة: ٥٠٠,٠٠٠ ج.م</span>
-                <span className="font-bold text-[#1E2429]">تستحق بعد انتهاء أعمال الرخام</span>
+                <span className="font-bold text-[#1E2429]">{T("ld.92")}</span>
               </div>
             </div>
           </div>
@@ -675,7 +676,7 @@ export default function LandingAndLogin({ onLogin }) {
             {/* Visual Interactive Mockup Card */}
             <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#DDE1E5] shadow-md space-y-4 order-2 lg:order-1">
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
-                <span className="text-xs font-black text-[#1E2429]">سجل تدقيق الجودة والملاحظات (Snag List)</span>
+                <span className="text-xs font-black text-[#1E2429]">{T("ld.93")}</span>
                 <span className="text-[11px] font-bold text-[#5A646E] font-mono">٤ بنود تحت المتابعة</span>
               </div>
 
@@ -683,17 +684,17 @@ export default function LandingAndLogin({ onLogin }) {
                 <div className="p-3 rounded-xl bg-emerald-50/60 border border-emerald-200/80 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#D9480F]" />
-                    <span className="font-bold text-[#1E2429]">ضبط استواء زوايا محارة الصالون بشبك فايبر</span>
+                    <span className="font-bold text-[#1E2429]">{T("ld.95")}</span>
                   </div>
-                  <span className="text-[10px] font-extrabold text-emerald-700">تم المعالجة</span>
+                  <span className="text-[10px] font-extrabold text-emerald-700">{T("ld.96")}</span>
                 </div>
 
                 <div className="p-3 rounded-xl bg-amber-50/60 border border-amber-200/80 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 text-amber-600" />
-                    <span className="font-bold text-[#1E2429]">تعديل مسار مخرج تكييف الكونسيلد بالدور الأول</span>
+                    <span className="font-bold text-[#1E2429]">{T("ld.97")}</span>
                   </div>
-                  <span className="text-[10px] font-extrabold text-amber-700">قيد التنفيذ</span>
+                  <span className="text-[10px] font-extrabold text-amber-700">{T("ld.98")}</span>
                 </div>
 
                 <div className="p-3 rounded-xl bg-[#F3F4F6] border border-[#DDE1E5] flex items-center justify-between">
@@ -702,7 +703,7 @@ export default function LandingAndLogin({ onLogin }) {
                     <span className="font-bold text-[#1E2429]">لوحة شوب دروينج معتمدة: Rev 03 - MEP</span>
                   </div>
                   <span className="text-[10px] font-extrabold text-[#1E2429] bg-[#ECEEF0] px-2 py-0.5 rounded-full">
-                    AFC جاهز للتنفيذ
+                    {T("ld.100")}
                   </span>
                 </div>
               </div>
@@ -714,27 +715,27 @@ export default function LandingAndLogin({ onLogin }) {
                 <Layers className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                الركن الرابع • الموقع والمكتب الفني
+                {T("ld.101")}
               </span>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
-                إدارة المهام والمخططات: تنفيذ دقيق وملاحظات موثقة
+                {T("ld.102")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
-                اربط مهندسي الموقع بالمكتب الفني بدون تضارب في المخططات أو تأخير في الاستفسارات. يتيح النظام إدارة إصدارات اللوحات التنفيذية المعتمدة (Shop Drawings)، ورفع تقارير العمالة اليومية، وتوثيق معالجة ملاحظات الاستلام (Snags) قبل تسليم العميل.
+                {T("ld.103")}
               </p>
 
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-[#1E2429] font-bold">
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>نظام إدارة وثائق ومخططات هندسية معتمدة مع أرشفة تلقائية للنسخ السابقة.</span>
+                  <span>{T("ld.104")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>حل هندسي فوري لاستفسارات الموقع (RFI) يمنع تعطيل العمل الميداني.</span>
+                  <span>{T("ld.105")}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#D9480F] shrink-0" />
-                  <span>قوائم فحص الجودة وملاحظات الاستلام لضمان تشطيب معماري بدون أخطاء.</span>
+                  <span>{T("ld.106")}</span>
                 </li>
               </ul>
 
@@ -743,7 +744,7 @@ export default function LandingAndLogin({ onLogin }) {
                   onClick={() => openModal("Site Engineer")}
                   className="inline-flex items-center gap-2 text-xs sm:text-sm font-black text-[#1E2429] hover:text-emerald-700 transition-colors cursor-pointer"
                 >
-                  <span>جرب شاشة التقارير والملاحظات كمهندس موقع</span>
+                  <span>{T("ld.107")}</span>
                   <ArrowLeft className="ltr:-scale-x-100 w-4 h-4" />
                 </button>
               </div>
@@ -756,13 +757,13 @@ export default function LandingAndLogin({ onLogin }) {
       <section id="comparison" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-extrabold text-[#D9480F] uppercase tracking-widest block mb-2">
-            مقارنة مباشرة وحاسمة
+            {T("ld.108")}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1E2429] tracking-tight leading-tight">
-            لماذا معيار؟
+            {T("ld.109")}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
-            شاهد الفرق بين الاستمرار في فوضى الأدوات المجتزأة، أو استخدام أنظمة محاسبية قديمة غير مناسبة لطبيعة الديكور، وبين الترقية إلى منصتنا المتخصصة.
+            {T("ld.110")}
           </p>
         </div>
 
@@ -771,41 +772,41 @@ export default function LandingAndLogin({ onLogin }) {
           <table className="w-full text-start border-collapse min-w-[700px]">
             <thead>
               <tr className="border-b border-[#DDE1E5] text-sm">
-                <th className="p-5 sm:p-6 font-black text-[#1E2429] w-1/4">الميزة الهندسية والمالية</th>
+                <th className="p-5 sm:p-6 font-black text-[#1E2429] w-1/4">{T("ld.111")}</th>
                 <th className="p-5 sm:p-6 font-black text-[#1E2429] w-1/3 bg-[#F3F4F6] border-t-4 border-[#2B3138] relative">
                   <div className="flex items-center justify-between">
-                    <span className="text-[#1E2429] text-base sm:text-lg font-black">منصة معيار (Miyar)</span>
+                    <span className="text-[#1E2429] text-base sm:text-lg font-black">{T("ld.112")}</span>
                     <span className="px-2.5 py-0.5 rounded-full bg-[#2B3138] text-white text-[10px] font-black">
-                      الخيار الأذكى
+                      {T("ld.113")}
                     </span>
                   </div>
                 </th>
-                <th className="p-5 sm:p-6 font-bold text-[#5A646E] w-1/5">الإكسيل والواتساب (التقليدي)</th>
-                <th className="p-5 sm:p-6 font-bold text-[#5A646E] w-1/5">أنظمة ERP المعقدة والقديمة</th>
+                <th className="p-5 sm:p-6 font-bold text-[#5A646E] w-1/5">{T("ld.114")}</th>
+                <th className="p-5 sm:p-6 font-bold text-[#5A646E] w-1/5">{T("ld.115")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#ECEEF0] text-xs sm:text-sm">
               {/* Row 1 */}
               <tr className="hover:bg-[#F3F4F6]/50 transition-colors">
                 <td className="p-5 sm:p-6 font-extrabold text-[#1E2429]">
-                  بوابة رقمية مخصصة للعميل (Client Portal)
+                  {T("ld.116")}
                 </td>
                 <td className="p-5 sm:p-6 bg-[#F3F4F6]/70 font-bold text-[#1E2429]">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-[#D9480F] shrink-0 mt-0.5" />
-                    <span>رابط خاص للعميل لمتابعة نسب الإنجاز بالصور، الفواتير، واعتماد العينات بنقرة واحدة.</span>
+                    <span>{T("ld.117")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>رسائل ومحادثات واتساب مشتتة وفيديوهات تضيع في المحادثات.</span>
+                    <span>{T("ld.118")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>غير متاح نهائياً للعميل، أو يتطلب واجهة معقدة لا يفهمها.</span>
+                    <span>{T("ld.119")}</span>
                   </div>
                 </td>
               </tr>
@@ -813,24 +814,24 @@ export default function LandingAndLogin({ onLogin }) {
               {/* Row 2 */}
               <tr className="hover:bg-[#F3F4F6]/50 transition-colors">
                 <td className="p-5 sm:p-6 font-extrabold text-[#1E2429]">
-                  المقايسات الذكية وأوامر التغيير (Auto BOQ & VO)
+                  {T("ld.120")}
                 </td>
                 <td className="p-5 sm:p-6 bg-[#F3F4F6]/70 font-bold text-[#1E2429]">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-[#D9480F] shrink-0 mt-0.5" />
-                    <span>حساب تلقائي لتكلفة الخامات والعمالة والهالك وهوامش الربح مع تصدير فوري.</span>
+                    <span>{T("ld.121")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>معادلات إكسيل يدوية مليئة بأخطاء الحسابات وتآكل الأرباح الخفية.</span>
+                    <span>{T("ld.122")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-                    <span>معقدة للغاية، وتتطلب إدخال قيود محاسبية طويلة لكل بند.</span>
+                    <span>{T("ld.123")}</span>
                   </div>
                 </td>
               </tr>
@@ -838,24 +839,24 @@ export default function LandingAndLogin({ onLogin }) {
               {/* Row 3 */}
               <tr className="hover:bg-[#F3F4F6]/50 transition-colors">
                 <td className="p-5 sm:p-6 font-extrabold text-[#1E2429]">
-                  رقابة العهد النقدية للمهندسين (Petty Cash Control)
+                  {T("ld.124")}
                 </td>
                 <td className="p-5 sm:p-6 bg-[#F3F4F6]/70 font-bold text-[#1E2429]">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-[#D9480F] shrink-0 mt-0.5" />
-                    <span>تصفية لحظية بالصور من الجوال واعتماد بنقرة واحدة مع منع التجاوز المالي.</span>
+                    <span>{T("ld.125")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>فواتير ورقية تضيع بين جيوب المهندسين ونزيف مالي غير مكتشف.</span>
+                    <span>{T("ld.126")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>أنظمة مكتبية لا يملك مهندس الموقع تطبيقاً خفيفاً لاستخدامها في الموقع.</span>
+                    <span>{T("ld.127")}</span>
                   </div>
                 </td>
               </tr>
@@ -863,24 +864,24 @@ export default function LandingAndLogin({ onLogin }) {
               {/* Row 4 */}
               <tr className="hover:bg-[#F3F4F6]/50 transition-colors">
                 <td className="p-5 sm:p-6 font-extrabold text-[#1E2429]">
-                  سهولة الاستخدام وبدء العمل (Zero Training)
+                  {T("ld.128")}
                 </td>
                 <td className="p-5 sm:p-6 bg-[#F3F4F6]/70 font-bold text-[#1E2429]">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-[#D9480F] shrink-0 mt-0.5" />
-                    <span>تبدأ العمل في دقيقتين بواجهة عربية مصممة خصيصاً للمعماريين بدون تدريب.</span>
+                    <span>{T("ld.129")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <AlertCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-                    <span>سهل مبدئياً لكنه يتحول لكابوس تنظيمي وفوضى بمجرد إدارة أكثر من موقعين.</span>
+                    <span>{T("ld.130")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>يتطلب أسابيع من التدريب وشهوراً لإعداده ورسوم استشارات باهظة.</span>
+                    <span>{T("ld.131")}</span>
                   </div>
                 </td>
               </tr>
@@ -888,24 +889,24 @@ export default function LandingAndLogin({ onLogin }) {
               {/* Row 5 */}
               <tr className="hover:bg-[#F3F4F6]/50 transition-colors">
                 <td className="p-5 sm:p-6 font-extrabold text-[#1E2429]">
-                  تطبيق PWA والعمل بالموقع بلا إنترنت (Offline Ready)
+                  {T("ld.132")}
                 </td>
                 <td className="p-5 sm:p-6 bg-[#F3F4F6]/70 font-bold text-[#1E2429]">
                   <div className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-[#D9480F] shrink-0 mt-0.5" />
-                    <span>تطبيق تقدمي يثبت على الشاشة الرئيسية ويعمل في البدرومات ومواقع انقطاع الشبكة.</span>
+                    <span>{T("ld.133")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>الواتساب يتوقف تماماً بدون تغطية إنترنت بالموقع.</span>
+                    <span>{T("ld.134")}</span>
                   </div>
                 </td>
                 <td className="p-5 sm:p-6 text-[#5A646E]">
                   <div className="flex items-start gap-2">
                     <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
-                    <span>تتطلب اتصالاً دائماً وثابتاً بالسيرفر المركزي.</span>
+                    <span>{T("ld.135")}</span>
                   </div>
                 </td>
               </tr>
@@ -914,8 +915,8 @@ export default function LandingAndLogin({ onLogin }) {
         </div>
 
         <div className="mt-8 p-6 rounded-2xl bg-white border border-[#DDE1E5] text-center text-xs sm:text-sm font-bold text-[#1E2429]">
-          <span className="text-[#1E2429] font-black">النتيجة الواضحة: </span>
-          معيار يمنحك سرعة وبساطة التطبيقات اليومية، مع الدقة والانضباط المالي الذي تتطلبه مشاريع التشطيب الفاخرة.
+          <span className="text-[#1E2429] font-black">{T("ld.136")} </span>
+          {T("ld.137")}
         </div>
       </section>
 
@@ -933,21 +934,21 @@ export default function LandingAndLogin({ onLogin }) {
               style={{ color: '#FFFFFF' }}
               className="inline-block px-4 py-1.5 rounded-full bg-[#D9480F]/25 text-[#FFFFFF] text-xs font-bold border border-[#D9480F]/40 mb-4"
             >
-              جاهز لتجربة التحول في إدارة مكتبك؟
+              {T("ld.138")}
             </span>
 
             <h2
               style={{ color: '#FFFFFF' }}
               className="text-3xl md:text-5xl font-bold leading-tight mb-6"
             >
-              هل أنت مستعد لنقل مكتبك لمستوى آخر من الاحترافية والسيطرة؟
+              {T("ld.139")}
             </h2>
 
             <p
               style={{ color: '#ECEEF0' }}
               className="text-lg max-w-2xl mx-auto mb-10 opacity-90 leading-relaxed font-normal"
             >
-              انضم إلى مكاتب التصميم الداخلي والمقاولات التي حولت إدارتها إلى تجربة سلسة تزيد الأرباح وتبهر العملاء. يمكنك تجربة النظام بالكامل بجميع أدواره فوراً.
+              {T("ld.140")}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -955,7 +956,7 @@ export default function LandingAndLogin({ onLogin }) {
                 onClick={() => openModal("Admin")}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#7B848E] text-[#1E2429] hover:bg-[#9AA2AB] font-bold text-base sm:text-lg shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
-                دخول المنصة وتجربة النظام مجاناً
+                {T("ld.141")}
               </button>
             </div>
           </div>
@@ -970,8 +971,8 @@ export default function LandingAndLogin({ onLogin }) {
               <Building2 className="w-5 h-5 text-white" />
             </div>
             <div>
-              <p className="text-base font-black text-[#1E2429]">معيار</p>
-              <p className="text-[11px] text-[#5A646E]">نظام الإدارة المعماري والمالي المتكامل</p>
+              <p className="text-base font-black text-[#1E2429]">{T("ld.1")}</p>
+              <p className="text-[11px] text-[#5A646E]">{T("ld.142")}</p>
             </div>
           </div>
 
@@ -997,7 +998,7 @@ export default function LandingAndLogin({ onLogin }) {
           </div>
 
           <p className="text-xs text-[#5A646E] font-medium">
-            جميع الحقوق محفوظة لمنصة معيار © ٢٠٢٦ — صُمم خصيصاً للمكاتب الهندسية الفاخرة.
+            {T("ld.143")}
           </p>
         </div>
       </footer>
@@ -1020,15 +1021,15 @@ export default function LandingAndLogin({ onLogin }) {
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-black text-[#1E2429]">
-                    تسجيل الدخول للمنصة
+                    {T("ld.144")}
                   </h3>
-                  <p className="text-[11px] text-[#5A646E]">اختر دورك لتجربة استعراض النظام الفوري</p>
+                  <p className="text-[11px] text-[#5A646E]">{T("ld.145")}</p>
                 </div>
               </div>
               <button
                 onClick={closeModal}
                 className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
-                aria-label="إغلاق"
+                aria-label={T("ld.155")}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1039,7 +1040,7 @@ export default function LandingAndLogin({ onLogin }) {
               {/* Email */}
               <div>
                 <label className="block text-xs font-bold text-[#1E2429] mb-1.5">
-                  البريد الإلكتروني
+                  {T("ld.147")}
                 </label>
                 <div className="relative">
                   <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#5A646E]">
@@ -1059,7 +1060,7 @@ export default function LandingAndLogin({ onLogin }) {
               {/* Password */}
               <div>
                 <label className="block text-xs font-bold text-[#1E2429] mb-1.5">
-                  كلمة المرور
+                  {T("ld.148")}
                 </label>
                 <div className="relative">
                   <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#5A646E]">
@@ -1081,7 +1082,7 @@ export default function LandingAndLogin({ onLogin }) {
                 <label className="block text-xs font-black text-[#1E2429] mb-1.5 flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
                     <UserCheck className="w-4 h-4 text-[#1E2429]" />
-                    الدخول للتجربة كـ (Test Role):
+                    {T("ld.149")}
                   </span>
                   <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                     MVP Quick Switch
@@ -1093,17 +1094,17 @@ export default function LandingAndLogin({ onLogin }) {
                   onChange={(e) => setSelectedRole(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-[#DDE1E5] bg-[#F3F4F6] text-xs sm:text-sm font-bold text-[#1E2429] focus:outline-none focus:ring-2 border-[#CBD0D6] focus:border-[#2B3138] focus:ring-1 focus:ring-[#2B3138] cursor-pointer shadow-2xs"
                 >
-                  <option value="Admin">Manager (مدير تنفيذي - لوحة التحكم والمالية)</option>
-                  <option value="Site Engineer">Site Engineer (مهندس موقع - التقارير والعهد)</option>
-                  <option value="Technical Office">Tech Office (المكتب الفني - المقايسات والمخططات)</option>
-                  <option value="Client">Client (العميل - بوابة المتابعة والفواتير)</option>
+                  <option value="Admin">{T("ld.150")}</option>
+                  <option value="Site Engineer">{T("ld.151")}</option>
+                  <option value="Technical Office">{T("ld.152")}</option>
+                  <option value="Client">{T("ld.153")}</option>
                 </select>
               </div>
 
               {/* Quick 1-Click Role Access Buttons */}
               <div className="pt-1">
                 <span className="text-[11px] font-bold text-[#5A646E] block mb-2">
-                  أو اختر دورك للدخول الفوري بنقرة واحدة:
+                  {T("ld.154")}
                 </span>
                 <div className="grid grid-cols-2 gap-2">
                   {DEMO_ROLES.map((r) => {
