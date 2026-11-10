@@ -16,15 +16,30 @@ import FinancialsDashboard from "./FinancialsDashboard";
 import TeamManagement from "./TeamManagement";
 import ProjectsManagement from "./ProjectsManagement";
 import ModulePlaceholder from "./ModulePlaceholder";
+import { ROLE_CONFIG } from "../config/roles";
+
+const DASHBOARD_TAB = "لوحة التحكم";
+
+/** Tabs a role may open (matches id, name or label from ROLE_CONFIG). */
+function getAllowedTabs(role) {
+  return new Set(
+    (ROLE_CONFIG[role] || []).flatMap((item) => [item.id, item.name, item.label])
+  );
+}
 
 function MainContent({
   currentRole,
-  activeTab,
+  activeTab: requestedTab,
   setActiveTab,
   actionItems,
   setActionItems,
   setSelectedItem,
 }) {
+  // Role guard: a role can never render a screen that is not in its own menu.
+  const activeTab = getAllowedTabs(currentRole).has(requestedTab)
+    ? requestedTab
+    : DASHBOARD_TAB;
+
   const renderScreen = () => {
     // Logic Structure:
     // IF activeTab is "لوحة التحكم" (or "Dashboard"):
