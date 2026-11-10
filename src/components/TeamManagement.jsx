@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { tr_ as T } from "../i18n";
 import {
   Users,
   UserPlus,
@@ -295,14 +296,14 @@ function TeamManagement() {
               <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                 <Users className="w-5 h-5" />
               </div>
-              <span>إدارة فريق العمل والصلاحيات</span>
+              <span>{T("team.1")}</span>
             </h1>
             <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
-              {teamMembers.length} أعضاء مسجلين
+              {T("team.2", { v0: teamMembers.length })}
             </span>
           </div>
           <p className="text-xs md:text-sm text-[#5A646E]">
-            إدارة الكوادر الهندسية والإدارية، تعيين الصلاحيات التفصيلية، ومتابعة توزيع المهندسين على المشاريع.
+            {T("team.3")}
           </p>
         </div>
 
@@ -311,10 +312,10 @@ function TeamManagement() {
           <button
             onClick={handleResetTeam}
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs cursor-pointer"
-            title="استعادة البيانات الأصلية"
+            title={T("team.4")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>إعادة ضبط</span>
+            <span>{T("team.5")}</span>
           </button>
 
           {/* Primary Button "+ إضافة عضو جديد" */}
@@ -323,7 +324,7 @@ function TeamManagement() {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
-            <span>+ إضافة عضو جديد</span>
+            <span>{T("team.6")}</span>
           </button>
         </div>
       </div>
@@ -331,41 +332,41 @@ function TeamManagement() {
       {/* KPI Stats Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي أعضاء الفريق</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("team.7")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
             <span className="text-[11px] font-bold text-[#5A646E] bg-[#ECEEF0] border border-[#DDE1E5] px-2 py-0.5 rounded-md">
-              عضو فعال
+              {T("team.8")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">مهندسو المواقع (Site)</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("team.9")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-emerald-600">{stats.siteEng}</span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
-              ميداني
+              {T("team.10")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">المكتب الفني (Tech Office)</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("team.11")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-amber-800">{stats.techOffice}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
-              دراسات ومخططات
+              {T("team.12")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">الإدارة العامة (Admin)</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("team.13")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.managers}</span>
             <span className="text-[11px] font-bold text-[#1E2429] bg-[#ECEEF0] border border-[#DDE1E5] px-2 py-0.5 rounded-md">
-              إشراف واعتمادات
+              {T("team.14")}
             </span>
           </div>
         </div>
@@ -378,7 +379,7 @@ function TeamManagement() {
           <Search className="w-4 h-4 text-[#5A646E] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
-            placeholder="بحث بالاسم أو الصلاحية أو البريد الإلكتروني..."
+            placeholder={T("team.15")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#DDE1E5] bg-[#F3F4F6] text-xs md:text-sm font-semibold text-[#1E2429] placeholder-[#5A646E]/50 focus:outline-none focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -409,11 +410,11 @@ function TeamManagement() {
           <table className="w-full text-start border-collapse">
             <thead>
               <tr className="bg-[#F3F4F6] text-[#5A646E] text-xs font-bold border-b border-[#DDE1E5]">
-                <th className="py-4 px-5 min-w-[240px]">الاسم وبيانات الاتصال</th>
-                <th className="py-4 px-4 w-40 text-center">الصلاحية والنطاق</th>
-                <th className="py-4 px-4 w-36 text-center">المشاريع الحالية</th>
-                <th className="py-4 px-4 w-32 text-center">الحالة</th>
-                <th className="py-4 px-5 w-32 text-center">الإجراءات</th>
+                <th className="py-4 px-5 min-w-[240px]">{T("team.16")}</th>
+                <th className="py-4 px-4 w-40 text-center">{T("team.17")}</th>
+                <th className="py-4 px-4 w-36 text-center">{T("team.18")}</th>
+                <th className="py-4 px-4 w-32 text-center">{T("team.19")}</th>
+                <th className="py-4 px-5 w-32 text-center">{T("team.20")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#ECEEF0] text-xs md:text-sm">
@@ -438,7 +439,7 @@ function TeamManagement() {
                         <button
                           onClick={() => handleOpenEditModal(member)}
                           className={`w-10 h-10 rounded-2xl ${member.color} text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-xs hover:ring-2 hover:ring-[#2B3138]/30 transition-all cursor-pointer`}
-                          title="تعديل بيانات العضو"
+                          title={T("team.21")}
                         >
                           {member.avatar}
                         </button>
@@ -447,7 +448,7 @@ function TeamManagement() {
                           <button
                             onClick={() => handleOpenEditModal(member)}
                             className="text-start group-hover:text-amber-800 transition-colors cursor-pointer block"
-                            title="انقر لتعديل بيانات العضو والصلاحيات"
+                            title={T("team.22")}
                           >
                             <h4 className="font-extrabold text-[#1E2429] group-hover:text-amber-800 transition-colors leading-snug flex items-center gap-1.5">
                               <span>{member.name}</span>
@@ -487,7 +488,7 @@ function TeamManagement() {
                     <td className="py-4 px-4 text-center">
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#ECEEF0] text-[#1E2429] font-extrabold text-xs">
                         <Building2 className="w-3.5 h-3.5 text-[#5A646E]" />
-                        <span>{member.projectsCount} مشاريع</span>
+                        <span>{T("team.23", { v0: member.projectsCount })}</span>
                       </span>
                     </td>
 
@@ -495,7 +496,7 @@ function TeamManagement() {
                     <td className="py-4 px-4 text-center">
                       <button
                         onClick={() => handleToggleStatus(member.id)}
-                        title="انقر لتغيير الحالة"
+                        title={T("team.24")}
                         className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border transition-all cursor-pointer ${
                           isStatusActive
                             ? "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100"
@@ -524,7 +525,7 @@ function TeamManagement() {
                         <button
                           onClick={() => handleOpenEditModal(member)}
                           className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
-                          title="تعديل بيانات العضو"
+                          title={T("team.21")}
                         >
                           <Edit3 className="w-4 h-4" />
                         </button>
@@ -533,7 +534,7 @@ function TeamManagement() {
                         <button
                           onClick={() => handleToggleStatus(member.id)}
                           className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
-                          title="تبديل حالة النشاط"
+                          title={T("team.25")}
                         >
                           <Power className="w-4 h-4" />
                         </button>
@@ -542,7 +543,7 @@ function TeamManagement() {
                         <button
                           onClick={() => handleDeleteMember(member.id, member.name)}
                           className="p-1.5 rounded-lg text-[#5A646E] hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
-                          title="حذف العضو"
+                          title={T("team.26")}
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -556,7 +557,7 @@ function TeamManagement() {
                 <tr>
                   <td colSpan="5" className="py-12 text-center text-[#5A646E]">
                     <Users className="w-8 h-8 mx-auto mb-2 text-[#7B848E]" />
-                    <p className="font-bold text-[#5A646E]">لم يتم العثور على أي أعضاء مطابقة للبحث</p>
+                    <p className="font-bold text-[#5A646E]">{T("team.27")}</p>
                     <p className="text-xs text-[#5A646E] mt-1">
                       جرّب تعديل كلمة البحث أو الضغط على "+ إضافة عضو جديد"
                     </p>
@@ -589,12 +590,12 @@ function TeamManagement() {
                 {editingMember ? (
                   <>
                     <Edit3 className="w-5 h-5 text-[#1E2429]" />
-                    <span>تعديل بيانات {editingMember.name}</span>
+                    <span>{T("team.28", { v0: editingMember.name })}</span>
                   </>
                 ) : (
                   <>
                     <UserPlus className="w-5 h-5 text-[#1E2429]" />
-                    <span>إضافة عضو جديد لفريق العمل</span>
+                    <span>{T("team.29")}</span>
                   </>
                 )}
               </h3>
@@ -616,7 +617,7 @@ function TeamManagement() {
                 <input
                   type="text"
                   required
-                  placeholder="مثال: م. مصطفى إبراهيم"
+                  placeholder={T("team.30")}
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] placeholder-[#5A646E]/50 focus:outline-none focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -633,12 +634,12 @@ function TeamManagement() {
                   onChange={(e) => handleRoleChange(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-bold text-[#1E2429] bg-white focus:outline-none focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all cursor-pointer"
                 >
-                  <option value="مهندس موقع">مهندس موقع (Site Engineer)</option>
-                  <option value="مكتب فني">مكتب فني (Technical Office)</option>
-                  <option value="مدير">مدير تنفيذي (Admin)</option>
+                  <option value="مهندس موقع">{T("team.31")}</option>
+                  <option value="مكتب فني">{T("team.32")}</option>
+                  <option value="مدير">{T("team.33")}</option>
                 </select>
                 <p className="text-[11px] text-[#5A646E] mt-1">
-                  تغيير الدور يضبط الصلاحيات أدناه تلقائياً بناءً على إعدادات الأمان الافتراضية.
+                  {T("team.34")}
                 </p>
               </div>
 
@@ -648,11 +649,11 @@ function TeamManagement() {
                   <div className="flex items-center gap-1.5">
                     <Shield className="w-4 h-4 text-[#1E2429]" />
                     <span className="text-xs font-bold text-[#1E2429]">
-                      الصلاحيات التفصيلية (Detailed Permissions)
+                      {T("team.35")}
                     </span>
                   </div>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-                    مصفوفة الوصول
+                    {T("team.36")}
                   </span>
                 </div>
 
@@ -661,10 +662,10 @@ function TeamManagement() {
                   <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#DDE1E5] shadow-2xs">
                     <div>
                       <p className="text-xs font-bold text-[#1E2429]">
-                        الاطلاع على التكاليف والأرباح
+                        {T("team.37")}
                       </p>
                       <p className="text-[10px] text-[#5A646E]">
-                        رؤية هوامش الربح الإجمالية وأسعار التكلفة بالمقايسات
+                        {T("team.38")}
                       </p>
                     </div>
                     {/* iOS-Style Toggle Switch (Dir LTR ensures flawless switch sliding) */}
@@ -690,10 +691,10 @@ function TeamManagement() {
                   <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#DDE1E5] shadow-2xs">
                     <div>
                       <p className="text-xs font-bold text-[#1E2429]">
-                        تعديل وإضافة المقايسات
+                        {T("team.39")}
                       </p>
                       <p className="text-[10px] text-[#5A646E]">
-                        إنشاء بنود تسعير جديدة وتعديل بنود المقايسات التقديرية
+                        {T("team.40")}
                       </p>
                     </div>
                     <button
@@ -718,10 +719,10 @@ function TeamManagement() {
                   <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#DDE1E5] shadow-2xs">
                     <div>
                       <p className="text-xs font-bold text-[#1E2429]">
-                        اعتماد تقارير الموقع
+                        {T("team.41")}
                       </p>
                       <p className="text-[10px] text-[#5A646E]">
-                        الموافقة الرسمية على يوميات التنفيذ وتوثيق مراحل العمل
+                        {T("team.42")}
                       </p>
                     </div>
                     <button
@@ -746,10 +747,10 @@ function TeamManagement() {
                   <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#DDE1E5] shadow-2xs">
                     <div>
                       <p className="text-xs font-bold text-[#1E2429]">
-                        طلب وتسوية عهدة مالية
+                        {T("team.43")}
                       </p>
                       <p className="text-[10px] text-[#5A646E]">
-                        صرف النثريات الطارئة ورفع إيصالات المصروفات النقدية
+                        {T("team.44")}
                       </p>
                     </div>
                     <button
@@ -776,7 +777,7 @@ function TeamManagement() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                    البريد الإلكتروني
+                    {T("team.45")}
                   </label>
                   <input
                     type="email"
@@ -789,7 +790,7 @@ function TeamManagement() {
 
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                    رقم الجوال
+                    {T("team.46")}
                   </label>
                   <input
                     type="text"
@@ -804,7 +805,7 @@ function TeamManagement() {
               {/* Field 4: Projects Count */}
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  عدد المشاريع المسندة
+                  {T("team.47")}
                 </label>
                 <input
                   type="number"
@@ -826,7 +827,7 @@ function TeamManagement() {
                     className="text-xs font-bold text-rose-600 hover:text-rose-700 hover:bg-rose-50 px-3 py-2 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
-                    <span>حذف المستخدم</span>
+                    <span>{T("team.48")}</span>
                   </button>
                 ) : (
                   <div />
@@ -838,7 +839,7 @@ function TeamManagement() {
                     onClick={handleCloseModal}
                     className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
                   >
-                    إلغاء
+                    {T("team.49")}
                   </button>
                   <button
                     type="submit"
@@ -847,12 +848,12 @@ function TeamManagement() {
                     {editingMember ? (
                       <>
                         <Check className="w-4 h-4" />
-                        <span>حفظ التعديلات</span>
+                        <span>{T("team.50")}</span>
                       </>
                     ) : (
                       <>
                         <UserPlus className="w-4 h-4" />
-                        <span>حفظ وإضافة</span>
+                        <span>{T("team.51")}</span>
                       </>
                     )}
                   </button>

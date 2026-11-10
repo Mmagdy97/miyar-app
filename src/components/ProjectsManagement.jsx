@@ -1,4 +1,5 @@
 import { currencySymbol } from "../i18n";
+import { tr_ as T } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -202,14 +203,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                 <FolderKanban className="w-5 h-5" />
               </div>
-              <span>إدارة المشاريع والجدول الزمني</span>
+              <span>{T("proj.1")}</span>
             </h1>
             <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-              {projects.length} مشاريع نشطة
+              {T("proj.2", { v0: projects.length })}
             </span>
           </div>
           <p className="text-xs md:text-sm text-[#5A646E]">
-            متابعة المخططات الزمنية ونسب الإنجاز الميداني، ومراحل التصميم والتنفيذ والتسليم لحظياً.
+            {T("proj.3")}
           </p>
         </div>
 
@@ -218,10 +219,10 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           <button
             onClick={handleResetProjects}
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs cursor-pointer"
-            title="استعادة البيانات الأصلية"
+            title={T("proj.4")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>إعادة ضبط</span>
+            <span>{T("proj.5")}</span>
           </button>
 
           {/* Requirement 2: Primary Button "+ إضافة مشروع جديد" */}
@@ -230,7 +231,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>+ إضافة مشروع جديد</span>
+            <span>{T("proj.6")}</span>
           </button>
         </div>
       </div>
@@ -238,41 +239,41 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       {/* KPI Stats Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي المشاريع</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("proj.7")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
             <span className="text-[11px] font-bold text-[#5A646E] bg-[#ECEEF0] px-2 py-0.5 rounded-md border border-[#DDE1E5]">
-              مشروع
+              {T("proj.8")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">مشاريع وفق الجدول</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("proj.9")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-emerald-700">{stats.onTrack}</span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-              منتظم
+              {T("proj.10")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">مشاريع متأخرة</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("proj.11")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-rose-700">{stats.delayed}</span>
             <span className="text-[11px] font-bold text-rose-800 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
-              تتطلب تدخلاً
+              {T("proj.12")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">متوسط الإنجاز الكلي</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("proj.13")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">%{stats.avgProgress}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-              مكتمل
+              {T("proj.14")}
             </span>
           </div>
         </div>
@@ -285,7 +286,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           <Search className="w-4 h-4 text-[#5A646E] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
-            placeholder="بحث باسم المشروع أو العميل أو المهندس المشرف..."
+            placeholder={T("proj.15")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#DDE1E5] bg-[#F3F4F6] text-xs md:text-sm font-semibold text-[#1E2429] placeholder-[#5A646E]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -340,7 +341,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs font-bold text-[#5A646E] bg-[#ECEEF0] px-2 py-0.5 rounded-md border border-[#DDE1E5]">
-                      مشروع سكني / تجاري
+                      {T("proj.16")}
                     </span>
                   </div>
                   <h3 className="text-base md:text-lg font-black text-[#1E2429] truncate tracking-tight group-hover:text-amber-800 transition-colors">
@@ -348,7 +349,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   </h3>
                   <p className="text-xs text-[#5A646E] mt-0.5 flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-[#5A646E]" />
-                    <span>العميل: <strong className="text-[#5A646E] font-bold">{project.client}</strong></span>
+                    <span>{T("proj.17")} <strong className="text-[#5A646E] font-bold">{project.client}</strong></span>
                   </p>
                 </div>
 
@@ -368,7 +369,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-[#1E2429] flex items-center gap-1">
                       <TrendingUp className="w-3.5 h-3.5 text-[#1E2429]" />
-                      <span>نسبة الإنجاز الفعلي</span>
+                      <span>{T("proj.18")}</span>
                     </span>
                     <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
                       %{project.progress}
@@ -384,7 +385,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 {/* 2. Mini Timeline Tracker showing 4 phases: [تصميم -> تأسيس -> تشطيب -> تسليم] */}
                 <div className="bg-[#F3F4F6] rounded-xl p-3.5 border border-[#DDE1E5]">
                   <span className="text-[11px] font-bold text-[#5A646E] block mb-2.5">
-                    مسار المراحل الزمنية (Milestone Phases)
+                    {T("proj.19")}
                   </span>
 
                   <div className="flex items-center justify-between relative">
@@ -439,7 +440,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                       <User className="w-3.5 h-3.5" />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] text-[#5A646E] block leading-none">المهندس المشرف</span>
+                      <span className="text-[10px] text-[#5A646E] block leading-none">{T("proj.20")}</span>
                       <span className="font-bold text-[#1E2429] text-[11px] truncate block mt-0.5">
                         {project.engineer}
                       </span>
@@ -451,7 +452,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                       <Clock className="w-3.5 h-3.5" />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] text-[#5A646E] block leading-none">موعد التسليم</span>
+                      <span className="text-[10px] text-[#5A646E] block leading-none">{T("proj.21")}</span>
                       <span className="font-bold text-[#1E2429] text-[11px] truncate block mt-0.5 font-mono">
                         {project.deadline}
                       </span>
@@ -468,7 +469,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   className="flex-1 py-2 px-3 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6] text-[#5A646E] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Building2 className="w-3.5 h-3.5 text-[#5A646E]" />
-                  <span>تفاصيل المشروع</span>
+                  <span>{T("proj.22")}</span>
                 </button>
 
                 {/* Button 2: تعديل الجدول الزمني */}
@@ -477,7 +478,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   className="flex-1 py-2 px-3 rounded-lg border border-[#CBD0D6] bg-[#ECEEF0] hover:bg-[#DDE1E5] text-[#1E2429] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sliders className="w-3.5 h-3.5 text-[#1E2429]" />
-                  <span>تعديل الجدول الزمني</span>
+                  <span>{T("proj.23")}</span>
                 </button>
               </div>
             </div>
@@ -487,9 +488,9 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
         {filteredProjects.length === 0 && (
           <div className="col-span-full py-16 text-center bg-white rounded-lg border border-[#DDE1E5] p-8">
             <FolderKanban className="w-10 h-10 mx-auto mb-2 text-[#7B848E]" />
-            <h4 className="text-base font-bold text-[#5A646E]">لم يتم العثور على أي مشاريع مطابقة</h4>
+            <h4 className="text-base font-bold text-[#5A646E]">{T("proj.24")}</h4>
             <p className="text-xs text-[#5A646E] mt-1 max-w-sm mx-auto">
-              جرّب تغيير حالة التصفية أو اسم البحث أو قم بإضافة مشروع جديد للمنصة.
+              {T("proj.25")}
             </p>
           </div>
         )}
@@ -503,7 +504,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
               <h3 className="text-lg font-black text-[#1E2429] flex items-center gap-2">
                 <Plus className="w-5 h-5 text-[#1E2429]" />
-                <span>إضافة مشروع جديد وبدء المخطط</span>
+                <span>{T("proj.26")}</span>
               </h3>
               <button
                 onClick={() => setIsAddProjectOpen(false)}
@@ -523,7 +524,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 <input
                   type="text"
                   required
-                  placeholder="مثال: فيلا اللوتس - الشيخ زايد"
+                  placeholder={T("proj.27")}
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] placeholder-[#5A646E]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -538,7 +539,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 <input
                   type="text"
                   required
-                  placeholder="مثال: أ. محمود فاروق"
+                  placeholder={T("proj.28")}
                   value={newClientName}
                   onChange={(e) => setNewClientName(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] placeholder-[#5A646E]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -562,11 +563,11 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                    موقع المشروع
+                    {T("proj.29")}
                   </label>
                   <input
                     type="text"
-                    placeholder="مثال: زايد، التجمع، المعادي"
+                    placeholder={T("proj.30")}
                     value={newLocation}
                     onChange={(e) => setNewLocation(e.target.value)}
                     className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -595,11 +596,11 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
                 <div>
                   <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                    الميزانية التقديرية ({currencySymbol()})
+                    {T("proj.31", { v0: currencySymbol() })}
                   </label>
                   <input
                     type="text"
-                    placeholder="مثال: ٤,٥٠٠,٠٠٠"
+                    placeholder={T("proj.32")}
                     value={newBudget}
                     onChange={(e) => setNewBudget(e.target.value)}
                     className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138] transition-all"
@@ -620,14 +621,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   onClick={() => setIsAddProjectOpen(false)}
                   className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
                 >
-                  إلغاء
+                  {T("proj.34")}
                 </button>
                 <button
                   type="submit"
                   className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs md:text-sm transition-colors cursor-pointer shadow-sm"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>إنشاء المشروع وبدء العمل</span>
+                  <span>{T("proj.35")}</span>
                 </button>
               </div>
             </form>
@@ -642,7 +643,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
               <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
                 <Sliders className="w-5 h-5 text-[#1E2429]" />
-                <span>تعديل الجدول الزمني: {editingTimelineProject.name}</span>
+                <span>{T("proj.36", { v0: editingTimelineProject.name })}</span>
               </h3>
               <button
                 onClick={() => setEditingTimelineProject(null)}
@@ -655,7 +656,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             <form onSubmit={handleSaveTimeline} className="space-y-4 mt-4">
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  المرحلة التنفيذية الحالية
+                  {T("proj.37")}
                 </label>
                 <div className="grid grid-cols-4 gap-1.5">
                   {PHASES.map((p) => (
@@ -677,7 +678,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="text-xs font-bold text-[#5A646E]">نسبة الإنجاز الفعلي</label>
+                  <label className="text-xs font-bold text-[#5A646E]">{T("proj.18")}</label>
                   <span className="text-xs font-black text-[#1E2429]">%{timelineProgress}</span>
                 </div>
                 <input
@@ -691,15 +692,15 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">حالة المشروع</label>
+                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("proj.38")}</label>
                 <select
                   value={timelineStatus}
                   onChange={(e) => setTimelineStatus(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
                 >
-                  <option value="جاري العمل">جاري العمل (On Track)</option>
-                  <option value="متقدم عن الجدول">متقدم عن الجدول (Ahead)</option>
-                  <option value="متأخر">متأخر (Delayed)</option>
+                  <option value="جاري العمل">{T("proj.39")}</option>
+                  <option value="متقدم عن الجدول">{T("proj.40")}</option>
+                  <option value="متأخر">{T("proj.41")}</option>
                 </select>
               </div>
 
@@ -709,13 +710,13 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   onClick={() => setEditingTimelineProject(null)}
                   className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
                 >
-                  إلغاء
+                  {T("proj.34")}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs shadow-sm"
                 >
-                  حفظ التحديثات
+                  {T("proj.42")}
                 </button>
               </div>
             </form>
@@ -748,30 +749,30 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               />
               <div className="absolute top-3 start-3">
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#1E2429]/70 text-white backdrop-blur-xs">
-                  المرحلة: {selectedProject.phase}
+                  {T("proj.43", { v0: selectedProject.phase })}
                 </span>
               </div>
             </div>
 
             <div className="space-y-3 text-xs">
               <div className="flex justify-between py-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">العميل:</span>
+                <span className="text-[#5A646E]">{T("proj.17")}</span>
                 <span className="font-bold text-[#1E2429]">{selectedProject.client}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">المهندس المشرف:</span>
+                <span className="text-[#5A646E]">{T("proj.44")}</span>
                 <span className="font-bold text-[#1E2429]">{selectedProject.engineer}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">الميزانية التعاقدية:</span>
+                <span className="text-[#5A646E]">{T("proj.45")}</span>
                 <span className="font-black text-[#1E2429]">{selectedProject.budget}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">تاريخ البدء:</span>
+                <span className="text-[#5A646E]">{T("proj.46")}</span>
                 <span className="font-mono text-[#5A646E]">{selectedProject.startDate}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-[#ECEEF0]">
-                <span className="text-[#5A646E]">موعد التسليم النهائي:</span>
+                <span className="text-[#5A646E]">{T("proj.47")}</span>
                 <span className="font-mono text-rose-700 font-bold">{selectedProject.deadline}</span>
               </div>
             </div>
@@ -781,7 +782,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 onClick={() => setSelectedProject(null)}
                 className="w-full py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white text-xs font-bold hover:bg-[#1E2429] transition-colors shadow-sm"
               >
-                إغلاق النافذة
+                {T("proj.48")}
               </button>
             </div>
           </div>

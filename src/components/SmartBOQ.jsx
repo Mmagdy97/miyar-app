@@ -1,4 +1,5 @@
-import { currencySymbol, intlLocale } from "../i18n";
+import { currencySymbol, intlLocale, currencyName } from "../i18n";
+import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
 import {
@@ -164,8 +165,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div className="text-start">
-            <p className="text-xs font-bold">تم حفظ المسودة بنجاح</p>
-            <p className="text-[11px] text-[#ECEEF0]">تم تحديث بيانات المقايسة التقديرية محلياً</p>
+            <p className="text-xs font-bold">{T("sboq.1")}</p>
+            <p className="text-[11px] text-[#ECEEF0]">{T("sboq.2")}</p>
           </div>
         </div>
       )}
@@ -176,18 +177,18 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <div className="flex items-center gap-2.5 flex-wrap mb-1.5">
             <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2">
               <FileSpreadsheet className="w-7 h-7 text-[#1E2429]" />
-              <span>المقايسة التقديرية - فيلا الياسمين</span>
+              <span>{T("sboq.3")}</span>
             </h1>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
               <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
-              قيد التسعير
+              {T("sboq.4")}
             </span>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5]">
-              كود: BOQ-2026-YAS-03
+              {T("sboq.5")}
             </span>
           </div>
           <p className="text-xs md:text-sm text-[#5A646E]">
-            حساب تكاليف الخامات والعمالة وهوامش الربح وإعداد عرض السعر النهائي الموجه للعميل (أ. محمد).
+            {T("sboq.6")}
           </p>
         </div>
 
@@ -196,17 +197,17 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <button
             onClick={handleResetDefaults}
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs cursor-pointer"
-            title="استرجاع البنود الافتراضية"
+            title={T("sboq.7")}
           >
             <RefreshCw className="w-3.5 h-3.5" />
-            <span>إعادة ضبط</span>
+            <span>{T("sboq.8")}</span>
           </button>
           <button
             onClick={() => setShowAddItemModal(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>+ إضافة بند جديد</span>
+            <span>{T("sboq.9")}</span>
           </button>
         </div>
       </div>
@@ -214,17 +215,17 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       {/* Mini KPI Highlights */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">عدد البنود المدرجة</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("sboq.10")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">{boqItems.length}</span>
             <span className="text-[11px] font-bold text-[#5A646E] bg-[#ECEEF0] px-2 py-0.5 rounded-md border border-[#DDE1E5]">
-              بند تنفيذي
+              {T("sboq.11")}
             </span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي التكلفة المباشرة</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("sboq.12")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">
               {Math.round(totalCost).toLocaleString(intlLocale())}
@@ -234,7 +235,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
         </div>
 
         <div className="bg-white rounded-lg p-5 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">الربح الصافي المتوقع</span>
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("sboq.13")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-emerald-700">
               +{Math.round(totalProfit).toLocaleString(intlLocale())}
@@ -247,7 +248,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
         {/* 4. Client Quotation Card - Sage Green Hero Card */}
         <div className="bg-[#2B3138] rounded-xl p-5 border border-[#20262C] text-white shadow-sm">
-          <span className="text-[11px] font-bold text-[#ECEEF0] block mb-1">عرض السعر للعميل</span>
+          <span className="text-[11px] font-bold text-[#ECEEF0] block mb-1">{T("sboq.14")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-white">
               {Math.round(totalPrice).toLocaleString(intlLocale())}
@@ -280,15 +281,15 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <div>
             <h2 className="text-base font-extrabold text-[#1E2429] flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#1E2429]" />
-              <span>جدول حصر الكميات والتسعير التفاعلي (Interactive BOQ Table)</span>
+              <span>{T("sboq.15")}</span>
             </h2>
             <p className="text-xs text-[#5A646E] mt-0.5">
-              عدّل الكميات وأسعار التكلفة وهامش الربح في الحقول مباشرة؛ وسيتم حساب السعر الإجمالي تلقائياً.
+              {T("sboq.16")}
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-[#5A646E]">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-600"></span>
-            <span>تحديث حسابي فوري (Live Reactive)</span>
+            <span>{T("sboq.17")}</span>
           </div>
         </div>
 
@@ -298,13 +299,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <thead>
               <tr className="bg-[#F3F4F6] text-[#5A646E] text-xs font-bold border-b border-[#DDE1E5]">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
-                <th className="py-3.5 px-4 min-w-[240px]">البند والمواصفة الفنية</th>
-                <th className="py-3.5 px-3 w-28 text-center">الوحدة</th>
-                <th className="py-3.5 px-3 w-32 text-center">الكمية (Qty)</th>
-                <th className="py-3.5 px-3 w-40 text-center">سعر الوحدة - تكلفة ({currencySymbol()})</th>
-                <th className="py-3.5 px-3 w-32 text-center">هامش الربح %</th>
-                <th className="py-3.5 px-4 min-w-[150px] text-end">الإجمالي للعميل ({currencySymbol()})</th>
-                <th className="py-3.5 px-3 w-14 text-center">حذف</th>
+                <th className="py-3.5 px-4 min-w-[240px]">{T("sboq.18")}</th>
+                <th className="py-3.5 px-3 w-28 text-center">{T("sboq.19")}</th>
+                <th className="py-3.5 px-3 w-32 text-center">{T("sboq.20")}</th>
+                <th className="py-3.5 px-3 w-40 text-center">{T("sboq.21", { v0: currencySymbol() })}</th>
+                <th className="py-3.5 px-3 w-32 text-center">{T("sboq.22")}</th>
+                <th className="py-3.5 px-4 min-w-[150px] text-end">{T("sboq.23", { v0: currencySymbol() })}</th>
+                <th className="py-3.5 px-3 w-14 text-center">{T("sboq.24")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#ECEEF0] text-xs md:text-sm">
@@ -413,7 +414,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                           <span className="text-xs font-bold text-[#5A646E]">{currencySymbol()}</span>
                         </span>
                         <span className="text-[10px] font-semibold text-emerald-700">
-                          ربح: +{Math.round(rowProfit).toLocaleString(intlLocale())} {currencySymbol()}
+                          {T("sboq.25", { v0: Math.round(rowProfit).toLocaleString(intlLocale()), v1: currencySymbol() })}
                         </span>
                       </div>
                     </td>
@@ -423,7 +424,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                       <button
                         onClick={() => handleDeleteItem(item.id)}
                         className="p-1.5 rounded-lg text-[#5A646E] hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
-                        title="حذف هذا البند"
+                        title={T("sboq.26")}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -436,7 +437,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <tr>
                   <td colSpan="8" className="py-12 text-center text-[#5A646E]">
                     <AlertCircle className="w-8 h-8 mx-auto mb-2 text-[#7B848E]" />
-                    <p className="font-bold text-[#5A646E]">لا توجد بنود تطابق هذا التصنيف</p>
+                    <p className="font-bold text-[#5A646E]">{T("sboq.27")}</p>
                     <p className="text-xs text-[#5A646E] mt-1">
                       يمكنك اختيار تصنيف آخر أو الضغط على "+ إضافة بند جديد"
                     </p>
@@ -471,7 +472,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           <div className="flex items-center gap-5 sm:gap-8 flex-wrap">
             {/* Total Cost */}
             <div className="flex flex-col">
-              <span className="text-[11px] font-bold text-[#5A646E]">إجمالي التكلفة</span>
+              <span className="text-[11px] font-bold text-[#5A646E]">{T("sboq.28")}</span>
               <span className="text-sm md:text-base font-extrabold text-[#5A646E]">
                 {Math.round(totalCost).toLocaleString(intlLocale())}{" "}
                 <span className="text-xs font-normal text-[#5A646E]">{currencySymbol()}</span>
@@ -482,7 +483,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex flex-col">
               <span className="text-[11px] font-bold text-[#5A646E] flex items-center gap-1">
                 <TrendingUp className="w-3 h-3 text-emerald-600" />
-                <span>إجمالي الربح المتوقع</span>
+                <span>{T("sboq.29")}</span>
               </span>
               <span className="text-sm md:text-base font-extrabold text-emerald-700">
                 +{Math.round(totalProfit).toLocaleString(intlLocale())}{" "}
@@ -497,13 +498,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex flex-col">
               <span className="text-[11px] font-extrabold text-[#1E2429] uppercase tracking-wider flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-amber-700" />
-                <span>إجمالي عرض السعر (Final Quotation)</span>
+                <span>{T("sboq.30")}</span>
               </span>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight">
                   {Math.round(totalPrice).toLocaleString(intlLocale())}
                 </span>
-                <span className="text-xs font-bold text-amber-800">جنيه مصري</span>
+                <span className="text-xs font-bold text-amber-800">{currencyName()}</span>
               </div>
             </div>
           </div>
@@ -516,7 +517,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6] text-[#5A646E] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
             >
               <Save className="w-4 h-4 text-[#5A646E]" />
-              <span>حفظ كمسودة</span>
+              <span>{T("sboq.32")}</span>
             </button>
 
             {/* Send to Client for Approval */}
@@ -525,7 +526,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs md:text-sm font-black shadow-sm transition-all cursor-pointer"
             >
               <Send className="w-4 h-4" />
-              <span>إرسال للعميل للاعتماد</span>
+              <span>{T("sboq.33")}</span>
             </button>
           </div>
         </div>
@@ -538,7 +539,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
               <h3 className="text-lg font-black text-[#1E2429] flex items-center gap-2">
                 <Plus className="w-5 h-5 text-[#1E2429]" />
-                <span>إضافة بند جديد للمقايسة</span>
+                <span>{T("sboq.34")}</span>
               </h3>
               <button
                 onClick={() => setShowAddItemModal(false)}
@@ -551,32 +552,32 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <form onSubmit={handleAddItemSubmit} className="space-y-4 mt-4">
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  تصنيف البند
+                  {T("sboq.35")}
                 </label>
                 <select
                   value={newItemCategory}
                   onChange={(e) => setNewItemCategory(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138]"
                 >
-                  <option value="أعمال الكهرباء">أعمال الكهرباء</option>
-                  <option value="أعمال السباكة والصحي">أعمال السباكة والصحي</option>
-                  <option value="أعمال المحارة والتشطيبات">أعمال المحارة والتشطيبات</option>
-                  <option value="الأسقف المعلقة والجبسوم بورد">الأسقف المعلقة والجبسوم بورد</option>
-                  <option value="الأرضيات والرخام">الأرضيات والرخام</option>
-                  <option value="أعمال الدهانات الديكورية">أعمال الدهانات الديكورية</option>
-                  <option value="أعمال النجارة والأبواب">أعمال النجارة والأبواب</option>
-                  <option value="أخرى">أخرى</option>
+                  <option value="أعمال الكهرباء">{T("sboq.36")}</option>
+                  <option value="أعمال السباكة والصحي">{T("sboq.37")}</option>
+                  <option value="أعمال المحارة والتشطيبات">{T("sboq.38")}</option>
+                  <option value="الأسقف المعلقة والجبسوم بورد">{T("sboq.39")}</option>
+                  <option value="الأرضيات والرخام">{T("sboq.40")}</option>
+                  <option value="أعمال الدهانات الديكورية">{T("sboq.41")}</option>
+                  <option value="أعمال النجارة والأبواب">{T("sboq.42")}</option>
+                  <option value="أخرى">{T("sboq.43")}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  اسم البند وتفاصيل المواصفة
+                  {T("sboq.44")}
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="مثال: توريد وتركيب قواطع زجاجية سيكوريت ١٠ مم..."
+                  placeholder={T("sboq.45")}
                   value={newItemName}
                   onChange={(e) => setNewItemName(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138]"
@@ -585,22 +586,22 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">الوحدة</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("sboq.19")}</label>
                   <select
                     value={newItemUnit}
                     onChange={(e) => setNewItemUnit(e.target.value)}
                     className="w-full px-2.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138]"
                   >
-                    <option value="متر مربع">متر مربع (م²)</option>
-                    <option value="متر طولي">متر طولي (م.ط)</option>
-                    <option value="مقطوعية">مقطوعية (جملة)</option>
-                    <option value="عدد / قطعة">عدد / قطعة</option>
-                    <option value="نقطة">نقطة</option>
+                    <option value="متر مربع">{T("sboq.46")}</option>
+                    <option value="متر طولي">{T("sboq.47")}</option>
+                    <option value="مقطوعية">{T("sboq.48")}</option>
+                    <option value="عدد / قطعة">{T("sboq.49")}</option>
+                    <option value="نقطة">{T("sboq.50")}</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">الكمية</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("sboq.51")}</label>
                   <input
                     type="number"
                     min="1"
@@ -613,7 +614,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">سعر التكلفة</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("sboq.52")}</label>
                   <input
                     type="number"
                     min="0"
@@ -628,7 +629,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  هامش الربح المطلوب (%)
+                  {T("sboq.53")}
                 </label>
                 <div className="flex items-center gap-3">
                   <input
@@ -647,11 +648,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  ملاحظات أو اشتراطات فنية (اختياري)
+                  {T("sboq.54")}
                 </label>
                 <input
                   type="text"
-                  placeholder="مثال: الخامات مطابقة للاعتماد المعماري المرفق"
+                  placeholder={T("sboq.55")}
                   value={newItemNote}
                   onChange={(e) => setNewItemNote(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs text-[#5A646E] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138]"
@@ -660,7 +661,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
               {/* Preview calculation */}
               <div className="p-3 bg-[#F3F4F6] rounded-lg border border-[#DDE1E5] flex items-center justify-between text-xs">
-                <span className="text-[#5A646E]">سعر البند الإجمالي المقترح للعميل:</span>
+                <span className="text-[#5A646E]">{T("sboq.56")}</span>
                 <span className="font-bold text-[#1E2429] text-sm">
                   {Math.round(
                     (parseFloat(newItemQty) || 0) *
@@ -677,13 +678,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                   onClick={() => setShowAddItemModal(false)}
                   className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] cursor-pointer"
                 >
-                  إلغاء
+                  {T("sboq.57")}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm cursor-pointer"
                 >
-                  إدراج البند في المقايسة
+                  {T("sboq.58")}
                 </button>
               </div>
             </form>
@@ -700,11 +701,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             <h3 className="text-lg font-black text-[#1E2429] mb-2">
-              تم إرسال المقايسة التقديرية للعميل بنجاح!
+              {T("sboq.59")}
             </h3>
 
             <p className="text-xs text-[#5A646E] leading-relaxed mb-5">
-              تم إشعار العميل (أ. محمد) بمقايسة مشروع{" "}
+              تم إشعار العميل (أ. محمد) بمقايسة مشروع 
               <strong className="text-[#1E2429]">فيلا الياسمين</strong> بإجمالي{" "}
               <strong className="text-[#1E2429]">
                 {Math.round(totalPrice).toLocaleString(intlLocale())} {currencySymbol()}
@@ -714,15 +715,15 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
             <div className="bg-[#F3F4F6] rounded-lg p-3 border border-[#DDE1E5] text-xs text-[#5A646E] text-start space-y-1 mb-5">
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">عدد البنود:</span>
-                <span className="font-bold">{boqItems.length} بنود</span>
+                <span className="text-[#5A646E]">{T("sboq.63")}</span>
+                <span className="font-bold">{T("sboq.64", { v0: boqItems.length })}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">إجمالي التكلفة:</span>
+                <span className="text-[#5A646E]">{T("sboq.65")}</span>
                 <span className="font-bold">{Math.round(totalCost).toLocaleString(intlLocale())} {currencySymbol()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">متوسط هامش الربح:</span>
+                <span className="text-[#5A646E]">{T("sboq.66")}</span>
                 <span className="font-bold text-emerald-700">%{averageMargin}</span>
               </div>
             </div>
@@ -731,7 +732,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               onClick={() => setSendSuccessModal(false)}
               className="w-full py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors font-bold text-xs md:text-sm shadow-sm transition-colors cursor-pointer"
             >
-              تم، العودة إلى جدول المقايسة
+              {T("sboq.67")}
             </button>
           </div>
         </div>
