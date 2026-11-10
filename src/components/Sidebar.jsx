@@ -43,28 +43,28 @@ function Sidebar({
   return (
     <aside
       ref={sidebarRef}
-      className={`relative flex flex-col h-full bg-[#183C35] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
-        hideHeader ? "w-full border-none" : "border-s border-[#5D8C70]/20"
+      className={`relative flex flex-col h-full bg-[#2B3138] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
+        hideHeader ? "w-full border-none" : "border-s border-[#D9480F]/20"
       } ${!hideHeader && (collapsed ? "md:w-[72px]" : "w-full md:w-64")}`}
     >
       {/* Sidebar Header */}
       {!hideHeader && (
         <div
-          className={`flex items-center h-16 px-4 border-b border-[#5D8C70]/20 ${
+          className={`flex items-center h-16 px-4 border-b border-[#D9480F]/20 ${
             collapsed ? "justify-center" : "justify-between"
           }`}
         >
           {/* Mobile Header: Logo + Close Drawer Button */}
           <div className="flex md:hidden items-center justify-between w-full">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#5D8C70]/30 text-white shadow-2xs">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#D9480F]/30 text-white shadow-2xs">
                 <Building2 className="w-4 h-4 text-white" />
               </div>
               <span className="text-base font-black text-white tracking-tight">معيار</span>
             </div>
             <button
               onClick={onCloseMobile || onItemClick}
-              className="p-1.5 rounded-lg text-[#EFEEE8]/80 hover:text-white hover:bg-[#5D8C70]/20 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg text-[#ECEEF0]/80 hover:text-white hover:bg-[#D9480F]/20 transition-colors cursor-pointer"
               aria-label="إغلاق القائمة"
             >
               <X className="w-5 h-5" />
@@ -74,13 +74,13 @@ function Sidebar({
           {/* Desktop Header: Label + Collapse Toggle */}
           <div className="hidden md:flex items-center justify-between w-full">
             {!collapsed && (
-              <span className="text-[11px] font-bold text-[#EFEEE8]/80 uppercase tracking-widest font-ibm">
+              <span className="text-[11px] font-bold text-[#ECEEF0]/80 uppercase tracking-widest font-ibm">
                 القائمة الرئيسية
               </span>
             )}
             <button
               onClick={toggleSidebar}
-              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#EFEEE8]/70 hover:text-white hover:bg-[#5D8C70]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
+              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#ECEEF0]/70 hover:text-white hover:bg-[#D9480F]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
               aria-label={collapsed ? "توسيع القائمة الجانبية" : "تصغير القائمة الجانبية"}
               title={collapsed ? "توسيع القائمة" : "تصغير القائمة"}
             >
@@ -97,7 +97,7 @@ function Sidebar({
       {/* Role Badge inside Sidebar (Pure White & Light Cream on Dark) */}
       {!collapsed && (
         <div className="mx-3 mt-3 mb-2 p-3.5 rounded-xl bg-white/10 border border-white/15 shadow-2xs">
-          <p className="text-xs text-[#EFEEE8]/70 font-medium">
+          <p className="text-xs text-[#ECEEF0]/70 font-medium">
             الدور الحالي للنظام
           </p>
           <p className="text-sm font-bold text-white mt-0.5 truncate tracking-tight">
@@ -137,8 +137,8 @@ function Sidebar({
                 collapsed ? "justify-center px-2 py-3" : "px-3.5 py-2.5 gap-3"
               } ${
                 isActive
-                  ? "bg-[#5D8C70] text-white font-bold shadow-sm"
-                  : "text-[#EFEEE8]/80 hover:bg-white/5 hover:text-white"
+                  ? "bg-[#D9480F] text-white font-bold shadow-sm"
+                  : "text-[#ECEEF0]/80 hover:bg-white/5 hover:text-white"
               }`}
             >
               <Icon
@@ -147,7 +147,7 @@ function Sidebar({
                 } ${
                   isActive
                     ? "text-white"
-                    : "text-[#EFEEE8]/80 group-hover:text-white"
+                    : "text-[#ECEEF0]/80 group-hover:text-white"
                 }`}
               />
               {!collapsed && (
@@ -161,22 +161,22 @@ function Sidebar({
       {/* Tooltip for collapsed state (popping to the LEFT in RTL) */}
       {collapsed && tooltip.visible && (
         <div
-          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#202923] border border-[#5D8C70]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
+          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#1E2429] border border-[#D9480F]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
           style={{ top: tooltip.top, transform: "translateY(-50%)" }}
         >
           {tooltip.text}
-          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#202923] border-t border-e border-[#5D8C70]/30 rotate-45" />
+          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#1E2429] border-t border-e border-[#D9480F]/30 rotate-45" />
         </div>
       )}
 
       {/* PWA Install Button (Visible in desktop sidebar and mobile drawer) */}
       {isInstallable && (
-        <div className={`px-3 py-2 border-t border-[#5D8C70]/20 ${collapsed ? "flex justify-center" : ""}`}>
+        <div className={`px-3 py-2 border-t border-[#D9480F]/20 ${collapsed ? "flex justify-center" : ""}`}>
           <button
             onClick={onInstallClick}
             onMouseEnter={(e) => handleMouseEnter(e, "تثبيت التطبيق على جهازك")}
             onMouseLeave={handleMouseLeave}
-            className={`flex items-center justify-center gap-2 rounded-lg bg-[#5D8C70]/20 text-white border border-[#5D8C70]/30 font-medium text-xs hover:bg-[#5D8C70]/35 transition-all cursor-pointer shadow-2xs active:scale-95 group ${
+            className={`flex items-center justify-center gap-2 rounded-lg bg-[#D9480F]/20 text-white border border-[#D9480F]/30 font-medium text-xs hover:bg-[#D9480F]/35 transition-all cursor-pointer shadow-2xs active:scale-95 group ${
               collapsed ? "w-10 h-10 p-0" : "w-full px-3.5 py-2.5"
             }`}
             title="تثبيت التطبيق على جهازك (PWA)"
@@ -189,18 +189,18 @@ function Sidebar({
 
       {/* Bottom section */}
       {!hideHeader && (
-        <div className={`p-4 border-t border-[#5D8C70]/20 ${collapsed ? "text-center" : ""}`}>
+        <div className={`p-4 border-t border-[#D9480F]/20 ${collapsed ? "text-center" : ""}`}>
           {!collapsed ? (
             <div className="text-center">
               <p className="text-[11px] font-bold text-white">
                 معيار — استوديو التصميم والمقاولات
               </p>
-              <p className="text-[10px] text-[#EFEEE8]/60 mt-0.5 font-medium">
+              <p className="text-[10px] text-[#ECEEF0]/60 mt-0.5 font-medium">
                 حلول المقاولات والعمارة الداخلية
               </p>
             </div>
           ) : (
-            <p className="text-[10px] font-bold text-[#EFEEE8]/60">v1.0</p>
+            <p className="text-[10px] font-bold text-[#ECEEF0]/60">v1.0</p>
           )}
         </div>
       )}

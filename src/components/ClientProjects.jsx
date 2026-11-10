@@ -47,7 +47,7 @@ const CLIENT_UNITS = [
     engineer: "م. ليلى رياض (مصممة الديكور)",
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
-    badgeColor: "bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]",
+    badgeColor: "bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]",
   },
   {
     id: 3,
@@ -80,7 +80,7 @@ function ClientProjects() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -93,24 +93,24 @@ function ClientProjects() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#202923] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#EFEEE8] border border-[#E5E6DF] flex items-center justify-center text-[#202923]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <Briefcase className="w-5 h-5" />
                 </div>
                 <span>مشاريعي الحالية</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]/80">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
                 {CLIENT_UNITS.length} وحدات استثمارية وسكنية
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#526257]">
+            <p className="text-xs md:text-sm text-[#5A646E]">
               متابعة شاملة لوحداتك العقارية ومشاريع التصميم الداخلي الموكلة لشركة معيار.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[#526257] bg-white px-3.5 py-2 rounded-lg border border-[#E5E6DF] shadow-2xs">
-              العميل: <strong className="text-[#202923]">أ. محمد عبد الرحمن</strong>
+            <span className="text-xs font-bold text-[#5A646E] bg-white px-3.5 py-2 rounded-lg border border-[#DDE1E5] shadow-2xs">
+              العميل: <strong className="text-[#1E2429]">أ. محمد عبد الرحمن</strong>
             </span>
           </div>
         </div>
@@ -120,16 +120,16 @@ function ClientProjects() {
           {CLIENT_UNITS.map((unit) => (
             <div
               key={unit.id}
-              className="bg-white rounded-lg border border-[#E5E6DF] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+              className="bg-white rounded-lg border border-[#DDE1E5] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
             >
               {/* Cover Image with Gradient Overlay */}
-              <div className="relative h-48 overflow-hidden bg-[#183C35]">
+              <div className="relative h-48 overflow-hidden bg-[#2B3138]">
                 <img
                   src={unit.image}
                   alt={unit.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#202923]/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1E2429]/80 via-transparent to-transparent" />
 
                 {/* Status Badge in Photo */}
                 <div className="absolute top-3.5 start-3.5">
@@ -154,18 +154,18 @@ function ClientProjects() {
               <div className="p-5 space-y-4 flex-1">
                 {/* Location & Type */}
                 <div className="space-y-1">
-                  <div className="flex items-center gap-1.5 text-xs text-[#526257]">
-                    <MapPin className="w-3.5 h-3.5 text-[#526257] shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs text-[#5A646E]">
+                    <MapPin className="w-3.5 h-3.5 text-[#5A646E] shrink-0" />
                     <span className="truncate">{unit.location}</span>
                   </div>
-                  <p className="text-xs font-bold text-[#526257]">{unit.type}</p>
+                  <p className="text-xs font-bold text-[#5A646E]">{unit.type}</p>
                 </div>
 
                 {/* Progress Track */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-[#526257] font-medium">نسبة تقدم الأعمال:</span>
-                    <span className="text-xs font-bold text-[#202923] tracking-wide font-mono">
+                    <span className="text-[#5A646E] font-medium">نسبة تقدم الأعمال:</span>
+                    <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
                       %{unit.progress}
                     </span>
                   </div>
@@ -173,35 +173,35 @@ function ClientProjects() {
                 </div>
 
                 {/* Specs List */}
-                <div className="p-3 bg-[#F5F3ED] rounded-lg border border-[#EFEEE8] space-y-2 text-xs">
+                <div className="p-3 bg-[#F3F4F6] rounded-lg border border-[#ECEEF0] space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#526257]">المساحة:</span>
-                    <span className="font-bold text-[#202923]">{unit.area}</span>
+                    <span className="text-[#5A646E]">المساحة:</span>
+                    <span className="font-bold text-[#1E2429]">{unit.area}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#526257]">الموعد النهائي:</span>
-                    <span className="font-bold text-[#202923] font-mono">{unit.expectedHandover}</span>
+                    <span className="text-[#5A646E]">الموعد النهائي:</span>
+                    <span className="font-bold text-[#1E2429] font-mono">{unit.expectedHandover}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#526257]">فريق الإشراف:</span>
-                    <span className="font-bold text-[#202923] truncate max-w-[160px]">{unit.engineer}</span>
+                    <span className="text-[#5A646E]">فريق الإشراف:</span>
+                    <span className="font-bold text-[#1E2429] truncate max-w-[160px]">{unit.engineer}</span>
                   </div>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="p-4 bg-[#F5F3ED]/60 border-t border-[#EFEEE8] flex items-center gap-2">
+              <div className="p-4 bg-[#F3F4F6]/60 border-t border-[#ECEEF0] flex items-center gap-2">
                 <button
                   onClick={() => handleAction(unit.name, "تقرير الإنجاز وصور الموقع")}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#E5E6DF] bg-white hover:bg-[#F5F3ED] text-[#202923] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6] text-[#1E2429] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Eye className="w-3.5 h-3.5 text-[#526257]" />
+                  <Eye className="w-3.5 h-3.5 text-[#5A646E]" />
                   <span>صور الموقع</span>
                 </button>
 
                 <button
                   onClick={() => handleAction(unit.name, "المخططات الهندسية 3D")}
-                  className="flex-1 py-2 px-3 rounded-lg bg-[#183C35] hover:bg-[#202923] text-white hover:bg-[#202923] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>معاينة 3D</span>

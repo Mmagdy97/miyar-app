@@ -8,8 +8,8 @@
   "orientation": "portrait",
   "dir": "rtl",
   "lang": "ar",
-  "theme_color": "#183C35",
-  "background_color": "#F5F3ED",
+  "theme_color": "#2B3138",
+  "background_color": "#F3F4F6",
   "categories": ["business", "productivity"],
   "icons": [
     {

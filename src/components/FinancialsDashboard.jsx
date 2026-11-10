@@ -188,7 +188,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-20 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -200,17 +200,17 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-black text-[#202923] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#EFEEE8] border border-[#E5E6DF] flex items-center justify-center text-[#202923]">
+            <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                 <Banknote className="w-5 h-5" />
               </div>
               <span>إدارة العهد النقدية والمصروفات</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]/80">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
               نظام الصرف المالي اللحظي
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#526257]">
+          <p className="text-xs md:text-sm text-[#5A646E]">
             متابعة أرصدة العهد الميدانية المفتوحة، وتدقيق فواتير المصروفات النثرية للمواقع واعتمادها فوراً.
           </p>
         </div>
@@ -219,7 +219,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleResetData}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#202923] bg-white border border-[#E5E6DF] hover:bg-[#F5F3ED] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#1E2429] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs cursor-pointer"
             title="استعادة البيانات الأصلية"
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -227,7 +227,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
           </button>
           <button
             onClick={() => setTopUpModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-white bg-[#183C35] hover:bg-[#202923] hover:bg-[#202923] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>+ صرف دفعة عهدة جديدة</span>
@@ -238,21 +238,21 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       {/* Requirement 2: 3 Glassmorphic KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Card 1: Total Given (إجمالي العهد المفتوحة) */}
-        <div className="relative bg-white rounded-lg p-6 border border-[#E5E6DF] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-white rounded-lg p-6 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#526257]">إجمالي العهد المفتوحة</span>
-            <div className="w-10 h-10 rounded-lg bg-[#EFEEE8] text-[#202923] flex items-center justify-center border border-[#E5E6DF]">
+            <span className="text-xs font-bold text-[#5A646E]">إجمالي العهد المفتوحة</span>
+            <div className="w-10 h-10 rounded-lg bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center border border-[#DDE1E5]">
               <Wallet className="w-5 h-5" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl md:text-3xl font-black text-[#202923] tracking-tight transition-all duration-300">
+            <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight transition-all duration-300">
               {totalGiven.toLocaleString("ar-EG")}
             </span>
-            <span className="text-xs font-bold text-[#526257]">جنيه مصري</span>
+            <span className="text-xs font-bold text-[#5A646E]">جنيه مصري</span>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#526257]">
-            <span className="font-bold text-[#202923] bg-[#EFEEE8] px-2 py-0.5 rounded-md border border-[#E5E6DF]">
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#5A646E]">
+            <span className="font-bold text-[#1E2429] bg-[#ECEEF0] px-2 py-0.5 rounded-md border border-[#DDE1E5]">
               {engineersCash.length} مهندسين
             </span>
             <span>بمواقع العمل المختلفة</span>
@@ -260,20 +260,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         </div>
 
         {/* Card 2: Total Spent (إجمالي المنصرف المعتمد) */}
-        <div className="relative bg-white rounded-lg p-6 border border-[#E5E6DF] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-white rounded-lg p-6 border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#526257]">إجمالي المنصرف المعتمد</span>
-            <div className="w-10 h-10 rounded-lg bg-[#EFEEE8] text-[#202923] flex items-center justify-center border border-[#E5E6DF]">
+            <span className="text-xs font-bold text-[#5A646E]">إجمالي المنصرف المعتمد</span>
+            <div className="w-10 h-10 rounded-lg bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center border border-[#DDE1E5]">
               <CheckCircle2 className="w-5 h-5" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl md:text-3xl font-black text-[#202923] tracking-tight transition-all duration-300">
+            <span className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight transition-all duration-300">
               {totalSpent.toLocaleString("ar-EG")}
             </span>
-            <span className="text-xs font-bold text-[#526257]">جنيه مصري</span>
+            <span className="text-xs font-bold text-[#5A646E]">جنيه مصري</span>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#526257]">
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#5A646E]">
             <span className="font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
               %{overallSpentRatio} نسبة الصرف
             </span>
@@ -282,9 +282,9 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         </div>
 
         {/* Card 3: Remaining in Field (الرصيد المتبقي بالمواقع) */}
-        <div className="relative bg-[#183C35] text-white rounded-xl p-6 border border-[#14322c] shadow-sm overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-[#2B3138] text-white rounded-xl p-6 border border-[#20262C] shadow-sm overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#EFEEE8]">الرصيد المتبقي بالمواقع</span>
+            <span className="text-xs font-bold text-[#ECEEF0]">الرصيد المتبقي بالمواقع</span>
             <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center border border-white/20">
               <Coins className="w-5 h-5" />
             </div>
@@ -293,9 +293,9 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-black text-white tracking-tight transition-all duration-300">
               {remainingInField.toLocaleString("ar-EG")}
             </span>
-            <span className="text-xs font-bold text-[#EFEEE8]/80">جنيه مصري</span>
+            <span className="text-xs font-bold text-[#ECEEF0]/80">جنيه مصري</span>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#EFEEE8]">
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#ECEEF0]">
             <span className="font-bold text-white bg-white/15 px-2 py-0.5 rounded-md border border-white/20 text-white">
               سيولة متاحة
             </span>
@@ -308,18 +308,18 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Right Column in RTL (7 cols): أرصدة المهندسين (Engineers Balances) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-white rounded-lg border border-[#E5E6DF] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
-            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#EFEEE8]">
+          <div className="bg-white rounded-lg border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#ECEEF0]">
               <div>
-                <h2 className="text-base md:text-lg font-black text-[#202923] flex items-center gap-2">
-                  <Wallet className="w-5 h-5 text-[#202923]" />
+                <h2 className="text-base md:text-lg font-black text-[#1E2429] flex items-center gap-2">
+                  <Wallet className="w-5 h-5 text-[#1E2429]" />
                   <span>أرصدة المهندسين ومتابعة العهد (Engineers Balances)</span>
                 </h2>
-                <p className="text-xs text-[#526257] mt-0.5">
+                <p className="text-xs text-[#5A646E] mt-0.5">
                   نسبة استهلاك كل مهندس للعهدة المالية المسلمة له ورصيده النقدي المتبقي
                 </p>
               </div>
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#EFEEE8] text-[#526257] border border-[#E5E6DF]">
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5]">
                 {engineersCash.length} مهندسين
               </span>
             </div>
@@ -332,8 +332,8 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                   eng.totalGiven > 0 ? Math.min(100, Math.round((eng.spent / eng.totalGiven) * 100)) : 0;
 
                 // Color code progress bar
-                let progressColor = "bg-[#183C35]";
-                let badgeColor = "bg-[#EFEEE8] text-[#202923] border-[#E5E6DF]";
+                let progressColor = "bg-[#2B3138]";
+                let badgeColor = "bg-[#ECEEF0] text-[#1E2429] border-[#DDE1E5]";
                 if (ratio >= 85) {
                   progressColor = "bg-rose-600";
                   badgeColor = "bg-rose-50 text-rose-800 border-rose-200";
@@ -345,7 +345,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 return (
                   <div
                     key={eng.id}
-                    className="p-4 rounded-lg border border-[#E5E6DF] bg-white hover:bg-[#F5F3ED]/50 transition-all shadow-2xs"
+                    className="p-4 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6]/50 transition-all shadow-2xs"
                   >
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div className="flex items-center gap-3">
@@ -355,11 +355,11 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                           {eng.avatar}
                         </div>
                         <div>
-                          <h3 className="text-sm font-extrabold text-[#202923] leading-tight">
+                          <h3 className="text-sm font-extrabold text-[#1E2429] leading-tight">
                             {eng.name}
                           </h3>
-                          <p className="text-xs text-[#526257] mt-0.5 flex items-center gap-1">
-                            <Building2 className="w-3 h-3 text-[#526257]" />
+                          <p className="text-xs text-[#5A646E] mt-0.5 flex items-center gap-1">
+                            <Building2 className="w-3 h-3 text-[#5A646E]" />
                             <span>{eng.site}</span>
                           </p>
                         </div>
@@ -367,12 +367,12 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
                       {/* Available Balance Tag */}
                       <div className="text-end">
-                        <span className="text-[10px] font-bold text-[#526257] block">
+                        <span className="text-[10px] font-bold text-[#5A646E] block">
                           الرصيد المتاح
                         </span>
-                        <span className="text-sm md:text-base font-black text-[#202923] tracking-tight">
+                        <span className="text-sm md:text-base font-black text-[#1E2429] tracking-tight">
                           {available.toLocaleString("ar-EG")}{" "}
-                          <span className="text-[11px] font-normal text-[#526257]">ج.م</span>
+                          <span className="text-[11px] font-normal text-[#5A646E]">ج.م</span>
                         </span>
                       </div>
                     </div>
@@ -380,14 +380,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     {/* Progress Bar Container */}
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[11px] text-[#526257]">
+                        <span className="text-[11px] text-[#5A646E]">
                           المنصرف:{" "}
-                          <strong className="text-[#202923] font-bold">
+                          <strong className="text-[#1E2429] font-bold">
                             {eng.spent.toLocaleString("ar-EG")} ج.م
                           </strong>{" "}
                           من أصل {eng.totalGiven.toLocaleString("ar-EG")} ج.م
                         </span>
-                        <span className="text-xs font-bold text-[#202923] tracking-wide">
+                        <span className="text-xs font-bold text-[#1E2429] tracking-wide">
                           %{ratio} مستهلك
                         </span>
                       </div>
@@ -410,7 +410,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             {/* Note */}
-            <div className="mt-5 p-3 rounded-lg bg-[#F5F3ED] border border-[#E5E6DF] flex items-center gap-2.5 text-xs text-[#526257]">
+            <div className="mt-5 p-3 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center gap-2.5 text-xs text-[#5A646E]">
               <Sparkles className="w-4 h-4 text-amber-700 shrink-0" />
               <span>
                 يتم تحديث نسب الاستهلاك والأرصدة الحرة في ثوانٍ بمجرد قيامك باعتماد أي فاتورة جديدة.
@@ -421,14 +421,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
         {/* Left Column in RTL (5 cols): فواتير بانتظار الاعتماد (Pending Expenses) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white rounded-lg border border-[#E5E6DF] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
-            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#EFEEE8]">
+          <div className="bg-white rounded-lg border border-[#DDE1E5] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#ECEEF0]">
               <div>
-                <h2 className="text-base md:text-lg font-black text-[#202923] flex items-center gap-2">
+                <h2 className="text-base md:text-lg font-black text-[#1E2429] flex items-center gap-2">
                   <Receipt className="w-5 h-5 text-amber-700" />
                   <span>فواتير بانتظار الاعتماد</span>
                 </h2>
-                <p className="text-xs text-[#526257] mt-0.5">
+                <p className="text-xs text-[#5A646E] mt-0.5">
                   فواتير نقدية وإيصالات تم رفعها من المواقع وتنتظر الموافقة المالية
                 </p>
               </div>
@@ -442,20 +442,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               {pendingExpenses.map((expense) => (
                 <div
                   key={expense.id}
-                  className="p-4 rounded-lg border border-[#E5E6DF] hover:border-[#5D8C70] bg-white shadow-2xs transition-all duration-200"
+                  className="p-4 rounded-lg border border-[#DDE1E5] hover:border-[#D9480F] bg-white shadow-2xs transition-all duration-200"
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
-                      <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#EFEEE8] text-[#526257] border border-[#E5E6DF] mb-1.5">
+                      <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5] mb-1.5">
                         {expense.category}
                       </span>
-                      <h4 className="text-xs md:text-sm font-extrabold text-[#202923] leading-snug">
+                      <h4 className="text-xs md:text-sm font-extrabold text-[#1E2429] leading-snug">
                         {expense.description}
                       </h4>
-                      <p className="text-[11px] text-[#526257] mt-1 flex items-center gap-1.5">
-                        <span className="font-semibold text-[#202923]">{expense.engName}</span>
+                      <p className="text-[11px] text-[#5A646E] mt-1 flex items-center gap-1.5">
+                        <span className="font-semibold text-[#1E2429]">{expense.engName}</span>
                         <span>•</span>
-                        <span className="text-[#526257]">{expense.date}</span>
+                        <span className="text-[#5A646E]">{expense.date}</span>
                       </p>
                     </div>
 
@@ -464,16 +464,16 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       <span className="text-sm md:text-base font-black text-rose-700 block">
                         {expense.amount.toLocaleString("ar-EG")}
                       </span>
-                      <span className="text-[10px] font-bold text-[#526257]">جنيه مصري</span>
+                      <span className="text-[10px] font-bold text-[#5A646E]">جنيه مصري</span>
                     </div>
                   </div>
 
                   {/* Actions Bar */}
-                  <div className="flex items-center justify-between pt-3 border-t border-[#EFEEE8] mt-3">
+                  <div className="flex items-center justify-between pt-3 border-t border-[#ECEEF0] mt-3">
                     {/* View Receipt Button */}
                     <button
                       onClick={() => setSelectedReceipt(expense)}
-                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#526257] hover:text-[#202923] hover:bg-[#EFEEE8] transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
                       title="معاينة صورة الفاتورة"
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -484,7 +484,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleRejectExpense(expense.id)}
-                        className="p-1.5 rounded-lg text-[#526257] hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-[#5A646E] hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
                         title="رفض الفاتورة"
                       >
                         <X className="w-4 h-4" />
@@ -493,7 +493,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       {/* The "اعتماد" (Approve) Button */}
                       <button
                         onClick={() => handleApproveExpense(expense)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#183C35] hover:bg-[#202923] text-white hover:bg-[#202923] transition-colors font-bold text-xs shadow-sm transition-all cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors font-bold text-xs shadow-sm transition-all cursor-pointer"
                       >
                         <Check className="w-3.5 h-3.5" />
                         <span>اعتماد</span>
@@ -505,19 +505,19 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
               {/* Empty state when all expenses approved */}
               {pendingExpenses.length === 0 && (
-                <div className="py-12 px-4 text-center rounded-lg bg-[#F5F3ED] border border-[#E5E6DF]">
-                  <div className="w-12 h-12 rounded-lg bg-[#EFEEE8] text-[#202923] flex items-center justify-center mx-auto mb-3 border border-[#E5E6DF]">
+                <div className="py-12 px-4 text-center rounded-lg bg-[#F3F4F6] border border-[#DDE1E5]">
+                  <div className="w-12 h-12 rounded-lg bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center mx-auto mb-3 border border-[#DDE1E5]">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
-                  <h4 className="text-sm font-extrabold text-[#202923] mb-1">
+                  <h4 className="text-sm font-extrabold text-[#1E2429] mb-1">
                     رائع! تم اعتماد جميع الفواتير المعلقة
                   </h4>
-                  <p className="text-xs text-[#526257] max-w-xs mx-auto mb-4">
+                  <p className="text-xs text-[#5A646E] max-w-xs mx-auto mb-4">
                     لا توجد فواتير أو إيصالات بانتظار التدقيق المالي في الوقت الحالي.
                   </p>
                   <button
                     onClick={handleResetData}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white border border-[#E5E6DF] text-xs font-bold text-[#202923] hover:bg-[#F5F3ED] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white border border-[#DDE1E5] text-xs font-bold text-[#1E2429] hover:bg-[#F3F4F6] transition-colors cursor-pointer"
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>إعادة تجربة التدقيق المالي</span>
@@ -531,32 +531,32 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
       {/* View Receipt Modal */}
       {selectedReceipt && (
-        <div className="fixed inset-0 z-50 bg-[#202923]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-md w-full overflow-hidden text-start animate-in zoom-in-95 duration-200">
-            <div className="p-4 border-b border-[#EFEEE8] flex items-center justify-between">
+        <div className="fixed inset-0 z-50 bg-[#1E2429]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-md w-full overflow-hidden text-start animate-in zoom-in-95 duration-200">
+            <div className="p-4 border-b border-[#ECEEF0] flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-black text-[#202923]">
+                <h3 className="text-sm font-black text-[#1E2429]">
                   معاينة إيصال: {selectedReceipt.receiptNumber}
                 </h3>
-                <p className="text-[11px] text-[#526257]">{selectedReceipt.engName}</p>
+                <p className="text-[11px] text-[#5A646E]">{selectedReceipt.engName}</p>
               </div>
               <button
                 onClick={() => setSelectedReceipt(null)}
-                className="p-1.5 rounded-lg text-[#526257] hover:text-[#526257] hover:bg-[#EFEEE8] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#5A646E] hover:bg-[#ECEEF0] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Receipt Image Mock */}
-            <div className="relative bg-[#EFEEE8] h-56 overflow-hidden flex items-center justify-center">
+            <div className="relative bg-[#ECEEF0] h-56 overflow-hidden flex items-center justify-center">
               <img
                 src={selectedReceipt.invoiceImg}
                 alt="Receipt Mock"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#202923]/70 via-transparent to-transparent flex items-end p-4">
-                <span className="text-white text-xs font-bold flex items-center gap-1.5 bg-[#202923]/50 backdrop-blur-xs px-2.5 py-1 rounded-lg">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1E2429]/70 via-transparent to-transparent flex items-end p-4">
+                <span className="text-white text-xs font-bold flex items-center gap-1.5 bg-[#1E2429]/50 backdrop-blur-xs px-2.5 py-1 rounded-lg">
                   <Receipt className="w-3.5 h-3.5 text-emerald-400" />
                   <span>فاتورة إلكترونية موثقة من الموقع</span>
                 </span>
@@ -565,20 +565,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
             {/* Details Body */}
             <div className="p-5 space-y-3">
-              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EFEEE8]">
-                <span className="text-[#526257]">وصف المصروف:</span>
-                <span className="font-bold text-[#202923]">{selectedReceipt.description}</span>
+              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
+                <span className="text-[#5A646E]">وصف المصروف:</span>
+                <span className="font-bold text-[#1E2429]">{selectedReceipt.description}</span>
               </div>
-              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EFEEE8]">
-                <span className="text-[#526257]">التصنيف المحاسبي:</span>
-                <span className="font-bold text-[#202923]">{selectedReceipt.category}</span>
+              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
+                <span className="text-[#5A646E]">التصنيف المحاسبي:</span>
+                <span className="font-bold text-[#1E2429]">{selectedReceipt.category}</span>
               </div>
-              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EFEEE8]">
-                <span className="text-[#526257]">تاريخ التحرير:</span>
-                <span className="font-bold text-[#202923]">{selectedReceipt.date}</span>
+              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
+                <span className="text-[#5A646E]">تاريخ التحرير:</span>
+                <span className="font-bold text-[#1E2429]">{selectedReceipt.date}</span>
               </div>
               <div className="flex justify-between items-center text-sm pt-1">
-                <span className="font-bold text-[#526257]">المبلغ الإجمالي:</span>
+                <span className="font-bold text-[#5A646E]">المبلغ الإجمالي:</span>
                 <span className="text-lg font-black text-rose-700">
                   {selectedReceipt.amount.toLocaleString("ar-EG")} ج.م
                 </span>
@@ -586,16 +586,16 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             {/* Modal Actions */}
-            <div className="p-4 bg-[#F5F3ED] border-t border-[#EFEEE8] flex items-center gap-2">
+            <div className="p-4 bg-[#F3F4F6] border-t border-[#ECEEF0] flex items-center gap-2">
               <button
                 onClick={() => setSelectedReceipt(null)}
-                className="w-1/3 py-2.5 rounded-lg border border-[#E5E6DF] text-xs font-bold text-[#526257] hover:bg-[#EFEEE8] transition-colors cursor-pointer"
+                className="w-1/3 py-2.5 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
               >
                 إغلاق
               </button>
               <button
                 onClick={() => handleApproveExpense(selectedReceipt)}
-                className="w-2/3 py-2.5 rounded-lg bg-[#183C35] hover:bg-[#202923] text-white hover:bg-[#202923] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                className="w-2/3 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-1.5"
               >
                 <Check className="w-4 h-4" />
                 <span>اعتماد الفاتورة الآن</span>
@@ -607,16 +607,16 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
       {/* Top-Up Petty Cash Modal */}
       {topUpModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#202923]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE8]">
-              <h3 className="text-base font-black text-[#202923] flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#202923]" />
+        <div className="fixed inset-0 z-50 bg-[#1E2429]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
+              <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
+                <Plus className="w-5 h-5 text-[#1E2429]" />
                 <span>صرف دفعة عهدة نقدية جديدة للمهندس</span>
               </h3>
               <button
                 onClick={() => setTopUpModalOpen(false)}
-                className="p-1 rounded-lg text-[#526257] hover:text-[#526257] hover:bg-[#EFEEE8]"
+                className="p-1 rounded-lg text-[#5A646E] hover:text-[#5A646E] hover:bg-[#ECEEF0]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -624,13 +624,13 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
             <form onSubmit={handleTopUpSubmit} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                   اختر المهندس والموقع
                 </label>
                 <select
                   value={topUpEngId}
                   onChange={(e) => setTopUpEngId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E5E6DF] text-xs font-bold text-[#202923] focus:outline-none focus:ring-2 border-[#D5D8D0] focus:border-[#183C35] focus:ring-1 focus:ring-[#183C35]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] focus:outline-none focus:ring-2 border-[#CBD0D6] focus:border-[#2B3138] focus:ring-1 focus:ring-[#2B3138]"
                 >
                   {engineersCash.map((eng) => (
                     <option key={eng.id} value={eng.id}>
@@ -641,7 +641,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                   مبلغ الدفعة الإضافية (ج.م)
                 </label>
                 <input
@@ -651,7 +651,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                   required
                   value={topUpAmount}
                   onChange={(e) => setTopUpAmount(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E5E6DF] text-sm font-black text-[#202923] focus:outline-none focus:ring-2 border-[#D5D8D0] focus:border-[#183C35] focus:ring-1 focus:ring-[#183C35]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-sm font-black text-[#1E2429] focus:outline-none focus:ring-2 border-[#CBD0D6] focus:border-[#2B3138] focus:ring-1 focus:ring-[#2B3138]"
                 />
               </div>
 
@@ -662,17 +662,17 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 </p>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EFEEE8]">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#ECEEF0]">
                 <button
                   type="button"
                   onClick={() => setTopUpModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#526257] hover:bg-[#EFEEE8] cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] cursor-pointer"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#183C35] hover:bg-[#202923] text-white hover:bg-[#202923] transition-colors text-xs font-bold shadow-sm cursor-pointer"
+                  className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm cursor-pointer"
                 >
                   تأكيد صرف العهدة
                 </button>

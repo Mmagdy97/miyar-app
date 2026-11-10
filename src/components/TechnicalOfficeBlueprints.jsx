@@ -200,7 +200,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#183C35] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -212,17 +212,17 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-black text-[#202923] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#EFEEE8] border border-[#E5E6DF] flex items-center justify-center text-[#202923]">
+            <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                 <FileCode className="w-5 h-5" />
               </div>
               <span>إدارة المخططات واللوحات التنفيذية</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
               سجل Document Control
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#526257]">
+          <p className="text-xs md:text-sm text-[#5A646E]">
             أرشيف اللوحات التنفيذية المعتمدة (Shop Drawings) ومتابعة إصدارات التعديلات المعمارية والـ MEP.
           </p>
         </div>
@@ -231,7 +231,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleReset}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#526257] bg-white border border-[#E5E6DF] hover:bg-[#F5F3ED] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs cursor-pointer"
             title="استعادة البيانات الأصلية"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -241,7 +241,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
           {/* Primary Action Button: + رفع مخطط جديد */}
           <button
             onClick={() => setIsUploadModalOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#183C35] hover:bg-[#202923] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
           >
             <UploadCloud className="w-4 h-4" />
             <span>+ رفع مخطط جديد</span>
@@ -251,18 +251,18 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
       {/* KPI Stats Bar */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-lg p-4 border border-[#E5E6DF] shadow-xs">
-          <span className="text-[11px] font-bold text-[#526257] block mb-1">إجمالي المخططات المفهرسة</span>
+        <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs">
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي المخططات المفهرسة</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-black text-[#202923]">{stats.total}</span>
-            <span className="text-[11px] font-bold text-[#202923] bg-[#EFEEE8] border border-[#E5E6DF] px-2 py-0.5 rounded-md">
+            <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
+            <span className="text-[11px] font-bold text-[#1E2429] bg-[#ECEEF0] border border-[#DDE1E5] px-2 py-0.5 rounded-md">
               لوحة رسمية
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-4 border border-[#E5E6DF] shadow-xs">
-          <span className="text-[11px] font-bold text-[#526257] block mb-1">معتمدة للتنفيذ (AFC)</span>
+        <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs">
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">معتمدة للتنفيذ (AFC)</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-emerald-600">{stats.afc}</span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
@@ -271,8 +271,8 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-4 border border-[#E5E6DF] shadow-xs">
-          <span className="text-[11px] font-bold text-[#526257] block mb-1">قيد المراجعة والتدقيق</span>
+        <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs">
+          <span className="text-[11px] font-bold text-[#5A646E] block mb-1">قيد المراجعة والتدقيق</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-amber-600">{stats.review}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
@@ -283,16 +283,16 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       </div>
 
       {/* Search and Discipline Filters */}
-      <div className="bg-white rounded-lg border border-[#E5E6DF] p-3.5 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="bg-white rounded-lg border border-[#DDE1E5] p-3.5 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-[#526257] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#5A646E] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="بحث باسم اللوحة أو الكود (مثل: M-02, E-01)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E5E6DF] bg-[#F5F3ED] text-xs md:text-sm font-semibold text-[#202923] placeholder-[#526257]/50 focus:outline-none focus:ring-2 focus:ring-[#183C35]/10 focus:border-[#183C35] transition-all"
+            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#DDE1E5] bg-[#F3F4F6] text-xs md:text-sm font-semibold text-[#1E2429] placeholder-[#5A646E]/50 focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] transition-all"
           />
         </div>
 
@@ -304,8 +304,8 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
               onClick={() => setSelectedDiscipline(disc)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedDiscipline === disc
-                  ? "bg-[#183C35] text-white shadow-sm"
-                  : "bg-[#EFEEE8] text-[#202923] hover:bg-[#E5E6DF]"
+                  ? "bg-[#2B3138] text-white shadow-sm"
+                  : "bg-[#ECEEF0] text-[#1E2429] hover:bg-[#DDE1E5]"
               }`}
             >
               {disc}
@@ -315,11 +315,11 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       </div>
 
       {/* Main Document Control Data Table */}
-      <div className="bg-white rounded-lg border border-[#E5E6DF] shadow-xs overflow-hidden">
+      <div className="bg-white rounded-lg border border-[#DDE1E5] shadow-xs overflow-hidden">
         <div className="overflow-x-auto w-full">
           <table className="w-full text-start border-collapse">
             <thead>
-              <tr className="bg-[#F5F3ED] text-[#526257] text-xs font-bold border-b border-[#E5E6DF]">
+              <tr className="bg-[#F3F4F6] text-[#5A646E] text-xs font-bold border-b border-[#DDE1E5]">
                 <th className="py-4 px-5 min-w-[260px]">اسم اللوحة والمواصفة الهندسية</th>
                 <th className="py-4 px-4 w-32 text-center">كود اللوحة</th>
                 <th className="py-4 px-4 w-28 text-center">الإصدار (Rev)</th>
@@ -328,27 +328,27 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                 <th className="py-4 px-5 w-32 text-center">الإجراءات</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EFEEE8] text-xs md:text-sm">
+            <tbody className="divide-y divide-[#ECEEF0] text-xs md:text-sm">
               {filteredDrawings.map((dwg) => {
                 const isAfc = dwg.status === "معتمد للتنفيذ (AFC)";
 
                 return (
                   <tr
                     key={dwg.id}
-                    className="hover:bg-[#F5F3ED] transition-colors duration-150 group"
+                    className="hover:bg-[#F3F4F6] transition-colors duration-150 group"
                   >
                     {/* Drawing Name & Discipline */}
                     <td className="py-4 px-5">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-[#EFEEE8] text-[#202923] font-extrabold text-xs flex items-center justify-center shrink-0 border border-[#E5E6DF]">
+                        <div className="w-10 h-10 rounded-lg bg-[#ECEEF0] text-[#1E2429] font-extrabold text-xs flex items-center justify-center shrink-0 border border-[#DDE1E5]">
                           <FileCode className="w-5 h-5" />
                         </div>
                         <div>
-                          <h4 className="font-extrabold text-[#202923] leading-snug group-hover:text-[#202923] transition-colors">
+                          <h4 className="font-extrabold text-[#1E2429] leading-snug group-hover:text-[#1E2429] transition-colors">
                             {dwg.name}
                           </h4>
-                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#526257]">
-                            <span className="text-[#526257] font-semibold">{dwg.discipline}</span>
+                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#5A646E]">
+                            <span className="text-[#5A646E] font-semibold">{dwg.discipline}</span>
                             <span>•</span>
                             <span>{dwg.fileSize}</span>
                             <span>•</span>
@@ -360,20 +360,20 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
                     {/* Code */}
                     <td className="py-4 px-4 text-center">
-                      <span className="font-mono font-black text-[#202923] bg-[#EFEEE8] px-2.5 py-1 rounded-lg text-xs text-[#202923]">
+                      <span className="font-mono font-black text-[#1E2429] bg-[#ECEEF0] px-2.5 py-1 rounded-lg text-xs text-[#1E2429]">
                         {dwg.code}
                       </span>
                     </td>
 
                     {/* Revision */}
                     <td className="py-4 px-4 text-center">
-                      <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]">
+                      <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
                         {dwg.rev}
                       </span>
                     </td>
 
                     {/* Upload Date */}
-                    <td className="py-4 px-4 text-center text-xs text-[#526257] font-medium">
+                    <td className="py-4 px-4 text-center text-xs text-[#5A646E] font-medium">
                       {dwg.uploadDate}
                     </td>
 
@@ -401,7 +401,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         {/* Preview */}
                         <button
                           onClick={() => handlePreviewDrawing(dwg.name, dwg.code)}
-                          className="p-1.5 rounded-lg text-[#526257] hover:text-[#202923] hover:bg-[#EFEEE8] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
                           title="معاينة اللوحة"
                         >
                           <Eye className="w-4 h-4" />
@@ -410,7 +410,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         {/* Download */}
                         <button
                           onClick={() => handleDownloadDrawing(dwg.name, dwg.code)}
-                          className="p-1.5 rounded-lg text-[#526257] hover:text-[#202923] hover:bg-[#EFEEE8] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] transition-colors cursor-pointer"
                           title="تحميل الملف التنفيذي"
                         >
                           <Download className="w-4 h-4" />
@@ -419,7 +419,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         {/* Delete */}
                         <button
                           onClick={() => handleDeleteDrawing(dwg.id, dwg.name)}
-                          className="p-1.5 rounded-lg text-[#526257] hover:text-rose-700 hover:bg-[#EFEEE8] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#5A646E] hover:text-rose-700 hover:bg-[#ECEEF0] transition-colors cursor-pointer"
                           title="حذف اللوحة من الأرشيف"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -432,10 +432,10 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
               {filteredDrawings.length === 0 && (
                 <tr>
-                  <td colSpan="6" className="py-12 text-center text-[#526257]">
-                    <FileText className="w-8 h-8 mx-auto mb-2 text-[#C5A36B]" />
-                    <p className="font-bold text-[#526257]">لم يتم العثور على أي مخططات مطابقة للبحث</p>
-                    <p className="text-xs text-[#526257] mt-1">
+                  <td colSpan="6" className="py-12 text-center text-[#5A646E]">
+                    <FileText className="w-8 h-8 mx-auto mb-2 text-[#7B848E]" />
+                    <p className="font-bold text-[#5A646E]">لم يتم العثور على أي مخططات مطابقة للبحث</p>
+                    <p className="text-xs text-[#5A646E] mt-1">
                       جرّب تعديل كلمة البحث أو الضغط على "+ رفع مخطط جديد"
                     </p>
                   </td>
@@ -446,12 +446,12 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
         </div>
 
         {/* Table Footer */}
-        <div className="p-4 bg-[#F5F3ED] border-t border-[#E5E6DF] flex items-center justify-between text-xs text-[#526257]">
+        <div className="p-4 bg-[#F3F4F6] border-t border-[#DDE1E5] flex items-center justify-between text-xs text-[#5A646E]">
           <span>
-            عرض <strong className="text-[#202923]">{filteredDrawings.length}</strong> من أصل{" "}
-            <strong className="text-[#202923]">{drawings.length}</strong> مخطط
+            عرض <strong className="text-[#1E2429]">{filteredDrawings.length}</strong> من أصل{" "}
+            <strong className="text-[#1E2429]">{drawings.length}</strong> مخطط
           </span>
-          <span className="text-[11px] text-[#526257]">
+          <span className="text-[11px] text-[#5A646E]">
             * جميع اللوحات المعتمدة تحمل خاتم AFC الرقمي وتصل فوراً لمهندسي المواقع.
           </span>
         </div>
@@ -459,16 +459,16 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
       {/* Upload Drawing Modal */}
       {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#202923]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E6DF] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFEEE8]">
-              <h3 className="text-lg font-black text-[#202923] flex items-center gap-2">
-                <UploadCloud className="w-5 h-5 text-[#202923]" />
+        <div className="fixed inset-0 z-50 bg-[#1E2429]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
+              <h3 className="text-lg font-black text-[#1E2429] flex items-center gap-2">
+                <UploadCloud className="w-5 h-5 text-[#1E2429]" />
                 <span>رفع مخطط تنفيذي جديد للأرشيف</span>
               </h3>
               <button
                 onClick={() => setIsUploadModalOpen(false)}
-                className="p-1.5 rounded-lg text-[#526257] hover:text-[#202923] hover:bg-[#EFEEE8] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0] cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -476,7 +476,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
             <form onSubmit={handleUploadSubmit} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                   اسم اللوحة / المخطط <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -485,13 +485,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                   placeholder="مثال: مخطط شبكة الإنارة المعمارية والسبوت لايت..."
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E5E6DF] text-xs md:text-sm font-semibold text-[#202923] focus:outline-none focus:ring-2 focus:ring-[#183C35]/10 focus:border-[#183C35] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] transition-all"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                     كود اللوحة (Drawing Code) <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -500,18 +500,18 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                     placeholder="مثال: E-03-1F"
                     value={newCode}
                     onChange={(e) => setNewCode(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E6DF] text-xs font-mono font-bold text-[#202923] focus:outline-none focus:ring-2 focus:ring-[#183C35]/10 focus:border-[#183C35]"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-mono font-bold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                     رقم التعديل (Revision)
                   </label>
                   <select
                     value={newRev}
                     onChange={(e) => setNewRev(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E6DF] text-xs font-bold text-[#202923] bg-white"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
                   >
                     <option value="Rev. 00">Rev. 00 (مبدئي)</option>
                     <option value="Rev. 01">Rev. 01</option>
@@ -523,13 +523,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                     التخصص الهندسي
                   </label>
                   <select
                     value={newDiscipline}
                     onChange={(e) => setNewDiscipline(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E6DF] text-xs font-bold text-[#202923] bg-white"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
                   >
                     <option value="معماري وديكور">معماري وديكور</option>
                     <option value="كهرباء">كهرباء</option>
@@ -540,13 +540,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#526257] mb-1.5">
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
                     حالة اللوحة
                   </label>
                   <select
                     value={newStatus}
                     onChange={(e) => setNewStatus(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E6DF] text-xs font-bold text-[#202923] bg-white"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
                   >
                     <option value="معتمد للتنفيذ (AFC)">معتمد للتنفيذ (AFC)</option>
                     <option value="قيد المراجعة">قيد المراجعة</option>
@@ -555,27 +555,27 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
               </div>
 
               {/* Upload Zone Mock */}
-              <div className="border-2 border-dashed border-[#D5D8D0] hover:border-[#183C35] rounded-lg p-6 text-center bg-[#F5F3ED] hover:bg-[#EFEEE8] transition-all cursor-pointer">
-                <UploadCloud className="w-8 h-8 text-[#526257] mx-auto mb-2" />
-                <p className="text-xs font-bold text-[#202923]">
+              <div className="border-2 border-dashed border-[#CBD0D6] hover:border-[#2B3138] rounded-lg p-6 text-center bg-[#F3F4F6] hover:bg-[#ECEEF0] transition-all cursor-pointer">
+                <UploadCloud className="w-8 h-8 text-[#5A646E] mx-auto mb-2" />
+                <p className="text-xs font-bold text-[#1E2429]">
                   اسحب ملف المخطط (DWG أو PDF) هنا أو اضغط للاختيار
                 </p>
-                <p className="text-[10px] text-[#526257] mt-1">
+                <p className="text-[10px] text-[#5A646E] mt-1">
                   الحد الأقصى لحجم الملف: ٥٠ ميجابايت (AutoCAD / Revit / PDF)
                 </p>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EFEEE8]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#ECEEF0]">
                 <button
                   type="button"
                   onClick={() => setIsUploadModalOpen(false)}
-                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#526257] hover:bg-[#EFEEE8] cursor-pointer"
+                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0] cursor-pointer"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#183C35] hover:bg-[#202923] hover:bg-[#202923] text-white font-bold text-xs md:text-sm shadow-sm transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs md:text-sm shadow-sm transition-all cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
                   <span>تأكيد الرفع والفهرسة</span>

@@ -170,9 +170,9 @@ function App() {
 
   return (
     <div
-      className="min-h-screen w-full relative isolate flex flex-col md:flex-row h-screen overflow-hidden font-ibm bg-[#F5F3ED] text-[#202923] selection:bg-[#183C35] selection:text-white"
+      className="min-h-screen w-full relative isolate flex flex-col md:flex-row h-screen overflow-hidden font-ibm bg-[#F3F4F6] text-[#1E2429] selection:bg-[#2B3138] selection:text-white"
     >
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#183C35] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#2B3138] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         تخطي إلى المحتوى
       </a>
       {/* Ambient Restful Studio Glow Orbs */}
@@ -180,8 +180,8 @@ function App() {
         aria-hidden="true"
         className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-[-10%] start-[-5%] w-[500px] h-[500px] rounded-full bg-[#5D8C70]/10 blur-[130px]" />
-        <div className="absolute bottom-[-10%] end-[-10%] w-[600px] h-[600px] rounded-full bg-[#C5A36B]/8 blur-[130px]" />
+        <div className="absolute top-[-10%] start-[-5%] w-[500px] h-[500px] rounded-full bg-[#D9480F]/10 blur-[130px]" />
+        <div className="absolute bottom-[-10%] end-[-10%] w-[600px] h-[600px] rounded-full bg-[#7B848E]/8 blur-[130px]" />
       </div>
 
       {/* Mobile Drawer Backdrop Overlay */}

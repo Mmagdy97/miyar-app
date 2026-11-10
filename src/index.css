@@ -3,13 +3,13 @@
 @theme {
   --font-ibm: 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --default-font-family: var(--font-ibm);
-  --color-miyar-bg: #F5F3ED;
-  --color-miyar-primary: #183C35;
-  --color-miyar-secondary: #5D8C70;
-  --color-miyar-accent: #C5A36B;
-  --color-miyar-text-primary: #202923;
-  --color-miyar-text-secondary: #526257;
-  --color-miyar-border: #E5E6DF;
+  --color-miyar-bg: #F3F4F6;
+  --color-miyar-primary: #2B3138;
+  --color-miyar-secondary: #D9480F;
+  --color-miyar-accent: #7B848E;
+  --color-miyar-text-primary: #1E2429;
+  --color-miyar-text-secondary: #5A646E;
+  --color-miyar-border: #DDE1E5;
 }
 
 * {
@@ -18,8 +18,8 @@
 
 body {
   font-family: 'IBM Plex Sans Arabic', sans-serif;
-  background-color: #F5F3ED;
-  color: #202923;
+  background-color: #F3F4F6;
+  color: #1E2429;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -62,26 +62,26 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5D8D0;
+  background: #CBD0D6;
   border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5D8C70;
+  background: #D9480F;
 }
 
 /* Miyar Studio Card Utilities */
 .studio-card {
   background-color: #FFFFFF;
-  border: 1px solid #E5E6DF;
+  border: 1px solid #DDE1E5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
   border-radius: 0.75rem;
 }
 
 .studio-card-dark {
-  background-color: #183C35;
-  border: 1px solid #14322c;
-  box-shadow: 0 4px 20px rgba(24, 60, 53, 0.18);
+  background-color: #2B3138;
+  border: 1px solid #20262C;
+  box-shadow: 0 4px 20px rgba(43, 49, 56, 0.18);
   border-radius: 0.75rem;
   color: #FFFFFF;
 }
@@ -91,8 +91,8 @@ p {
 }
 
 .studio-card-interactive:hover {
-  border-color: #5D8C70;
-  box-shadow: 0 4px 16px rgba(24, 60, 53, 0.08);
+  border-color: #D9480F;
+  box-shadow: 0 4px 16px rgba(43, 49, 56, 0.08);
 }
 
 /* Global Border & Background Harmonization for Miyar */
@@ -101,27 +101,27 @@ p {
 .border-slate-200,
 .border-slate-200\/60,
 .border-slate-200\/80,
-.border-\[\#EAE5DF\] {
-  border-color: #E5E6DF;
+.border-\[\#E6E9EC\] {
+  border-color: #DDE1E5;
 }
 
 .border-neutral-100,
 .border-slate-100,
-.border-\[\#F3EFEA\] {
-  border-color: #EFEEE8;
+.border-\[\#F1F2F4\] {
+  border-color: #ECEEF0;
 }
 
 .bg-neutral-50,
 .bg-slate-50,
-.bg-\[\#F8F6F2\],
+.bg-\[\#F6F7F8\],
 .bg-\[\#F8FAFC\] {
-  background-color: #F5F3ED;
+  background-color: #F3F4F6;
 }
 
 .bg-neutral-100,
 .bg-slate-100,
-.bg-\[\#F3EFEA\] {
-  background-color: #EFEEE8;
+.bg-\[\#F1F2F4\] {
+  background-color: #ECEEF0;
 }
 
 .shadow-\[0_8px_30px_rgba\(45\,36\,34\,0\.04\)\] {
@@ -130,7 +130,7 @@ p {
 
 /* Accessibility: visible keyboard focus, reduced motion, comfortable touch targets */
 :focus-visible {
-  outline: 2px solid #183C35;
+  outline: 2px solid #2B3138;
   outline-offset: 2px;
   border-radius: 4px;
 }

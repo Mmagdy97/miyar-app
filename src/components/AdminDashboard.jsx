@@ -111,7 +111,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
     if (item.type === "report") {
       return {
         icon: ClipboardCheck,
-        iconBg: "bg-[#EFEEE8] text-[#526257] border border-[#E5E6DF]",
+        iconBg: "bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5]",
       };
     }
     if (item.type === "expense") {
@@ -123,50 +123,50 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
     if (item.type === "material") {
       return {
         icon: Package,
-        iconBg: "bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]",
+        iconBg: "bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]",
       };
     }
     return {
       icon: FileText,
-      iconBg: "bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]",
+      iconBg: "bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]",
     };
   };
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#E5E6DF]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#DDE1E5]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#526257]" />
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#5A646E]" />
               استوديو الإدارة التنفيذية
             </span>
-            <span className="text-xs text-[#526257] font-semibold">استوديو القاهرة</span>
+            <span className="text-xs text-[#5A646E] font-semibold">استوديو القاهرة</span>
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#202923] mt-1.5">
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#1E2429] mt-1.5">
             نظرة عامة على الأداء
           </h1>
 
-          <p className="text-xs md:text-sm text-[#526257] mt-1 flex items-center gap-2 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#526257]">
-              <Calendar className="w-3.5 h-3.5 text-[#526257]" />
+          <p className="text-xs md:text-sm text-[#5A646E] mt-1 flex items-center gap-2 flex-wrap">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-[#5A646E]">
+              <Calendar className="w-3.5 h-3.5 text-[#5A646E]" />
               {todayArabic}
             </span>
-            <span className="text-[#C5A36B]">•</span>
-            <span className="text-[#526257]">
-              متابعة مباشرة لـ <strong className="text-[#202923]">{toAr(TOTALS.projectCount)} مشاريع قيد التنفيذ</strong> في نطاق القاهرة الكبرى
+            <span className="text-[#7B848E]">•</span>
+            <span className="text-[#5A646E]">
+              متابعة مباشرة لـ <strong className="text-[#1E2429]">{toAr(TOTALS.projectCount)} مشاريع قيد التنفيذ</strong> في نطاق القاهرة الكبرى
             </span>
           </p>
         </div>
 
         {/* Studio Status Pill */}
         <div className="flex items-center gap-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-[#E5E6DF] text-xs font-semibold text-[#526257] shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-[#DDE1E5] text-xs font-semibold text-[#5A646E] shadow-xs">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C5A36B] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5D8C70]/150" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7B848E] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D9480F]/150" />
             </span>
             <span>مزامنة مباشرة مع مواقع التنفيذ</span>
           </div>
@@ -176,11 +176,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI 1: الإيرادات المتوقعة */}
-        <div className="bg-white border border-[#E5E6DF] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#526257] text-sm font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#183C35]" />
+              <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
                 الإيرادات المتوقعة
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#27734E]/10 text-[#27734E]">
@@ -190,18 +190,18 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </div>
 
             <div className="mt-4">
-              <span className="text-3xl font-bold tracking-tight text-[#202923] font-ibm">
-                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#526257]">ج.م</span>
+              <span className="text-3xl font-bold tracking-tight text-[#1E2429] font-ibm">
+                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
               </span>
             </div>
-            <p className="text-xs text-[#526257] mt-1">
+            <p className="text-xs text-[#5A646E] mt-1">
               إجمالي القيمة التعاقدية لـ {toAr(TOTALS.projectCount)} مشاريع
             </p>
           </div>
 
           {/* Sparkline */}
-          <div className="mt-5 pt-3 border-t border-[#EFEEE8]">
-            <div className="flex items-center justify-between text-xs text-[#526257] mb-1">
+          <div className="mt-5 pt-3 border-t border-[#ECEEF0]">
+            <div className="flex items-center justify-between text-xs text-[#5A646E] mb-1">
               <span>مسار النمو (آخر ٦ شهور)</span>
               <span className="text-[#27734E] font-bold">+٦٧٠ ألف ج.م</span>
             </div>
@@ -209,24 +209,24 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
                 <defs>
                   <linearGradient id="revGradAr" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#183C35" stopOpacity="0.15" />
-                    <stop offset="100%" stopColor="#183C35" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#2B3138" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#2B3138" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <path d="M0,26 Q20,24 35,18 T70,12 T100,4 L100,30 L0,30 Z" fill="url(#revGradAr)" />
-                <path d="M0,26 Q20,24 35,18 T70,12 T100,4" fill="none" stroke="#183C35" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="100" cy="4" r="2.5" fill="#183C35" />
+                <path d="M0,26 Q20,24 35,18 T70,12 T100,4" fill="none" stroke="#2B3138" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="100" cy="4" r="2.5" fill="#2B3138" />
               </svg>
             </div>
           </div>
         </div>
 
         {/* KPI 2: إجمالي المحصل */}
-        <div className="bg-white border border-[#E5E6DF] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#526257] text-sm font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#183C35]" />
+              <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
                 إجمالي المحصل
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#27734E]/10 text-[#27734E]">
@@ -235,41 +235,41 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
-              <span className="text-3xl font-bold tracking-tight text-[#202923] font-ibm">
-                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#526257]">ج.م</span>
+              <span className="text-3xl font-bold tracking-tight text-[#1E2429] font-ibm">
+                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
               </span>
             </div>
-            <p className="text-xs text-[#526257] mt-1">
+            <p className="text-xs text-[#5A646E] mt-1">
               مودعة بالحسابات البنكية للمكتب
             </p>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#EFEEE8]">
-            <div className="flex items-center justify-between text-xs text-[#526257] mb-1">
+          <div className="mt-5 pt-3 border-t border-[#ECEEF0]">
+            <div className="flex items-center justify-between text-xs text-[#5A646E] mb-1">
               <span>سرعة التدفقات النقدية</span>
-              <span className="text-[#202923] font-bold">٤٢٠ ألف ج.م/شهر</span>
+              <span className="text-[#1E2429] font-bold">٤٢٠ ألف ج.م/شهر</span>
             </div>
             <div className="h-10 w-full relative">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
                 <defs>
                   <linearGradient id="collGradAr" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#183C35" stopOpacity="0.15" />
-                    <stop offset="100%" stopColor="#183C35" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#2B3138" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#2B3138" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <path d="M0,28 Q25,26 45,19 T80,10 T100,6 L100,30 L0,30 Z" fill="url(#collGradAr)" />
-                <path d="M0,28 Q25,26 45,19 T80,10 T100,6" fill="none" stroke="#183C35" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="100" cy="6" r="2.5" fill="#183C35" />
+                <path d="M0,28 Q25,26 45,19 T80,10 T100,6" fill="none" stroke="#2B3138" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="100" cy="6" r="2.5" fill="#2B3138" />
               </svg>
             </div>
           </div>
         </div>
 
         {/* KPI 3: مستحقات متأخرة */}
-        <div className="bg-white border border-[#E5E6DF] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#526257] text-sm font-medium flex items-center gap-1.5">
+              <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B83F3F]" />
                 مستحقات متأخرة
               </span>
@@ -280,56 +280,56 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4">
               <span className="text-3xl font-bold tracking-tight text-[#B83F3F] font-ibm">
-                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#526257]">ج.م</span>
+                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
               </span>
             </div>
-            <p className="text-xs text-[#526257] mt-1">
+            <p className="text-xs text-[#5A646E] mt-1">
               {toAr(TOTALS.overdueCount)} فواتير ومستخلصات تجاوزت موعد الاستحقاق
             </p>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#EFEEE8] space-y-2">
-            <div className="flex items-center justify-between text-xs text-[#526257] font-medium">
+          <div className="mt-5 pt-3 border-t border-[#ECEEF0] space-y-2">
+            <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
               <span className="truncate">مستخلص {TOTALS.topOverdue.projectName}</span>
               <span className="shrink-0 text-xs font-bold text-[#B83F3F]">{formatCompact(TOTALS.topOverdue.amount)} ج.م ({toAr(TOTALS.topOverdue.pctOfOverdue)}٪)</span>
             </div>
             <ProgressBar value={TOTALS.topOverdue.pctOfOverdue} customFillClass="bg-[#B83F3F]" />
-            <p className="text-xs text-[#526257] font-medium">
+            <p className="text-xs text-[#5A646E] font-medium">
               متوسط التأخير: {toAr(TOTALS.overdueAvgDays)} يوماً
             </p>
           </div>
         </div>
 
         {/* KPI 4: عهد مهندسين نشطة */}
-        <div className="bg-white border border-[#E5E6DF] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#526257] text-sm font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#183C35]" />
+              <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
                 عهد مهندسين نشطة
               </span>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#C5A36B]/15 text-[#A76B20]">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#7B848E]/15 text-[#B45309]">
                 بالمواقع ({toAr(TOTALS.cashUsedPct)}٪)
               </span>
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
-              <span className="text-3xl font-bold tracking-tight text-[#202923] font-ibm">
-                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#526257]">ج.م</span>
+              <span className="text-3xl font-bold tracking-tight text-[#1E2429] font-ibm">
+                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#5A646E]">ج.م</span>
               </span>
             </div>
-            <p className="text-xs text-[#526257] mt-1">
+            <p className="text-xs text-[#5A646E] mt-1">
               في حوزة {toAr(TOTALS.cashEngineerCount)} مهندسي مواقع للمشتريات
             </p>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#EFEEE8] space-y-2.5">
-            <div className="flex items-center justify-between text-xs text-[#526257] font-medium">
+          <div className="mt-5 pt-3 border-t border-[#ECEEF0] space-y-2.5">
+            <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
               <span>نسبة استخدام سقف العهد</span>
-              <span className="text-xs font-bold text-[#202923] font-mono">{toAr(TOTALS.cashUsedPct)}٪</span>
+              <span className="text-xs font-bold text-[#1E2429] font-mono">{toAr(TOTALS.cashUsedPct)}٪</span>
             </div>
-            <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#183C35]" />
-            <div className="flex items-center justify-between text-xs text-[#526257] font-medium">
+            <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#2B3138]" />
+            <div className="flex items-center justify-between text-xs text-[#5A646E] font-medium">
               <span>إجمالي العهد المسلّمة: {formatNumber(TOTALS.cashGiven)} ج.م</span>
               <span className="text-[#27734E] font-bold">السيولة آمنة</span>
             </div>
@@ -338,42 +338,42 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
       </div>
 
       {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
-      <div className="bg-white rounded-xl border border-[#E5E6DF] shadow-sm p-6 md:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#EFEEE8]">
+      <div className="bg-white rounded-xl border border-[#DDE1E5] shadow-sm p-6 md:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#ECEEF0]">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-[#202923]">
+              <h2 className="text-base font-bold text-[#1E2429]">
                 التدفقات النقدية والأداء المالي
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#5D8C70]/15 text-[#183C35] border border-[#5D8C70]/30">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#D9480F]/15 text-[#2B3138] border border-[#D9480F]/30">
                 هامش الربح التشغيلي: ٣٩.٤٪
               </span>
             </div>
-            <p className="text-xs text-[#526257] mt-0.5">
+            <p className="text-xs text-[#5A646E] mt-0.5">
               مقارنة شهرية بين المستخلصات المحصلة وتكاليف التشوين ومصروفات المواقع
             </p>
           </div>
 
           {/* Controls & Legend */}
           <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-4 text-xs font-medium text-[#526257]">
+            <div className="flex items-center gap-4 text-xs font-medium text-[#5A646E]">
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#183C35]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#2B3138]" />
                 التدفقات الداخلة (الإيراد)
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#E5E6DF]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#DDE1E5]" />
                 مصروفات المواقع
               </span>
             </div>
 
-            <div className="inline-flex rounded-lg border border-[#E5E6DF] p-0.5 bg-[#F5F3ED] text-xs font-bold">
+            <div className="inline-flex rounded-lg border border-[#DDE1E5] p-0.5 bg-[#F3F4F6] text-xs font-bold">
               <button
                 onClick={() => setTimeframe("6M")}
                 className={`px-3 py-1 rounded-lg transition-all ${
                   timeframe === "6M"
-                    ? "bg-[#183C35] text-white shadow-xs"
-                    : "text-[#526257] hover:text-[#202923]"
+                    ? "bg-[#2B3138] text-white shadow-xs"
+                    : "text-[#5A646E] hover:text-[#1E2429]"
                 }`}
               >
                 آخر ٦ شهور
@@ -382,8 +382,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                 onClick={() => setTimeframe("YTD")}
                 className={`px-3 py-1 rounded-lg transition-all ${
                   timeframe === "YTD"
-                    ? "bg-[#183C35] text-white shadow-xs"
-                    : "text-[#526257] hover:text-[#202923]"
+                    ? "bg-[#2B3138] text-white shadow-xs"
+                    : "text-[#5A646E] hover:text-[#1E2429]"
                 }`}
               >
                 السنة بالكامل
@@ -396,27 +396,27 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
         <div className="mt-6 pt-2">
           <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
             {activeHoverBar ? (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EFEEE8] border border-[#E5E6DF] text-[#202923] animate-in fade-in">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] text-[#1E2429] animate-in fade-in">
                 <span>{activeHoverBar.month} ٢٠٢٦:</span>
-                <span className="text-[#202923] font-bold">
+                <span className="text-[#1E2429] font-bold">
                   إيراد: {activeHoverBar.revenue} ألف ج.م
                 </span>
-                <span className="text-[#526257]">|</span>
-                <span className="text-[#526257]">
+                <span className="text-[#5A646E]">|</span>
+                <span className="text-[#5A646E]">
                   مصروف: {activeHoverBar.expenses} ألف ج.م
                 </span>
-                <span className="text-[#183C35]">
+                <span className="text-[#2B3138]">
                   (صافي +{Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)}٪)
                 </span>
               </span>
             ) : (
-              <span className="text-[#526257] text-xs font-medium">
+              <span className="text-[#5A646E] text-xs font-medium">
                 مرر الفأرة فوق الأعمدة لعرض التفاصيل وصافي أرباح كل شهر
               </span>
             )}
           </div>
 
-          <div className="grid grid-cols-6 gap-2 sm:gap-6 items-end h-52 border-b border-dashed border-[#E5E6DF] pb-3">
+          <div className="grid grid-cols-6 gap-2 sm:gap-6 items-end h-52 border-b border-dashed border-[#DDE1E5] pb-3">
             {MONTHLY_FINANCIALS.map((item) => {
               const revPercent = Math.round((item.revenue / maxVal) * 100);
               const expPercent = Math.round((item.expenses / maxVal) * 100);
@@ -431,16 +431,16 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                   <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
                     {/* Revenue Bar (Sage Green) */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#183C35] group-hover:bg-[#202923] transition-all duration-300"
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#2B3138] group-hover:bg-[#1E2429] transition-all duration-300"
                       style={{ height: `${revPercent}%` }}
                     />
                     {/* Expense Bar */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E5E6DF] group-hover:bg-[#E5E6DF] transition-all duration-300"
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#DDE1E5] group-hover:bg-[#DDE1E5] transition-all duration-300"
                       style={{ height: `${expPercent}%` }}
                     />
                   </div>
-                  <span className="mt-3 text-xs font-bold text-[#202923] group-hover:text-[#202923] transition-colors">
+                  <span className="mt-3 text-xs font-bold text-[#1E2429] group-hover:text-[#1E2429] transition-colors">
                     {item.month}
                   </span>
                 </div>
@@ -449,25 +449,25 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
 
           {/* Bottom Summary Bar */}
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#526257] pt-1">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#5A646E] pt-1">
             <div className="flex items-center gap-6">
               <div>
-                <span className="text-[#526257] block text-[11px] font-semibold">إجمالي إيراد ٦ أشهر</span>
-                <span className="font-extrabold text-[#202923] text-sm">٥,٤٢٠,٠٠٠ ج.م</span>
+                <span className="text-[#5A646E] block text-[11px] font-semibold">إجمالي إيراد ٦ أشهر</span>
+                <span className="font-extrabold text-[#1E2429] text-sm">٥,٤٢٠,٠٠٠ ج.م</span>
               </div>
-              <div className="h-6 w-px bg-[#E5E6DF]" />
+              <div className="h-6 w-px bg-[#DDE1E5]" />
               <div>
-                <span className="text-[#526257] block text-[11px] font-semibold">تكاليف التشوين والمواقع</span>
-                <span className="font-extrabold text-[#202923] text-sm">٣,٤٢٠,٠٠٠ ج.م</span>
+                <span className="text-[#5A646E] block text-[11px] font-semibold">تكاليف التشوين والمواقع</span>
+                <span className="font-extrabold text-[#1E2429] text-sm">٣,٤٢٠,٠٠٠ ج.م</span>
               </div>
-              <div className="h-6 w-px bg-[#E5E6DF]" />
+              <div className="h-6 w-px bg-[#DDE1E5]" />
               <div>
-                <span className="text-[#526257] block text-[11px] font-semibold">صافي أرباح المقاولات</span>
-                <span className="font-extrabold text-[#183C35] text-sm">+٢,٠٠٠,٠٠٠ ج.م</span>
+                <span className="text-[#5A646E] block text-[11px] font-semibold">صافي أرباح المقاولات</span>
+                <span className="font-extrabold text-[#2B3138] text-sm">+٢,٠٠٠,٠٠٠ ج.م</span>
               </div>
             </div>
 
-            <span className="text-[11px] text-[#526257] font-medium">
+            <span className="text-[11px] text-[#5A646E] font-medium">
               البيانات مطابقة لسجلات الفواتير الإلكترونية المعتمدة
             </span>
           </div>
@@ -477,27 +477,27 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
       {/* 4. Split Layout (Projects Health vs Action Center) */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left Column: حالة المشاريع (Projects Health) */}
-        <div className="bg-white rounded-xl border border-[#E5E6DF] shadow-[0_8px_30px_rgba(45,36,34,0.04)] overflow-hidden flex flex-col justify-between flex-1">
+        <div className="bg-white rounded-xl border border-[#DDE1E5] shadow-[0_8px_30px_rgba(45,36,34,0.04)] overflow-hidden flex flex-col justify-between flex-1">
           <div>
-            <div className="p-5 border-b border-[#EFEEE8] flex items-center justify-between">
+            <div className="p-5 border-b border-[#ECEEF0] flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold text-[#202923] flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-[#202923]" />
+                  <h2 className="text-base font-bold text-[#1E2429] flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-[#1E2429]" />
                     حالة المشاريع والتنفيذ
                   </h2>
                 </div>
-                <p className="text-xs text-[#526257] mt-0.5">
+                <p className="text-xs text-[#5A646E] mt-0.5">
                   نسب الإنجاز الميداني ومراحل التصميم والمهندسون المشرفون
                 </p>
               </div>
 
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#EFEEE8] text-[#202923] border border-[#E5E6DF]">
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
                 {INITIAL_PROJECTS.length} مواقع قيد العمل
               </span>
             </div>
 
-            <div className="divide-y divide-[#EFEEE8]">
+            <div className="divide-y divide-[#ECEEF0]">
               {INITIAL_PROJECTS.map((project) => {
                 const isOnTrack = project.status === "جاري العمل";
                 const team = TEAM_MEMBERS[project.id] || [];
@@ -505,26 +505,26 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                 return (
                   <div
                     key={project.id}
-                    className="p-5 hover:bg-[#F5F3ED]/70 transition-all duration-200 group"
+                    className="p-5 hover:bg-[#F3F4F6]/70 transition-all duration-200 group"
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-bold text-[#202923] group-hover:text-[#202923] transition-colors">
+                          <h3 className="text-sm font-bold text-[#1E2429] group-hover:text-[#1E2429] transition-colors">
                             {project.name}
                           </h3>
-                          <span className="text-[11px] px-2 py-0.5 rounded-md bg-[#EFEEE8] text-[#202923] font-semibold border border-[#E5E6DF]">
+                          <span className="text-[11px] px-2 py-0.5 rounded-md bg-[#ECEEF0] text-[#1E2429] font-semibold border border-[#DDE1E5]">
                             {project.category}
                           </span>
                           <span
                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
                               isOnTrack
-                                ? "bg-[#5D8C70]/15 text-[#183C35] border-[#5D8C70]/30"
+                                ? "bg-[#D9480F]/15 text-[#2B3138] border-[#D9480F]/30"
                                 : "bg-rose-50 text-rose-700 border-rose-200"
                             }`}
                           >
                             {isOnTrack ? (
-                              <CheckCircle2 className="w-3 h-3 me-1 text-[#5D8C70]" />
+                              <CheckCircle2 className="w-3 h-3 me-1 text-[#D9480F]" />
                             ) : (
                               <ShieldAlert className="w-3 h-3 me-1 text-rose-600" />
                             )}
@@ -532,8 +532,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                           </span>
                         </div>
 
-                        <p className="text-xs text-[#526257] mt-1">
-                          العميل: <span className="text-[#202923] font-bold">{project.client}</span> • القيمة التعاقدية: <span className="text-[#202923] font-extrabold">{project.contractValue}</span>
+                        <p className="text-xs text-[#5A646E] mt-1">
+                          العميل: <span className="text-[#1E2429] font-bold">{project.client}</span> • القيمة التعاقدية: <span className="text-[#1E2429] font-extrabold">{project.contractValue}</span>
                         </p>
                       </div>
 
@@ -556,10 +556,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     {/* Progress Bar with Sage Green Fill */}
                     <div className="mt-3">
                       <div className="flex items-center justify-between text-xs mb-1.5 font-semibold">
-                        <span className="text-[#526257]">
-                          المرحلة: <span className="text-[#202923] font-bold">{project.phase}</span>
+                        <span className="text-[#5A646E]">
+                          المرحلة: <span className="text-[#1E2429] font-bold">{project.phase}</span>
                         </span>
-                        <span className="text-xs font-bold text-[#202923] tracking-wide font-mono">
+                        <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
                           {project.progress}٪ مكتمل
                         </span>
                       </div>
@@ -570,11 +570,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                       />
                     </div>
 
-                    <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#526257]">
-                      <span className="truncate max-w-[260px] text-[#526257]">
+                    <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#5A646E]">
+                      <span className="truncate max-w-[260px] text-[#5A646E]">
                         {project.phaseDetail}
                       </span>
-                      <span className="shrink-0 font-bold text-[#526257]">
+                      <span className="shrink-0 font-bold text-[#5A646E]">
                         التسليم: {project.dueDate}
                       </span>
                     </div>
@@ -584,11 +584,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </div>
           </div>
 
-          <div className="p-4 bg-[#F5F3ED]/70 border-t border-[#EFEEE8] flex items-center justify-between text-xs">
-            <span className="text-[#526257] font-medium">
+          <div className="p-4 bg-[#F3F4F6]/70 border-t border-[#ECEEF0] flex items-center justify-between text-xs">
+            <span className="text-[#5A646E] font-medium">
               جميع الأعمال متوافقة مع الكود الهندسي المصري ٢٠٢٦
             </span>
-            <button className="font-bold text-[#202923] hover:text-amber-800 inline-flex items-center gap-1 transition-colors">
+            <button className="font-bold text-[#1E2429] hover:text-amber-800 inline-flex items-center gap-1 transition-colors">
               عرض سجل المشاريع
               <ChevronLeft className="ltr:-scale-x-100 w-3.5 h-3.5" />
             </button>
@@ -596,15 +596,15 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* Right Column: Action Center (المهام والاعتمادات العاجلة) - Clickable Items & Modal */}
-        <div className="bg-white rounded-xl border border-[#E5E6DF] shadow-sm overflow-hidden flex flex-col justify-between">
+        <div className="bg-white rounded-xl border border-[#DDE1E5] shadow-sm overflow-hidden flex flex-col justify-between">
           <div>
-            <div className="p-5 border-b border-[#EFEEE8] flex items-center justify-between">
+            <div className="p-5 border-b border-[#ECEEF0] flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-[#202923] flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-[#202923]" />
+                <h2 className="text-base font-bold text-[#1E2429] flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-[#1E2429]" />
                   المهام والاعتمادات العاجلة
                 </h2>
-                <p className="text-xs text-[#526257] mt-0.5">
+                <p className="text-xs text-[#5A646E] mt-0.5">
                   اضغط على أي عنصر لعرض التفاصيل والصور الميدانية
                 </p>
               </div>
@@ -612,8 +612,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               <span
                 className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
                   pendingCount > 0
-                    ? "bg-[#EFEEE8] text-[#202923] border-[#E5E6DF]"
-                    : "bg-[#EFEEE8] text-[#526257] border-[#E5E6DF]"
+                    ? "bg-[#ECEEF0] text-[#1E2429] border-[#DDE1E5]"
+                    : "bg-[#ECEEF0] text-[#5A646E] border-[#DDE1E5]"
                 }`}
               >
                 {pendingCount} قيد الانتظار
@@ -623,7 +623,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             {/* Dynamic Map over actionItems Prop with Clickable Rows */}
             <div className="p-4 space-y-3.5 max-h-[580px] overflow-y-auto">
               {adminActionItems.length === 0 ? (
-                <div className="text-center py-12 text-[#526257]">
+                <div className="text-center py-12 text-[#5A646E]">
                   <ClipboardCheck className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p className="text-xs font-bold">لا توجد مهام معلقة حالياً</p>
                 </div>
@@ -639,12 +639,12 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     <div
                       key={item.id}
                       onClick={() => setSelectedItem(item)}
-                      className={`rounded-xl p-4 border transition-all duration-200 relative cursor-pointer hover:bg-[#F5F3ED] ${
+                      className={`rounded-xl p-4 border transition-all duration-200 relative cursor-pointer hover:bg-[#F3F4F6] ${
                         isJustNow && isPending
-                          ? "bg-[#F5F3ED] border-[#D5D8D0] ring-1 ring-[#183C35]/10 shadow-xs"
+                          ? "bg-[#F3F4F6] border-[#CBD0D6] ring-1 ring-[#2B3138]/10 shadow-xs"
                           : isPending
-                          ? "bg-white border-[#E5E6DF] hover:border-[#5D8C70] hover:shadow-xs hover:-translate-y-0.5"
-                          : "bg-[#F5F3ED]/60 border-[#E5E6DF] opacity-90"
+                          ? "bg-white border-[#DDE1E5] hover:border-[#D9480F] hover:shadow-xs hover:-translate-y-0.5"
+                          : "bg-[#F3F4F6]/60 border-[#DDE1E5] opacity-90"
                       }`}
                     >
                       <div className="flex items-start gap-3.5">
@@ -657,53 +657,53 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2">
-                              <span className="text-[11px] font-bold text-[#526257] uppercase tracking-wider">
+                              <span className="text-[11px] font-bold text-[#5A646E] uppercase tracking-wider">
                                 {item.category || "إشعار"} • {item.project || "الموقع"}
                               </span>
 
                               {/* Subtle badge if timestamp is "الآن" */}
                               {isJustNow && isPending && (
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#5D8C70]/15 text-[#183C35] border border-[#5D8C70]/30">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#183C35]" />
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D9480F]/15 text-[#2B3138] border border-[#D9480F]/30">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#2B3138]" />
                                   جديد الآن
                                 </span>
                               )}
                             </div>
 
-                            <span className="text-[11px] font-bold text-[#526257] shrink-0">
+                            <span className="text-[11px] font-bold text-[#5A646E] shrink-0">
                               {item.timestamp || item.time}
                             </span>
                           </div>
 
                           <div className="flex items-center justify-between gap-2 mt-1">
-                            <h4 className="text-sm font-bold text-[#202923] leading-snug">
+                            <h4 className="text-sm font-bold text-[#1E2429] leading-snug">
                               {item.title}
                             </h4>
                             {item.amount && (
-                              <span className="text-xs font-bold text-[#202923] shrink-0 bg-[#EFEEE8] px-2.5 py-0.5 rounded-lg border border-[#E5E6DF] font-mono">
+                              <span className="text-xs font-bold text-[#1E2429] shrink-0 bg-[#ECEEF0] px-2.5 py-0.5 rounded-lg border border-[#DDE1E5] font-mono">
                                 {item.amount}
                               </span>
                             )}
                           </div>
 
                           {item.subtitle && (
-                            <p className="text-xs text-[#526257] mt-1 leading-relaxed">
+                            <p className="text-xs text-[#5A646E] mt-1 leading-relaxed">
                               {item.subtitle}
                             </p>
                           )}
 
-                          <div className="mt-2 text-[11px] text-[#526257] font-medium">
+                          <div className="mt-2 text-[11px] text-[#5A646E] font-medium">
                             المصدر:{" "}
-                            <span className="text-[#202923] font-bold">
+                            <span className="text-[#1E2429] font-bold">
                               {item.user || item.submitter}
                             </span>
-                            <span className="text-[#202923] ms-2 font-bold hover:underline">
+                            <span className="text-[#1E2429] ms-2 font-bold hover:underline">
                               (اضغط لعرض التفاصيل والصور)
                             </span>
                           </div>
 
                           {/* Interactive Action Buttons */}
-                          <div className="mt-3.5 pt-3 border-t border-[#EFEEE8] flex items-center justify-between">
+                          <div className="mt-3.5 pt-3 border-t border-[#ECEEF0] flex items-center justify-between">
                             {isPending ? (
                               <div className="flex items-center gap-2">
                                 <button
@@ -711,7 +711,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                     e.stopPropagation();
                                     handleAction(item.id, "approved");
                                   }}
-                                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-[#183C35] hover:bg-[#202923] hover:bg-[#202923] transition-colors shadow-sm cursor-pointer"
+                                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] transition-colors shadow-sm cursor-pointer"
                                 >
                                   <Check className="w-3.5 h-3.5" />
                                   اعتماد
@@ -721,7 +721,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                     e.stopPropagation();
                                     handleAction(item.id, "rejected");
                                   }}
-                                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-[#526257] bg-white border border-[#E5E6DF] hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 active:scale-95 transition-all"
+                                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 active:scale-95 transition-all"
                                 >
                                   <X className="w-3.5 h-3.5" />
                                   رفض
@@ -732,13 +732,13 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                 <span
                                   className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
                                     item.status === "approved"
-                                      ? "text-[#183C35] bg-[#5D8C70]/15 border border-[#5D8C70]/30"
+                                      ? "text-[#2B3138] bg-[#D9480F]/15 border border-[#D9480F]/30"
                                       : "text-rose-800 bg-rose-50 border border-rose-200"
                                   }`}
                                 >
                                   {item.status === "approved" ? (
                                     <>
-                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#5D8C70]" />
+                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#D9480F]" />
                                       تم الاعتماد والموافقة
                                     </>
                                   ) : (
@@ -754,7 +754,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                                     e.stopPropagation();
                                     handleAction(item.id, "pending");
                                   }}
-                                  className="text-[11px] font-bold text-[#526257] hover:text-[#526257] underline"
+                                  className="text-[11px] font-bold text-[#5A646E] hover:text-[#5A646E] underline"
                                 >
                                   تراجع
                                 </button>
@@ -762,7 +762,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             )}
 
                             {isPending && (
-                              <span className="text-[11px] text-[#526257] hidden sm:inline font-medium">
+                              <span className="text-[11px] text-[#5A646E] hidden sm:inline font-medium">
                                 يتطلب مراجعة الشريك
                               </span>
                             )}
@@ -776,9 +776,9 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </div>
           </div>
 
-          <div className="p-4 bg-[#F5F3ED]/70 border-t border-[#EFEEE8] flex items-center justify-between text-xs text-[#526257] font-medium">
+          <div className="p-4 bg-[#F3F4F6]/70 border-t border-[#ECEEF0] flex items-center justify-between text-xs text-[#5A646E] font-medium">
             <span>تسجيل وتوثيق كافة العمليات في السجل الرقابي للمكتب</span>
-            <span className="font-bold text-[#526257]">محدث الآن</span>
+            <span className="font-bold text-[#5A646E]">محدث الآن</span>
           </div>
         </div>
       </div>
