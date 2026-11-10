@@ -12,6 +12,7 @@ import {
   Layers,
   ChevronLeft,
 } from "lucide-react";
+import { clientProject, toAr } from "../data/seed";
 
 const TIMELINE_STEPS = [
   {
@@ -46,7 +47,7 @@ const TIMELINE_STEPS = [
     id: 3,
     phase: "المرحلة الثالثة: أعمال التشطيبات والديكور الداخلي",
     dateRange: "٢١ أكتوبر ٢٠٢٦ — ١٥ ديسمبر ٢٠٢٦",
-    status: "المرحلة النشطة حالياً (قيد التنفيذ ٧٥٪)",
+    status: `المرحلة النشطة حالياً (قيد التنفيذ ${toAr(clientProject().progress)}٪)`,
     statusType: "active",
     description:
       "تأكيس وبؤج المحارة، تركيب شاسيهات وألواح الجبسوم بورد لبيوت النور، توريد وتركيب رخام أرضيات الاستقبال، والبدء في وجه البطانة للدهانات.",

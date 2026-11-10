@@ -20,6 +20,7 @@ import {
   ChevronRight,
   Sliders,
 } from "lucide-react";
+import { PEOPLE, projectsCountFor } from "../data/seed";
 
 // Smart default permissions generator based on role
 const getDefaultPermissions = (role) => {
@@ -55,69 +56,19 @@ const getDefaultPermissions = (role) => {
   }
 };
 
-// Initial realistic team members data
-const INITIAL_TEAM_MEMBERS = [
-  {
-    id: 1,
-    name: "م. أحمد سمير",
-    role: "مهندس موقع",
-    email: "ahmed.samir@miyar.eg",
-    phone: "+20 100 234 5678",
-    projectsCount: 3,
-    status: "نشط",
-    avatar: "أ",
-    color: "bg-[#183C35]",
-    permissions: getDefaultPermissions("مهندس موقع"),
-  },
-  {
-    id: 2,
-    name: "م. سارة عامر",
-    role: "مدير",
-    email: "sara.amer@miyar.eg",
-    phone: "+20 111 876 5432",
-    projectsCount: 5,
-    status: "نشط",
-    avatar: "س",
-    color: "bg-[#202923]",
-    permissions: getDefaultPermissions("مدير"),
-  },
-  {
-    id: 3,
-    name: "م. طارق يوسف",
-    role: "مكتب فني",
-    email: "tarek.youssef@miyar.eg",
-    phone: "+20 122 345 6789",
-    projectsCount: 4,
-    status: "نشط",
-    avatar: "ط",
-    color: "bg-[#5D8C70]",
-    permissions: getDefaultPermissions("مكتب فني"),
-  },
-  {
-    id: 4,
-    name: "م. كريم مصطفى",
-    role: "مهندس موقع",
-    email: "karim.mostafa@miyar.eg",
-    phone: "+20 106 555 4321",
-    projectsCount: 2,
-    status: "نشط",
-    avatar: "ك",
-    color: "bg-[#183C35]",
-    permissions: getDefaultPermissions("مهندس موقع"),
-  },
-  {
-    id: 5,
-    name: "م. ليلى رياض",
-    role: "مكتب فني",
-    email: "layla.riad@miyar.eg",
-    phone: "+20 114 999 8877",
-    projectsCount: 1,
-    status: "في إجازة",
-    avatar: "ل",
-    color: "bg-[#183C35]",
-    permissions: getDefaultPermissions("مكتب فني"),
-  },
-];
+// Team members (single source: src/data/seed.js)
+const INITIAL_TEAM_MEMBERS = PEOPLE.map((p, i) => ({
+  id: i + 1,
+  name: p.displayName,
+  role: p.role,
+  email: p.email,
+  phone: p.phone,
+  projectsCount: projectsCountFor(p.id),
+  status: p.status,
+  avatar: p.name[0],
+  color: p.color,
+  permissions: getDefaultPermissions(p.role),
+}));
 
 const ROLE_BADGES = {
   مدير: {

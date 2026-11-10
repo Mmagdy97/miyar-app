@@ -22,46 +22,21 @@ import {
   Coins,
   DollarSign,
 } from "lucide-react";
+import { ENGINEER_CASH, personById, projectById, initialsOf } from "../data/seed";
 
-// Initial Engineers Petty Cash State
-const INITIAL_ENGINEERS_CASH = [
-  {
-    id: 1,
-    name: "م. أحمد الشناوي",
-    site: "مقر إداري - الشيخ زايد",
-    totalGiven: 50000,
-    spent: 35000,
-    avatar: "أ.ش",
-    color: "bg-[#183C35]",
-  },
-  {
-    id: 2,
-    name: "م. كريم مصطفى",
-    site: "فيلا الياسمين - التجمع الخامس",
-    totalGiven: 75000,
-    spent: 48000,
-    avatar: "ك.م",
-    color: "bg-[#202923]",
-  },
-  {
-    id: 3,
-    name: "م. عمر عادل",
-    site: "دوبلكس نيو جيزة",
-    totalGiven: 40000,
-    spent: 34500,
-    avatar: "ع.ع",
-    color: "bg-[#5D8C70]",
-  },
-  {
-    id: 4,
-    name: "م. يوسف مدحت",
-    site: "شقة ريفيرا - هليوبوليس",
-    totalGiven: 30000,
-    spent: 12000,
-    avatar: "ي.م",
-    color: "bg-[#183C35]",
-  },
-];
+// Initial Engineers Petty Cash State (single source: src/data/seed.js)
+const INITIAL_ENGINEERS_CASH = ENGINEER_CASH.map((c) => {
+  const person = personById(c.engineerId);
+  return {
+    id: c.id,
+    name: person.displayName,
+    site: projectById(c.projectId).name,
+    totalGiven: c.totalGiven,
+    spent: c.spent,
+    avatar: initialsOf(person.name),
+    color: person.color,
+  };
+});
 
 // Initial Pending Expenses State
 const INITIAL_PENDING_EXPENSES = [

@@ -24,6 +24,10 @@ import {
   SlidersHorizontal,
   Compass,
 } from "lucide-react";
+import { clientProject, getClientPayments, formatNumber, formatDateAr, formatMonthYearAr, toAr } from "../data/seed";
+
+const PROJECT = clientProject();
+const PAY = getClientPayments();
 
 // Project Phases Stepper Data
 const PROJECT_PHASES = [
@@ -32,7 +36,7 @@ const PROJECT_PHASES = [
     title: "التصميم والمخططات",
     subtitle: "المخططات الهندسية والمود بورد ثلاثي الأبعاد",
     status: "completed",
-    date: "١٥ أغسطس ٢٠٢٦",
+    date: "٢٥ سبتمبر ٢٠٢٦",
     badge: "مكتمل بنجاح",
   },
   {
@@ -48,7 +52,7 @@ const PROJECT_PHASES = [
     title: "أعمال التشطيب والديكور",
     subtitle: "تركيب الرخام المستورد وتجليد الحوائط والأسقف",
     status: "active",
-    date: "٢٤ نوفمبر ٢٠٢٦",
+    date: "١٥ ديسمبر ٢٠٢٦",
     badge: "المرحلة الحالية",
   },
   {
@@ -56,7 +60,7 @@ const PROJECT_PHASES = [
     title: "الفرش والتسليم النهائي",
     subtitle: "المطابخ والأثاث المخصص والفحص الشامل واستلام المفتاح",
     status: "pending",
-    date: "١٥ يناير ٢٠٢٧",
+    date: formatDateAr(PROJECT.deadline),
     badge: "قيد الانتظار",
   },
 ];
@@ -239,14 +243,14 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   stroke="url(#clientProgressGrad)"
                   strokeWidth="8"
                   strokeDasharray="251.2"
-                  strokeDashoffset="62.8" /* 75% complete */
+                  strokeDashoffset={251.2 * (1 - PROJECT.progress / 100)}
                   strokeLinecap="round"
                   className="transition-all duration-1000 ease-out"
                 />
               </svg>
               <div className="absolute flex flex-col items-center justify-center text-center">
                 <span className="text-2xl font-black text-white leading-none">
-                  ٧٥٪
+                  {toAr(PROJECT.progress)}٪
                 </span>
                 <span className="text-[10px] text-[#EFEEE8] font-medium mt-0.5">
                   مكتمل
@@ -259,14 +263,14 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 إنجاز كلي للمشروع
               </span>
               <p className="text-sm font-extrabold text-white">
-                ٧٥٪ إنجاز كلي
+                {toAr(PROJECT.progress)}٪ إنجاز كلي
               </p>
               <p className="text-[11px] text-[#EFEEE8]/80">
-                التسليم النهائي المستهدف: يناير ٢٠٢٧
+                التسليم النهائي المستهدف: {formatMonthYearAr(PROJECT.deadline)}
               </p>
               <div className="flex items-center gap-1.5 pt-1 text-[11px] text-[#C5A36B] font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>الجدول الزمني متقدم بيومين</span>
+                <span>الجدول الزمني وفق الخطة المعتمدة</span>
               </div>
             </div>
           </div>
@@ -593,7 +597,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              ٦٠٪ مسدد من إجمالي العقد
+              {toAr(PAY.paidPct)}٪ مسدد من إجمالي العقد
             </span>
           </div>
         </div>
@@ -606,7 +610,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               إجمالي قيمة العقد
             </span>
             <div className="text-2xl sm:text-3xl font-black text-[#202923] font-ibm">
-              ٢,٥٠٠,٠٠٠ <span className="text-sm font-bold text-[#526257]">ج.م</span>
+              {formatNumber(PAY.total)} <span className="text-sm font-bold text-[#526257]">ج.م</span>
             </div>
             <p className="text-[11px] text-[#526257]">
               شامل كافة بنود التوريدات وأعمال الديكور
@@ -620,14 +624,14 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 إجمالي المدفوع حتى الآن
               </span>
               <span className="text-xs font-bold text-[#202923] tracking-wide font-mono">
-                ٦٠٪
+                {toAr(PAY.paidPct)}٪
               </span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-[#202923] font-ibm">
-              ١,٥٠٠,٠٠٠ <span className="text-sm font-bold text-[#EFEEE8]/80">ج.م</span>
+              {formatNumber(PAY.paid)} <span className="text-sm font-bold text-[#EFEEE8]/80">ج.م</span>
             </div>
             {/* Horizontal progress bar */}
-            <ProgressBar value={60} />
+            <ProgressBar value={PAY.paidPct} />
             <p className="text-[11px] text-[#526257] font-medium">
               تم سداد الدفعة الأولى والثانية بنجاح
             </p>
@@ -645,10 +649,10 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </span>
               </div>
               <div style={{ color: '#FFFFFF' }} className="text-2xl sm:text-3xl font-black font-ibm mt-1">
-                ٥٠٠,٠٠٠ <span style={{ color: '#EFEEE8' }} className="text-sm font-bold opacity-80">ج.م</span>
+                {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span style={{ color: '#EFEEE8' }} className="text-sm font-bold opacity-80">ج.م</span>
               </div>
               <p style={{ color: '#EFEEE8' }} className="text-[11px] mt-1">
-                تستحق بعد اعتماد بند رخام الأرضيات
+                {PAY.next ? `تستحق في ${formatDateAr(PAY.next.dueIso)}` : "لا توجد دفعات مستحقة"}
               </p>
             </div>
 
@@ -783,11 +787,11 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div>
                   <span className="text-[#526257] text-xs block">المبلغ المطلوب سداده:</span>
                   <span className="text-2xl font-black text-[#202923] font-ibm">
-                    ٥٠٠,٠٠٠ ج.م
+                    {PAY.next ? formatNumber(PAY.next.amount) : "٠"} ج.م
                   </span>
                 </div>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#202923] border border-[#E5E6DF] shadow-xs">
-                  تستحق: نوفمبر ٢٠٢٦
+                  تستحق: {PAY.next ? formatMonthYearAr(PAY.next.dueIso) : "—"}
                 </span>
               </div>
 

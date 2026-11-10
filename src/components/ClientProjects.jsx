@@ -14,6 +14,7 @@ import {
   FileText,
   Clock,
 } from "lucide-react";
+import { clientProject } from "../data/seed";
 
 const CLIENT_UNITS = [
   {
@@ -23,7 +24,7 @@ const CLIENT_UNITS = [
     location: "حي الياسمين، القاهرة الجديدة",
     area: "٦٥٠ م² (أرضي + أول + بدروم + رووف)",
     phase: "مرحلة التشطيبات",
-    progress: 75,
+    progress: clientProject().progress,
     status: "جاري العمل وفق الجدول",
     startDate: "سبتمبر ٢٠٢٦",
     expectedHandover: "ديسمبر ٢٠٢٦",

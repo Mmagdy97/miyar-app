@@ -23,78 +23,47 @@ import {
   Camera,
   Users,
 } from "lucide-react";
+import {
+  PROJECTS as SEED_PROJECTS,
+  personById,
+  initialsOf,
+  formatDateAr,
+  formatCompact,
+  formatNumber,
+  toAr,
+  getTotals,
+} from "../data/seed";
 
-// Team Members for each project with Arabic initials and roles
-const TEAM_MEMBERS = {
-  1: [
-    { initials: "س.ع", name: "سارة عامر", role: "كبير المعماريين", bg: "bg-[#183C35]" },
-    { initials: "ك.م", name: "كريم مصطفى", role: "مهندس الموقع", bg: "bg-[#183C35]" },
-    { initials: "ط.ي", name: "طارق يوسف", role: "استشاري MEP", bg: "bg-[#5D8C70]" },
-  ],
-  2: [
-    { initials: "م.ح", name: "محمد حسن", role: "مهندس مدني", bg: "bg-[#202923]" },
-    { initials: "ل.ر", name: "ليلى رياض", role: "مصممة الديكور", bg: "bg-[#183C35]" },
-  ],
-  3: [
-    { initials: "ن.ف", name: "نور فتحي", role: "مهندسة معمارية", bg: "bg-[#183C35]" },
-    { initials: "ع.ع", name: "عمر عادل", role: "مسؤول المشتريات", bg: "bg-[#5D8C70]" },
-  ],
-  4: [
-    { initials: "ي.م", name: "يوسف مدحت", role: "مشرف الموقع", bg: "bg-[#202923]" },
-    { initials: "س.ك", name: "سلمى كمال", role: "مراقبة الجودة", bg: "bg-[#5D8C70]" },
-  ],
-};
+// Team members per project and project cards (single source: src/data/seed.js)
+const TEAM_MEMBERS = Object.fromEntries(
+  SEED_PROJECTS.map((p) => [
+    p.id,
+    p.teamIds.map((id) => {
+      const person = personById(id);
+      return {
+        initials: initialsOf(person.name),
+        name: person.name,
+        role: person.title,
+        bg: person.color,
+      };
+    }),
+  ])
+);
 
-const INITIAL_PROJECTS = [
-  {
-    id: 1,
-    name: "فيلا الياسمين - التجمع الخامس",
-    category: "سكني فاخر",
-    client: "مجموعة العامر للاستثمار",
-    phase: "التشطيب النهائي وأعمال MEP",
-    phaseDetail: "تركيب الرخام المستورد والتكييف المركزي المخفي",
-    progress: 78,
-    status: "جاري العمل",
-    dueDate: "٢٤ نوفمبر ٢٠٢٦",
-    contractValue: "٢.٨٥ مليون ج.م",
-  },
-  {
-    id: 2,
-    name: "مقر إداري - الشيخ زايد",
-    category: "مساحات عمل ومكاتب",
-    client: "شركة نايل تك للبرمجيات",
-    phase: "أعمال التأسيس والهيكل الداخلي",
-    phaseDetail: "قواطع زجاجية عازلة وهياكل أسقف معلقة",
-    progress: 42,
-    status: "متأخر",
-    dueDate: "١٥ ديسمبر ٢٠٢٦",
-    contractValue: "٦.٥٠ مليون ج.م",
-  },
-  {
-    id: 3,
-    name: "دوبلكس نيو جيزة",
-    category: "تجديد بنتهاوس كامل",
-    client: "د. فاروق الشريف",
-    phase: "أعمال النجارة والديكور",
-    phaseDetail: "تجليد جدران خشب جوز طبيعي ومطابخ ألمانية",
-    progress: 88,
-    status: "جاري العمل",
-    dueDate: "١٠ نوفمبر ٢٠٢٦",
-    contractValue: "١.٤٠ مليون ج.م",
-  },
-  {
-    id: 4,
-    name: "شاليه مراسي 14B",
-    category: "فيلا شاطئية ساحلية",
-    client: "م. طارق عبد الرحمن",
-    phase: "أعمال الرخام والتراصو",
-    phaseDetail: "أرضيات تراصو خارجية وترافنتينو حمامات السباحة",
-    progress: 60,
-    status: "جاري العمل",
-    dueDate: "٠٥ يناير ٢٠٢٧",
-    contractValue: "٩٥٠ ألف ج.م",
-  },
-];
+const INITIAL_PROJECTS = SEED_PROJECTS.map((p) => ({
+  id: p.id,
+  name: p.name,
+  category: p.category,
+  client: p.client,
+  phase: p.phaseTitle,
+  phaseDetail: p.phaseDetail,
+  progress: p.progress,
+  status: p.status,
+  dueDate: formatDateAr(p.deadline),
+  contractValue: `${formatCompact(p.contractValue)} ج.م`,
+}));
+
+const TOTALS = getTotals();
 
 const MONTHLY_FINANCIALS = [
   { month: "يونيو", revenue: 580, expenses: 380, label: "٥٨٠ ألف / ٣٨٠ ألف" },
@@ -187,7 +156,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </span>
             <span className="text-[#C5A36B]">•</span>
             <span className="text-[#526257]">
-              متابعة مباشرة لـ <strong className="text-[#202923]">٤ مشاريع قيد التنفيذ</strong> في نطاق القاهرة الكبرى
+              متابعة مباشرة لـ <strong className="text-[#202923]">{toAr(TOTALS.projectCount)} مشاريع قيد التنفيذ</strong> في نطاق القاهرة الكبرى
             </span>
           </p>
         </div>
@@ -222,11 +191,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4">
               <span className="text-3xl font-bold tracking-tight text-[#202923] font-ibm">
-                ٥.٤ مليون <span className="text-base font-medium text-[#526257]">ج.م</span>
+                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#526257]">ج.م</span>
               </span>
             </div>
             <p className="text-xs text-[#526257] mt-1">
-              إجمالي القيمة التعاقدية لـ ٦ مشاريع
+              إجمالي القيمة التعاقدية لـ {toAr(TOTALS.projectCount)} مشاريع
             </p>
           </div>
 
@@ -261,13 +230,13 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                 إجمالي المحصل
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#27734E]/10 text-[#27734E]">
-                ٥٩.٢٪
+                {toAr(TOTALS.collectedPct)}٪
               </span>
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
               <span className="text-3xl font-bold tracking-tight text-[#202923] font-ibm">
-                ٣.٢ مليون <span className="text-base font-medium text-[#526257]">ج.م</span>
+                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#526257]">ج.م</span>
               </span>
             </div>
             <p className="text-xs text-[#526257] mt-1">
@@ -311,22 +280,22 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="mt-4">
               <span className="text-3xl font-bold tracking-tight text-[#B83F3F] font-ibm">
-                ١.١٤ مليون <span className="text-base font-medium text-[#526257]">ج.م</span>
+                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#526257]">ج.م</span>
               </span>
             </div>
             <p className="text-xs text-[#526257] mt-1">
-              ٣ فواتير ومستخلصات تجاوزت موعد الاستحقاق
+              {toAr(TOTALS.overdueCount)} فواتير ومستخلصات تجاوزت موعد الاستحقاق
             </p>
           </div>
 
           <div className="mt-5 pt-3 border-t border-[#EFEEE8] space-y-2">
             <div className="flex items-center justify-between text-xs text-[#526257] font-medium">
-              <span className="truncate">مستخلص فيلا الياسمين</span>
-              <span className="shrink-0 text-xs font-bold text-[#B83F3F]">٥٨٠ ألف ج.م (٦٨٪)</span>
+              <span className="truncate">مستخلص {TOTALS.topOverdue.projectName}</span>
+              <span className="shrink-0 text-xs font-bold text-[#B83F3F]">{formatCompact(TOTALS.topOverdue.amount)} ج.م ({toAr(TOTALS.topOverdue.pctOfOverdue)}٪)</span>
             </div>
-            <ProgressBar value={68} customFillClass="bg-[#B83F3F]" />
+            <ProgressBar value={TOTALS.topOverdue.pctOfOverdue} customFillClass="bg-[#B83F3F]" />
             <p className="text-xs text-[#526257] font-medium">
-              متوسط التأخير: ١٨ يوماً
+              متوسط التأخير: {toAr(TOTALS.overdueAvgDays)} يوماً
             </p>
           </div>
         </div>
@@ -340,28 +309,28 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                 عهد مهندسين نشطة
               </span>
               <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#C5A36B]/15 text-[#A76B20]">
-                بالمواقع (٧٥٪)
+                بالمواقع ({toAr(TOTALS.cashUsedPct)}٪)
               </span>
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
               <span className="text-3xl font-bold tracking-tight text-[#202923] font-ibm">
-                ٤٥,٠٠٠ <span className="text-base font-medium text-[#526257]">ج.م</span>
+                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#526257]">ج.م</span>
               </span>
             </div>
             <p className="text-xs text-[#526257] mt-1">
-              في حوزة ٤ مهندسي مواقع للمشتريات
+              في حوزة {toAr(TOTALS.cashEngineerCount)} مهندسي مواقع للمشتريات
             </p>
           </div>
 
           <div className="mt-5 pt-3 border-t border-[#EFEEE8] space-y-2.5">
             <div className="flex items-center justify-between text-xs text-[#526257] font-medium">
               <span>نسبة استخدام سقف العهد</span>
-              <span className="text-xs font-bold text-[#202923] font-mono">٧٥٪</span>
+              <span className="text-xs font-bold text-[#202923] font-mono">{toAr(TOTALS.cashUsedPct)}٪</span>
             </div>
-            <ProgressBar value={75} customFillClass="bg-[#183C35]" />
+            <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#183C35]" />
             <div className="flex items-center justify-between text-xs text-[#526257] font-medium">
-              <span>الحد الأقصى: ٦٠,٠٠٠ ج.م</span>
+              <span>إجمالي العهد المسلّمة: {formatNumber(TOTALS.cashGiven)} ج.م</span>
               <span className="text-[#27734E] font-bold">السيولة آمنة</span>
             </div>
           </div>

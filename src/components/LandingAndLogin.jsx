@@ -36,6 +36,10 @@ import {
   HelpCircle,
   Download,
 } from "lucide-react";
+import { clientProject, ENGINEER_CASH, formatEGP, toAr } from "../data/seed";
+
+const HERO_PROJECT = clientProject();
+const HERO_CASH = ENGINEER_CASH.find((c) => c.projectId === HERO_PROJECT.id);
 
 const DEMO_ROLES = [
   {
@@ -255,7 +259,7 @@ export default function LandingAndLogin({ onLogin }) {
                 </div>
                 <div className="flex items-center gap-2 text-xs font-bold text-[#202923] bg-white px-3 py-1 rounded-lg border border-[#E5E6DF] shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>فيلا الياسمين — التجمع الخامس (YAS-2026)</span>
+                  <span>{HERO_PROJECT.name} ({HERO_PROJECT.code})</span>
                 </div>
                 <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                   مباشر من الموقع
@@ -268,26 +272,26 @@ export default function LandingAndLogin({ onLogin }) {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   <div className="p-3.5 rounded-xl bg-white border border-[#E5E6DF] shadow-2xs">
                     <span className="text-[10px] font-bold text-[#526257] block">قيمة التعاقد</span>
-                    <span className="text-base sm:text-lg font-black text-[#202923] mt-0.5 block">٢,٤٥٠,٠٠٠ ج.م</span>
+                    <span className="text-base sm:text-lg font-black text-[#202923] mt-0.5 block">{formatEGP(HERO_PROJECT.contractValue)}</span>
                     <span className="text-[10px] text-[#5D8C70] font-bold">شامل التوريد والتركيب</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-white border border-[#E5E6DF] shadow-2xs">
                     <span className="text-[10px] font-bold text-[#526257] block">المنصرف الفعلي بالمواقع</span>
-                    <span className="text-base sm:text-lg font-black text-[#202923] mt-0.5 block">١,١٨٠,٠٠٠ ج.م</span>
+                    <span className="text-base sm:text-lg font-black text-[#202923] mt-0.5 block">{formatEGP(HERO_PROJECT.spentActual)}</span>
                     <span className="text-[10px] text-[#526257] font-bold">فواتير معتمدة لحظياً</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-[#183C35] text-white border border-[#14322c] shadow-2xs">
                     <span style={{ color: '#EFEEE8' }} className="text-[10px] font-bold text-[#EFEEE8] block">رصيد العهد المتاح بالموقع</span>
-                    <span style={{ color: '#FFFFFF' }} className="text-base sm:text-lg font-black text-white mt-0.5 block">٨٧,٥٠٠ ج.م</span>
+                    <span style={{ color: '#FFFFFF' }} className="text-base sm:text-lg font-black text-white mt-0.5 block">{formatEGP(HERO_CASH.totalGiven - HERO_CASH.spent)}</span>
                     <span style={{ color: '#C5A36B' }} className="text-[10px] text-[#C5A36B] font-bold">جاهز للصرف الطارئ</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-white border border-[#E5E6DF] shadow-2xs">
                     <span className="text-[10px] font-bold text-[#526257] block">نسبة الإنجاز الفعلي</span>
-                    <span className="text-base sm:text-lg font-black text-[#202923] mt-0.5 block">٧٨٪</span>
-                    <span className="text-[10px] text-[#5D8C70] font-bold">متقدم عن الجدول بـ ٤ أيام</span>
+                    <span className="text-base sm:text-lg font-black text-[#202923] mt-0.5 block">{toAr(HERO_PROJECT.progress)}٪</span>
+                    <span className="text-[10px] text-[#5D8C70] font-bold">وفق الجدول الزمني المعتمد</span>
                   </div>
                 </div>
 
@@ -295,10 +299,10 @@ export default function LandingAndLogin({ onLogin }) {
                 <div className="p-4 rounded-xl bg-white border border-[#E5E6DF] shadow-2xs space-y-2">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-[#202923]">المرحلة الحالية: تشطيبات الرخام والتجاليد</span>
-                    <span className="font-bold text-[#202923] font-mono">٧٨٪</span>
+                    <span className="font-bold text-[#202923] font-mono">{toAr(HERO_PROJECT.progress)}٪</span>
                   </div>
                   <div className="w-full h-2.5 bg-[#EFEEE8] rounded-full overflow-hidden">
-                    <div className="h-full bg-[#183C35] rounded-full w-[78%]" />
+                    <div className="h-full bg-[#183C35] rounded-full" style={{ width: `${HERO_PROJECT.progress}%` }} />
                   </div>
                 </div>
 

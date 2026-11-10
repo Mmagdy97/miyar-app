@@ -23,82 +23,37 @@ import {
   Sliders,
   DollarSign,
 } from "lucide-react";
+import {
+  PROJECTS as SEED_PROJECTS,
+  PHASES as SEED_PHASES,
+  PEOPLE,
+  personById,
+  formatEGP,
+} from "../data/seed";
 
 // Standard Phases in Construction & Interior Design
-const PHASES = ["تصميم", "تأسيس", "تشطيب", "تسليم"];
+const PHASES = SEED_PHASES;
 
-// Initial Projects Data
-const INITIAL_PROJECTS = [
-  {
-    id: 1,
-    name: "فيلا الياسمين - التجمع الخامس",
-    client: "أ. محمد عبد الرحمن",
-    engineer: "م. أحمد الشناوي",
-    progress: 65,
-    status: "جاري العمل",
-    phase: "تشطيب",
-    startDate: "2026-09-01",
-    deadline: "2026-12-30",
-    budget: "٥,٤٠٠,٠٠٠ ج.م",
-    location: "التجمع الخامس - القاهرة الجديدة",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 2,
-    name: "مقر إداري - الشيخ زايد",
-    client: "شركة كابيتال القابضة",
-    engineer: "م. كريم مصطفى",
-    progress: 42,
-    status: "متأخر",
-    phase: "تأسيس",
-    startDate: "2026-08-15",
-    deadline: "2026-11-20",
-    budget: "٣,٢٠٠,٠٠٠ ج.م",
-    location: "بوليجون سوديك - الشيخ زايد",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    name: "دوبلكس نيو جيزة - بالم هيلز",
-    client: "د. طارق السعيد",
-    engineer: "م. عمر عادل",
-    progress: 88,
-    status: "متقدم عن الجدول",
-    phase: "تشطيب",
-    startDate: "2026-06-10",
-    deadline: "2026-10-15",
-    budget: "٢,٨٥٠,٠٠٠ ج.م",
-    location: "نيو جيزة - طريق الإسكندرية الصحراوي",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    name: "بنتهاوس ريفيرا - هليوبوليس",
-    client: "م. شريف والي",
-    engineer: "م. يوسف مدحت",
-    progress: 15,
-    status: "جاري العمل",
-    phase: "تصميم",
-    startDate: "2026-10-01",
-    deadline: "2027-02-28",
-    budget: "٤,١٠٠,٠٠٠ ج.م",
-    location: "مصر الجديدة - القاهرة",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-  },
-];
+// Initial Projects Data (single source of truth: src/data/seed.js)
+const INITIAL_PROJECTS = SEED_PROJECTS.map((p) => ({
+  id: p.id,
+  name: p.name,
+  client: p.client,
+  engineer: personById(p.engineerId).displayName,
+  progress: p.progress,
+  status: p.status,
+  phase: p.phase,
+  startDate: p.startDate,
+  deadline: p.deadline,
+  budget: formatEGP(p.contractValue),
+  location: p.location,
+  image: p.image,
+}));
 
 // Available Engineers for Assignment
-const ENGINEERS_LIST = [
-  "م. أحمد الشناوي",
-  "م. كريم مصطفى",
-  "م. عمر عادل",
-  "م. يوسف مدحت",
-  "م. طارق يوسف",
-];
+const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
+  (p) => p.displayName
+);
 
 function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [projects, setProjects] = useState(INITIAL_PROJECTS);

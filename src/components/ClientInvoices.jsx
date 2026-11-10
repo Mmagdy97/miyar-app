@@ -13,59 +13,9 @@ import {
   Lock,
   ArrowUpRight,
 } from "lucide-react";
+import { CLIENT_INVOICES } from "../data/seed";
 
-const INITIAL_INVOICES = [
-  {
-    id: 1,
-    title: "الدفعة الأولى: التعاقد واعتماد المخططات 3D",
-    milestone: "مقدم التعاقد وبدء أعمال التصميم",
-    amount: 1350000,
-    dueDate: "٢٠٢٦/٠٩/٠١",
-    paidDate: "٢٠٢٦/٠٩/٠٣",
-    status: "مدفوع",
-    receiptNo: "INV-2026-001",
-  },
-  {
-    id: 2,
-    title: "الدفعة الثانية: أعمال التأسيس والمرافق (MEP)",
-    milestone: "استلام شبكات السباكة والكهرباء والعزل",
-    amount: 1350000,
-    dueDate: "٢٠٢٦/١٠/٠١",
-    paidDate: "٢٠٢٦/١٠/٠٥",
-    status: "مدفوع",
-    receiptNo: "INV-2026-002",
-  },
-  {
-    id: 3,
-    title: "الدفعة الثالثة: توريد وتركيب الرخام والجبسوم بورد",
-    milestone: "مرحلة أعمال التشطيبات المعمارية الكبرى",
-    amount: 1350000,
-    dueDate: "٢٠٢٦/١١/١٥",
-    paidDate: null,
-    status: "مستحق",
-    receiptNo: "INV-2026-003",
-  },
-  {
-    id: 4,
-    title: "الدفعة الرابعة: الدهانات النهائية والأبواب والتجهيزات",
-    milestone: "التشطيبات الدقيقة والألوان والإنارة",
-    amount: 810000,
-    dueDate: "٢٠٢٦/١٢/١٠",
-    paidDate: null,
-    status: "مستحق",
-    receiptNo: "INV-2026-004",
-  },
-  {
-    id: 5,
-    title: "الدفعة الخامسة: التسليم النهائي وشهادة الضمان",
-    milestone: "المعاينة الختامية والتسليم المفتاحي",
-    amount: 540000,
-    dueDate: "٢٠٢٦/١٢/٣٠",
-    paidDate: null,
-    status: "مستحق",
-    receiptNo: "INV-2026-005",
-  },
-];
+const INITIAL_INVOICES = CLIENT_INVOICES;
 
 function ClientInvoices() {
   const [invoices, setInvoices] = useState(INITIAL_INVOICES);

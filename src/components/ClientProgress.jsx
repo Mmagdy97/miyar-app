@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Check,
 } from "lucide-react";
+import { clientProject } from "../data/seed";
 
 const DISCIPLINES_PROGRESS = [
   {
@@ -79,7 +80,7 @@ const DISCIPLINES_PROGRESS = [
 ];
 
 function ClientProgress() {
-  const overallPercentage = 75;
+  const overallPercentage = clientProject().progress;
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden" dir="rtl">
