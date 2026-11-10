@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tr_ as T } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
   TrendingUp,
@@ -93,21 +94,21 @@ function ClientProgress() {
                 <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <TrendingUp className="w-5 h-5" />
                 </div>
-                <span>تفاصيل نسب الإنجاز</span>
+                <span>{T("cli.108")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                مشروع: فيلا الياسمين
+                {T("cli.124")}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              تقرير تفصيلي لنسب الإنجاز المرحلي لكل بند من بنود الديكور والتشطيب الداخلي.
+              {T("cli.110")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>مطابق للكود الهندسي</span>
+              <span>{T("cli.111")}</span>
             </span>
           </div>
         </div>
@@ -117,19 +118,19 @@ function ClientProgress() {
           <div className="relative z-10 space-y-3 max-w-lg text-center md:text-start">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-md border border-white/20">
               <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>مرحلة التشطيبات المعمارية الكبرى</span>
+              <span>{T("cli.112")}</span>
             </span>
             <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">
-              مشروعك تجاوز مرحلة التأسيس بنجاح وفي طريقه للتسليم
+              {T("cli.113")}
             </h2>
             <p className="text-xs md:text-sm text-[#ECEEF0] leading-relaxed">
-              تم إنجاز كافة أعمال التأسيس للمرافق بنسبة ١٠٠٪، والعمل جاري حالياً على الرخام والجبس بورد لإعداد الفيلا لمرحلة الدهانات النهائية.
+              {T("cli.114")}
             </p>
 
             <div className="pt-2 flex items-center justify-center md:justify-start gap-4 text-xs text-[#ECEEF0]">
-              <span>تاريخ البدء: <strong>سبتمبر ٢٠٢٦</strong></span>
+              <span>{T("cli.115")} <strong>{T("cli.116")}</strong></span>
               <span>•</span>
-              <span>الموعد المتوقع: <strong className="text-white">ديسمبر ٢٠٢٦</strong></span>
+              <span>{T("cli.117")} <strong className="text-white">{T("cli.118")}</strong></span>
             </div>
           </div>
 
@@ -173,7 +174,7 @@ function ClientProgress() {
                 %{overallPercentage}
               </span>
               <span className="text-[11px] font-bold text-[#7B848E] mt-0.5">
-                إنجاز كلي للمشروع
+                {T("cli.119")}
               </span>
             </div>
           </div>
@@ -184,9 +185,9 @@ function ClientProgress() {
           <div className="flex items-center justify-between">
             <h3 className="text-base font-extrabold text-[#1E2429] flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#1E2429]" />
-              <span>تفصيل البنود التخصصية بالموقع (Disciplines Breakdown)</span>
+              <span>{T("cli.120")}</span>
             </h3>
-            <span className="text-xs text-[#5A646E]">محدثة وفق اليوميات الميدانية</span>
+            <span className="text-xs text-[#5A646E]">{T("cli.121")}</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -222,7 +223,7 @@ function ClientProgress() {
                   {/* Progress Track */}
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-[11px] font-bold text-[#5A646E]">نسبة الإنجاز</span>
+                      <span className="text-[11px] font-bold text-[#5A646E]">{T("cli.122")}</span>
                       <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
                         %{item.percentage}
                       </span>

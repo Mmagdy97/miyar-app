@@ -1,4 +1,5 @@
 import { currencySymbol } from "../i18n";
+import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -184,37 +185,37 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center gap-2 flex-wrap">
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white border border-white/20 inline-flex items-center gap-1.5 backdrop-blur-sm">
                 <Sparkles className="w-3.5 h-3.5 text-white" />
-                جناح العميل الخاص • Private Client Suite
+                {T("cli.28")}
               </span>
               <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 text-[#ECEEF0] border border-white/15">
-                كود المشروع: YAS-2026
+                {T("cli.29")}
               </span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
-              مرحباً بك في مشروعك، أ. محمد
+              {T("cli.30")}
             </h1>
 
             <div className="flex items-center gap-2.5 flex-wrap pt-1">
               <span className="text-lg sm:text-xl font-bold text-white">
-                فيلا الياسمين - التجمع الخامس
+                {T("cli.31")}
               </span>
               <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-white/10 text-[#7B848E] border border-white/20">
-                مرحلة التشطيبات والديكور
+                {T("cli.32")}
               </span>
             </div>
 
             <p className="text-xs sm:text-sm text-[#ECEEF0] leading-relaxed pt-1 flex items-center gap-2 flex-wrap">
               <span className="inline-flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-rose-400" />
-                حي النرجس، قطعة ٤٢
+                {T("cli.33")}
               </span>
               <span>•</span>
-              <span>المساحة: ٦٥٠ م²</span>
+              <span>{T("cli.34")}</span>
               <span>•</span>
-              <span>الطراز: نيوكلاسيك معاصر</span>
+              <span>{T("cli.35")}</span>
               <span>•</span>
-              <span>الاستشاري: م. طارق يوسف</span>
+              <span>{T("cli.36")}</span>
             </p>
           </div>
 
@@ -253,27 +254,27 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               </svg>
               <div className="absolute flex flex-col items-center justify-center text-center">
                 <span className="text-2xl font-black text-white leading-none">
-                  {toAr(PROJECT.progress)}٪
+                  {T("cli.37", { v0: toAr(PROJECT.progress) })}
                 </span>
                 <span className="text-[10px] text-[#ECEEF0] font-medium mt-0.5">
-                  مكتمل
+                  {T("cli.38")}
                 </span>
               </div>
             </div>
 
             <div className="space-y-1">
               <span className="text-xs font-bold text-[#7B848E] block">
-                إنجاز كلي للمشروع
+                {T("cli.119")}
               </span>
               <p className="text-sm font-extrabold text-white">
-                {toAr(PROJECT.progress)}٪ إنجاز كلي
+                {T("cli.40", { v0: toAr(PROJECT.progress) })}
               </p>
               <p className="text-[11px] text-[#ECEEF0]/80">
-                التسليم النهائي المستهدف: {formatMonthYearAr(PROJECT.deadline)}
+                {T("cli.41", { v0: formatMonthYearAr(PROJECT.deadline) })}
               </p>
               <div className="flex items-center gap-1.5 pt-1 text-[11px] text-[#7B848E] font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>الجدول الزمني وفق الخطة المعتمدة</span>
+                <span>{T("cli.42")}</span>
               </div>
             </div>
           </div>
@@ -286,14 +287,14 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           <div>
             <h2 className="text-lg font-black text-[#1E2429] flex items-center gap-2">
               <Compass className="w-5 h-5 text-[#1E2429]" />
-              الجدول الزمني لمراحل مشروعك
+              {T("cli.43")}
             </h2>
             <p className="text-xs text-[#5A646E] mt-0.5">
-              تتبع رحلة تحويل المخطط الهندسي إلى منزلك الفاخر خطوة بخطوة
+              {T("cli.44")}
             </p>
           </div>
           <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] self-start sm:self-auto">
-            المرحلة الحالية: ٣ من ٤
+            {T("cli.45")}
           </span>
         </div>
 
@@ -319,7 +320,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-extrabold text-[#5A646E] font-mono">
-                      المرحلة ٠{phase.id}
+                      {T("cli.46", { v0: phase.id })}
                     </span>
 
                     {/* Status Pill */}
@@ -366,7 +367,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </div>
 
                 <div className="pt-4 mt-3 border-t border-[#ECEEF0] flex items-center justify-between text-[11px]">
-                  <span className="text-[#5A646E] font-medium">التاريخ:</span>
+                  <span className="text-[#5A646E] font-medium">{T("cli.47")}</span>
                   <span
                     className={`font-bold ${
                       isActive ? "text-[#1E2429] font-bold" : "text-[#5A646E]"
@@ -390,16 +391,16 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             </div>
             <div>
               <h2 className="text-base sm:text-lg font-black text-[#1E2429]">
-                اعتمادات وموافقات مطلوبة منك
+                {T("cli.48")}
               </h2>
               <p className="text-xs text-[#5A646E] mt-0.5">
-                مشاركتك في اختيار اللمسات النهائية لضمان مطابقة الذوق الرفيع
+                {T("cli.49")}
               </p>
             </div>
           </div>
 
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 self-start sm:self-auto">
-            مطلوب رأيك اليوم
+            {T("cli.50")}
           </span>
         </div>
 
@@ -408,23 +409,23 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="space-y-2 max-w-xl">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                عينة رخام الأرضيات
+                {T("cli.51")}
               </span>
-              <span className="text-xs text-[#5A646E]">استقبال وصالون الفيلا</span>
+              <span className="text-xs text-[#5A646E]">{T("cli.52")}</span>
             </div>
 
             <h3 className="text-base font-black text-[#1E2429]">
-              اعتماد عينة رخام الأرضيات (Crema Marfil إسباني فرز أول)
+              {T("cli.53")}
             </h3>
 
             <p className="text-xs text-[#5A646E] leading-relaxed">
-              عينة حجرية طبيعية مصقولة مقاس ٨٠×٨٠ سم مستوردة من إسبانيا مع لمسة دافئة تعكس الإنارة النهارية بشكل مثالي. تم توفير لوحين في الموقع لمعاينتك على الطبيعة.
+              {T("cli.54")}
             </p>
 
             <div className="flex items-center gap-4 text-xs text-[#5A646E] pt-1 font-medium">
-              <span>المورد: رخام إسبانيا الدولي</span>
+              <span>{T("cli.55")}</span>
               <span>•</span>
-              <span>السماكة: ٢٠ مم معالجة ضد التبقع</span>
+              <span>{T("cli.56")}</span>
             </div>
           </div>
 
@@ -437,7 +438,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   className="px-5 py-3 rounded-lg text-xs sm:text-sm font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
-                  <span>موافقة واعتماد العينة</span>
+                  <span>{T("cli.57")}</span>
                 </button>
 
                 <button
@@ -445,39 +446,39 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   className="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#ECEEF0] hover:text-rose-700 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <X className="w-4 h-4" />
-                  <span>طلب عينة بديلة</span>
+                  <span>{T("cli.58")}</span>
                 </button>
               </>
             ) : approvalsState.marble === "approved" ? (
               <div className="p-3.5 rounded-lg bg-emerald-50 border border-emerald-300 text-center space-y-1">
                 <span className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-800">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  تم اعتماد العينة بنجاح
+                  {T("cli.59")}
                 </span>
                 <p className="text-[11px] text-emerald-700">
-                  تم إشعار المكتب الفني لبدء التوريد والتركيب
+                  {T("cli.60")}
                 </p>
                 <button
                   onClick={() => handleClientApproval("marble", "pending")}
                   className="text-[10px] text-[#5A646E] hover:text-[#5A646E] underline font-medium pt-1"
                 >
-                  تغيير الرأي
+                  {T("cli.61")}
                 </button>
               </div>
             ) : (
               <div className="p-3.5 rounded-lg bg-rose-50 border border-rose-300 text-center space-y-1">
                 <span className="inline-flex items-center gap-1.5 text-xs font-black text-rose-800">
                   <X className="w-4 h-4 text-rose-600" />
-                  تم طلب عينة رخام بديلة
+                  {T("cli.62")}
                 </span>
                 <p className="text-[11px] text-rose-700">
-                  سيقوم مهندس الديكور بتحضير كتالوج رخام بديل
+                  {T("cli.63")}
                 </p>
                 <button
                   onClick={() => handleClientApproval("marble", "pending")}
                   className="text-[10px] text-[#5A646E] hover:text-[#5A646E] underline font-medium pt-1"
                 >
-                  تراجع
+                  {T("cli.64")}
                 </button>
               </div>
             )}
@@ -492,16 +493,16 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center gap-2">
               <Camera className="w-5 h-5 text-[#1E2429]" />
               <h2 className="text-lg font-black text-[#1E2429]">
-                آخر تحديثات الموقع الميدانية
+                {T("cli.65")}
               </h2>
             </div>
             <p className="text-xs text-[#5A646E] mt-0.5">
-              صور وتوثيق حي من مهندسي الموقع للأعمال المنفذة هذا الأسبوع
+              {T("cli.66")}
             </p>
           </div>
 
           <span className="text-xs font-bold text-[#1E2429] bg-[#ECEEF0] px-3 py-1 rounded-full border border-[#DDE1E5] self-start sm:self-auto">
-            محدث اليوم • ٤ لقطات جديدة
+            {T("cli.67")}
           </span>
         </div>
 
@@ -570,7 +571,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
                   <div className="pt-3 border-t border-[#ECEEF0] flex items-center justify-between text-[10px] text-[#5A646E]">
                     <span className="truncate max-w-[140px]">
-                      بواسطة: {photo.photographer}
+                      {T("cli.68", { v0: photo.photographer })}
                     </span>
                     <span className="font-bold text-[#1E2429] flex items-center gap-1 group-hover:underline">
                       معاينة <Eye className="w-3 h-3" />
@@ -590,17 +591,17 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center gap-2">
               <CreditCard className="w-5 h-5 text-[#1E2429]" />
               <h2 className="text-lg font-black text-[#1E2429]">
-                الملخص المالي المبسط لمشروعك
+                {T("cli.69")}
               </h2>
             </div>
             <p className="text-xs text-[#5A646E] mt-0.5">
-              متابعة دفعات العقد المعتمدة بدون تعقيدات محاسبية
+              {T("cli.70")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              {toAr(PAY.paidPct)}٪ مسدد من إجمالي العقد
+              {T("cli.71", { v0: toAr(PAY.paidPct) })}
             </span>
           </div>
         </div>
@@ -610,13 +611,13 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           {/* Metric 1: Total Contract */}
           <div className="p-5 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] space-y-2">
             <span className="text-xs font-bold text-[#5A646E] uppercase tracking-wider">
-              إجمالي قيمة العقد
+              {T("cli.72")}
             </span>
             <div className="text-2xl sm:text-3xl font-black text-[#1E2429] font-ibm">
               {formatNumber(PAY.total)} <span className="text-sm font-bold text-[#5A646E]">{currencySymbol()}</span>
             </div>
             <p className="text-[11px] text-[#5A646E]">
-              شامل كافة بنود التوريدات وأعمال الديكور
+              {T("cli.73")}
             </p>
           </div>
 
@@ -624,10 +625,10 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="p-5 rounded-2xl bg-white border border-[#DDE1E5] shadow-sm space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-[#1E2429] uppercase tracking-wider">
-                إجمالي المدفوع حتى الآن
+                {T("cli.74")}
               </span>
               <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
-                {toAr(PAY.paidPct)}٪
+                {T("cli.37", { v0: toAr(PAY.paidPct) })}
               </span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-[#1E2429] font-ibm">
@@ -636,7 +637,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             {/* Horizontal progress bar */}
             <ProgressBar value={PAY.paidPct} />
             <p className="text-[11px] text-[#5A646E] font-medium">
-              تم سداد الدفعة الأولى والثانية بنجاح
+              {T("cli.75")}
             </p>
           </div>
 
@@ -645,10 +646,10 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             <div>
               <div className="flex items-center justify-between">
                 <span style={{ color: '#ECEEF0' }} className="text-xs font-bold uppercase tracking-wider">
-                  الدفعة المستحقة القادمة
+                  {T("cli.76")}
                 </span>
                 <span style={{ color: '#FFFFFF' }} className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
-                  دفعة التشطيبات
+                  {T("cli.77")}
                 </span>
               </div>
               <div style={{ color: '#FFFFFF' }} className="text-2xl sm:text-3xl font-black font-ibm mt-1">
@@ -664,7 +665,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               className="w-full py-2.5 px-4 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#2B3138] hover:bg-[#ECEEF0] active:scale-98 transition-all shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <CreditCard className="w-4 h-4" />
-              <span>تفاصيل الدفعة والتحويل</span>
+              <span>{T("cli.78")}</span>
             </button>
           </div>
         </div>
@@ -703,10 +704,10 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-[#1E2429]">
-                  تاريخ التوثيق: {activePhoto.date}
+                  {T("cli.79", { v0: activePhoto.date })}
                 </span>
                 <span className="text-xs text-[#5A646E]">
-                  الموثق: {activePhoto.photographer}
+                  {T("cli.80", { v0: activePhoto.photographer })}
                 </span>
               </div>
 
@@ -743,7 +744,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   onClick={() => setActivePhoto(null)}
                   className="px-5 py-2 rounded-lg text-xs font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] transition-colors shadow-sm"
                 >
-                  إغلاق
+                  {T("cli.81")}
                 </button>
               </div>
             </div>
@@ -769,10 +770,10 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </div>
                 <div>
                   <h3 className="text-base font-black text-[#1E2429]">
-                    بيانات سداد الدفعة القادمة
+                    {T("cli.82")}
                   </h3>
                   <p className="text-xs text-[#5A646E]">
-                    دفعة أعمال التشطيب والرخام (رقم ٣)
+                    {T("cli.83")}
                   </p>
                 </div>
               </div>
@@ -788,7 +789,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="p-6 space-y-4 text-xs sm:text-sm">
               <div className="p-4 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5] flex items-center justify-between">
                 <div>
-                  <span className="text-[#5A646E] text-xs block">المبلغ المطلوب سداده:</span>
+                  <span className="text-[#5A646E] text-xs block">{T("cli.84")}</span>
                   <span className="text-2xl font-black text-[#1E2429] font-ibm">
                     {PAY.next ? formatNumber(PAY.next.amount) : "٠"} {currencySymbol()}
                   </span>
@@ -801,13 +802,13 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               {/* Bank Transfer Details */}
               <div className="space-y-2 p-4 rounded-lg bg-[#F3F4F6] border border-[#DDE1E5]">
                 <h4 className="font-bold text-[#1E2429] text-xs uppercase tracking-wider">
-                  بيانات التحويل البنكي الرسمي للشركة:
+                  {T("cli.85")}
                 </h4>
                 <div className="space-y-1 text-xs text-[#5A646E] font-medium">
-                  <p>اسم البنك: <strong className="text-[#1E2429]">البنك التجاري الدولي (CIB - مصر)</strong></p>
-                  <p>اسم الحساب: <strong className="text-[#1E2429]">شركة معيار للمقاولات والتصميم الداخلي</strong></p>
-                  <p>رقم الآيبان (IBAN): <strong className="text-[#1E2429] font-mono">EG4200100003000001234567890</strong></p>
-                  <p>رقم السجل التجاري: <strong className="text-[#1E2429] font-mono">١٨٤٥٢٩</strong></p>
+                  <p>{T("cli.86")} <strong className="text-[#1E2429]">{T("cli.87")}</strong></p>
+                  <p>{T("cli.88")} <strong className="text-[#1E2429]">{T("cli.89")}</strong></p>
+                  <p>{T("cli.90")} <strong className="text-[#1E2429] font-mono">EG4200100003000001234567890</strong></p>
+                  <p>{T("cli.91")} <strong className="text-[#1E2429] font-mono">{T("cli.92")}</strong></p>
                 </div>
               </div>
 
@@ -815,10 +816,10 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-300 text-center space-y-1">
                   <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
                   <p className="font-black text-emerald-900 text-sm">
-                    تم إرسال إشعار التحويل للإدارة المالية بنجاح!
+                    {T("cli.93")}
                   </p>
                   <p className="text-xs text-emerald-700">
-                    سيتم مراجعة الإيداع وإصدار السند الضريبي المعتمد فوراً.
+                    {T("cli.94")}
                   </p>
                 </div>
               ) : (
@@ -827,13 +828,13 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                     onClick={() => setTransferConfirmed(true)}
                     className="flex-1 py-3 rounded-lg text-xs sm:text-sm font-medium text-white bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] active:scale-95 transition-all shadow-sm"
                   >
-                    تأكيد إتمام التحويل البنكي
+                    {T("cli.95")}
                   </button>
                   <button
                     onClick={() => setPaymentModalOpen(false)}
                     className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#5A646E] bg-[#ECEEF0] hover:bg-[#DDE1E5]"
                   >
-                    إلغاء
+                    {T("cli.96")}
                   </button>
                 </div>
               )}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tr_ as T } from "../i18n";
 import {
   CalendarDays,
   CheckCircle2,
@@ -85,21 +86,21 @@ function ClientTimeline() {
                 <div className="w-9 h-9 rounded-xl bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <CalendarDays className="w-5 h-5" />
                 </div>
-                <span>الجدول الزمني للمشروع</span>
+                <span>{T("cli.123")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-                مشروع: فيلا الياسمين
+                {T("cli.124")}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              المراحل التنفيذية المعتمدة ومحطات الاستلام التعاقدية حتى التسليم المفتاحي النهائي.
+              {T("cli.125")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] text-xs font-bold">
               <Clock className="w-3.5 h-3.5 text-emerald-600" />
-              <span>موعد التسليم: ٣٠ ديسمبر ٢٠٢٦</span>
+              <span>{T("cli.126")}</span>
             </span>
           </div>
         </div>
@@ -150,7 +151,7 @@ function ClientTimeline() {
                       </h3>
                       {isActive && (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 animate-pulse">
-                          <span>المرحلة الحالية</span>
+                          <span>{T("cli.127")}</span>
                         </span>
                       )}
                     </div>
@@ -182,7 +183,7 @@ function ClientTimeline() {
                   {/* Deliverables Checklist */}
                   <div className="p-3.5 rounded-lg bg-[#F3F4F6] border border-[#ECEEF0] space-y-2">
                     <span className="text-[11px] font-bold text-[#5A646E] block mb-1">
-                      مخرجات واعتمادات المرحلة:
+                      {T("cli.128")}
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                       {step.deliverables.map((item, dIdx) => (

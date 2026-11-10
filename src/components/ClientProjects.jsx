@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tr_ as T } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
   Briefcase,
@@ -97,20 +98,20 @@ function ClientProjects() {
                 <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <Briefcase className="w-5 h-5" />
                 </div>
-                <span>مشاريعي الحالية</span>
+                <span>{T("cli.97")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
-                {CLIENT_UNITS.length} وحدات استثمارية وسكنية
+                {T("cli.98", { v0: CLIENT_UNITS.length })}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              متابعة شاملة لوحداتك العقارية ومشاريع التصميم الداخلي الموكلة لشركة معيار.
+              {T("cli.99")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-[#5A646E] bg-white px-3.5 py-2 rounded-lg border border-[#DDE1E5] shadow-2xs">
-              العميل: <strong className="text-[#1E2429]">أ. محمد عبد الرحمن</strong>
+              العميل: <strong className="text-[#1E2429]">{T("cli.100")}</strong>
             </span>
           </div>
         </div>
@@ -145,7 +146,7 @@ function ClientProjects() {
                 <div className="absolute bottom-3 start-3 end-3 flex items-center justify-between text-white">
                   <span className="text-xs font-black">{unit.name}</span>
                   <span className="text-xs font-mono font-bold text-amber-300">
-                    %{unit.progress} إنجاز
+                    {T("cli.101", { v0: unit.progress })}
                   </span>
                 </div>
               </div>
@@ -164,7 +165,7 @@ function ClientProjects() {
                 {/* Progress Track */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-[#5A646E] font-medium">نسبة تقدم الأعمال:</span>
+                    <span className="text-[#5A646E] font-medium">{T("cli.102")}</span>
                     <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
                       %{unit.progress}
                     </span>
@@ -175,15 +176,15 @@ function ClientProjects() {
                 {/* Specs List */}
                 <div className="p-3 bg-[#F3F4F6] rounded-lg border border-[#ECEEF0] space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#5A646E]">المساحة:</span>
+                    <span className="text-[#5A646E]">{T("cli.103")}</span>
                     <span className="font-bold text-[#1E2429]">{unit.area}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#5A646E]">الموعد النهائي:</span>
+                    <span className="text-[#5A646E]">{T("cli.104")}</span>
                     <span className="font-bold text-[#1E2429] font-mono">{unit.expectedHandover}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#5A646E]">فريق الإشراف:</span>
+                    <span className="text-[#5A646E]">{T("cli.105")}</span>
                     <span className="font-bold text-[#1E2429] truncate max-w-[160px]">{unit.engineer}</span>
                   </div>
                 </div>
@@ -196,7 +197,7 @@ function ClientProjects() {
                   className="flex-1 py-2 px-3 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6] text-[#1E2429] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5 text-[#5A646E]" />
-                  <span>صور الموقع</span>
+                  <span>{T("cli.106")}</span>
                 </button>
 
                 <button
@@ -204,7 +205,7 @@ function ClientProjects() {
                   className="flex-1 py-2 px-3 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>معاينة 3D</span>
+                  <span>{T("cli.107")}</span>
                 </button>
               </div>
             </div>
