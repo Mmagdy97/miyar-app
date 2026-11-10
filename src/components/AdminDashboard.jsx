@@ -1,3 +1,4 @@
+import { cashStore, cashTotals } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
@@ -63,7 +64,7 @@ const INITIAL_PROJECTS = SEED_PROJECTS.map((p) => ({
   contractValue: `${formatCompact(p.contractValue)} ج.م`,
 }));
 
-const TOTALS = getTotals();
+const BASE_TOTALS = getTotals();
 
 const MONTHLY_FINANCIALS = [
   { month: "يونيو", revenue: 580, expenses: 380, label: "٥٨٠ ألف / ٣٨٠ ألف" },
@@ -75,6 +76,16 @@ const MONTHLY_FINANCIALS = [
 ];
 
 function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
+  const [cashRows] = cashStore.use();
+  const cash = cashTotals(cashRows);
+  const TOTALS = {
+    ...BASE_TOTALS,
+    cashGiven: cash.given,
+    cashSpent: cash.spent,
+    cashRemaining: cash.remaining,
+    cashUsedPct: cash.usedPct,
+    cashEngineerCount: cash.count,
+  };
   const [timeframe, setTimeframe] = useState("6M");
   const [activeHoverBar, setActiveHoverBar] = useState(null);
 
