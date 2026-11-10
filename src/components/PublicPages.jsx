@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Check, ArrowRight } from "lucide-react";
+import { CURRENCIES, formatMoney } from "../lib/currency";
 
 // DRAFT pricing (indicative, to be validated with first customers before launch).
-const CURRENCIES = {
-  EGP: { label: "جنيه مصري", symbol: "ج.م", prices: [0, 1200, 3200] },
-  SAR: { label: "ريال سعودي", symbol: "ر.س", prices: [0, 109, 299] },
-  AED: { label: "درهم إماراتي", symbol: "د.إ", prices: [0, 109, 299] },
-  TRY: { label: "ليرة تركية", symbol: "₺", prices: [0, 1200, 3200] },
+const PRICES = {
+  EGP: [0, 1200, 3200],
+  TRY: [0, 1200, 3200],
+  SAR: [0, 109, 299],
+  AED: [0, 109, 299],
+  KWD: [0, 9, 24],
+  JOD: [0, 20, 56],
+  USD: [0, 29, 79],
 };
 
 const PLANS = [
@@ -28,18 +32,16 @@ const PLANS = [
   },
 ];
 
-const fmt = (n) => n.toLocaleString("ar-EG");
 
 export function PricingSection({ onStart }) {
   const [cur, setCur] = useState("EGP");
-  const c = CURRENCIES[cur];
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
       <div className="text-center mb-10">
         <h2 className="text-3xl sm:text-4xl font-black text-[#1E2429] mb-3">أسعار واضحة تناسب حجم مكتبك</h2>
         <p className="text-[#5A646E] mb-6">ابدأ مجاناً، وترقّى عندما يكبر عدد مشاريعك. الأسعار شهرية.</p>
         <div role="group" aria-label="العملة" className="inline-flex flex-wrap justify-center gap-1 p-1 rounded-xl bg-white border border-[#DDE1E5]">
-          {Object.entries(CURRENCIES).map(([k, v]) => (
+          {Object.keys(PRICES).map((k) => (
             <button
               key={k}
               onClick={() => setCur(k)}
@@ -48,7 +50,7 @@ export function PricingSection({ onStart }) {
                 cur === k ? "bg-[#2B3138] text-white" : "text-[#5A646E] hover:bg-[#ECEEF0]"
               }`}
             >
-              {v.label}
+              {CURRENCIES[k].name}
             </button>
           ))}
         </div>
@@ -65,12 +67,12 @@ export function PricingSection({ onStart }) {
             <h3 className="text-xl font-black text-[#1E2429]">{p.name}</h3>
             <p className="text-xs text-[#5A646E] mb-4">{p.tagline}</p>
             <p className="mb-5">
-              {c.prices[i] === 0 ? (
+              {PRICES[cur][i] === 0 ? (
                 <span className="text-4xl font-black text-[#1E2429]">مجاناً</span>
               ) : (
                 <>
-                  <span className="text-4xl font-black text-[#1E2429]">{fmt(c.prices[i])}</span>{" "}
-                  <span className="text-sm font-bold text-[#5A646E]">{c.symbol} / شهرياً</span>
+                  <span className="text-4xl font-black text-[#1E2429]">{formatMoney(PRICES[cur][i], cur, "ar-EG", { compact: true })}</span>{" "}
+                  <span className="text-sm font-bold text-[#5A646E]">/ شهرياً</span>
                 </>
               )}
             </p>
