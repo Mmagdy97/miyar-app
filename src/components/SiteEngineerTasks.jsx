@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { tr_ as T, E } from "../i18n";
 import {
   ListTodo,
   CheckCircle2,
@@ -155,14 +156,14 @@ function SiteEngineerTasks() {
                 <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <ListTodo className="w-5 h-5" />
                 </div>
-                <span>المهام الميدانية المسندة</span>
+                <span>{T("se.105")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-                م. محمد (الموقع)
+                {T("se.106")}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              قائمة البنود التنفيذية الواجب استلامها وتدقيقها اليوم في موقع فيلا الياسمين.
+              {T("se.107")}
             </p>
           </div>
 
@@ -171,24 +172,24 @@ function SiteEngineerTasks() {
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>+ إضافة مهمة للموقع</span>
+            <span>{T("se.108")}</span>
           </button>
         </div>
 
         {/* KPI Mini Row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
           <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي المهام</span>
+            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.109")}</span>
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
           </div>
 
           <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">قيد التنفيذ</span>
+            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.110")}</span>
             <span className="text-xl md:text-2xl font-black text-amber-800">{stats.pending}</span>
           </div>
 
           <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">تم الإنجاز</span>
+            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.111")}</span>
             <span className="text-xl md:text-2xl font-black text-emerald-700">{stats.completed}</span>
           </div>
         </div>
@@ -205,7 +206,7 @@ function SiteEngineerTasks() {
                   : "bg-white text-[#5A646E] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
               }`}
             >
-              {tab}
+              {E(tab)}
             </button>
           ))}
         </div>
@@ -248,7 +249,7 @@ function SiteEngineerTasks() {
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${priorityClass}`}
                       >
-                        {task.priority}
+                        {E(task.priority)}
                       </span>
                       <span className="text-[11px] text-[#5A646E] flex items-center gap-1">
                         <Clock className="w-3 h-3 text-[#5A646E]" />
@@ -292,9 +293,9 @@ function SiteEngineerTasks() {
         {filteredTasks.length === 0 && (
           <div className="py-12 text-center bg-white rounded-lg border border-[#DDE1E5] p-8">
             <CheckCircle2 className="w-10 h-10 mx-auto mb-2 text-emerald-500" />
-            <h4 className="text-sm font-bold text-[#1E2429]">لا توجد مهام مطابقة</h4>
+            <h4 className="text-sm font-bold text-[#1E2429]">{T("se.112")}</h4>
             <p className="text-xs text-[#5A646E] mt-1">
-              جميع المهام التنفيذية في هذا القسم محدثة ومكتملة.
+              {T("se.113")}
             </p>
           </div>
         )}
@@ -307,7 +308,7 @@ function SiteEngineerTasks() {
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
               <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
                 <Plus className="w-5 h-5 text-[#1E2429]" />
-                <span>إضافة مهمة استلام ميداني</span>
+                <span>{T("se.114")}</span>
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -325,7 +326,7 @@ function SiteEngineerTasks() {
                 <input
                   type="text"
                   required
-                  placeholder="مثال: استلام دهانات الريسبشن وجه بطانة..."
+                  placeholder={T("se.115")}
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -334,11 +335,11 @@ function SiteEngineerTasks() {
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  مكان التنفيذ بالموقع
+                  {T("se.116")}
                 </label>
                 <input
                   type="text"
-                  placeholder="مثال: الدور الأول - الغرفة الرئيسية"
+                  placeholder={T("se.117")}
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
                   className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -347,23 +348,23 @@ function SiteEngineerTasks() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">درجة الأهمية</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.118")}</label>
                   <select
                     value={newPriority}
                     onChange={(e) => setNewPriority(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
                   >
-                    <option value="عاجل">عاجل</option>
-                    <option value="متوسط">متوسط</option>
-                    <option value="عادي">عادي</option>
+                    <option value="عاجل">{T("se.119")}</option>
+                    <option value="متوسط">{T("se.120")}</option>
+                    <option value="عادي">{T("se.121")}</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">الوقت المستهدف</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.122")}</label>
                   <input
                     type="text"
-                    placeholder="اليوم، ٠٣:٠٠ م"
+                    placeholder={T("se.123")}
                     value={newDueTime}
                     onChange={(e) => setNewDueTime(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429]"
@@ -377,13 +378,13 @@ function SiteEngineerTasks() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
                 >
-                  إلغاء
+                  {T("se.124")}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs shadow-sm"
                 >
-                  إضافة المهمة
+                  {T("se.125")}
                 </button>
               </div>
             </form>

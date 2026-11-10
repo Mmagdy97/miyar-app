@@ -1,4 +1,4 @@
-import { currencySymbol, intlLocale, useI18n } from "../i18n";
+import { currencySymbol, intlLocale, useI18n, E } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -545,7 +545,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             {project.name}
                           </h3>
                           <span className="text-[11px] px-2 py-0.5 rounded-md bg-[#ECEEF0] text-[#1E2429] font-semibold border border-[#DDE1E5]">
-                            {project.category}
+                            {E(project.category)}
                           </span>
                           <span
                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
@@ -559,7 +559,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             ) : (
                               <ShieldAlert className="w-3 h-3 me-1 text-rose-600" />
                             )}
-                            {project.status}
+                            {E(project.status)}
                           </span>
                         </div>
 
@@ -588,7 +588,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     <div className="mt-3">
                       <div className="flex items-center justify-between text-xs mb-1.5 font-semibold">
                         <span className="text-[#5A646E]">
-                          {t("adm.phase")} <span className="text-[#1E2429] font-bold">{project.phase}</span>
+                          {t("adm.phase")} <span className="text-[#1E2429] font-bold">{E(project.phase)}</span>
                         </span>
                         <span className="text-xs font-bold text-[#1E2429] tracking-wide font-mono">
                           {t("adm.complete", { p: toAr(project.progress) })}

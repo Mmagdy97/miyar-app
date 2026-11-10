@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tr_ as T, E } from "../i18n";
 import {
   FileText,
   Download,
@@ -116,14 +117,14 @@ function TechnicalOfficeSettings() {
                 <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <Settings className="w-5 h-5" />
                 </div>
-                <span>الإعدادات والنماذج الهندسية</span>
+                <span>{T("to.128")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-                إدارة الجودة وقواعد العمل
+                {T("to.129")}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              تحميل قوالب ونماذج العمل الهندسية القياسية، وضبط قواعد الأرشفة والإشعارات الآلية بالمكتب الفني.
+              {T("to.130")}
             </p>
           </div>
 
@@ -132,7 +133,7 @@ function TechnicalOfficeSettings() {
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold text-[#5A646E] bg-white border border-[#DDE1E5] hover:bg-[#F3F4F6] transition-colors shadow-2xs self-start sm:self-auto cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>إعادة ضبط القواعد</span>
+            <span>{T("to.131")}</span>
           </button>
         </div>
 
@@ -142,14 +143,14 @@ function TechnicalOfficeSettings() {
             <div>
               <h2 className="text-base md:text-lg font-black text-[#1E2429] flex items-center gap-2">
                 <FileText className="w-5 h-5 text-[#1E2429]" />
-                <span>النماذج القياسية (Engineering Templates)</span>
+                <span>{T("to.132")}</span>
               </h2>
               <p className="text-xs text-[#5A646E] mt-0.5">
-                نماذج رسمية جاهزة للطباعة والتعبئة مطابقة لمواصفات المشروعات الكبرى
+                {T("to.133")}
               </p>
             </div>
             <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#5A646E]">
-              {STANDARD_TEMPLATES.length} نماذج رسمية
+              {T("to.134", { v0: STANDARD_TEMPLATES.length })}
             </span>
           </div>
 
@@ -165,7 +166,7 @@ function TechnicalOfficeSettings() {
                       {tmpl.code}
                     </span>
                     <span className="text-[10px] font-bold text-[#5A646E] bg-[#ECEEF0] px-2 py-0.5 rounded-md">
-                      {tmpl.category}
+                      {E(tmpl.category)}
                     </span>
                   </div>
 
@@ -187,7 +188,7 @@ function TechnicalOfficeSettings() {
                     className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#ECEEF0] hover:bg-[#2B3138] text-[#1E2429] hover:text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    <span>تحميل النموذج</span>
+                    <span>{T("to.135")}</span>
                   </button>
                 </div>
               </div>
@@ -201,14 +202,14 @@ function TechnicalOfficeSettings() {
             <div>
               <h2 className="text-base md:text-lg font-black text-[#1E2429] flex items-center gap-2">
                 <Sliders className="w-5 h-5 text-[#1E2429]" />
-                <span>إعدادات وقواعد عمل المكتب الفني (Workflow Rules)</span>
+                <span>{T("to.136")}</span>
               </h2>
               <p className="text-xs text-[#5A646E] mt-0.5">
-                تفعيل الإشعارات الآلية وإجراءات الضبط والاعتماد الرقمي للرسومات والمقايسات
+                {T("to.137")}
               </p>
             </div>
             <span className="text-xs font-bold text-[#1E2429] bg-[#ECEEF0] px-2.5 py-1 rounded-full border border-[#DDE1E5]">
-              حفظ فوري
+              {T("to.138")}
             </span>
           </div>
 
@@ -217,10 +218,10 @@ function TechnicalOfficeSettings() {
             <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3F4F6] border border-[#DDE1E5]/60 hover:bg-[#F3F4F6] rounded-lg transition-colors">
               <div>
                 <h4 className="text-xs md:text-sm font-extrabold text-[#1E2429]">
-                  إرسال إشعار للموقع عند اعتماد مخطط جديد (AFC)
+                  {T("to.139")}
                 </h4>
                 <p className="text-[11px] text-[#5A646E] mt-0.5">
-                  إرسال تنبيه مباشر لجوال مهندس الموقع فور اعتماد لوحة جديدة لتفادي العمل بمخطط ملغي
+                  {T("to.140")}
                 </p>
               </div>
 
@@ -246,10 +247,10 @@ function TechnicalOfficeSettings() {
             <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3F4F6] border border-[#DDE1E5]/60 hover:bg-[#F3F4F6] rounded-lg transition-colors">
               <div>
                 <h4 className="text-xs md:text-sm font-extrabold text-[#1E2429]">
-                  طلب توقيع استشاري المالك قبل تصدير المقايسة
+                  {T("to.141")}
                 </h4>
                 <p className="text-[11px] text-[#5A646E] mt-0.5">
-                  عدم إتاحة تحميل المقايسة بصيغة PDF الرسمية للعميل إلا بعد توقيع الاستشاري
+                  {T("to.142")}
                 </p>
               </div>
 
@@ -275,7 +276,7 @@ function TechnicalOfficeSettings() {
             <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3F4F6] border border-[#DDE1E5]/60 hover:bg-[#F3F4F6] rounded-lg transition-colors">
               <div>
                 <h4 className="text-xs md:text-sm font-extrabold text-[#1E2429]">
-                  أرشفة الإصدارات القديمة تلقائياً عند رفع Rev جديد
+                  {T("to.143")}
                 </h4>
                 <p className="text-[11px] text-[#5A646E] mt-0.5">
                   تحويل الإصدار السابق تلقائياً إلى حالة "ملغي (Superseded)" ونقله لسجل الأرشيف
@@ -304,10 +305,10 @@ function TechnicalOfficeSettings() {
             <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3F4F6] border border-[#DDE1E5]/60 hover:bg-[#F3F4F6] rounded-lg transition-colors">
               <div>
                 <h4 className="text-xs md:text-sm font-extrabold text-[#1E2429]">
-                  التنبيه التلقائي للمهندسين عند تأخر الرد على استفسار RFI
+                  {T("to.144")}
                 </h4>
                 <p className="text-[11px] text-[#5A646E] mt-0.5">
-                  إرسال إشعار عاجل إذا تجاوز استفسار الموقع ٤٨ ساعة دون صدور حل هندسي معتمد
+                  {T("to.145")}
                 </p>
               </div>
 

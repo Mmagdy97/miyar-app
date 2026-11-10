@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tr_ as T, E } from "../i18n";
 import {
   PackageSearch,
   Send,
@@ -147,14 +148,14 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
               <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                 <Truck className="w-5 h-5" />
               </div>
-              <span>طلبات الخامات والتشوين (Material Requests)</span>
+              <span>{T("se.50")}</span>
             </h1>
             <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
-              الموقع: فيلا الياسمين
+              {T("se.51")}
             </span>
           </div>
           <p className="text-xs md:text-sm text-[#5A646E]">
-            طلب توريد الأسمنت، الرمل، السيراميك والمواسير مباشرة من إدارة المشتريات وتتبع وصول الشاحنات.
+            {T("se.52")}
           </p>
         </div>
 
@@ -163,7 +164,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
           <div className="flex items-center gap-2 pb-4 mb-4 border-b border-[#ECEEF0]">
             <PackageSearch className="w-5 h-5 text-[#1E2429]" />
             <h2 className="text-base font-extrabold text-[#1E2429]">
-              طلب توريد خامات جديد إلى الموقع
+              {T("se.53")}
             </h2>
           </div>
 
@@ -179,23 +180,23 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                   onChange={(e) => setMaterialType(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-bold text-[#1E2429] bg-white focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                 >
-                  <option value="أسمنت">أسمنت (بورتلاندي / مقاوم / أبيض)</option>
-                  <option value="رمل">رمل (حرش / مغسول / ناعم)</option>
-                  <option value="سيراميك وبورسلين">سيراميك وبورسلين وأرضيات</option>
-                  <option value="مواسير سباكة">مواسير سباكة وقطع توصيل</option>
-                  <option value="كابلات كهرباء">كابلات كهرباء وخراطيم علاء الدين</option>
-                  <option value="جبسوم بورد">ألواح جبسوم بورد وشاسيهات صاج</option>
-                  <option value="أخرى">خامات أخرى (تحديد يدوي)</option>
+                  <option value="أسمنت">{T("se.54")}</option>
+                  <option value="رمل">{T("se.55")}</option>
+                  <option value="سيراميك وبورسلين">{T("se.56")}</option>
+                  <option value="مواسير سباكة">{T("se.57")}</option>
+                  <option value="كابلات كهرباء">{T("se.58")}</option>
+                  <option value="جبسوم بورد">{T("se.59")}</option>
+                  <option value="أخرى">{T("se.60")}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                  تفاصيل الخامة والمواصفة / الماركة
+                  {T("se.61")}
                 </label>
                 <input
                   type="text"
-                  placeholder="مثال: أسمنت سويف مقاوم، أو بورسلين كليوباترا ٦٠×١٢٠"
+                  placeholder={T("se.62")}
                   value={customMaterial}
                   onChange={(e) => setCustomMaterial(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -214,7 +215,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                   min="1"
                   step="any"
                   required
-                  placeholder="مثال: ١٠٠"
+                  placeholder={T("se.63")}
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-black text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -222,19 +223,19 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">الوحدة</label>
+                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.64")}</label>
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
                   className="w-full px-3 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-bold text-[#1E2429] bg-white"
                 >
-                  <option value="شيكارة">شيكارة</option>
-                  <option value="طن">طن</option>
-                  <option value="متر مكعب (م³)">متر مكعب (م³)</option>
-                  <option value="متر مربع (م²)">متر مربع (م²)</option>
-                  <option value="لوح">لوح</option>
-                  <option value="لفة / بكرة">لفة / بكرة</option>
-                  <option value="قلاب كبير">قلاب كبير</option>
+                  <option value="شيكارة">{T("se.65")}</option>
+                  <option value="طن">{T("se.66")}</option>
+                  <option value="متر مكعب (م³)">{T("se.67")}</option>
+                  <option value="متر مربع (م²)">{T("se.68")}</option>
+                  <option value="لوح">{T("se.69")}</option>
+                  <option value="لفة / بكرة">{T("se.70")}</option>
+                  <option value="قلاب كبير">{T("se.71")}</option>
                 </select>
               </div>
 
@@ -255,11 +256,11 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
             {/* Field 3: Notes */}
             <div>
               <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
-                ملاحظات التشوين ونقطة التفريغ
+                {T("se.72")}
               </label>
               <input
                 type="text"
-                placeholder="مثال: يرجى توفير ونش تفريغ للسطح، أو التشوين بغرفة التخزين بالبدروم..."
+                placeholder={T("se.73")}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -286,14 +287,14 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
             <div>
               <h3 className="text-base font-extrabold text-[#1E2429] flex items-center gap-2">
                 <Truck className="w-4 h-4 text-[#1E2429]" />
-                <span>سجل طلبات التوريد السابقة للموقع</span>
+                <span>{T("se.75")}</span>
               </h3>
               <p className="text-xs text-[#5A646E] mt-0.5">
-                متابعة حالة شحن وتفريغ المواد المطلوبة من إدارة المشتريات
+                {T("se.76")}
               </p>
             </div>
             <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#ECEEF0] text-[#5A646E]">
-              {requests.length} طلبات
+              {T("se.77", { v0: requests.length })}
             </span>
           </div>
 
@@ -315,7 +316,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                       <p className="text-xs text-[#5A646E] mt-0.5 flex items-center gap-1.5">
                         <strong className="text-[#1E2429] font-bold">{req.quantity}</strong>
                         <span>•</span>
-                        <span>مطلوب: {req.requiredDate}</span>
+                        <span>{T("se.78", { v0: req.requiredDate })}</span>
                       </p>
                     </div>
 
@@ -323,13 +324,13 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border shrink-0 ${statusClass}`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-current" />
-                      <span>{req.status}</span>
+                      <span>{E(req.status)}</span>
                     </span>
                   </div>
 
                   {req.notes && (
                     <div className="pt-2 mt-2 border-t border-[#ECEEF0] flex items-center justify-between text-xs text-[#5A646E]">
-                      <span>ملاحظة: {req.notes}</span>
+                      <span>{T("se.79", { v0: req.notes })}</span>
                       <span>{req.requestDate}</span>
                     </div>
                   )}

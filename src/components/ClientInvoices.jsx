@@ -1,4 +1,5 @@
-import { currencySymbol, intlLocale } from "../i18n";
+import { currencySymbol, intlLocale, E } from "../i18n";
+import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState, useMemo } from "react";
 import {
@@ -92,27 +93,27 @@ function ClientInvoices() {
                 <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <CreditCard className="w-5 h-5" />
                 </div>
-                <span>الدفعات المالية والفواتير</span>
+                <span>{T("cli.1")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
-                مشروع: فيلا الياسمين
+                {T("cli.124")}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              جدول الدفعات والمستحقات التعاقدية الشفافة والإيصالات الضريبية المعتمدة.
+              {T("cli.3")}
             </p>
           </div>
 
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>بوابة دفع آمنة مشفرة (Stripe 256-bit)</span>
+            <span>{T("cli.4")}</span>
           </span>
         </div>
 
         {/* Financial KPI Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white rounded-xl p-6 border border-[#DDE1E5] shadow-sm">
-            <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">إجمالي قيمة التعاقد</span>
+            <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">{T("cli.5")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-[#1E2429] tracking-tight">
                 {totalContract.toLocaleString(intlLocale())}
@@ -120,12 +121,12 @@ function ClientInvoices() {
               <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] text-[#5A646E] mt-2 block">
-              شامل التوريد والتنفيذ والضمان
+              {T("cli.6")}
             </span>
           </div>
 
           <div className="bg-white rounded-xl p-6 border border-[#DDE1E5] shadow-sm">
-            <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">إجمالي المدفوع حتى الآن</span>
+            <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">{T("cli.74")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-emerald-600 tracking-tight">
                 {totalPaid.toLocaleString(intlLocale())}
@@ -133,12 +134,12 @@ function ClientInvoices() {
               <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-2">
-              %{Math.round((totalPaid / totalContract) * 100)} مسدد بالكامل
+              {T("cli.8", { v0: Math.round((totalPaid / totalContract) * 100) })}
             </span>
           </div>
 
           <div className="bg-[#2B3138] text-white rounded-xl p-6 border border-[#20262C] shadow-sm">
-            <span className="text-xs font-bold text-[#ECEEF0] block mb-1">المتبقي للاستحقاق</span>
+            <span className="text-xs font-bold text-[#ECEEF0] block mb-1">{T("cli.9")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-white tracking-tight">
                 {totalDue.toLocaleString(intlLocale())}
@@ -146,7 +147,7 @@ function ClientInvoices() {
               <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] text-[#ECEEF0] mt-2 block">
-              مقسم على الدفعات المتبقية وفق جدول التسليم
+              {T("cli.10")}
             </span>
           </div>
         </div>
@@ -155,20 +156,20 @@ function ClientInvoices() {
         <div className="bg-white rounded-lg border border-[#DDE1E5] shadow-sm overflow-hidden overflow-x-auto w-full">
           <div className="p-5 border-b border-[#ECEEF0] flex items-center justify-between">
             <h3 className="text-base font-extrabold text-[#1E2429]">
-              جدول الدفعات والمستحقات المرحلية
+              {T("cli.11")}
             </h3>
-            <span className="text-xs text-[#5A646E] font-mono">٥ دفعات تعاقدية</span>
+            <span className="text-xs text-[#5A646E] font-mono">{T("cli.12")}</span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-start border-collapse">
               <thead>
                 <tr className="bg-[#F3F4F6]/90 text-[#5A646E] text-xs font-bold border-b border-[#DDE1E5]">
-                  <th className="py-4 px-5 min-w-[240px]">الدفعة والمرحلة المستهدفة</th>
-                  <th className="py-4 px-4 w-40 text-center">المبلغ المستحق</th>
-                  <th className="py-4 px-4 w-36 text-center">تاريخ الاستحقاق</th>
-                  <th className="py-4 px-4 w-32 text-center">الحالة</th>
-                  <th className="py-4 px-5 w-44 text-center">الإجراء المالي</th>
+                  <th className="py-4 px-5 min-w-[240px]">{T("cli.13")}</th>
+                  <th className="py-4 px-4 w-40 text-center">{T("cli.14")}</th>
+                  <th className="py-4 px-4 w-36 text-center">{T("cli.15")}</th>
+                  <th className="py-4 px-4 w-32 text-center">{T("cli.16")}</th>
+                  <th className="py-4 px-5 w-44 text-center">{T("cli.17")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#ECEEF0] text-xs md:text-sm">
@@ -217,7 +218,7 @@ function ClientInvoices() {
                               isPaid ? "bg-emerald-600" : "bg-amber-500 animate-pulse"
                             }`}
                           />
-                          <span>{inv.status}</span>
+                          <span>{E(inv.status)}</span>
                         </span>
                       </td>
 
@@ -229,7 +230,7 @@ function ClientInvoices() {
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6] text-[#5A646E] text-xs font-bold transition-all shadow-2xs cursor-pointer"
                           >
                             <Download className="w-3.5 h-3.5 text-[#5A646E]" />
-                            <span>تحميل الإيصال</span>
+                            <span>{T("cli.18")}</span>
                           </button>
                         ) : (
                           <button
@@ -237,7 +238,7 @@ function ClientInvoices() {
                             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer"
                           >
                             <Lock className="w-3.5 h-3.5" />
-                            <span>ادفع الآن عبر Stripe</span>
+                            <span>{T("cli.19")}</span>
                           </button>
                         )}
                       </td>
@@ -260,8 +261,8 @@ function ClientInvoices() {
                   <CreditCard className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-[#1E2429]">سداد الدفعة عبر Stripe</h3>
-                  <p className="text-[10px] text-[#5A646E]">بوابة دفع مشفرة وآمنة</p>
+                  <h3 className="text-base font-black text-[#1E2429]">{T("cli.20")}</h3>
+                  <p className="text-[10px] text-[#5A646E]">{T("cli.21")}</p>
                 </div>
               </div>
               <button
@@ -274,11 +275,11 @@ function ClientInvoices() {
 
             <div className="my-4 p-4 bg-[#F3F4F6] rounded-lg border border-[#DDE1E5] space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">الدفعة المستحقة:</span>
+                <span className="text-[#5A646E]">{T("cli.22")}</span>
                 <span className="font-bold text-[#1E2429]">{payingInvoice.title}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">المبلغ المطلوب:</span>
+                <span className="text-[#5A646E]">{T("cli.23")}</span>
                 <span className="font-black text-[#1E2429] text-base">
                   {payingInvoice.amount.toLocaleString(intlLocale())} {currencySymbol()}
                 </span>
@@ -288,7 +289,7 @@ function ClientInvoices() {
             <form onSubmit={handleStripePaySubmit} className="space-y-3.5">
               <div>
                 <label className="block text-xs font-bold text-[#5A646E] mb-1">
-                  رقم البطاقة الائتمانية (Visa / Mastercard)
+                  {T("cli.24")}
                 </label>
                 <div className="relative">
                   <input
@@ -303,7 +304,7 @@ function ClientInvoices() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1">تاريخ الانتهاء</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1">{T("cli.25")}</label>
                   <input
                     type="text"
                     required
@@ -312,7 +313,7 @@ function ClientInvoices() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1">رمز الأمان (CVC)</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1">{T("cli.26")}</label>
                   <input
                     type="text"
                     required
@@ -328,7 +329,7 @@ function ClientInvoices() {
                   onClick={() => setPayingInvoice(null)}
                   className="w-1/3 py-2.5 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
                 >
-                  إلغاء
+                  {T("cli.96")}
                 </button>
                 <button
                   type="submit"

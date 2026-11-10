@@ -1,4 +1,5 @@
 import AdminDashboard from "./AdminDashboard";
+import { tr_ as T } from "../i18n";
 import SiteEngineerDashboard from "./SiteEngineerDashboard";
 import SiteEngineerTasks from "./SiteEngineerTasks";
 import SiteEngineerSnagList from "./SiteEngineerSnagList";

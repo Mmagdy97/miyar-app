@@ -1,4 +1,4 @@
-import { currencySymbol, intlLocale, useI18n, currencyName } from "../i18n";
+import { currencySymbol, intlLocale, useI18n, currencyName, E } from "../i18n";
 import { toAr } from "../data/seed";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
@@ -384,7 +384,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5] mb-1.5">
-                        {expense.category}
+                        {E(expense.category)}
                       </span>
                       <h4 className="text-xs md:text-sm font-extrabold text-[#1E2429] leading-snug">
                         {expense.description}
@@ -512,7 +512,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               </div>
               <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
                 <span className="text-[#5A646E]">{t("fin.category")}</span>
-                <span className="font-bold text-[#1E2429]">{selectedReceipt.category}</span>
+                <span className="font-bold text-[#1E2429]">{E(selectedReceipt.category)}</span>
               </div>
               <div className="flex justify-between items-center text-xs pb-2 border-b border-[#ECEEF0]">
                 <span className="text-[#5A646E]">{t("fin.date")}</span>

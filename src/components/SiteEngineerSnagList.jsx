@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { tr_ as T, E } from "../i18n";
 import {
   AlertTriangle,
   Plus,
@@ -151,14 +152,14 @@ function SiteEngineerSnagList() {
                 <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
                   <AlertTriangle className="w-5 h-5" />
                 </div>
-                <span>ملاحظات وعيوب التنفيذ (Snag List)</span>
+                <span>{T("se.80")}</span>
               </h1>
               <span className="text-xs font-bold px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-                {stats.pending} ملاحظة مفتوحة
+                {T("se.81", { v0: stats.pending })}
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#5A646E]">
-              سجل تدقيق الجودة والملاحظات الهندسية المطلوب معالجتها قبل الاستلام النهائي للعميل.
+              {T("se.82")}
             </p>
           </div>
 
@@ -168,24 +169,24 @@ function SiteEngineerSnagList() {
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>+ إضافة ملاحظة جديدة</span>
+            <span>{T("se.83")}</span>
           </button>
         </div>
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
           <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">إجمالي الملاحظات</span>
+            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.84")}</span>
             <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
           </div>
 
           <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">قيد الملاحظة</span>
+            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.85")}</span>
             <span className="text-xl md:text-2xl font-black text-rose-700">{stats.pending}</span>
           </div>
 
           <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">تمت المعالجة</span>
+            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.86")}</span>
             <span className="text-xl md:text-2xl font-black text-emerald-700">{stats.resolved}</span>
           </div>
         </div>
@@ -202,7 +203,7 @@ function SiteEngineerSnagList() {
                   : "bg-white text-[#5A646E] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
               }`}
             >
-              {tab}
+              {E(tab)}
             </button>
           ))}
         </div>
@@ -229,7 +230,7 @@ function SiteEngineerSnagList() {
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${severityClass}`}
                       >
-                        درجة الخطورة: {snag.severity}
+                        {T("se.87", { v0: snag.severity })}
                       </span>
                       <span className="text-[11px] text-[#5A646E]">{snag.date}</span>
                     </div>
@@ -255,12 +256,12 @@ function SiteEngineerSnagList() {
                     {isResolved ? (
                       <>
                         <Check className="w-3.5 h-3.5" />
-                        <span>تمت المعالجة ✓</span>
+                        <span>{T("se.88")}</span>
                       </>
                     ) : (
                       <>
                         <Clock className="w-3.5 h-3.5 text-amber-500" />
-                        <span>تأكيد المعالجة</span>
+                        <span>{T("se.89")}</span>
                       </>
                     )}
                   </button>
@@ -269,12 +270,12 @@ function SiteEngineerSnagList() {
                 <div className="pt-3 border-t border-[#ECEEF0] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#5A646E]">
                   <span className="flex items-center gap-1 text-[#5A646E]">
                     <Building2 className="w-3.5 h-3.5 text-[#5A646E]" />
-                    <span>المكان: <strong className="text-[#5A646E]">{snag.location}</strong></span>
+                    <span>{T("se.90")} <strong className="text-[#5A646E]">{snag.location}</strong></span>
                   </span>
 
                   <span className="flex items-center gap-1 text-[#5A646E]">
                     <User className="w-3.5 h-3.5 text-[#5A646E]" />
-                    <span>المسؤول: <strong className="text-[#1E2429]">{snag.contractor}</strong></span>
+                    <span>{T("se.91")} <strong className="text-[#1E2429]">{snag.contractor}</strong></span>
                   </span>
                 </div>
               </div>
@@ -284,9 +285,9 @@ function SiteEngineerSnagList() {
           {filteredSnags.length === 0 && (
             <div className="py-12 text-center bg-white rounded-lg border border-[#DDE1E5] p-8">
               <CheckCircle2 className="w-10 h-10 mx-auto mb-2 text-emerald-500" />
-              <h4 className="text-sm font-bold text-[#1E2429]">لا توجد ملاحظات في هذا التصنيف</h4>
+              <h4 className="text-sm font-bold text-[#1E2429]">{T("se.92")}</h4>
               <p className="text-xs text-[#5A646E] mt-1">
-                جميع الملاحظات المعمارية والإنشائية قيد السيطرة الكاملة.
+                {T("se.93")}
               </p>
             </div>
           )}
@@ -300,7 +301,7 @@ function SiteEngineerSnagList() {
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
               <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-500" />
-                <span>توثيق ملاحظة أو عيب تنفيذي جديد</span>
+                <span>{T("se.94")}</span>
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -318,7 +319,7 @@ function SiteEngineerSnagList() {
                 <textarea
                   required
                   rows={3}
-                  placeholder="مثال: شرخ في محارة الحائط الغربي خلف عمود الكهرباء..."
+                  placeholder={T("se.95")}
                   value={newDesc}
                   onChange={(e) => setNewDesc(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -332,7 +333,7 @@ function SiteEngineerSnagList() {
                 <input
                   type="text"
                   required
-                  placeholder="مثال: الدور الثاني - غرفة الملابس (Dressing)"
+                  placeholder={T("se.96")}
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
@@ -341,23 +342,23 @@ function SiteEngineerSnagList() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">درجة الخطورة</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.97")}</label>
                   <select
                     value={newSeverity}
                     onChange={(e) => setNewSeverity(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
                   >
-                    <option value="طفيفة">طفيفة (Minor)</option>
-                    <option value="متوسطة">متوسطة (Moderate)</option>
-                    <option value="حرجة">حرجة (Critical)</option>
+                    <option value="طفيفة">{T("se.98")}</option>
+                    <option value="متوسطة">{T("se.99")}</option>
+                    <option value="حرجة">{T("se.100")}</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">المقاول المسؤول</label>
+                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.101")}</label>
                   <input
                     type="text"
-                    placeholder="فني السباكة / الدهانات"
+                    placeholder={T("se.102")}
                     value={newContractor}
                     onChange={(e) => setNewContractor(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429]"
@@ -371,13 +372,13 @@ function SiteEngineerSnagList() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
                 >
-                  إلغاء
+                  {T("se.124")}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs shadow-sm"
                 >
-                  تسجيل الملاحظة
+                  {T("se.104")}
                 </button>
               </div>
             </form>
