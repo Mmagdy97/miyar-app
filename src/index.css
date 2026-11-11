@@ -150,3 +150,38 @@ p {
     min-width: 44px;
   }
 }
+
+/* ---- Design polish layer ---- */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+html {
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  text-size-adjust: 100%;
+}
+::selection { background: #D9480F; color: #fff; }
+:focus-visible { outline: 2px solid #D9480F; outline-offset: 2px; border-radius: 6px; }
+input, select, textarea { caret-color: #D9480F; }
+input, select, textarea { font-size: max(16px, 1em); }
+@media (min-width: 768px) { input, select, textarea { font-size: inherit; } }
+td, th, .tabular, [data-num] { font-variant-numeric: tabular-nums lining-nums; }
+button, [role="button"], a { touch-action: manipulation; }
+button:not(:disabled) { cursor: pointer; }
+
+.btn-press {
+  transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease;
+}
+.btn-press:active, .btn-press-x:active { transform: scale(0.97); }
+.btn-press-x { transition: transform 160ms var(--ease-out), background-color 160ms ease; }
+
+/* No stuck hover on touch: lift only where hover exists */
+@media (hover: hover) and (pointer: fine) {
+  .lift { transition: transform 200ms var(--ease-out), border-color 200ms ease; }
+  .lift:hover { transform: translateY(-2px); border-color: #CBD0D6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+.min-h-screen { min-height: 100vh; min-height: 100dvh; }
