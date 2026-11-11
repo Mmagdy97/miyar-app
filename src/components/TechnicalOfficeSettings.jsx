@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   FileText,
@@ -86,7 +86,7 @@ function TechnicalOfficeSettings() {
 
   // Mock template download
   const handleDownloadTemplate = (template) => {
-    setToastMessage(`جاري تحميل ${template.code} - ${template.name}...`);
+    setToastMessage(DF("جاري تحميل {0} - {1}...", template.code, template.name));
     setTimeout(() => setToastMessage(null), 3000);
   };
 

@@ -82,8 +82,8 @@ function SiteEngineerSnagList() {
             s.status === "تمت المعالجة" ? "قيد الملاحظة" : "تمت المعالجة";
           setToastMessage(
             nextStatus === "تمت المعالجة"
-              ? `تم تحديث الملاحظة إلى "تمت المعالجة" بنجاح ✓`
-              : `تمت إعادة فتح الملاحظة للمراجعة`
+              ? D("تم تحديث الملاحظة إلى \"تمت المعالجة\" بنجاح ✓")
+              : D("تمت إعادة فتح الملاحظة للمراجعة")
           );
           setTimeout(() => setToastMessage(null), 3000);
           return { ...s, status: nextStatus };
@@ -113,7 +113,7 @@ function SiteEngineerSnagList() {
     setNewDesc("");
     setNewLocation("");
     setNewContractor("");
-    setToastMessage(`تم توثيق ملاحظة جديدة في قائمة العيوب (Snag List)`);
+    setToastMessage(D("تم توثيق ملاحظة جديدة في قائمة العيوب (Snag List)"));
     setTimeout(() => setToastMessage(null), 3500);
   };
 

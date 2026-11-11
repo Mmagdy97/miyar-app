@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   PackageSearch,
@@ -102,7 +102,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
       const newNotification = {
         id: Date.now(),
         title: D("طلب توريد خامات: ") + finalMaterialName,
-        subtitle: `الكمية: ${quantity} ${unit} • موعد التوريد: ${requiredDate || D("خلال ٤٨ ساعة")}`,
+        subtitle: DF("الكمية: {0} {1} • موعد التوريد: {2}", quantity, unit, requiredDate || D("خلال ٤٨ ساعة")),
         user: "م. محمد (الموقع)",
         project: D("فيلا الياسمين - التجمع"),
         category: "طلب تشوين وتوريد",

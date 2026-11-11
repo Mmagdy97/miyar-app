@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   CalendarDays,
@@ -49,7 +49,7 @@ const TIMELINE_STEPS = localize([
     id: 3,
     phase: "المرحلة الثالثة: أعمال التشطيبات والديكور الداخلي",
     dateRange: D("٢١ أكتوبر ٢٠٢٦ — ١٥ ديسمبر ٢٠٢٦"),
-    status: `المرحلة النشطة حالياً (قيد التنفيذ ${toAr(clientProject().progress)}٪)`,
+    status: DF("المرحلة النشطة حالياً (قيد التنفيذ {0}٪)", toAr(clientProject().progress)),
     statusType: "active",
     description:
       D("تأكيس وبؤج المحارة، تركيب شاسيهات وألواح الجبسوم بورد لبيوت النور، توريد وتركيب رخام أرضيات الاستقبال، والبدء في وجه البطانة للدهانات."),

@@ -1,5 +1,5 @@
 import { currencySymbol, intlLocale, E } from "../i18n";
-import { D } from "../data/dataI18n";
+import { D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState, useMemo } from "react";
@@ -59,9 +59,9 @@ function ClientInvoices() {
       setIsProcessing(false);
       setPayingInvoice(null);
       setToastMessage(
-        `تمت معالجة الدفع بنجاح عبر Stripe بقيمة ${payingInvoice.amount.toLocaleString(
+        DF("تمت معالجة الدفع بنجاح عبر Stripe بقيمة {0} {1} ✓", payingInvoice.amount.toLocaleString(
           intlLocale()
-        )} ${currencySymbol()} ✓`
+        ), currencySymbol())
       );
       setTimeout(() => setToastMessage(null), 3500);
     }, 1200);
@@ -69,7 +69,7 @@ function ClientInvoices() {
 
   // Mock Receipt Download
   const handleDownloadReceipt = (receiptNo) => {
-    setToastMessage(`جاري تنزيل الإيصال الضريبي المعتمد: ${receiptNo}.pdf`);
+    setToastMessage(DF("جاري تنزيل الإيصال الضريبي المعتمد: {0}.pdf", receiptNo));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -341,7 +341,7 @@ function ClientInvoices() {
                   <span>
                     {isProcessing
                       ? "جاري التأكيد مع البنك..."
-                      : `تأكيد دفع ${payingInvoice.amount.toLocaleString(intlLocale())} ${currencySymbol()}`}
+                      : DF("تأكيد دفع {0} {1}", payingInvoice.amount.toLocaleString(intlLocale()), currencySymbol())}
                   </span>
                 </button>
               </div>

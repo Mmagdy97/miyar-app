@@ -1,5 +1,5 @@
 import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
@@ -106,7 +106,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       const boqAction = {
         id: Date.now(),
         title: "اعتماد المقايسة التقديرية - فيلا الياسمين",
-        subtitle: `إجمالي المقايسة: ${totalPrice.toLocaleString(intlLocale())} ${currencySymbol()} (${boqItems.length} بند تشطيبات)`,
+        subtitle: DF("إجمالي المقايسة: {0} {1} ({2} بند تشطيبات)", totalPrice.toLocaleString(intlLocale()), currencySymbol(), boqItems.length),
         user: "المكتب الفني / الإدارة المالية",
         project: D("فيلا الياسمين - التجمع"),
         category: "مقايسة تعاقدية",

@@ -19,3 +19,6 @@ export const localize = (x) => {
   }
   return x;
 };
+
+/** Translate a template with {0},{1}… placeholders (key is the Arabic template). */
+export const DF = (tpl, ...a) => D(tpl).replace(/\{(\d+)\}/g, (m, i) => (i in a ? a[i] : m));

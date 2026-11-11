@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
@@ -74,7 +74,7 @@ function ClientProjects() {
   const [toastMessage, setToastMessage] = useState(null);
 
   const handleAction = (unitName, actionType) => {
-    setToastMessage(`جاري فتح ${actionType} لمشروع: ${unitName}...`);
+    setToastMessage(DF("جاري فتح {0} لمشروع: {1}...", actionType, unitName));
     setTimeout(() => setToastMessage(null), 3000);
   };
 

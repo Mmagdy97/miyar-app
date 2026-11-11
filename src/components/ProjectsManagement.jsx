@@ -1,5 +1,5 @@
 import { currencySymbol, E } from "../i18n";
-import { D } from "../data/dataI18n";
+import { D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
@@ -142,7 +142,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
     setNewLocation("");
 
     // Toast
-    setToastMessage(`تم إنشاء مشروع "${newProject.name}" بنجاح وإسناده لـ ${newProject.engineer}`);
+    setToastMessage(DF("تم إنشاء مشروع \"{0}\" بنجاح وإسناده لـ {1}", newProject.name, newProject.engineer));
     setTimeout(() => setToastMessage(null), 3500);
   };
 
@@ -172,7 +172,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       )
     );
 
-    setToastMessage(`تم تحديث الجدول الزمني ونسبة الإنجاز لمشروع "${editingTimelineProject.name}"`);
+    setToastMessage(DF("تم تحديث الجدول الزمني ونسبة الإنجاز لمشروع \"{0}\"", editingTimelineProject.name));
     setEditingTimelineProject(null);
     setTimeout(() => setToastMessage(null), 3500);
   };

@@ -1,5 +1,5 @@
 import { currencySymbol, intlLocale } from "../i18n";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { expensesStore } from "../data/stores";
 import { ENGINEER_CASH, personById, projectById, formatNumber } from "../data/seed";
@@ -113,7 +113,7 @@ function SiteEngineerDashboard({ setActionItems }) {
       ...prev,
       {
         id: newId,
-        name: `لقطة_ميدانية_جديدة_رقم_${newId}.jpg`,
+        name: DF("لقطة_ميدانية_جديدة_رقم_{0}.jpg", newId),
         time: "الآن",
         size: "٣.١ ميجابايت",
       },
@@ -135,7 +135,7 @@ function SiteEngineerDashboard({ setActionItems }) {
     const newReportItem = {
       id: Date.now(),
       title: "تقرير يومي جديد: فيلا الياسمين",
-      subtitle: `حضور ${totalWorkers} عمال بالموقع • ${worksChecklist.filter((w) => w.done).length} مهام منجزة • ${photos.length} صور توثيقية`,
+      subtitle: DF("حضور {0} عمال بالموقع • {1} مهام منجزة • {2} صور توثيقية", totalWorkers, worksChecklist.filter((w) => w.done).length, photos.length),
       user: eng.displayName,
       project: proj.name,
       category: "تقرير يومي",
@@ -192,7 +192,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
     const newExpenseItem = {
       id: Date.now(),
-      title: `تصفية عهدة (${cashCategory})`,
+      title: DF("تصفية عهدة ({0})", cashCategory),
       subtitle: cashNotes || D("طلب تسوية عهدة ميدانية طارئة"),
       user: "م. محمد (الموقع)",
       project: D("فيلا الياسمين - التجمع"),

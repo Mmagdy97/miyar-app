@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   FileText,
@@ -153,8 +153,8 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
     if (setActionItems) {
       const newAction = {
         id: Date.now(),
-        title: `مخطط تنفيذي جديد: ${newDrawing.name}`,
-        subtitle: `كود ${newDrawing.code} • إصدار ${newDrawing.rev} • ${newDrawing.status}`,
+        title: DF("مخطط تنفيذي جديد: {0}", newDrawing.name),
+        subtitle: DF("كود {0} • إصدار {1} • {2}", newDrawing.code, newDrawing.rev, newDrawing.status),
         user: "المكتب الفني",
         project: D("فيلا الياسمين - التجمع"),
         category: "مخططات ومستندات",
@@ -168,26 +168,26 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       setActionItems((prev) => [newAction, ...prev]);
     }
 
-    setToastMessage(`تم رفع واعتماد المخطط "${newDrawing.name}" بنجاح`);
+    setToastMessage(DF("تم رفع واعتماد المخطط \"{0}\" بنجاح", newDrawing.name));
     setTimeout(() => setToastMessage(null), 3500);
   };
 
   // Delete Drawing
   const handleDeleteDrawing = (id, name) => {
     setDrawings((prev) => prev.filter((d) => d.id !== id));
-    setToastMessage(`تم حذف المخطط: "${name}"`);
+    setToastMessage(DF("تم حذف المخطط: \"{0}\"", name));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
   // Mock Download
   const handleDownloadDrawing = (name, code) => {
-    setToastMessage(`جاري تحميل ملف الأوتوكاد والـ PDF: ${code} - ${name}...`);
+    setToastMessage(DF("جاري تحميل ملف الأوتوكاد والـ PDF: {0} - {1}...", code, name));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
   // Mock Preview
   const handlePreviewDrawing = (name, code) => {
-    setToastMessage(`فتح معاينة المخطط الفني: [${code}] ${name}`);
+    setToastMessage(DF("فتح معاينة المخطط الفني: [{0}] {1}", code, name));
     setTimeout(() => setToastMessage(null), 3000);
   };
 

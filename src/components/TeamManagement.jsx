@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   Users,
@@ -217,7 +217,7 @@ function TeamManagement() {
             : m
         )
       );
-      setToastMessage(`تم تحديث بيانات "${newName.trim()}" والصلاحيات بنجاح`);
+      setToastMessage(DF("تم تحديث بيانات \"{0}\" والصلاحيات بنجاح", newName.trim()));
     } else {
       // Add new member
       const initial = getInitial(newName.trim());
@@ -240,7 +240,7 @@ function TeamManagement() {
       };
 
       setTeamMembers((prev) => [newMember, ...prev]);
-      setToastMessage(`تمت إضافة "${newMember.name}" بنجاح إلى فريق العمل`);
+      setToastMessage(DF("تمت إضافة \"{0}\" بنجاح إلى فريق العمل", newMember.name));
     }
 
     handleCloseModal();
@@ -253,7 +253,7 @@ function TeamManagement() {
     if (editingMember && editingMember.id === id) {
       handleCloseModal();
     }
-    setToastMessage(`تم حذف "${name}" من فريق العمل`);
+    setToastMessage(DF("تم حذف \"{0}\" من فريق العمل", name));
     setTimeout(() => setToastMessage(null), 3500);
   };
 

@@ -1,5 +1,5 @@
 import { currencySymbol, intlLocale, E } from "../i18n";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -237,8 +237,8 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
     if (setActionItems) {
       const newAction = {
         id: Date.now(),
-        title: `لوحة جديدة معتمدة: ${newDrawing.name}`,
-        subtitle: `إصدار ${newDrawing.rev} • مشروع ${newDrawing.project}`,
+        title: DF("لوحة جديدة معتمدة: {0}", newDrawing.name),
+        subtitle: DF("إصدار {0} • مشروع {1}", newDrawing.rev, newDrawing.project),
         user: "المكتب الفني",
         project: newDrawing.project,
         category: "مخططات ومستندات",
@@ -282,8 +282,8 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
     if (setActionItems) {
       const newAction = {
         id: Date.now(),
-        title: `حل هندسي معتمد لـ ${solvingRfi.id}`,
-        subtitle: `تم اعتماد حل تعارض: ${solvingRfi.title}`,
+        title: DF("حل هندسي معتمد لـ {0}", solvingRfi.id),
+        subtitle: DF("تم اعتماد حل تعارض: {0}", solvingRfi.title),
         user: "المكتب الفني",
         project: solvingRfi.location,
         category: "حلول RFI",
@@ -340,7 +340,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             </span>
             <span className="text-[#80848B]">•</span>
             <span className="text-[#5D6168]">
-              متابعة مستندات <strong className="text-[#16181C]">٤ مشاريع تنفيذية</strong> وجداول الحصر والمقايسات
+              {D("متابعة مستندات")} <strong className="text-[#16181C]">{D("٤ مشاريع تنفيذية")}</strong> {D("وجداول الحصر والمقايسات")}
             </span>
           </p>
         </div>
@@ -379,7 +379,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             </span>
           </div>
           <p className="text-xs text-[#5D6168] mt-2 font-medium">
-            ٣ معماري وديكور • ٢ كهروميكانيكال
+            {D("٣ معماري وديكور • ٢ كهروميكانيكال")}
           </p>
         </div>
 
@@ -431,7 +431,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             </span>
           </div>
           <p className="text-xs text-[#5D6168] mt-2 font-medium">
-            تشطيبات شاليه مراسي ومقر الشيخ زايد
+            {D("تشطيبات شاليه مراسي ومقر الشيخ زايد")}
           </p>
         </div>
 
@@ -554,14 +554,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     <div className="flex items-center gap-1 shrink-0 pt-1">
                       <button
                         title={T("to.28")}
-                        onClick={() => alert(`معاينة المخطط: ${dwg.name} (${dwg.code})`)}
+                        onClick={() => alert(DF("معاينة المخطط: {0} ({1})", dwg.name, dwg.code))}
                         className="p-1.5 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6] transition-colors"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button
                         title={T("to.29")}
-                        onClick={() => alert(`جاري تنزيل الملف المعتمد: ${dwg.name}.pdf`)}
+                        onClick={() => alert(DF("جاري تنزيل الملف المعتمد: {0}.pdf", dwg.name))}
                         className="p-1.5 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6] transition-colors"
                       >
                         <Download className="w-4 h-4" />
@@ -695,7 +695,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               </h2>
             </div>
             <p className="text-xs text-[#5D6168] mt-0.5">
-              متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع: <strong className="text-[#16181C]">فيلا الياسمين (BOQ-YAS-2026)</strong>
+              {D("متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:")} <strong className="text-[#16181C]">{D("فيلا الياسمين (BOQ-YAS-2026)")}</strong>
             </p>
           </div>
 

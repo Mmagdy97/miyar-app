@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { localize, D } from "../data/dataI18n";
+import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   ListTodo,
@@ -88,7 +88,7 @@ function SiteEngineerTasks() {
         if (t.id === id) {
           const newStatus = !t.completed;
           if (newStatus) {
-            setToastMessage(`أحسنت! تم إنجاز مهمة: "${t.title}"`);
+            setToastMessage(DF("أحسنت! تم إنجاز مهمة: \"{0}\"", t.title));
             setTimeout(() => setToastMessage(null), 3000);
           }
           return { ...t, completed: newStatus };
@@ -117,7 +117,7 @@ function SiteEngineerTasks() {
     setIsModalOpen(false);
     setNewTitle("");
     setNewLocation("");
-    setToastMessage(`تمت إضافة مهمة جديدة: "${newTask.title}"`);
+    setToastMessage(DF("تمت إضافة مهمة جديدة: \"{0}\"", newTask.title));
     setTimeout(() => setToastMessage(null), 3500);
   };
 
