@@ -66,7 +66,7 @@ function Sidebar({
             </div>
             <button
               onClick={onCloseMobile || onItemClick}
-              className="p-1.5 rounded-lg text-[#ECEEF0]/80 hover:text-white hover:bg-[#D9480F]/20 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg text-[#EEECE6]/80 hover:text-white hover:bg-[#D9480F]/20 transition-colors cursor-pointer"
               aria-label={t("menu.close")}
             >
               <X className="w-5 h-5" />
@@ -76,13 +76,13 @@ function Sidebar({
           {/* Desktop Header: Label + Collapse Toggle */}
           <div className="hidden md:flex items-center justify-between w-full">
             {!collapsed && (
-              <span className="text-[11px] font-bold text-[#ECEEF0]/80 uppercase tracking-widest font-ibm">
+              <span className="text-[11px] font-bold text-[#EEECE6]/80 uppercase tracking-widest font-ibm">
                 {t("menu.main")}
               </span>
             )}
             <button
               onClick={toggleSidebar}
-              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#ECEEF0]/70 hover:text-white hover:bg-[#D9480F]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
+              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#EEECE6]/70 hover:text-white hover:bg-[#D9480F]/20 transition-colors duration-150 focus:outline-none cursor-pointer"
               aria-label={collapsed ? t("menu.expand") : t("menu.collapse")}
               title={collapsed ? t("menu.expand") : t("menu.collapse")}
             >
@@ -99,7 +99,7 @@ function Sidebar({
       {/* Role Badge inside Sidebar (Pure White & Light Cream on Dark) */}
       {!collapsed && (
         <div className="mx-3 mt-3 mb-2 p-3.5 rounded-xl bg-white/10 border border-white/15 shadow-2xs">
-          <p className="text-xs text-[#ECEEF0]/70 font-medium">
+          <p className="text-xs text-[#EEECE6]/70 font-medium">
             {t("menu.currentRole")}
           </p>
           <p className="text-sm font-bold text-white mt-0.5 truncate tracking-tight">
@@ -141,7 +141,7 @@ function Sidebar({
               } ${
                 isActive
                   ? "bg-[#D9480F] text-white font-bold shadow-sm"
-                  : "text-[#ECEEF0]/80 hover:bg-white/5 hover:text-white"
+                  : "text-[#EEECE6]/80 hover:bg-white/5 hover:text-white"
               }`}
             >
               <Icon
@@ -150,7 +150,7 @@ function Sidebar({
                 } ${
                   isActive
                     ? "text-white"
-                    : "text-[#ECEEF0]/80 group-hover:text-white"
+                    : "text-[#EEECE6]/80 group-hover:text-white"
                 }`}
               />
               {!collapsed && (
@@ -164,11 +164,11 @@ function Sidebar({
       {/* Tooltip for collapsed state (popping to the LEFT in RTL) */}
       {collapsed && tooltip.visible && (
         <div
-          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#1E2429] border border-[#D9480F]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
+          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[#16181C] border border-[#D9480F]/30 rounded-lg shadow-md whitespace-nowrap pointer-events-none"
           style={{ top: tooltip.top, transform: "translateY(-50%)" }}
         >
           {tooltip.text}
-          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#1E2429] border-t border-e border-[#D9480F]/30 rotate-45" />
+          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#16181C] border-t border-e border-[#D9480F]/30 rotate-45" />
         </div>
       )}
 
@@ -198,12 +198,12 @@ function Sidebar({
               <p className="text-[11px] font-bold text-white">
                 {t("brand.footer1")}
               </p>
-              <p className="text-[10px] text-[#ECEEF0]/60 mt-0.5 font-medium">
+              <p className="text-[10px] text-[#EEECE6]/60 mt-0.5 font-medium">
                 {t("brand.footer2")}
               </p>
             </div>
           ) : (
-            <p className="text-[10px] font-bold text-[#ECEEF0]/60">v1.0</p>
+            <p className="text-[10px] font-bold text-[#EEECE6]/60">v1.0</p>
           )}
         </div>
       )}

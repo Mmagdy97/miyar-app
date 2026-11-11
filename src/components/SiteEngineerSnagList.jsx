@@ -57,7 +57,7 @@ const INITIAL_SNAGS = [
 const SEVERITY_COLORS = {
   حرجة: "bg-rose-50 text-rose-800 border-rose-200",
   متوسطة: "bg-amber-50 text-amber-800 border-amber-200",
-  طفيفة: "bg-[#ECEEF0] text-[#5A646E] border-[#DDE1E5]",
+  طفيفة: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
 };
 
 function SiteEngineerSnagList() {
@@ -148,8 +148,8 @@ function SiteEngineerSnagList() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#16181C] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
                   <AlertTriangle className="w-5 h-5" />
                 </div>
                 <span>{T("se.80")}</span>
@@ -158,7 +158,7 @@ function SiteEngineerSnagList() {
                 {T("se.81", { v0: stats.pending })}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#5A646E]">
+            <p className="text-xs md:text-sm text-[#5D6168]">
               {T("se.82")}
             </p>
           </div>
@@ -166,7 +166,7 @@ function SiteEngineerSnagList() {
           {/* Button: + إضافة ملاحظة جديدة */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#16181C] transition-colors shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{T("se.83")}</span>
@@ -175,18 +175,18 @@ function SiteEngineerSnagList() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-          <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.84")}</span>
-            <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.84")}</span>
+            <span className="text-xl md:text-2xl font-black text-[#16181C]">{stats.total}</span>
           </div>
 
-          <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.85")}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.85")}</span>
             <span className="text-xl md:text-2xl font-black text-rose-700">{stats.pending}</span>
           </div>
 
-          <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.86")}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.86")}</span>
             <span className="text-xl md:text-2xl font-black text-emerald-700">{stats.resolved}</span>
           </div>
         </div>
@@ -200,7 +200,7 @@ function SiteEngineerSnagList() {
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 filter === tab
                   ? "bg-[#2B3138] text-white shadow-sm"
-                  : "bg-white text-[#5A646E] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
+                  : "bg-white text-[#5D6168] border border-[#E3E0D9] hover:bg-[#F6F5F1]"
               }`}
             >
               {E(tab)}
@@ -221,7 +221,7 @@ function SiteEngineerSnagList() {
                 className={`bg-white rounded-lg p-5 border transition-all duration-200 ${
                   isResolved
                     ? "border-emerald-200/70 bg-emerald-50/15 rounded-lg"
-                    : "border-[#DDE1E5] rounded-lg shadow-xs"
+                    : "border-[#E3E0D9] rounded-lg shadow-xs"
                 }`}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -232,12 +232,12 @@ function SiteEngineerSnagList() {
                       >
                         {T("se.87", { v0: snag.severity })}
                       </span>
-                      <span className="text-[11px] text-[#5A646E]">{snag.date}</span>
+                      <span className="text-[11px] text-[#5D6168]">{snag.date}</span>
                     </div>
 
                     <h3
                       className={`text-sm md:text-base font-extrabold leading-snug ${
-                        isResolved ? "line-through text-[#5A646E]" : "text-[#1E2429]"
+                        isResolved ? "line-through text-[#5D6168]" : "text-[#16181C]"
                       }`}
                     >
                       {snag.description}
@@ -250,7 +250,7 @@ function SiteEngineerSnagList() {
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                       isResolved
                         ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-                        : "bg-[#ECEEF0] text-[#5A646E] border border-[#DDE1E5] hover:bg-[#DDE1E5]"
+                        : "bg-[#EEECE6] text-[#5D6168] border border-[#E3E0D9] hover:bg-[#E3E0D9]"
                     }`}
                   >
                     {isResolved ? (
@@ -267,15 +267,15 @@ function SiteEngineerSnagList() {
                   </button>
                 </div>
 
-                <div className="pt-3 border-t border-[#ECEEF0] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#5A646E]">
-                  <span className="flex items-center gap-1 text-[#5A646E]">
-                    <Building2 className="w-3.5 h-3.5 text-[#5A646E]" />
-                    <span>{T("se.90")} <strong className="text-[#5A646E]">{snag.location}</strong></span>
+                <div className="pt-3 border-t border-[#EEECE6] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#5D6168]">
+                  <span className="flex items-center gap-1 text-[#5D6168]">
+                    <Building2 className="w-3.5 h-3.5 text-[#5D6168]" />
+                    <span>{T("se.90")} <strong className="text-[#5D6168]">{snag.location}</strong></span>
                   </span>
 
-                  <span className="flex items-center gap-1 text-[#5A646E]">
-                    <User className="w-3.5 h-3.5 text-[#5A646E]" />
-                    <span>{T("se.91")} <strong className="text-[#1E2429]">{snag.contractor}</strong></span>
+                  <span className="flex items-center gap-1 text-[#5D6168]">
+                    <User className="w-3.5 h-3.5 text-[#5D6168]" />
+                    <span>{T("se.91")} <strong className="text-[#16181C]">{snag.contractor}</strong></span>
                   </span>
                 </div>
               </div>
@@ -283,10 +283,10 @@ function SiteEngineerSnagList() {
           })}
 
           {filteredSnags.length === 0 && (
-            <div className="py-12 text-center bg-white rounded-lg border border-[#DDE1E5] p-8">
+            <div className="py-12 text-center bg-white rounded-lg border border-[#E3E0D9] p-8">
               <CheckCircle2 className="w-10 h-10 mx-auto mb-2 text-emerald-500" />
-              <h4 className="text-sm font-bold text-[#1E2429]">{T("se.92")}</h4>
-              <p className="text-xs text-[#5A646E] mt-1">
+              <h4 className="text-sm font-bold text-[#16181C]">{T("se.92")}</h4>
+              <p className="text-xs text-[#5D6168] mt-1">
                 {T("se.93")}
               </p>
             </div>
@@ -296,16 +296,16 @@ function SiteEngineerSnagList() {
 
       {/* Add Snag Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#1E2429]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
-              <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
+        <div className="fixed inset-0 z-50 bg-[#16181C]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E3E0D9] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEECE6]">
+              <h3 className="text-base font-black text-[#16181C] flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-500" />
                 <span>{T("se.94")}</span>
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0]"
+                className="p-1 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -313,7 +313,7 @@ function SiteEngineerSnagList() {
 
             <form onSubmit={handleAddSnag} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
                   وصف الملاحظة / العيب بالتفصيل <span className="text-rose-500">*</span>
                 </label>
                 <textarea
@@ -322,12 +322,12 @@ function SiteEngineerSnagList() {
                   placeholder={T("se.95")}
                   value={newDesc}
                   onChange={(e) => setNewDesc(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-semibold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
                   المكان / الغرفة بالموقع <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -336,17 +336,17 @@ function SiteEngineerSnagList() {
                   placeholder={T("se.96")}
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-semibold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.97")}</label>
+                  <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("se.97")}</label>
                   <select
                     value={newSeverity}
                     onChange={(e) => setNewSeverity(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
+                    className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-bold text-[#16181C] bg-white"
                   >
                     <option value="طفيفة">{T("se.98")}</option>
                     <option value="متوسطة">{T("se.99")}</option>
@@ -355,28 +355,28 @@ function SiteEngineerSnagList() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.101")}</label>
+                  <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("se.101")}</label>
                   <input
                     type="text"
                     placeholder={T("se.102")}
                     value={newContractor}
                     onChange={(e) => setNewContractor(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429]"
+                    className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-semibold text-[#16181C]"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#ECEEF0]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EEECE6]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#5D6168] hover:bg-[#EEECE6]"
                 >
                   {T("se.124")}
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs shadow-sm"
+                  className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#16181C] hover:bg-[#16181C] text-white font-bold text-xs shadow-sm"
                 >
                   {T("se.104")}
                 </button>
