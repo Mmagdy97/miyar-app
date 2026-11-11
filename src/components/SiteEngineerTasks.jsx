@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { problemsStore } from "../data/stores";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
@@ -13,6 +14,7 @@ import {
   X,
   RotateCcw,
   Check,
+  Flag,
 } from "lucide-react";
 
 const INITIAL_TASKS = localize([
@@ -80,6 +82,56 @@ function SiteEngineerTasks() {
   const [newLocation, setNewLocation] = useState("");
   const [newPriority, setNewPriority] = useState("متوسط");
   const [newDueTime, setNewDueTime] = useState("اليوم، ٠٣:٠٠ م");
+
+  // Problem reporting
+  const [problems, setProblems] = problemsStore.use();
+  const [probTask, setProbTask] = useState(null);
+  const [probType, setProbType] = useState("materials");
+  const [probSev, setProbSev] = useState("medium");
+  const [probDesc, setProbDesc] = useState("");
+  const [probStop, setProbStop] = useState(true);
+
+  const openProblem = (task) => {
+    setProbTask(task);
+    setProbType("materials");
+    setProbSev("medium");
+    setProbDesc("");
+    setProbStop(true);
+  };
+
+  const submitProblem = (e) => {
+    e.preventDefault();
+    if (!probDesc.trim()) return;
+    setProblems((prev) => [
+      {
+        id: Date.now(),
+        taskId: probTask.id,
+        task: probTask.title,
+        project: probTask.project,
+        type: probType,
+        severity: probSev,
+        desc: probDesc.trim(),
+        status: "open",
+        at: new Date().toISOString(),
+      },
+      ...prev,
+    ]);
+    if (probStop) setTasks((prev) => prev.map((t) => (t.id === probTask.id ? { ...t, blocked: true } : t)));
+    setToastMessage(T("prob.sent", { 0: probTask.title }));
+    setTimeout(() => setToastMessage(null), 3500);
+    setProbTask(null);
+  };
+
+  const resolveProblem = (pr) => {
+    setProblems((prev) => prev.map((x) => (x.id === pr.id ? { ...x, status: "resolved" } : x)));
+    setTasks((prev) =>
+      prev.map((t) =>
+        t.id === pr.taskId && !problems.some((x) => x.id !== pr.id && x.taskId === pr.taskId && x.status === "open")
+          ? { ...t, blocked: false }
+          : t
+      )
+    );
+  };
 
   // Toggle task completed status
   const handleToggleTask = (id) => {
@@ -286,6 +338,28 @@ function SiteEngineerTasks() {
                     {task.completed ? D("تم الإنجاز ✓") : D("انقر للاكتمال")}
                   </span>
                 </div>
+
+                <div className="mt-3 flex items-center justify-between gap-2">
+                  {task.blocked ? (
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1">
+                      <AlertTriangle className="w-3 h-3" />
+                      {T("prob.blocked")}
+                    </span>
+                  ) : (
+                    <span />
+                  )}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openProblem(task);
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold text-rose-700 bg-rose-50 border border-rose-200 hover:bg-rose-100 cursor-pointer"
+                  >
+                    <Flag className="w-3.5 h-3.5" />
+                    {T("prob.btn")}
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -300,7 +374,90 @@ function SiteEngineerTasks() {
             </p>
           </div>
         )}
+
+        {/* Reported problems */}
+        <section className="space-y-3">
+          <h2 className="text-base font-black text-[#16181C] flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-rose-600" />
+            <span>{T("prob.sec")}</span>
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-[#EEECE6] border border-[#E3E0D9]">{problems.length}</span>
+          </h2>
+          {problems.length === 0 ? (
+            <p className="text-xs text-[#5D6168] bg-white rounded-lg border border-[#E3E0D9] p-4 text-center">{T("prob.empty")}</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {problems.map((pr) => (
+                <div key={pr.id} className={`p-4 rounded-lg border bg-white ${pr.status === "resolved" ? "opacity-60 border-[#E3E0D9]" : "border-rose-200"}`}>
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EEECE6] border border-[#E3E0D9]">{T("prob.t." + pr.type)}</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${pr.severity === "high" ? "bg-rose-50 text-rose-700 border-rose-200" : pr.severity === "medium" ? "bg-amber-50 text-amber-800 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200"}`}>{T("prob.s." + pr.severity)}</span>
+                  </div>
+                  <p className="text-sm font-extrabold text-[#16181C] leading-snug">{pr.task}</p>
+                  <p className="text-xs text-[#5D6168] mt-1 leading-relaxed">{pr.desc}</p>
+                  <div className="mt-3 flex items-center justify-between text-[11px]">
+                    <span className="text-[#5D6168]">{new Date(pr.at).toLocaleString()}</span>
+                    {pr.status === "open" ? (
+                      <button type="button" onClick={() => resolveProblem(pr)} className="px-3 py-1 rounded-lg font-bold text-white bg-[#2B3138] hover:bg-[#16181C] cursor-pointer">{T("prob.resolve")}</button>
+                    ) : (
+                      <span className="font-bold text-emerald-700">{T("prob.resolved")}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
       </div>
+
+      {/* Report Problem Modal */}
+      {probTask && (
+        <div className="fixed inset-0 z-50 bg-[#16181C]/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E3E0D9] max-w-md w-full p-6 text-start max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EEECE6]">
+              <h3 className="text-base font-black text-[#16181C] flex items-center gap-2">
+                <Flag className="w-5 h-5 text-rose-600" />
+                <span>{T("prob.title")}</span>
+              </h3>
+              <button type="button" onClick={() => setProbTask(null)} className="p-1 rounded-lg text-[#5D6168] hover:bg-[#EEECE6]">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <p className="text-xs font-bold text-[#5D6168] mt-3">{T("prob.for", { 0: probTask.title })}</p>
+            <form onSubmit={submitProblem} className="space-y-4 mt-4">
+              <div>
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("prob.type")}</label>
+                <select value={probType} onChange={(e) => setProbType(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-bold text-[#16181C] bg-white">
+                  {["materials", "safety", "quality", "design", "equipment", "labor", "other"].map((k) => (
+                    <option key={k} value={k}>{T("prob.t." + k)}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("prob.sev")}</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {["high", "medium", "low"].map((k) => (
+                    <button key={k} type="button" onClick={() => setProbSev(k)} className={`py-2 rounded-lg text-xs font-bold border cursor-pointer ${probSev === k ? "bg-[#2B3138] text-white border-[#2B3138]" : "bg-white text-[#5D6168] border-[#E3E0D9]"}`}>
+                      {T("prob.s." + k)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("prob.desc")} <span className="text-rose-500">*</span></label>
+                <textarea required rows={3} value={probDesc} onChange={(e) => setProbDesc(e.target.value)} placeholder={T("prob.desc.ph")} className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs font-semibold text-[#16181C]" />
+              </div>
+              <label className="flex items-center gap-2 text-xs font-bold text-[#16181C] cursor-pointer">
+                <input type="checkbox" checked={probStop} onChange={(e) => setProbStop(e.target.checked)} />
+                {T("prob.stop")}
+              </label>
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EEECE6]">
+                <button type="button" onClick={() => setProbTask(null)} className="px-4 py-2 rounded-lg text-xs font-bold text-[#5D6168] hover:bg-[#EEECE6]">{T("se.124")}</button>
+                <button type="submit" className="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-sm">{T("prob.send")}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Add Task Modal */}
       {isModalOpen && (
