@@ -215,7 +215,7 @@ function ClientProgress() {
                     </div>
 
                     <span
-                      className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border shrink-0 ${item.statusBadge}`}
+                      className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border max-w-[45%] text-center leading-snug ${item.statusBadge}`}
                     >
                       {E(item.status)}
                     </span>

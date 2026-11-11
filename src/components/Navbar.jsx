@@ -62,7 +62,7 @@ function Navbar({
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-3 sm:px-4 md:px-6 bg-white/80 glass border-b border-[#E3E0D9] w-full max-w-full">
       {/* Right in RTL: Mobile Menu Toggle + Logo & Platform Identity */}
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
         {/* Hamburger Menu Toggle (Visible on Mobile < md) */}
         <button
           onClick={onToggleMobileMenu}

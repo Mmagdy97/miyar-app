@@ -149,6 +149,8 @@ p {
     min-height: 44px;
     min-width: 44px;
   }
+  button[role="switch"] { min-width: 0; min-height: 0; }
+  header button { min-width: 0; }
 }
 
 /* ---- Design polish layer ---- */
