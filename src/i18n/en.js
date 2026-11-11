@@ -1351,4 +1351,7 @@ export default {
   "nav.Technical Office.Moodboard": "Moodboard",
   "md.Technical Office.Moodboard.t": "Moodboard",
   "md.Technical Office.Moodboard.d": "Collect style images, colours and notes per project before drawings are approved.",
+  "nav.Technical Office.Selections": "Selections & FF&E",
+  "md.Technical Office.Selections.t": "Selections & FF&E",
+  "md.Technical Office.Selections.d": "Propose furniture and fittings per room and track client approval and the supply schedule.",
 };
