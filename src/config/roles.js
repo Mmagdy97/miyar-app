@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Receipt,
+  Armchair,
   FilePenLine,
   Truck,
   UsersRound,
@@ -31,6 +32,7 @@ export const ROLE_CONFIG = {
     { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
     { id: "BOQ & Approvals", name: "المقايسات والاعتمادات", label: "المقايسات والاعتمادات", icon: ClipboardCheck },
     { id: "Certificates", name: "المستخلصات والمحتجزات", label: "المستخلصات والمحتجزات", icon: Receipt },
+    { id: "Selections", name: "الاختيارات وFF&E", label: "الاختيارات وFF&E", icon: Armchair },
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
     { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
@@ -55,6 +57,7 @@ export const ROLE_CONFIG = {
     { id: "My Projects", name: "مشاريعي", label: "مشاريعي", icon: Briefcase },
     { id: "Progress Overview", name: "نسب الإنجاز", label: "نسب الإنجاز", icon: Eye },
     { id: "Invoices & Payments", name: "الفواتير والدفعات", label: "الفواتير والدفعات", icon: CreditCard },
+    { id: "Selections", name: "اختياراتي", label: "اختياراتي", icon: Armchair },
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
     { id: "Schedule", name: "الجدول الزمني", label: "الجدول الزمني", icon: CalendarDays },
   ],
