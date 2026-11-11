@@ -1,10 +1,11 @@
-import { Globe2, SunMoon, FileDown, Smartphone, Users, ShieldCheck, CreditCard, ImagePlus, BellRing, Building, Coins, Scale, Check, Clock, MessageCircle, FileText, Receipt } from "lucide-react";
+import { Globe2, SunMoon, FileDown, Smartphone, Users, ShieldCheck, CreditCard, ImagePlus, BellRing, Building, Coins, Scale, Check, Clock, MessageCircle, FileText, Receipt, HardHat, Armchair, QrCode, WifiOff } from "lucide-react";
 import { useI18n } from "../i18n";
 
 // [icon, live, dictionary number]: live cards first.
 const ITEMS = [
   [Globe2, true, 1], [SunMoon, true, 2], [FileDown, true, 3], [Smartphone, true, 4], [Users, true, 5],
   [MessageCircle, true, 13], [FileText, true, 14], [Receipt, true, 15],
+  [Receipt, true, 16], [HardHat, true, 17], [Armchair, true, 18], [QrCode, true, 19], [WifiOff, true, 20],
   [ShieldCheck, false, 6], [CreditCard, false, 7], [ImagePlus, false, 8], [BellRing, false, 9], [Building, false, 10], [Coins, false, 11], [Scale, false, 12],
 ];
 
