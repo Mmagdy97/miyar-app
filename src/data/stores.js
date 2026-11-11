@@ -26,3 +26,12 @@ export const certsStore = createPersistedStore("miyar:certs:v1", [], (x) => x);
 // Site labour (puantaj): workers list and daily attendance { "YYYY-MM-DD": { workerId: { s, ot } } }.
 export const workersStore = createPersistedStore("miyar:workers:v1", WORKERS, localize);
 export const attendanceStore = createPersistedStore("miyar:attendance:v1", {}, (x) => x);
+
+// Subcontractors and purchase orders (Admin). Amounts in base currency units.
+export const subsStore = createPersistedStore("miyar:subs:v1", [
+  { id: 1, name: "شركة النور للكهرباء", trade: "كهرباء", contract: 420000, paid: 210000 },
+  { id: 2, name: "مؤسسة الأمل للسباكة", trade: "سباكة", contract: 310000, paid: 93000 },
+], (x) => x);
+export const posStore = createPersistedStore("miyar:pos:v1", [
+  { id: 1, no: "PO-001", supplier: "الصفا للرخام", item: "رخام كرارة", qty: 120, price: 1850, status: "sent" },
+], (x) => x);
