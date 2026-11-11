@@ -1351,4 +1351,7 @@ export default {
   "nav.Technical Office.Moodboard": "Moodboard",
   "md.Technical Office.Moodboard.t": "Moodboard",
   "md.Technical Office.Moodboard.d": "Çizimler onaylanmadan önce proje başına stil görselleri, renkler ve notlar toplayın.",
+  "nav.Technical Office.Selections": "Seçimler ve FF&E",
+  "md.Technical Office.Selections.t": "Seçimler ve FF&E",
+  "md.Technical Office.Selections.d": "Oda başına mobilya ve donanım önerin, müşteri onayını ve tedarik listesini takip edin.",
 };

@@ -1351,4 +1351,7 @@ export default {
   "nav.Technical Office.Moodboard": "الموودبورد",
   "md.Technical Office.Moodboard.t": "الموودبورد",
   "md.Technical Office.Moodboard.d": "اجمع صور وألوان وملاحظات الستايل لكل مشروع قبل اعتماد المخططات.",
+  "nav.Technical Office.Selections": "الاختيارات وFF&E",
+  "md.Technical Office.Selections.t": "الاختيارات وFF&E",
+  "md.Technical Office.Selections.d": "اقترح الأثاث والتجهيزات لكل غرفة وتابع موافقة العميل وجدول التوريد.",
 };
