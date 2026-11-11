@@ -6,6 +6,7 @@ import { OVERDUE, projectById, clientProject } from "../data/seed";
 import { whatsappLink } from "../lib/share";
 import { invoiceRows, toCsv, download } from "../lib/accountant";
 import OfficeDetails from "./OfficeDetails";
+import EInvoicePanel from "./EInvoicePanel";
 
 /** Admin: one-tap WhatsApp payment reminders + accountant export (Excel/JSON with VAT). */
 export default function ReceivablesPanel() {
@@ -56,6 +57,7 @@ export default function ReceivablesPanel() {
         })}
       </ul>
       <OfficeDetails />
+      <EInvoicePanel />
     </section>
   );
 }
