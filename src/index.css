@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-ibm: 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-ibm: 'Inter', 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --default-font-family: var(--font-ibm);
   --color-miyar-bg: #F3F4F6;
   --color-miyar-primary: #2B3138;
@@ -13,11 +13,11 @@
 }
 
 * {
-  font-family: 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', 'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
-  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-family: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
   background-color: #F3F4F6;
   color: #1E2429;
   -webkit-font-smoothing: antialiased;
@@ -185,3 +185,10 @@ button:not(:disabled) { cursor: pointer; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 .min-h-screen { min-height: 100vh; min-height: 100dvh; }
+
+/* ---- Dark theme base ---- */
+html.dark { color-scheme: dark; }
+html.dark body { background-color: #0b0e12; color: #eceef0; }
+html.dark ::-webkit-scrollbar-thumb { background: #313840; }
+html.dark .studio-card { background-color: #13171c; border-color: #262c34; box-shadow: none; }
+html.dark select option { background: #13171c; color: #eceef0; }

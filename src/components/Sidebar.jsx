@@ -45,7 +45,7 @@ function Sidebar({
   return (
     <aside
       ref={sidebarRef}
-      className={`relative flex flex-col h-full bg-[#2B3138] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
+      className={`relative flex flex-col h-full bg-[#171B21] text-white transition-all duration-300 ease-in-out shrink-0 select-none ${
         hideHeader ? "w-full border-none" : "border-s border-[#D9480F]/20"
       } ${!hideHeader && (collapsed ? "md:w-[72px]" : "w-full md:w-64")}`}
     >

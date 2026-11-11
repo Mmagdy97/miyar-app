@@ -278,9 +278,9 @@ export default function LandingAndLogin({ onLogin }) {
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-[#2B3138] text-white border border-[#20262C] shadow-2xs">
-                    <span style={{ color: '#ECEEF0' }} className="text-[10px] font-bold text-[#ECEEF0] block">{T("ld.16")}</span>
-                    <span style={{ color: '#FFFFFF' }} className="text-base sm:text-lg font-black text-white mt-0.5 block">{formatEGP(HERO_CASH.totalGiven - HERO_CASH.spent)}</span>
-                    <span style={{ color: '#7B848E' }} className="text-[10px] text-[#7B848E] font-bold">{T("ld.17")}</span>
+                    <span className="text-[10px] font-bold text-[#ECEEF0] block">{T("ld.16")}</span>
+                    <span className="text-base sm:text-lg font-black text-white mt-0.5 block">{formatEGP(HERO_CASH.totalGiven - HERO_CASH.spent)}</span>
+                    <span className="text-[10px] text-[#7B848E] font-bold">{T("ld.17")}</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
@@ -878,7 +878,7 @@ export default function LandingAndLogin({ onLogin }) {
       <PricingSection onStart={() => openModal("Admin")} />
 
       <section id="cta" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="bg-[#2B3138] text-white rounded-xl p-12 md:p-16 text-center relative overflow-hidden">
+        <div className="bg-[#171B21] border border-[#262c34] text-white rounded-xl p-12 md:p-16 text-center relative overflow-hidden">
           <div className="relative z-10 max-w-3xl mx-auto">
             <span
               style={{ color: '#FFFFFF' }}

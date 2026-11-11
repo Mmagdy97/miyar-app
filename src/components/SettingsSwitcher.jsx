@@ -1,4 +1,6 @@
-import { Globe, Coins } from "lucide-react";
+import { useState } from "react";
+import { Globe, Coins, Sun, Moon } from "lucide-react";
+import { getTheme, setTheme } from "../theme";
 import { useI18n } from "../i18n";
 import { CURRENCIES } from "../lib/currency";
 import { LOCALES } from "../config/locale";
@@ -9,9 +11,14 @@ export default function SettingsSwitcher({ compact = false, dark = false }) {
   const box = `flex items-center gap-1.5 rounded-lg border px-2 py-1.5 text-xs font-bold ${
     dark ? "bg-white/10 border-white/20 text-white" : "bg-white border-[#DDE1E5] text-[#1E2429]"
   }`;
+  const [theme, setThemeState] = useState(getTheme());
+  const toggle = () => { const n = theme === "dark" ? "light" : "dark"; setTheme(n); setThemeState(n); };
   const sel = "bg-transparent outline-none cursor-pointer max-w-[110px]";
   return (
     <div className="flex items-center gap-2">
+      <button type="button" onClick={toggle} aria-label={theme === "dark" ? "Light theme" : "Dark theme"} className={`${box} btn-press`}>
+        {theme === "dark" ? <Sun className="w-3.5 h-3.5" aria-hidden="true" /> : <Moon className="w-3.5 h-3.5" aria-hidden="true" />}
+      </button>
       <label className={box}>
         <Globe className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
         <span className="sr-only">{t("settings.language")}</span>

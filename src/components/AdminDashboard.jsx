@@ -227,8 +227,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                   </linearGradient>
                 </defs>
                 <path d="M0,26 Q20,24 35,18 T70,12 T100,4 L100,30 L0,30 Z" fill="url(#revGradAr)" />
-                <path d="M0,26 Q20,24 35,18 T70,12 T100,4" fill="none" stroke="#2B3138" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="100" cy="4" r="2.5" fill="#2B3138" />
+                <path d="M0,26 Q20,24 35,18 T70,12 T100,4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="100" cy="4" r="2.5" fill="currentColor" />
               </svg>
             </div>
           </div>
@@ -271,8 +271,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                   </linearGradient>
                 </defs>
                 <path d="M0,28 Q25,26 45,19 T80,10 T100,6 L100,30 L0,30 Z" fill="url(#collGradAr)" />
-                <path d="M0,28 Q25,26 45,19 T80,10 T100,6" fill="none" stroke="#2B3138" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="100" cy="6" r="2.5" fill="#2B3138" />
+                <path d="M0,28 Q25,26 45,19 T80,10 T100,6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="100" cy="6" r="2.5" fill="currentColor" />
               </svg>
             </div>
           </div>
