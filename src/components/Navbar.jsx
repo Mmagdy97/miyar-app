@@ -103,7 +103,7 @@ function Navbar({
           </button>
         )}
 
-        <div className="hidden md:block"><SettingsSwitcher compact /></div>
+        <SettingsSwitcher />
 
         {/* Interactive Notification Bell with Dropdown */}
         <div className="relative" ref={notificationsRef}>

@@ -961,4 +961,9 @@ export default {
   "hero.qty": "الكمية",
   "hero.unit": "م²",
   "hero.profit": "الربح على البند",
+  "settings.title": "اللغة والعملة والمظهر",
+  "settings.theme": "المظهر",
+  "settings.light": "فاتح",
+  "settings.dark": "داكن",
+  "settings.close": "إغلاق",
 };
