@@ -51,6 +51,7 @@ export const ROLE_CONFIG = {
     { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم الهندسية", icon: LayoutDashboard },
     { id: "BOQ Management", name: "إدارة المقايسات", label: "إدارة المقايسات (BOQ)", icon: ClipboardCheck },
     { id: "Drawings & Docs", name: "المخططات والمستندات", label: "المخططات والمستندات", icon: FileText },
+    { id: "Moodboard", name: "الموودبورد", label: "الموودبورد", icon: Palette },
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
     { id: "Project Tracking", name: "متابعة التنفيذ", label: "متابعة التنفيذ", icon: FolderKanban },
     { id: "Settings", name: "الإعدادات والنماذج", label: "الإعدادات والنماذج", icon: Settings },

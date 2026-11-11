@@ -1348,4 +1348,7 @@ export default {
   "to.dwg.total": "Toplam {0} çizim dizinlendi",
   "to.co.sub": "{0} müşteri onayı bekliyor • {1} taslak",
   "nav.Technical Office.Change Orders": "Değişiklik emirleri",
+  "nav.Technical Office.Moodboard": "Moodboard",
+  "md.Technical Office.Moodboard.t": "Moodboard",
+  "md.Technical Office.Moodboard.d": "Çizimler onaylanmadan önce proje başına stil görselleri, renkler ve notlar toplayın.",
 };

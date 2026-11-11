@@ -1348,4 +1348,7 @@ export default {
   "to.dwg.total": "{0} drawings indexed in total",
   "to.co.sub": "{0} awaiting client • {1} draft",
   "nav.Technical Office.Change Orders": "Change orders",
+  "nav.Technical Office.Moodboard": "Moodboard",
+  "md.Technical Office.Moodboard.t": "Moodboard",
+  "md.Technical Office.Moodboard.d": "Collect style images, colours and notes per project before drawings are approved.",
 };
