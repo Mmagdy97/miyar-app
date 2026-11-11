@@ -25,7 +25,7 @@ export function PricingSection({ onStart }) {
   const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-      <div className="text-center mb-10">
+      <div className="text-start max-w-2xl mb-10">
         <h2 className="text-3xl sm:text-4xl font-black text-[#1E2429] mb-3">{t("pricing.title")}</h2>
         <p className="text-[#5A646E] mb-6">{t("pricing.sub")}</p>
         <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap justify-center gap-1 p-1 rounded-xl bg-white border border-[#DDE1E5]">

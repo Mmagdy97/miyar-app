@@ -527,7 +527,7 @@ export default function LandingAndLogin({ onLogin }) {
 
       {/* 4. The Competitor Comparison Table (The Deal Closer) */}
       <section id="comparison" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-start max-w-2xl mb-14">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#1E2429] leading-tight text-balance">
             {T("ld.109")}
           </h2>
@@ -683,7 +683,7 @@ export default function LandingAndLogin({ onLogin }) {
           </table>
         </div>
 
-        <div className="mt-8 p-6 rounded-2xl bg-white border border-[#DDE1E5] text-center text-xs sm:text-sm font-bold text-[#1E2429]">
+        <div className="mt-8 p-6 rounded-xl bg-white border border-[#DDE1E5] text-center text-xs sm:text-sm font-bold text-[#1E2429]">
           <span className="text-[#1E2429] font-black">{T("ld.136")} </span>
           {T("ld.137")}
         </div>
@@ -693,33 +693,25 @@ export default function LandingAndLogin({ onLogin }) {
       <PricingSection onStart={() => openModal("Admin")} />
 
       <section id="cta" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="bg-[#171B21] border border-[#262c34] text-white rounded-xl p-12 md:p-16 text-center relative overflow-hidden">
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <span
-              style={{ color: '#FFFFFF' }}
-              className="inline-block px-4 py-1.5 rounded-full bg-[#D9480F]/25 text-[#FFFFFF] text-xs font-bold border border-[#D9480F]/40 mb-4"
-            >
-              {T("ld.138")}
-            </span>
+        <div className="bg-[#171B21] border border-[#262c34] text-white rounded-xl p-10 md:p-16 text-start relative overflow-hidden">
+          <div className="relative z-10 max-w-3xl">
 
             <h2
-              style={{ color: '#FFFFFF' }}
-              className="text-3xl md:text-5xl font-bold leading-tight mb-6"
+              className="text-3xl md:text-5xl font-bold leading-tight mb-6 text-white text-balance"
             >
               {T("ld.139")}
             </h2>
 
             <p
-              style={{ color: '#ECEEF0' }}
-              className="text-lg max-w-2xl mx-auto mb-10 opacity-90 leading-relaxed font-normal"
+              className="text-lg max-w-2xl mb-10 text-[#C9CFD6] leading-relaxed font-normal"
             >
               {T("ld.140")}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
               <button
                 onClick={() => openModal("Admin")}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#7B848E] text-[#1E2429] hover:bg-[#9AA2AB] font-bold text-base sm:text-lg shadow-lg  btn-press-x transition-all cursor-pointer"
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-[#D9480F] text-white hover:bg-[#B83B0A] font-semibold text-base btn-press"
               >
                 {T("ld.141")}
               </button>
