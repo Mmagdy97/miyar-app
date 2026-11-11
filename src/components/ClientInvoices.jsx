@@ -138,7 +138,7 @@ function ClientInvoices() {
             </span>
           </div>
 
-          <div className="bg-[#2B3138] text-white rounded-xl p-6 border border-[#20262C] shadow-sm">
+          <div className="bg-[#171B21] text-white rounded-xl p-6 border border-[#20262C] shadow-sm">
             <span className="text-xs font-bold text-[#ECEEF0] block mb-1">{T("cli.9")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-white tracking-tight">

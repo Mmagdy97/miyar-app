@@ -175,7 +175,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Premium Header (Welcome Banner) */}
-      <div className="relative rounded-2xl p-6 sm:p-8 md:p-10 bg-[#2B3138] text-white shadow-sm border border-[#20262C] overflow-hidden">
+      <div className="relative rounded-2xl p-6 sm:p-8 md:p-10 bg-[#171B21] text-white shadow-sm border border-[#20262C] overflow-hidden">
         {/* Subtle Ambient Glows */}
         
 
@@ -645,17 +645,17 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
           <div className="p-5 rounded-xl bg-[#2B3138] text-white border border-[#20262C] shadow-sm space-y-3 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
-                <span style={{ color: '#ECEEF0' }} className="text-xs font-bold uppercase tracking-wider">
+                <span className="text-xs font-bold uppercase tracking-wider">
                   {T("cli.76")}
                 </span>
-                <span style={{ color: '#FFFFFF' }} className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
+                <span className="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
                   {T("cli.77")}
                 </span>
               </div>
-              <div style={{ color: '#FFFFFF' }} className="text-2xl sm:text-3xl font-black font-ibm mt-1">
-                {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span style={{ color: '#ECEEF0' }} className="text-sm font-bold opacity-80">{currencySymbol()}</span>
+              <div className="text-2xl sm:text-3xl font-black font-ibm mt-1">
+                {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span className="text-sm font-bold opacity-80">{currencySymbol()}</span>
               </div>
-              <p style={{ color: '#ECEEF0' }} className="text-[11px] mt-1">
+              <p className="text-[11px] mt-1">
                 {PAY.next ? `تستحق في ${formatDateAr(PAY.next.dueIso)}` : "لا توجد دفعات مستحقة"}
               </p>
             </div>

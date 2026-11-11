@@ -219,7 +219,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         </div>
 
         {/* Card 3: Remaining in Field (الرصيد المتبقي بالمواقع) */}
-        <div className="relative bg-[#2B3138] text-white rounded-xl p-6 border border-[#20262C] shadow-sm overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-[#171B21] text-white rounded-xl p-6 border border-[#20262C] shadow-sm overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold text-[#ECEEF0]">{t("fin.remaining")}</span>
             <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center border border-white/20">

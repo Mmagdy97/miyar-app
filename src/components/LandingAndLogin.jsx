@@ -1,5 +1,6 @@
 import { PricingSection, LegalPage } from "./PublicPages";
 import { tr_ as T } from "../i18n";
+import Hero from "./Hero";
 import SettingsSwitcher from "./SettingsSwitcher";
 import { useI18n } from "../i18n";
 import { useState } from "react";
@@ -131,19 +132,10 @@ export default function LandingAndLogin({ onLogin }) {
      
       className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F3F4F6] text-[#1E2429] selection:bg-[#2B3138] selection:text-white overflow-x-hidden"
     >
-      {/* Ambient Restful Sage & Slate Glow Orbs */}
-      <div
-        aria-hidden="true"
-        className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
-      >
-        <div className="absolute top-[-6%] start-[-5%] w-[600px] h-[600px] rounded-full bg-[#D9480F]/10 blur-[140px]" />
-        <div className="absolute top-[35%] end-[-10%] w-[680px] h-[680px] rounded-full bg-[#7B848E]/8 blur-[150px]" />
-        <div className="absolute bottom-[5%] start-[10%] w-[550px] h-[550px] rounded-full bg-[#D9480F]/10 blur-[130px]" />
-      </div>
 
       {/* 1. Floating Glass Navbar */}
-      <header className="fixed top-0 end-0 start-0 z-40 bg-white/70 backdrop-blur-xl border-b border-[#DDE1E5] transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+      <header className="fixed top-0 end-0 start-0 z-40 bg-[#F3F4F6] border-b border-[#DDE1E5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
           {/* Logo (Right in RTL) */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#2B3138] text-white flex items-center justify-center shadow-sm">
@@ -192,7 +184,7 @@ export default function LandingAndLogin({ onLogin }) {
             <div className="hidden sm:block"><SettingsSwitcher compact /></div>
             <button
               onClick={() => openModal("Admin")}
-              className="px-6 py-2.5 rounded-full bg-[#2B3138] hover:bg-[#1E2429] text-white text-xs sm:text-sm font-medium rounded-lg shadow-sm transition-all cursor-pointer active:scale-95 flex items-center gap-2"
+              className="px-6 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white text-xs sm:text-sm font-medium rounded-lg btn-press flex items-center gap-2"
             >
               <LogIn className="w-4 h-4" />
               <span>{t("landing.login")}</span>
@@ -201,208 +193,12 @@ export default function LandingAndLogin({ onLogin }) {
         </div>
       </header>
 
-      {/* 2. The Hero Section (The Hook) */}
-      <section className="pt-32 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6 max-w-7xl mx-auto w-full flex flex-col items-center text-center">
-        {/* Subtle Architectural Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D9480F]/15 border border-[#D9480F]/30 shadow-xs text-xs font-bold text-[#2B3138] mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
-          <Sparkles className="w-3.5 h-3.5 text-[#D9480F]" />
-          <span>{T("ld.3")}</span>
-        </div>
-
-        {/* Massive Tight-Leading Typography */}
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#1E2429] leading-[1.18] sm:leading-[1.15] max-w-5xl tracking-tight animate-in fade-in duration-900">
-          {T("ld.4")}
-        </h1>
-
-        {/* Subtitle */}
-        <p className="mt-6 text-base sm:text-xl lg:text-2xl text-[#5A646E] max-w-3xl leading-relaxed font-normal animate-in fade-in duration-1000">
-          {T("ld.5")}
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto animate-in fade-in duration-1000">
-          <button
-            onClick={() => openModal("Admin")}
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#2B3138] text-white font-medium text-sm sm:text-base hover:bg-[#1E2429] rounded-lg hover:scale-105 active:scale-95 transition-all duration-300 shadow-md flex items-center justify-center gap-3 cursor-pointer"
-          >
-            <span>{T("ld.6")}</span>
-            <ArrowLeft className="ltr:-scale-x-100 w-4 h-4 text-white" />
-          </button>
-
-          <button
-            onClick={() => scrollToSection("comparison")}
-            className="w-full sm:w-auto px-7 py-4 rounded-full bg-white hover:bg-[#F3F4F6] text-[#1E2429] border border-[#DDE1E5] text-sm sm:text-base font-medium rounded-lg shadow-xs hover:border-[#CBD0D6] transition-all flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <span>{T("ld.7")}</span>
-            <ArrowDown className="w-4 h-4 text-[#5A646E]" />
-          </button>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="mt-8 flex items-center justify-center flex-wrap gap-4 sm:gap-8 text-xs font-bold text-[#5A646E]">
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-[#D9480F]" />
-            {T("ld.8")}
-          </span>
-          <span className="hidden sm:inline text-[#7B848E]">•</span>
-          <span className="flex items-center gap-1.5">
-            <Smartphone className="w-4 h-4 text-[#D9480F]" />
-            {T("ld.9")}
-          </span>
-          <span className="hidden sm:inline text-[#7B848E]">•</span>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-[#D9480F]" />
-            {T("ld.10")}
-          </span>
-        </div>
-
-        {/* Gorgeous Floating Dashboard Mockup Graphic (Pure CSS Composition) */}
-        <div className="w-full max-w-5xl mx-auto mt-14 sm:mt-20 relative">
-          {/* Main App Container Mockup */}
-          <div className="relative rounded-3xl bg-[#DDE1E5]/60 p-2 sm:p-4 backdrop-blur-2xl border border-[#CBD0D6] shadow-2xl shadow-slate-900/10">
-            <div className="bg-white rounded-2xl border border-[#DDE1E5] overflow-hidden shadow-inner text-start">
-              {/* Window Header Bar */}
-              <div className="px-4 py-3 bg-[#F3F4F6] border-b border-[#DDE1E5] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-rose-400 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-amber-400 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-400 inline-block" />
-                </div>
-                <div className="flex items-center gap-2 text-xs font-bold text-[#1E2429] bg-white px-3 py-1 rounded-lg border border-[#DDE1E5] shadow-2xs">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>{HERO_PROJECT.name} ({HERO_PROJECT.code})</span>
-                </div>
-                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                  {T("ld.11")}
-                </span>
-              </div>
-
-              {/* Window Body: Mini Dashboard Simulation */}
-              <div className="p-4 sm:p-6 space-y-5 bg-[#F3F4F6]/60">
-                {/* 4 Mini KPI Cards */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.12")}</span>
-                    <span className="text-base sm:text-lg font-black text-[#1E2429] mt-0.5 block">{formatEGP(HERO_PROJECT.contractValue)}</span>
-                    <span className="text-[10px] text-[#D9480F] font-bold">{T("ld.13")}</span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.14")}</span>
-                    <span className="text-base sm:text-lg font-black text-[#1E2429] mt-0.5 block">{formatEGP(HERO_PROJECT.spentActual)}</span>
-                    <span className="text-[10px] text-[#5A646E] font-bold">{T("ld.15")}</span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-[#2B3138] text-white border border-[#20262C] shadow-2xs">
-                    <span style={{ color: '#ECEEF0' }} className="text-[10px] font-bold text-[#ECEEF0] block">{T("ld.16")}</span>
-                    <span style={{ color: '#FFFFFF' }} className="text-base sm:text-lg font-black text-white mt-0.5 block">{formatEGP(HERO_CASH.totalGiven - HERO_CASH.spent)}</span>
-                    <span style={{ color: '#7B848E' }} className="text-[10px] text-[#7B848E] font-bold">{T("ld.17")}</span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs">
-                    <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.18")}</span>
-                    <span className="text-base sm:text-lg font-black text-[#1E2429] mt-0.5 block">{toAr(HERO_PROJECT.progress)}٪</span>
-                    <span className="text-[10px] text-[#D9480F] font-bold">{T("ld.20")}</span>
-                  </div>
-                </div>
-
-                {/* Milestone Progress Bar Simulation */}
-                <div className="p-4 rounded-xl bg-white border border-[#DDE1E5] shadow-2xs space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-[#1E2429]">{T("ld.21")}</span>
-                    <span className="font-bold text-[#1E2429] font-mono">{toAr(HERO_PROJECT.progress)}٪</span>
-                  </div>
-                  <div className="w-full h-2.5 bg-[#ECEEF0] rounded-full overflow-hidden">
-                    <div className="h-full bg-[#2B3138] rounded-full" style={{ width: `${HERO_PROJECT.progress}%` }} />
-                  </div>
-                </div>
-
-                {/* Split Two Panels: Recent Activity & Cash Sync */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                  <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] space-y-2">
-                    <div className="flex items-center justify-between font-bold text-[#1E2429] border-b border-[#ECEEF0] pb-1.5">
-                      <span className="flex items-center gap-1.5">
-                        <HardHat className="w-3.5 h-3.5 text-[#1E2429]" />
-                        {T("ld.22")}
-                      </span>
-                      <span className="text-[10px] text-[#5A646E]">اليوم، ١١:٣٠ ص</span>
-                    </div>
-                    <p className="text-[#5A646E] text-[11px] leading-relaxed">
-                      {T("ld.24")}
-                    </p>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white border border-[#DDE1E5] space-y-2">
-                    <div className="flex items-center justify-between font-bold text-[#1E2429] border-b border-[#ECEEF0] pb-1.5">
-                      <span className="flex items-center gap-1.5">
-                        <Coins className="w-3.5 h-3.5 text-[#1E2429]" />
-                        {T("ld.25")}
-                      </span>
-                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
-                        {T("ld.26")}
-                      </span>
-                    </div>
-                    <p className="text-[#5A646E] text-[11px] leading-relaxed">
-                      م. كريم مصطفى: شراء وصلات سباكة نحاسية إضافية (+٢,٨٥٠ ج.م) — إيصال ضريبي مرفق.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating Satellite Glass Card 1 (Top Right Corner - Approval Action) */}
-          <div className="hidden lg:flex absolute -top-8 -start-6 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#DDE1E5] shadow-xl max-w-xs text-start animate-in fade-in slide-in-from-right duration-1000">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-5 h-5 text-[#D9480F]" />
-              </div>
-              <div>
-                <p className="text-xs font-black text-[#1E2429] leading-snug">
-                  {T("ld.28")}
-                </p>
-                <p className="text-[11px] text-[#5A646E] mt-0.5">
-                  العميل أ. محمد عبد الرحمن اعتمد العينة بنقرة واحدة
-                </p>
-                <span className="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-extrabold">
-                  {T("ld.30")}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating Satellite Glass Card 2 (Bottom Left Corner - Instant Cash Control) */}
-          <div className="hidden lg:flex absolute -bottom-8 -end-6 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-[#DDE1E5] shadow-xl max-w-xs text-start animate-in fade-in slide-in-from-left duration-1000">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center shrink-0">
-                <Wallet className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-black text-[#1E2429]">
-                    {T("ld.31")}
-                  </p>
-                  <span className="text-xs font-black text-[#1E2429] font-mono">+٥٠,٠٠٠ ج.م</span>
-                </div>
-                <p className="text-[11px] text-[#5A646E] mt-0.5">
-                  {T("ld.33")}
-                </p>
-                <span className="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold">
-                  {T("ld.34")}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero onStart={() => openModal("Admin")} onWhy={() => scrollToSection("comparison")} />
 
       {/* 3. The Core Features Showcase (Detailed Explanations) */}
       <section id="features" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <span className="text-xs font-extrabold text-[#D9480F] uppercase tracking-widest block mb-2">
-            {T("ld.35")}
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1E2429] tracking-tight leading-tight">
+        <div className="max-w-2xl mb-14 sm:mb-20 text-start">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#1E2429] leading-tight text-balance">
             {T("ld.36")}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
@@ -416,13 +212,7 @@ export default function LandingAndLogin({ onLogin }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Description (7 Cols in RTL) */}
             <div className="lg:col-span-6 space-y-4 text-start">
-              <div className="w-12 h-12 rounded-2xl bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center font-bold shadow-2xs">
-                <Calculator className="w-6 h-6" />
-              </div>
-              <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                {T("ld.38")}
-              </span>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#1E2429] leading-snug text-balance">
                 {T("ld.39")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
@@ -456,7 +246,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Visual Interactive Mockup Card (6 Cols) */}
-            <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#DDE1E5] shadow-md space-y-4">
+            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#DDE1E5] space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
@@ -500,7 +290,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Pillar 2: الرقابة المالية والعهد (Petty Cash) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Interactive Mockup Card (6 Cols - First on Desktop for alternating flow) */}
-            <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#DDE1E5] shadow-md space-y-4 order-2 lg:order-1">
+            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#DDE1E5] space-y-4 order-2 lg:order-1">
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-[#2B3138] text-white flex items-center justify-center font-bold text-xs">
@@ -549,13 +339,7 @@ export default function LandingAndLogin({ onLogin }) {
 
             {/* Text Description (6 Cols) */}
             <div className="lg:col-span-6 space-y-4 text-start order-1 lg:order-2">
-              <div className="w-12 h-12 rounded-2xl bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center font-bold shadow-2xs">
-                <Wallet className="w-6 h-6" />
-              </div>
-              <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                {T("ld.70")}
-              </span>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#1E2429] leading-snug text-balance">
                 {T("ld.71")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
@@ -593,13 +377,7 @@ export default function LandingAndLogin({ onLogin }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Description */}
             <div className="lg:col-span-6 space-y-4 text-start">
-              <div className="w-12 h-12 rounded-2xl bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center font-bold shadow-2xs">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                {T("ld.77")}
-              </span>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#1E2429] leading-snug text-balance">
                 {T("ld.78")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
@@ -633,7 +411,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Visual Interactive Mockup Card */}
-            <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#DDE1E5] shadow-md space-y-4">
+            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#DDE1E5] space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
                 <div>
                   <span className="text-[10px] font-bold text-[#5A646E] block">{T("ld.84")}</span>
@@ -674,7 +452,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Pillar 4: إدارة المهام والمخططات (Site & Tech Office) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Interactive Mockup Card */}
-            <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#DDE1E5] shadow-md space-y-4 order-2 lg:order-1">
+            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#DDE1E5] space-y-4 order-2 lg:order-1">
               <div className="flex items-center justify-between pb-3 border-b border-[#ECEEF0]">
                 <span className="text-xs font-black text-[#1E2429]">{T("ld.93")}</span>
                 <span className="text-[11px] font-bold text-[#5A646E] font-mono">٤ بنود تحت المتابعة</span>
@@ -711,13 +489,7 @@ export default function LandingAndLogin({ onLogin }) {
 
             {/* Text Description */}
             <div className="lg:col-span-6 space-y-4 text-start order-1 lg:order-2">
-              <div className="w-12 h-12 rounded-2xl bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center font-bold shadow-2xs">
-                <Layers className="w-6 h-6" />
-              </div>
-              <span className="text-xs font-bold text-[#5A646E] tracking-wider uppercase block">
-                {T("ld.101")}
-              </span>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1E2429] tracking-tight leading-snug">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#1E2429] leading-snug text-balance">
                 {T("ld.102")}
               </h3>
               <p className="text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
@@ -756,10 +528,7 @@ export default function LandingAndLogin({ onLogin }) {
       {/* 4. The Competitor Comparison Table (The Deal Closer) */}
       <section id="comparison" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-extrabold text-[#D9480F] uppercase tracking-widest block mb-2">
-            {T("ld.108")}
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1E2429] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#1E2429] leading-tight text-balance">
             {T("ld.109")}
           </h2>
           <p className="mt-4 text-sm sm:text-base text-[#5A646E] leading-relaxed font-medium">
@@ -768,7 +537,7 @@ export default function LandingAndLogin({ onLogin }) {
         </div>
 
         {/* The Table Container */}
-        <div className="bg-white rounded-3xl shadow-sm border border-[#DDE1E5] overflow-hidden overflow-x-auto">
+        <div className="bg-white rounded-xl shadow-sm border border-[#DDE1E5] overflow-hidden overflow-x-auto">
           <table className="w-full text-start border-collapse min-w-[700px]">
             <thead>
               <tr className="border-b border-[#DDE1E5] text-sm">
@@ -776,7 +545,7 @@ export default function LandingAndLogin({ onLogin }) {
                 <th className="p-5 sm:p-6 font-black text-[#1E2429] w-1/3 bg-[#F3F4F6] border-t-4 border-[#2B3138] relative">
                   <div className="flex items-center justify-between">
                     <span className="text-[#1E2429] text-base sm:text-lg font-black">{T("ld.112")}</span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#2B3138] text-white text-[10px] font-black">
+                    <span className="px-2.5 py-0.5 rounded-lg bg-[#2B3138] text-white text-[10px] font-black">
                       {T("ld.113")}
                     </span>
                   </div>
@@ -924,11 +693,7 @@ export default function LandingAndLogin({ onLogin }) {
       <PricingSection onStart={() => openModal("Admin")} />
 
       <section id="cta" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="bg-[#2B3138] text-white rounded-3xl p-12 md:p-16 text-center shadow-2xl relative overflow-hidden border border-[#20262C]">
-          {/* Subtle Ambient Decorative Glow */}
-          <div className="absolute -top-24 -start-24 w-96 h-96 bg-[#D9480F]/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -end-24 w-96 h-96 bg-[#7B848E]/10 rounded-full blur-3xl pointer-events-none" />
-
+        <div className="bg-[#171B21] border border-[#262c34] text-white rounded-xl p-12 md:p-16 text-center relative overflow-hidden">
           <div className="relative z-10 max-w-3xl mx-auto">
             <span
               style={{ color: '#FFFFFF' }}
@@ -954,7 +719,7 @@ export default function LandingAndLogin({ onLogin }) {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => openModal("Admin")}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#7B848E] text-[#1E2429] hover:bg-[#9AA2AB] font-bold text-base sm:text-lg shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#7B848E] text-[#1E2429] hover:bg-[#9AA2AB] font-bold text-base sm:text-lg shadow-lg  btn-press-x transition-all cursor-pointer"
               >
                 {T("ld.141")}
               </button>
@@ -1008,10 +773,8 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="fixed inset-0 z-50 bg-[#2B3138]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
            
-            className="bg-white rounded-3xl shadow-2xl border border-[#DDE1E5] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
+            className="bg-white rounded-xl shadow-2xl border border-[#DDE1E5] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
           >
-            {/* Modal Ambient Corner */}
-            <div className="absolute top-0 start-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
 
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0] relative z-10">

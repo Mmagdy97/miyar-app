@@ -168,15 +168,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
       {/* 1. Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#DDE1E5]">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5] inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#5A646E]" />
-              {t("adm.studio")}
-            </span>
-            <span className="text-xs text-[#5A646E] font-semibold">{t("adm.site")}</span>
-          </div>
 
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#1E2429] mt-1.5">
+          <h1 className="text-2xl md:text-3xl font-bold text-[#1E2429] text-balance">
             {t("adm.title")}
           </h1>
 
@@ -191,23 +184,12 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             </span>
           </p>
         </div>
-
-        {/* Studio Status Pill */}
-        <div className="flex items-center gap-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-[#DDE1E5] text-xs font-semibold text-[#5A646E] shadow-xs">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7B848E] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D9480F]/150" />
-            </span>
-            <span>{t("adm.sync")}</span>
-          </div>
-        </div>
       </div>
 
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI 1: الإيرادات المتوقعة */}
-        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
@@ -245,15 +227,15 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                   </linearGradient>
                 </defs>
                 <path d="M0,26 Q20,24 35,18 T70,12 T100,4 L100,30 L0,30 Z" fill="url(#revGradAr)" />
-                <path d="M0,26 Q20,24 35,18 T70,12 T100,4" fill="none" stroke="#2B3138" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="100" cy="4" r="2.5" fill="#2B3138" />
+                <path d="M0,26 Q20,24 35,18 T70,12 T100,4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="100" cy="4" r="2.5" fill="currentColor" />
               </svg>
             </div>
           </div>
         </div>
 
         {/* KPI 2: إجمالي المحصل */}
-        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
@@ -289,15 +271,15 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                   </linearGradient>
                 </defs>
                 <path d="M0,28 Q25,26 45,19 T80,10 T100,6 L100,30 L0,30 Z" fill="url(#collGradAr)" />
-                <path d="M0,28 Q25,26 45,19 T80,10 T100,6" fill="none" stroke="#2B3138" strokeWidth="2" strokeLinecap="round" />
-                <circle cx="100" cy="6" r="2.5" fill="#2B3138" />
+                <path d="M0,28 Q25,26 45,19 T80,10 T100,6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="100" cy="6" r="2.5" fill="currentColor" />
               </svg>
             </div>
           </div>
         </div>
 
         {/* KPI 3: مستحقات متأخرة */}
-        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
@@ -332,7 +314,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* KPI 4: عهد مهندسين نشطة */}
-        <div className="bg-white border border-[#DDE1E5] rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex flex-col justify-between">
+        <div className="bg-white border border-[#DDE1E5] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-[#5A646E] text-sm font-medium flex items-center gap-1.5">
