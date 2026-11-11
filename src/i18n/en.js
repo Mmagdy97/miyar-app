@@ -956,4 +956,9 @@ export default {
   "e.تشوين ونولون": "Storage & freight",
   "e.خامات سباكة": "Plumbing materials",
   "e.رخام مستورد": "Imported marble",
+  "hero.live": "Live",
+  "hero.margin": "Profit margin",
+  "hero.qty": "Quantity",
+  "hero.unit": "m²",
+  "hero.profit": "Profit on this item",
 };

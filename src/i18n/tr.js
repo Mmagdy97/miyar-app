@@ -956,4 +956,9 @@ export default {
   "e.تشوين ونولون": "İstifleme ve nakliye",
   "e.خامات سباكة": "Tesisat malzemeleri",
   "e.رخام مستورد": "İthal mermer",
+  "hero.live": "Canlı",
+  "hero.margin": "Kâr marjı",
+  "hero.qty": "Miktar",
+  "hero.unit": "m²",
+  "hero.profit": "Kalem kârı",
 };
