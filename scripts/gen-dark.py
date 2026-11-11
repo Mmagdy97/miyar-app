@@ -31,10 +31,10 @@ def fromhsl(H,S,L):
 
 ACCENT='#e8590c'
 # explicit neutral map (light-theme brand colours -> dark theme)
-BG={'#ffffff':'#13171c','#fff':'#13171c','#f3f4f6':'#0b0e12','#f9fafb':'#0f1317','#ecf0f1':'#1a1f26','#eceef0':'#1a1f26','#dde1e5':'#262c34',
-    '#2b3138':ACCENT,'#1e2429':'#c2410c','#d9480f':ACCENT}
-TEXT={'#1e2429':'#eceef0','#2b3138':'#eceef0','#5a646e':'#9aa3ad','#7b848e':'#7e8791','#ffffff':'#ffffff','#fff':'#ffffff','#d9480f':'#ff8a4c'}
-BORDER={'#dde1e5':'#262c34','#eceef0':'#1f242b','#cbd0d6':'#313840','#ffffff':'#262c34','#2b3138':'#3a424b','#d9480f':ACCENT}
+BG={'#ffffff':'#13171c','#fff':'#13171c','#f6f5f1':'#0b0e12','#faf9f6':'#0f1317','#ecf0f1':'#1a1f26','#eeece6':'#1a1f26','#e3e0d9':'#262c34',
+    '#2b3138':ACCENT,'#16181c':'#c2410c','#d9480f':ACCENT}
+TEXT={'#16181c':'#eeece6','#2b3138':'#eeece6','#5d6168':'#9aa3ad','#80848b':'#7e8791','#ffffff':'#ffffff','#fff':'#ffffff','#d9480f':'#ff8a4c'}
+BORDER={'#e3e0d9':'#262c34','#eeece6':'#1f242b','#d1cdc5':'#313840','#ffffff':'#262c34','#2b3138':'#3a424b','#d9480f':ACCENT}
 
 def dark(prop,hexv,alpha_=False):
     h=hexv.lower()

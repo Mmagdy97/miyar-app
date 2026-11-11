@@ -65,7 +65,7 @@ const INITIAL_TASKS = [
 const PRIORITY_BADGES = {
   عاجل: "bg-rose-50 text-rose-800 border-rose-200",
   متوسط: "bg-amber-50 text-amber-800 border-amber-200",
-  عادي: "bg-[#ECEEF0] text-[#5A646E] border-[#DDE1E5]",
+  عادي: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
 };
 
 function SiteEngineerTasks() {
@@ -152,24 +152,24 @@ function SiteEngineerTasks() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#16181C] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
                   <ListTodo className="w-5 h-5" />
                 </div>
                 <span>{T("se.105")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
                 {T("se.106")}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#5A646E]">
+            <p className="text-xs md:text-sm text-[#5D6168]">
               {T("se.107")}
             </p>
           </div>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#1E2429] transition-colors shadow-sm transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#16181C] transition-colors shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{T("se.108")}</span>
@@ -178,18 +178,18 @@ function SiteEngineerTasks() {
 
         {/* KPI Mini Row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-          <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.109")}</span>
-            <span className="text-xl md:text-2xl font-black text-[#1E2429]">{stats.total}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.109")}</span>
+            <span className="text-xl md:text-2xl font-black text-[#16181C]">{stats.total}</span>
           </div>
 
-          <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.110")}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.110")}</span>
             <span className="text-xl md:text-2xl font-black text-amber-800">{stats.pending}</span>
           </div>
 
-          <div className="bg-white rounded-lg p-4 border border-[#DDE1E5] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#5A646E] block mb-1">{T("se.111")}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.111")}</span>
             <span className="text-xl md:text-2xl font-black text-emerald-700">{stats.completed}</span>
           </div>
         </div>
@@ -203,7 +203,7 @@ function SiteEngineerTasks() {
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 filter === tab
                   ? "bg-[#2B3138] text-white shadow-sm"
-                  : "bg-white text-[#5A646E] border border-[#DDE1E5] hover:bg-[#F3F4F6]"
+                  : "bg-white text-[#5D6168] border border-[#E3E0D9] hover:bg-[#F6F5F1]"
               }`}
             >
               {E(tab)}
@@ -223,8 +223,8 @@ function SiteEngineerTasks() {
                 onClick={() => handleToggleTask(task.id)}
                 className={`p-4 md:p-5 rounded-lg border transition-all duration-200 cursor-pointer select-none group flex flex-col justify-between ${
                   task.completed
-                    ? "bg-[#F3F4F6] border-[#DDE1E5]/80 rounded-lg opacity-75"
-                    : "bg-white border-[#DDE1E5] rounded-lg shadow-xs hover:border-[#D9480F]"
+                    ? "bg-[#F6F5F1] border-[#E3E0D9]/80 rounded-lg opacity-75"
+                    : "bg-white border-[#E3E0D9] rounded-lg shadow-xs hover:border-[#D9480F]"
                 }`}
               >
                 <div className="flex items-start gap-3.5 mb-3">
@@ -238,7 +238,7 @@ function SiteEngineerTasks() {
                     className={`w-6 h-6 rounded-lg border flex items-center justify-center shrink-0 mt-0.5 transition-all cursor-pointer ${
                       task.completed
                         ? "bg-[#2B3138] border-white/10 text-white shadow-xs"
-                        : "border-[#CBD0D6] bg-white group-hover:border-[#2B3138]"
+                        : "border-[#D1CDC5] bg-white group-hover:border-[#2B3138]"
                     }`}
                   >
                     {task.completed && <Check className="w-4 h-4 stroke-[3]" />}
@@ -251,8 +251,8 @@ function SiteEngineerTasks() {
                       >
                         {E(task.priority)}
                       </span>
-                      <span className="text-[11px] text-[#5A646E] flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-[#5A646E]" />
+                      <span className="text-[11px] text-[#5D6168] flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-[#5D6168]" />
                         <span>{task.dueTime}</span>
                       </span>
                     </div>
@@ -260,8 +260,8 @@ function SiteEngineerTasks() {
                     <h3
                       className={`text-sm md:text-base font-extrabold leading-snug transition-all ${
                         task.completed
-                          ? "line-through text-[#5A646E]"
-                          : "text-[#1E2429] group-hover:text-[#1E2429]"
+                          ? "line-through text-[#5D6168]"
+                          : "text-[#16181C] group-hover:text-[#16181C]"
                       }`}
                     >
                       {task.title}
@@ -269,9 +269,9 @@ function SiteEngineerTasks() {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#ECEEF0] flex items-center justify-between text-xs text-[#5A646E]">
-                  <span className="flex items-center gap-1.5 text-[#5A646E] text-[11px]">
-                    <Building2 className="w-3.5 h-3.5 text-[#5A646E]" />
+                <div className="pt-3 border-t border-[#EEECE6] flex items-center justify-between text-xs text-[#5D6168]">
+                  <span className="flex items-center gap-1.5 text-[#5D6168] text-[11px]">
+                    <Building2 className="w-3.5 h-3.5 text-[#5D6168]" />
                     <span>{task.location}</span>
                   </span>
 
@@ -279,7 +279,7 @@ function SiteEngineerTasks() {
                     className={`text-[11px] font-bold px-2 py-0.5 rounded-lg ${
                       task.completed
                         ? "text-emerald-800 bg-emerald-50"
-                        : "text-[#5A646E] bg-[#ECEEF0]"
+                        : "text-[#5D6168] bg-[#EEECE6]"
                     }`}
                   >
                     {task.completed ? "تم الإنجاز ✓" : "انقر للاكتمال"}
@@ -291,10 +291,10 @@ function SiteEngineerTasks() {
         </div>
 
         {filteredTasks.length === 0 && (
-          <div className="py-12 text-center bg-white rounded-lg border border-[#DDE1E5] p-8">
+          <div className="py-12 text-center bg-white rounded-lg border border-[#E3E0D9] p-8">
             <CheckCircle2 className="w-10 h-10 mx-auto mb-2 text-emerald-500" />
-            <h4 className="text-sm font-bold text-[#1E2429]">{T("se.112")}</h4>
-            <p className="text-xs text-[#5A646E] mt-1">
+            <h4 className="text-sm font-bold text-[#16181C]">{T("se.112")}</h4>
+            <p className="text-xs text-[#5D6168] mt-1">
               {T("se.113")}
             </p>
           </div>
@@ -303,16 +303,16 @@ function SiteEngineerTasks() {
 
       {/* Add Task Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#1E2429]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
-              <h3 className="text-base font-black text-[#1E2429] flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#1E2429]" />
+        <div className="fixed inset-0 z-50 bg-[#16181C]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E3E0D9] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEECE6]">
+              <h3 className="text-base font-black text-[#16181C] flex items-center gap-2">
+                <Plus className="w-5 h-5 text-[#16181C]" />
                 <span>{T("se.114")}</span>
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-[#5A646E] hover:text-[#1E2429] hover:bg-[#ECEEF0]"
+                className="p-1 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -320,7 +320,7 @@ function SiteEngineerTasks() {
 
             <form onSubmit={handleAddTask} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
                   عنوان المهمة <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -329,12 +329,12 @@ function SiteEngineerTasks() {
                   placeholder={T("se.115")}
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DDE1E5] text-xs md:text-sm font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-semibold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1.5">
+                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
                   {T("se.116")}
                 </label>
                 <input
@@ -342,17 +342,17 @@ function SiteEngineerTasks() {
                   placeholder={T("se.117")}
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2 rounded-lg border border-[#E3E0D9] text-xs font-semibold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.118")}</label>
+                  <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("se.118")}</label>
                   <select
                     value={newPriority}
                     onChange={(e) => setNewPriority(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-bold text-[#1E2429] bg-white"
+                    className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-bold text-[#16181C] bg-white"
                   >
                     <option value="عاجل">{T("se.119")}</option>
                     <option value="متوسط">{T("se.120")}</option>
@@ -361,28 +361,28 @@ function SiteEngineerTasks() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1.5">{T("se.122")}</label>
+                  <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("se.122")}</label>
                   <input
                     type="text"
                     placeholder={T("se.123")}
                     value={newDueTime}
                     onChange={(e) => setNewDueTime(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-semibold text-[#1E2429]"
+                    className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-semibold text-[#16181C]"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#ECEEF0]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EEECE6]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#5D6168] hover:bg-[#EEECE6]"
                 >
                   {T("se.124")}
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] hover:bg-[#1E2429] text-white font-bold text-xs shadow-sm"
+                  className="px-5 py-2 rounded-lg bg-[#2B3138] hover:bg-[#16181C] hover:bg-[#16181C] text-white font-bold text-xs shadow-sm"
                 >
                   {T("se.125")}
                 </button>

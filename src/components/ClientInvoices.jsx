@@ -89,17 +89,17 @@ function ClientInvoices() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#1E2429] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#ECEEF0] border border-[#DDE1E5] flex items-center justify-center text-[#1E2429]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#16181C] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <span>{T("cli.1")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#ECEEF0] text-[#1E2429] border border-[#DDE1E5]/80">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]/80">
                 {T("cli.124")}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#5A646E]">
+            <p className="text-xs md:text-sm text-[#5D6168]">
               {T("cli.3")}
             </p>
           </div>
@@ -112,26 +112,26 @@ function ClientInvoices() {
 
         {/* Financial KPI Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl p-6 border border-[#DDE1E5] shadow-sm">
-            <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">{T("cli.5")}</span>
+          <div className="bg-white rounded-xl p-6 border border-[#E3E0D9] shadow-sm">
+            <span className="text-xs font-bold text-[#EEECE6]/80 block mb-1">{T("cli.5")}</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-black text-[#1E2429] tracking-tight">
+              <span className="text-2xl font-black text-[#16181C] tracking-tight">
                 {totalContract.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
+              <span className="text-xs font-bold text-[#EEECE6]/80">{currencySymbol()}</span>
             </div>
-            <span className="text-[11px] text-[#5A646E] mt-2 block">
+            <span className="text-[11px] text-[#5D6168] mt-2 block">
               {T("cli.6")}
             </span>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border border-[#DDE1E5] shadow-sm">
-            <span className="text-xs font-bold text-[#ECEEF0]/80 block mb-1">{T("cli.74")}</span>
+          <div className="bg-white rounded-xl p-6 border border-[#E3E0D9] shadow-sm">
+            <span className="text-xs font-bold text-[#EEECE6]/80 block mb-1">{T("cli.74")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-emerald-600 tracking-tight">
                 {totalPaid.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
+              <span className="text-xs font-bold text-[#EEECE6]/80">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-2">
               {T("cli.8", { v0: Math.round((totalPaid / totalContract) * 100) })}
@@ -139,32 +139,32 @@ function ClientInvoices() {
           </div>
 
           <div className="bg-[#171B21] text-white rounded-xl p-6 border border-[#20262C] shadow-sm">
-            <span className="text-xs font-bold text-[#ECEEF0] block mb-1">{T("cli.9")}</span>
+            <span className="text-xs font-bold text-[#EEECE6] block mb-1">{T("cli.9")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-black text-white tracking-tight">
                 {totalDue.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#ECEEF0]/80">{currencySymbol()}</span>
+              <span className="text-xs font-bold text-[#EEECE6]/80">{currencySymbol()}</span>
             </div>
-            <span className="text-[11px] text-[#ECEEF0] mt-2 block">
+            <span className="text-[11px] text-[#EEECE6] mt-2 block">
               {T("cli.10")}
             </span>
           </div>
         </div>
 
         {/* Invoices Table Card */}
-        <div className="bg-white rounded-lg border border-[#DDE1E5] shadow-sm overflow-hidden overflow-x-auto w-full">
-          <div className="p-5 border-b border-[#ECEEF0] flex items-center justify-between">
-            <h3 className="text-base font-extrabold text-[#1E2429]">
+        <div className="bg-white rounded-lg border border-[#E3E0D9] shadow-sm overflow-hidden overflow-x-auto w-full">
+          <div className="p-5 border-b border-[#EEECE6] flex items-center justify-between">
+            <h3 className="text-base font-extrabold text-[#16181C]">
               {T("cli.11")}
             </h3>
-            <span className="text-xs text-[#5A646E] font-mono">{T("cli.12")}</span>
+            <span className="text-xs text-[#5D6168] font-mono">{T("cli.12")}</span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-start border-collapse">
               <thead>
-                <tr className="bg-[#F3F4F6]/90 text-[#5A646E] text-xs font-bold border-b border-[#DDE1E5]">
+                <tr className="bg-[#F6F5F1]/90 text-[#5D6168] text-xs font-bold border-b border-[#E3E0D9]">
                   <th className="py-4 px-5 min-w-[240px]">{T("cli.13")}</th>
                   <th className="py-4 px-4 w-40 text-center">{T("cli.14")}</th>
                   <th className="py-4 px-4 w-36 text-center">{T("cli.15")}</th>
@@ -172,35 +172,35 @@ function ClientInvoices() {
                   <th className="py-4 px-5 w-44 text-center">{T("cli.17")}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#ECEEF0] text-xs md:text-sm">
+              <tbody className="divide-y divide-[#EEECE6] text-xs md:text-sm">
                 {invoices.map((inv) => {
                   const isPaid = inv.status === "مدفوع";
 
                   return (
                     <tr
                       key={inv.id}
-                      className="hover:bg-[#ECEEF0]/20 transition-colors duration-150"
+                      className="hover:bg-[#EEECE6]/20 transition-colors duration-150"
                     >
                       {/* Milestone Title */}
                       <td className="py-4 px-5">
-                        <h4 className="font-extrabold text-[#1E2429] leading-snug">
+                        <h4 className="font-extrabold text-[#16181C] leading-snug">
                           {inv.title}
                         </h4>
-                        <span className="text-[11px] text-[#5A646E] mt-0.5 block">
+                        <span className="text-[11px] text-[#5D6168] mt-0.5 block">
                           {inv.milestone}
                         </span>
                       </td>
 
                       {/* Amount */}
                       <td className="py-4 px-4 text-center">
-                        <span className="font-mono font-black text-[#1E2429] text-sm md:text-base">
+                        <span className="font-mono font-black text-[#16181C] text-sm md:text-base">
                           {inv.amount.toLocaleString(intlLocale())}
                         </span>
-                        <span className="text-[10px] text-[#5A646E] block font-sans">{currencySymbol()}</span>
+                        <span className="text-[10px] text-[#5D6168] block font-sans">{currencySymbol()}</span>
                       </td>
 
                       {/* Due Date */}
-                      <td className="py-4 px-4 text-center text-xs text-[#5A646E] font-mono">
+                      <td className="py-4 px-4 text-center text-xs text-[#5D6168] font-mono">
                         {inv.dueDate}
                       </td>
 
@@ -227,15 +227,15 @@ function ClientInvoices() {
                         {isPaid ? (
                           <button
                             onClick={() => handleDownloadReceipt(inv.receiptNo)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DDE1E5] bg-white hover:bg-[#F3F4F6] text-[#5A646E] text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E3E0D9] bg-white hover:bg-[#F6F5F1] text-[#5D6168] text-xs font-bold transition-all shadow-2xs cursor-pointer"
                           >
-                            <Download className="w-3.5 h-3.5 text-[#5A646E]" />
+                            <Download className="w-3.5 h-3.5 text-[#5D6168]" />
                             <span>{T("cli.18")}</span>
                           </button>
                         ) : (
                           <button
                             onClick={() => setPayingInvoice(inv)}
-                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white hover:bg-[#1E2429] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#2B3138] hover:bg-[#16181C] text-white hover:bg-[#16181C] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer"
                           >
                             <Lock className="w-3.5 h-3.5" />
                             <span>{T("cli.19")}</span>
@@ -253,34 +253,34 @@ function ClientInvoices() {
 
       {/* Stripe Payment Modal */}
       {payingInvoice && (
-        <div className="fixed inset-0 z-50 bg-[#1E2429]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#DDE1E5] border border-[#DDE1E5] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#ECEEF0]">
+        <div className="fixed inset-0 z-50 bg-[#16181C]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E3E0D9] border border-[#E3E0D9] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEECE6]">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[#ECEEF0] text-[#1E2429] flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-lg bg-[#EEECE6] text-[#16181C] flex items-center justify-center font-bold">
                   <CreditCard className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-[#1E2429]">{T("cli.20")}</h3>
-                  <p className="text-[10px] text-[#5A646E]">{T("cli.21")}</p>
+                  <h3 className="text-base font-black text-[#16181C]">{T("cli.20")}</h3>
+                  <p className="text-[10px] text-[#5D6168]">{T("cli.21")}</p>
                 </div>
               </div>
               <button
                 onClick={() => setPayingInvoice(null)}
-                className="p-1 rounded-lg text-[#5A646E] hover:text-[#5A646E] hover:bg-[#ECEEF0]"
+                className="p-1 rounded-lg text-[#5D6168] hover:text-[#5D6168] hover:bg-[#EEECE6]"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="my-4 p-4 bg-[#F3F4F6] rounded-lg border border-[#DDE1E5] space-y-2 text-xs">
+            <div className="my-4 p-4 bg-[#F6F5F1] rounded-lg border border-[#E3E0D9] space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">{T("cli.22")}</span>
-                <span className="font-bold text-[#1E2429]">{payingInvoice.title}</span>
+                <span className="text-[#5D6168]">{T("cli.22")}</span>
+                <span className="font-bold text-[#16181C]">{payingInvoice.title}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#5A646E]">{T("cli.23")}</span>
-                <span className="font-black text-[#1E2429] text-base">
+                <span className="text-[#5D6168]">{T("cli.23")}</span>
+                <span className="font-black text-[#16181C] text-base">
                   {payingInvoice.amount.toLocaleString(intlLocale())} {currencySymbol()}
                 </span>
               </div>
@@ -288,7 +288,7 @@ function ClientInvoices() {
 
             <form onSubmit={handleStripePaySubmit} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-bold text-[#5A646E] mb-1">
+                <label className="block text-xs font-bold text-[#5D6168] mb-1">
                   {T("cli.24")}
                 </label>
                 <div className="relative">
@@ -296,38 +296,38 @@ function ClientInvoices() {
                     type="text"
                     required
                     defaultValue="٤٢٤٢ •••• •••• ٤٢٤٢"
-                    className="w-full pe-3 ps-10 py-2 rounded-lg border border-[#DDE1E5] text-xs font-mono font-bold text-[#1E2429] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                    className="w-full pe-3 ps-10 py-2 rounded-lg border border-[#E3E0D9] text-xs font-mono font-bold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
                   />
-                  <CreditCard className="w-4 h-4 text-[#5A646E] absolute start-3.5 top-1/2 -translate-y-1/2" />
+                  <CreditCard className="w-4 h-4 text-[#5D6168] absolute start-3.5 top-1/2 -translate-y-1/2" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1">{T("cli.25")}</label>
+                  <label className="block text-xs font-bold text-[#5D6168] mb-1">{T("cli.25")}</label>
                   <input
                     type="text"
                     required
                     defaultValue="١٢/٢٨"
-                    className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-mono text-center text-[#1E2429]"
+                    className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-mono text-center text-[#16181C]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-[#5A646E] mb-1">{T("cli.26")}</label>
+                  <label className="block text-xs font-bold text-[#5D6168] mb-1">{T("cli.26")}</label>
                   <input
                     type="text"
                     required
                     defaultValue="٨٨٨"
-                    className="w-full px-3 py-2 rounded-lg border border-[#DDE1E5] text-xs font-mono text-center text-[#1E2429]"
+                    className="w-full px-3 py-2 rounded-lg border border-[#E3E0D9] text-xs font-mono text-center text-[#16181C]"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-[#ECEEF0]">
+              <div className="flex items-center gap-2 pt-3 border-t border-[#EEECE6]">
                 <button
                   type="button"
                   onClick={() => setPayingInvoice(null)}
-                  className="w-1/3 py-2.5 rounded-lg text-xs font-bold text-[#5A646E] hover:bg-[#ECEEF0]"
+                  className="w-1/3 py-2.5 rounded-lg text-xs font-bold text-[#5D6168] hover:bg-[#EEECE6]"
                 >
                   {T("cli.96")}
                 </button>

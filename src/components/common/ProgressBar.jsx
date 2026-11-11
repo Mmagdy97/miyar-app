@@ -22,19 +22,19 @@ export default function ProgressBar({
     return () => clearTimeout(timeout);
   }, [actualPercentage]);
 
-  // Determine fill color (Miyar: Forest Green #2B3138, Sand Gold #7B848E for warning, Sage Green #D9480F for completed)
+  // Determine fill color (Miyar: Forest Green #2B3138, Sand Gold #80848B for warning, Sage Green #D9480F for completed)
   let fillClass = "bg-[#2B3138]";
   if (customFillClass) {
     fillClass = customFillClass;
   } else if (isWarning || actualPercentage >= warningThreshold) {
-    fillClass = "bg-[#7B848E]";
+    fillClass = "bg-[#80848B]";
   } else if (isCompleted || actualPercentage === 100) {
     fillClass = "bg-[#D9480F]";
   }
 
   return (
     <div
-      className={`w-full h-2.5 bg-[#ECEEF0] rounded-full overflow-hidden shadow-inner mt-2 ${trackClassName} ${className}`}
+      className={`w-full h-2.5 bg-[#EEECE6] rounded-full overflow-hidden shadow-inner mt-2 ${trackClassName} ${className}`}
     >
       <div
         className={`h-full rounded-full transition-all duration-[1500ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${fillClass}`}

@@ -5,7 +5,7 @@ import { CURRENCIES } from "../lib/currency";
 import { LOCALES } from "../config/locale";
 import { getTheme, setTheme } from "../theme";
 
-const SECTION = "text-[11px] font-semibold uppercase tracking-wide text-[#7B848E] mb-2";
+const SECTION = "text-[11px] font-semibold uppercase tracking-wide text-[#80848B] mb-2";
 
 /** One compact control: language, currency and theme, as a popover on desktop and a bottom sheet on phones. */
 export default function SettingsSwitcher() {
@@ -32,7 +32,7 @@ export default function SettingsSwitcher() {
   };
   const row = (active) =>
     `w-full flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-start btn-press ${
-      active ? "bg-[#D9480F]/10 text-[#D9480F] font-semibold" : "text-[#1E2429] hover:bg-[#ECEEF0]"
+      active ? "bg-[#D9480F]/10 text-[#D9480F] font-semibold" : "text-[#16181C] hover:bg-[#EEECE6]"
     }`;
 
   return (
@@ -43,7 +43,7 @@ export default function SettingsSwitcher() {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label={t("settings.title")}
-        className="btn-press inline-flex items-center gap-2 rounded-lg border border-[#DDE1E5] bg-white px-2.5 h-9 text-xs font-semibold text-[#1E2429] hover:bg-[#ECEEF0]"
+        className="btn-press inline-flex items-center gap-2 rounded-lg border border-[#E3E0D9] bg-white px-2.5 h-9 text-xs font-semibold text-[#16181C] hover:bg-[#EEECE6]"
       >
         <SlidersHorizontal className="w-4 h-4" aria-hidden="true" />
         <span className="tabular-nums" dir="ltr">{locale.toUpperCase()} · {currency}</span>
@@ -51,15 +51,15 @@ export default function SettingsSwitcher() {
 
       {open && (
         <>
-          <div className="fixed inset-0 z-[60] bg-[#1E2429]/50 sm:hidden" aria-hidden="true" />
+          <div className="fixed inset-0 z-[60] bg-[#16181C]/50 sm:hidden" aria-hidden="true" />
           <div
             role="dialog"
             aria-label={t("settings.title")}
-            className="fixed z-[70] inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t border-[#DDE1E5] bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:mt-2 sm:end-0 sm:w-80 sm:max-h-[70vh] sm:rounded-xl sm:border sm:shadow-lg sm:p-3"
+            className="fixed z-[70] inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t border-[#E3E0D9] bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:mt-2 sm:end-0 sm:w-80 sm:max-h-[70vh] sm:rounded-xl sm:border sm:shadow-lg sm:p-3"
           >
             <div className="flex items-center justify-between mb-3 sm:hidden">
-              <h2 className="text-base font-bold text-[#1E2429]">{t("settings.title")}</h2>
-              <button type="button" onClick={() => setOpen(false)} aria-label={t("settings.close")} className="btn-press p-2 -m-2 rounded-lg text-[#5A646E]">
+              <h2 className="text-base font-bold text-[#16181C]">{t("settings.title")}</h2>
+              <button type="button" onClick={() => setOpen(false)} aria-label={t("settings.close")} className="btn-press p-2 -m-2 rounded-lg text-[#5D6168]">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -88,7 +88,7 @@ export default function SettingsSwitcher() {
             </div>
 
             <p className={SECTION}>{t("settings.theme")}</p>
-            <div className="grid grid-cols-2 gap-1.5 rounded-lg bg-[#ECEEF0] p-1" role="group">
+            <div className="grid grid-cols-2 gap-1.5 rounded-lg bg-[#EEECE6] p-1" role="group">
               {[["light", Sun, t("settings.light")], ["dark", Moon, t("settings.dark")]].map(([k, Icon, label]) => (
                 <button
                   key={k}
@@ -96,7 +96,7 @@ export default function SettingsSwitcher() {
                   onClick={() => pickTheme(k)}
                   aria-pressed={theme === k}
                   className={`btn-press inline-flex items-center justify-center gap-2 rounded-md py-2 text-sm font-semibold ${
-                    theme === k ? "bg-white text-[#1E2429] shadow-sm" : "text-[#5A646E]"
+                    theme === k ? "bg-white text-[#16181C] shadow-sm" : "text-[#5D6168]"
                   }`}
                 >
                   <Icon className="w-4 h-4" aria-hidden="true" />{label}
