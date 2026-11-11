@@ -1,4 +1,5 @@
 import { currencySymbol, intlLocale } from "../i18n";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { expensesStore } from "../data/stores";
 import { ENGINEER_CASH, personById, projectById, formatNumber } from "../data/seed";
@@ -28,19 +29,19 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-const WEATHER_OPTIONS = [
-  { id: "sunny", label: "☀️ مشمس ومستقر" },
-  { id: "hot", label: "🌡️ حار - تشغيل مبردات" },
-  { id: "windy", label: "💨 رياح وغبار خفيف" },
-  { id: "smooth", label: "🟢 العمل يسير بدون عوائق" },
-];
+const WEATHER_OPTIONS = localize([
+  { id: "sunny", label: D("☀️ مشمس ومستقر") },
+  { id: "hot", label: D("🌡️ حار - تشغيل مبردات") },
+  { id: "windy", label: D("💨 رياح وغبار خفيف") },
+  { id: "smooth", label: D("🟢 العمل يسير بدون عوائق") },
+]);
 
-const INITIAL_WORKS_CHECKLIST = [
-  { id: 1, text: "استكمال شبكة مواسير التغذية والصرف بالبدروم", done: true },
-  { id: 2, text: "استلام شحنة أسمنت العزل وتشوينها في المخزن الداخلي", done: true },
-  { id: 3, text: "مطابقة مناسيب أرضيات الرخام في بهو المدخل مع المخطط", done: false },
-  { id: 4, text: "عزل جدران خزان المياه الأرضي بالبيتومين المطاطي", done: false },
-];
+const INITIAL_WORKS_CHECKLIST = localize([
+  { id: 1, text: D("استكمال شبكة مواسير التغذية والصرف بالبدروم"), done: true },
+  { id: 2, text: D("استلام شحنة أسمنت العزل وتشوينها في المخزن الداخلي"), done: true },
+  { id: 3, text: D("مطابقة مناسيب أرضيات الرخام في بهو المدخل مع المخطط"), done: false },
+  { id: 4, text: D("عزل جدران خزان المياه الأرضي بالبيتومين المطاطي"), done: false },
+]);
 
 function SiteEngineerDashboard({ setActionItems }) {
   // Labor count state (mobile tap-friendly +/-)
@@ -53,8 +54,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
   const [weatherSelected, setWeatherSelected] = useState("sunny");
   const [worksChecklist, setWorksChecklist] = useState(INITIAL_WORKS_CHECKLIST);
-  const [customNotes, setCustomNotes] = useState(
-    "تم فحص ضغط شبكة التغذية على ٨ بار لمدة ساعتين بحضور مندوب الشركة الموردة، وتم توثيق شهادة الاختبار بنجاح."
+  const [customNotes, setCustomNotes] = useState("تم فحص ضغط شبكة التغذية على ٨ بار لمدة ساعتين بحضور مندوب الشركة الموردة، وتم توثيق شهادة الاختبار بنجاح."
   );
 
   // Mock Uploaded Photos
@@ -155,7 +155,7 @@ function SiteEngineerDashboard({ setActionItems }) {
     setCustomNotes("");
 
     // Show temporary success message for 3 seconds
-    setToastMessage("تم إرسال التقرير للإدارة بنجاح ✔️");
+    setToastMessage(D("تم إرسال التقرير للإدارة بنجاح ✔️"));
     setShowToast(true);
     setTimeout(() => {
       setShowToast(false);
@@ -180,7 +180,7 @@ function SiteEngineerDashboard({ setActionItems }) {
         id: Date.now(),
         engId: cashRow.id,
         engName: `${eng.displayName} (${proj.name})`,
-        description: cashNotes || "طلب تسوية عهدة ميدانية",
+        description: cashNotes || D("طلب تسوية عهدة ميدانية"),
         amount: amountNum,
         date: "الآن",
         category: cashCategory,
@@ -193,9 +193,9 @@ function SiteEngineerDashboard({ setActionItems }) {
     const newExpenseItem = {
       id: Date.now(),
       title: `تصفية عهدة (${cashCategory})`,
-      subtitle: cashNotes || "طلب تسوية عهدة ميدانية طارئة",
+      subtitle: cashNotes || D("طلب تسوية عهدة ميدانية طارئة"),
       user: "م. محمد (الموقع)",
-      project: "فيلا الياسمين - التجمع",
+      project: D("فيلا الياسمين - التجمع"),
       category: "تسوية عهدة",
       amount: `${formatNumber(amountNum)} ${currencySymbol()}`,
       timestamp: "الآن",
@@ -213,7 +213,7 @@ function SiteEngineerDashboard({ setActionItems }) {
     setTimeout(() => {
       setPettyCashSuccess(false);
       setPettyCashModalOpen(false);
-      setToastMessage("تم إرسال طلب تسوية العهدة للإدارة بنجاح ✔️");
+      setToastMessage(D("تم إرسال طلب تسوية العهدة للإدارة بنجاح ✔️"));
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
     }, 1200);
@@ -592,10 +592,10 @@ function SiteEngineerDashboard({ setActionItems }) {
                       </div>
                       <div className="min-w-0">
                         <p className="font-bold text-[#16181C] truncate">
-                          {photo.name}
+                          {D(photo.name)}
                         </p>
                         <p className="text-[10px] text-[#5D6168]">
-                          {photo.time} • {photo.size}
+                          {D(photo.time)} • {D(photo.size)}
                         </p>
                       </div>
                     </div>

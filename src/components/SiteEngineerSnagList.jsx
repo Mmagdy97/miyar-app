@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   AlertTriangle,
@@ -15,12 +16,12 @@ import {
   ShieldAlert,
 } from "lucide-react";
 
-const INITIAL_SNAGS = [
+const INITIAL_SNAGS = localize([
   {
     id: 1,
     description: "شرخ سطحي وترييح في دهان جدار غرفة النوم الرئيسية",
     location: "الدور الأول - غرفة النوم الرئيسية",
-    contractor: "مقاول الدهانات (الأسطى حسن)",
+    contractor: D("مقاول الدهانات (الأسطى حسن)"),
     severity: "متوسطة", // حرجة | متوسطة | طفيفة
     status: "قيد الملاحظة", // قيد الملاحظة | تمت المعالجة
     date: "اليوم، ١٠:٣٠ ص",
@@ -29,7 +30,7 @@ const INITIAL_SNAGS = [
     id: 2,
     description: "تسريب مياه بسيط عند سن محبس دفن حمام الضيوف",
     location: "الدور الأرضي - حمام الضيوف",
-    contractor: "فني السباكة (الأسطى رجب)",
+    contractor: D("فني السباكة (الأسطى رجب)"),
     severity: "حرجة",
     status: "قيد الملاحظة",
     date: "اليوم، ٠٩:١٥ ص",
@@ -38,7 +39,7 @@ const INITIAL_SNAGS = [
     id: 3,
     description: "فروق وزنات وتطبيش في زاوية الجبسوم بورد لبيت النور",
     location: "منطقة الاستقبال والمدخل",
-    contractor: "فريق الجبسوم بورد (شركة ديكور بلس)",
+    contractor: D("فريق الجبسوم بورد (شركة ديكور بلس)"),
     severity: "متوسطة",
     status: "تمت المعالجة",
     date: "أمس، ٠٤:٠٠ م",
@@ -47,18 +48,18 @@ const INITIAL_SNAGS = [
     id: 4,
     description: "تفريغ في سقية عرانيس رخام التريستا بالمدخل الرئيسي",
     location: "المدخل الرئيسي الخارجي",
-    contractor: "معلم الرخام (الأسطى فتحي)",
+    contractor: D("معلم الرخام (الأسطى فتحي)"),
     severity: "طفيفة",
     status: "تمت المعالجة",
     date: "أمس، ١١:٢٠ ص",
   },
-];
+]);
 
-const SEVERITY_COLORS = {
+const SEVERITY_COLORS = localize({
   حرجة: "bg-rose-50 text-rose-800 border-rose-200",
   متوسطة: "bg-amber-50 text-amber-800 border-amber-200",
   طفيفة: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
-};
+});
 
 function SiteEngineerSnagList() {
   const [snags, setSnags] = useState(INITIAL_SNAGS);
@@ -101,7 +102,7 @@ function SiteEngineerSnagList() {
       id: Date.now(),
       description: newDesc.trim(),
       location: newLocation.trim(),
-      contractor: newContractor.trim() || "فريق التشطيبات بالموقع",
+      contractor: newContractor.trim() || D("فريق التشطيبات بالموقع"),
       severity: newSeverity,
       status: "قيد الملاحظة",
       date: "الآن",
@@ -230,7 +231,7 @@ function SiteEngineerSnagList() {
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${severityClass}`}
                       >
-                        {T("se.87", { v0: snag.severity })}
+                        {T("se.87", { v0: D(snag.severity) })}
                       </span>
                       <span className="text-[11px] text-[#5D6168]">{snag.date}</span>
                     </div>

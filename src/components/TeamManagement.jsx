@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   Users,
@@ -71,7 +72,7 @@ const INITIAL_TEAM_MEMBERS = PEOPLE.map((p, i) => ({
   permissions: getDefaultPermissions(p.role),
 }));
 
-const ROLE_BADGES = {
+const ROLE_BADGES = localize({
   مدير: {
     label: "مدير تنفيذي",
     badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200 font-semibold",
@@ -87,7 +88,7 @@ const ROLE_BADGES = {
     badgeClass: "bg-amber-50 text-amber-800 border-amber-200",
     dotClass: "bg-amber-700",
   },
-};
+});
 
 const AVATAR_COLORS = [
   "bg-[#2B3138]",
@@ -272,7 +273,7 @@ function TeamManagement() {
   // Reset to default sample team
   const handleResetTeam = () => {
     setTeamMembers(INITIAL_TEAM_MEMBERS);
-    setToastMessage("تمت استعادة القائمة الافتراضية لفريق العمل");
+    setToastMessage(D("تمت استعادة القائمة الافتراضية لفريق العمل"));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -318,7 +319,7 @@ function TeamManagement() {
             <span>{T("team.5")}</span>
           </button>
 
-          {/* Primary Button "+ إضافة عضو جديد" */}
+          {/* Primary Button D("+ إضافة عضو جديد") */}
           <button
             onClick={handleOpenAddModal}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3138] hover:bg-[#16181C] transition-colors shadow-sm cursor-pointer"
@@ -426,7 +427,7 @@ function TeamManagement() {
                 };
 
                 const isStatusActive = member.status === "نشط";
-                const isStatusLeave = member.status === "في إجازة";
+                const isStatusLeave = member.status ==="في إجازة";
 
                 return (
                   <tr
@@ -559,7 +560,7 @@ function TeamManagement() {
                     <Users className="w-8 h-8 mx-auto mb-2 text-[#80848B]" />
                     <p className="font-bold text-[#5D6168]">{T("team.27")}</p>
                     <p className="text-xs text-[#5D6168] mt-1">
-                      جرّب تعديل كلمة البحث أو الضغط على "+ إضافة عضو جديد"
+                      جرّب تعديل كلمة البحث أو الضغط على "{D("+ إضافة عضو جديد")}"
                     </p>
                   </td>
                 </tr>
@@ -571,11 +572,11 @@ function TeamManagement() {
         {/* Table Footer */}
         <div className="p-4 bg-[#F6F5F1] border-t border-[#E3E0D9]/60 flex items-center justify-between text-xs text-[#5D6168]">
           <span>
-            عرض <strong className="text-[#16181C]">{filteredMembers.length}</strong> من أصل{" "}
-            <strong className="text-[#16181C]">{teamMembers.length}</strong> عضو
+            {D("عرض")} <strong className="text-[#16181C]">{filteredMembers.length}</strong> {D("من أصل")}{" "}
+            <strong className="text-[#16181C]">{teamMembers.length}</strong> {D("عضو")}
           </span>
           <span className="text-[11px] text-[#5D6168]">
-            * اضغط على اسم الموظف أو أيقونة التعديل لضبط الصلاحيات المخصصة له.
+            {D("* اضغط على اسم الموظف أو أيقونة التعديل لضبط الصلاحيات المخصصة له.")}
           </span>
         </div>
       </div>

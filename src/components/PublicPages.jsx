@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { localize } from "../data/dataI18n";
 import { Check, ArrowRight } from "lucide-react";
 import { CURRENCIES, formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
@@ -87,7 +88,7 @@ export function PricingSection({ onStart }) {
   );
 }
 
-const LEGAL = {
+const LEGAL = localize({
   privacy: {
     title: "سياسة الخصوصية",
     sections: [
@@ -112,7 +113,7 @@ const LEGAL = {
       ["التعديل والقانون الواجب", "قد نحدّث هذه الشروط مع إشعارك بالتغييرات الجوهرية. يُحدَّد القانون الواجب التطبيق والجهة القضائية وفق بلد تسجيل الشركة المشغّلة: [يُستكمل قبل الإطلاق]."],
     ],
   },
-};
+});
 
 export function LegalPage({ kind, onBack }) {
   const doc = LEGAL[kind];

@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   ListTodo,
@@ -14,59 +15,59 @@ import {
   Check,
 } from "lucide-react";
 
-const INITIAL_TASKS = [
+const INITIAL_TASKS = localize([
   {
     id: 1,
     title: "استلام بند السباكة وتغذية الحمامات",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     location: "الدور الأرضي - حمام الضيوف",
-    dueTime: "اليوم، ١٢:٠٠ م",
+    dueTime: D("اليوم، ١٢:٠٠ م"),
     priority: "عاجل",
     completed: true,
   },
   {
     id: 2,
     title: "مراجعة شرب الكهرباء وتكسير مسارات العلب",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     location: "الدور الأول - غرف النوم",
-    dueTime: "اليوم، ٠٢:٣٠ م",
+    dueTime: D("اليوم، ٠٢:٣٠ م"),
     priority: "متوسط",
     completed: false,
   },
   {
     id: 3,
     title: "فحص عزل الحمامات واختبار ضغط المياه (٨ بار)",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     location: "البدروم والرووف",
-    dueTime: "اليوم، ٠٤:٠٠ م",
+    dueTime: D("اليوم، ٠٤:٠٠ م"),
     priority: "عاجل",
     completed: false,
   },
   {
     id: 4,
     title: "مطابقة وزنات شاسيهات الجبسوم بورد وبيت النور",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     location: "منطقة الاستقبال والصالون",
-    dueTime: "غداً، ١٠:٠٠ ص",
+    dueTime: D("غداً، ١٠:٠٠ ص"),
     priority: "عادي",
     completed: false,
   },
   {
     id: 5,
     title: "استلام شحنة البورسلين والفرز الأول مع مسؤول التشوين",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     location: "المخزن الخارجي للموقع",
-    dueTime: "غداً، ٠١:٠٠ م",
+    dueTime: D("غداً، ٠١:٠٠ م"),
     priority: "عادي",
     completed: true,
   },
-];
+]);
 
-const PRIORITY_BADGES = {
+const PRIORITY_BADGES = localize({
   عاجل: "bg-rose-50 text-rose-800 border-rose-200",
   متوسط: "bg-amber-50 text-amber-800 border-amber-200",
   عادي: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
-};
+});
 
 function SiteEngineerTasks() {
   const [tasks, setTasks] = useState(INITIAL_TASKS);
@@ -105,9 +106,9 @@ function SiteEngineerTasks() {
     const newTask = {
       id: Date.now(),
       title: newTitle.trim(),
-      project: "فيلا الياسمين - التجمع",
-      location: newLocation.trim() || "الموقع العام",
-      dueTime: newDueTime.trim() || "اليوم",
+      project: D("فيلا الياسمين - التجمع"),
+      location: newLocation.trim() || D("الموقع العام"),
+      dueTime: newDueTime.trim() || D("اليوم"),
       priority: newPriority,
       completed: false,
     };
@@ -130,8 +131,8 @@ function SiteEngineerTasks() {
 
   // Filtered tasks
   const filteredTasks = useMemo(() => {
-    if (filter === "قيد التنفيذ") return tasks.filter((t) => !t.completed);
-    if (filter === "المكتملة") return tasks.filter((t) => t.completed);
+    if (filter ==="قيد التنفيذ") return tasks.filter((t) => !t.completed);
+    if (filter ==="المكتملة") return tasks.filter((t) => t.completed);
     return tasks;
   }, [tasks, filter]);
 
@@ -196,7 +197,7 @@ function SiteEngineerTasks() {
 
         {/* Filters */}
         <div className="flex items-center gap-2">
-          {["الكل", "قيد التنفيذ", "المكتملة"].map((tab) => (
+          {["الكل", D("قيد التنفيذ"), D("المكتملة")].map((tab) => (
             <button
               key={tab}
               onClick={() => setFilter(tab)}
@@ -282,7 +283,7 @@ function SiteEngineerTasks() {
                         : "text-[#5D6168] bg-[#EEECE6]"
                     }`}
                   >
-                    {task.completed ? "تم الإنجاز ✓" : "انقر للاكتمال"}
+                    {task.completed ? D("تم الإنجاز ✓") : D("انقر للاكتمال")}
                   </span>
                 </div>
               </div>

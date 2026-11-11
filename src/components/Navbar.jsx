@@ -1,4 +1,5 @@
 import LogoMark from "./LogoMark";
+import { D } from "../data/dataI18n";
 import { useState, useRef, useEffect } from "react";
 import {
   Building2,
@@ -194,7 +195,7 @@ function Navbar({
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-1">
                             <span className="text-[10px] font-bold text-[#5D6168] uppercase tracking-wider truncate">
-                              {item.category || "تنبيه"}
+                              {item.category || D("تنبيه")}
                             </span>
                             <span className="text-[10px] font-bold text-[#5D6168] shrink-0">
                               {item.timestamp || item.time}
@@ -215,7 +216,7 @@ function Navbar({
                             <span className="text-[10px] text-[#5D6168]">
                               {t("notif.project")}{" "}
                               <strong className="text-[#16181C]">
-                                {item.project || "الموقع"}
+                                {item.project || D("الموقع")}
                               </strong>
                             </span>
 
@@ -303,12 +304,12 @@ function Navbar({
         {/* User Avatar & Profile */}
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#F6F5F1] text-[#2B3138] font-extrabold text-xs border border-[#E3E0D9] shadow-2xs shrink-0">
-            م.أ
+            {D("م.أ")}
           </div>
           {/* Profile Name & Role (Hidden on mobile < md as instructed) */}
           <div className="hidden md:block text-start">
             <p className="text-xs font-bold text-[#16181C] leading-tight">
-              م. محمد أحمد
+              {D("م. محمد أحمد")}
             </p>
             <p className="text-[10px] text-[#5D6168] font-medium leading-tight mt-0.5">
               {roleShort(currentRole)}

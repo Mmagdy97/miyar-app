@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   PackageSearch,
@@ -15,7 +16,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const INITIAL_REQUESTS = [
+const INITIAL_REQUESTS = localize([
   {
     id: 1,
     materialType: "أسمنت بورتلاندي مقاوم للكبريتات (سويف)",
@@ -40,19 +41,19 @@ const INITIAL_REQUESTS = [
     id: 3,
     materialType: "مواسير بولي بروبلين ٣/٤ بوصة وصرف ٤ بوصة الشريف",
     quantity: "٤٥ عود تغذية + ٣٠ عود صرف",
-    requiredDate: "أمس",
+    requiredDate: D("أمس"),
     project: "فيلا الياسمين - التجمع الخامس",
     status: "تم التوريد",
     notes: "تم الاستلام والمطابقة بمعرفة م. محمد وتخزينها بالموقع",
     requestDate: "أمس، ٠٩:٠٠ ص",
   },
-];
+]);
 
-const STATUS_BADGES = {
+const STATUS_BADGES = localize({
   "قيد المراجعة": "bg-amber-50 text-amber-800 border-amber-200",
   "جاري الشحن": "bg-[#EEECE6] text-[#16181C] border-[#E3E0D9]",
   "تم التوريد": "bg-emerald-50 text-emerald-800 border-emerald-200",
-};
+});
 
 function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelectedItem }) {
   const [requests, setRequests] = useState(INITIAL_REQUESTS);
@@ -73,12 +74,12 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
     if (!quantity) return;
 
     const finalMaterialName =
-      materialType === "أخرى"
+      materialType ==="أخرى"
         ? customMaterial.trim() || "خامات أخرى"
         : materialType;
 
     const fullMaterialDetails =
-      materialType === "أخرى"
+      materialType ==="أخرى"
         ? customMaterial.trim() || "خامات تشطيبات متنوعة"
         : `${materialType}${customMaterial.trim() ? " (" + customMaterial.trim() + ")" : ""}`;
 
@@ -86,10 +87,10 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
       id: Date.now(),
       materialType: fullMaterialDetails,
       quantity: `${quantity} ${unit}`,
-      requiredDate: requiredDate || "خلال ٤٨ ساعة",
+      requiredDate: requiredDate || D("خلال ٤٨ ساعة"),
       project: "فيلا الياسمين - التجمع الخامس",
       status: "قيد المراجعة",
-      notes: notes.trim() || "تشوين عادي بالموقع",
+      notes: notes.trim() || D("تشوين عادي بالموقع"),
       requestDate: "الآن",
     };
 
@@ -100,10 +101,10 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
     if (setActionItems) {
       const newNotification = {
         id: Date.now(),
-        title: "طلب توريد خامات: " + finalMaterialName,
-        subtitle: `الكمية: ${quantity} ${unit} • موعد التوريد: ${requiredDate || "خلال ٤٨ ساعة"}`,
+        title: D("طلب توريد خامات: ") + finalMaterialName,
+        subtitle: `الكمية: ${quantity} ${unit} • موعد التوريد: ${requiredDate || D("خلال ٤٨ ساعة")}`,
         user: "م. محمد (الموقع)",
-        project: "فيلا الياسمين - التجمع",
+        project: D("فيلا الياسمين - التجمع"),
         category: "طلب تشوين وتوريد",
         amount: `${quantity} ${unit}`,
         targetRole: "Admin",
@@ -116,15 +117,15 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
     }
 
     // Requirement 3: Clear the input fields
-    setMaterialType("أسمنت");
+    setMaterialType(D("أسمنت"));
     setCustomMaterial("");
     setQuantity("");
-    setUnit("شيكارة");
+    setUnit(D("شيكارة"));
     setRequiredDate("");
     setNotes("");
 
     // Requirement 3: Show local success state/toast for 3 seconds
-    setToastMessage("تم إرسال الطلب للإدارة بنجاح ✔️");
+    setToastMessage(D("تم إرسال الطلب للإدارة بنجاح ✔️"));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -173,7 +174,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
-                  نوع الخامة <span className="text-rose-500">*</span>
+                  {D("نوع الخامة")} <span className="text-rose-500">*</span>
                 </label>
                 <select
                   value={materialType}
@@ -208,7 +209,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
-                  الكمية المطلوبة <span className="text-rose-500">*</span>
+                  {D("الكمية المطلوبة")} <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="number"
@@ -241,7 +242,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
 
               <div>
                 <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
-                  موعد التوريد المطلوب <span className="text-rose-500">*</span>
+                  {D("موعد التوريد المطلوب")} <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="date"
@@ -275,7 +276,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#2B3138] hover:bg-[#16181C] text-white hover:bg-[#16181C] transition-colors font-bold text-sm transition-all cursor-pointer disabled:opacity-50 shadow-sm"
               >
                 <Send className="w-4 h-4" />
-                <span>{isSubmitting ? "جاري الإرسال..." : "إرسال الطلب للإدارة"}</span>
+                <span>{isSubmitting ? "جاري الإرسال..." : D("إرسال الطلب للإدارة")}</span>
               </button>
             </div>
           </form>

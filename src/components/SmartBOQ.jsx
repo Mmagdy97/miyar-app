@@ -1,4 +1,5 @@
 import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
@@ -25,14 +26,14 @@ import {
 
 // Default interior design BOQ items
 
-const CATEGORY_COLORS = {
+const CATEGORY_COLORS = localize({
   "أعمال الكهرباء": "bg-amber-50 text-amber-800 border-amber-200",
   "أعمال السباكة والصحي": "bg-[#EEECE6] text-[#16181C] border-[#E3E0D9]",
   "أعمال المحارة والتشطيبات": "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
   "الأسقف المعلقة والجبسوم بورد": "bg-[#EEECE6] text-[#16181C] border-[#D1CDC5] font-semibold",
   "الأرضيات والرخام": "bg-amber-50 text-amber-900 border-amber-200",
   "أخرى": "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
-};
+});
 
 function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
   const [boqItems, setBoqItems] = boqStore.use();
@@ -81,7 +82,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       quantity: parseFloat(newItemQty) || 1,
       unitCost: parseFloat(newItemCost) || 0,
       margin: parseFloat(newItemMargin) || 20,
-      note: newItemNote.trim() || "بند مستحدث بمقايسة التشطيبات",
+      note: newItemNote.trim() || D("بند مستحدث بمقايسة التشطيبات"),
     };
 
     setBoqItems((prev) => [...prev, newItem]);
@@ -107,7 +108,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
         title: "اعتماد المقايسة التقديرية - فيلا الياسمين",
         subtitle: `إجمالي المقايسة: ${totalPrice.toLocaleString(intlLocale())} ${currencySymbol()} (${boqItems.length} بند تشطيبات)`,
         user: "المكتب الفني / الإدارة المالية",
-        project: "فيلا الياسمين - التجمع",
+        project: D("فيلا الياسمين - التجمع"),
         category: "مقايسة تعاقدية",
         amount: `${totalPrice.toLocaleString(intlLocale())} ${currencySymbol()}`,
         timestamp: "الآن",
@@ -317,7 +318,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 const rowCost = qty * cost;
                 const rowTotal = rowCost * (1 + margin / 100);
                 const rowProfit = rowTotal - rowCost;
-                const categoryClass = CATEGORY_COLORS[item.category] || CATEGORY_COLORS["أخرى"];
+                const categoryClass = CATEGORY_COLORS[item.category] || CATEGORY_COLORS[D("أخرى")];
 
                 return (
                   <tr
@@ -439,7 +440,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     <AlertCircle className="w-8 h-8 mx-auto mb-2 text-[#80848B]" />
                     <p className="font-bold text-[#5D6168]">{T("sboq.27")}</p>
                     <p className="text-xs text-[#5D6168] mt-1">
-                      يمكنك اختيار تصنيف آخر أو الضغط على "+ إضافة بند جديد"
+                      يمكنك اختيار تصنيف آخر أو الضغط على D("+ إضافة بند جديد")
                     </p>
                   </td>
                 </tr>
@@ -452,15 +453,15 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
         <div className="p-4 bg-[#F6F5F1] border-t border-[#E3E0D9] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#5D6168]">
           <div className="flex items-center gap-3">
             <span>
-              إجمالي البنود: <strong className="text-[#16181C]">{boqItems.length}</strong>
+              {D("إجمالي البنود:")} <strong className="text-[#16181C]">{boqItems.length}</strong>
             </span>
             <span>•</span>
             <span>
-              متوسط هامش الربح: <strong className="text-[#16181C] font-bold">%{averageMargin}</strong>
+              {D("متوسط هامش الربح:")} <strong className="text-[#16181C] font-bold">%{averageMargin}</strong>
             </span>
           </div>
           <span className="text-[11px] text-[#5D6168]">
-            * السعر الإجمالي يشمل التوريد والتركيب والتشوين ومصاريف الإشراف الهندسي.
+            {D("* السعر الإجمالي يشمل التوريد والتركيب والتشوين ومصاريف الإشراف الهندسي.")}
           </span>
         </div>
       </div>

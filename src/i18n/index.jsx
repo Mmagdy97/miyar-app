@@ -5,6 +5,7 @@ import tr from "./tr";
 import { LOCALES } from "../config/locale";
 import { CURRENCIES, formatMoney } from "../lib/currency";
 
+import DEMO from "../data/demoStrings.json";
 const DICTS = { ar, en, tr };
 const INTL = { ar: "ar-EG", en: "en-US", tr: "tr-TR" };
 const KEY = "miyar:settings:v1";
@@ -24,7 +25,7 @@ export const getCurrency = () => current.currency;
 export const intlLocale = () => INTL[current.locale];
 const fill = (str, vars) => (vars ? str.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m)) : str);
 export const tr_ = (key, vars) => fill(DICTS[current.locale][key] ?? DICTS.ar[key] ?? key, vars);
-export const E = (v) => (typeof v === "string" ? (DICTS[current.locale]["e." + v] ?? v) : v);
+export const E = (v) => (typeof v === "string" ? (DICTS[current.locale]["e." + v] ?? DEMO[current.locale]?.[v] ?? v) : v);
 export const money = (n, opts) => formatMoney(n, current.currency, intlLocale(), opts);
 export const currencyName = () => new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(current.currency);
 export const currencySymbol = () => {

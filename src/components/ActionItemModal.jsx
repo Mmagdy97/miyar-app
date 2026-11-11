@@ -1,4 +1,5 @@
 import { tr_ as T } from "../i18n";
+import { D } from "../data/dataI18n";
 import {
   FileText,
   Users,
@@ -30,7 +31,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
                 {selectedItem.title}
               </h3>
               <p className="text-[11px] text-[#5D6168] font-medium mt-0.5">
-                {selectedItem.category || "تقرير موقع"} • {selectedItem.project || "فيلا الياسمين - التجمع"}
+                {selectedItem.category || D("تقرير موقع")} • {selectedItem.project || D("فيلا الياسمين - التجمع")}
               </p>
             </div>
           </div>
@@ -69,7 +70,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
             </h4>
             <div className="p-3.5 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] text-xs sm:text-sm text-[#16181C] leading-relaxed font-medium">
               {selectedItem.subtitle ||
-                "تم استكمال تمديدات شبكة الصرف والتغذية بالبدروم بنجاح، وتشوين شحنة أسمنت العزل المقاوم، وفحص ضغط الشبكة على ٨ بار لمدة ساعتين بدون أي تسريب مع مطابقة المنسوب المعماري."}
+                D("تم استكمال تمديدات شبكة الصرف والتغذية بالبدروم بنجاح، وتشوين شحنة أسمنت العزل المقاوم، وفحص ضغط الشبكة على ٨ بار لمدة ساعتين بدون أي تسريب مع مطابقة المنسوب المعماري.")}
             </div>
           </div>
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { localize, D } from "./data/dataI18n";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import MainContent from "./components/MainContent";
@@ -8,13 +9,13 @@ import { ROLE_CONFIG, ROLE_TITLES } from "./config/roles";
 import { Menu, X, Building2, Download } from "lucide-react";
 
 // Role-Based Initial Action Items & Notifications in Arabic
-const INITIAL_ACTION_ITEMS = [
+const INITIAL_ACTION_ITEMS = localize([
   {
     id: 1,
     title: "مراجعة أمر تغيير (VO #03) - فيلا الياسمين",
     subtitle: "ترقية إلى رخام كلكتا جولد إيطالي لبهو المدخل الرئيسي",
     user: "فريق استوديو فيلا الياسمين",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     category: "أمر تغيير (VO)",
     amount: "+٨٥,٠٠٠ ج.م",
     timestamp: "منذ ساعتين",
@@ -42,7 +43,7 @@ const INITIAL_ACTION_ITEMS = [
     title: "تحديث جديد لصور الموقع ونسب الإنجاز",
     subtitle: "تم توثيق اختبار ضغط شبكة الصرف وإنهاء أعمال التأسيس",
     user: "م. محمد (الموقع)",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     category: "تقرير ميداني",
     amount: "نسبة الإنجاز ٧٨٪",
     timestamp: "الآن",
@@ -70,7 +71,7 @@ const INITIAL_ACTION_ITEMS = [
     title: "مطلوب مراجعة مخطط التكييف والإنارة المعمارية",
     subtitle: "مخططات الأسقف المعلقة بالدور الأول تتطلب مطابقة مع التصميم الداخلي",
     user: "المكتب الفني",
-    project: "دوبلكس نيو جيزة",
+    project: D("دوبلكس نيو جيزة"),
     category: "مخططات ومستندات",
     amount: "مراجعة كود",
     timestamp: "منذ ٣ ساعات",
@@ -79,7 +80,7 @@ const INITIAL_ACTION_ITEMS = [
     type: "report",
     status: "pending",
   },
-];
+]);
 
 function App() {
   const saved = (() => {
@@ -175,7 +176,7 @@ function App() {
       className="min-h-screen w-full relative isolate flex flex-col md:flex-row h-screen overflow-hidden font-ibm bg-[#F6F5F1] text-[#16181C] selection:bg-[#2B3138] selection:text-white"
     >
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#2B3138] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
-        تخطي إلى المحتوى
+        {D("تخطي إلى المحتوى")}
       </a>
       {/* Mobile Drawer Backdrop Overlay */}
       {isMobileMenuOpen && (

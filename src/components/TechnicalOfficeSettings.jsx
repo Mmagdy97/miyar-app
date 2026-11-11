@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   FileText,
@@ -17,7 +18,7 @@ import {
 } from "lucide-react";
 
 // Standard Engineering Templates
-const STANDARD_TEMPLATES = [
+const STANDARD_TEMPLATES = localize([
   {
     id: "WIR",
     code: "WIR-01",
@@ -58,7 +59,7 @@ const STANDARD_TEMPLATES = [
     category: "المقايسات والعقود",
     color: "from-purple-600 to-pink-600",
   },
-];
+]);
 
 // Initial Settings Toggles
 const INITIAL_SETTINGS = {
@@ -77,7 +78,7 @@ function TechnicalOfficeSettings() {
   const handleToggle = (key) => {
     setSettings((prev) => {
       const updated = { ...prev, [key]: !prev[key] };
-      setToastMessage("تم تحديث إعدادات المكتب الفني بنجاح");
+      setToastMessage(D("تم تحديث إعدادات المكتب الفني بنجاح"));
       setTimeout(() => setToastMessage(null), 2500);
       return updated;
     });
@@ -92,7 +93,7 @@ function TechnicalOfficeSettings() {
   // Reset settings
   const handleResetSettings = () => {
     setSettings(INITIAL_SETTINGS);
-    setToastMessage("تمت استعادة الإعدادات الافتراضية");
+    setToastMessage(D("تمت استعادة الإعدادات الافتراضية"));
     setTimeout(() => setToastMessage(null), 2500);
   };
 
@@ -279,7 +280,7 @@ function TechnicalOfficeSettings() {
                   {T("to.143")}
                 </h4>
                 <p className="text-[11px] text-[#5D6168] mt-0.5">
-                  تحويل الإصدار السابق تلقائياً إلى حالة "ملغي (Superseded)" ونقله لسجل الأرشيف
+                  {D("تحويل الإصدار السابق تلقائياً إلى حالة")} "{D("ملغي (Superseded)")}" {D("ونقله لسجل الأرشيف")}
                 </p>
               </div>
 

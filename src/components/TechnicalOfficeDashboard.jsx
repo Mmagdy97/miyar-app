@@ -1,4 +1,5 @@
 import { currencySymbol, intlLocale, E } from "../i18n";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
@@ -29,14 +30,14 @@ import {
 } from "lucide-react";
 
 // Mock Latest Engineering Drawings (Document Control)
-const INITIAL_DRAWINGS = [
+const INITIAL_DRAWINGS = localize([
   {
     id: "DWG-01",
     name: "لوحة توزيع الكهرباء والإنارة - الدور الأرضي",
     code: "E-02-GF",
     rev: "Rev. 02",
-    discipline: "كهرباء",
-    project: "فيلا الياسمين - التجمع",
+    discipline: D("كهرباء"),
+    project: D("فيلا الياسمين - التجمع"),
     date: "اليوم، ٠٩:٣٠ ص",
     size: "٤.٢ ميجابايت",
     status: "approved", // approved | review | rejected
@@ -48,7 +49,7 @@ const INITIAL_DRAWINGS = [
     code: "P-01-BS",
     rev: "Rev. 01",
     discipline: "صحي ومياه",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     date: "أمس، ٠٣:١٥ م",
     size: "٣.٨ ميجابايت",
     status: "approved",
@@ -60,7 +61,7 @@ const INITIAL_DRAWINGS = [
     code: "A-04-1F",
     rev: "Rev. 03",
     discipline: "معماري وديكور",
-    project: "دوبلكس نيو جيزة",
+    project: D("دوبلكس نيو جيزة"),
     date: "منذ يومين",
     size: "٦.١ ميجابايت",
     status: "review",
@@ -84,16 +85,16 @@ const INITIAL_DRAWINGS = [
     code: "M-03-HVAC",
     rev: "Rev. 02",
     discipline: "تكييف وميكانيكا",
-    project: "فيلا الياسمين - التجمع",
+    project: D("فيلا الياسمين - التجمع"),
     date: "٠٢ نوفمبر ٢٠٢٦",
     size: "٥.٤ ميجابايت",
     status: "rejected",
     statusLabel: "مرفوضة للتعديل",
   },
-];
+]);
 
 // Mock Site Requests / RFIs
-const INITIAL_RFIS = [
+const INITIAL_RFIS = localize([
   {
     id: "RFI-104",
     title: "تعارض مسار تكييف الكونسيلد مع كمرة خرسانية ساقطة",
@@ -128,10 +129,10 @@ const INITIAL_RFIS = [
     solution: "تم إرسال التفصيلة المعمارية رقم D-14 ومطابقتها مع مواصفات استشاري العزل.",
     time: "٠٣ نوفمبر ٢٠٢٦",
   },
-];
+]);
 
 // Mock Active BOQ Items
-const BOQ_ITEMS = [
+const BOQ_ITEMS = localize([
   {
     code: "01.02",
     description: "توريد وتركيب رخام كلكتا جولد إيطالي معالج ومصقول للأرضيات",
@@ -177,7 +178,7 @@ const BOQ_ITEMS = [
     progress: 32,
     status: "وصول الخامات للموقع",
   },
-];
+]);
 
 function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem }) {
   const [drawings, setDrawings] = useState(INITIAL_DRAWINGS);
@@ -218,7 +219,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
     e.preventDefault();
     const newDrawing = {
       id: `DWG-${drawings.length + 1}`,
-      name: newDwgName || "لوحة تفاصيل تنفيذية جديدة",
+      name: newDwgName || D("لوحة تفاصيل تنفيذية جديدة"),
       code: newDwgCode || "A-09-DT",
       rev: newDwgRev,
       discipline: newDwgDiscipline,
@@ -271,7 +272,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               ...rfi,
               status: "solved",
               priorityLabel: "تم إرسال الحل للموقع ✓",
-              solution: solutionText || "تم تعديل مسار الدكت وتمريره من الفتحة المعتمدة.",
+              solution: solutionText || D("تم تعديل مسار الدكت وتمريره من الفتحة المعتمدة."),
             }
           : rfi
       )
@@ -593,7 +594,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               </div>
 
               <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-                {rfis.filter((r) => r.status === "pending").length} تتطلب رداً
+                {rfis.filter((r) => r.status === "pending").length} {D("تتطلب رداً")}
               </span>
             </div>
 
@@ -662,7 +663,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                       ) : (
                         <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                          <span>{rfi.solution || "تم اعتماد الحل وإرسال اللوحة المعدلة"}</span>
+                          <span>{rfi.solution || D("تم اعتماد الحل وإرسال اللوحة المعدلة")}</span>
                         </div>
                       )}
 
@@ -700,7 +701,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
-              إجمالي البنود: ٥ بنود رئيسية
+              {D("إجمالي البنود: ٥ بنود رئيسية")}
             </span>
           </div>
         </div>

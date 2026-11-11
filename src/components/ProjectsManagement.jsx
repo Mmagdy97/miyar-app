@@ -1,4 +1,5 @@
 import { currencySymbol, E } from "../i18n";
+import { D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
@@ -124,7 +125,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       startDate: todayStr,
       deadline: newDeadline || "2027-03-31",
       budget: newBudget.trim() ? `${newBudget.trim()} ${currencySymbol()}` : `${formatEGP(3500000)}`,
-      location: newLocation.trim() || "القاهرة الجديدة",
+      location: newLocation.trim() || D("القاهرة الجديدة"),
       image:
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
     };
@@ -179,7 +180,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   // Reset to default sample projects
   const handleResetProjects = () => {
     setProjects(INITIAL_PROJECTS);
-    setToastMessage("تمت استعادة المشروعات التجريبية الافتراضية");
+    setToastMessage(D("تمت استعادة المشروعات التجريبية الافتراضية"));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -425,7 +426,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                                 : "text-[#5D6168]"
                             }`}
                           >
-                            {phase}
+                            {D(phase)}
                           </span>
                         </div>
                       );
@@ -610,7 +611,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
               <div className="p-3 bg-amber-50/60 rounded-lg border border-amber-200 text-xs text-amber-900">
                 <p>
-                  يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة <strong>"التصميم"</strong>، وسيتلقى المهندس والعميل إشعاراً فورياً.
+                  يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة <strong>D("التصميم")</strong>، وسيتلقى المهندس والعميل إشعاراً فورياً.
                 </p>
               </div>
 
@@ -670,7 +671,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                           : "bg-[#EEECE6] text-[#16181C] hover:bg-[#E3E0D9]"
                       }`}
                     >
-                      {p}
+                      {D(p)}
                     </button>
                   ))}
                 </div>

@@ -8,6 +8,7 @@
 /* ───────────── Formatting helpers (locale + currency aware) ───────────── */
 
 import { getLocale, intlLocale, currencySymbol } from "../i18n";
+import { localize } from "./dataI18n";
 
 const AR_DIGITS = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
 
@@ -53,7 +54,7 @@ export const formatMonthYearAr = dateFmt({ month: "long", year: "numeric" });
 
 /* ───────────── People ───────────── */
 
-const prefixed = (name) => `م. ${name}`;
+const prefixed = (name) => `${{ ar: "م.", en: "Eng.", tr: "Müh." }[getLocale()] || "م."} ${name}`;
 
 export const PEOPLE = [
   { id: "sara", name: "سارة عامر", title: "كبير المعماريين", role: "مدير", email: "sara.amer@miyar.eg", phone: "+20 111 876 5432", status: "نشط", color: "bg-[#1E2429]" },
@@ -63,7 +64,7 @@ export const PEOPLE = [
   { id: "karim", name: "كريم مصطفى", title: "مهندس الموقع", role: "مهندس موقع", email: "karim.mostafa@miyar.eg", phone: "+20 106 555 4321", status: "نشط", color: "bg-[#2B3138]" },
   { id: "omar", name: "عمر عادل", title: "مهندس الموقع", role: "مهندس موقع", email: "omar.adel@miyar.eg", phone: "+20 101 222 3344", status: "نشط", color: "bg-[#D9480F]" },
   { id: "youssef", name: "يوسف مدحت", title: "مهندس الموقع", role: "مهندس موقع", email: "youssef.medhat@miyar.eg", phone: "+20 109 888 7766", status: "نشط", color: "bg-[#1E2429]" },
-].map((p) => ({ ...p, displayName: prefixed(p.name) }));
+].map((p) => localize({ ...p })).map((p) => ({ ...p, displayName: prefixed(p.name) }));
 
 export const personById = (id) => PEOPLE.find((p) => p.id === id);
 
@@ -165,7 +166,7 @@ export const PROJECTS = [
     image:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
   },
-];
+].map(localize);
 
 export const projectById = (id) => PROJECTS.find((p) => p.id === id);
 
@@ -195,7 +196,7 @@ export const CLIENT_INVOICES = [
   { id: 3, title: "الدفعة الثالثة: توريد وتركيب الرخام والجبسوم بورد", milestone: "مرحلة أعمال التشطيبات المعمارية الكبرى", amount: 1_350_000, dueDate: "٢٠٢٦/١١/١٥", paidDate: null, status: "مستحق", receiptNo: "INV-2026-003", dueIso: "2026-11-15" },
   { id: 4, title: "الدفعة الرابعة: الدهانات النهائية والأبواب والتجهيزات", milestone: "التشطيبات الدقيقة والألوان والإنارة", amount: 810_000, dueDate: "٢٠٢٦/١٢/١٠", paidDate: null, status: "مستحق", receiptNo: "INV-2026-004", dueIso: "2026-12-10" },
   { id: 5, title: "الدفعة الخامسة: التسليم النهائي وشهادة الضمان", milestone: "المعاينة الختامية والتسليم المفتاحي", amount: 540_000, dueDate: "٢٠٢٦/١٢/٣٠", paidDate: null, status: "مستحق", receiptNo: "INV-2026-005", dueIso: "2026-12-30" },
-];
+].map(localize);
 
 /* ───────────── Overdue receivables (office level) ───────────── */
 

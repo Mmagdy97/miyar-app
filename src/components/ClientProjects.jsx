@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
@@ -17,7 +18,7 @@ import {
 } from "lucide-react";
 import { clientProject } from "../data/seed";
 
-const CLIENT_UNITS = [
+const CLIENT_UNITS = localize([
   {
     id: 1,
     name: "فيلا الياسمين - التجمع الخامس",
@@ -66,7 +67,7 @@ const CLIENT_UNITS = [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80",
     badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
   },
-];
+]);
 
 function ClientProjects() {
   const [selectedUnit, setSelectedUnit] = useState(null);
@@ -111,7 +112,7 @@ function ClientProjects() {
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-[#5D6168] bg-white px-3.5 py-2 rounded-lg border border-[#E3E0D9] shadow-2xs">
-              العميل: <strong className="text-[#16181C]">{T("cli.100")}</strong>
+              {D("العميل:")} <strong className="text-[#16181C]">{T("cli.100")}</strong>
             </span>
           </div>
         </div>
@@ -193,7 +194,7 @@ function ClientProjects() {
               {/* Card Footer Actions */}
               <div className="p-4 bg-[#F6F5F1]/60 border-t border-[#EEECE6] flex items-center gap-2">
                 <button
-                  onClick={() => handleAction(unit.name, "تقرير الإنجاز وصور الموقع")}
+                  onClick={() => handleAction(unit.name, D("تقرير الإنجاز وصور الموقع"))}
                   className="flex-1 py-2 px-3 rounded-lg border border-[#E3E0D9] bg-white hover:bg-[#F6F5F1] text-[#16181C] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5 text-[#5D6168]" />
@@ -201,7 +202,7 @@ function ClientProjects() {
                 </button>
 
                 <button
-                  onClick={() => handleAction(unit.name, "المخططات الهندسية 3D")}
+                  onClick={() => handleAction(unit.name, D("المخططات الهندسية 3D"))}
                   className="flex-1 py-2 px-3 rounded-lg bg-[#2B3138] hover:bg-[#16181C] text-white hover:bg-[#16181C] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />

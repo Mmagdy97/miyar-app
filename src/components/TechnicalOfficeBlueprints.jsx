@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
   FileText,
@@ -20,7 +21,7 @@ import {
   FileCode,
 } from "lucide-react";
 
-const INITIAL_DRAWINGS = [
+const INITIAL_DRAWINGS = localize([
   {
     id: "DWG-01",
     name: "مخطط التكييف المركزي ومسارات الدكت - الدور الأول",
@@ -37,7 +38,7 @@ const INITIAL_DRAWINGS = [
     name: "لوحة توزيع الإنارة ومخارج القوى - الدور الأرضي",
     code: "E-01-GF",
     rev: "Rev. 03",
-    discipline: "كهرباء",
+    discipline: D("كهرباء"),
     project: "فيلا الياسمين - التجمع الخامس",
     uploadDate: "أمس، ٠٣:١٥ م",
     fileSize: "٣.٥ ميجابايت",
@@ -76,15 +77,15 @@ const INITIAL_DRAWINGS = [
     fileSize: "٦.١ ميجابايت",
     status: "قيد المراجعة",
   },
-];
+]);
 
-const DISCIPLINES = [
+const DISCIPLINES = localize([
   "الكل",
   "معماري وديكور",
-  "كهرباء",
+  D("كهرباء"),
   "ميكانيكا وتكييف",
   "صحي ومياه",
-];
+]);
 
 function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
   const [drawings, setDrawings] = useState(INITIAL_DRAWINGS);
@@ -155,7 +156,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
         title: `مخطط تنفيذي جديد: ${newDrawing.name}`,
         subtitle: `كود ${newDrawing.code} • إصدار ${newDrawing.rev} • ${newDrawing.status}`,
         user: "المكتب الفني",
-        project: "فيلا الياسمين - التجمع",
+        project: D("فيلا الياسمين - التجمع"),
         category: "مخططات ومستندات",
         amount: newDrawing.rev,
         targetRole: "Site Engineer",
@@ -193,7 +194,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
   // Reset demo drawings
   const handleReset = () => {
     setDrawings(INITIAL_DRAWINGS);
-    setToastMessage("تمت استعادة القائمة الافتراضية للمخططات");
+    setToastMessage(D("تمت استعادة القائمة الافتراضية للمخططات"));
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -351,7 +352,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                           <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#5D6168]">
                             <span className="text-[#5D6168] font-semibold">{E(dwg.discipline)}</span>
                             <span>•</span>
-                            <span>{dwg.fileSize}</span>
+                            <span>{D(dwg.fileSize)}</span>
                             <span>•</span>
                             <span>{dwg.project}</span>
                           </div>
@@ -375,7 +376,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
                     {/* Upload Date */}
                     <td className="py-4 px-4 text-center text-xs text-[#5D6168] font-medium">
-                      {dwg.uploadDate}
+                      {D(dwg.uploadDate)}
                     </td>
 
                     {/* Status Badge */}
@@ -437,7 +438,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                     <FileText className="w-8 h-8 mx-auto mb-2 text-[#80848B]" />
                     <p className="font-bold text-[#5D6168]">{T("to.109")}</p>
                     <p className="text-xs text-[#5D6168] mt-1">
-                      جرّب تعديل كلمة البحث أو الضغط على "+ رفع مخطط جديد"
+                      جرّب تعديل كلمة البحث أو الضغط على D("+ رفع مخطط جديد")
                     </p>
                   </td>
                 </tr>
@@ -449,11 +450,11 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
         {/* Table Footer */}
         <div className="p-4 bg-[#F6F5F1] border-t border-[#E3E0D9] flex items-center justify-between text-xs text-[#5D6168]">
           <span>
-            عرض <strong className="text-[#16181C]">{filteredDrawings.length}</strong> من أصل{" "}
-            <strong className="text-[#16181C]">{drawings.length}</strong> مخطط
+            {D("عرض")} <strong className="text-[#16181C]">{filteredDrawings.length}</strong> {D("من أصل")}{" "}
+            <strong className="text-[#16181C]">{drawings.length}</strong> {D("مخطط")}
           </span>
           <span className="text-[11px] text-[#5D6168]">
-            * جميع اللوحات المعتمدة تحمل خاتم AFC الرقمي وتصل فوراً لمهندسي المواقع.
+            {D("* جميع اللوحات المعتمدة تحمل خاتم AFC الرقمي وتصل فوراً لمهندسي المواقع.")}
           </span>
         </div>
       </div>

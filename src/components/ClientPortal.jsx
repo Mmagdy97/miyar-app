@@ -1,4 +1,5 @@
 import { currencySymbol, E } from "../i18n";
+import { localize, D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState } from "react";
@@ -32,7 +33,7 @@ import { clientProject, getClientPayments, formatNumber, formatDateAr, formatMon
 const PROJECT = clientProject();
 
 // Project Phases Stepper Data
-const PROJECT_PHASES = [
+const PROJECT_PHASES = localize([
   {
     id: 1,
     title: "التصميم والمخططات",
@@ -65,10 +66,10 @@ const PROJECT_PHASES = [
     date: formatDateAr(PROJECT.deadline),
     badge: "قيد الانتظار",
   },
-];
+]);
 
 // High-end Instagram-style site gallery photos
-const SITE_UPDATES = [
+const SITE_UPDATES = localize([
   {
     id: 1,
     title: "تركيب رخام الكلكتا الإيطالي بهو المدخل",
@@ -109,7 +110,7 @@ const SITE_UPDATES = [
     bgGradient: "from-[#F6F5F1] via-[#EEECE6] to-[#F6F5F1]",
     likes: 8,
   },
-];
+]);
 
 function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
   const [invoiceRows] = invoicesStore.use();
@@ -148,7 +149,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       const decisionTitle =
         decision === "approved"
           ? "العميل اعتمد عينة الرخام Crema Marfil"
-          : "العميل طلب بديلاً لعينة رخام Crema Marfil";
+          : D("العميل طلب بديلاً لعينة رخام Crema Marfil");
 
       const newActionItem = {
         id: Date.now(),
@@ -156,11 +157,11 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         subtitle:
           decision === "approved"
             ? "اعتمد أ. محمد عينة رخام الأرضيات الإسباني، جاهز للتوريد والتركيب."
-            : "طلب أ. محمد توفير بديل بلون أفتح أو عروق رخام بيج كلاسيكي.",
+            : D("طلب أ. محمد توفير بديل بلون أفتح أو عروق رخام بيج كلاسيكي."),
         user: "أ. محمد (العميل)",
-        project: "فيلا الياسمين - التجمع",
+        project: D("فيلا الياسمين - التجمع"),
         category: "اعتماد عميل",
-        amount: decision === "approved" ? "معتمد ✓" : "طلب بديل",
+        amount: decision === "approved" ? "معتمد ✓" : D("طلب بديل"),
         timestamp: "الآن",
         time: "الآن",
         targetRole: "Admin",
@@ -574,7 +575,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                       {T("cli.68", { v0: photo.photographer })}
                     </span>
                     <span className="font-bold text-[#16181C] flex items-center gap-1 group-hover:underline">
-                      معاينة <Eye className="w-3 h-3" />
+                      {D("معاينة")} <Eye className="w-3 h-3" />
                     </span>
                   </div>
                 </div>
@@ -656,7 +657,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span className="text-sm font-bold opacity-80">{currencySymbol()}</span>
               </div>
               <p className="text-[11px] mt-1">
-                {PAY.next ? `تستحق في ${formatDateAr(PAY.next.dueIso)}` : "لا توجد دفعات مستحقة"}
+                {PAY.next ? `${D("تستحق في")} ${formatDateAr(PAY.next.dueIso)}` : D("لا توجد دفعات مستحقة")}
               </p>
             </div>
 
@@ -736,7 +737,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   <span>
                     {likedPhotos[activePhoto.id]
                       ? "تم الإعجاب بالصورة"
-                      : "أعجبني"}
+                      : D("أعجبني")}
                   </span>
                 </button>
 

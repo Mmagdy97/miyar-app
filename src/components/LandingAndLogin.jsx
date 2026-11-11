@@ -1,4 +1,5 @@
 import LogoMark from "./LogoMark";
+import { D } from "../data/dataI18n";
 import { PricingSection, LegalPage } from "./PublicPages";
 import { tr_ as T } from "../i18n";
 import Hero from "./Hero";
@@ -896,7 +897,7 @@ export default function LandingAndLogin({ onLogin }) {
                 >
                   <LogIn className="w-4 h-4 text-white" />
                   <span>
-                    {isSubmitting ? "جاري الدخول للنظام..." : "دخول المنصة الآن"}
+                    {isSubmitting ? "جاري الدخول للنظام..." : D("دخول المنصة الآن")}
                   </span>
                 </button>
               </div>

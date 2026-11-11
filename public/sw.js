@@ -1,4 +1,4 @@
-const CACHE_NAME = 'miyar-v1';
+const CACHE_NAME = 'miyar-v2';
 
 // Core static assets to pre-cache on install
 const PRECACHE_ASSETS = [
@@ -7,9 +7,7 @@ const PRECACHE_ASSETS = [
   '/manifest.json',
   '/favicon.svg',
   '/pwa-192x192.png',
-  '/pwa-512x512.png',
-  '/pwa-192x192.svg',
-  '/pwa-512x512.svg'
+  '/pwa-512x512.png'
 ];
 
 // Install event: cache core assets and skip waiting

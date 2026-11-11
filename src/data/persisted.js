@@ -2,7 +2,7 @@ import { useSyncExternalStore } from "react";
 
 // Tiny localStorage-backed store; same API shape as useState (supports functional updates).
 // Swapped for Supabase queries later without touching the screens.
-export function createPersistedStore(key, initial) {
+export function createPersistedStore(key, initial, view = (x) => x) {
   const listeners = new Set();
   let state;
   try {
@@ -26,10 +26,16 @@ export function createPersistedStore(key, initial) {
     return () => listeners.delete(l);
   };
   const get = () => state;
+  // Memoised localised view: stable identity per raw state (required by useSyncExternalStore).
+  let lastRaw, lastView;
+  const getView = () => {
+    if (state !== lastRaw) { lastRaw = state; lastView = view(state); }
+    return lastView;
+  };
   return {
-    get,
+    get: getView,
     set,
     reset: () => set(initial),
-    use: () => [useSyncExternalStore(subscribe, get), set],
+    use: () => [useSyncExternalStore(subscribe, getView), set],
   };
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { localize } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
@@ -17,7 +18,7 @@ import {
 } from "lucide-react";
 import { clientProject } from "../data/seed";
 
-const DISCIPLINES_PROGRESS = [
+const DISCIPLINES_PROGRESS = localize([
   {
     id: 1,
     name: "أعمال السباكة وتغذية المياه",
@@ -78,7 +79,7 @@ const DISCIPLINES_PROGRESS = [
     icon: Paintbrush,
     details: "دهانات جوتن فينوماتيك مخملية ناعمة جاري تحضير بطانتها.",
   },
-];
+]);
 
 function ClientProgress() {
   const overallPercentage = clientProject().progress;

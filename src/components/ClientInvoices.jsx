@@ -1,4 +1,5 @@
 import { currencySymbol, intlLocale, E } from "../i18n";
+import { D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { invoicesStore } from "../data/stores";
 import { useState, useMemo } from "react";
