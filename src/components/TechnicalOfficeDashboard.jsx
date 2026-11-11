@@ -1,7 +1,8 @@
-import { currencySymbol, intlLocale, E } from "../i18n";
+import { intlLocale, E } from "../i18n";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState } from "react";
+import { drawingsStore, rfisStore, changeOrdersStore } from "../data/stores";
 import ProgressBar from "./ProgressBar";
 import {
   FileCode,
@@ -30,107 +31,6 @@ import {
 } from "lucide-react";
 
 // Mock Latest Engineering Drawings (Document Control)
-const INITIAL_DRAWINGS = localize([
-  {
-    id: "DWG-01",
-    name: "لوحة توزيع الكهرباء والإنارة - الدور الأرضي",
-    code: "E-02-GF",
-    rev: "Rev. 02",
-    discipline: D("كهرباء"),
-    project: D("فيلا الياسمين - التجمع"),
-    date: "اليوم، ٠٩:٣٠ ص",
-    size: "٤.٢ ميجابايت",
-    status: "approved", // approved | review | rejected
-    statusLabel: "معتمدة للتنفيذ (AFC)",
-  },
-  {
-    id: "DWG-02",
-    name: "مخطط تمديدات الصرف والتغذية - البدروم",
-    code: "P-01-BS",
-    rev: "Rev. 01",
-    discipline: "صحي ومياه",
-    project: D("فيلا الياسمين - التجمع"),
-    date: "أمس، ٠٣:١٥ م",
-    size: "٣.٨ ميجابايت",
-    status: "approved",
-    statusLabel: "معتمدة للتنفيذ (AFC)",
-  },
-  {
-    id: "DWG-03",
-    name: "مخطط الأسقف المعلقة وتوزيع الإضاءة المخفية",
-    code: "A-04-1F",
-    rev: "Rev. 03",
-    discipline: "معماري وديكور",
-    project: D("دوبلكس نيو جيزة"),
-    date: "منذ يومين",
-    size: "٦.١ ميجابايت",
-    status: "review",
-    statusLabel: "بانتظار المراجعة",
-  },
-  {
-    id: "DWG-04",
-    name: "تفصيلة رخام الدرج والمصعد البانورامي",
-    code: "D-08-ST",
-    rev: "Rev. 01",
-    discipline: "تفاصيل معمارية",
-    project: "مقر إداري - الشيخ زايد",
-    date: "٠٤ نوفمبر ٢٠٢٦",
-    size: "٢.٩ ميجابايت",
-    status: "review",
-    statusLabel: "بانتظار المراجعة",
-  },
-  {
-    id: "DWG-05",
-    name: "مسارات التكييف الكونسيلد المعدلة لتفادي الكمرات",
-    code: "M-03-HVAC",
-    rev: "Rev. 02",
-    discipline: "تكييف وميكانيكا",
-    project: D("فيلا الياسمين - التجمع"),
-    date: "٠٢ نوفمبر ٢٠٢٦",
-    size: "٥.٤ ميجابايت",
-    status: "rejected",
-    statusLabel: "مرفوضة للتعديل",
-  },
-]);
-
-// Mock Site Requests / RFIs
-const INITIAL_RFIS = localize([
-  {
-    id: "RFI-104",
-    title: "تعارض مسار تكييف الكونسيلد مع كمرة خرسانية ساقطة",
-    location: "فيلا الياسمين - جناح الماستر",
-    submitter: "م. كريم مصطفى (مهندس الموقع)",
-    priority: "urgent", // urgent | medium | normal
-    priorityLabel: "عاجل جداً (أعمال معطلة)",
-    details: "مسار دكت التكييف المعتمد بالمخطط يتعارض مع كمرة خرسانية عمق ٦٠ سم، مما يمنع تمرير مجرى الهواء بالارتفاع المطلوب.",
-    status: "pending", // pending | solved
-    time: "منذ ساعتين",
-  },
-  {
-    id: "RFI-103",
-    title: "تحديد منسوب عتب فتحات الأبواب الداخلية بعد منسوب اللياسة",
-    location: "مقر إداري - الشيخ زايد",
-    submitter: "م. أحمد (الموقع)",
-    priority: "medium",
-    priorityLabel: "أولوية متوسطة",
-    details: "يرجى تأكيد الارتفاع الصافي لفتحات الأبواب الخشبية بعد احتساب منسوب بلاط البورسلين لطلب الحلق الزفر.",
-    status: "pending",
-    time: "أمس، ٠٥:٠٠ م",
-  },
-  {
-    id: "RFI-102",
-    title: "تأكيد سمك عزل خزان المياه الأرضي وطبقات الحماية",
-    location: "فيلا الياسمين - البدروم",
-    submitter: "م. كريم مصطفى (مهندس الموقع)",
-    priority: "normal",
-    priorityLabel: "تم الحل والاعتماد",
-    details: "تم اعتماد دهان وجهين بيتومين مطاطي مع تركيب ألواح حماية سمك ٤ مم وفحص ضغط المياه لمدة ٤٨ ساعة.",
-    status: "solved",
-    solution: "تم إرسال التفصيلة المعمارية رقم D-14 ومطابقتها مع مواصفات استشاري العزل.",
-    time: "٠٣ نوفمبر ٢٠٢٦",
-  },
-]);
-
 // Mock Active BOQ Items
 const BOQ_ITEMS = localize([
   {
@@ -181,8 +81,14 @@ const BOQ_ITEMS = localize([
 ]);
 
 function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem }) {
-  const [drawings, setDrawings] = useState(INITIAL_DRAWINGS);
-  const [rfis, setRfis] = useState(INITIAL_RFIS);
+  const [drawings, setDrawings] = drawingsStore.use();
+  const [rfis, setRfis] = rfisStore.use();
+  const [orders] = changeOrdersStore.use();
+  const nf = (n) => n.toLocaleString(intlLocale());
+  const reviewCount = drawings.filter((d) => d.status === "review").length;
+  const pendingRfis = rfis.filter((r) => r.status === "pending").length;
+  const coSent = orders.filter((o) => o.status === "sent").length;
+  const coDraft = orders.filter((o) => o.status === "draft").length;
   const [searchQuery, setSearchQuery] = useState("");
 
   // Upload Drawing Modal State
@@ -218,7 +124,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
   const handleUploadSubmit = (e) => {
     e.preventDefault();
     const newDrawing = {
-      id: `DWG-${drawings.length + 1}`,
+      id: `DWG-${Date.now()}`,
       name: newDwgName || D("لوحة تفاصيل تنفيذية جديدة"),
       code: newDwgCode || "A-09-DT",
       rev: newDwgRev,
@@ -372,14 +278,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
-              {D("٥")}
+              {nf(reviewCount)}
             </span>
             <span className="text-xs font-bold text-[#16181C] bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
               {T("to.9")}
             </span>
           </div>
           <p className="text-xs text-[#5D6168] mt-2 font-medium">
-            {D("٣ معماري وديكور • ٢ كهروميكانيكال")}
+            {T("to.dwg.total", { 0: nf(drawings.length) })}
           </p>
         </div>
 
@@ -400,7 +306,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-amber-800 font-ibm">
-              {D("٢")}
+              {nf(pendingRfis)}
             </span>
             <span className="text-xs font-black text-rose-800 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
               {T("to.13")}
@@ -448,14 +354,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
-              {D("١")}
+              {nf(coSent + coDraft)}
             </span>
             <span className="text-xs font-bold text-purple-700 bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
               {T("to.21")}
             </span>
           </div>
           <p className="text-xs text-[#5D6168] mt-2 font-medium">
-            {T("to.22", { v0: currencySymbol() })}
+            {T("to.co.sub", { 0: nf(coSent), 1: nf(coDraft) })}
           </p>
         </div>
       </div>

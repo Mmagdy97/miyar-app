@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { techSettingsStore, TECH_SETTINGS_DEFAULT } from "../data/stores";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
@@ -71,7 +72,7 @@ const INITIAL_SETTINGS = {
 };
 
 function TechnicalOfficeSettings() {
-  const [settings, setSettings] = useState(INITIAL_SETTINGS);
+  const [settings, setSettings] = techSettingsStore.use();
   const [toastMessage, setToastMessage] = useState(null);
 
   // Toggle switch
@@ -92,7 +93,7 @@ function TechnicalOfficeSettings() {
 
   // Reset settings
   const handleResetSettings = () => {
-    setSettings(INITIAL_SETTINGS);
+    setSettings(TECH_SETTINGS_DEFAULT);
     setToastMessage(D("تمت استعادة الإعدادات الافتراضية"));
     setTimeout(() => setToastMessage(null), 2500);
   };
