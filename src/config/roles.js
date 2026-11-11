@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Receipt,
+  UsersRound,
   FolderKanban,
   DollarSign,
   ClipboardCheck,
@@ -36,6 +37,7 @@ export const ROLE_CONFIG = {
     { id: "Daily Reports", name: "التقارير اليومية", label: "التقارير اليومية", icon: FileText },
     { id: "Snag List", name: "قائمة الملاحظات", label: "قائمة الملاحظات (Snag List)", icon: AlertTriangle },
     { id: "Material Requests", name: "طلبات تشوين المواد", label: "طلبات تشوين المواد", icon: PackageSearch },
+    { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
   ],
   "Technical Office": [
     { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم الهندسية", icon: LayoutDashboard },
