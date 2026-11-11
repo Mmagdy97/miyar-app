@@ -2,6 +2,9 @@ import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
 import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
+import { officeStore, defaultVat } from "../data/office";
+import OfficeDetails from "./OfficeDetails";
+import { getCurrency } from "../i18n";
 import { useState, useMemo } from "react";
 import {
   FileSpreadsheet,
@@ -89,6 +92,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
     setNewItemName("");
     setNewItemNote("");
   };
+
+  const [quoteClient, setQuoteClient] = useState("");
+  const [office] = officeStore.use();
+  const vatRate = office.vatRate ?? defaultVat(getCurrency());
+  const quoteNo = `Q-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}`;
 
   // Export BOQ as CSV (UTF-8 BOM so Excel reads Arabic/Turkish correctly)
   const handleExportCsv = () => {
@@ -196,21 +204,52 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               <FileSpreadsheet className="w-7 h-7 text-[#16181C]" />
               <span>{T("sboq.3")}</span>
             </h1>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+            <span className="no-print inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
               <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
               {T("sboq.4")}
             </span>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EEECE6] text-[#5D6168] border border-[#E3E0D9]">
+            <span className="no-print text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EEECE6] text-[#5D6168] border border-[#E3E0D9]">
               {T("sboq.5")}
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#5D6168]">
+          <p className="no-print text-xs md:text-sm text-[#5D6168]">
             {T("sboq.6")}
           </p>
         </div>
 
+        <div className="no-print w-full grid gap-3 md:grid-cols-[1fr_16rem] items-start">
+          <OfficeDetails />
+          <label className="text-xs font-bold text-[#5D6168] space-y-1">
+            {T("quote.client")}
+            <input
+              value={quoteClient}
+              onChange={(e) => setQuoteClient(e.target.value)}
+              maxLength={80}
+              className="w-full rounded-xl border border-[#E3E0D9] bg-white px-3 py-2 text-sm"
+            />
+          </label>
+        </div>
+
+        {/* Printed quotation header (hidden on screen) */}
+        <div className="print-only w-full border-b border-black pb-3 mb-2">
+          <div className="flex justify-between items-start gap-4">
+            <div>
+              <p className="text-xl font-black">{office.name || T("brand")}</p>
+              {office.taxId && <p className="text-xs">{T("office.tax")}: {office.taxId}</p>}
+              {office.phone && <p className="text-xs" dir="ltr">{office.phone}</p>}
+            </div>
+            <div className="text-end text-xs space-y-0.5">
+              <p className="text-lg font-black">{T("quote.title")}</p>
+              <p>{T("quote.no")}: {quoteNo}</p>
+              <p>{T("quote.date")}: {new Date().toLocaleDateString(intlLocale())}</p>
+              <p>{T("quote.valid", { 0: office.quoteDays })}</p>
+            </div>
+          </div>
+          {quoteClient && <p className="mt-2 text-sm font-bold">{T("quote.client")}: {quoteClient}</p>}
+        </div>
+
         {/* Quick Top Actions */}
-        <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="no-print flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleResetDefaults}
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#5D6168] bg-white border border-[#E3E0D9] hover:bg-[#F6F5F1] transition-colors shadow-2xs cursor-pointer"
@@ -230,7 +269,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Mini KPI Highlights */}
-      <div className="grid stat-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
+      <div className="no-print grid stat-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("sboq.10")}</span>
           <div className="flex items-baseline justify-between">
@@ -276,7 +315,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Category Tabs Filter */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">
+      <div className="no-print flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -293,7 +332,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Main Glassmorphic Interactive Table Card */}
-      <div className="bg-white rounded-lg border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
+      <div className="no-print bg-white rounded-lg border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
         <div className="p-4 md:p-5 border-b border-[#EEECE6] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F6F5F1]">
           <div>
             <h2 className="text-base font-extrabold text-[#16181C] flex items-center gap-2">
@@ -768,6 +807,47 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
       )}
+
+      {/* Client-facing printed table: selling prices only, never cost or margin */}
+      <table className="print-only w-full text-start border-collapse text-sm">
+        <thead>
+          <tr className="border-b border-black text-xs">
+            <th className="py-1.5 w-8">#</th>
+            <th className="py-1.5 text-start">{T("sboq.18")}</th>
+            <th className="py-1.5">{T("sboq.19")}</th>
+            <th className="py-1.5">{T("sboq.20")}</th>
+            <th className="py-1.5 text-end">{T("sboq.csv.total")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {boqItems.map((i, n) => {
+            const unitPrice = (parseFloat(i.unitCost) || 0) * (1 + (parseFloat(i.margin) || 0) / 100);
+            const rowTotal = unitPrice * (parseFloat(i.quantity) || 0);
+            return (
+              <tr key={i.id} className="border-b border-gray-300">
+                <td className="py-1">{n + 1}</td>
+                <td className="py-1">{E(i.name)}</td>
+                <td className="py-1 text-center">{E(i.unit)}</td>
+                <td className="py-1 text-center">{i.quantity}</td>
+                <td className="py-1 text-end">{Math.round(rowTotal).toLocaleString(intlLocale())}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
+      {/* Printed totals + signature (hidden on screen) */}
+      <div className="print-only mt-6 w-full">
+        <div className="ms-auto w-72 text-sm space-y-1">
+          <div className="flex justify-between"><span>{T("quote.subtotal")}</span><span>{Math.round(totalPrice).toLocaleString(intlLocale())} {currencySymbol()}</span></div>
+          <div className="flex justify-between"><span>{T("quote.vat")} ({vatRate}%)</span><span>{Math.round(totalPrice * vatRate / 100).toLocaleString(intlLocale())} {currencySymbol()}</span></div>
+          <div className="flex justify-between font-black border-t border-black pt-1"><span>{T("quote.grand")}</span><span>{Math.round(totalPrice * (1 + vatRate / 100)).toLocaleString(intlLocale())} {currencySymbol()}</span></div>
+        </div>
+        <div className="mt-12 grid grid-cols-2 gap-10 text-xs">
+          <div className="border-t border-black pt-1">{office.name || T("brand")}</div>
+          <div className="border-t border-black pt-1">{T("quote.sign")}</div>
+        </div>
+      </div>
     </main>
   );
 }

@@ -6,6 +6,10 @@ import './dark.css'
 import App from './App.jsx'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 import CookieBanner from './components/CookieBanner.jsx'
+import SharedView from './components/SharedView.jsx'
+
+// Public client link: /?share=<snapshot> renders a read-only page, no login and no app shell.
+const sharePayload = new URLSearchParams(window.location.search).get('share')
 
 // Register Service Worker for PWA
 if ('serviceWorker' in navigator) {
@@ -25,7 +29,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <I18nProvider>
       <ErrorBoundary>
-        <App />
+        {sharePayload ? <SharedView payload={sharePayload} /> : <App />}
         <CookieBanner />
       </ErrorBoundary>
     </I18nProvider>

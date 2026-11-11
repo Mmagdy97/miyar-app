@@ -248,8 +248,13 @@ html:not(.dark) ::selection { background: #D9480F; color: #fff; }
   .bg-white.border.rounded-xl.cursor-pointer:hover { transform: translateY(-2px); }
 }
 
+/* Print-only blocks (quote header/totals) are hidden on screen */
+.print-only { display: none; }
+
 /* Print: only the main content (BOQ quotation etc.) */
 @media print {
+  .print-only { display: block !important; }
+  table.print-only { display: table !important; }
   aside, header, nav, .no-print, .fixed { display: none !important; }
   html, body, #root, main { background: #fff !important; color: #000 !important; height: auto !important; overflow: visible !important; }
   * { box-shadow: none !important; animation: none !important; }

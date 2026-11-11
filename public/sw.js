@@ -1,4 +1,4 @@
-const CACHE_NAME = 'miyar-v2';
+const CACHE_NAME = 'miyar-v3';
 
 // Core static assets to pre-cache on install
 const PRECACHE_ASSETS = [

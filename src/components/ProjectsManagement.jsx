@@ -3,6 +3,8 @@ import { D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
+import ShareMenu, { projectShare } from "./ShareMenu";
+import { whatsappLink } from "../lib/share";
 import {
   FolderKanban,
   Plus,
@@ -146,6 +148,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
+  const [notifyClient, setNotifyClient] = useState(null);
+
   // Open Edit Timeline Modal
   const handleOpenTimelineModal = (project) => {
     setEditingTimelineProject(project);
@@ -172,6 +176,9 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       )
     );
 
+    const updated = { ...editingTimelineProject, progress: parseInt(timelineProgress, 10) || 0, phase: timelinePhase, status: timelineStatus };
+    setNotifyClient(projectShare(updated, { kind: "stage" }));
+    setTimeout(() => setNotifyClient(null), 12000);
     setToastMessage(DF("تم تحديث الجدول الزمني ونسبة الإنجاز لمشروع \"{0}\"", editingTimelineProject.name));
     setEditingTimelineProject(null);
     setTimeout(() => setToastMessage(null), 3500);
@@ -193,6 +200,21 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
           <p className="text-xs font-bold leading-relaxed">{toastMessage}</p>
+        </div>
+      )}
+
+      {notifyClient && (
+        <div className="no-print fixed bottom-24 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-white text-[#16181C] rounded-xl shadow-xl border border-[#E3E0D9]">
+          <p className="text-xs font-bold">{T("notify.title")}</p>
+          <a
+            href={whatsappLink(notifyClient.text)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setNotifyClient(null)}
+            className="rounded-full bg-emerald-600 text-white text-xs font-bold px-3 py-1.5"
+          >
+            {T("notify.send")}
+          </a>
         </div>
       )}
 
@@ -354,13 +376,16 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   </p>
                 </div>
 
-                {/* Status Badge */}
+                {/* Status Badge + share */}
+                <div className="flex flex-col items-end gap-2 shrink-0">
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border shrink-0 ${statusBadgeClass}`}
                 >
                   <span className={`w-2 h-2 rounded-full ${statusDotClass}`} />
                   <span>{E(project.status)}</span>
                 </span>
+                <ShareMenu project={project} />
+                </div>
               </div>
 
               {/* Card Body */}

@@ -67,10 +67,12 @@ html.dark .border-\[\#E3E0D9\]\/80{border-color:rgb(38 44 52 / 0.8)}
 html.dark .border-\[\#EEECE6\]{border-color:#1f242b}
 html.dark .border-amber-200{border-color:#5d5228}
 html.dark .border-amber-300{border-color:#ffd230}
+html.dark .border-black{border-color:#000000}
 html.dark .border-emerald-200{border-color:#285d44}
 html.dark .border-emerald-200\/70{border-color:rgb(40 93 68 / 0.7)}
 html.dark .border-emerald-300{border-color:#5ee9b5}
 html.dark .border-emerald-500{border-color:#00bc7d}
+html.dark .border-gray-300{border-color:#39404b}
 html.dark .border-rose-200{border-color:#5d282f}
 html.dark .border-rose-300{border-color:#5d282f}
 html.dark .border-white{border-color:#262c34}

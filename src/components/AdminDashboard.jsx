@@ -2,6 +2,7 @@ import { currencySymbol, intlLocale, useI18n, E } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
+import ReceivablesPanel from "./ReceivablesPanel";
 import {
   TrendingUp,
   Wallet,
@@ -349,6 +350,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
         </div>
       </div>
+
+      <ReceivablesPanel />
 
       {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
       <div className="bg-white rounded-xl border border-[#E3E0D9] shadow-sm p-6 md:p-8">
