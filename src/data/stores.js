@@ -1,6 +1,7 @@
 import { createPersistedStore } from "./persisted";
 import { localize } from "./dataI18n";
 import { CLIENT_INVOICES } from "./seed";
+import { TECH_DRAWINGS, TECH_RFIS } from "./techSeed";
 import { WORKERS } from "./workersSeed";
 import { INITIAL_BOQ_ITEMS } from "./boqSeed";
 import { INITIAL_ENGINEERS_CASH, INITIAL_PENDING_EXPENSES } from "./cashSeed";
@@ -47,3 +48,15 @@ export const signaturesStore = createPersistedStore("miyar:signatures:v1", {}, (
 
 // Moodboard tiles per project: image (https URL), colour (#hex) or note; the client can like tiles.
 export const moodStore = createPersistedStore("miyar:mood:v1", [], (x) => x);
+
+// Technical office: drawings and RFIs shared by the dashboard and the drawings screen; workflow settings.
+export const drawingsStore = createPersistedStore("miyar:drawings:v1", TECH_DRAWINGS, localize);
+export const rfisStore = createPersistedStore("miyar:rfis:v1", TECH_RFIS, localize);
+export const TECH_SETTINGS_DEFAULT = {
+  notifySiteOnAfc: true,
+  requireConsultantSign: true,
+  autoArchiveRevisions: true,
+  autoAlertDelayedRfi: true,
+  lockBoqAfterClientApproval: false,
+};
+export const techSettingsStore = createPersistedStore("miyar:techsettings:v1", TECH_SETTINGS_DEFAULT, (x) => x);

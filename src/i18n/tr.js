@@ -1345,4 +1345,7 @@ export default {
   "mods.role.Technical Office": "Teknik ofis",
   "mods.role.Client": "Müşteri",
   "mods.try": "Bu rolün ekranlarını deneyin",
+  "to.dwg.total": "Toplam {0} çizim dizinlendi",
+  "to.co.sub": "{0} müşteri onayı bekliyor • {1} taslak",
+  "nav.Technical Office.Change Orders": "Değişiklik emirleri",
 };

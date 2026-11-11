@@ -1345,4 +1345,7 @@ export default {
   "mods.role.Technical Office": "Technical office",
   "mods.role.Client": "Client",
   "mods.try": "Try this role's screens",
+  "to.dwg.total": "{0} drawings indexed in total",
+  "to.co.sub": "{0} awaiting client • {1} draft",
+  "nav.Technical Office.Change Orders": "Change orders",
 };

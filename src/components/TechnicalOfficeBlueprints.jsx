@@ -1,4 +1,6 @@
 import { useState, useMemo } from "react";
+import { drawingsStore } from "../data/stores";
+import { TECH_DRAWINGS } from "../data/techSeed";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import {
@@ -21,63 +23,13 @@ import {
   FileCode,
 } from "lucide-react";
 
-const INITIAL_DRAWINGS = localize([
-  {
-    id: "DWG-01",
-    name: "مخطط التكييف المركزي ومسارات الدكت - الدور الأول",
-    code: "M-02-1F",
-    rev: "Rev. 02",
-    discipline: "ميكانيكا وتكييف",
-    project: "فيلا الياسمين - التجمع الخامس",
-    uploadDate: "اليوم، ٠٩:٣٠ ص",
-    fileSize: "٤.٨ ميجابايت",
-    status: "معتمد للتنفيذ (AFC)",
-  },
-  {
-    id: "DWG-02",
-    name: "لوحة توزيع الإنارة ومخارج القوى - الدور الأرضي",
-    code: "E-01-GF",
-    rev: "Rev. 03",
-    discipline: D("كهرباء"),
-    project: "فيلا الياسمين - التجمع الخامس",
-    uploadDate: "أمس، ٠٣:١٥ م",
-    fileSize: "٣.٥ ميجابايت",
-    status: "معتمد للتنفيذ (AFC)",
-  },
-  {
-    id: "DWG-03",
-    name: "تفاصيل شاسيهات الأسقف المعلقة وبيوت النور",
-    code: "A-04-DT",
-    rev: "Rev. 01",
-    discipline: "معماري وديكور",
-    project: "فيلا الياسمين - التجمع الخامس",
-    uploadDate: "اليوم، ١١:٤٥ ص",
-    fileSize: "٥.٢ ميجابايت",
-    status: "قيد المراجعة",
-  },
-  {
-    id: "DWG-04",
-    name: "مخطط شبكة الصرف الداخلي وغرف التفتيش",
-    code: "P-02-BS",
-    rev: "Rev. 01",
-    discipline: "صحي ومياه",
-    project: "فيلا الياسمين - التجمع الخامس",
-    uploadDate: "منذ يومين",
-    fileSize: "٢.٩ ميجابايت",
-    status: "معتمد للتنفيذ (AFC)",
-  },
-  {
-    id: "DWG-05",
-    name: "قطاعات رأسية لتجليد حوائط الرخام وتوزيع الإضاءة",
-    code: "A-06-SC",
-    rev: "Rev. 02",
-    discipline: "معماري وديكور",
-    project: "فيلا الياسمين - التجمع الخامس",
-    uploadDate: "اليوم، ٠٨:٠٠ ص",
-    fileSize: "٦.١ ميجابايت",
-    status: "قيد المراجعة",
-  },
-]);
+const AFC = "معتمد للتنفيذ (AFC)";
+const REVIEW = "قيد المراجعة";
+const REJECTED = "مرفوضة للتعديل";
+const LABEL_OF = { approved: AFC, review: REVIEW, rejected: REJECTED };
+const CODE_OF = { [AFC]: "approved", [REVIEW]: "review" };
+// The shared store uses the dashboard's shape; this screen shows it with its own field names.
+const toView = (d) => ({ ...d, uploadDate: d.date, fileSize: d.size, status: LABEL_OF[d.status] || d.status });
 
 const DISCIPLINES = localize([
   "الكل",
@@ -88,7 +40,8 @@ const DISCIPLINES = localize([
 ]);
 
 function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
-  const [drawings, setDrawings] = useState(INITIAL_DRAWINGS);
+  const [stored, setStored] = drawingsStore.use();
+  const drawings = useMemo(() => stored.map(toView), [stored]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDiscipline, setSelectedDiscipline] = useState("الكل");
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -128,7 +81,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
     if (!newName.trim() || !newCode.trim()) return;
 
     const newDrawing = {
-      id: `DWG-0${drawings.length + 1}`,
+      id: `DWG-${Date.now()}`,
       name: newName.trim(),
       code: newCode.trim().toUpperCase(),
       rev: newRev,
@@ -139,7 +92,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       status: newStatus,
     };
 
-    setDrawings((prev) => [newDrawing, ...prev]);
+    setStored((prev) => [{ id: newDrawing.id, name: newDrawing.name, code: newDrawing.code, rev: newDrawing.rev, discipline: newDrawing.discipline, project: newDrawing.project, date: "الآن", size: newDrawing.fileSize, status: CODE_OF[newStatus] || "review", statusLabel: newStatus }, ...prev]);
     setIsUploadModalOpen(false);
 
     // Reset Form
@@ -174,7 +127,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
   // Delete Drawing
   const handleDeleteDrawing = (id, name) => {
-    setDrawings((prev) => prev.filter((d) => d.id !== id));
+    setStored((prev) => prev.filter((d) => d.id !== id));
     setToastMessage(DF("تم حذف المخطط: \"{0}\"", name));
     setTimeout(() => setToastMessage(null), 3000);
   };
@@ -193,7 +146,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
   // Reset demo drawings
   const handleReset = () => {
-    setDrawings(INITIAL_DRAWINGS);
+    setStored(TECH_DRAWINGS);
     setToastMessage(D("تمت استعادة القائمة الافتراضية للمخططات"));
     setTimeout(() => setToastMessage(null), 3000);
   };

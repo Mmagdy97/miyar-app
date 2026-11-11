@@ -1345,4 +1345,7 @@ export default {
   "mods.role.Technical Office": "المكتب الفني",
   "mods.role.Client": "العميل",
   "mods.try": "جرّب شاشة هذا الدور",
+  "to.dwg.total": "إجمالي {0} لوحة مفهرسة",
+  "to.co.sub": "{0} بانتظار العميل • {1} مسودة",
+  "nav.Technical Office.Change Orders": "أوامر التغيير",
 };
