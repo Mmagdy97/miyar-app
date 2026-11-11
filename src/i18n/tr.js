@@ -1202,4 +1202,6 @@ export default {
   "co.msg": "Değişiklik emri no {0}: {1} - maliyet {2} - ek süre {3} gün. Onay için müşteri portalını açın.",
   "nav.Admin.Change Orders": "Değişiklik emirleri",
   "nav.Client.Change Orders": "Değişiklik emirleri",
+  "off.msg": "Çevrimdışısınız — çalışmanız bu cihazda kaydediliyor",
+  "off.back": "Bağlantı geri geldi",
 };

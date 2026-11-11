@@ -1,4 +1,4 @@
-const CACHE_NAME = 'miyar-v3';
+const CACHE_NAME = 'miyar-v4';
 
 // Core static assets to pre-cache on install
 const PRECACHE_ASSETS = [
@@ -55,7 +55,7 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          return caches.match('/') || caches.match('/index.html');
+          return caches.match('/').then((r) => r || caches.match('/index.html'));
         })
     );
     return;
@@ -63,7 +63,7 @@ self.addEventListener('fetch', (event) => {
 
   // Stale-while-revalidate for assets
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(event.request, { ignoreVary: true }).then((cachedResponse) => {
       const fetchPromise = fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
@@ -81,5 +81,15 @@ self.addEventListener('fetch', (event) => {
 
       return cachedResponse || fetchPromise;
     })
+  );
+});
+
+// Page tells us which assets it loaded so the first visit is already usable offline.
+self.addEventListener('message', (event) => {
+  if (!event.data || event.data.type !== 'CACHE_URLS') return;
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(event.data.urls.map((u) => cache.add(u).catch(() => {})))
+    )
   );
 });

@@ -18,6 +18,11 @@ if ('serviceWorker' in navigator) {
       .register('/sw.js')
       .then((registration) => {
         console.log('Miyar PWA Service Worker registered successfully:', registration.scope);
+        // First visit: ask the worker to cache the assets this page already loaded, for offline use.
+        navigator.serviceWorker.ready.then((reg) => {
+          const urls = performance.getEntriesByType('resource').map((e) => e.name).filter((u) => u.startsWith(location.origin));
+          reg.active?.postMessage({ type: 'CACHE_URLS', urls });
+        });
       })
       .catch((error) => {
         console.warn('Miyar PWA Service Worker registration failed:', error);
