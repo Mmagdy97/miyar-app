@@ -430,7 +430,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
 
           <div className="grid grid-cols-6 gap-2 sm:gap-6 items-end h-52 border-b border-dashed border-[#E3E0D9] pb-3">
-            {MONTHLY_FINANCIALS.map((item) => {
+            {MONTHLY_FINANCIALS.map((item, idx) => {
               const revPercent = Math.round((item.revenue / maxVal) * 100);
               const expPercent = Math.round((item.expenses / maxVal) * 100);
 
@@ -444,13 +444,13 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                   <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
                     {/* Revenue Bar (Sage Green) */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#2B3138] group-hover:bg-[#16181C] transition-all duration-300"
-                      style={{ height: `${revPercent}%` }}
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#2B3138] group-hover:bg-[#16181C] transition-colors duration-200 bar-grow"
+                      style={{ height: `${revPercent}%`, animationDelay: `${idx * 60}ms` }}
                     />
                     {/* Expense Bar */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E3E0D9] group-hover:bg-[#E3E0D9] transition-all duration-300"
-                      style={{ height: `${expPercent}%` }}
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E3E0D9] group-hover:bg-[#E3E0D9] transition-colors duration-200 bar-grow"
+                      style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
                     />
                   </div>
                   <span className="mt-3 text-xs font-bold text-[#16181C] group-hover:text-[#16181C] transition-colors">
