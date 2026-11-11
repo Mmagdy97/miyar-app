@@ -1,3 +1,4 @@
+import { createPersistedStore } from "../data/persisted";
 import { useState, useMemo } from "react";
 import { problemsStore } from "../data/stores";
 import { localize, D, DF } from "../data/dataI18n";
@@ -71,8 +72,10 @@ const PRIORITY_BADGES = localize({
   عادي: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
 });
 
+const tasksStore = createPersistedStore("miyar:tasks:v1", INITIAL_TASKS);
+
 function SiteEngineerTasks() {
-  const [tasks, setTasks] = useState(INITIAL_TASKS);
+  const [tasks, setTasks] = tasksStore.use();
   const [filter, setFilter] = useState("الكل");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);

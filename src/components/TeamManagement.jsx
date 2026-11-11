@@ -1,3 +1,4 @@
+import { createPersistedStore } from "../data/persisted";
 import { useState, useMemo } from "react";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
@@ -98,8 +99,10 @@ const AVATAR_COLORS = [
   "bg-[#D9480F]",
 ];
 
+const teamStore = createPersistedStore("miyar:team:v1", INITIAL_TEAM_MEMBERS);
+
 function TeamManagement() {
-  const [teamMembers, setTeamMembers] = useState(INITIAL_TEAM_MEMBERS);
+  const [teamMembers, setTeamMembers] = teamStore.use();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   // Requirement 1: Edit Functionality State

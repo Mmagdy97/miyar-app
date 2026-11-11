@@ -1,3 +1,4 @@
+import { createPersistedStore } from "../data/persisted";
 import { useState } from "react";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
@@ -55,8 +56,10 @@ const STATUS_BADGES = localize({
   "تم التوريد": "bg-emerald-50 text-emerald-800 border-emerald-200",
 });
 
+const requestsStore = createPersistedStore("miyar:requests:v1", INITIAL_REQUESTS);
+
 function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelectedItem }) {
-  const [requests, setRequests] = useState(INITIAL_REQUESTS);
+  const [requests, setRequests] = requestsStore.use();
   const [toastMessage, setToastMessage] = useState(null);
 
   // Form State
