@@ -8,9 +8,12 @@
   "orientation": "portrait",
   "dir": "rtl",
   "lang": "ar",
-  "theme_color": "#2B3138",
-  "background_color": "#F3F4F6",
-  "categories": ["business", "productivity"],
+  "theme_color": "#D9480F",
+  "background_color": "#0b0e12",
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "/pwa-192x192.png",
@@ -22,23 +25,17 @@
       "src": "/pwa-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/pwa-192x192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/pwa-512x512.svg",
+      "src": "/pwa-512x512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/favicon.svg",
-      "sizes": "48x48",
+      "sizes": "any",
       "type": "image/svg+xml"
     }
   ]

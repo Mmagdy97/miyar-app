@@ -1,3 +1,4 @@
+import LogoMark from "./LogoMark";
 import { useState, useRef, useEffect } from "react";
 import {
   Building2,
@@ -73,7 +74,7 @@ function Navbar({
         {/* Brand Icon + Name */}
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#2B3138] text-white shadow-xs transition-transform hover:scale-105 cursor-pointer">
-            <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <LogoMark className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <div className="flex flex-col">
             <span className="text-base sm:text-lg font-black text-[#16181C] tracking-tight leading-tight flex items-center gap-1.5">

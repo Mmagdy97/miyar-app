@@ -1,3 +1,4 @@
+import LogoMark from "./LogoMark";
 import { PricingSection, LegalPage } from "./PublicPages";
 import { tr_ as T } from "../i18n";
 import Hero from "./Hero";
@@ -139,7 +140,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Logo (Right in RTL) */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#2B3138] text-white flex items-center justify-center shadow-sm">
-              <Building2 className="w-5 h-5 text-white" />
+              <LogoMark className="w-5 h-5 text-white" />
             </div>
             <div>
               <span className="text-xl font-black text-[#16181C] tracking-tight">
@@ -725,7 +726,7 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-[#2B3138] text-white flex items-center justify-center font-bold">
-              <Building2 className="w-5 h-5 text-white" />
+              <LogoMark className="w-5 h-5 text-white" />
             </div>
             <div>
               <p className="text-base font-black text-[#16181C]">{T("ld.1")}</p>
@@ -772,7 +773,7 @@ export default function LandingAndLogin({ onLogin }) {
             <div className="flex items-center justify-between pb-4 border-b border-[#EEECE6] relative z-10">
               <div className="flex items-center gap-2.5">
                 <div className="w-10 h-10 rounded-xl bg-[#2B3138] text-white flex items-center justify-center shadow-xs">
-                  <Building2 className="w-5 h-5 text-white" />
+                  <LogoMark className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-black text-[#16181C]">

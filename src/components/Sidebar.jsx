@@ -1,3 +1,4 @@
+import LogoMark from "./LogoMark";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Download, Building2, X } from "lucide-react";
 import { ROLE_CONFIG, roleTitle as roleTitleOf, navLabel } from "../config/roles";
@@ -72,7 +73,7 @@ function Sidebar({
           <div className="flex md:hidden items-center justify-between w-full">
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#D9480F] text-white">
-                <Building2 className="w-4 h-4 text-white" />
+                <LogoMark className="w-4 h-4 text-white" />
               </div>
               <span className="text-base font-bold text-[#16181C]">{t("brand")}</span>
             </div>
