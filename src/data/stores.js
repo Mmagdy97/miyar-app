@@ -35,3 +35,6 @@ export const subsStore = createPersistedStore("miyar:subs:v1", [
 export const posStore = createPersistedStore("miyar:pos:v1", [
   { id: 1, no: "PO-001", supplier: "الصفا للرخام", item: "رخام كرارة", qty: 120, price: 1850, status: "sent" },
 ], (x) => x);
+
+// Change orders (أوامر التغيير): draft -> sent -> approved/rejected by the client.
+export const changeOrdersStore = createPersistedStore("miyar:changeorders:v1", [], (x) => x);
