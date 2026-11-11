@@ -25,7 +25,7 @@ const QTY = 120;
 const COST = 1400;
 
 /** Live Smart-BOQ line: the margin slider reprices the item in real time. */
-function BoqLive() {
+export function BoqLive() {
   const [margin, setMargin] = useState(30);
   const price = Math.round(COST * (1 + margin / 100));
   const total = price * QTY;
