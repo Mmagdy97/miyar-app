@@ -18,3 +18,6 @@ export const boqStore = createPersistedStore("miyar:boq:v1", INITIAL_BOQ_ITEMS, 
 
 // Site problems reported from field tasks (Admin/Tech Office read these later via Supabase).
 export const problemsStore = createPersistedStore("miyar:problems:v1", [], (x) => x);
+
+// Progress-billing certificates (مستخلصات / hakediş). Amounts in base currency units.
+export const certsStore = createPersistedStore("miyar:certs:v1", [], (x) => x);

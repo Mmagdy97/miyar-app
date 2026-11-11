@@ -1,5 +1,6 @@
 import {
   LayoutDashboard,
+  Receipt,
   FolderKanban,
   DollarSign,
   ClipboardCheck,
@@ -26,6 +27,7 @@ export const ROLE_CONFIG = {
     { id: "Projects", name: "المشاريع الجارية", label: "المشاريع الجارية", icon: FolderKanban },
     { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
     { id: "BOQ & Approvals", name: "المقايسات والاعتمادات", label: "المقايسات والاعتمادات", icon: ClipboardCheck },
+    { id: "Certificates", name: "المستخلصات والمحتجزات", label: "المستخلصات والمحتجزات", icon: Receipt },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
   ],
   "Site Engineer": [

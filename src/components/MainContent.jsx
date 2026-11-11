@@ -13,6 +13,7 @@ import TechnicalOfficeDashboard from "./TechnicalOfficeDashboard";
 import TechnicalOfficeBlueprints from "./TechnicalOfficeBlueprints";
 import TechnicalOfficeSettings from "./TechnicalOfficeSettings";
 import SmartBOQ from "./SmartBOQ";
+import Certificates from "./Certificates";
 import FinancialsDashboard from "./FinancialsDashboard";
 import TeamManagement from "./TeamManagement";
 import ProjectsManagement from "./ProjectsManagement";
@@ -239,6 +240,8 @@ function MainContent({
         />
       );
     }
+
+    if (activeTab === "المستخلصات والمحتجزات" || activeTab === "Certificates") return <Certificates />;
 
     // Team Management Tab Routing for "فريق العمل"
     const isTeamTab =
