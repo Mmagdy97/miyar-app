@@ -198,3 +198,4 @@ create policy notif_insert on notifications for insert with check (org_id = auth
 -- Clients may read BOQs and drawings of their own projects
 create policy boq_client on boq_items for select using (exists (select 1 from projects p where p.id = project_id and p.client_id = auth.uid()));
 create policy drawings_client on drawings for select using (exists (select 1 from projects p where p.id = project_id and p.client_id = auth.uid()));
+drop policy notifications_read on notifications; -- users only see their own
