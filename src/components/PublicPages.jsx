@@ -4,86 +4,83 @@ import { Check, ArrowRight } from "lucide-react";
 import { CURRENCIES, formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
 
-// DRAFT pricing (indicative, to be validated with first customers before launch).
-const PRICES = {
-  EGP: [0, 1200, 3200],
-  TRY: [0, 1200, 3200],
-  SAR: [0, 109, 299],
-  AED: [0, 109, 299],
-  KWD: [0, 9, 24],
-  JOD: [0, 20, 56],
-  USD: [0, 29, 79],
-};
-
-const PLANS = [
-  { key: "free", n: 4 },
-  { key: "pro", n: 5, highlight: true },
-  { key: "office", n: 5 },
-];
+import { PRICES, PLANS, planPrice } from "../lib/pricing";
 
 export function PricingSection({ onStart }) {
   const { t, currency } = useI18n();
   const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
+  const [yearly, setYearly] = useState(false);
+  const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#2B3138] text-white" : "text-[#5D6168] hover:bg-[#EEECE6]"}`;
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
       <div className="text-start max-w-2xl mb-10">
         <h2 className="text-3xl sm:text-4xl font-black text-[#16181C] mb-3">{t("pricing.title")}</h2>
         <p className="text-[#5D6168] mb-6">{t("pricing.sub")}</p>
-        <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap justify-center gap-1 p-1 rounded-xl bg-white border border-[#E3E0D9]">
-          {Object.keys(PRICES).map((k) => (
-            <button
-              key={k}
-              onClick={() => setCur(k)}
-              aria-pressed={cur === k}
-              className={`px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${
-                cur === k ? "bg-[#2B3138] text-white" : "text-[#5D6168] hover:bg-[#EEECE6]"
-              }`}
-            >
-              {CURRENCIES[k].name}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="grid md:grid-cols-3 gap-5">
-        {PLANS.map((p, i) => (
-          <div
-            key={p.name}
-            className={`rounded-2xl p-6 bg-white flex flex-col border ${
-              p.highlight ? "border-[#D9480F] shadow-lg ring-1 ring-[#D9480F]/30" : "border-[#E3E0D9]"
-            }`}
-          >
-            {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#D9480F] text-white">{t("pricing.popular")}</span>}
-            <h3 className="text-xl font-black text-[#16181C]">{t(`plan.${p.key}`)}</h3>
-            <p className="text-xs text-[#5D6168] mb-4">{t(`plan.${p.key}.tag`)}</p>
-            <p className="mb-5">
-              {PRICES[cur][i] === 0 ? (
-                <span className="text-4xl font-black text-[#16181C]">{t("pricing.free")}</span>
-              ) : (
-                <>
-                  <span className="text-4xl font-black text-[#16181C]">{formatMoney(PRICES[cur][i], cur, intlLocale(), { compact: true })}</span>{" "}
-                  <span className="text-sm font-bold text-[#5D6168]">{t("pricing.perMonth")}</span>
-                </>
-              )}
-            </p>
-            <ul className="space-y-2.5 mb-6 flex-1">
-              {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm text-[#16181C]">
-                  <Check className="w-4 h-4 mt-0.5 text-[#D9480F] shrink-0" /> {f}
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={onStart}
-              className={`w-full py-3 rounded-xl font-bold text-sm cursor-pointer transition-colors ${
-                p.highlight ? "bg-[#D9480F] text-white hover:bg-[#B93C0B]" : "bg-[#2B3138] text-white hover:bg-[#16181C]"
-              }`}
-            >
-              {i === 0 ? t("pricing.startFree") : t("pricing.try")}
+        <div className="flex flex-wrap gap-3">
+          <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#E3E0D9]">
+            {Object.keys(PRICES).map((k) => (
+              <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
+                {CURRENCIES[k].name}
+              </button>
+            ))}
+          </div>
+          <div role="group" aria-label={t("pricing.billing")} className="inline-flex gap-1 p-1 rounded-xl bg-white border border-[#E3E0D9]">
+            <button onClick={() => setYearly(false)} aria-pressed={!yearly} className={pill(!yearly)}>{t("pricing.monthly")}</button>
+            <button onClick={() => setYearly(true)} aria-pressed={yearly} className={pill(yearly)}>
+              {t("pricing.yearly")} <span className={yearly ? "text-[#FDBA74]" : "text-[#D9480F]"}>· {t("pricing.save")}</span>
             </button>
           </div>
-        ))}
+        </div>
       </div>
-      <p className="text-center text-xs text-[#5D6168] mt-6">{t("pricing.note")}</p>
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        {PLANS.map((p, i) => {
+          const price = planPrice(cur, i, yearly);
+          return (
+            <div
+              key={p.key}
+              className={`rounded-2xl p-6 bg-white flex flex-col border ${
+                p.highlight ? "border-[#D9480F] shadow-lg ring-1 ring-[#D9480F]/30" : "border-[#E3E0D9]"
+              }`}
+            >
+              {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#D9480F] text-white">{t("pricing.popular")}</span>}
+              <h3 className="text-xl font-black text-[#16181C]">{t(`plan.${p.key}`)}</h3>
+              <p className="text-xs text-[#5D6168] mb-4">{t(`plan.${p.key}.tag`)}</p>
+              <p className="mb-5">
+                {p.custom ? (
+                  <span className="text-3xl font-black text-[#16181C]">{t("pricing.custom")}</span>
+                ) : price === 0 ? (
+                  <span className="text-4xl font-black text-[#16181C]">{t("pricing.free")}</span>
+                ) : (
+                  <>
+                    <span className="text-3xl font-black text-[#16181C] tabular-nums">{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
+                    <span className="text-sm font-bold text-[#5D6168]">{yearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                  </>
+                )}
+              </p>
+              <ul className="space-y-2.5 mb-6 flex-1">
+                {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-[#16181C]">
+                    <Check className="w-4 h-4 mt-0.5 text-[#D9480F] shrink-0" /> {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={onStart}
+                className={`w-full py-3 rounded-xl font-bold text-sm cursor-pointer transition-colors ${
+                  p.highlight ? "bg-[#D9480F] text-white hover:bg-[#B93C0B]" : "bg-[#2B3138] text-white hover:bg-[#16181C]"
+                }`}
+              >
+                {i === 0 ? t("pricing.startFree") : p.custom ? t("pricing.contact") : t("pricing.try")}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+      <div className="mt-6 rounded-2xl border border-[#D9480F]/30 bg-[#D9480F]/5 p-4 text-center">
+        <p className="text-sm font-bold text-[#16181C]">{t("pricing.founding")}</p>
+        <p className="text-xs text-[#5D6168] mt-1">{t("pricing.trial")}</p>
+      </div>
+      <p className="text-center text-xs text-[#5D6168] mt-4">{t("pricing.note")}</p>
     </section>
   );
 }
