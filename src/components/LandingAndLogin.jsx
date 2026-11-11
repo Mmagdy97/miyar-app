@@ -181,7 +181,7 @@ export default function LandingAndLogin({ onLogin }) {
 
           {/* Action button (Left in RTL) */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block"><SettingsSwitcher compact /></div>
+            <SettingsSwitcher />
             <button
               onClick={() => openModal("Admin")}
               className="px-6 py-2.5 rounded-lg bg-[#2B3138] hover:bg-[#1E2429] text-white text-xs sm:text-sm font-medium rounded-lg btn-press flex items-center gap-2"

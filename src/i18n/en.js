@@ -961,4 +961,9 @@ export default {
   "hero.qty": "Quantity",
   "hero.unit": "m²",
   "hero.profit": "Profit on this item",
+  "settings.title": "Language, currency & theme",
+  "settings.theme": "Theme",
+  "settings.light": "Light",
+  "settings.dark": "Dark",
+  "settings.close": "Close",
 };

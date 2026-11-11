@@ -961,4 +961,9 @@ export default {
   "hero.qty": "Miktar",
   "hero.unit": "m²",
   "hero.profit": "Kalem kârı",
+  "settings.title": "Dil, para birimi ve tema",
+  "settings.theme": "Tema",
+  "settings.light": "Açık",
+  "settings.dark": "Koyu",
+  "settings.close": "Kapat",
 };
