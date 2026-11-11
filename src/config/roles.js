@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Receipt,
+  Truck,
   UsersRound,
   FolderKanban,
   DollarSign,
@@ -29,6 +30,7 @@ export const ROLE_CONFIG = {
     { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
     { id: "BOQ & Approvals", name: "المقايسات والاعتمادات", label: "المقايسات والاعتمادات", icon: ClipboardCheck },
     { id: "Certificates", name: "المستخلصات والمحتجزات", label: "المستخلصات والمحتجزات", icon: Receipt },
+    { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
   ],
   "Site Engineer": [

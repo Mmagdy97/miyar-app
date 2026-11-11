@@ -14,6 +14,7 @@ import TechnicalOfficeBlueprints from "./TechnicalOfficeBlueprints";
 import TechnicalOfficeSettings from "./TechnicalOfficeSettings";
 import SmartBOQ from "./SmartBOQ";
 import Certificates from "./Certificates";
+import Procurement from "./Procurement";
 import SiteEngineerAttendance from "./SiteEngineerAttendance";
 import FinancialsDashboard from "./FinancialsDashboard";
 import TeamManagement from "./TeamManagement";
@@ -244,6 +245,7 @@ function MainContent({
       );
     }
 
+    if (activeTab === "الباطن والمشتريات" || activeTab === "Procurement") return <Procurement />;
     if (activeTab === "المستخلصات والمحتجزات" || activeTab === "Certificates") return <Certificates />;
 
     // Team Management Tab Routing for "فريق العمل"
