@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HardHat, ShoppingCart, MessageCircle, Plus } from "lucide-react";
-import { tr_ as T, money } from "../i18n";
+import { tr_ as T, E, money } from "../i18n";
 import { subsStore, posStore } from "../data/stores";
 import { poTotal, subBalance, procurementTotals } from "../lib/procurement";
 import { whatsappLink } from "../lib/share";
@@ -30,7 +30,7 @@ export default function Procurement() {
     setPf({ supplier: "", item: "", qty: "", price: "" });
   };
   const poNext = (id) => setPos((a) => a.map((p) => (p.id === id && PO_NEXT[p.status] ? { ...p, status: PO_NEXT[p.status] } : p)));
-  const poText = (p) => T("proc.msg", { 0: p.no, 1: p.item, 2: `${p.qty}`, 3: money(poTotal(p)) });
+  const poText = (p) => T("proc.msg", { 0: p.no, 1: E(p.item), 2: `${p.qty}`, 3: money(poTotal(p)) });
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -56,7 +56,7 @@ export default function Procurement() {
               const pctPaid = s.contract ? Math.round((s.paid / s.contract) * 100) : 0;
               return (
                 <div key={s.id} className="bg-white rounded-lg border border-[#E3E0D9] p-4">
-                  <div className="flex justify-between gap-2"><p className="text-sm font-extrabold text-[#16181C]">{s.name}</p><span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EEECE6] border border-[#E3E0D9] h-fit">{s.trade}</span></div>
+                  <div className="flex justify-between gap-2"><p className="text-sm font-extrabold text-[#16181C]">{E(s.name)}</p><span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EEECE6] border border-[#E3E0D9] h-fit">{E(s.trade)}</span></div>
                   <div className="h-2 rounded-full bg-[#EEECE6] mt-3 overflow-hidden"><div className="h-full bg-[#2B3138]" style={{ width: pctPaid + "%" }} /></div>
                   <div className="flex justify-between text-[11px] font-bold text-[#5D6168] mt-2">
                     <span>{T("proc.paid")}: {money(s.paid, { compact: true })} / {money(s.contract, { compact: true })}</span>
@@ -90,8 +90,8 @@ export default function Procurement() {
             {pos.map((p) => (
               <div key={p.id} className="bg-white rounded-lg border border-[#E3E0D9] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-extrabold text-[#16181C]">{p.no} · {p.item}</p>
-                  <p className="text-[11px] font-bold text-[#5D6168]">{p.supplier} · {p.qty} × {money(p.price)} = {money(poTotal(p))}</p>
+                  <p className="text-sm font-extrabold text-[#16181C]">{p.no} · {E(p.item)}</p>
+                  <p className="text-[11px] font-bold text-[#5D6168]">{E(p.supplier)} · {p.qty} × {money(p.price)} = {money(poTotal(p))}</p>
                 </div>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${p.status === "received" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : p.status === "sent" ? "bg-amber-50 text-amber-800 border-amber-200" : "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]"}`}>{T("proc.s." + p.status)}</span>
                 <div className="flex gap-2">

@@ -2,6 +2,7 @@ import { ChevronRight, Check, LogIn } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import Capabilities from "./Capabilities";
+import RoleModules from "./RoleModules";
 import { BoqLive } from "./Hero";
 import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
@@ -79,6 +80,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         ))}
       </div>
 
+      <RoleModules openModal={openModal} />
       <Capabilities />
 
       {/* Comparison */}
