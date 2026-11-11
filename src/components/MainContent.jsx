@@ -15,6 +15,7 @@ import TechnicalOfficeSettings from "./TechnicalOfficeSettings";
 import SmartBOQ from "./SmartBOQ";
 import Certificates from "./Certificates";
 import Procurement from "./Procurement";
+import ChangeOrders from "./ChangeOrders";
 import SiteEngineerAttendance from "./SiteEngineerAttendance";
 import FinancialsDashboard from "./FinancialsDashboard";
 import TeamManagement from "./TeamManagement";
@@ -97,6 +98,8 @@ function MainContent({
         );
       }
     }
+
+    if (activeTab === "أوامر التغيير" || activeTab === "Change Orders") return <ChangeOrders role={currentRole === "Client" ? "Client" : "Admin"} />;
 
     // Client Dedicated Role Navigation Routing
     if (currentRole === "Client") {
