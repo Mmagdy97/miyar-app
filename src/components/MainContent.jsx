@@ -14,6 +14,7 @@ import TechnicalOfficeBlueprints from "./TechnicalOfficeBlueprints";
 import TechnicalOfficeSettings from "./TechnicalOfficeSettings";
 import SmartBOQ from "./SmartBOQ";
 import Certificates from "./Certificates";
+import SiteEngineerAttendance from "./SiteEngineerAttendance";
 import FinancialsDashboard from "./FinancialsDashboard";
 import TeamManagement from "./TeamManagement";
 import ProjectsManagement from "./ProjectsManagement";
@@ -141,6 +142,8 @@ function MainContent({
     if (isSnagListTab) {
       return <SiteEngineerSnagList />;
     }
+
+    if (activeTab === "الحضور والعمالة" || activeTab === "Attendance") return <SiteEngineerAttendance />;
 
     const isMaterialRequestsTab =
       activeTab === "طلبات تشوين المواد" ||

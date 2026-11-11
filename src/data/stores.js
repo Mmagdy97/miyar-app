@@ -1,6 +1,7 @@
 import { createPersistedStore } from "./persisted";
 import { localize } from "./dataI18n";
 import { CLIENT_INVOICES } from "./seed";
+import { WORKERS } from "./workersSeed";
 import { INITIAL_BOQ_ITEMS } from "./boqSeed";
 import { INITIAL_ENGINEERS_CASH, INITIAL_PENDING_EXPENSES } from "./cashSeed";
 
@@ -21,3 +22,7 @@ export const problemsStore = createPersistedStore("miyar:problems:v1", [], (x) =
 
 // Progress-billing certificates (مستخلصات / hakediş). Amounts in base currency units.
 export const certsStore = createPersistedStore("miyar:certs:v1", [], (x) => x);
+
+// Site labour (puantaj): workers list and daily attendance { "YYYY-MM-DD": { workerId: { s, ot } } }.
+export const workersStore = createPersistedStore("miyar:workers:v1", WORKERS, localize);
+export const attendanceStore = createPersistedStore("miyar:attendance:v1", {}, (x) => x);
