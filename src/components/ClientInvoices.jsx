@@ -112,7 +112,7 @@ function ClientInvoices() {
         </div>
 
         {/* Financial KPI Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid stat-grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white rounded-xl p-6 border border-[#E3E0D9] shadow-sm">
             <span className="text-xs font-bold text-[#EEECE6]/80 block mb-1">{T("cli.5")}</span>
             <div className="flex items-baseline gap-1.5">

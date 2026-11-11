@@ -43,10 +43,10 @@ export default function SettingsSwitcher() {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label={t("settings.title")}
-        className="btn-press inline-flex items-center gap-2 rounded-lg border border-[#E3E0D9] bg-white px-2.5 h-9 text-xs font-semibold text-[#16181C] hover:bg-[#EEECE6]"
+        className="btn-press inline-flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg border border-[#E3E0D9] bg-white px-2.5 h-9 text-xs font-semibold text-[#16181C] hover:bg-[#EEECE6]"
       >
         <SlidersHorizontal className="w-4 h-4" aria-hidden="true" />
-        <span className="tabular-nums" dir="ltr">{locale.toUpperCase()} · {currency}</span>
+        <span className="tabular-nums whitespace-nowrap" dir="ltr">{locale.toUpperCase()} · {currency}</span>
       </button>
 
       {open && (

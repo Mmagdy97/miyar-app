@@ -392,7 +392,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
             <div className="grid grid-cols-2 gap-2.5">
               {/* Plumbers */}
-              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex items-center justify-between">
+              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <span className="text-xs font-bold text-[#16181C] block">{T("se.21")}</span>
                   <span className="text-[11px] text-[#5D6168]">{T("se.22")}</span>
@@ -419,7 +419,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               </div>
 
               {/* Helpers / Cleaning */}
-              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex items-center justify-between">
+              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <span className="text-xs font-bold text-[#16181C] block">{T("se.23")}</span>
                   <span className="text-[11px] text-[#5D6168]">{T("se.24")}</span>
@@ -446,7 +446,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               </div>
 
               {/* Tilers */}
-              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex items-center justify-between">
+              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <span className="text-xs font-bold text-[#16181C] block">{T("se.25")}</span>
                   <span className="text-[11px] text-[#5D6168]">{T("se.26")}</span>
@@ -473,7 +473,7 @@ function SiteEngineerDashboard({ setActionItems }) {
               </div>
 
               {/* Electricians */}
-              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex items-center justify-between">
+              <div className="p-3 rounded-lg bg-[#F6F5F1] border border-[#E3E0D9] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <span className="text-xs font-bold text-[#16181C] block">{T("se.27")}</span>
                   <span className="text-[11px] text-[#5D6168]">{T("se.28")}</span>

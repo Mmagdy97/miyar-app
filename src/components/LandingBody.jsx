@@ -28,7 +28,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
   return (
     <>
       {/* Nav */}
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#F6F5F1]/80 backdrop-blur-xl border-b border-[#E3E0D9]/70">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#F6F5F1]/80 glass border-b border-[#E3E0D9]/70">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-[9px] bg-[#D9480F] text-white flex items-center justify-center"><LogoMark className="w-4.5 h-4.5 text-white" /></div>

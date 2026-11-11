@@ -175,7 +175,7 @@ function SiteEngineerSnagList() {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid stat-grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
           <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs text-center">
             <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("se.84")}</span>
             <span className="text-xl md:text-2xl font-black text-[#16181C]">{stats.total}</span>

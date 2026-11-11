@@ -230,7 +230,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Mini KPI Highlights */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
+      <div className="grid stat-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("sboq.10")}</span>
           <div className="flex items-baseline justify-between">

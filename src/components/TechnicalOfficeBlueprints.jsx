@@ -252,7 +252,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       </div>
 
       {/* KPI Stats Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div className="grid stat-grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 border border-[#E3E0D9] shadow-xs">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("to.93")}</span>
           <div className="flex items-baseline justify-between">
