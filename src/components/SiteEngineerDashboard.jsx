@@ -222,7 +222,7 @@ function SiteEngineerDashboard({ setActionItems }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent min-h-screen w-full max-w-full overflow-x-hidden">
       {/* Constrain layout to a mobile/tablet-friendly container */}
-      <div className="max-w-2xl mx-auto space-y-5 pb-12">
+      <div className="max-w-2xl lg:max-w-6xl mx-auto space-y-5 pb-12">
         {/* Temporary Success Toast Message (Auto-hides after 3 seconds) */}
         {showToast && (
           <div className="sticky top-4 z-40 p-4 rounded-lg bg-emerald-700 text-white shadow-xl shadow-emerald-600/25 border border-emerald-500 animate-in fade-in slide-in-from-top-4 flex items-center justify-between gap-3">
@@ -287,6 +287,8 @@ function SiteEngineerDashboard({ setActionItems }) {
           </div>
         </div>
 
+        <div className="lg:grid lg:grid-cols-12 lg:gap-6 lg:items-start space-y-5 lg:space-y-0">
+        <div className="lg:col-span-5 lg:sticky lg:top-24">
         {/* 2. Active Sites (مواقع العمل الحالية) */}
         <div className="bg-white rounded-lg border border-[#E3E0D9] p-5 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
@@ -331,6 +333,8 @@ function SiteEngineerDashboard({ setActionItems }) {
           </div>
         </div>
 
+        </div>
+        <div className="lg:col-span-7">
         {/* 3. Daily Report Quick Form (نموذج التقرير السريع) */}
         <form
           id="daily-form"
@@ -628,6 +632,8 @@ function SiteEngineerDashboard({ setActionItems }) {
             </p>
           </div>
         </form>
+        </div>
+        </div>
       </div>
 
       {/* Petty Cash Settlement Modal */}
