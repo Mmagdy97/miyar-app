@@ -254,3 +254,15 @@ html:not(.dark) ::selection { background: #D9480F; color: #fff; }
   html, body, #root, main { background: #fff !important; color: #000 !important; height: auto !important; overflow: visible !important; }
   * { box-shadow: none !important; animation: none !important; }
 }
+
+/* ───── Apple-style app layer: bigger radii, quiet surfaces, confident type ───── */
+.rounded-lg { border-radius: 0.875rem; }
+.rounded-xl { border-radius: 1.25rem; }
+.rounded-2xl { border-radius: 1.5rem; }
+button.rounded-lg, a.rounded-lg { border-radius: 999px; }
+input, select, textarea { border-radius: 0.875rem; }
+.shadow-sm, .shadow-xs, .shadow-2xs, .shadow-md, .shadow-lg { box-shadow: none !important; }
+main h1 { font-size: clamp(1.6rem, 3.4vw, 2.25rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; }
+main h2 { letter-spacing: -0.015em; font-weight: 650; }
+main { --card-pad: 1.5rem; }
+header.sticky { backdrop-filter: saturate(180%) blur(20px); }

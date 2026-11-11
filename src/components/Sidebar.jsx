@@ -65,7 +65,7 @@ function Sidebar({
       {/* Sidebar Header */}
       {!hideHeader && (
         <div
-          className={`flex items-center h-16 px-4 border-b border-[#E3E0D9] ${
+          className={`flex items-center h-14 px-4 border-b border-[#E3E0D9] ${
             collapsed ? "justify-center" : "justify-between"
           }`}
         >

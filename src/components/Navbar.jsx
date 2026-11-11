@@ -60,7 +60,7 @@ function Navbar({
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-3 sm:px-4 md:px-6 bg-white/95 backdrop-blur-md border-b border-[#E3E0D9] w-full max-w-full">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-3 sm:px-4 md:px-6 bg-white/80 backdrop-blur-xl border-b border-[#E3E0D9] w-full max-w-full">
       {/* Right in RTL: Mobile Menu Toggle + Logo & Platform Identity */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Hamburger Menu Toggle (Visible on Mobile < md) */}
@@ -74,18 +74,12 @@ function Navbar({
 
         {/* Brand Icon + Name */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#2B3138] text-white shadow-xs transition-transform hover:scale-105 cursor-pointer">
+          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] bg-[#D9480F] text-white transition-transform hover:scale-105 cursor-pointer">
             <LogoMark className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <div className="flex flex-col">
             <span className="text-base sm:text-lg font-black text-[#16181C] tracking-tight leading-tight flex items-center gap-1.5">
               <span>{t("brand")}</span>
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-[#F6F5F1] text-[#2B3138] border border-[#E3E0D9] hidden sm:inline">
-                MIYAR
-              </span>
-            </span>
-            <span className="text-[10px] text-[#5D6168] font-medium hidden sm:inline leading-none">
-              {t("brand.tagline")}
             </span>
           </div>
         </div>
