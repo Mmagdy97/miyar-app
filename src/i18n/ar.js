@@ -1348,4 +1348,7 @@ export default {
   "to.dwg.total": "إجمالي {0} لوحة مفهرسة",
   "to.co.sub": "{0} بانتظار العميل • {1} مسودة",
   "nav.Technical Office.Change Orders": "أوامر التغيير",
+  "nav.Technical Office.Moodboard": "الموودبورد",
+  "md.Technical Office.Moodboard.t": "الموودبورد",
+  "md.Technical Office.Moodboard.d": "اجمع صور وألوان وملاحظات الستايل لكل مشروع قبل اعتماد المخططات.",
 };
