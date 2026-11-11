@@ -534,7 +534,22 @@
   "متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:": "Tracking contractual item quantities against actual site take-off for project:",
   "فيلا الياسمين (BOQ-YAS-2026)": "Jasmine Villa (BOQ-YAS-2026)",
   "يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة": "The project automatically starts at 0% progress in the",
-  "، وسيتلقى المهندس والعميل إشعاراً فورياً.": " phase; the engineer and client will be notified instantly."
+  "، وسيتلقى المهندس والعميل إشعاراً فورياً.": " phase; the engineer and client will be notified instantly.",
+  "حسن إبراهيم": "Hassan Ibrahim",
+  "عم صابر": "Sabir",
+  "محمود السيد": "Mahmoud El-Sayed",
+  "أحمد فتحي": "Ahmed Fathy",
+  "علي رمضان": "Ali Ramadan",
+  "نجار": "Carpenter",
+  "سباك": "Plumber",
+  "كهربائي": "Electrician",
+  "نقاش": "Painter",
+  "عامل": "Labourer",
+  "شركة النور للكهرباء": "El-Nour Electrical Co.",
+  "مؤسسة الأمل للسباكة": "El-Amal Plumbing Est.",
+  "سباكة": "Plumbing",
+  "الصفا للرخام": "El-Safa Marble",
+  "رخام كرارة": "Carrara marble"
  },
  "tr": {
   "سارة عامر": "Sara Amer",
@@ -1070,6 +1085,21 @@
   "متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:": "Sözleşme kalem miktarlarının şantiyedeki gerçek metrajla karşılaştırılması, proje:",
   "فيلا الياسمين (BOQ-YAS-2026)": "Yasemin Villa (BOQ-YAS-2026)",
   "يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة": "Proje otomatik olarak %0 ilerlemeyle şu aşamada başlar:",
-  "، وسيتلقى المهندس والعميل إشعاراً فورياً.": "; mühendis ve müşteri anında bilgilendirilir."
+  "، وسيتلقى المهندس والعميل إشعاراً فورياً.": "; mühendis ve müşteri anında bilgilendirilir.",
+  "حسن إبراهيم": "Hasan İbrahim",
+  "عم صابر": "Sabir",
+  "محمود السيد": "Mahmud es-Seyyid",
+  "أحمد فتحي": "Ahmet Fethi",
+  "علي رمضان": "Ali Ramazan",
+  "نجار": "Marangoz",
+  "سباك": "Tesisatçı",
+  "كهربائي": "Elektrikçi",
+  "نقاش": "Boyacı",
+  "عامل": "İşçi",
+  "شركة النور للكهرباء": "Nur Elektrik A.Ş.",
+  "مؤسسة الأمل للسباكة": "Amal Tesisat",
+  "سباكة": "Tesisat",
+  "الصفا للرخام": "Safa Mermer",
+  "رخام كرارة": "Carrara mermeri"
  }
 }

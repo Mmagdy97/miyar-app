@@ -48,6 +48,7 @@ html.dark .bg-emerald-700\/80{background-color:rgb(0 122 85 / 0.8)}
 html.dark .bg-purple-500{background-color:#36194d}
 html.dark .bg-rose-50{background-color:#301214}
 html.dark .bg-rose-600{background-color:#ec003f}
+html.dark .bg-sky-50{background-color:#122430}
 html.dark .bg-white{background-color:#13171c}
 html.dark .bg-white\/10{background-color:rgb(19 23 28 / 0.1)}
 html.dark .bg-white\/15{background-color:rgb(19 23 28 / 0.15)}
@@ -67,6 +68,7 @@ html.dark .border-\[\#E3E0D9\]\/80{border-color:rgb(38 44 52 / 0.8)}
 html.dark .border-\[\#EEECE6\]{border-color:#1f242b}
 html.dark .border-amber-200{border-color:#5d5228}
 html.dark .border-amber-300{border-color:#ffd230}
+html.dark .border-amber-400\/40{border-color:rgb(255 185 0 / 0.4)}
 html.dark .border-black{border-color:#000000}
 html.dark .border-emerald-200{border-color:#285d44}
 html.dark .border-emerald-200\/70{border-color:rgb(40 93 68 / 0.7)}
@@ -75,12 +77,15 @@ html.dark .border-emerald-500{border-color:#00bc7d}
 html.dark .border-gray-300{border-color:#39404b}
 html.dark .border-rose-200{border-color:#5d282f}
 html.dark .border-rose-300{border-color:#5d282f}
+html.dark .border-rose-600{border-color:#ec003f}
+html.dark .border-sky-200{border-color:#284b5d}
 html.dark .border-white{border-color:#262c34}
 html.dark .border-white\/10{border-color:rgb(38 44 52 / 0.1)}
 html.dark .border-white\/15{border-color:rgb(38 44 52 / 0.15)}
 html.dark .border-white\/20{border-color:rgb(38 44 52 / 0.2)}
 html.dark .divide-\[\#E3E0D9\]\/60{border-color:rgb(38 44 52 / 0.6)}
 html.dark .divide-\[\#EEECE6\]{border-color:#1f242b}
+html.dark .fill-rose-500{fill:#ff2056}
 html.dark .fill-rose-600{fill:#ff5c87}
 html.dark .focus\:bg-\[\#2B3138\]:focus{background-color:#e8590c}
 html.dark .focus\:border-\[\#2B3138\]:focus{border-color:#3a424b}
@@ -115,7 +120,10 @@ html.dark .hover\:bg-\[\#F6F5F1\]\/50:hover{background-color:rgb(11 14 18 / 0.5)
 html.dark .hover\:bg-\[\#F6F5F1\]\/70:hover{background-color:rgb(11 14 18 / 0.7)}
 html.dark .hover\:bg-amber-100:hover{background-color:#302a12}
 html.dark .hover\:bg-emerald-100:hover{background-color:#123021}
+html.dark .hover\:bg-emerald-700:hover{background-color:#007a55}
+html.dark .hover\:bg-rose-100:hover{background-color:#301214}
 html.dark .hover\:bg-rose-50:hover{background-color:#301214}
+html.dark .hover\:bg-rose-700:hover{background-color:#c70036}
 html.dark .hover\:bg-white:hover{background-color:#13171c}
 html.dark .hover\:border-\[\#2B3138\]:hover{border-color:#3a424b}
 html.dark .hover\:border-\[\#D9480F\]:hover{border-color:#e8590c}
@@ -150,12 +158,14 @@ html.dark .text-\[\#D9480F\]{color:#ff8a4c}
 html.dark .text-\[\#EEECE6\]{color:#eeece6}
 html.dark .text-\[\#EEECE6\]\/80{color:rgb(238 236 230 / 0.8)}
 html.dark .text-amber-300{color:#ffd230}
+html.dark .text-amber-400{color:#ffb900}
 html.dark .text-amber-500{color:#ffbf5c}
 html.dark .text-amber-600{color:#ffae5c}
 html.dark .text-amber-700{color:#ff9f5c}
 html.dark .text-amber-800{color:#ff9d5c}
 html.dark .text-amber-800\/80{color:rgb(255 157 92 / 0.8)}
 html.dark .text-amber-900{color:#f79c63}
+html.dark .text-black{color:#ffffff}
 html.dark .text-emerald-200{color:#a4f4cf}
 html.dark .text-emerald-400{color:#5cffcc}
 html.dark .text-emerald-500{color:#5cffc8}
@@ -169,6 +179,7 @@ html.dark .text-rose-500{color:#ff2056}
 html.dark .text-rose-600{color:#ff5c87}
 html.dark .text-rose-700{color:#ff5c88}
 html.dark .text-rose-800{color:#ff5c91}
+html.dark .text-sky-700{color:#5cc2ff}
 html.dark .to-\[\#16181C\]{--tw-gradient-to:#c2410c}
 html.dark .to-\[\#2B3138\]{--tw-gradient-to:#e8590c}
 html.dark .to-\[\#E3E0D9\]{--tw-gradient-to:#262c34}
