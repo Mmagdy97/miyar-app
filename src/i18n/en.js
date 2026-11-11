@@ -1354,4 +1354,6 @@ export default {
   "nav.Technical Office.Selections": "Selections & FF&E",
   "md.Technical Office.Selections.t": "Selections & FF&E",
   "md.Technical Office.Selections.d": "Propose furniture and fittings per room and track client approval and the supply schedule.",
+  "sboq.r6": "Take off quantities and items and prepare the final BOQ for the client.",
+  "sboq.r16": "Edit quantities directly in the fields; the total price is calculated automatically.",
 };

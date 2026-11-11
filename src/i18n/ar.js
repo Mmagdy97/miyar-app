@@ -1354,4 +1354,6 @@ export default {
   "nav.Technical Office.Selections": "الاختيارات وFF&E",
   "md.Technical Office.Selections.t": "الاختيارات وFF&E",
   "md.Technical Office.Selections.d": "اقترح الأثاث والتجهيزات لكل غرفة وتابع موافقة العميل وجدول التوريد.",
+  "sboq.r6": "حصر الكميات والبنود وإعداد المقايسة النهائية الموجهة للعميل.",
+  "sboq.r16": "عدّل الكميات في الحقول مباشرة؛ وسيتم حساب السعر الإجمالي تلقائيًا.",
 };

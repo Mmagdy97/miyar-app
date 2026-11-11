@@ -39,7 +39,7 @@ const CATEGORY_COLORS = localize({
   "أخرى": "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
 });
 
-function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
+function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = false }) {
   const [boqItems, setBoqItems] = boqStore.use();
   const [filterCategory, setFilterCategory] = useState("الكل");
   const [saveToast, setSaveToast] = useState(false);
@@ -104,10 +104,10 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
   // Export BOQ as CSV (UTF-8 BOM so Excel reads Arabic/Turkish correctly)
   const handleExportCsv = () => {
     const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-    const head = [T("sboq.csv.cat"), T("sboq.csv.item"), T("sboq.csv.unit"), T("sboq.csv.qty"), T("sboq.csv.cost"), T("sboq.csv.margin"), T("sboq.csv.total")];
+    const head = [T("sboq.csv.cat"), T("sboq.csv.item"), T("sboq.csv.unit"), T("sboq.csv.qty"), ...(restricted ? [] : [T("sboq.csv.cost"), T("sboq.csv.margin")]), T("sboq.csv.total")];
     const rows = boqItems.map((i) => {
       const total = i.quantity * i.unitCost * (1 + i.margin / 100);
-      return [i.category, i.name, i.unit, i.quantity, i.unitCost, i.margin, Math.round(total * 100) / 100];
+      return [i.category, i.name, i.unit, i.quantity, ...(restricted ? [] : [i.unitCost, i.margin]), Math.round(total * 100) / 100];
     });
     const csv = "\ufeff" + [head, ...rows].map((r) => r.map(esc).join(",")).join("\r\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
@@ -216,7 +216,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             </span>
           </div>
           <p className="no-print text-xs md:text-sm text-[#5D6168]">
-            {T("sboq.6")}
+            {T(restricted ? "sboq.r6" : "sboq.6")}
           </p>
         </div>
 
@@ -231,7 +231,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               className="w-full rounded-xl border border-[#E3E0D9] bg-white px-3 py-2 text-sm"
             />
           </label>
-          <QuoteSignature quoteNo={quoteNo} total={Math.round(totalPrice * (1 + vatRate / 100))} defaultName={quoteClient} />
+          {!restricted && <QuoteSignature quoteNo={quoteNo} total={Math.round(totalPrice * (1 + vatRate / 100))} defaultName={quoteClient} />}
         </div>
 
         {/* Printed quotation header (hidden on screen) */}
@@ -284,6 +284,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
 
+        {!restricted && (
+          <>
         <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("sboq.12")}</span>
           <div className="flex items-baseline justify-between">
@@ -305,6 +307,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             </span>
           </div>
         </div>
+
+          </>
+        )}
 
         {/* 4. Client Quotation Card - Sage Green Hero Card */}
         <div className="bg-[#2B3138] rounded-xl p-5 border border-[#20262C] text-white shadow-sm">
@@ -344,7 +349,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               <span>{T("sboq.15")}</span>
             </h2>
             <p className="text-xs text-[#5D6168] mt-0.5">
-              {T("sboq.16")}
+              {T(restricted ? "sboq.r16" : "sboq.16")}
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-[#5D6168]">
@@ -362,8 +367,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <th className="py-3.5 px-4 min-w-[240px]">{T("sboq.18")}</th>
                 <th className="py-3.5 px-3 w-28 text-center">{T("sboq.19")}</th>
                 <th className="py-3.5 px-3 w-32 text-center">{T("sboq.20")}</th>
-                <th className="py-3.5 px-3 w-40 text-center">{T("sboq.21", { v0: currencySymbol() })}</th>
-                <th className="py-3.5 px-3 w-32 text-center">{T("sboq.22")}</th>
+                {!restricted && <th className="py-3.5 px-3 w-40 text-center">{T("sboq.21", { v0: currencySymbol() })}</th>}
+                {!restricted && <th className="py-3.5 px-3 w-32 text-center">{T("sboq.22")}</th>}
                 <th className="py-3.5 px-4 min-w-[150px] text-end">{T("sboq.23", { v0: currencySymbol() })}</th>
                 <th className="py-3.5 px-3 w-14 text-center">{T("sboq.24")}</th>
               </tr>
@@ -431,6 +436,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                       </div>
                     </td>
 
+                    {!restricted && (
+                      <>
                     {/* Editable Unit Cost */}
                     <td className="py-3.5 px-3 text-center">
                       <div className="relative inline-flex items-center w-full max-w-[130px]">
@@ -466,6 +473,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                       </div>
                     </td>
 
+                      </>
+                    )}
+
                     {/* Auto-Calculated Total Price for Client */}
                     <td className="py-3.5 px-4 text-end">
                       <div className="flex flex-col items-end">
@@ -473,9 +483,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                           {Math.round(rowTotal).toLocaleString(intlLocale())}{" "}
                           <span className="text-xs font-bold text-[#5D6168]">{currencySymbol()}</span>
                         </span>
-                        <span className="text-[10px] font-semibold text-emerald-700">
+                        {!restricted && (<span className="text-[10px] font-semibold text-emerald-700">
                           {T("sboq.25", { v0: Math.round(rowProfit).toLocaleString(intlLocale()), v1: currencySymbol() })}
-                        </span>
+                        </span>)}
                       </div>
                     </td>
 
@@ -495,7 +505,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
               {filteredItems.length === 0 && (
                 <tr>
-                  <td colSpan="8" className="py-12 text-center text-[#5D6168]">
+                  <td colSpan={restricted ? 6 : 8} className="py-12 text-center text-[#5D6168]">
                     <AlertCircle className="w-8 h-8 mx-auto mb-2 text-[#80848B]" />
                     <p className="font-bold text-[#5D6168]">{T("sboq.27")}</p>
                     <p className="text-xs text-[#5D6168] mt-1">
@@ -514,10 +524,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             <span>
               {D("إجمالي البنود:")} <strong className="text-[#16181C]">{boqItems.length}</strong>
             </span>
+            {!restricted && (
+              <>
             <span>•</span>
             <span>
               {D("متوسط هامش الربح:")} <strong className="text-[#16181C] font-bold">{pct(averageMargin)}</strong>
             </span>
+              </>
+            )}
           </div>
           <span className="text-[11px] text-[#5D6168]">
             {D("* السعر الإجمالي يشمل التوريد والتركيب والتشوين ومصاريف الإشراف الهندسي.")}
@@ -530,6 +544,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Summary Figures */}
           <div className="flex items-center gap-5 sm:gap-8 flex-wrap">
+            {!restricted && (
+              <>
             {/* Total Cost */}
             <div className="flex flex-col">
               <span className="text-[11px] font-bold text-[#5D6168]">{T("sboq.28")}</span>
@@ -550,6 +566,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <span className="text-xs font-normal text-[#5D6168]">{currencySymbol()}</span>
               </span>
             </div>
+
+              </>
+            )}
 
             {/* Divider */}
             <div className="hidden sm:block h-8 w-px bg-[#E3E0D9]" />
@@ -687,6 +706,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                   />
                 </div>
 
+                {!restricted && (
                 <div>
                   <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("sboq.52")}</label>
                   <input
@@ -699,6 +719,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     className="w-full px-2.5 py-2 rounded-lg border border-[#E3E0D9] text-xs font-bold text-[#16181C] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3138] focus:border-[#2B3138]"
                   />
                 </div>
+                )}
               </div>
 
               <div>
@@ -792,6 +813,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <span className="text-[#5D6168]">{T("sboq.63")}</span>
                 <span className="font-bold">{T("sboq.64", { v0: boqItems.length })}</span>
               </div>
+              {!restricted && (
+                <>
               <div className="flex justify-between">
                 <span className="text-[#5D6168]">{T("sboq.65")}</span>
                 <span className="font-bold">{Math.round(totalCost).toLocaleString(intlLocale())} {currencySymbol()}</span>
@@ -800,6 +823,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 <span className="text-[#5D6168]">{T("sboq.66")}</span>
                 <span className="font-bold text-emerald-700">{pct(averageMargin)}</span>
               </div>
+                </>
+              )}
             </div>
 
             <button

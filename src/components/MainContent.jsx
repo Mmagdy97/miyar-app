@@ -102,7 +102,7 @@ function MainContent({
     }
 
     if (activeTab === "الموودبورد" || activeTab === "Moodboard") return <Moodboard role={currentRole === "Client" ? "Client" : "Admin"} />;
-    if (activeTab === "الاختيارات وFF&E" || activeTab === "اختياراتي" || activeTab === "Selections") return <Selections role={currentRole === "Client" ? "Client" : "Admin"} />;
+    if (activeTab === "الاختيارات وFF&E" || activeTab === "اختياراتي" || activeTab === "Selections") return <Selections role={currentRole === "Client" ? "Client" : "Admin"} restricted={currentRole === "Technical Office"} />;
     if (activeTab === "أوامر التغيير" || activeTab === "Change Orders") return <ChangeOrders role={currentRole === "Client" ? "Client" : "Admin"} />;
 
     // Client Dedicated Role Navigation Routing
@@ -228,6 +228,7 @@ function MainContent({
     if (isBOQTab) {
       return (
         <SmartBOQ
+          restricted={currentRole === "Technical Office"}
           actionItems={actionItems}
           setActionItems={setActionItems}
           setSelectedItem={setSelectedItem}

@@ -11,7 +11,7 @@ const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approve
 const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "" };
 
 /** Client selections & FF&E schedule. Admin proposes items per room; the client approves or rejects. */
-export default function Selections({ role = "Admin" }) {
+export default function Selections({ role = "Admin", restricted = false }) {
   const isClient = role === "Client";
   const [items, setItems] = selectionsStore.use();
   const [projectId, setProjectId] = useState(isClient ? CLIENT_PROJECT_ID : PROJECTS[0].id);
@@ -49,7 +49,7 @@ export default function Selections({ role = "Admin" }) {
         )}
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[["sel.k.approved", t.price], ["sel.k.pending", t.pending], ...(isClient ? [] : [["sel.k.cost", t.cost], ["sel.k.margin", t.margin]])].map(([k, v]) => (
+          {[["sel.k.approved", t.price], ["sel.k.pending", t.pending], ...(isClient || restricted ? [] : [["sel.k.cost", t.cost], ["sel.k.margin", t.margin]])].map(([k, v]) => (
             <div key={k} className="bg-white rounded-lg p-4 border border-[#E3E0D9] text-center">
               <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T(k)}</span>
               <span className="text-lg md:text-xl font-black text-[#16181C]">{money(v, { compact: true })}</span>
@@ -64,7 +64,7 @@ export default function Selections({ role = "Admin" }) {
             <input required placeholder={T("sel.item")} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} className={input + " flex-1 min-w-36"} />
             <input placeholder={T("sel.supplier")} value={f.supplier} onChange={(e) => setF({ ...f, supplier: e.target.value })} className={input + " w-32"} />
             <input type="number" min={1} placeholder={T("sel.qty")} value={f.qty} onChange={(e) => setF({ ...f, qty: e.target.value })} className={input + " w-20"} />
-            <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />
+            {!restricted && <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />}
             <input required type="number" min={1} placeholder={T("sel.price")} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} className={input + " w-28"} />
             <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3138] hover:bg-[#16181C] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
           </form>
@@ -78,7 +78,7 @@ export default function Selections({ role = "Admin" }) {
               <div key={i.id} className="bg-white rounded-lg border border-[#E3E0D9] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-extrabold text-[#16181C]">{i.name}</p>
-                  <p className="text-[11px] font-bold text-[#5D6168]">{i.supplier && i.supplier + " · "}{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && ` · ${T("sel.cost")}: ${money(lineCost(i))}`}</p>
+                  <p className="text-[11px] font-bold text-[#5D6168]">{i.supplier && i.supplier + " · "}{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && ` · ${T("sel.cost")}: ${money(lineCost(i))}`}</p>
                 </div>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${badge[i.status]}`}>{T("sel.s." + i.status)}</span>
                 <div className="flex gap-2">

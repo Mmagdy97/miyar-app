@@ -1354,4 +1354,6 @@ export default {
   "nav.Technical Office.Selections": "Seçimler ve FF&E",
   "md.Technical Office.Selections.t": "Seçimler ve FF&E",
   "md.Technical Office.Selections.d": "Oda başına mobilya ve donanım önerin, müşteri onayını ve tedarik listesini takip edin.",
+  "sboq.r6": "Miktarları ve kalemleri çıkarın, müşteri için nihai metrajı hazırlayın.",
+  "sboq.r16": "Miktarları doğrudan alanlarda düzenleyin; toplam fiyat otomatik hesaplanır.",
 };
