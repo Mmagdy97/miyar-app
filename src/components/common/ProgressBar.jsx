@@ -37,7 +37,7 @@ export default function ProgressBar({
       className={`w-full h-2.5 bg-[#EEECE6] rounded-full overflow-hidden shadow-inner mt-2 ${trackClassName} ${className}`}
     >
       <div
-        className={`h-full rounded-full transition-all duration-[1500ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${fillClass}`}
+        className={`h-full rounded-full transition-all duration-[800ms] ease-[cubic-bezier(0.23,1,0.32,1)] ${fillClass}`}
         style={{ width: `${width}%` }}
       />
     </div>
