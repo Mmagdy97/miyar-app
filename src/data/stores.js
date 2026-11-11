@@ -41,3 +41,6 @@ export const changeOrdersStore = createPersistedStore("miyar:changeorders:v1", [
 
 // Client selections / FF&E schedule lines: proposed -> approved/rejected -> ordered.
 export const selectionsStore = createPersistedStore("miyar:selections:v1", [], (x) => x);
+
+// Electronic quote acceptances keyed by quote number: { name, img (png data URL), total, at }.
+export const signaturesStore = createPersistedStore("miyar:signatures:v1", {}, (x) => x);

@@ -4,6 +4,8 @@ import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
 import { officeStore, defaultVat } from "../data/office";
 import OfficeDetails from "./OfficeDetails";
+import QuoteSignature from "./QuoteSignature";
+import { signaturesStore } from "../data/stores";
 import { getCurrency } from "../i18n";
 import { useState, useMemo } from "react";
 import {
@@ -96,6 +98,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
   const [quoteClient, setQuoteClient] = useState("");
   const [office] = officeStore.use();
   const vatRate = office.vatRate ?? defaultVat(getCurrency());
+  const [sigs] = signaturesStore.use();
   const quoteNo = `Q-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}`;
 
   // Export BOQ as CSV (UTF-8 BOM so Excel reads Arabic/Turkish correctly)
@@ -228,6 +231,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               className="w-full rounded-xl border border-[#E3E0D9] bg-white px-3 py-2 text-sm"
             />
           </label>
+          <QuoteSignature quoteNo={quoteNo} total={Math.round(totalPrice * (1 + vatRate / 100))} defaultName={quoteClient} />
         </div>
 
         {/* Printed quotation header (hidden on screen) */}
@@ -845,7 +849,15 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
         </div>
         <div className="mt-12 grid grid-cols-2 gap-10 text-xs">
           <div className="border-t border-black pt-1">{office.name || T("brand")}</div>
-          <div className="border-t border-black pt-1">{T("quote.sign")}</div>
+          <div className="border-t border-black pt-1">
+            {sigs[quoteNo] && sigs[quoteNo].total === Math.round(totalPrice * (1 + vatRate / 100)) && (
+              <div className="-mt-12 mb-1">
+                <img src={sigs[quoteNo].img} alt="" className="h-10" />
+                <p className="text-[10px]">{T("sign.done", { 0: sigs[quoteNo].name, 1: new Date(sigs[quoteNo].at).toLocaleDateString() })}</p>
+              </div>
+            )}
+            {T("quote.sign")}
+          </div>
         </div>
       </div>
     </main>
