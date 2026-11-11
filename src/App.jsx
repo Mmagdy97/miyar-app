@@ -200,7 +200,7 @@ function App() {
       {/* Sidebar: Slide-over Drawer on Mobile (< md), Static on Desktop (md:) */}
       <div
         className={`fixed inset-y-0 start-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:block ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          isMobileMenuOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"
         } ${sidebarCollapsed ? "md:w-[72px]" : "md:w-64"} w-72 shrink-0 h-full`}
       >
         <Sidebar

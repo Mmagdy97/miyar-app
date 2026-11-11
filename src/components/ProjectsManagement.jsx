@@ -238,8 +238,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* KPI Stats Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("proj.7")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#16181C]">{stats.total}</span>
@@ -249,7 +249,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("proj.9")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-emerald-700">{stats.onTrack}</span>
@@ -259,7 +259,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("proj.11")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-rose-700">{stats.delayed}</span>
@@ -269,7 +269,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("proj.13")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-black text-[#16181C]">%{stats.avgProgress}</span>

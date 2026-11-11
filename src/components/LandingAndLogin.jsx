@@ -199,8 +199,8 @@ export default function LandingAndLogin({ onLogin }) {
       <Hero onStart={() => openModal("Admin")} onWhy={() => scrollToSection("comparison")} />
 
       {/* 3. The Core Features Showcase (Detailed Explanations) */}
-      <section id="features" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="max-w-2xl mb-14 sm:mb-20 text-start">
+      <section id="features" className="py-14 sm:py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <div className="max-w-2xl mb-8 sm:mb-20 text-start">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#16181C] leading-tight text-balance">
             {T("ld.36")}
           </h2>
@@ -210,7 +210,7 @@ export default function LandingAndLogin({ onLogin }) {
         </div>
 
         {/* 4 Pillars in Alternating Rich Bento Layout */}
-        <div id="pillars" className="space-y-16 sm:space-y-24">
+        <div id="pillars" className="space-y-10 sm:space-y-24">
           {/* Pillar 1: المقايسات الذكية (Smart BOQ) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Text Description (7 Cols in RTL) */}
@@ -249,7 +249,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Visual Interactive Mockup Card (6 Cols) */}
-            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4">
+            <div className="hidden lg:block lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#EEECE6]">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
@@ -293,7 +293,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Pillar 2: الرقابة المالية والعهد (Petty Cash) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Interactive Mockup Card (6 Cols - First on Desktop for alternating flow) */}
-            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4 order-2 lg:order-1">
+            <div className="hidden lg:block lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4 order-2 lg:order-1">
               <div className="flex items-center justify-between pb-3 border-b border-[#EEECE6]">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-[#2B3138] text-white flex items-center justify-center font-bold text-xs">
@@ -414,7 +414,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Visual Interactive Mockup Card */}
-            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4">
+            <div className="hidden lg:block lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#EEECE6]">
                 <div>
                   <span className="text-[10px] font-bold text-[#5D6168] block">{T("ld.84")}</span>
@@ -455,7 +455,7 @@ export default function LandingAndLogin({ onLogin }) {
           {/* Pillar 4: إدارة المهام والمخططات (Site & Tech Office) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Interactive Mockup Card */}
-            <div className="lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4 order-2 lg:order-1">
+            <div className="hidden lg:block lg:col-span-6 bg-white rounded-xl p-6 sm:p-8 border border-[#E3E0D9] space-y-4 order-2 lg:order-1">
               <div className="flex items-center justify-between pb-3 border-b border-[#EEECE6]">
                 <span className="text-xs font-black text-[#16181C]">{T("ld.93")}</span>
                 <span className="text-[11px] font-bold text-[#5D6168] font-mono">٤ بنود تحت المتابعة</span>
@@ -531,7 +531,7 @@ export default function LandingAndLogin({ onLogin }) {
       <Capabilities />
 
       {/* 4. The Competitor Comparison Table (The Deal Closer) */}
-      <section id="comparison" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+      <section id="comparison" className="py-14 sm:py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="text-start max-w-2xl mb-14">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#16181C] leading-tight text-balance">
             {T("ld.109")}
@@ -697,7 +697,7 @@ export default function LandingAndLogin({ onLogin }) {
       {/* 5. Final CTA Banner & Footer */}
       <PricingSection onStart={() => openModal("Admin")} />
 
-      <section id="cta" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+      <section id="cta" className="py-12 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
         <div className="bg-[#171B21] border border-[#262c34] text-white rounded-xl p-10 md:p-16 text-start relative overflow-hidden">
           <div className="relative z-10 max-w-3xl">
 
