@@ -3,6 +3,7 @@ import { D } from "../data/dataI18n";
 import { PricingSection, LegalPage } from "./PublicPages";
 import { tr_ as T } from "../i18n";
 import Hero from "./Hero";
+import Capabilities from "./Capabilities";
 import SettingsSwitcher from "./SettingsSwitcher";
 import { useI18n } from "../i18n";
 import { useState } from "react";
@@ -526,6 +527,8 @@ export default function LandingAndLogin({ onLogin }) {
           </div>
         </div>
       </section>
+
+      <Capabilities />
 
       {/* 4. The Competitor Comparison Table (The Deal Closer) */}
       <section id="comparison" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">

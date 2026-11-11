@@ -143,6 +143,17 @@ function App() {
     setIsMobileMenuOpen(false);
   };
 
+  // Browser back/forward moves between tabs (hash keeps the tab shareable per session).
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    if (history.state?.tab !== activeTab) history.pushState({ tab: activeTab }, "", "#app");
+  }, [activeTab, isAuthenticated]);
+  useEffect(() => {
+    const onPop = (e) => { if (e.state?.tab) setActiveTab(e.state.tab); };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
   useEffect(() => {
     try {
       sessionStorage.setItem("miyar:session", JSON.stringify({ auth: isAuthenticated, role: currentRole, tab: activeTab }));

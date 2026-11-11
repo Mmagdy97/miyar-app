@@ -532,7 +532,9 @@
   "وجداول الحصر والمقايسات": "and quantity take-off & BOQ schedules",
   "٤ مشاريع تنفيذية": "4 active projects",
   "متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:": "Tracking contractual item quantities against actual site take-off for project:",
-  "فيلا الياسمين (BOQ-YAS-2026)": "Jasmine Villa (BOQ-YAS-2026)"
+  "فيلا الياسمين (BOQ-YAS-2026)": "Jasmine Villa (BOQ-YAS-2026)",
+  "يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة": "The project automatically starts at 0% progress in the",
+  "، وسيتلقى المهندس والعميل إشعاراً فورياً.": " phase; the engineer and client will be notified instantly."
  },
  "tr": {
   "سارة عامر": "Sara Amer",
@@ -1066,6 +1068,8 @@
   "وجداول الحصر والمقايسات": "ve metraj ve BOQ çizelgeleri",
   "٤ مشاريع تنفيذية": "4 aktif proje",
   "متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:": "Sözleşme kalem miktarlarının şantiyedeki gerçek metrajla karşılaştırılması, proje:",
-  "فيلا الياسمين (BOQ-YAS-2026)": "Yasemin Villa (BOQ-YAS-2026)"
+  "فيلا الياسمين (BOQ-YAS-2026)": "Yasemin Villa (BOQ-YAS-2026)",
+  "يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة": "Proje otomatik olarak %0 ilerlemeyle şu aşamada başlar:",
+  "، وسيتلقى المهندس والعميل إشعاراً فورياً.": "; mühendis ve müşteri anında bilgilendirilir."
  }
 }

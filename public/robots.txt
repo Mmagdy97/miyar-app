@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://miyar-app-rho.vercel.app/sitemap.xml

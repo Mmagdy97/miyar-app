@@ -611,7 +611,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
               <div className="p-3 bg-amber-50/60 rounded-lg border border-amber-200 text-xs text-amber-900">
                 <p>
-                  يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة <strong>D("التصميم")</strong>، وسيتلقى المهندس والعميل إشعاراً فورياً.
+                  {D("يبدأ المشروع تلقائياً بنسبة إنجاز ٠٪ في مرحلة")} <strong>{D("التصميم")}</strong>{D("، وسيتلقى المهندس والعميل إشعاراً فورياً.")}
                 </p>
               </div>
 

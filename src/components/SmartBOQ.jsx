@@ -21,8 +21,7 @@ import {
   HelpCircle,
   RefreshCw,
   X,
-  FileCheck,
-} from "lucide-react";
+  FileCheck, Printer } from "lucide-react";
 
 // Default interior design BOQ items
 
@@ -89,6 +88,23 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
     setShowAddItemModal(false);
     setNewItemName("");
     setNewItemNote("");
+  };
+
+  // Export BOQ as CSV (UTF-8 BOM so Excel reads Arabic/Turkish correctly)
+  const handleExportCsv = () => {
+    const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const head = [T("sboq.csv.cat"), T("sboq.csv.item"), T("sboq.csv.unit"), T("sboq.csv.qty"), T("sboq.csv.cost"), T("sboq.csv.margin"), T("sboq.csv.total")];
+    const rows = boqItems.map((i) => {
+      const total = i.quantity * i.unitCost * (1 + i.margin / 100);
+      return [i.category, i.name, i.unit, i.quantity, i.unitCost, i.margin, Math.round(total * 100) / 100];
+    });
+    const csv = "\ufeff" + [head, ...rows].map((r) => r.map(esc).join(",")).join("\r\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "miyar-boq.csv";
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   // Handle Save Draft
@@ -318,7 +334,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                 const rowCost = qty * cost;
                 const rowTotal = rowCost * (1 + margin / 100);
                 const rowProfit = rowTotal - rowCost;
-                const categoryClass = CATEGORY_COLORS[item.category] || CATEGORY_COLORS[D("أخرى")];
+                const categoryClass = CATEGORY_COLORS[item.category] || CATEGORY_COLORS["أخرى"];
 
                 return (
                   <tr
@@ -440,7 +456,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     <AlertCircle className="w-8 h-8 mx-auto mb-2 text-[#80848B]" />
                     <p className="font-bold text-[#5D6168]">{T("sboq.27")}</p>
                     <p className="text-xs text-[#5D6168] mt-1">
-                      يمكنك اختيار تصنيف آخر أو الضغط على D("+ إضافة بند جديد")
+                      يمكنك اختيار تصنيف آخر أو الضغط على "{D("+ إضافة بند جديد")}"
                     </p>
                   </td>
                 </tr>
@@ -512,6 +528,20 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={handleExportCsv}
+              className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E3E0D9] bg-white hover:bg-[#F6F5F1] text-[#5D6168] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
+            >
+              <Download className="w-4 h-4" />
+              <span>{T("boq.csv")}</span>
+            </button>
+            <button
+              onClick={() => window.print()}
+              className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E3E0D9] bg-white hover:bg-[#F6F5F1] text-[#5D6168] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
+            >
+              <Printer className="w-4 h-4" />
+              <span>{T("boq.print")}</span>
+            </button>
             {/* Save Draft */}
             <button
               onClick={handleSaveDraft}

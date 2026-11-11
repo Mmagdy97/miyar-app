@@ -15,7 +15,9 @@ const load = () => {
     const s = JSON.parse(localStorage.getItem(KEY));
     if (s && DICTS[s.locale] && CURRENCIES[s.currency]) return s;
   } catch { /* ignore */ }
-  return { locale: "ar", currency: "EGP" };
+  // First visit: pick the browser language when we support it, else Arabic.
+  const nav = (navigator.language || "ar").slice(0, 2).toLowerCase();
+  return { locale: DICTS[nav] ? nav : "ar", currency: nav === "tr" ? "TRY" : nav === "en" ? "USD" : "EGP" };
 };
 
 // Module-level current settings so plain helpers (formatters in seed.js) can read them.
@@ -51,6 +53,13 @@ export function I18nProvider({ children }) {
     const l = LOCALES[settings.locale];
     document.documentElement.lang = l.lang;
     document.documentElement.dir = l.dir;
+    const d = DICTS[settings.locale];
+    document.title = d["meta.title"];
+    const set = (sel, attr, v) => document.querySelector(sel)?.setAttribute(attr, v);
+    set('meta[name="description"]', "content", d["meta.desc"]);
+    set('meta[property="og:title"]', "content", d["meta.title"]);
+    set('meta[property="og:description"]', "content", d["meta.desc"]);
+    set('meta[property="og:locale"]', "content", { ar: "ar_EG", en: "en_US", tr: "tr_TR" }[settings.locale]);
   }, [settings.locale]);
 
   const value = useMemo(() => ({
