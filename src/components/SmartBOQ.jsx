@@ -1,5 +1,5 @@
 import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
-import { localize, D, DF } from "../data/dataI18n";
+import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
 import { useState, useMemo } from "react";
@@ -258,7 +258,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               +{Math.round(totalProfit).toLocaleString(intlLocale())}
             </span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded-md border border-emerald-200">
-              %{averageMargin}
+              {pct(averageMargin)}
             </span>
           </div>
         </div>
@@ -473,7 +473,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
             </span>
             <span>•</span>
             <span>
-              {D("متوسط هامش الربح:")} <strong className="text-[#16181C] font-bold">%{averageMargin}</strong>
+              {D("متوسط هامش الربح:")} <strong className="text-[#16181C] font-bold">{pct(averageMargin)}</strong>
             </span>
           </div>
           <span className="text-[11px] text-[#5D6168]">
@@ -672,7 +672,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
                     className="flex-1 accent-zinc-900 cursor-pointer"
                   />
                   <span className="w-14 text-center px-2 py-1 bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9] rounded-lg text-xs font-bold">
-                    %{newItemMargin}
+                    {pct(newItemMargin)}
                   </span>
                 </div>
               </div>
@@ -755,7 +755,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem }) {
               </div>
               <div className="flex justify-between">
                 <span className="text-[#5D6168]">{T("sboq.66")}</span>
-                <span className="font-bold text-emerald-700">%{averageMargin}</span>
+                <span className="font-bold text-emerald-700">{pct(averageMargin)}</span>
               </div>
             </div>
 

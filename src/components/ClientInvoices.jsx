@@ -202,7 +202,7 @@ function ClientInvoices() {
 
                       {/* Due Date */}
                       <td className="py-4 px-4 text-center text-xs text-[#5D6168] font-mono">
-                        {inv.dueDate}
+                        {D(inv.dueDate)}
                       </td>
 
                       {/* Status */}

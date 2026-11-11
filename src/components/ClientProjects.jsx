@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { localize, D, DF } from "../data/dataI18n";
+import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
@@ -168,7 +168,7 @@ function ClientProjects() {
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-[#5D6168] font-medium">{T("cli.102")}</span>
                     <span className="text-xs font-bold text-[#16181C] tracking-wide font-mono">
-                      %{unit.progress}
+                      {pct(unit.progress)}
                     </span>
                   </div>
                   <ProgressBar value={unit.progress} />

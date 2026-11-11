@@ -1,5 +1,5 @@
 import { currencySymbol, E } from "../i18n";
-import { D, DF } from "../data/dataI18n";
+import { D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
@@ -272,7 +272,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
         <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E3E0D9] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#5D6168] block mb-1">{T("proj.13")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-black text-[#16181C]">%{stats.avgProgress}</span>
+            <span className="text-xl md:text-2xl font-black text-[#16181C]">{pct(stats.avgProgress)}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
               {T("proj.14")}
             </span>
@@ -373,7 +373,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                       <span>{T("proj.18")}</span>
                     </span>
                     <span className="text-xs font-bold text-[#16181C] tracking-wide font-mono">
-                      %{project.progress}
+                      {pct(project.progress)}
                     </span>
                   </div>
 
@@ -680,7 +680,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-xs font-bold text-[#5D6168]">{T("proj.18")}</label>
-                  <span className="text-xs font-black text-[#16181C]">%{timelineProgress}</span>
+                  <span className="text-xs font-black text-[#16181C]">{pct(timelineProgress)}</span>
                 </div>
                 <input
                   type="range"

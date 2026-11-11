@@ -7,7 +7,12 @@ const LOGIC_KEYS = new Set(["status","phase","role","priority","severity","id","
 
 /** Translate one demo string; user-entered text passes through untouched. */
 export { MAPS };
-export const D = (v) => (typeof v === "string" ? (MAPS[getLocale()]?.[v] ?? v) : v);
+const toLatin = (v) => v.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/٪/g, "%").replace(/٫/g, ".");
+export const D = (v) => {
+  if (typeof v !== "string") return v;
+  const loc = getLocale();
+  return MAPS[loc]?.[v] ?? (loc === "ar" ? v : toLatin(v));
+};
 
 /** Deep-localise display fields only (status/phase/role stay intact for logic). */
 export const localize = (x) => {
@@ -22,3 +27,6 @@ export const localize = (x) => {
 
 /** Translate a template with {0},{1}… placeholders (key is the Arabic template). */
 export const DF = (tpl, ...a) => D(tpl).replace(/\{(\d+)\}/g, (m, i) => (i in a ? a[i] : m));
+
+/** 53 -> "%53" (ar, as before) | "53%" (en/tr) */
+export const pct = (n) => (getLocale() === "ar" ? `%${n}` : `${n}%`);

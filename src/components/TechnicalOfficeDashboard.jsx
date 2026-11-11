@@ -372,7 +372,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
-              ٥
+              {D("٥")}
             </span>
             <span className="text-xs font-bold text-[#16181C] bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
               {T("to.9")}
@@ -400,7 +400,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-amber-800 font-ibm">
-              ٢
+              {D("٢")}
             </span>
             <span className="text-xs font-black text-rose-800 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
               {T("to.13")}
@@ -424,7 +424,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
-              ٣
+              {D("٣")}
             </span>
             <span className="text-xs font-bold text-emerald-700 bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
               {T("to.17")}
@@ -448,7 +448,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
-              ١
+              {D("١")}
             </span>
             <span className="text-xs font-bold text-purple-700 bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
               {T("to.21")}

@@ -322,7 +322,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
             {/* Quick Metrics */}
             <div className="mt-4 pt-3 border-t border-[#E3E0D9] flex items-center justify-between text-xs text-[#5D6168] font-medium">
-              <span>{T("se.12")} <strong className="text-xs font-bold text-[#16181C] tracking-wide font-mono">٧٨٪</strong></span>
+              <span>{T("se.12")} <strong className="text-xs font-bold text-[#16181C] tracking-wide font-mono">{D("٧٨٪")}</strong></span>
               <span className="text-[#5D6168]">{T("se.14")} <strong className="text-[#16181C]">{T("se.15")}</strong></span>
             </div>
 

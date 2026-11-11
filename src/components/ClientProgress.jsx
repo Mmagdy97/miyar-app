@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { localize } from "../data/dataI18n";
+import { localize, pct } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
 import ProgressBar from "./ProgressBar";
 import {
@@ -172,7 +172,7 @@ function ClientProgress() {
             {/* Inner Ring Text */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
               <span className="text-3xl md:text-4xl font-black tracking-tight text-white font-mono">
-                %{overallPercentage}
+                {pct(overallPercentage)}
               </span>
               <span className="text-[11px] font-bold text-[#80848B] mt-0.5">
                 {T("cli.119")}
@@ -226,7 +226,7 @@ function ClientProgress() {
                     <div className="flex justify-between items-center text-xs">
                       <span className="text-[11px] font-bold text-[#5D6168]">{T("cli.122")}</span>
                       <span className="text-xs font-bold text-[#16181C] tracking-wide font-mono">
-                        %{item.percentage}
+                        {pct(item.percentage)}
                       </span>
                     </div>
                     <ProgressBar
