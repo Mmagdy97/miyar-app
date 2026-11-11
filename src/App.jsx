@@ -1,3 +1,4 @@
+import { createPersistedStore } from "./data/persisted";
 import { useState, useEffect } from "react";
 import { localize, D } from "./data/dataI18n";
 import Sidebar from "./components/Sidebar";
@@ -83,6 +84,8 @@ const INITIAL_ACTION_ITEMS = localize([
   },
 ]);
 
+const actionItemsStore = createPersistedStore("miyar:actions:v1", INITIAL_ACTION_ITEMS);
+
 function App() {
   const saved = (() => {
     try { return JSON.parse(sessionStorage.getItem("miyar:session")) || {}; } catch { return {}; }
@@ -132,7 +135,7 @@ function App() {
   };
 
   // Shared state for real-time synchronization between Engineer and Admin with role-based targeting
-  const [actionItems, setActionItems] = useState(INITIAL_ACTION_ITEMS);
+  const [actionItems, setActionItems] = actionItemsStore.use();
 
   // Requirement 1: Global Modal State in the parent App Shell
   const [selectedItem, setSelectedItem] = useState(null);

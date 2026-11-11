@@ -1,3 +1,4 @@
+import { createPersistedStore } from "../data/persisted";
 import { currencySymbol, E } from "../i18n";
 import { D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
@@ -60,8 +61,10 @@ const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
   (p) => p.displayName
 );
 
+const projectsStore = createPersistedStore("miyar:projects:v1", INITIAL_PROJECTS);
+
 function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
-  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+  const [projects, setProjects] = projectsStore.use();
   const [isAddProjectOpen, setIsAddProjectOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("الكل");

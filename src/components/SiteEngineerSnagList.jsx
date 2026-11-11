@@ -1,3 +1,4 @@
+import { createPersistedStore } from "../data/persisted";
 import { useState, useMemo } from "react";
 import { localize, D } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
@@ -61,8 +62,10 @@ const SEVERITY_COLORS = localize({
   طفيفة: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
 });
 
+const snagsStore = createPersistedStore("miyar:snags:v1", INITIAL_SNAGS);
+
 function SiteEngineerSnagList() {
-  const [snags, setSnags] = useState(INITIAL_SNAGS);
+  const [snags, setSnags] = snagsStore.use();
   const [filter, setFilter] = useState("الكل");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
