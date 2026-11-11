@@ -1202,4 +1202,6 @@ export default {
   "co.msg": "Change order #{0}: {1} - cost {2} - extra time {3} days. Please open the client portal to approve.",
   "nav.Admin.Change Orders": "Change orders",
   "nav.Client.Change Orders": "Change orders",
+  "off.msg": "You're offline — your work is saved on this device",
+  "off.back": "Back online",
 };

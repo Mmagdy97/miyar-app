@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { localize, D } from "./data/dataI18n";
 import Sidebar from "./components/Sidebar";
+import OfflineBanner from "./components/OfflineBanner";
 import Navbar from "./components/Navbar";
 import MainContent from "./components/MainContent";
 import ActionItemModal from "./components/ActionItemModal";
@@ -189,6 +190,7 @@ function App() {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#2B3138] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         {D("تخطي إلى المحتوى")}
       </a>
+      <OfflineBanner />
       {/* Mobile Drawer Backdrop Overlay */}
       {isMobileMenuOpen && (
         <div
