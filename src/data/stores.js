@@ -44,3 +44,6 @@ export const selectionsStore = createPersistedStore("miyar:selections:v1", [], (
 
 // Electronic quote acceptances keyed by quote number: { name, img (png data URL), total, at }.
 export const signaturesStore = createPersistedStore("miyar:signatures:v1", {}, (x) => x);
+
+// Moodboard tiles per project: image (https URL), colour (#hex) or note; the client can like tiles.
+export const moodStore = createPersistedStore("miyar:mood:v1", [], (x) => x);
