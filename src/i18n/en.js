@@ -1234,4 +1234,13 @@ export default {
   "sel.repropose": "Re-propose",
   "nav.Admin.Selections": "Selections & FF&E",
   "nav.Client.Selections": "My selections",
+  "sign.btn": "Sign & accept quote",
+  "sign.resign": "Sign again (total changed)",
+  "sign.title": "Accept quote",
+  "sign.terms": "By signing, the client accepts the items and prices of this quote at its current total. Any change to the total voids the signature.",
+  "sign.name": "Signer name",
+  "sign.pad": "Sign here with finger or mouse",
+  "sign.clear": "Clear signature",
+  "sign.confirm": "Accept",
+  "sign.done": "Signed electronically by {0} on {1}",
 };

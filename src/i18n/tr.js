@@ -1234,4 +1234,13 @@ export default {
   "sel.repropose": "Yeniden öner",
   "nav.Admin.Selections": "Seçimler ve FF&E",
   "nav.Client.Selections": "Seçimlerim",
+  "sign.btn": "Teklifi imzala ve onayla",
+  "sign.resign": "Yeniden imzala (toplam değişti)",
+  "sign.title": "Teklifi onayla",
+  "sign.terms": "İmzalayarak müşteri, bu teklifin kalem ve fiyatlarını mevcut toplamıyla kabul eder. Toplamdaki her değişiklik imzayı geçersiz kılar.",
+  "sign.name": "İmzalayan adı",
+  "sign.pad": "Parmak veya fareyle buraya imzalayın",
+  "sign.clear": "İmzayı sil",
+  "sign.confirm": "Onayla",
+  "sign.done": "{0} tarafından {1} tarihinde elektronik olarak imzalandı",
 };
