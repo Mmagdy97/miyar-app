@@ -38,3 +38,6 @@ export const posStore = createPersistedStore("miyar:pos:v1", [
 
 // Change orders (أوامر التغيير): draft -> sent -> approved/rejected by the client.
 export const changeOrdersStore = createPersistedStore("miyar:changeorders:v1", [], (x) => x);
+
+// Client selections / FF&E schedule lines: proposed -> approved/rejected -> ordered.
+export const selectionsStore = createPersistedStore("miyar:selections:v1", [], (x) => x);
