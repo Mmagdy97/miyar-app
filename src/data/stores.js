@@ -15,3 +15,6 @@ export const cashTotals = (rows) => {
 
 export const invoicesStore = createPersistedStore("miyar:invoices:v1", CLIENT_INVOICES, localize);
 export const boqStore = createPersistedStore("miyar:boq:v1", INITIAL_BOQ_ITEMS, localize);
+
+// Site problems reported from field tasks (Admin/Tech Office read these later via Supabase).
+export const problemsStore = createPersistedStore("miyar:problems:v1", [], (x) => x);
