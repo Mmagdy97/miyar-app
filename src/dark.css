@@ -20,7 +20,6 @@ html.dark .bg-\[\#D9480F\]{background-color:#e8590c}
 html.dark .bg-\[\#D9480F\]\/10{background-color:rgb(232 89 12 / 0.1)}
 html.dark .bg-\[\#D9480F\]\/15{background-color:rgb(232 89 12 / 0.15)}
 html.dark .bg-\[\#D9480F\]\/20{background-color:rgb(232 89 12 / 0.2)}
-html.dark .bg-\[\#D9480F\]\/25{background-color:rgb(232 89 12 / 0.25)}
 html.dark .bg-\[\#D9480F\]\/30{background-color:rgb(232 89 12 / 0.3)}
 html.dark .bg-\[\#DDE1E5\]{background-color:#262c34}
 html.dark .bg-\[\#ECEEF0\]{background-color:#1a1f26}
@@ -65,7 +64,6 @@ html.dark .border-\[\#CBD0D6\]{border-color:#313840}
 html.dark .border-\[\#D9480F\]{border-color:#e8590c}
 html.dark .border-\[\#D9480F\]\/20{border-color:rgb(232 89 12 / 0.2)}
 html.dark .border-\[\#D9480F\]\/30{border-color:rgb(232 89 12 / 0.3)}
-html.dark .border-\[\#D9480F\]\/40{border-color:rgb(232 89 12 / 0.4)}
 html.dark .border-\[\#DDE1E5\]{border-color:#262c34}
 html.dark .border-\[\#DDE1E5\]\/60{border-color:rgb(38 44 52 / 0.6)}
 html.dark .border-\[\#DDE1E5\]\/80{border-color:rgb(38 44 52 / 0.8)}
@@ -110,7 +108,6 @@ html.dark .group:hover .group-hover\:text-\[\#1E2429\]{color:#eceef0}
 html.dark .group:hover .group-hover\:text-amber-800{color:#ff9d5c}
 html.dark .hover\:bg-\[\#1E2429\]:hover{background-color:#c2410c}
 html.dark .hover\:bg-\[\#2B3138\]:hover{background-color:#e8590c}
-html.dark .hover\:bg-\[\#9AA2AB\]:hover{background-color:#1a1e22}
 html.dark .hover\:bg-\[\#B83B0A\]:hover{background-color:#b83b0a}
 html.dark .hover\:bg-\[\#B93C0B\]:hover{background-color:#b93c0b}
 html.dark .hover\:bg-\[\#D9480F\]\/20:hover{background-color:rgb(232 89 12 / 0.2)}
@@ -155,6 +152,7 @@ html.dark .text-\[\#5A646E\]\/40{color:rgb(154 163 173 / 0.4)}
 html.dark .text-\[\#7B848E\]{color:#7e8791}
 html.dark .text-\[\#B45309\]{color:#f7a364}
 html.dark .text-\[\#B83F3F\]{color:#d58585}
+html.dark .text-\[\#C9CFD6\]{color:#c9cfd6}
 html.dark .text-\[\#D9480F\]{color:#ff8a4c}
 html.dark .text-\[\#ECEEF0\]{color:#eceef0}
 html.dark .text-\[\#ECEEF0\]\/60{color:rgb(236 238 240 / 0.6)}
