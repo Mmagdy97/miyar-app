@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { localize } from "../data/dataI18n";
 import { Check, ArrowRight } from "lucide-react";
-import { CURRENCIES, formatMoney } from "../lib/currency";
+import { formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
 
 import { PRICES, PLANS, planPrice } from "../lib/pricing";
@@ -20,7 +20,7 @@ export function PricingSection({ onStart }) {
           <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#DAD3C2]">
             {Object.keys(PRICES).map((k) => (
               <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
-                {CURRENCIES[k].name}
+                {(() => { try { return new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(k); } catch { return k; } })()}
               </button>
             ))}
           </div>
@@ -38,18 +38,16 @@ export function PricingSection({ onStart }) {
           return (
             <div
               key={p.key}
-              className={`rounded-2xl p-6 bg-white flex flex-col border ${
+              className={`relative rounded-xl p-6 bg-white flex flex-col border ${
                 p.highlight ? "border-[#B5452B] shadow-lg ring-1 ring-[#B5452B]/30" : "border-[#DAD3C2]"
               }`}
             >
-              {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#B5452B] text-white">{t("pricing.popular")}</span>}
+              {p.highlight && <span className="absolute -top-3 start-6 text-[11px] font-bold px-2.5 py-1 rounded-md bg-[#B5452B] text-white">{t("pricing.popular")}</span>}
               <h3 className="text-xl font-black text-[#1A2236]">{t(`plan.${p.key}`)}</h3>
               <p className="text-xs text-[#535E78] mb-4">{t(`plan.${p.key}.tag`)}</p>
               <p className="mb-5">
                 {p.custom ? (
                   <span className="text-3xl font-black text-[#1A2236]">{t("pricing.custom")}</span>
-                ) : price === 0 ? (
-                  <span className="text-4xl font-black text-[#1A2236]">{t("pricing.free")}</span>
                 ) : (
                   <>
                     <span className="text-3xl font-black text-[#1A2236] tabular-nums">{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
