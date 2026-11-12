@@ -58,7 +58,7 @@ const STANDARD_TEMPLATES = localize([
     format: "PDF + EXCEL",
     size: "١.١ ميجابايت",
     category: "المقايسات والعقود",
-    color: "from-purple-600 to-pink-600",
+    color: "from-[#B5452B] to-[#9A3822]",
   },
 ]);
 

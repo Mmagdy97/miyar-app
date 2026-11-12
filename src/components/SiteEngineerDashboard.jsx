@@ -27,6 +27,7 @@ import {
   ChevronDown,
   Trash2,
   CheckCircle,
+  Wallet,
 } from "lucide-react";
 
 const WEATHER_OPTIONS = localize([
@@ -643,7 +644,7 @@ function SiteEngineerDashboard({ setActionItems }) {
             <div className="flex items-center justify-between pb-3 border-b border-[#E9E3D5]">
               <div className="flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-[#E9E3D5] text-[#1A2236] flex items-center justify-center font-bold">
-                  💸
+                  <Wallet className="w-4 h-4" aria-hidden="true" />
                 </span>
                 <h3 className="text-base font-black text-[#1A2236]">
                   {T("se.39")}

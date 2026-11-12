@@ -710,7 +710,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
             {uploadSuccess ? (
               <div className="p-8 text-center space-y-2">
-                <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto animate-bounce" />
+                <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h4 className="font-black text-[#1A2236] text-base">
                   {T("to.55")}
                 </h4>
