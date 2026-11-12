@@ -83,23 +83,23 @@ function ClientTimeline() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#16181C] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
                   <CalendarDays className="w-5 h-5" />
                 </div>
                 <span>{T("cli.123")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
                 {T("cli.124")}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#5D6168]">
+            <p className="text-xs md:text-sm text-[#535E78]">
               {T("cli.125")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9] text-xs font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2] text-xs font-bold">
               <Clock className="w-3.5 h-3.5 text-emerald-600" />
               <span>{T("cli.126")}</span>
             </span>
@@ -107,7 +107,7 @@ function ClientTimeline() {
         </div>
 
         {/* Vertical Stepper Container */}
-        <div className="relative border-e-2 border-[#E3E0D9] ms-4 sm:ms-6 ps-6 sm:ps-8 space-y-8 py-2">
+        <div className="relative border-e-2 border-[#DAD3C2] ms-4 sm:ms-6 ps-6 sm:ps-8 space-y-8 py-2">
           {TIMELINE_STEPS.map((step, idx) => {
             const isCompleted = step.statusType === "completed";
             const isActive = step.statusType === "active";
@@ -119,8 +119,8 @@ function ClientTimeline() {
                 <div
                   className={`absolute -start-[35px] sm:-start-[43px] top-4 w-9 h-9 rounded-full flex items-center justify-center text-xs font-black transition-all ${
                     isCompleted || isActive
-                      ? "bg-[#2B3138] text-white border-4 border-white shadow-sm ring-1 ring-[#E3E0D9]"
-                      : "bg-[#EEECE6] text-[#5D6168] border-4 border-white shadow-sm"
+                      ? "bg-[#24304D] text-white border-4 border-white shadow-sm ring-1 ring-[#DAD3C2]"
+                      : "bg-[#E9E3D5] text-[#535E78] border-4 border-white shadow-sm"
                   }`}
                 >
                   {isCompleted ? (
@@ -136,8 +136,8 @@ function ClientTimeline() {
                 <div
                   className={`bg-white rounded-2xl p-6 border transition-all duration-300 ${
                     isActive
-                      ? "border-[#2B3138] shadow-sm ring-1 ring-[#2B3138]/10"
-                      : "border-[#E3E0D9] shadow-sm"
+                      ? "border-[#24304D] shadow-sm ring-1 ring-[#24304D]/10"
+                      : "border-[#DAD3C2] shadow-sm"
                   }`}
                 >
                   {/* Card Header */}
@@ -145,7 +145,7 @@ function ClientTimeline() {
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3
                         className={`text-base font-black tracking-tight ${
-                          isActive ? "text-emerald-600 font-black" : "text-[#16181C]"
+                          isActive ? "text-emerald-600 font-black" : "text-[#1A2236]"
                         }`}
                       >
                         {E(step.phase)}
@@ -160,10 +160,10 @@ function ClientTimeline() {
                     <span
                       className={`inline-block px-3 py-1 rounded-full text-xs font-bold border self-start sm:self-auto ${
                         isCompleted
-                          ? "bg-[#EEECE6] text-[#16181C] border-[#E3E0D9]"
+                          ? "bg-[#E9E3D5] text-[#1A2236] border-[#DAD3C2]"
                           : isActive
                           ? "bg-amber-50 text-amber-800 border-amber-200 font-black"
-                          : "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]"
+                          : "bg-[#E9E3D5] text-[#535E78] border-[#DAD3C2]"
                       }`}
                     >
                       {E(step.status)}
@@ -171,34 +171,34 @@ function ClientTimeline() {
                   </div>
 
                   {/* Dates */}
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#5D6168] mb-3">
-                    <CalendarDays className="w-3.5 h-3.5 text-[#5D6168]" />
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#535E78] mb-3">
+                    <CalendarDays className="w-3.5 h-3.5 text-[#535E78]" />
                     <span>{step.dateRange}</span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs md:text-sm text-[#5D6168] leading-relaxed mb-4">
+                  <p className="text-xs md:text-sm text-[#535E78] leading-relaxed mb-4">
                     {step.description}
                   </p>
 
                   {/* Deliverables Checklist */}
-                  <div className="p-3.5 rounded-lg bg-[#F6F5F1] border border-[#EEECE6] space-y-2">
-                    <span className="text-[11px] font-bold text-[#5D6168] block mb-1">
+                  <div className="p-3.5 rounded-lg bg-[#F3EFE6] border border-[#E9E3D5] space-y-2">
+                    <span className="text-[11px] font-bold text-[#535E78] block mb-1">
                       {T("cli.128")}
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                       {step.deliverables.map((item, dIdx) => (
                         <div
                           key={dIdx}
-                          className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-lg border border-[#E3E0D9]/60 text-[#5D6168] text-[11px]"
+                          className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-lg border border-[#DAD3C2]/60 text-[#535E78] text-[11px]"
                         >
                           <CheckCircle2
                             className={`w-3.5 h-3.5 shrink-0 ${
                               isCompleted
                                 ? "text-emerald-600"
                                 : isActive
-                                ? "text-[#16181C]"
-                                : "text-[#80848B]"
+                                ? "text-[#1A2236]"
+                                : "text-[#65708A]"
                             }`}
                           />
                           <span className="truncate">{item}</span>

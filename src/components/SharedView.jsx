@@ -12,28 +12,28 @@ export default function SharedView({ payload }) {
   const s = useMemo(() => decodeSnapshot(payload), [payload]);
 
   return (
-    <div className="min-h-screen bg-[#F6F5F1] text-[#16181C]">
-      <header className="h-14 px-4 flex items-center justify-between border-b border-[#E3E0D9] bg-white/80">
+    <div className="min-h-screen bg-[#F3EFE6] text-[#1A2236]">
+      <header className="h-14 px-4 flex items-center justify-between border-b border-[#DAD3C2] bg-white/80">
         <a href="/" className="flex items-center gap-2 font-black">
-          <span className="w-8 h-8 rounded-lg bg-[#D9480F] text-white flex items-center justify-center">
+          <span className="w-8 h-8 rounded-lg bg-[#B5452B] text-white flex items-center justify-center">
             <LogoMark className="w-5 h-5" />
           </span>
           <span>{T("brand")}</span>
         </a>
-        <span className="text-[11px] font-bold text-[#5D6168]">{T("shared.readonly")}</span>
+        <span className="text-[11px] font-bold text-[#535E78]">{T("shared.readonly")}</span>
       </header>
 
       <main className="max-w-2xl mx-auto p-4 md:p-8 space-y-4">
         {!s || !s.name ? (
-          <p className="text-center text-sm text-[#5D6168] py-20">{T("shared.invalid")}</p>
+          <p className="text-center text-sm text-[#535E78] py-20">{T("shared.invalid")}</p>
         ) : (
           <>
-            <section className="bg-white rounded-2xl border border-[#E3E0D9] p-5 space-y-4">
-              {s.office && <p className="text-xs font-bold text-[#5D6168]">{s.office}</p>}
+            <section className="bg-white rounded-2xl border border-[#DAD3C2] p-5 space-y-4">
+              {s.office && <p className="text-xs font-bold text-[#535E78]">{s.office}</p>}
               <div>
-                <p className="text-xs font-bold text-[#5D6168]">{T("shared.title")}</p>
+                <p className="text-xs font-bold text-[#535E78]">{T("shared.title")}</p>
                 <h1 className="text-xl font-black mt-0.5">{s.name}</h1>
-                {s.client && <p className="text-sm text-[#5D6168] mt-0.5">{s.client}</p>}
+                {s.client && <p className="text-sm text-[#535E78] mt-0.5">{s.client}</p>}
               </div>
               <div>
                 <div className="flex items-center justify-between text-xs font-bold mb-1.5">
@@ -44,32 +44,32 @@ export default function SharedView({ payload }) {
               </div>
               <dl className="grid grid-cols-2 gap-3 text-sm">
                 {s.phase && (
-                  <div className="rounded-xl bg-[#F6F5F1] p-3 min-w-0">
-                    <dt className="text-[11px] font-bold text-[#5D6168]">{T("shared.phase")}</dt>
+                  <div className="rounded-xl bg-[#F3EFE6] p-3 min-w-0">
+                    <dt className="text-[11px] font-bold text-[#535E78]">{T("shared.phase")}</dt>
                     <dd className="font-bold truncate">{E(s.phase)}</dd>
                   </div>
                 )}
                 {s.status && (
-                  <div className="rounded-xl bg-[#F6F5F1] p-3 min-w-0">
-                    <dt className="text-[11px] font-bold text-[#5D6168]">{T("shared.status")}</dt>
+                  <div className="rounded-xl bg-[#F3EFE6] p-3 min-w-0">
+                    <dt className="text-[11px] font-bold text-[#535E78]">{T("shared.status")}</dt>
                     <dd className="font-bold truncate">{E(s.status)}</dd>
                   </div>
                 )}
               </dl>
-              <div className="space-y-1.5 text-xs text-[#5D6168]">
+              <div className="space-y-1.5 text-xs text-[#535E78]">
                 {s.deadline && (
-                  <p className="flex items-center gap-2"><CalendarDays className="w-4 h-4" />{T("shared.deadline")}: <strong className="text-[#16181C]">{s.deadline}</strong></p>
+                  <p className="flex items-center gap-2"><CalendarDays className="w-4 h-4" />{T("shared.deadline")}: <strong className="text-[#1A2236]">{s.deadline}</strong></p>
                 )}
                 {s.location && (
                   <p className="flex items-center gap-2"><MapPin className="w-4 h-4" />{s.location}</p>
                 )}
                 {s.updated && <p>{T("shared.updated")}: {s.updated}</p>}
               </div>
-              {s.note && <p className="text-sm leading-relaxed border-t border-[#EEECE6] pt-3">{s.note}</p>}
+              {s.note && <p className="text-sm leading-relaxed border-t border-[#E9E3D5] pt-3">{s.note}</p>}
             </section>
 
             {s.phases.length > 1 && (
-              <section className="bg-white rounded-2xl border border-[#E3E0D9] p-5">
+              <section className="bg-white rounded-2xl border border-[#DAD3C2] p-5">
                 <h2 className="text-sm font-black mb-4">{T("shared.stages")}</h2>
                 <ol className="flex items-start justify-between gap-1">
                   {s.phases.map((ph, i) => {
@@ -77,10 +77,10 @@ export default function SharedView({ payload }) {
                     const done = cur > i, now = cur === i;
                     return (
                       <li key={ph + i} className="flex-1 flex flex-col items-center gap-1.5 text-center min-w-0">
-                        <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${done || now ? "bg-[#2B3138] text-white" : "bg-white border-2 border-[#E3E0D9] text-[#5D6168]"} ${now ? "ring-4 ring-[#2B3138]/10" : ""}`}>
+                        <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${done || now ? "bg-[#24304D] text-white" : "bg-white border-2 border-[#DAD3C2] text-[#535E78]"} ${now ? "ring-4 ring-[#24304D]/10" : ""}`}>
                           {done ? <Check className="w-4 h-4" /> : i + 1}
                         </span>
-                        <span className={`text-[11px] leading-tight ${now ? "font-black" : "font-bold text-[#5D6168]"}`}>{ph}</span>
+                        <span className={`text-[11px] leading-tight ${now ? "font-black" : "font-bold text-[#535E78]"}`}>{ph}</span>
                       </li>
                     );
                   })}
@@ -89,7 +89,7 @@ export default function SharedView({ payload }) {
             )}
 
             {s.timeline.length > 0 && (
-              <section className="bg-white rounded-2xl border border-[#E3E0D9] p-5">
+              <section className="bg-white rounded-2xl border border-[#DAD3C2] p-5">
                 <h2 className="text-sm font-black mb-3">{T("shared.stages")}</h2>
                 <ul className="space-y-3">
                   {s.timeline.map((t, i) => (
@@ -99,7 +99,7 @@ export default function SharedView({ payload }) {
                           {t.pct >= 100 && <Check className="w-4 h-4 text-emerald-700 shrink-0" />}
                           <span className="truncate">{t.title}</span>
                         </span>
-                        <span className="text-xs font-mono text-[#5D6168]">{pct(t.pct)}</span>
+                        <span className="text-xs font-mono text-[#535E78]">{pct(t.pct)}</span>
                       </div>
                       <ProgressBar value={t.pct} />
                     </li>
@@ -109,15 +109,15 @@ export default function SharedView({ payload }) {
             )}
 
             {s.contract > 0 && isSupportedCurrency(s.currency) && (
-              <section className="bg-white rounded-2xl border border-[#E3E0D9] p-5">
+              <section className="bg-white rounded-2xl border border-[#DAD3C2] p-5">
                 <h2 className="text-sm font-black mb-3">{T("shared.payments")}</h2>
                 <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-xl bg-[#F6F5F1] p-3">
-                    <p className="text-[11px] font-bold text-[#5D6168]">{T("shared.collected")}</p>
+                  <div className="rounded-xl bg-[#F3EFE6] p-3">
+                    <p className="text-[11px] font-bold text-[#535E78]">{T("shared.collected")}</p>
                     <p className="font-black">{formatMoney(s.collected, s.currency, intlLocale(), { compact: true })}</p>
                   </div>
-                  <div className="rounded-xl bg-[#F6F5F1] p-3">
-                    <p className="text-[11px] font-bold text-[#5D6168]">{T("shared.remaining")}</p>
+                  <div className="rounded-xl bg-[#F3EFE6] p-3">
+                    <p className="text-[11px] font-bold text-[#535E78]">{T("shared.remaining")}</p>
                     <p className="font-black">{formatMoney(Math.max(0, s.contract - s.collected), s.currency, intlLocale(), { compact: true })}</p>
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export default function SharedView({ payload }) {
             {s.phone && (
               <a
                 href={whatsappLink("", s.phone)}
-                className="flex items-center justify-center gap-2 rounded-full bg-[#2B3138] text-white text-sm font-bold py-3"
+                className="flex items-center justify-center gap-2 rounded-full bg-[#24304D] text-white text-sm font-bold py-3"
               >
                 <Phone className="w-4 h-4" />
                 {T("shared.contact")}
@@ -135,7 +135,7 @@ export default function SharedView({ payload }) {
             )}
           </>
         )}
-        <p className="text-center text-[11px] text-[#5D6168] pt-4">{T("shared.by")}</p>
+        <p className="text-center text-[11px] text-[#535E78] pt-4">{T("shared.by")}</p>
       </main>
     </div>
   );

@@ -225,28 +225,28 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       )}
 
       {/* 1. Header & Quick Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#E3E0D9]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#DAD3C2]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9] inline-flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-[#5D6168]" />
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2] inline-flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-[#535E78]" />
               {T("to.3")}
             </span>
-            <span className="text-xs text-[#5D6168] font-semibold font-mono">BIM & CAD Studio</span>
+            <span className="text-xs text-[#535E78] font-semibold font-mono">BIM & CAD Studio</span>
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#16181C] mt-1.5">
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-[#1A2236] mt-1.5">
             {T("to.4")}
           </h1>
 
-          <p className="text-xs md:text-sm text-[#5D6168] mt-1 flex items-center gap-2 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#5D6168]">
-              <Calendar className="w-3.5 h-3.5 text-[#5D6168]" />
+          <p className="text-xs md:text-sm text-[#535E78] mt-1 flex items-center gap-2 flex-wrap">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-[#535E78]">
+              <Calendar className="w-3.5 h-3.5 text-[#535E78]" />
               {todayArabic}
             </span>
-            <span className="text-[#80848B]">•</span>
-            <span className="text-[#5D6168]">
-              {D("متابعة مستندات")} <strong className="text-[#16181C]">{D("٤ مشاريع تنفيذية")}</strong> {D("وجداول الحصر والمقايسات")}
+            <span className="text-[#65708A]">•</span>
+            <span className="text-[#535E78]">
+              {D("متابعة مستندات")} <strong className="text-[#1A2236]">{D("٤ مشاريع تنفيذية")}</strong> {D("وجداول الحصر والمقايسات")}
             </span>
           </p>
         </div>
@@ -255,7 +255,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
         <div className="flex items-center gap-3">
           <button
             onClick={() => setUploadModalOpen(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#16181C] transition-colors shadow-sm active:scale-95 transition-all cursor-pointer"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black text-white bg-[#24304D] hover:bg-[#1A2236] transition-colors shadow-sm active:scale-95 transition-all cursor-pointer"
           >
             <UploadCloud className="w-4 h-4 shrink-0" />
             <span>{T("to.6")}</span>
@@ -266,34 +266,34 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       {/* 2. Engineering Dashboard Grid (4 Cards) */}
       <div className="grid stat-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: مخططات بانتظار الاعتماد */}
-        <div className="bg-white rounded-lg border border-[#E3E0D9] p-5 shadow-xs transition-all flex flex-col justify-between">
+        <div className="bg-white rounded-lg border border-[#DAD3C2] p-5 shadow-xs transition-all flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#5D6168] uppercase tracking-wider flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#16181C]" />
+            <span className="text-xs font-bold text-[#535E78] uppercase tracking-wider flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1A2236]" />
               {T("to.7")}
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
+            <div className="w-8 h-8 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
               <FileCode className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
-            <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
+            <span className="text-3xl font-black tracking-tight text-[#1A2236] font-ibm">
               {nf(reviewCount)}
             </span>
-            <span className="text-xs font-bold text-[#16181C] bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
+            <span className="text-xs font-bold text-[#1A2236] bg-[#E9E3D5] border border-[#DAD3C2] px-2 py-0.5 rounded-full text-[#1A2236]">
               {T("to.9")}
             </span>
           </div>
-          <p className="text-xs text-[#5D6168] mt-2 font-medium">
+          <p className="text-xs text-[#535E78] mt-2 font-medium">
             {T("to.dwg.total", { 0: nf(drawings.length) })}
           </p>
         </div>
 
         {/* Card 2: طلبات استفسار الموقع (RFIs) - Warning/Urgent Style */}
-        <div className="bg-white rounded-lg border border-[#E3E0D9] p-5 shadow-xs transition-all flex flex-col justify-between relative overflow-hidden">
+        <div className="bg-white rounded-lg border border-[#DAD3C2] p-5 shadow-xs transition-all flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 end-0 start-0 h-1 bg-amber-700" />
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#16181C] flex items-center gap-1.5">
+            <span className="text-xs font-bold text-[#1A2236] flex items-center gap-1.5">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
@@ -318,49 +318,49 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
         </div>
 
         {/* Card 3: مقايسات قيد التسعير */}
-        <div className="bg-white rounded-lg border border-[#E3E0D9] p-5 shadow-xs transition-all flex flex-col justify-between">
+        <div className="bg-white rounded-lg border border-[#DAD3C2] p-5 shadow-xs transition-all flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#5D6168] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-bold text-[#535E78] uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               {T("to.15")}
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
+            <div className="w-8 h-8 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
               <ClipboardList className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
-            <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
+            <span className="text-3xl font-black tracking-tight text-[#1A2236] font-ibm">
               {D("٣")}
             </span>
-            <span className="text-xs font-bold text-emerald-700 bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
+            <span className="text-xs font-bold text-emerald-700 bg-[#E9E3D5] border border-[#DAD3C2] px-2 py-0.5 rounded-full text-[#1A2236]">
               {T("to.17")}
             </span>
           </div>
-          <p className="text-xs text-[#5D6168] mt-2 font-medium">
+          <p className="text-xs text-[#535E78] mt-2 font-medium">
             {D("تشطيبات شاليه مراسي ومقر الشيخ زايد")}
           </p>
         </div>
 
         {/* Card 4: أوامر التغيير المطلوبة */}
-        <div className="bg-white rounded-lg border border-[#E3E0D9] p-5 shadow-xs transition-all flex flex-col justify-between">
+        <div className="bg-white rounded-lg border border-[#DAD3C2] p-5 shadow-xs transition-all flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#5D6168] uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-bold text-[#535E78] uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
               {T("to.19")}
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
+            <div className="w-8 h-8 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
               <FileEdit className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
-            <span className="text-3xl font-black tracking-tight text-[#16181C] font-ibm">
+            <span className="text-3xl font-black tracking-tight text-[#1A2236] font-ibm">
               {nf(coSent + coDraft)}
             </span>
-            <span className="text-xs font-bold text-purple-700 bg-[#EEECE6] border border-[#E3E0D9] px-2 py-0.5 rounded-full text-[#16181C]">
+            <span className="text-xs font-bold text-purple-700 bg-[#E9E3D5] border border-[#DAD3C2] px-2 py-0.5 rounded-full text-[#1A2236]">
               {T("to.21")}
             </span>
           </div>
-          <p className="text-xs text-[#5D6168] mt-2 font-medium">
+          <p className="text-xs text-[#535E78] mt-2 font-medium">
             {T("to.co.sub", { 0: nf(coSent), 1: nf(coDraft) })}
           </p>
         </div>
@@ -369,15 +369,15 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       {/* 3. Split Layout (Two Columns: Document Control vs Site RFIs) */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left Column: آخر المخططات الهندسية (Document Control & Shop Drawings) */}
-        <div className="bg-white rounded-lg border border-[#E3E0D9] shadow-xs overflow-hidden flex flex-col justify-between flex-1">
+        <div className="bg-white rounded-lg border border-[#DAD3C2] shadow-xs overflow-hidden flex flex-col justify-between flex-1">
           <div>
-            <div className="p-5 border-b border-[#EEECE6] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="p-5 border-b border-[#E9E3D5] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <h2 className="text-base font-bold text-[#16181C] flex items-center gap-2">
-                  <FileCode className="w-4 h-4 text-[#16181C]" />
+                <h2 className="text-base font-bold text-[#1A2236] flex items-center gap-2">
+                  <FileCode className="w-4 h-4 text-[#1A2236]" />
                   {T("to.23")}
                 </h2>
-                <p className="text-xs text-[#5D6168] mt-0.5">
+                <p className="text-xs text-[#535E78] mt-0.5">
                   {T("to.24")}
                 </p>
               </div>
@@ -389,13 +389,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={T("to.25")}
-                  className="py-1.5 ps-8 pe-3 rounded-lg border border-[#E3E0D9] text-xs focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-[#16181C] placeholder:text-[#5D6168] w-44"
+                  className="py-1.5 ps-8 pe-3 rounded-lg border border-[#DAD3C2] text-xs focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-[#1A2236] placeholder:text-[#535E78] w-44"
                 />
-                <Search className="w-3.5 h-3.5 text-[#5D6168] absolute start-2.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-3.5 h-3.5 text-[#535E78] absolute start-2.5 top-1/2 -translate-y-1/2" />
               </div>
             </div>
 
-            <div className="divide-y divide-[#EEECE6] max-h-[460px] overflow-y-auto">
+            <div className="divide-y divide-[#E9E3D5] max-h-[460px] overflow-y-auto">
               {filteredDrawings.map((dwg) => {
                 const isApproved = dwg.status === "approved";
                 const isReview = dwg.status === "review";
@@ -404,32 +404,32 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 return (
                   <div
                     key={dwg.id}
-                    className="p-4 hover:bg-[#F6F5F1] transition-all flex items-start justify-between gap-3 group"
+                    className="p-4 hover:bg-[#F3EFE6] transition-all flex items-start justify-between gap-3 group"
                   >
                     <div className="flex items-start gap-3 min-w-0">
-                      <div className="w-9 h-9 rounded-lg bg-[#EEECE6] group-hover:bg-[#E3E0D9] text-[#5D6168] flex items-center justify-center font-bold text-xs shrink-0 transition-colors">
+                      <div className="w-9 h-9 rounded-lg bg-[#E9E3D5] group-hover:bg-[#DAD3C2] text-[#535E78] flex items-center justify-center font-bold text-xs shrink-0 transition-colors">
                         <FileText className="w-4 h-4" />
                       </div>
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-xs sm:text-sm font-bold text-[#16181C] truncate">
+                          <h3 className="text-xs sm:text-sm font-bold text-[#1A2236] truncate">
                             {dwg.name}
                           </h3>
-                          <span className="text-[10px] font-black font-mono px-1.5 py-0.5 rounded bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
+                          <span className="text-[10px] font-black font-mono px-1.5 py-0.5 rounded bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
                             {dwg.code}
                           </span>
-                          <span className="text-[10px] font-extrabold text-[#16181C] bg-[#EEECE6] text-[#16181C] px-1.5 py-0.5 rounded border border-[#E3E0D9]">
+                          <span className="text-[10px] font-extrabold text-[#1A2236] bg-[#E9E3D5] text-[#1A2236] px-1.5 py-0.5 rounded border border-[#DAD3C2]">
                             {dwg.rev}
                           </span>
                         </div>
 
-                        <p className="text-xs text-[#5D6168] mt-1 flex items-center gap-2 flex-wrap">
-                          <span>{T("to.26")} <strong className="text-[#5D6168]">{dwg.project}</strong></span>
+                        <p className="text-xs text-[#535E78] mt-1 flex items-center gap-2 flex-wrap">
+                          <span>{T("to.26")} <strong className="text-[#535E78]">{dwg.project}</strong></span>
                           <span>•</span>
                           <span>{T("to.27", { v0: dwg.discipline })}</span>
                           <span>•</span>
-                          <span className="text-[#5D6168] text-[11px]">{dwg.date}</span>
+                          <span className="text-[#535E78] text-[11px]">{dwg.date}</span>
                         </p>
 
                         <div className="mt-2 flex items-center gap-2">
@@ -451,7 +451,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                             )}
                             {dwg.statusLabel}
                           </span>
-                          <span className="text-[10px] text-[#5D6168]">{dwg.size}</span>
+                          <span className="text-[10px] text-[#535E78]">{dwg.size}</span>
                         </div>
                       </div>
                     </div>
@@ -461,14 +461,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                       <button
                         title={T("to.28")}
                         onClick={() => alert(DF("معاينة المخطط: {0} ({1})", dwg.name, dwg.code))}
-                        className="p-1.5 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6] transition-colors"
+                        className="p-1.5 rounded-lg text-[#535E78] hover:text-[#1A2236] hover:bg-[#E9E3D5] transition-colors"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button
                         title={T("to.29")}
                         onClick={() => alert(DF("جاري تنزيل الملف المعتمد: {0}.pdf", dwg.name))}
-                        className="p-1.5 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6] transition-colors"
+                        className="p-1.5 rounded-lg text-[#535E78] hover:text-[#1A2236] hover:bg-[#E9E3D5] transition-colors"
                       >
                         <Download className="w-4 h-4" />
                       </button>
@@ -479,22 +479,22 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             </div>
           </div>
 
-          <div className="p-3.5 bg-[#F6F5F1] border-t border-[#EEECE6] text-[#5D6168] flex items-center justify-between text-xs text-[#5D6168]">
+          <div className="p-3.5 bg-[#F3EFE6] border-t border-[#E9E3D5] text-[#535E78] flex items-center justify-between text-xs text-[#535E78]">
             <span>{T("to.30", { v0: drawings.length })}</span>
-            <span className="font-bold text-[#5D6168]">{T("to.31")}</span>
+            <span className="font-bold text-[#535E78]">{T("to.31")}</span>
           </div>
         </div>
 
         {/* Right Column: استفسارات وتعارضات الموقع (Site Requests / RFIs) */}
-        <div className="bg-white rounded-lg border border-[#E3E0D9] shadow-xs overflow-hidden flex flex-col justify-between flex-1">
+        <div className="bg-white rounded-lg border border-[#DAD3C2] shadow-xs overflow-hidden flex flex-col justify-between flex-1">
           <div>
-            <div className="p-5 border-b border-[#EEECE6] flex items-center justify-between">
+            <div className="p-5 border-b border-[#E9E3D5] flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-[#16181C] flex items-center gap-2">
+                <h2 className="text-base font-bold text-[#1A2236] flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-700" />
                   {T("to.32")}
                 </h2>
-                <p className="text-xs text-[#5D6168] mt-0.5">
+                <p className="text-xs text-[#535E78] mt-0.5">
                   {T("to.33")}
                 </p>
               </div>
@@ -516,13 +516,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                       isUrgent && isPending
                         ? "bg-amber-50/30 border-amber-300 shadow-xs"
                         : isPending
-                        ? "bg-white border-[#E3E0D9] shadow-xs"
-                        : "bg-[#F6F5F1] border-[#E3E0D9]/60 opacity-90"
+                        ? "bg-white border-[#DAD3C2] shadow-xs"
+                        : "bg-[#F3EFE6] border-[#DAD3C2]/60 opacity-90"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-black font-mono px-2 py-0.5 rounded bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
+                        <span className="text-[10px] font-black font-mono px-2 py-0.5 rounded bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
                           {rfi.id}
                         </span>
                         <span
@@ -538,30 +538,30 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                         </span>
                       </div>
 
-                      <span className="text-[11px] text-[#5D6168] font-medium">
+                      <span className="text-[11px] text-[#535E78] font-medium">
                         {rfi.time}
                       </span>
                     </div>
 
-                    <h3 className="text-xs sm:text-sm font-black text-[#16181C] mt-2 leading-snug">
+                    <h3 className="text-xs sm:text-sm font-black text-[#1A2236] mt-2 leading-snug">
                       {rfi.title}
                     </h3>
 
-                    <p className="text-xs text-[#5D6168] mt-1.5 leading-relaxed bg-[#F6F5F1] p-2.5 rounded-lg border border-[#E3E0D9]">
+                    <p className="text-xs text-[#535E78] mt-1.5 leading-relaxed bg-[#F3EFE6] p-2.5 rounded-lg border border-[#DAD3C2]">
                       {rfi.details}
                     </p>
 
-                    <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#5D6168]">
-                      <span>{T("to.34")} <strong className="text-[#16181C]">{rfi.location}</strong></span>
-                      <span>{T("to.35")} <strong className="text-[#5D6168]">{rfi.submitter}</strong></span>
+                    <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#535E78]">
+                      <span>{T("to.34")} <strong className="text-[#1A2236]">{rfi.location}</strong></span>
+                      <span>{T("to.35")} <strong className="text-[#535E78]">{rfi.submitter}</strong></span>
                     </div>
 
                     {/* Action or Resolution */}
-                    <div className="mt-3 pt-3 border-t border-[#EEECE6] flex items-center justify-between">
+                    <div className="mt-3 pt-3 border-t border-[#E9E3D5] flex items-center justify-between">
                       {isPending ? (
                         <button
                           onClick={() => setSolvingRfi(rfi)}
-                          className="px-4 py-1.5 rounded-xl text-xs font-black text-white bg-[#2B3138] hover:bg-[#16181C] active:scale-95 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer text-white"
+                          className="px-4 py-1.5 rounded-xl text-xs font-black text-white bg-[#24304D] hover:bg-[#1A2236] active:scale-95 transition-all shadow-sm flex items-center gap-1.5 cursor-pointer text-white"
                         >
                           <Send className="w-3.5 h-3.5" />
                           <span>{T("to.36")}</span>
@@ -573,7 +573,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                         </div>
                       )}
 
-                      <span className="text-[10px] text-[#5D6168]">
+                      <span className="text-[10px] text-[#535E78]">
                         {T("to.38")}
                       </span>
                     </div>
@@ -583,39 +583,39 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             </div>
           </div>
 
-          <div className="p-3.5 bg-[#F6F5F1] border-t border-[#EEECE6] text-[#5D6168] flex items-center justify-between text-xs text-[#5D6168]">
+          <div className="p-3.5 bg-[#F3EFE6] border-t border-[#E9E3D5] text-[#535E78] flex items-center justify-between text-xs text-[#535E78]">
             <span>{T("to.39")}</span>
-            <span className="font-bold text-[#5D6168]">{T("to.40")}</span>
+            <span className="font-bold text-[#535E78]">{T("to.40")}</span>
           </div>
         </div>
       </div>
 
       {/* 4. Active BOQs (المقايسات النشطة) */}
-      <div className="bg-white rounded-lg border border-[#E3E0D9] p-5 sm:p-6 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#EEECE6]">
+      <div className="bg-white rounded-lg border border-[#DAD3C2] p-5 sm:p-6 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#E9E3D5]">
           <div>
             <div className="flex items-center gap-2">
-              <ClipboardList className="w-5 h-5 text-[#16181C]" />
-              <h2 className="text-base sm:text-lg font-black text-[#16181C]">
+              <ClipboardList className="w-5 h-5 text-[#1A2236]" />
+              <h2 className="text-base sm:text-lg font-black text-[#1A2236]">
                 {T("to.41")}
               </h2>
             </div>
-            <p className="text-xs text-[#5D6168] mt-0.5">
-              {D("متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:")} <strong className="text-[#16181C]">{D("فيلا الياسمين (BOQ-YAS-2026)")}</strong>
+            <p className="text-xs text-[#535E78] mt-0.5">
+              {D("متابعة كميات البنود التعاقدية ومقارنتها بالحصر الفعلي بالموقع لمشروع:")} <strong className="text-[#1A2236]">{D("فيلا الياسمين (BOQ-YAS-2026)")}</strong>
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
               {D("إجمالي البنود: ٥ بنود رئيسية")}
             </span>
           </div>
         </div>
 
         {/* Clean Structured Data Table */}
-        <div className="overflow-x-auto w-full rounded-lg border border-[#E3E0D9] shadow-sm">
+        <div className="overflow-x-auto w-full rounded-lg border border-[#DAD3C2] shadow-sm">
           <table className="w-full text-start text-xs">
-            <thead className="bg-[#F6F5F1] text-[#5D6168] font-extrabold border-b border-[#E3E0D9]">
+            <thead className="bg-[#F3EFE6] text-[#535E78] font-extrabold border-b border-[#DAD3C2]">
               <tr>
                 <th className="py-3 px-3.5 font-mono">{T("to.44")}</th>
                 <th className="py-3 px-3.5">{T("to.45")}</th>
@@ -626,29 +626,29 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <th className="py-3 px-3.5 text-center">{T("to.50")}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EEECE6]">
+            <tbody className="divide-y divide-[#E9E3D5]">
               {BOQ_ITEMS.map((item) => (
-                <tr key={item.code} className="hover:bg-[#F6F5F1] transition-colors">
-                  <td className="py-3.5 px-3.5 font-bold font-mono text-[#5D6168]">
+                <tr key={item.code} className="hover:bg-[#F3EFE6] transition-colors">
+                  <td className="py-3.5 px-3.5 font-bold font-mono text-[#535E78]">
                     {item.code}
                   </td>
-                  <td className="py-3.5 px-3.5 font-bold text-[#16181C] max-w-xs">
+                  <td className="py-3.5 px-3.5 font-bold text-[#1A2236] max-w-xs">
                     {item.description}
                   </td>
-                  <td className="py-3.5 px-3.5 text-center text-[#5D6168] font-bold">
+                  <td className="py-3.5 px-3.5 text-center text-[#535E78] font-bold">
                     {E(item.unit)}
                   </td>
-                  <td className="py-3.5 px-3.5 text-center font-extrabold text-[#16181C] font-mono">
+                  <td className="py-3.5 px-3.5 text-center font-extrabold text-[#1A2236] font-mono">
                     {item.contractQty.toLocaleString(intlLocale())}
                   </td>
-                  <td className="py-3.5 px-3.5 text-center font-extrabold text-[#16181C] font-mono">
+                  <td className="py-3.5 px-3.5 text-center font-extrabold text-[#1A2236] font-mono">
                     {item.executedQty.toLocaleString(intlLocale())}
                   </td>
                   <td className="py-3.5 px-3.5">
                     <div className="space-y-1">
                       <div className="flex items-center justify-between text-[11px] font-bold">
-                        <span className="text-[#5D6168]">{T("to.51")}</span>
-                        <span className="text-xs font-bold text-[#16181C] tracking-wide font-mono">{T("to.52", { v0: item.progress })}</span>
+                        <span className="text-[#535E78]">{T("to.51")}</span>
+                        <span className="text-xs font-bold text-[#1A2236] tracking-wide font-mono">{T("to.52", { v0: item.progress })}</span>
                       </div>
                       <ProgressBar
                         value={item.progress}
@@ -661,7 +661,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                       className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
                         item.progress === 100
                           ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                          : "bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]"
+                          : "bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]"
                       }`}
                     >
                       {E(item.status)}
@@ -677,24 +677,24 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       {/* Upload Drawing Modal */}
       {uploadModalOpen && (
         <div
-          className="fixed inset-0 bg-[#16181C]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-[#1A2236]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setUploadModalOpen(false)}
         >
           <div
            
-            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#E3E0D9] text-start animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#DAD3C2] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-[#EEECE6] bg-[#F6F5F1]">
+            <div className="flex items-center justify-between p-6 border-b border-[#E9E3D5] bg-[#F3EFE6]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#EEECE6] text-[#16181C] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-lg bg-[#E9E3D5] text-[#1A2236] flex items-center justify-center font-bold">
                   <UploadCloud className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-[#16181C]">
+                  <h3 className="text-base font-black text-[#1A2236]">
                     {T("to.53")}
                   </h3>
-                  <p className="text-xs text-[#5D6168]">
+                  <p className="text-xs text-[#535E78]">
                     {T("to.54")}
                   </p>
                 </div>
@@ -702,7 +702,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
               <button
                 onClick={() => setUploadModalOpen(false)}
-                className="w-8 h-8 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#E3E0D9] flex items-center justify-center text-sm font-bold"
+                className="w-8 h-8 rounded-lg text-[#535E78] hover:text-[#1A2236] hover:bg-[#DAD3C2] flex items-center justify-center text-sm font-bold"
               >
                 ✕
               </button>
@@ -711,17 +711,17 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             {uploadSuccess ? (
               <div className="p-8 text-center space-y-2">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto animate-bounce" />
-                <h4 className="font-black text-[#16181C] text-base">
+                <h4 className="font-black text-[#1A2236] text-base">
                   {T("to.55")}
                 </h4>
-                <p className="text-xs text-[#5D6168]">
+                <p className="text-xs text-[#535E78]">
                   {T("to.56")}
                 </p>
               </div>
             ) : (
               <form onSubmit={handleUploadSubmit} className="p-6 space-y-4 text-xs sm:text-sm">
                 <div>
-                  <label className="block text-xs font-bold text-[#5D6168] mb-1">
+                  <label className="block text-xs font-bold text-[#535E78] mb-1">
                     {T("to.57")}
                   </label>
                   <input
@@ -730,13 +730,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                     value={newDwgName}
                     onChange={(e) => setNewDwgName(e.target.value)}
                     placeholder={T("to.58")}
-                    className="w-full p-3 rounded-lg border border-[#E3E0D9] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs sm:text-sm font-bold text-[#16181C]"
+                    className="w-full p-3 rounded-lg border border-[#DAD3C2] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-xs sm:text-sm font-bold text-[#1A2236]"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[#5D6168] mb-1">
+                    <label className="block text-xs font-bold text-[#535E78] mb-1">
                       {T("to.59")}
                     </label>
                     <input
@@ -745,18 +745,18 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                       value={newDwgCode}
                       onChange={(e) => setNewDwgCode(e.target.value)}
                       placeholder="E-05-1F"
-                      className="w-full p-3 rounded-lg border border-[#E3E0D9] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs sm:text-sm font-bold font-mono text-[#16181C]"
+                      className="w-full p-3 rounded-lg border border-[#DAD3C2] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-xs sm:text-sm font-bold font-mono text-[#1A2236]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#5D6168] mb-1">
+                    <label className="block text-xs font-bold text-[#535E78] mb-1">
                       {T("to.60")}
                     </label>
                     <select
                       value={newDwgRev}
                       onChange={(e) => setNewDwgRev(e.target.value)}
-                      className="w-full p-3 rounded-lg border border-[#E3E0D9] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs font-bold text-[#16181C] bg-white"
+                      className="w-full p-3 rounded-lg border border-[#DAD3C2] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-xs font-bold text-[#1A2236] bg-white"
                     >
                       <option value="Rev. 00">{T("to.114")}</option>
                       <option value="Rev. 01">{T("to.62")}</option>
@@ -768,13 +768,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[#5D6168] mb-1">
+                    <label className="block text-xs font-bold text-[#535E78] mb-1">
                       {T("to.115")}
                     </label>
                     <select
                       value={newDwgDiscipline}
                       onChange={(e) => setNewDwgDiscipline(e.target.value)}
-                      className="w-full p-3 rounded-lg border border-[#E3E0D9] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs font-bold text-[#16181C] bg-white"
+                      className="w-full p-3 rounded-lg border border-[#DAD3C2] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-xs font-bold text-[#1A2236] bg-white"
                     >
                       <option value="معماري وديكور">{T("to.116")}</option>
                       <option value="إنشائي">{T("to.67")}</option>
@@ -785,13 +785,13 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#5D6168] mb-1">
+                    <label className="block text-xs font-bold text-[#535E78] mb-1">
                       {T("to.71")}
                     </label>
                     <select
                       value={newDwgProject}
                       onChange={(e) => setNewDwgProject(e.target.value)}
-                      className="w-full p-3 rounded-lg border border-[#E3E0D9] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs font-bold text-[#16181C] bg-white"
+                      className="w-full p-3 rounded-lg border border-[#DAD3C2] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-xs font-bold text-[#1A2236] bg-white"
                     >
                       <option value="فيلا الياسمين - التجمع">{T("to.72")}</option>
                       <option value="مقر إداري - الشيخ زايد">{T("to.73")}</option>
@@ -802,12 +802,12 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 </div>
 
                 {/* Upload Zone */}
-                <div className="p-4 border-2 border-dashed border-[#D1CDC5] rounded-lg bg-[#F6F5F1] text-center cursor-pointer hover:bg-[#EEECE6] transition-colors">
-                  <UploadCloud className="w-8 h-8 text-[#5D6168] mx-auto mb-1" />
-                  <p className="text-xs font-bold text-[#16181C]">
+                <div className="p-4 border-2 border-dashed border-[#C6BEAA] rounded-lg bg-[#F3EFE6] text-center cursor-pointer hover:bg-[#E9E3D5] transition-colors">
+                  <UploadCloud className="w-8 h-8 text-[#535E78] mx-auto mb-1" />
+                  <p className="text-xs font-bold text-[#1A2236]">
                     {T("to.76")}
                   </p>
-                  <p className="text-[10px] text-[#5D6168] mt-0.5">
+                  <p className="text-[10px] text-[#535E78] mt-0.5">
                     {T("to.77")}
                   </p>
                 </div>
@@ -815,14 +815,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <div className="flex items-center gap-2 pt-2">
                   <button
                     type="submit"
-                    className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#16181C] text-white active:scale-95 transition-all shadow-sm"
+                    className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#24304D] hover:bg-[#1A2236] text-white active:scale-95 transition-all shadow-sm"
                   >
                     {T("to.78")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setUploadModalOpen(false)}
-                    className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#5D6168] bg-[#EEECE6] hover:bg-[#E3E0D9] text-[#5D6168]"
+                    className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#535E78] bg-[#E9E3D5] hover:bg-[#DAD3C2] text-[#535E78]"
                   >
                     {T("to.126")}
                   </button>
@@ -836,24 +836,24 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       {/* RFI Solution Modal */}
       {solvingRfi && (
         <div
-          className="fixed inset-0 bg-[#16181C]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-[#1A2236]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setSolvingRfi(null)}
         >
           <div
            
-            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#E3E0D9] text-start animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl max-w-lg w-full overflow-hidden border border-[#DAD3C2] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-[#EEECE6] bg-[#F6F5F1]">
+            <div className="flex items-center justify-between p-6 border-b border-[#E9E3D5] bg-[#F3EFE6]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#EEECE6] text-[#16181C] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-lg bg-[#E9E3D5] text-[#1A2236] flex items-center justify-center font-bold">
                   <AlertTriangle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-[#16181C]">
+                  <h3 className="text-base font-black text-[#1A2236]">
                     {T("to.80", { v0: solvingRfi.id })}
                   </h3>
-                  <p className="text-xs text-[#5D6168]">
+                  <p className="text-xs text-[#535E78]">
                     {T("to.81")}
                   </p>
                 </div>
@@ -861,7 +861,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
               <button
                 onClick={() => setSolvingRfi(null)}
-                className="w-8 h-8 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#E3E0D9] flex items-center justify-center text-sm font-bold"
+                className="w-8 h-8 rounded-lg text-[#535E78] hover:text-[#1A2236] hover:bg-[#DAD3C2] flex items-center justify-center text-sm font-bold"
               >
                 ✕
               </button>
@@ -879,7 +879,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5D6168] mb-1">
+                <label className="block text-xs font-bold text-[#535E78] mb-1">
                   {T("to.84")}
                 </label>
                 <textarea
@@ -888,14 +888,14 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                   value={solutionText}
                   onChange={(e) => setSolutionText(e.target.value)}
                   placeholder={T("to.85")}
-                  className="w-full p-3 rounded-lg border border-[#E3E0D9] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138] text-xs sm:text-sm text-[#16181C] leading-relaxed placeholder:text-[#5D6168]"
+                  className="w-full p-3 rounded-lg border border-[#DAD3C2] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D] text-xs sm:text-sm text-[#1A2236] leading-relaxed placeholder:text-[#535E78]"
                 />
               </div>
 
               <div className="flex items-center gap-2 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#2B3138] hover:bg-[#16181C] text-white active:scale-95 transition-all shadow-sm flex items-center justify-center gap-1.5"
+                  className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-black text-white bg-[#24304D] hover:bg-[#1A2236] text-white active:scale-95 transition-all shadow-sm flex items-center justify-center gap-1.5"
                 >
                   <Send className="w-4 h-4" />
                   <span>{T("to.86")}</span>
@@ -903,7 +903,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
                 <button
                   type="button"
                   onClick={() => setSolvingRfi(null)}
-                  className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#5D6168] bg-[#EEECE6] hover:bg-[#E3E0D9] text-[#5D6168]"
+                  className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#535E78] bg-[#E9E3D5] hover:bg-[#DAD3C2] text-[#535E78]"
                 >
                   {T("to.126")}
                 </button>

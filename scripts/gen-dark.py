@@ -29,12 +29,12 @@ def hsl(h):
 def fromhsl(H,S,L):
     r,g,b=colorsys.hls_to_rgb(H,max(0,min(1,L)),max(0,min(1,S))); return rgb2hex(r*255,g*255,b*255)
 
-ACCENT='#e8590c'
+ACCENT='#e0714f'
 # explicit neutral map (light-theme brand colours -> dark theme)
-BG={'#fbfaf7':'#0f1317','#ffffff':'#13171c','#fff':'#13171c','#f6f5f1':'#0b0e12','#faf9f6':'#0f1317','#ecf0f1':'#1a1f26','#eeece6':'#1a1f26','#e3e0d9':'#262c34',
-    '#2b3138':ACCENT,'#16181c':'#c2410c','#d9480f':ACCENT}
-TEXT={'#16181c':'#eeece6','#2b3138':'#eeece6','#5d6168':'#9aa3ad','#80848b':'#7e8791','#ffffff':'#ffffff','#fff':'#ffffff','#d9480f':'#ff8a4c'}
-BORDER={'#e3e0d9':'#262c34','#eeece6':'#1f242b','#d1cdc5':'#313840','#ffffff':'#262c34','#2b3138':'#3a424b','#d9480f':ACCENT}
+BG={'#faf7f0':'#10172a','#ffffff':'#151d33','#fff':'#151d33','#f3efe6':'#0c1120','#faf7f0':'#10172a','#ecf0f1':'#1b2540','#e9e3d5':'#1b2540','#dad3c2':'#273250',
+    '#24304d':ACCENT,'#1a2236':'#9a3822','#b5452b':ACCENT}
+TEXT={'#1a2236':'#e9e3d5','#24304d':'#e9e3d5','#535e78':'#a1a9bd','#65708a':'#8a93a8','#ffffff':'#ffffff','#fff':'#ffffff','#b5452b':'#f0987a'}
+BORDER={'#dad3c2':'#273250','#e9e3d5':'#1d2744','#c6beaa':'#33405F','#ffffff':'#273250','#24304d':'#3e4b6c','#b5452b':ACCENT}
 
 def dark(prop,hexv,alpha_=False):
     h=hexv.lower()
@@ -43,7 +43,7 @@ def dark(prop,hexv,alpha_=False):
         if alpha_ and S<0.2 and L<0.3: return '#000000'
         if h in BG: return BG[h]
         if S<0.12:   # neutral
-            return fromhsl(0.58,0.12,0.06+ (1-L)*0.16) if L>0.5 else h
+            return fromhsl(0.62,0.12,0.06+ (1-L)*0.16) if L>0.5 else h
         if L>0.8: return fromhsl(H,min(S,0.45),0.13)
         if L>0.55: return fromhsl(H,min(S,0.5),0.2)
         return h
@@ -55,7 +55,7 @@ def dark(prop,hexv,alpha_=False):
     # border / ring / divide / outline / shadow
     if h in BORDER: return BORDER[h]
     H,S,L=hsl(h)
-    if S<0.12: return fromhsl(0.58,0.1,0.09+(1-L)*0.14) if L>0.5 else h
+    if S<0.12: return fromhsl(0.62,0.1,0.09+(1-L)*0.14) if L>0.5 else h
     if L>0.7: return fromhsl(H,min(S,0.4),0.26)
     return h
 

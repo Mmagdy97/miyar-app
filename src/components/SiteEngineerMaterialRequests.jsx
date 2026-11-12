@@ -52,7 +52,7 @@ const INITIAL_REQUESTS = localize([
 
 const STATUS_BADGES = localize({
   "قيد المراجعة": "bg-amber-50 text-amber-800 border-amber-200",
-  "جاري الشحن": "bg-[#EEECE6] text-[#16181C] border-[#E3E0D9]",
+  "جاري الشحن": "bg-[#E9E3D5] text-[#1A2236] border-[#DAD3C2]",
   "تم التوريد": "bg-emerald-50 text-emerald-800 border-emerald-200",
 });
 
@@ -136,7 +136,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3138] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#24304D] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -148,26 +148,26 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
         {/* Header */}
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-black text-[#16181C] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
+            <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
                 <Truck className="w-5 h-5" />
               </div>
               <span>{T("se.50")}</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEECE6] text-[#16181C] border border-[#E3E0D9]">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
               {T("se.51")}
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#5D6168]">
+          <p className="text-xs md:text-sm text-[#535E78]">
             {T("se.52")}
           </p>
         </div>
 
         {/* Top: The Material Request Form */}
-        <div className="bg-white rounded-lg p-5 md:p-7 border border-[#E3E0D9] shadow-xs">
-          <div className="flex items-center gap-2 pb-4 mb-4 border-b border-[#EEECE6]">
-            <PackageSearch className="w-5 h-5 text-[#16181C]" />
-            <h2 className="text-base font-extrabold text-[#16181C]">
+        <div className="bg-white rounded-lg p-5 md:p-7 border border-[#DAD3C2] shadow-xs">
+          <div className="flex items-center gap-2 pb-4 mb-4 border-b border-[#E9E3D5]">
+            <PackageSearch className="w-5 h-5 text-[#1A2236]" />
+            <h2 className="text-base font-extrabold text-[#1A2236]">
               {T("se.53")}
             </h2>
           </div>
@@ -176,13 +176,13 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
             {/* Field 1: Material Type */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
+                <label className="block text-xs font-bold text-[#535E78] mb-1.5">
                   {D("نوع الخامة")} <span className="text-rose-500">*</span>
                 </label>
                 <select
                   value={materialType}
                   onChange={(e) => setMaterialType(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-bold text-[#16181C] bg-white focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DAD3C2] text-xs md:text-sm font-bold text-[#1A2236] bg-white focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D]"
                 >
                   <option value="أسمنت">{T("se.54")}</option>
                   <option value="رمل">{T("se.55")}</option>
@@ -195,7 +195,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
+                <label className="block text-xs font-bold text-[#535E78] mb-1.5">
                   {T("se.61")}
                 </label>
                 <input
@@ -203,7 +203,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                   placeholder={T("se.62")}
                   value={customMaterial}
                   onChange={(e) => setCustomMaterial(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-semibold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DAD3C2] text-xs md:text-sm font-semibold text-[#1A2236] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D]"
                 />
               </div>
             </div>
@@ -211,7 +211,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
             {/* Field 2: Quantity & Required Date */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
+                <label className="block text-xs font-bold text-[#535E78] mb-1.5">
                   {D("الكمية المطلوبة")} <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -222,16 +222,16 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                   placeholder={T("se.63")}
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-black text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DAD3C2] text-xs md:text-sm font-black text-[#1A2236] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">{T("se.64")}</label>
+                <label className="block text-xs font-bold text-[#535E78] mb-1.5">{T("se.64")}</label>
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-bold text-[#16181C] bg-white"
+                  className="w-full px-3 py-2.5 rounded-lg border border-[#DAD3C2] text-xs md:text-sm font-bold text-[#1A2236] bg-white"
                 >
                   <option value="شيكارة">{T("se.65")}</option>
                   <option value="طن">{T("se.66")}</option>
@@ -244,7 +244,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
+                <label className="block text-xs font-bold text-[#535E78] mb-1.5">
                   {D("موعد التوريد المطلوب")} <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -252,14 +252,14 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                   required
                   value={requiredDate}
                   onChange={(e) => setRequiredDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm font-semibold text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DAD3C2] text-xs md:text-sm font-semibold text-[#1A2236] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D]"
                 />
               </div>
             </div>
 
             {/* Field 3: Notes */}
             <div>
-              <label className="block text-xs font-bold text-[#5D6168] mb-1.5">
+              <label className="block text-xs font-bold text-[#535E78] mb-1.5">
                 {T("se.72")}
               </label>
               <input
@@ -267,7 +267,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                 placeholder={T("se.73")}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E0D9] text-xs md:text-sm text-[#16181C] focus:outline-none focus:ring-2 focus:ring-[#2B3138]/10 focus:border-[#2B3138]"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-[#DAD3C2] text-xs md:text-sm text-[#1A2236] focus:outline-none focus:ring-2 focus:ring-[#24304D]/10 focus:border-[#24304D]"
               />
             </div>
 
@@ -276,7 +276,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#2B3138] hover:bg-[#16181C] text-white hover:bg-[#16181C] transition-colors font-bold text-sm transition-all cursor-pointer disabled:opacity-50 shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#24304D] hover:bg-[#1A2236] text-white hover:bg-[#1A2236] transition-colors font-bold text-sm transition-all cursor-pointer disabled:opacity-50 shadow-sm"
               >
                 <Send className="w-4 h-4" />
                 <span>{isSubmitting ? "جاري الإرسال..." : D("إرسال الطلب للإدارة")}</span>
@@ -286,18 +286,18 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
         </div>
 
         {/* Bottom: Recent Requests List */}
-        <div className="bg-white rounded-lg p-5 md:p-6 border border-[#E3E0D9] shadow-xs">
-          <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#EEECE6]">
+        <div className="bg-white rounded-lg p-5 md:p-6 border border-[#DAD3C2] shadow-xs">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#E9E3D5]">
             <div>
-              <h3 className="text-base font-extrabold text-[#16181C] flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#16181C]" />
+              <h3 className="text-base font-extrabold text-[#1A2236] flex items-center gap-2">
+                <Truck className="w-4 h-4 text-[#1A2236]" />
                 <span>{T("se.75")}</span>
               </h3>
-              <p className="text-xs text-[#5D6168] mt-0.5">
+              <p className="text-xs text-[#535E78] mt-0.5">
                 {T("se.76")}
               </p>
             </div>
-            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#EEECE6] text-[#5D6168]">
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#E9E3D5] text-[#535E78]">
               {T("se.77", { v0: requests.length })}
             </span>
           </div>
@@ -310,15 +310,15 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
               return (
                 <div
                   key={req.id}
-                  className="p-4 rounded-lg border border-[#E3E0D9] bg-white hover:border-[#D9480F] shadow-xs transition-all"
+                  className="p-4 rounded-lg border border-[#DAD3C2] bg-white hover:border-[#B5452B] shadow-xs transition-all"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-2">
                     <div>
-                      <h4 className="text-sm font-extrabold text-[#16181C]">
+                      <h4 className="text-sm font-extrabold text-[#1A2236]">
                         {req.materialType}
                       </h4>
-                      <p className="text-xs text-[#5D6168] mt-0.5 flex items-center gap-1.5">
-                        <strong className="text-[#16181C] font-bold">{req.quantity}</strong>
+                      <p className="text-xs text-[#535E78] mt-0.5 flex items-center gap-1.5">
+                        <strong className="text-[#1A2236] font-bold">{req.quantity}</strong>
                         <span>•</span>
                         <span>{T("se.78", { v0: req.requiredDate })}</span>
                       </p>
@@ -333,7 +333,7 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                   </div>
 
                   {req.notes && (
-                    <div className="pt-2 mt-2 border-t border-[#EEECE6] flex items-center justify-between text-xs text-[#5D6168]">
+                    <div className="pt-2 mt-2 border-t border-[#E9E3D5] flex items-center justify-between text-xs text-[#535E78]">
                       <span>{T("se.79", { v0: req.notes })}</span>
                       <span>{req.requestDate}</span>
                     </div>

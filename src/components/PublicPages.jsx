@@ -10,24 +10,24 @@ export function PricingSection({ onStart }) {
   const { t, currency } = useI18n();
   const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
   const [yearly, setYearly] = useState(false);
-  const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#2B3138] text-white" : "text-[#5D6168] hover:bg-[#EEECE6]"}`;
+  const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#24304D] text-white" : "text-[#535E78] hover:bg-[#E9E3D5]"}`;
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
       <div className="text-start max-w-2xl mb-10">
-        <h2 className="text-3xl sm:text-4xl font-black text-[#16181C] mb-3">{t("pricing.title")}</h2>
-        <p className="text-[#5D6168] mb-6">{t("pricing.sub")}</p>
+        <h2 className="text-3xl sm:text-4xl font-black text-[#1A2236] mb-3">{t("pricing.title")}</h2>
+        <p className="text-[#535E78] mb-6">{t("pricing.sub")}</p>
         <div className="flex flex-wrap gap-3">
-          <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#E3E0D9]">
+          <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#DAD3C2]">
             {Object.keys(PRICES).map((k) => (
               <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
                 {CURRENCIES[k].name}
               </button>
             ))}
           </div>
-          <div role="group" aria-label={t("pricing.billing")} className="inline-flex gap-1 p-1 rounded-xl bg-white border border-[#E3E0D9]">
+          <div role="group" aria-label={t("pricing.billing")} className="inline-flex gap-1 p-1 rounded-xl bg-white border border-[#DAD3C2]">
             <button onClick={() => setYearly(false)} aria-pressed={!yearly} className={pill(!yearly)}>{t("pricing.monthly")}</button>
             <button onClick={() => setYearly(true)} aria-pressed={yearly} className={pill(yearly)}>
-              {t("pricing.yearly")} <span className={yearly ? "text-[#FDBA74]" : "text-[#D9480F]"}>· {t("pricing.save")}</span>
+              {t("pricing.yearly")} <span className={yearly ? "text-[#FDBA74]" : "text-[#B5452B]"}>· {t("pricing.save")}</span>
             </button>
           </div>
         </div>
@@ -39,35 +39,35 @@ export function PricingSection({ onStart }) {
             <div
               key={p.key}
               className={`rounded-2xl p-6 bg-white flex flex-col border ${
-                p.highlight ? "border-[#D9480F] shadow-lg ring-1 ring-[#D9480F]/30" : "border-[#E3E0D9]"
+                p.highlight ? "border-[#B5452B] shadow-lg ring-1 ring-[#B5452B]/30" : "border-[#DAD3C2]"
               }`}
             >
-              {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#D9480F] text-white">{t("pricing.popular")}</span>}
-              <h3 className="text-xl font-black text-[#16181C]">{t(`plan.${p.key}`)}</h3>
-              <p className="text-xs text-[#5D6168] mb-4">{t(`plan.${p.key}.tag`)}</p>
+              {p.highlight && <span className="self-start mb-3 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#B5452B] text-white">{t("pricing.popular")}</span>}
+              <h3 className="text-xl font-black text-[#1A2236]">{t(`plan.${p.key}`)}</h3>
+              <p className="text-xs text-[#535E78] mb-4">{t(`plan.${p.key}.tag`)}</p>
               <p className="mb-5">
                 {p.custom ? (
-                  <span className="text-3xl font-black text-[#16181C]">{t("pricing.custom")}</span>
+                  <span className="text-3xl font-black text-[#1A2236]">{t("pricing.custom")}</span>
                 ) : price === 0 ? (
-                  <span className="text-4xl font-black text-[#16181C]">{t("pricing.free")}</span>
+                  <span className="text-4xl font-black text-[#1A2236]">{t("pricing.free")}</span>
                 ) : (
                   <>
-                    <span className="text-3xl font-black text-[#16181C] tabular-nums">{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
-                    <span className="text-sm font-bold text-[#5D6168]">{yearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                    <span className="text-3xl font-black text-[#1A2236] tabular-nums">{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
+                    <span className="text-sm font-bold text-[#535E78]">{yearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
                   </>
                 )}
               </p>
               <ul className="space-y-2.5 mb-6 flex-1">
                 {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-[#16181C]">
-                    <Check className="w-4 h-4 mt-0.5 text-[#D9480F] shrink-0" /> {f}
+                  <li key={f} className="flex items-start gap-2 text-sm text-[#1A2236]">
+                    <Check className="w-4 h-4 mt-0.5 text-[#B5452B] shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
               <button
                 onClick={onStart}
                 className={`w-full py-3 rounded-xl font-bold text-sm cursor-pointer transition-colors ${
-                  p.highlight ? "bg-[#D9480F] text-white hover:bg-[#B93C0B]" : "bg-[#2B3138] text-white hover:bg-[#16181C]"
+                  p.highlight ? "bg-[#B5452B] text-white hover:bg-[#9A3822]" : "bg-[#24304D] text-white hover:bg-[#1A2236]"
                 }`}
               >
                 {i === 0 ? t("pricing.startFree") : p.custom ? t("pricing.contact") : t("pricing.try")}
@@ -76,11 +76,11 @@ export function PricingSection({ onStart }) {
           );
         })}
       </div>
-      <div className="mt-6 rounded-2xl border border-[#D9480F]/30 bg-[#D9480F]/5 p-4 text-center">
-        <p className="text-sm font-bold text-[#16181C]">{t("pricing.founding")}</p>
-        <p className="text-xs text-[#5D6168] mt-1">{t("pricing.trial")}</p>
+      <div className="mt-6 rounded-2xl border border-[#B5452B]/30 bg-[#B5452B]/5 p-4 text-center">
+        <p className="text-sm font-bold text-[#1A2236]">{t("pricing.founding")}</p>
+        <p className="text-xs text-[#535E78] mt-1">{t("pricing.trial")}</p>
       </div>
-      <p className="text-center text-xs text-[#5D6168] mt-4">{t("pricing.note")}</p>
+      <p className="text-center text-xs text-[#535E78] mt-4">{t("pricing.note")}</p>
     </section>
   );
 }
@@ -115,18 +115,18 @@ const LEGAL = localize({
 export function LegalPage({ kind, onBack }) {
   const doc = LEGAL[kind];
   return (
-    <main className="min-h-screen bg-[#F6F5F1] py-12 px-4 sm:px-6">
-      <article className="max-w-3xl mx-auto bg-white border border-[#E3E0D9] rounded-2xl p-6 sm:p-10">
-        <button onClick={onBack} className="flex items-center gap-2 text-sm font-bold text-[#5D6168] hover:text-[#2B3138] mb-6 cursor-pointer">
+    <main className="min-h-screen bg-[#F3EFE6] py-12 px-4 sm:px-6">
+      <article className="max-w-3xl mx-auto bg-white border border-[#DAD3C2] rounded-2xl p-6 sm:p-10">
+        <button onClick={onBack} className="flex items-center gap-2 text-sm font-bold text-[#535E78] hover:text-[#24304D] mb-6 cursor-pointer">
           <ArrowRight className="w-4 h-4 ltr:-scale-x-100 rtl:scale-x-100" /> العودة للصفحة الرئيسية
         </button>
-        <h1 className="text-3xl font-black text-[#16181C] mb-2">{doc.title}</h1>
-        <p className="text-xs text-[#5D6168] mb-8">آخر تحديث: نوفمبر ٢٠٢٦ — مسودة تُراجع قانونياً قبل الإطلاق</p>
+        <h1 className="text-3xl font-black text-[#1A2236] mb-2">{doc.title}</h1>
+        <p className="text-xs text-[#535E78] mb-8">آخر تحديث: نوفمبر ٢٠٢٦ — مسودة تُراجع قانونياً قبل الإطلاق</p>
         <div className="space-y-6">
           {doc.sections.map(([h, t], i) => (
             <section key={h}>
-              <h2 className="text-lg font-black text-[#16181C] mb-1">{`${(i + 1).toLocaleString("ar-EG")}. ${h}`}</h2>
-              <p className="text-sm leading-7 text-[#5D6168]">{t}</p>
+              <h2 className="text-lg font-black text-[#1A2236] mb-1">{`${(i + 1).toLocaleString("ar-EG")}. ${h}`}</h2>
+              <p className="text-sm leading-7 text-[#535E78]">{t}</p>
             </section>
           ))}
         </div>

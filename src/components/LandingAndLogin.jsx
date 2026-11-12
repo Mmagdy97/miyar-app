@@ -132,35 +132,35 @@ export default function LandingAndLogin({ onLogin }) {
   return (
     <div
      
-      className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F6F5F1] text-[#16181C] selection:bg-[#2B3138] selection:text-white overflow-x-hidden"
+      className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F3EFE6] text-[#1A2236] selection:bg-[#24304D] selection:text-white overflow-x-hidden"
     >
 
       <LandingBody openModal={openModal} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />
 
       {/* 6. The Login & MVP Demo Modal */}
       {isLoginModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#2B3138]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 bg-[#24304D]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
            
-            className="bg-white rounded-xl shadow-2xl border border-[#E3E0D9] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
+            className="bg-white rounded-xl shadow-2xl border border-[#DAD3C2] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
           >
 
             {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#EEECE6] relative z-10">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E9E3D5] relative z-10">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-[#2B3138] text-white flex items-center justify-center shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-[#24304D] text-white flex items-center justify-center shadow-xs">
                   <LogoMark className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-black text-[#16181C]">
+                  <h3 className="text-base sm:text-lg font-black text-[#1A2236]">
                     {T("ld.144")}
                   </h3>
-                  <p className="text-[11px] text-[#5D6168]">{T("ld.145")}</p>
+                  <p className="text-[11px] text-[#535E78]">{T("ld.145")}</p>
                 </div>
               </div>
               <button
                 onClick={closeModal}
-                className="p-1.5 rounded-lg text-[#5D6168] hover:text-[#16181C] hover:bg-[#EEECE6] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-[#535E78] hover:text-[#1A2236] hover:bg-[#E9E3D5] transition-colors cursor-pointer"
                 aria-label={T("ld.155")}
               >
                 <X className="w-5 h-5" />
@@ -171,11 +171,11 @@ export default function LandingAndLogin({ onLogin }) {
             <form onSubmit={handleFormSubmit} className="space-y-4 mt-5 relative z-10">
               {/* Email */}
               <div>
-                <label className="block text-xs font-bold text-[#16181C] mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2236] mb-1.5">
                   {T("ld.147")}
                 </label>
                 <div className="relative">
-                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#5D6168]">
+                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#535E78]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <input
@@ -183,7 +183,7 @@ export default function LandingAndLogin({ onLogin }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#E3E0D9] bg-[#F6F5F1]/50 text-xs sm:text-sm font-medium text-[#16181C] focus:outline-none focus:ring-2 border-[#D1CDC5] focus:border-[#2B3138] focus:ring-1 focus:ring-[#2B3138] transition-all"
+                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#DAD3C2] bg-[#F3EFE6]/50 text-xs sm:text-sm font-medium text-[#1A2236] focus:outline-none focus:ring-2 border-[#C6BEAA] focus:border-[#24304D] focus:ring-1 focus:ring-[#24304D] transition-all"
                     placeholder="architect@miyar.eg"
                   />
                 </div>
@@ -191,11 +191,11 @@ export default function LandingAndLogin({ onLogin }) {
 
               {/* Password */}
               <div>
-                <label className="block text-xs font-bold text-[#16181C] mb-1.5">
+                <label className="block text-xs font-bold text-[#1A2236] mb-1.5">
                   {T("ld.148")}
                 </label>
                 <div className="relative">
-                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#5D6168]">
+                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#535E78]">
                     <Lock className="w-4 h-4" />
                   </div>
                   <input
@@ -203,7 +203,7 @@ export default function LandingAndLogin({ onLogin }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#E3E0D9] bg-[#F6F5F1]/50 text-xs sm:text-sm font-medium text-[#16181C] focus:outline-none focus:ring-2 border-[#D1CDC5] focus:border-[#2B3138] focus:ring-1 focus:ring-[#2B3138] transition-all"
+                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#DAD3C2] bg-[#F3EFE6]/50 text-xs sm:text-sm font-medium text-[#1A2236] focus:outline-none focus:ring-2 border-[#C6BEAA] focus:border-[#24304D] focus:ring-1 focus:ring-[#24304D] transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -211,9 +211,9 @@ export default function LandingAndLogin({ onLogin }) {
 
               {/* MVP Magic Role Selector Dropdown */}
               <div className="pt-1">
-                <label className="block text-xs font-black text-[#16181C] mb-1.5 flex items-center justify-between">
+                <label className="block text-xs font-black text-[#1A2236] mb-1.5 flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
-                    <UserCheck className="w-4 h-4 text-[#16181C]" />
+                    <UserCheck className="w-4 h-4 text-[#1A2236]" />
                     {T("ld.149")}
                   </span>
                   <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
@@ -224,7 +224,7 @@ export default function LandingAndLogin({ onLogin }) {
                 <select
                   value={selectedRole}
                   onChange={(e) => setSelectedRole(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#E3E0D9] bg-[#F6F5F1] text-xs sm:text-sm font-bold text-[#16181C] focus:outline-none focus:ring-2 border-[#D1CDC5] focus:border-[#2B3138] focus:ring-1 focus:ring-[#2B3138] cursor-pointer shadow-2xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#DAD3C2] bg-[#F3EFE6] text-xs sm:text-sm font-bold text-[#1A2236] focus:outline-none focus:ring-2 border-[#C6BEAA] focus:border-[#24304D] focus:ring-1 focus:ring-[#24304D] cursor-pointer shadow-2xs"
                 >
                   <option value="Admin">{T("ld.150")}</option>
                   <option value="Site Engineer">{T("ld.151")}</option>
@@ -235,7 +235,7 @@ export default function LandingAndLogin({ onLogin }) {
 
               {/* Quick 1-Click Role Access Buttons */}
               <div className="pt-1">
-                <span className="text-[11px] font-bold text-[#5D6168] block mb-2">
+                <span className="text-[11px] font-bold text-[#535E78] block mb-2">
                   {T("ld.154")}
                 </span>
                 <div className="grid grid-cols-2 gap-2">
@@ -247,11 +247,11 @@ export default function LandingAndLogin({ onLogin }) {
                         type="button"
                         onClick={() => handleQuickLogin(r.id)}
                         className={`p-2.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer text-start flex items-center justify-between ${
-                          selectedRole === r.id ? "bg-[#2B3138] text-white border-[#2B3138] shadow-xs" : "bg-[#F6F5F1] text-[#16181C] border-[#E3E0D9] hover:border-[#D9480F]"
+                          selectedRole === r.id ? "bg-[#24304D] text-white border-[#24304D] shadow-xs" : "bg-[#F3EFE6] text-[#1A2236] border-[#DAD3C2] hover:border-[#B5452B]"
                         }`}
                       >
                         <div className="flex items-center gap-1.5 truncate">
-                          <RoleIcon className={`w-3.5 h-3.5 shrink-0 ${selectedRole === r.id ? "text-white" : "text-[#16181C]"}`} />
+                          <RoleIcon className={`w-3.5 h-3.5 shrink-0 ${selectedRole === r.id ? "text-white" : "text-[#1A2236]"}`} />
                           <span className="truncate">{r.title}</span>
                         </div>
                         {selectedRole === r.id && (
@@ -268,7 +268,7 @@ export default function LandingAndLogin({ onLogin }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 px-6 rounded-lg bg-[#2B3138] hover:bg-[#16181C] active:scale-[0.99] text-white font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                  className="w-full py-3 px-6 rounded-lg bg-[#24304D] hover:bg-[#1A2236] active:scale-[0.99] text-white font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
                 >
                   <LogIn className="w-4 h-4 text-white" />
                   <span>

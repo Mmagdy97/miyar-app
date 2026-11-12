@@ -35,7 +35,7 @@ const DISCIPLINES_PROGRESS = localize([
     percentage: 90,
     status: "متقدم - جاري سحب الأسلاك",
     statusBadge: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    color: "bg-[#2B3138]",
+    color: "bg-[#24304D]",
     icon: Zap,
     details: "تأسيس الشرب، علب ماجيك، ومسارات كابلات السويدي المعتمدة.",
   },
@@ -44,8 +44,8 @@ const DISCIPLINES_PROGRESS = localize([
     name: "أعمال المحارة والأسمنت",
     percentage: 85,
     status: "مكتمل بؤج وأوتار وتأكيس",
-    statusBadge: "bg-[#EEECE6] text-[#16181C] border-[#E3E0D9]",
-    color: "bg-[#16181C]",
+    statusBadge: "bg-[#E9E3D5] text-[#1A2236] border-[#DAD3C2]",
+    color: "bg-[#1A2236]",
     icon: Layers,
     details: "استلام استواء الحوائط والزوايا بشبك فايبر ضد الترييح والشروخ.",
   },
@@ -74,8 +74,8 @@ const DISCIPLINES_PROGRESS = localize([
     name: "الدهانات الديكورية والتشطيب النهائي",
     percentage: 25,
     status: "مرحلة المعجون والبطانة الأولى",
-    statusBadge: "bg-[#EEECE6] text-[#5D6168] border-[#E3E0D9]",
-    color: "from-[#D9480F] to-[#2B3138]",
+    statusBadge: "bg-[#E9E3D5] text-[#535E78] border-[#DAD3C2]",
+    color: "from-[#B5452B] to-[#24304D]",
     icon: Paintbrush,
     details: "دهانات جوتن فينوماتيك مخملية ناعمة جاري تحضير بطانتها.",
   },
@@ -91,8 +91,8 @@ function ClientProgress() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#16181C] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#EEECE6] border border-[#E3E0D9] flex items-center justify-center text-[#16181C]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
                   <TrendingUp className="w-5 h-5" />
                 </div>
                 <span>{T("cli.108")}</span>
@@ -101,7 +101,7 @@ function ClientProgress() {
                 {T("cli.124")}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#5D6168]">
+            <p className="text-xs md:text-sm text-[#535E78]">
               {T("cli.110")}
             </p>
           </div>
@@ -115,7 +115,7 @@ function ClientProgress() {
         </div>
 
         {/* Hero Section: Large Circular Progress Ring (75%) */}
-        <div className="bg-[#171B21] rounded-xl p-6 md:p-8 text-white shadow-sm border border-[#20262C] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-[#141B2F] rounded-xl p-6 md:p-8 text-white shadow-sm border border-[#1C2540] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="relative z-10 space-y-3 max-w-lg text-center md:text-start">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-white backdrop-blur-md border border-white/20">
               <Sparkles className="w-3.5 h-3.5 text-white" />
@@ -124,11 +124,11 @@ function ClientProgress() {
             <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">
               {T("cli.113")}
             </h2>
-            <p className="text-xs md:text-sm text-[#EEECE6] leading-relaxed">
+            <p className="text-xs md:text-sm text-[#E9E3D5] leading-relaxed">
               {T("cli.114")}
             </p>
 
-            <div className="pt-2 flex items-center justify-center md:justify-start gap-4 text-xs text-[#EEECE6]">
+            <div className="pt-2 flex items-center justify-center md:justify-start gap-4 text-xs text-[#E9E3D5]">
               <span>{T("cli.115")} <strong>{T("cli.116")}</strong></span>
               <span>•</span>
               <span>{T("cli.117")} <strong className="text-white">{T("cli.118")}</strong></span>
@@ -163,8 +163,8 @@ function ClientProgress() {
               />
               <defs>
                 <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D9480F" />
-                  <stop offset="100%" stopColor="#80848B" />
+                  <stop offset="0%" stopColor="#B5452B" />
+                  <stop offset="100%" stopColor="#65708A" />
                 </linearGradient>
               </defs>
             </svg>
@@ -174,7 +174,7 @@ function ClientProgress() {
               <span className="text-3xl md:text-4xl font-black tracking-tight text-white font-mono">
                 {pct(overallPercentage)}
               </span>
-              <span className="text-[11px] font-bold text-[#80848B] mt-0.5">
+              <span className="text-[11px] font-bold text-[#65708A] mt-0.5">
                 {T("cli.119")}
               </span>
             </div>
@@ -184,11 +184,11 @@ function ClientProgress() {
         {/* Detailed Breakdown for each Discipline */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-extrabold text-[#16181C] flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#16181C]" />
+            <h3 className="text-base font-extrabold text-[#1A2236] flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#1A2236]" />
               <span>{T("cli.120")}</span>
             </h3>
-            <span className="text-xs text-[#5D6168]">{T("cli.121")}</span>
+            <span className="text-xs text-[#535E78]">{T("cli.121")}</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -197,18 +197,18 @@ function ClientProgress() {
               return (
                 <div
                   key={item.id}
-                  className="bg-white rounded-lg p-5 border border-[#E3E0D9] shadow-xs hover:shadow-md transition-all space-y-3.5"
+                  className="bg-white rounded-lg p-5 border border-[#DAD3C2] shadow-xs hover:shadow-md transition-all space-y-3.5"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-[#EEECE6] text-[#16181C] flex items-center justify-center border border-[#E3E0D9] shrink-0">
+                      <div className="w-9 h-9 rounded-lg bg-[#E9E3D5] text-[#1A2236] flex items-center justify-center border border-[#DAD3C2] shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-extrabold text-[#16181C] leading-tight">
+                        <h4 className="text-sm font-extrabold text-[#1A2236] leading-tight">
                           {item.name}
                         </h4>
-                        <span className="text-[10px] text-[#5D6168] mt-0.5 block">
+                        <span className="text-[10px] text-[#535E78] mt-0.5 block">
                           {item.details}
                         </span>
                       </div>
@@ -224,8 +224,8 @@ function ClientProgress() {
                   {/* Progress Track */}
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-[11px] font-bold text-[#5D6168]">{T("cli.122")}</span>
-                      <span className="text-xs font-bold text-[#16181C] tracking-wide font-mono">
+                      <span className="text-[11px] font-bold text-[#535E78]">{T("cli.122")}</span>
+                      <span className="text-xs font-bold text-[#1A2236] tracking-wide font-mono">
                         {pct(item.percentage)}
                       </span>
                     </div>
