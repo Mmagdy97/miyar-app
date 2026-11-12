@@ -466,7 +466,6 @@ function TeamManagement() {
                             </span>
                             {member.phone && (
                               <>
-                                <span>•</span>
                                 <span className="flex items-center gap-1 font-mono">
                                   <Phone className="w-3 h-3 text-[#535E78]" />
                                   <span>{member.phone}</span>

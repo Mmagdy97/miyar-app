@@ -304,9 +304,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                           </h4>
                           <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#535E78]">
                             <span className="text-[#535E78] font-semibold">{E(dwg.discipline)}</span>
-                            <span>•</span>
                             <span>{D(dwg.fileSize)}</span>
-                            <span>•</span>
                             <span>{dwg.project}</span>
                           </div>
                         </div>

@@ -244,7 +244,6 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               <Calendar className="w-3.5 h-3.5 text-[#535E78]" />
               {todayArabic}
             </span>
-            <span className="text-[#65708A]">•</span>
             <span className="text-[#535E78]">
               {D("متابعة مستندات")} <strong className="text-[#1A2236]">{D("٤ مشاريع تنفيذية")}</strong> {D("وجداول الحصر والمقايسات")}
             </span>
@@ -426,9 +425,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
                         <p className="text-xs text-[#535E78] mt-1 flex items-center gap-2 flex-wrap">
                           <span>{T("to.26")} <strong className="text-[#535E78]">{dwg.project}</strong></span>
-                          <span>•</span>
                           <span>{T("to.27", { v0: dwg.discipline })}</span>
-                          <span>•</span>
                           <span className="text-[#535E78] text-[11px]">{dwg.date}</span>
                         </p>
 

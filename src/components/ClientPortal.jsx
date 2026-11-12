@@ -211,11 +211,8 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <MapPin className="w-3.5 h-3.5 text-rose-400" />
                 {T("cli.33")}
               </span>
-              <span>•</span>
               <span>{T("cli.34")}</span>
-              <span>•</span>
               <span>{T("cli.35")}</span>
-              <span>•</span>
               <span>{T("cli.36")}</span>
             </p>
           </div>
@@ -425,7 +422,6 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="flex items-center gap-4 text-xs text-[#535E78] pt-1 font-medium">
               <span>{T("cli.55")}</span>
-              <span>•</span>
               <span>{T("cli.56")}</span>
             </div>
           </div>

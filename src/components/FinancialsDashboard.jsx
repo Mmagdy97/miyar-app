@@ -391,7 +391,6 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       </h4>
                       <p className="text-[11px] text-[#535E78] mt-1 flex items-center gap-1.5">
                         <span className="font-semibold text-[#1A2236]">{expense.engName}</span>
-                        <span>•</span>
                         <span className="text-[#535E78]">{expense.date}</span>
                       </p>
                     </div>

@@ -179,7 +179,6 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
               <Calendar className="w-3.5 h-3.5 text-[#535E78]" />
               {todayArabic}
             </span>
-            <span className="text-[#65708A]">•</span>
             <span className="text-[#535E78]">
               {rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}
             </span>

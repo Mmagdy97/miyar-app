@@ -526,7 +526,6 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
             </span>
             {!restricted && (
               <>
-            <span>•</span>
             <span>
               {D("متوسط هامش الربح:")} <strong className="text-[#1A2236] font-bold">{pct(averageMargin)}</strong>
             </span>

@@ -319,7 +319,6 @@ function SiteEngineerMaterialRequests({ actionItems, setActionItems, setSelected
                       </h4>
                       <p className="text-xs text-[#535E78] mt-0.5 flex items-center gap-1.5">
                         <strong className="text-[#1A2236] font-bold">{req.quantity}</strong>
-                        <span>•</span>
                         <span>{T("se.78", { v0: req.requiredDate })}</span>
                       </p>
                     </div>

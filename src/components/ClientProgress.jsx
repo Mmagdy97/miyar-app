@@ -130,7 +130,6 @@ function ClientProgress() {
 
             <div className="pt-2 flex items-center justify-center md:justify-start gap-4 text-xs text-[#E9E3D5]">
               <span>{T("cli.115")} <strong>{T("cli.116")}</strong></span>
-              <span>•</span>
               <span>{T("cli.117")} <strong className="text-white">{T("cli.118")}</strong></span>
             </div>
           </div>
