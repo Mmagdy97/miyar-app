@@ -17,6 +17,7 @@ html.dark .bg-\[\#2F7A5F\]\/10{background-color:rgb(47 122 95 / 0.1)}
 html.dark .bg-\[\#475569\]{background-color:#475569}
 html.dark .bg-\[\#64748B\]{background-color:#64748b}
 html.dark .bg-\[\#64748B\]\/15{background-color:rgb(100 116 139 / 0.15)}
+html.dark .bg-\[\#94A3B8\]{background-color:#29313d}
 html.dark .bg-\[\#A93226\]{background-color:#a93226}
 html.dark .bg-\[\#A93226\]\/10{background-color:rgb(169 50 38 / 0.1)}
 html.dark .bg-\[\#E3E7EE\]{background-color:#191f29}
@@ -132,7 +133,6 @@ html.dark .hover\:ring-\[\#0F172A\]\/30:hover{--tw-ring-color:rgb(15 23 42 / 0.3
 html.dark .hover\:text-\[\#0F172A\]:hover{color:#879ed4}
 html.dark .hover\:text-\[\#0F766E\]:hover{color:#6eede3}
 html.dark .hover\:text-\[\#475569\]:hover{color:#9eabbd}
-html.dark .hover\:text-amber-800:hover{color:#ff9d5c}
 html.dark .hover\:text-rose-600:hover{color:#ff5c87}
 html.dark .hover\:text-rose-700:hover{color:#ff5c88}
 html.dark .hover\:to-emerald-800:hover{--tw-gradient-to:#006045}

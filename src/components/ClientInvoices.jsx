@@ -18,6 +18,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { CLIENT_INVOICES } from "../data/seed";
+import { printReceipt } from "../lib/receipt";
 
 
 function ClientInvoices() {
@@ -68,10 +69,7 @@ function ClientInvoices() {
   };
 
   // Mock Receipt Download
-  const handleDownloadReceipt = (receiptNo) => {
-    setToastMessage(DF("جاري تنزيل الإيصال الضريبي المعتمد: {0}.pdf", receiptNo));
-    setTimeout(() => setToastMessage(null), 3000);
-  };
+  const handleDownloadReceipt = (inv) => printReceipt(inv, "فيلا الياسمين - التجمع الخامس");
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -227,7 +225,7 @@ function ClientInvoices() {
                       <td className="py-4 px-5 text-center">
                         {isPaid ? (
                           <button
-                            onClick={() => handleDownloadReceipt(inv.receiptNo)}
+                            onClick={() => handleDownloadReceipt(inv)}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E3E7EE] bg-white hover:bg-[#F4F6F9] text-[#475569] text-xs font-bold transition-all shadow-2xs cursor-pointer"
                           >
                             <Download className="w-3.5 h-3.5 text-[#475569]" />

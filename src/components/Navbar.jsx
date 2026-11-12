@@ -189,7 +189,7 @@ function Navbar({
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-1">
                             <span className="text-[10px] font-bold text-[#475569] uppercase tracking-wider truncate">
-                              {item.category || D("تنبيه")}
+                              {item.category ? D(item.category) : D("تنبيه")}
                             </span>
                             <span className="text-[10px] font-bold text-[#475569] shrink-0">
                               {item.timestamp || item.time}
@@ -197,7 +197,7 @@ function Navbar({
                           </div>
 
                           <h4 className="text-xs font-bold text-[#0F172A] mt-0.5 leading-snug">
-                            {item.title}
+                            {D(item.title)}
                           </h4>
 
                           {item.subtitle && (

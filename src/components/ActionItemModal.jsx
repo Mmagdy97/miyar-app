@@ -28,10 +28,10 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
             </div>
             <div>
               <h3 className="text-base font-black text-[#0F172A] leading-tight tracking-tight">
-                {selectedItem.title}
+                {D(selectedItem.title)}
               </h3>
               <p className="text-[11px] text-[#475569] font-medium mt-0.5">
-                {selectedItem.category || D("تقرير موقع")} • {selectedItem.project || D("فيلا الياسمين - التجمع")}
+                {D(selectedItem.category || "تقرير موقع")} • {D(selectedItem.project || "فيلا الياسمين - التجمع")}
               </p>
             </div>
           </div>
@@ -52,13 +52,13 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
             <div>
               <span className="text-[#475569] block text-[10px] font-semibold">{T("ld.156")}</span>
               <span className="font-bold text-[#0F172A]">
-                {selectedItem.user || selectedItem.submitter || "م. محمد (الموقع)"}
+                {D(selectedItem.user || selectedItem.submitter || "م. محمد (الموقع)")}
               </span>
             </div>
             <div className="text-end">
               <span className="text-[#475569] block text-[10px] font-semibold">{T("ld.157")}</span>
               <span className="font-bold text-[#0F172A] font-mono">
-                {selectedItem.timestamp || selectedItem.time || "الآن"}
+                {D(selectedItem.timestamp || selectedItem.time || "الآن")}
               </span>
             </div>
           </div>
@@ -69,7 +69,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
               {T("ld.158")}
             </h4>
             <div className="p-3.5 rounded-lg bg-[#F4F6F9] border border-[#E3E7EE] text-xs sm:text-sm text-[#0F172A] leading-relaxed font-medium">
-              {selectedItem.subtitle ||
+              {D(selectedItem.subtitle) ||
                 D("تم استكمال تمديدات شبكة الصرف والتغذية بالبدروم بنجاح، وتشوين شحنة أسمنت العزل المقاوم، وفحص ضغط الشبكة على ٨ بار لمدة ساعتين بدون أي تسريب مع مطابقة المنسوب المعماري.")}
             </div>
           </div>

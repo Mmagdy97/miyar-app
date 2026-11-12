@@ -26,7 +26,8 @@ import {
 const AFC = "معتمد للتنفيذ (AFC)";
 const REVIEW = "قيد المراجعة";
 const REJECTED = "مرفوضة للتعديل";
-const LABEL_OF = { approved: AFC, review: REVIEW, rejected: REJECTED };
+const ARCHIVED = "مؤرشفة (إصدار سابق)";
+const LABEL_OF = { approved: AFC, review: REVIEW, rejected: REJECTED, superseded: ARCHIVED };
 const CODE_OF = { [AFC]: "approved", [REVIEW]: "review" };
 // The shared store uses the dashboard's shape; this screen shows it with its own field names.
 const toView = (d) => ({ ...d, uploadDate: d.date, fileSize: d.size, status: LABEL_OF[d.status] || d.status });
@@ -64,7 +65,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       const matchesDiscipline =
         selectedDiscipline === "الكل" || dwg.discipline === selectedDiscipline;
       return matchesSearch && matchesDiscipline;
-    });
+    }).sort((a, b) => (a.status === ARCHIVED) - (b.status === ARCHIVED)); // older revisions sink to the bottom
   }, [drawings, searchQuery, selectedDiscipline]);
 
   // Stats
@@ -92,7 +93,8 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       status: newStatus,
     };
 
-    setStored((prev) => [{ id: newDrawing.id, name: newDrawing.name, code: newDrawing.code, rev: newDrawing.rev, discipline: newDrawing.discipline, project: newDrawing.project, date: "الآن", size: newDrawing.fileSize, status: CODE_OF[newStatus] || "review", statusLabel: newStatus }, ...prev]);
+    // a new revision of the same drawing code archives the previous ones (kept for history)
+    setStored((prev) => [{ id: newDrawing.id, name: newDrawing.name, code: newDrawing.code, rev: newDrawing.rev, discipline: newDrawing.discipline, project: newDrawing.project, date: "الآن", size: newDrawing.fileSize, status: CODE_OF[newStatus] || "review", statusLabel: newStatus }, ...prev.map((d) => (d.code === newDrawing.code && d.status !== "superseded" ? { ...d, status: "superseded" } : d))]);
     setIsUploadModalOpen(false);
 
     // Reset Form
@@ -286,11 +288,12 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
             <tbody className="divide-y divide-[#EEF1F5] text-xs md:text-sm">
               {filteredDrawings.map((dwg) => {
                 const isAfc = dwg.status === "معتمد للتنفيذ (AFC)";
+                const isOld = dwg.status === ARCHIVED;
 
                 return (
                   <tr
                     key={dwg.id}
-                    className="hover:bg-[#F4F6F9] transition-colors duration-150 group"
+                    className={`hover:bg-[#F4F6F9] transition-colors duration-150 group ${isOld ? "opacity-55" : ""}`}
                   >
                     {/* Drawing Name & Discipline */}
                     <td className="py-4 px-5">
@@ -336,12 +339,14 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
                           isAfc
                             ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                            : isOld
+                            ? "bg-[#EEF1F5] text-[#64748B] border-[#E3E7EE]"
                             : "bg-amber-50 text-amber-700 border-amber-200"
                         }`}
                       >
                         <span
                           className={`w-1.5 h-1.5 rounded-full ${
-                            isAfc ? "bg-emerald-600" : "bg-amber-500 animate-pulse"
+                            isAfc ? "bg-emerald-600" : isOld ? "bg-[#94A3B8]" : "bg-amber-500"
                           }`}
                         />
                         <span>{E(dwg.status)}</span>

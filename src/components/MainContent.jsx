@@ -68,6 +68,7 @@ function MainContent({
             actionItems={actionItems}
             setActionItems={setActionItems}
             setSelectedItem={setSelectedItem}
+            setActiveTab={setActiveTab}
           />
         );
       }

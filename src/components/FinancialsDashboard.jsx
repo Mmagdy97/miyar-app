@@ -102,11 +102,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
+  // Rule: no new advance while the engineer still has unsettled (unreviewed) expenses
+  const unsettled = pendingExpenses.filter((x) => x.engId === parseInt(topUpEngId)).length;
+
   // Top Up Petty Cash Submission
   const handleTopUpSubmit = (e) => {
     e.preventDefault();
     const amountNum = parseFloat(topUpAmount) || 0;
-    if (amountNum <= 0) return;
+    if (amountNum <= 0 || unsettled > 0) return;
 
     setEngineersCash((prev) =>
       prev.map((eng) =>
@@ -595,11 +598,15 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 />
               </div>
 
-              <div className="p-3 bg-amber-50/60 rounded-lg border border-amber-200 text-xs text-amber-900">
-                <p>
-                  {t("fin.topUpNote")}
-                </p>
-              </div>
+              {unsettled > 0 ? (
+                <div role="alert" className="p-3 bg-rose-50 rounded-lg border border-rose-200 text-xs font-bold text-rose-800">
+                  {t("fin.blocked", { n: unsettled })}
+                </div>
+              ) : (
+                <div className="p-3 bg-amber-50/60 rounded-lg border border-amber-200 text-xs text-amber-900">
+                  <p>{t("fin.topUpNote")}</p>
+                </div>
+              )}
 
               <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EEF1F5]">
                 <button
@@ -611,7 +618,8 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#0F172A] hover:bg-[#0F172A] text-white hover:bg-[#0F172A] transition-colors text-xs font-bold shadow-sm cursor-pointer"
+                  disabled={unsettled > 0}
+                  className="px-5 py-2 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white transition-colors text-xs font-bold shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {t("fin.confirmTopUp")}
                 </button>

@@ -18,13 +18,8 @@ import {
   Send,
   Image as ImageIcon,
   DollarSign,
-  AlertTriangle,
-  Clock,
-  Sparkles,
   Check,
   Building,
-  UploadCloud,
-  ChevronDown,
   Trash2,
   CheckCircle,
   Wallet,
@@ -128,6 +123,11 @@ function SiteEngineerDashboard({ setActionItems }) {
   const totalWorkers =
     labor.plumbers + labor.helpers + labor.tilers + labor.electricians;
 
+  // Demo session = the engineer assigned to the client's project (single source: seed)
+  const cashRow = ENGINEER_CASH.find((c) => c.projectId === 1) || ENGINEER_CASH[0];
+  const eng = personById(cashRow.engineerId);
+  const proj = projectById(cashRow.projectId);
+
   // Requirement 3: Engineer Submit Daily Report
   const handleSubmitReport = (e) => {
     e.preventDefault();
@@ -171,10 +171,6 @@ function SiteEngineerDashboard({ setActionItems }) {
     const amountNum = Number(cashAmount);
     if (!(amountNum > 0)) return;
 
-    // Demo session = the engineer assigned to the client's project (single source: seed)
-    const cashRow = ENGINEER_CASH.find((c) => c.projectId === 1) || ENGINEER_CASH[0];
-    const eng = personById(cashRow.engineerId);
-    const proj = projectById(cashRow.projectId);
 
     expensesStore.set((prev) => [
       {

@@ -1,3 +1,4 @@
+import { D } from "../data/dataI18n";
 import { currencySymbol, intlLocale, useI18n, E } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
@@ -72,6 +73,11 @@ const BASE_TOTALS = getTotals();
 
 // month = 1-12; the label is rendered per locale (Intl) so it follows the UI language.
 const MONTHLY_FINANCIALS = [
+  { m: 1, revenue: 310, expenses: 240 },
+  { m: 2, revenue: 360, expenses: 270 },
+  { m: 3, revenue: 420, expenses: 300 },
+  { m: 4, revenue: 470, expenses: 330 },
+  { m: 5, revenue: 530, expenses: 350 },
   { m: 6, revenue: 580, expenses: 380 },
   { m: 7, revenue: 720, expenses: 490 },
   { m: 8, revenue: 890, expenses: 540 },
@@ -90,7 +96,7 @@ const rich = (str) =>
     i % 2 ? <strong key={i} className="text-[#0F172A]">{part}</strong> : part
   );
 
-function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
+function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, setActiveTab }) {
   const { t } = useI18n();
   const [cashRows] = cashStore.use();
   const [invoiceRows] = invoicesStore.use();
@@ -108,6 +114,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
     cashEngineerCount: cash.count,
   };
   const [timeframe, setTimeframe] = useState("6M");
+  const series = timeframe === "6M" ? MONTHLY_FINANCIALS.slice(-6) : MONTHLY_FINANCIALS;
   const [activeHoverBar, setActiveHoverBar] = useState(null);
 
   // Handle Approve / Reject / Undo on the shared state
@@ -135,7 +142,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
   }).format(new Date());
 
   const maxVal = Math.max(
-    ...MONTHLY_FINANCIALS.map((m) => Math.max(m.revenue, m.expenses))
+    ...series.map((m) => Math.max(m.revenue, m.expenses))
   );
 
   // Helper function to resolve icon and styling based on item type
@@ -464,7 +471,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <span className="text-[#475569] font-medium">
               {t("adm.codeOk")}
             </span>
-            <button className="font-bold text-[#0F172A] hover:text-amber-800 inline-flex items-center gap-1 transition-colors">
+            <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="font-bold text-[#0F766E] hover:underline inline-flex items-center gap-1 cursor-pointer">
               {t("adm.register")}
               <ChevronLeft className="ltr:-scale-x-100 w-3.5 h-3.5" />
             </button>
@@ -534,7 +541,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2 min-w-0">
                               <span className="text-[11px] font-semibold text-[#475569] truncate">
-                                {item.category || t("adm.notice")} • {item.project || t("adm.theSite")}
+                                {item.category ? D(item.category) : t("adm.notice")} • {item.project ? D(item.project) : t("adm.theSite")}
                               </span>
 
                               {/* Subtle badge if timestamp is "الآن" */}
@@ -547,31 +554,31 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             </div>
 
                             <span className="text-[11px] font-bold text-[#475569] shrink-0">
-                              {item.timestamp || item.time}
+                              {D(item.timestamp || item.time)}
                             </span>
                           </div>
 
                           <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-2 mt-1">
                             <h4 className="text-sm font-bold text-[#0F172A] leading-snug">
-                              {item.title}
+                              {D(item.title)}
                             </h4>
                             {item.amount && (
                               <span className="text-xs font-bold text-[#0F172A] shrink-0 bg-[#EEF1F5] px-2.5 py-0.5 rounded-lg border border-[#E3E7EE] font-mono">
-                                {item.amount}
+                                {D(item.amount)}
                               </span>
                             )}
                           </div>
 
                           {item.subtitle && (
                             <p className="text-xs text-[#475569] mt-1 leading-relaxed">
-                              {item.subtitle}
+                              {D(item.subtitle)}
                             </p>
                           )}
 
                           <div className="mt-2 text-[11px] text-[#475569] font-medium">
                             {t("adm.source")}{" "}
                             <span className="text-[#0F172A] font-bold">
-                              {item.user || item.submitter}
+                              {D(item.user || item.submitter)}
                             </span>
                             <span className="text-[#0F172A] ms-2 font-bold hover:underline">
                               {t("adm.clickDetails")}
@@ -668,7 +675,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                 {t("adm.cfTitle")}
               </h2>
               <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#0F766E]/15 text-[#0F172A] border border-[#0F766E]/30">
-                {t("adm.margin", { p: toAr(39.4) })}
+                {t("adm.margin", { p: toAr(Math.round((1 - series.reduce((a, x) => a + x.expenses, 0) / series.reduce((a, x) => a + x.revenue, 0)) * 1000) / 10) })}
               </span>
             </div>
             <p className="text-xs text-[#475569] mt-0.5">
@@ -738,8 +745,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             )}
           </div>
 
-          <div className="grid grid-cols-6 gap-2 sm:gap-6 items-end h-52 border-b border-dashed border-[#E3E7EE] pb-3">
-            {MONTHLY_FINANCIALS.map((item, idx) => {
+          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-dashed border-[#E3E7EE] pb-3`}>
+            {series.map((item, idx) => {
               const revPercent = Math.round((item.revenue / maxVal) * 100);
               const expPercent = Math.round((item.expenses / maxVal) * 100);
 
@@ -775,17 +782,17 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
             <div className="flex items-center gap-6">
               <div>
                 <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.rev6")}</span>
-                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
+                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
               </div>
               <div className="h-6 w-px bg-[#E3E7EE]" />
               <div>
                 <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.cost6")}</span>
-                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
               <div className="h-6 w-px bg-[#E3E7EE]" />
               <div>
                 <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.profit6")}</span>
-                <span className="font-extrabold text-[#0F172A] text-sm">+{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000 - MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+                <span className="font-extrabold text-[#0F172A] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
             </div>
 
