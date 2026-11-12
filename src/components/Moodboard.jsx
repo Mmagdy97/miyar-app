@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 import { useState } from "react";
 import { Palette, Heart, Trash2, Plus } from "lucide-react";
 import { tr_ as T, E } from "../i18n";
@@ -62,7 +63,7 @@ export default function Moodboard({ role = "Admin" }) {
         <div className="columns-2 md:columns-3 gap-3 [&>*]:mb-3">
           {mine.map((t) => (
             <figure key={t.id} className="break-inside-avoid bg-white rounded-lg border border-[#E3E7EE] overflow-hidden">
-              {t.kind === "image" && <img src={t.value} alt={t.caption} loading="lazy" referrerPolicy="no-referrer" className="w-full object-cover" />}
+              {t.kind === "image" && <div className="aspect-[4/3]"><Photo src={t.value} alt={t.caption} className="w-full h-full object-cover" /></div>}
               {t.kind === "color" && <div className="h-28 flex items-end p-2" style={{ background: t.value }}><span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-white/80 text-black">{t.value}</span></div>}
               {t.kind === "note" && <p className="p-4 text-sm font-bold text-[#0F172A] leading-relaxed">{t.value}</p>}
               <figcaption className="flex items-center justify-between gap-2 px-3 py-2 text-[11px] font-bold text-[#475569]">

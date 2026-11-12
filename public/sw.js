@@ -1,4 +1,4 @@
-const CACHE_NAME = 'miyar-v4';
+const CACHE_NAME = 'miyar-v5';
 
 // Core static assets to pre-cache on install
 const PRECACHE_ASSETS = [
@@ -40,6 +40,8 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   if (!url.protocol.startsWith('http')) return;
+  // Let the browser load third-party files (photos, fonts) directly; caching them here can break images
+  if (url.origin !== self.location.origin) return;
 
   // Navigation requests (HTML documents)
   if (event.request.mode === 'navigate') {

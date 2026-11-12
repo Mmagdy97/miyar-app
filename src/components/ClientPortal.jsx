@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 import { currencySymbol, E } from "../i18n";
 import { localize, D } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
@@ -36,6 +37,7 @@ const PROJECT = clientProject();
 const PROJECT_PHASES = localize([
   {
     id: 1,
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
     title: "التصميم والمخططات",
     subtitle: "المخططات الهندسية والمود بورد ثلاثي الأبعاد",
     status: "completed",
@@ -44,6 +46,7 @@ const PROJECT_PHASES = localize([
   },
   {
     id: 2,
+    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
     title: "أعمال التأسيس وMEP",
     subtitle: "شبكات الصرف والتغذية والتكييف والكهرباء الذكية",
     status: "completed",
@@ -52,6 +55,7 @@ const PROJECT_PHASES = localize([
   },
   {
     id: 3,
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
     title: "أعمال التشطيب والديكور",
     subtitle: "تركيب الرخام المستورد وتجليد الحوائط والأسقف",
     status: "active",
@@ -60,6 +64,7 @@ const PROJECT_PHASES = localize([
   },
   {
     id: 4,
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
     title: "الفرش والتسليم النهائي",
     subtitle: "المطابخ والأثاث المخصص والفحص الشامل واستلام المفتاح",
     status: "pending",
@@ -518,6 +523,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div
                   className={`relative h-48 bg-gradient-to-br ${photo.bgGradient} flex flex-col items-center justify-center p-4 overflow-hidden group-hover:scale-[1.02] transition-transform duration-500`}
                 >
+                  {photo.image && <div className="absolute inset-0"><Photo src={photo.image} alt={E(photo.title)} className="w-full h-full object-cover" fallbackClass="opacity-0" /></div>}
                   {/* Subtle architectural grid pattern */}
                   <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]" />
 

@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 import { currencySymbol, intlLocale, useI18n, currencyName, E } from "../i18n";
 import { toAr } from "../data/seed";
 import { useState, useMemo } from "react";
@@ -490,11 +491,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             {/* Receipt Image Mock */}
             <div className="relative bg-[#EEF1F5] h-56 overflow-hidden flex items-center justify-center">
               {selectedReceipt.invoiceImg ? (
-                <img
-                  src={selectedReceipt.invoiceImg}
-                  alt={t("fin.receiptAlt")}
-                  className="w-full h-full object-cover"
-                />
+                <Photo src={selectedReceipt.invoiceImg} alt={t("fin.receiptAlt")} className="w-full h-full object-cover" />
               ) : (
                 <Receipt className="w-12 h-12 text-[#475569]/40" />
               )}

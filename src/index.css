@@ -388,3 +388,23 @@ header.fixed.glass { position: fixed; }
 @keyframes nudge-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .nudge-in { animation: nudge-in 220ms cubic-bezier(.2,.8,.2,1) both; }
 @media (prefers-reduced-motion: reduce) { .nudge-in { animation: none; } }
+
+/* Primary actions use the brand teal, not near-black navy (softer, one accent across the product) */
+:root { --brand: #0F766E; --brand-hover: #0B5F58; }
+html.dark { --brand: #14B8A6; --brand-hover: #0D9488; }
+button.bg-\[\#0F172A\], a.bg-\[\#0F172A\], label.bg-\[\#0F172A\], input[type="submit"].bg-\[\#0F172A\] {
+  background-color: var(--brand) !important; border-color: var(--brand) !important; color: #fff !important;
+}
+button.bg-\[\#0F172A\]:hover, a.bg-\[\#0F172A\]:hover { background-color: var(--brand-hover) !important; }
+/* small dark icon tiles become a soft brand tint (big dark panels like the client hero stay dark) */
+div.bg-\[\#0F172A\]:is([class^="w-"],[class*=" w-"]):is([class^="h-"],[class*=" h-"]):not([class*="w-full"]):not([class*="h-full"]) {
+  background-color: color-mix(in srgb, var(--brand) 12%, transparent) !important; color: var(--brand) !important;
+}
+div.bg-\[\#0F172A\]:is([class^="w-"],[class*=" w-"]):is([class^="h-"],[class*=" h-"]):not([class*="w-full"]):not([class*="h-full"]) svg { color: var(--brand) !important; }
+/* large dark panels (client hero, landing bands, CTA): deep brand teal instead of navy-black */
+:root { --panel: #0E3B38; --panel-line: #1D524E; }
+html.dark { --panel: #0B2725; --panel-line: #18403D; }
+:is(div, section, aside).bg-\[\#0F172A\]:not(:is([class^="w-"],[class*=" w-"]):is([class^="h-"],[class*=" h-"]):not([class*="w-full"]):not([class*="h-full"])) {
+  background-color: var(--panel) !important; border-color: var(--panel-line) !important;
+}
+:is(div, section).bg-\[\#0F172A\] .text-\[\#0F766E\] { color: #99F6E4 !important; }

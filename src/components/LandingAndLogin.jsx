@@ -51,6 +51,7 @@ const HERO_CASH = ENGINEER_CASH.find((c) => c.projectId === HERO_PROJECT.id);
 const DEMO_ROLES = [
   {
     id: "Admin",
+    key: "admin",
     title: "مدير تنفيذي",
     subtitle: "Manager / CEO",
     desc: "لوحة التحكم الشاملة، الرقابة المالية، ونسب الإنجاز العامة والاعتمادات",
@@ -59,6 +60,7 @@ const DEMO_ROLES = [
   },
   {
     id: "Site Engineer",
+    key: "site",
     title: "مهندس موقع",
     subtitle: "Site Engineer",
     desc: "التقارير اليومية، تصفية العهد النقدية، طلبات التشوين، وقائمة الملاحظات",
@@ -67,6 +69,7 @@ const DEMO_ROLES = [
   },
   {
     id: "Technical Office",
+    key: "tech",
     title: "مكتب فني",
     subtitle: "Tech Office",
     desc: "المقايسات الذكية (BOQ)، مراجعة المخططات الهندسية، وإدارة المستندات",
@@ -75,6 +78,7 @@ const DEMO_ROLES = [
   },
   {
     id: "Client",
+    key: "client",
     title: "عميل المشروع",
     subtitle: "Client VIP Suite",
     desc: "بوابة العميل التفاعلية، متابعة صور الموقع، جدول الدفعات، واعتماد العينات",
@@ -148,14 +152,14 @@ export default function LandingAndLogin({ onLogin }) {
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-[#EEF1F5] relative z-10">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-[#0F172A] text-white flex items-center justify-center shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-[#0F766E] text-white flex items-center justify-center">
                   <LogoMark className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-black text-[#0F172A]">
-                    {T("ld.144")}
+                    {T("login.title")}
                   </h3>
-                  <p className="text-[11px] text-[#475569]">{T("ld.145")}</p>
+                  <p className="text-xs text-[#475569]">{T("login.sub")}</p>
                 </div>
               </div>
               <button
@@ -167,115 +171,34 @@ export default function LandingAndLogin({ onLogin }) {
               </button>
             </div>
 
-            {/* Login Form */}
-            <form onSubmit={handleFormSubmit} className="space-y-4 mt-5 relative z-10">
-              {/* Email */}
-              <div>
-                <label className="block text-xs font-bold text-[#0F172A] mb-1.5">
-                  {T("ld.147")}
-                </label>
-                <div className="relative">
-                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#475569]">
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#E3E7EE] bg-[#F4F6F9]/50 text-xs sm:text-sm font-medium text-[#0F172A] focus:outline-none focus:ring-2 border-[#CBD2DC] focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] transition-all"
-                    placeholder="architect@miyar.eg"
-                  />
-                </div>
-              </div>
-
-              {/* Password */}
-              <div>
-                <label className="block text-xs font-bold text-[#0F172A] mb-1.5">
-                  {T("ld.148")}
-                </label>
-                <div className="relative">
-                  <div className="absolute start-3.5 top-1/2 -translate-y-1/2 text-[#475569]">
-                    <Lock className="w-4 h-4" />
-                  </div>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#E3E7EE] bg-[#F4F6F9]/50 text-xs sm:text-sm font-medium text-[#0F172A] focus:outline-none focus:ring-2 border-[#CBD2DC] focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] transition-all"
-                    placeholder="••••••••"
-                  />
-                </div>
-              </div>
-
-              {/* MVP Magic Role Selector Dropdown */}
-              <div className="pt-1">
-                <label className="block text-xs font-black text-[#0F172A] mb-1.5 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5">
-                    <UserCheck className="w-4 h-4 text-[#0F172A]" />
-                    {T("ld.149")}
-                  </span>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                    MVP Quick Switch
-                  </span>
-                </label>
-
-                <select
-                  value={selectedRole}
-                  onChange={(e) => setSelectedRole(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#E3E7EE] bg-[#F4F6F9] text-xs sm:text-sm font-bold text-[#0F172A] focus:outline-none focus:ring-2 border-[#CBD2DC] focus:border-[#0F172A] focus:ring-1 focus:ring-[#0F172A] cursor-pointer shadow-2xs"
-                >
-                  <option value="Admin">{T("ld.150")}</option>
-                  <option value="Site Engineer">{T("ld.151")}</option>
-                  <option value="Technical Office">{T("ld.152")}</option>
-                  <option value="Client">{T("ld.153")}</option>
-                </select>
-              </div>
-
-              {/* Quick 1-Click Role Access Buttons */}
-              <div className="pt-1">
-                <span className="text-[11px] font-bold text-[#475569] block mb-2">
-                  {T("ld.154")}
-                </span>
-                <div className="grid grid-cols-2 gap-2">
+            {/* Demo entry: pick a role, enter. No fake credentials. */}
+            <form onSubmit={handleFormSubmit} className="mt-5 relative z-10">
+              <fieldset>
+                <legend className="text-sm font-semibold text-[#0F172A] mb-2.5">{T("login.pick")}</legend>
+                <div className="grid sm:grid-cols-2 gap-2.5">
                   {DEMO_ROLES.map((r) => {
                     const RoleIcon = r.icon;
+                    const on = selectedRole === r.id;
                     return (
-                      <button
-                        key={r.id}
-                        type="button"
-                        onClick={() => handleQuickLogin(r.id)}
-                        className={`p-2.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer text-start flex items-center justify-between ${
-                          selectedRole === r.id ? "bg-[#0F172A] text-white border-[#0F172A] shadow-xs" : "bg-[#F4F6F9] text-[#0F172A] border-[#E3E7EE] hover:border-[#0F766E]"
-                        }`}
-                      >
-                        <div className="flex items-center gap-1.5 truncate">
-                          <RoleIcon className={`w-3.5 h-3.5 shrink-0 ${selectedRole === r.id ? "text-white" : "text-[#0F172A]"}`} />
-                          <span className="truncate">{r.title}</span>
-                        </div>
-                        {selectedRole === r.id && (
-                          <CheckCircle2 className="w-3.5 h-3.5 text-white shrink-0 ms-1" />
-                        )}
-                      </button>
+                      <label key={r.id} className={`relative flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors ${on ? "border-[#0F766E] bg-[#0F766E]/[0.06] ring-1 ring-[#0F766E]" : "border-[#E3E7EE] bg-white hover:border-[#94A3B8]"}`}>
+                        <input type="radio" name="role" value={r.id} checked={on} onChange={() => setSelectedRole(r.id)} className="sr-only" />
+                        <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#0F766E] text-white" : "bg-[#EEF1F5] text-[#475569]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
+                        <span className="min-w-0">
+                          <span className="block text-sm font-semibold text-[#0F172A]">{T("login.role." + r.key)}</span>
+                          <span className="block mt-0.5 text-xs leading-relaxed text-[#64748B]">{T("login.desc." + r.key)}</span>
+                        </span>
+                        {on && <CheckCircle2 className="absolute top-3 end-3 w-4 h-4 text-[#0F766E]" aria-hidden="true" />}
+                      </label>
                     );
                   })}
                 </div>
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 px-6 rounded-lg bg-[#0F172A] hover:bg-[#0F172A] active:scale-[0.99] text-white font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
-                >
-                  <LogIn className="w-4 h-4 text-white" />
-                  <span>
-                    {isSubmitting ? "جاري الدخول للنظام..." : D("دخول المنصة الآن")}
-                  </span>
-                </button>
-              </div>
+              </fieldset>
+              <button type="submit" disabled={isSubmitting}
+                className="btn-press mt-5 w-full h-12 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
+                <LogIn className="w-4 h-4 ltr:-scale-x-100" aria-hidden="true" />
+                <span>{T("login.enter", { role: T("login.role." + (DEMO_ROLES.find((r) => r.id === selectedRole)?.key || "admin")) })}</span>
+              </button>
+              <p className="mt-3 text-xs text-center text-[#64748B]">{T("login.note")}</p>
             </form>
           </div>
         </div>

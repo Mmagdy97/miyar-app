@@ -47,7 +47,14 @@ export const selectionsStore = createPersistedStore("miyar:selections:v1", [], (
 export const signaturesStore = createPersistedStore("miyar:signatures:v1", {}, (x) => x);
 
 // Moodboard tiles per project: image (https URL), colour (#hex) or note; the client can like tiles.
-export const moodStore = createPersistedStore("miyar:mood:v1", [], (x) => x);
+export const moodStore = createPersistedStore("miyar:mood:v2", [
+  { id: 101, projectId: 1, kind: "image", value: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80", caption: "ريسبشن نيوكلاسيك بإضاءة مخفية", liked: true },
+  { id: 102, projectId: 1, kind: "color", value: "#C8A27A", caption: "بيج كاميل للحوائط", liked: true },
+  { id: 103, projectId: 1, kind: "image", value: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80", caption: "مطبخ مفتوح بخشب جوز", liked: false },
+  { id: 104, projectId: 1, kind: "note", value: "الرخام كلكتا جولد في البهو، ومط في الحمامات.", caption: "ملاحظة المصممة", liked: false },
+  { id: 105, projectId: 1, kind: "color", value: "#2F3A40", caption: "رمادي فحمي للأبواب", liked: false },
+  { id: 106, projectId: 1, kind: "image", value: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80", caption: "واجهة وحديقة", liked: false },
+], localize);
 
 // Technical office: drawings and RFIs shared by the dashboard and the drawings screen; workflow settings.
 export const drawingsStore = createPersistedStore("miyar:drawings:v1", TECH_DRAWINGS, localize);

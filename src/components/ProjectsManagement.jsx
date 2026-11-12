@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 import { createPersistedStore } from "../data/persisted";
 import { currencySymbol, E } from "../i18n";
 import { D, DF, pct } from "../data/dataI18n";
@@ -771,11 +772,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             <div className="my-4 rounded-lg overflow-hidden h-44 relative">
-              <img
-                src={selectedProject.image}
-                alt={selectedProject.name}
-                className="w-full h-full object-cover"
-              />
+              <Photo src={selectedProject.image} alt={selectedProject.name} label={selectedProject.name} className="w-full h-full object-cover" />
               <div className="absolute top-3 start-3">
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#0F172A]/70 text-white backdrop-blur-xs">
                   {T("proj.43", { v0: selectedProject.phase })}

@@ -73,9 +73,9 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             <div className="max-w-6xl mx-auto">
               <h2 className={`max-w-3xl text-3xl sm:text-4xl font-semibold leading-[1.2] text-balance ${p.dark ? "text-white" : "text-[#0F172A]"}`}>{T(p.title)}</h2>
               <p className={`mt-4 max-w-2xl text-base sm:text-lg leading-relaxed ${p.dark ? "text-[#94A3B8]" : "text-[#475569]"}`}>{T(p.desc)}</p>
-              <ul className={`mt-8 grid sm:grid-cols-3 gap-px rounded-xl overflow-hidden border ${p.dark ? "bg-[#273449] border-[#273449]" : "bg-[#E3E7EE] border-[#E3E7EE]"}`}>
+              <ul className={`mt-8 grid sm:grid-cols-3 gap-px rounded-xl overflow-hidden border ${p.dark ? "bg-[#1D524E] border-[#1D524E]" : "bg-[#E3E7EE] border-[#E3E7EE]"}`}>
                 {p.pts.map((k) => (
-                  <li key={k} className={`p-5 sm:p-6 ${p.dark ? "bg-[#172033]" : "bg-white"}`}>
+                  <li key={k} className={`p-5 sm:p-6 ${p.dark ? "bg-[#0B312E]" : "bg-white"}`}>
                     <Check className="w-4 h-4 text-[#0F766E]" aria-hidden="true" />
                     <p className={`mt-3 text-base leading-snug font-medium ${p.dark ? "text-[#EEF1F5]" : "text-[#0F172A]"}`}>{T(k)}</p>
                   </li>

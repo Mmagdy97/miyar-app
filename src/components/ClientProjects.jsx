@@ -1,3 +1,4 @@
+import Photo from "./Photo";
 import { useState } from "react";
 import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T, E } from "../i18n";
@@ -126,11 +127,7 @@ function ClientProjects() {
             >
               {/* Cover Image with Gradient Overlay */}
               <div className="relative h-48 overflow-hidden bg-[#0F172A]">
-                <img
-                  src={unit.image}
-                  alt={unit.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
-                />
+                <Photo src={unit.image} alt={unit.name} label={unit.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
 
                 {/* Status Badge in Photo */}

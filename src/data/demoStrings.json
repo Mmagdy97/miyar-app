@@ -550,7 +550,14 @@
   "سباكة": "Plumbing",
   "الصفا للرخام": "El-Safa Marble",
   "رخام كرارة": "Carrara marble",
-  "مؤرشفة (إصدار سابق)": "Archived (older revision)"
+  "مؤرشفة (إصدار سابق)": "Archived (older revision)",
+  "ريسبشن نيوكلاسيك بإضاءة مخفية": "Neoclassical reception with hidden lighting",
+  "بيج كاميل للحوائط": "Camel beige for walls",
+  "مطبخ مفتوح بخشب جوز": "Open kitchen in walnut",
+  "الرخام كلكتا جولد في البهو، ومط في الحمامات.": "Calacatta Gold marble in the lobby, matte in the bathrooms.",
+  "ملاحظة المصممة": "Designer note",
+  "رمادي فحمي للأبواب": "Charcoal grey for doors",
+  "واجهة وحديقة": "Facade and garden"
  },
  "tr": {
   "سارة عامر": "Sara Amer",
@@ -1102,6 +1109,13 @@
   "سباكة": "Tesisat",
   "الصفا للرخام": "Safa Mermer",
   "رخام كرارة": "Carrara mermeri",
-  "مؤرشفة (إصدار سابق)": "Arşivlendi (eski revizyon)"
+  "مؤرشفة (إصدار سابق)": "Arşivlendi (eski revizyon)",
+  "ريسبشن نيوكلاسيك بإضاءة مخفية": "Gizli aydınlatmalı neoklasik resepsiyon",
+  "بيج كاميل للحوائط": "Duvarlar için deve tüyü bej",
+  "مطبخ مفتوح بخشب جوز": "Ceviz açık mutfak",
+  "الرخام كلكتا جولد في البهو، ومط في الحمامات.": "Lobide Calacatta Gold mermer, banyolarda mat.",
+  "ملاحظة المصممة": "Tasarımcı notu",
+  "رمادي فحمي للأبواب": "Kapılar için antrasit gri",
+  "واجهة وحديقة": "Cephe ve bahçe"
  }
 }
