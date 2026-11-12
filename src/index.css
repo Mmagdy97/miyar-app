@@ -286,8 +286,10 @@ main { --card-pad: 1.25rem; }
 
 /* Signature: status chips drawn as paint-fan swatches (colour block + label), replacing soft pills */
 span.rounded-full[class*="border"][class*="text-"]:not([class*="w-"]):not([class*="size-"]) {
-  border-radius: 5px; display: inline-flex; align-items: center; gap: .4rem; font-weight: 600;
+  border-radius: 5px; display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; white-space: nowrap;
 }
+span.rounded-full[class*="border"][class*="text-"]:has(> span[class*="rounded-full"])::before,
+span.rounded-full[class*="border"][class*="text-"]:has(> svg)::before { display: none; }
 span.rounded-full[class*="border"][class*="text-"]:not([class*="w-"]):not([class*="size-"])::before {
   content: ""; flex: none; width: .5rem; height: .5rem; border-radius: 1.5px; background: currentColor;
 }

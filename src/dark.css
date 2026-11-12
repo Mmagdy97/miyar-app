@@ -104,7 +104,6 @@ html.dark .from-amber-100{--tw-gradient-from:#302a12}
 html.dark .from-amber-200{--tw-gradient-from:#4d4219}
 html.dark .from-amber-600{--tw-gradient-from:#e17100}
 html.dark .from-emerald-600{--tw-gradient-from:#009966}
-html.dark .from-purple-600{--tw-gradient-from:#9810fa}
 html.dark .group:hover .group-hover\:bg-\[\#1A2236\]{background-color:#9a3822}
 html.dark .group:hover .group-hover\:bg-\[\#DAD3C2\]{background-color:#273250}
 html.dark .group:hover .group-hover\:border-\[\#24304D\]{border-color:#3e4b6c}
@@ -185,12 +184,12 @@ html.dark .text-rose-800{color:#ff5c91}
 html.dark .text-sky-700{color:#5cc2ff}
 html.dark .to-\[\#1A2236\]{--tw-gradient-to:#9a3822}
 html.dark .to-\[\#24304D\]{--tw-gradient-to:#e0714f}
+html.dark .to-\[\#9A3822\]{--tw-gradient-to:#9a3822}
 html.dark .to-\[\#DAD3C2\]{--tw-gradient-to:#273250}
 html.dark .to-\[\#F3EFE6\]{--tw-gradient-to:#0c1120}
 html.dark .to-amber-50{--tw-gradient-to:#302a12}
 html.dark .to-emerald-700{--tw-gradient-to:#007a55}
 html.dark .to-orange-600{--tw-gradient-to:#f54900}
-html.dark .to-pink-600{--tw-gradient-to:#e60076}
 html.dark .to-teal-600{--tw-gradient-to:#009689}
 html.dark .via-\[\#DAD3C2\]{--tw-gradient-via:#273250}
 html.dark .via-\[\#E9E3D5\]{--tw-gradient-via:#1b2540}

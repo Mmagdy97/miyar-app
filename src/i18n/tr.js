@@ -499,7 +499,7 @@ export default {
   "se.3": "Saha",
   "se.4": "26°C Kahire",
   "se.5": "Günlük rapor ekle",
-  "se.6": "💸 Avans kapat",
+  "se.6": "Avans kapat",
   "se.7": "Bugün size atanan şantiye",
   "se.8": "Mevcut şantiyeniz",
   "se.9": "Yasemin Villa - Beşinci Yerleşim",

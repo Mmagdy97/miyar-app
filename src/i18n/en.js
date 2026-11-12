@@ -499,7 +499,7 @@ export default {
   "se.3": "Field",
   "se.4": "26°C Cairo",
   "se.5": "Add daily report",
-  "se.6": "💸 Settle advance",
+  "se.6": "Settle advance",
   "se.7": "Your assigned work site today",
   "se.8": "Your current site",
   "se.9": "Yasmine Villa - Fifth Settlement",
