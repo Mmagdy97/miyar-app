@@ -13,3 +13,18 @@ describe("puantaj", () => {
     expect(monthSummary(rec, [{ id: 1, rate: 400 }], "2026-11")[0]).toEqual({ id: 1, days: 1.5, ot: 0, wage: 600 });
   });
 });
+
+import { setRate, entryRate } from "./puantaj";
+describe("daily rate control", () => {
+  const ws = [{ id: 1, rate: 300 }];
+  const rec = { "2026-11-01": { 1: { s: "present", ot: 0, r: 300 } }, "2026-11-02": { 1: { s: "present", ot: 0 } } };
+  it("changing the rate keeps past days and applies from the chosen day", () => {
+    const { workers, records } = setRate(ws, rec, 1, 400, "2026-11-02");
+    expect(workers[0].rate).toBe(400);
+    expect(entryRate(records["2026-11-01"][1], workers[0])).toBe(300);
+    expect(monthSummary(records, workers, "2026-11")[0].wage).toBe(700);
+  });
+  it("ignores invalid rates", () => {
+    expect(setRate(ws, rec, 1, 0, "2026-11-02").workers).toBe(ws);
+  });
+});

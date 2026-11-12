@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { UsersRound, Plus, Download } from "lucide-react";
+import { UsersRound, Plus, Download, Pencil, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { workersStore, attendanceStore } from "../data/stores";
-import { dayWage, monthSummary } from "../lib/puantaj";
+import { dayWage, monthSummary, entryRate, setRate } from "../lib/puantaj";
 import { toCsv, download } from "../lib/accountant";
 
 const STATES = ["present", "half", "absent"];
@@ -15,21 +15,30 @@ export default function SiteEngineerAttendance() {
   const [date, setDate] = useState(today());
   const [name, setName] = useState("");
   const [trade, setTrade] = useState("");
-  const [rate, setRate] = useState("");
+  const [rate, setRateIn] = useState("");
+  const [edit, setEdit] = useState(null); // { id, v }
   const day = records[date] || {};
   const month = date.slice(0, 7);
   const sums = monthSummary(records, workers, month);
   const monthTotal = sums.reduce((s, x) => s + x.wage, 0);
-  const dayTotal = workers.reduce((s, w) => s + dayWage(w.rate, day[w.id]?.s, day[w.id]?.ot), 0);
+  const dayTotal = workers.reduce((s, w) => s + dayWage(entryRate(day[w.id], w), day[w.id]?.s, day[w.id]?.ot), 0);
   const present = workers.filter((w) => day[w.id] && day[w.id].s !== "absent").length;
 
-  const mark = (id, patch) =>
-    setRecords((r) => ({ ...r, [date]: { ...(r[date] || {}), [id]: { s: "absent", ot: 0, ...(r[date]?.[id] || {}), ...patch } } }));
+  // each entry stores the rate of that day, so a later rate change never rewrites history
+  const mark = (id, patch) => {
+    const w = workers.find((x) => x.id === id);
+    setRecords((r) => ({ ...r, [date]: { ...(r[date] || {}), [id]: { s: "absent", ot: 0, r: w?.rate, ...(r[date]?.[id] || {}), ...patch } } }));
+  };
+  const saveRate = () => {
+    if (!edit) return;
+    const res = setRate(workers, records, edit.id, edit.v, date);
+    setWorkers(res.workers); setRecords(res.records); setEdit(null);
+  };
   const addWorker = (e) => {
     e.preventDefault();
     if (!name.trim() || !Number(rate)) return;
     setWorkers((w) => [...w, { id: Date.now(), name: name.trim(), trade: trade.trim(), rate: Number(rate) }]);
-    setName(""); setTrade(""); setRate("");
+    setName(""); setTrade(""); setRateIn("");
   };
   const exportCsv = () =>
     download(`puantaj-${month}.csv`, toCsv([T("att.worker"), T("att.trade"), T("att.days"), T("att.ot"), T("att.wage")], workers.map((w, i) => [w.name, w.trade, sums[i].days, sums[i].ot, sums[i].wage])), "text/csv");
@@ -62,7 +71,20 @@ export default function SiteEngineerAttendance() {
               <div key={w.id} className="bg-white rounded-lg border border-[#E3E7EE] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-extrabold text-[#0F172A]">{E(w.name)}</p>
-                  <p className="text-[11px] text-[#475569] font-bold">{E(w.trade)} · {money(w.rate)} / {T("att.perday")} · {T("att.days")}: {sums[i].days}</p>
+                  {edit && edit.id === w.id ? (
+                    <form onSubmit={(ev) => { ev.preventDefault(); saveRate(); }} className="mt-1.5 flex flex-wrap items-center gap-2">
+                      <input type="number" min={1} autoFocus value={edit.v} onChange={(ev) => setEdit({ ...edit, v: ev.target.value })} aria-label={T("att.rate")} className={input + " w-28"} />
+                      <button type="submit" aria-label={T("att.save")} className="p-2 rounded-lg bg-[#0F766E] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
+                      <button type="button" onClick={() => setEdit(null)} aria-label={T("att.cancel")} className="p-2 rounded-lg border border-[#E3E7EE] cursor-pointer"><X className="w-4 h-4" /></button>
+                      <span className="w-full text-[11px] text-[#64748B]">{T("att.rateNote", { 0: date })}</span>
+                    </form>
+                  ) : (
+                    <p className="text-[11px] text-[#475569] font-bold flex flex-wrap items-center gap-x-1">
+                      <span>{E(w.trade)} ·</span>
+                      <button type="button" onClick={() => setEdit({ id: w.id, v: w.rate })} className="inline-flex items-center gap-1 text-[#0F766E] underline-offset-2 hover:underline cursor-pointer">{money(w.rate)} / {T("att.perday")}<Pencil className="w-3 h-3" aria-hidden="true" /></button>
+                      <span>· {T("att.days")}: {sums[i].days}</span>
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {STATES.map((s) => (
@@ -82,7 +104,7 @@ export default function SiteEngineerAttendance() {
           <form onSubmit={addWorker} className="flex flex-wrap gap-2 items-end">
             <input required placeholder={T("att.worker")} value={name} onChange={(e) => setName(e.target.value)} className={input} />
             <input placeholder={T("att.trade")} value={trade} onChange={(e) => setTrade(e.target.value)} className={input + " w-28"} />
-            <input required type="number" min={1} placeholder={T("att.rate")} value={rate} onChange={(e) => setRate(e.target.value)} className={input + " w-28"} />
+            <input required type="number" min={1} placeholder={T("att.rate")} value={rate} onChange={(e) => setRateIn(e.target.value)} className={input + " w-28"} />
             <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer"><Plus className="w-4 h-4" />{T("att.add")}</button>
           </form>
           <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0F172A] bg-white border border-[#E3E7EE] hover:bg-[#F4F6F9] cursor-pointer"><Download className="w-4 h-4" />{T("att.export")}</button>

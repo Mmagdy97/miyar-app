@@ -17,8 +17,21 @@ export function monthSummary(records, workers, month) {
       if (!e) continue;
       days += UNITS[e.s] ?? 0;
       ot += e.s === "absent" ? 0 : Number(e.ot) || 0;
-      wage += dayWage(w.rate, e.s, e.ot);
+      wage += dayWage(entryRate(e, w), e.s, e.ot);
     }
     return { id: w.id, days, ot, wage };
   });
+}
+
+/** The rate saved on the day's entry wins, so changing a worker's rate never rewrites past days. */
+export const entryRate = (e, w) => (e && e.r != null ? e.r : w.rate);
+
+/** Set a new daily rate from `date` on: updates the worker and that day's entry, keeps earlier days. */
+export function setRate(workers, records, id, rate, date) {
+  const r = Math.round(Number(rate) || 0);
+  if (r <= 0) return { workers, records };
+  const ws = workers.map((w) => (w.id === id ? { ...w, rate: r } : w));
+  const day = records[date];
+  const rs = day && day[id] ? { ...records, [date]: { ...day, [id]: { ...day[id], r } } } : records;
+  return { workers: ws, records: rs };
 }
