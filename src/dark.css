@@ -26,8 +26,8 @@ html.dark .bg-\[\#F4F6F9\]{background-color:#171f2b}
 html.dark .bg-\[\#F4F6F9\]\/50{background-color:rgb(23 31 43 / 0.5)}
 html.dark .bg-\[\#F4F6F9\]\/60{background-color:rgb(23 31 43 / 0.6)}
 html.dark .bg-\[\#F4F6F9\]\/70{background-color:rgb(23 31 43 / 0.7)}
-html.dark .bg-\[\#F4F6F9\]\/80{background-color:rgb(23 31 43 / 0.8)}
 html.dark .bg-\[\#F4F6F9\]\/90{background-color:rgb(23 31 43 / 0.9)}
+html.dark .bg-\[\#F4F6F9\]\/95{background-color:rgb(23 31 43 / 0.95)}
 html.dark .bg-\[\#FFFFFF\]{background-color:#151d33}
 html.dark .bg-amber-100{background-color:#302a12}
 html.dark .bg-amber-400{background-color:#ffb900}
@@ -91,8 +91,10 @@ html.dark .fill-rose-500{fill:#ff2056}
 html.dark .fill-rose-600{fill:#ff5c87}
 html.dark .focus\:bg-\[\#0F172A\]:focus{background-color:#0f172a}
 html.dark .focus\:border-\[\#0F172A\]:focus{border-color:#0f172a}
+html.dark .focus\:border-\[\#0F766E\]:focus{border-color:#0f766e}
 html.dark .focus\:ring-\[\#0F172A\]:focus{--tw-ring-color:#0f172a}
 html.dark .focus\:ring-\[\#0F172A\]\/10:focus{--tw-ring-color:rgb(15 23 42 / 0.1)}
+html.dark .focus\:ring-\[\#0F766E\]\/30:focus{--tw-ring-color:rgb(15 118 110 / 0.3)}
 html.dark .from-\[\#0F172A\]{--tw-gradient-from:#0f172a}
 html.dark .from-\[\#0F172A\]\/70{--tw-gradient-from:rgb(15 23 42 / 0.7)}
 html.dark .from-\[\#0F172A\]\/80{--tw-gradient-from:rgb(15 23 42 / 0.8)}

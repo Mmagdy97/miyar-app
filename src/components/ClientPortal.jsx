@@ -400,7 +400,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* Horizontal Timeline Stepper */}
-        <div className="grid stat-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+        <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
           {PROJECT_PHASES.map((phase, index) => {
             const isCompleted = phase.status === "completed";
             const isActive = phase.status === "active";
@@ -504,7 +504,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* Gallery Grid (3-4 High-End Photo Cards) */}
-        <div className="grid stat-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid stat-grid stat-swipe grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {SITE_UPDATES.map((photo) => {
             const isLiked = likedPhotos[photo.id];
 

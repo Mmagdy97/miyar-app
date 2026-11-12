@@ -194,7 +194,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
       </div>
 
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
-      <div className="grid stat-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI 1: الإيرادات المتوقعة */}
         <div className="bg-white border border-[#E3E7EE] rounded-xl p-5 flex flex-col justify-between">
           <div>

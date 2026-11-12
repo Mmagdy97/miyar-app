@@ -6,6 +6,7 @@ import OfflineBanner from "./components/OfflineBanner";
 import Navbar from "./components/Navbar";
 import BottomNav from "./components/BottomNav";
 import LeadNudge from "./components/LeadNudge";
+import { watchTableLabels } from "./lib/tableLabels";
 import MainContent from "./components/MainContent";
 import ActionItemModal from "./components/ActionItemModal";
 import LandingAndLogin from "./components/LandingAndLogin";
@@ -101,6 +102,8 @@ function App() {
   // Requirement 2: PWA Install State & Event Handler
   const [isInstallable, setIsInstallable] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => watchTableLabels(), []);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {

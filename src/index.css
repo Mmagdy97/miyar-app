@@ -311,22 +311,53 @@ header.fixed.glass { position: fixed; }
 
 /* ===== Mobile-first layer (phones) ===== */
 @media (max-width: 767px) {
-  /* KPI figures become a swipeable row of single cards instead of a cramped 2x2 grid */
-  .stat-grid {
+  /* KPI figures: compact 2-up grid; rich cards (charts, progress) swipe one by one */
+  .stat-grid:not(.stat-swipe) {
+    display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important;
+    background: transparent !important; border: 0 !important; border-radius: 0 !important; overflow: visible !important;
+  }
+  .stat-grid:not(.stat-swipe) > * {
+    padding: .75rem !important; border: 1px solid var(--line) !important; border-radius: var(--r-md) !important;
+    background-color: var(--surface) !important; min-width: 0; gap: .375rem;
+  }
+  .stat-grid:not(.stat-swipe) > *:nth-child(odd):last-child { grid-column: span 2; }
+  .stat-grid:not(.stat-swipe) .text-2xl, .stat-grid:not(.stat-swipe) .text-3xl, .stat-grid:not(.stat-swipe) .text-4xl { font-size: 20px !important; }
+  .stat-swipe {
     display: flex !important; overflow-x: auto; gap: 10px !important; background: transparent !important;
     border: 0 !important; border-radius: 0 !important; scroll-snap-type: x mandatory; scrollbar-width: none;
     margin-inline: -1rem; padding-inline: 1rem; scroll-padding-inline: 1rem; padding-bottom: 2px;
   }
-  .stat-grid::-webkit-scrollbar { display: none; }
-  .stat-grid > * {
+  .stat-swipe::-webkit-scrollbar { display: none; }
+  .stat-swipe > * {
     flex: 0 0 82%; scroll-snap-align: start; border: 1px solid var(--line) !important; border-radius: var(--r-lg) !important;
-    background-color: var(--surface) !important;
+    background-color: var(--surface) !important; justify-content: flex-start !important; gap: .75rem;
   }
-  .stat-grid > * { justify-content: flex-start !important; gap: .75rem; }
-  /* sections go edge-to-edge: no card-in-card squeeze */
-  main main > .bg-white, main main > .flex > .bg-white, main main > .grid:not(.stat-grid) > .bg-white, main main > div:not(.stat-grid):not(.fixed):not(.sticky):not([class*="bg-"]) > .bg-white.border:not(.fixed) {
+  /* full-width sections go edge-to-edge (no card-in-card squeeze); cards inside grids and form controls keep their box */
+  main main > .bg-white.border:not(select):not(input):not(textarea), main main > [class*="space-y"] > .bg-white.border:not(select):not(input):not(textarea), main main > .flex-col > .bg-white.border:not(select):not(input):not(textarea) {
     margin-inline: -1rem; border-radius: 0 !important; border-inline-width: 0 !important; max-width: none; width: auto;
   }
+  main main select, main main input, main main textarea { max-width: 100%; }
+  /* data tables become stacked cards: one card per row, each cell labelled with its column */
+  main table.has-labels:not(.keep-table) { display: block; min-width: 0 !important; width: 100% !important; }
+  main table.has-labels:not(.keep-table) thead { display: none; }
+  main table.has-labels:not(.keep-table) tbody, main table.has-labels:not(.keep-table) tfoot { display: block; }
+  main table.has-labels:not(.keep-table) tr {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem .75rem;
+    padding: .875rem 1rem; border-bottom: 1px solid var(--line);
+  }
+  main table.has-labels:not(.keep-table) td:first-child, main table.has-labels:not(.keep-table) td:last-child:has(button, a) { grid-column: 1 / -1; }
+  main table.has-labels:not(.keep-table) td:last-child:has(button, a)::before { display: none; }
+  main table.has-labels:not(.keep-table) td {
+    display: block; padding: .3rem 0 !important; border: 0 !important; text-align: start !important; min-width: 0; white-space: normal !important;
+  }
+  main table.has-labels:not(.keep-table) td::before {
+    content: attr(data-label); display: block; margin-bottom: 2px; font-size: 12px; font-weight: 500; color: var(--ink-2);
+  }
+  main table.has-labels:not(.keep-table) td:first-child::before { display: none; }
+  main table.has-labels:not(.keep-table) td[data-label=""]::before { display: none; }
+  main table.has-labels:not(.keep-table) td:first-child { font-weight: 700; }
+  main table.has-labels:not(.keep-table) td > * { min-width: 0; }
+  main .overflow-x-auto:has(> table.has-labels:not(.keep-table)) { overflow: visible; border: 0 !important; box-shadow: none !important; }
   main main .p-5, main main .p-6 { padding: 1rem; }
   main main .px-5, main main .px-6 { padding-inline: 1rem; }
   /* section headers stack instead of squeezing the title */

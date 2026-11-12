@@ -176,7 +176,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Requirement 2: 3 Glassmorphic KPI Cards */}
-      <div className="grid stat-grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Card 1: Total Given (إجمالي العهد المفتوحة) */}
         <div className="relative bg-white rounded-lg p-6 border border-[#E3E7EE] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowDown, Check } from "lucide-react";
+import { ArrowLeft, ArrowDown, Check, Copy, Send } from "lucide-react";
 import { tr_ as T, money } from "../i18n";
 import { formatNumber } from "../data/seed";
+import { quickQuote } from "../lib/quickQuote";
 
 /** Eases a displayed number toward its target (interruptible, no keyframes). */
 function useTween(target, ms = 260) {
@@ -21,60 +22,91 @@ function useTween(target, ms = 260) {
   return Math.round(v);
 }
 
-const QTY = 120;
-const COST = 1400;
+const UNITS = ["m2", "lm", "m3", "pc", "pt"];
+const DEFAULTS = { item: "", qty: 120, unit: "m2", materials: 1000, labour: 300, transport: 100, markup: 30, vat: 0 };
 
-/** Live Smart-BOQ line: the margin slider reprices the item in real time. */
+/** Fully editable Smart-BOQ line: the visitor enters every value and sees price, profit and margin live. */
 export function BoqLive() {
-  const [margin, setMargin] = useState(30);
-  const price = Math.round(COST * (1 + margin / 100));
-  const total = price * QTY;
-  const profit = (price - COST) * QTY;
-  const priceT = useTween(price), totalT = useTween(total), profitT = useTween(profit);
+  const [f, setF] = useState(DEFAULTS);
+  const [copied, setCopied] = useState(false);
+  const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
+  const r = quickQuote(f);
+  const priceT = useTween(r.unitPrice), totalT = useTween(r.total), profitT = useTween(r.profit);
+  const name = f.item.trim() || T("hero.itemPh");
+  const unit = T("hero.u." + f.unit);
+  const summary = T("hero.summary", { item: name, qty: formatNumber(Number(f.qty) || 0), unit, price: money(r.unitPrice), total: money(r.total) });
+  const copy = async () => { try { await navigator.clipboard.writeText(summary); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch { /* ignore */ } };
+
+  const field = "w-full h-10 px-3 rounded-lg border border-[#E3E7EE] bg-white text-sm text-[#0F172A] tabular-nums focus:outline-none focus:ring-2 focus:ring-[#0F766E]/30 focus:border-[#0F766E]";
+  const lab = "block text-xs font-medium text-[#475569] mb-1";
+  const num = (k, label, extra = {}) => (
+    <div>
+      <label htmlFor={"q-" + k} className={lab}>{label}</label>
+      <input id={"q-" + k} type="number" inputMode="decimal" min="0" value={f[k]} onChange={set(k)} className={field} {...extra} />
+    </div>
+  );
+
   return (
     <div className="rounded-xl border border-[#E3E7EE] bg-white overflow-hidden">
       <div className="flex items-center justify-between px-5 py-3 border-b border-[#E3E7EE] text-xs text-[#475569]">
-        <span className="font-semibold text-[#0F172A]">{T("ld.47")}</span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          {T("hero.live")}
-        </span>
+        <span className="font-semibold text-[#0F172A]">{T("hero.calc")}</span>
+        <button type="button" onClick={() => setF(DEFAULTS)} className="text-[#0F766E] font-semibold hover:underline cursor-pointer">{T("hero.reset")}</button>
       </div>
 
-      <div className="p-5 space-y-5">
+      <div className="p-5 space-y-4">
         <div>
-          <div className="flex items-baseline justify-between mb-2">
-            <label htmlFor="hero-margin" className="text-sm text-[#475569]">{T("hero.margin")}</label>
-            <output className="text-2xl font-bold text-[#0F766E] tabular-nums" dir="ltr">{margin}%</output>
-          </div>
-          <input
-            id="hero-margin"
-            type="range"
-            min="0"
-            max="60"
-            value={margin}
-            onChange={(e) => setMargin(+e.target.value)}
-            className="w-full h-1.5 accent-[#0F766E] cursor-pointer"
-          />
+          <label htmlFor="q-item" className={lab}>{T("hero.item")}</label>
+          <input id="q-item" value={f.item} onChange={set("item")} placeholder={T("hero.itemPh")} className={field} />
         </div>
+        <div className="grid grid-cols-2 gap-3">
+          {num("qty", T("hero.qty"))}
+          <div>
+            <label htmlFor="q-unit" className={lab}>{T("hero.unitL")}</label>
+            <select id="q-unit" value={f.unit} onChange={set("unit")} className={field}>
+              {UNITS.map((u) => <option key={u} value={u}>{T("hero.u." + u)}</option>)}
+            </select>
+          </div>
+        </div>
+        <fieldset>
+          <legend className={lab}>{T("hero.costs")}</legend>
+          <div className="grid grid-cols-3 gap-2">
+            {num("materials", T("hero.mat"))}
+            {num("labour", T("hero.lab"))}
+            {num("transport", T("hero.trn"))}
+          </div>
+        </fieldset>
+        <div>
+          <div className="flex items-center justify-between gap-3 mb-1.5">
+            <label htmlFor="q-markup" className="text-xs font-medium text-[#475569]">{T("hero.margin")}</label>
+            <div className="flex items-center gap-1.5">
+              <input aria-label={T("hero.margin")} type="number" min="0" max="300" value={f.markup} onChange={set("markup")} className="w-16 h-8 px-2 rounded-md border border-[#E3E7EE] text-sm font-bold text-[#0F766E] text-center tabular-nums" />
+              <span className="text-sm text-[#475569]">%</span>
+            </div>
+          </div>
+          <input id="q-markup" type="range" min="0" max="100" value={Math.min(100, Number(f.markup) || 0)} onChange={set("markup")} className="w-full h-1.5 accent-[#0F766E] cursor-pointer" />
+        </div>
+        {num("vat", T("hero.vat"), { max: 30 })}
 
         <dl className="text-sm divide-y divide-[#EEF1F5]">
-          <div className="flex justify-between py-2.5"><dt className="text-[#475569]">{T("hero.qty")}</dt><dd className="tabular-nums text-[#0F172A]">{formatNumber(QTY)} {T("hero.unit")}</dd></div>
-          <div className="flex justify-between py-2.5"><dt className="text-[#475569]">{T("ld.49")}</dt><dd className="tabular-nums text-[#0F172A]">{money(COST, { compact: true })}</dd></div>
-          <div className="flex justify-between py-2.5"><dt className="text-[#475569]">{T("ld.51")}</dt><dd className="tabular-nums text-[#0F172A]">{money(priceT, { compact: true })}</dd></div>
-          <div className="flex justify-between py-2.5"><dt className="text-[#475569]">{T("hero.profit")}</dt><dd className="tabular-nums text-emerald-600">{money(profitT, { compact: true })}</dd></div>
+          <div className="flex justify-between py-2"><dt className="text-[#475569]">{T("hero.unitCost")}</dt><dd className="tabular-nums text-[#0F172A]">{money(r.unitCost)}</dd></div>
+          <div className="flex justify-between py-2"><dt className="text-[#475569]">{T("hero.unitPrice")}</dt><dd className="tabular-nums font-semibold text-[#0F172A]">{money(priceT)}</dd></div>
+          <div className="flex justify-between py-2"><dt className="text-[#475569]">{T("hero.profit")}</dt><dd className="tabular-nums text-emerald-700">{money(profitT)} <span className="text-xs text-[#64748B]">({T("hero.ofSale", { p: r.margin })})</span></dd></div>
+          {Number(f.vat) > 0 && <div className="flex justify-between py-2"><dt className="text-[#475569]">{T("hero.tax")}</dt><dd className="tabular-nums text-[#0F172A]">{money(r.tax)}</dd></div>}
         </dl>
 
         <div className="flex items-end justify-between rounded-lg bg-[#F4F6F9] border border-[#E3E7EE] px-4 py-3">
-          <span className="text-xs text-[#475569]">{T("ld.53")}</span>
-          <span className="text-2xl font-bold text-[#0F172A] tabular-nums">{money(totalT, { compact: true })}</span>
+          <span className="text-xs text-[#475569]">{T("hero.total")}</span>
+          <output className="text-2xl font-bold text-[#0F172A] tabular-nums">{money(totalT)}</output>
         </div>
 
         <div className="flex gap-2">
-          <span className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-[#0F766E] text-white text-sm font-semibold py-2.5">
-            <Check className="w-4 h-4" aria-hidden="true" />{T("ld.56")}
-          </span>
-          <span className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E3E7EE] text-[#475569] text-sm font-semibold py-2.5">{T("ld.55")}</span>
+          <a href={"https://wa.me/?text=" + encodeURIComponent(summary)} target="_blank" rel="noopener noreferrer" className="btn-press flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white text-sm font-semibold py-2.5">
+            <Send className="w-4 h-4" aria-hidden="true" />{T("hero.share")}
+          </a>
+          <button type="button" onClick={copy} className="btn-press flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[#E3E7EE] text-[#0F172A] hover:bg-[#EEF1F5] text-sm font-semibold py-2.5 cursor-pointer">
+            {copied ? <Check className="w-4 h-4 text-emerald-600" aria-hidden="true" /> : <Copy className="w-4 h-4" aria-hidden="true" />}
+            <span aria-live="polite">{copied ? T("hero.copied") : T("hero.copy")}</span>
+          </button>
         </div>
       </div>
     </div>

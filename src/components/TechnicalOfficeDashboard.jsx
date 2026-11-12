@@ -263,7 +263,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       </div>
 
       {/* 2. Engineering Dashboard Grid (4 Cards) */}
-      <div className="grid stat-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: مخططات بانتظار الاعتماد */}
         <div className="bg-white rounded-lg border border-[#E3E7EE] p-5 shadow-xs transition-all flex flex-col justify-between">
           <div className="flex items-center justify-between">
