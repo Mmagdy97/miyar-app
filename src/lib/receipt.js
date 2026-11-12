@@ -1,3 +1,4 @@
+import { valueMoment } from "./nudge";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -17,6 +18,7 @@ ${row(T("rcpt.date"), E(inv.paidDate || "—"))}<tr><th>${esc(T("rcpt.amount"))}
 }
 
 export function printReceipt(inv, project) {
+  valueMoment("receipt");
   const f = document.createElement("iframe");
   f.setAttribute("aria-hidden", "true");
   f.style.cssText = "position:fixed;width:0;height:0;border:0;inset-inline-start:-9999px";

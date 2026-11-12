@@ -1,3 +1,4 @@
+import { valueMoment } from "../lib/nudge";
 import { useState } from "react";
 import { FilePenLine, Check, X, MessageCircle } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
@@ -25,7 +26,7 @@ export default function ChangeOrders({ role = "Admin" }) {
     setOrders((a) => [{ id: Date.now(), projectId: project.id, no: a.filter((o) => o.projectId === project.id).length + 1, title: f.title.trim(), desc: f.desc.trim(), cost: Number(f.cost), days: Number(f.days) || 0, status: "draft", date: new Date().toISOString().slice(0, 10) }, ...a]);
     setF({ title: "", desc: "", cost: "", days: "" });
   };
-  const setStatus = (id, status) => setOrders((a) => a.map((o) => (o.id === id ? { ...o, status } : o)));
+  const setStatus = (id, status) => { valueMoment("co-" + status); setOrders((a) => a.map((o) => (o.id === id ? { ...o, status } : o))); };
   const text = (o) => T("co.msg", { 0: `${o.no}`, 1: o.title, 2: money(o.cost), 3: `${o.days}` });
 
   return (

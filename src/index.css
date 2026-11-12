@@ -352,3 +352,8 @@ header.fixed.glass { position: fixed; }
   main h3 { font-size: 15px !important; line-height: 1.4 !important; }
   span.rounded-full[class*="border"][class*="text-"]:not([class*="w-"]):not([class*="size-"]) { font-size: 12px !important; padding: 2px 8px; }
 }
+
+/* contact nudge: quiet entrance, ease-out, under 250ms; none for reduced motion */
+@keyframes nudge-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.nudge-in { animation: nudge-in 220ms cubic-bezier(.2,.8,.2,1) both; }
+@media (prefers-reduced-motion: reduce) { .nudge-in { animation: none; } }

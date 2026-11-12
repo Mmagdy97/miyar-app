@@ -1,3 +1,4 @@
+import { valueMoment } from "../lib/nudge";
 import { currencySymbol, intlLocale } from "../i18n";
 import { localize, D, DF } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
@@ -152,6 +153,7 @@ function SiteEngineerDashboard({ setActionItems }) {
       setActionItems((prev) => [newReportItem, ...prev]);
     }
 
+    valueMoment("report");
     // Clear the text areas
     setCustomNotes("");
 

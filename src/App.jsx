@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import OfflineBanner from "./components/OfflineBanner";
 import Navbar from "./components/Navbar";
 import BottomNav from "./components/BottomNav";
+import LeadNudge from "./components/LeadNudge";
 import MainContent from "./components/MainContent";
 import ActionItemModal from "./components/ActionItemModal";
 import LandingAndLogin from "./components/LandingAndLogin";
@@ -250,6 +251,7 @@ function App() {
           setSelectedItem={setSelectedItem}
         />
         <BottomNav currentRole={currentRole} activeTab={activeTab} setActiveTab={setActiveTab} onMore={() => setIsMobileMenuOpen(true)} />
+        <LeadNudge currentRole={currentRole} activeTab={activeTab} />
       </div>
 
       {/* Requirement 2: Global Modal Rendering (Overlays ANY screen) */}

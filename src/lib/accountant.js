@@ -1,3 +1,4 @@
+import { valueMoment } from "./nudge";
 // Accountant export: net / VAT / gross per invoice, as CSV (opens in Excel) or JSON.
 // Amounts are treated as NET (excluding VAT); the office VAT rate is applied on top.
 import { withVat, isSupportedCurrency } from "./currency";
@@ -30,6 +31,7 @@ export function toCsv(headers, rows) {
 }
 
 export function download(filename, text, mime) {
+  valueMoment("export");
   const url = URL.createObjectURL(new Blob([text], { type: `${mime};charset=utf-8` }));
   const a = document.createElement("a");
   a.href = url;

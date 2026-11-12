@@ -1,4 +1,5 @@
-import { ChevronRight, Check, LogIn } from "lucide-react";
+import { waLink } from "../lib/nudge";
+import { ChevronRight, Check, LogIn, MessageCircle } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import Capabilities from "./Capabilities";
@@ -117,7 +118,10 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         <div className="rounded-xl bg-[#0F172A] text-white text-start px-6 sm:px-12 py-12 sm:py-16">
           <h2 className="max-w-3xl text-3xl sm:text-4xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
           <p className="mt-4 max-w-xl text-base sm:text-lg text-[#94A3B8] leading-relaxed">{T("ld.140")}</p>
-          <button onClick={() => openModal("Admin")} className="btn-press mt-8 h-11 px-6 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white text-base font-medium cursor-pointer">{T("ld.141")}</button>
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <button onClick={() => openModal("Admin")} className="btn-press h-11 px-6 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white text-base font-medium cursor-pointer">{T("ld.141")}</button>
+            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-11 text-base font-medium text-white/90 hover:text-white underline-offset-4 hover:underline"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
+          </div>
         </div>
       </section>
 

@@ -1,3 +1,4 @@
+import { valueMoment } from "../lib/nudge";
 import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
 import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
@@ -597,7 +598,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
               <span>{T("boq.csv")}</span>
             </button>
             <button
-              onClick={() => window.print()}
+              onClick={() => { valueMoment("quote"); window.print(); }}
               className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E3E7EE] bg-white hover:bg-[#F4F6F9] text-[#475569] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
             >
               <Printer className="w-4 h-4" />
