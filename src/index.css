@@ -322,6 +322,19 @@ header.fixed.glass { position: fixed; }
     flex: 0 0 82%; scroll-snap-align: start; border: 1px solid var(--line) !important; border-radius: var(--r-lg) !important;
     background-color: var(--surface) !important;
   }
+  .stat-grid > * { justify-content: flex-start !important; gap: .75rem; }
+  /* sections go edge-to-edge: no card-in-card squeeze */
+  main main > .bg-white, main main > .flex > .bg-white, main main > .grid:not(.stat-grid) > .bg-white, main main > div:not(.stat-grid):not(.fixed):not(.sticky):not([class*="bg-"]) > .bg-white.border:not(.fixed) {
+    margin-inline: -1rem; border-radius: 0 !important; border-inline-width: 0 !important; max-width: none; width: auto;
+  }
+  main main .p-5, main main .p-6 { padding: 1rem; }
+  main main .px-5, main main .px-6 { padding-inline: 1rem; }
+  /* section headers stack instead of squeezing the title */
+  main main .border-b.justify-between { flex-wrap: wrap; gap: .375rem .75rem; }
+  main main .border-t.justify-between { flex-wrap: wrap; gap: .25rem .75rem; }
+  main main.space-y-7 > * + *, main main.space-y-6 > * + *, main main.space-y-8 > * + * { margin-top: 1rem; }
+  /* no scroll-inside-scroll lists on phones (dialogs keep theirs) */
+  main main [class*="max-h-"][class*="overflow-y-auto"]:not(.fixed):not(.fixed *) { max-height: none; overflow: visible; }
   /* comfortable reading + tap sizes */
   main { font-size: 15px; }
   main button, main [role="button"] { min-height: 40px; }

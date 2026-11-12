@@ -414,8 +414,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                       </div>
 
                       {/* Overlapping Team Avatars */}
-                      <div className="flex items-center shrink-0">
-                        <div className="flex items-center -space-x-2 space-x-reverse overflow-hidden">
+                      <div className="hidden sm:flex items-center shrink-0">
+                        <div className="flex items-center -space-x-2 space-x-reverse">
                           {team.map((member, i) => (
                             <div
                               key={i}
@@ -435,7 +435,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                         <span className="text-[#475569]">
                           {t("adm.phase")} <span className="text-[#0F172A] font-bold">{E(project.phase)}</span>
                         </span>
-                        <span className="text-xs font-bold text-[#0F172A] tracking-wide font-mono">
+                        <span className="text-xs font-bold text-[#0F172A] tracking-wide font-mono whitespace-nowrap shrink-0 ms-2">
                           {t("adm.complete", { p: toAr(project.progress) })}
                         </span>
                       </div>
@@ -447,10 +447,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     </div>
 
                     <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#475569]">
-                      <span className="truncate max-w-[260px] text-[#475569]">
+                      <span className="truncate min-w-0 flex-1 text-[#475569]">
                         {project.phaseDetail}
                       </span>
-                      <span className="shrink-0 font-bold text-[#475569]">
+                      <span className="shrink-0 font-bold text-[#475569] ms-2">
                         {t("adm.due", { d: project.dueDate })}
                       </span>
                     </div>
@@ -525,15 +525,15 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                     >
                       <div className="flex items-start gap-3.5">
                         <div
-                          className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${visuals.iconBg}`}
+                          className={`hidden sm:flex w-9 h-9 rounded-xl items-center justify-center shrink-0 ${visuals.iconBg}`}
                         >
                           <ItemIcon className="w-4 h-4" />
                         </div>
 
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-2">
-                              <span className="text-[11px] font-bold text-[#475569] uppercase tracking-wider">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="text-[11px] font-semibold text-[#475569] truncate">
                                 {item.category || t("adm.notice")} • {item.project || t("adm.theSite")}
                               </span>
 
@@ -551,7 +551,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
                             </span>
                           </div>
 
-                          <div className="flex items-center justify-between gap-2 mt-1">
+                          <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-2 mt-1">
                             <h4 className="text-sm font-bold text-[#0F172A] leading-snug">
                               {item.title}
                             </h4>
