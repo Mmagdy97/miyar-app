@@ -201,7 +201,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               <span className="text-lg sm:text-xl font-bold text-white">
                 {T("cli.31")}
               </span>
-              <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-white/10 text-[#65708A] border border-white/20">
+              <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-white/10 text-[#C9CFDD] border border-white/20">
                 {T("cli.32")}
               </span>
             </div>
