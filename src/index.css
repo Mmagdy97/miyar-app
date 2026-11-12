@@ -325,7 +325,17 @@ header.fixed.glass { position: fixed; }
   /* comfortable reading + tap sizes */
   main { font-size: 15px; }
   main button, main [role="button"] { min-height: 40px; }
-  main h1 { font-size: 1.5rem; line-height: 1.3; }
-  main h2 { font-size: 1.2rem; }
-  span.rounded-full[class*="border"][class*="text-"]:not([class*="w-"]):not([class*="size-"]) { font-size: 11px; padding: 2px 8px; }
+  /* one mobile type scale: 12 / 13 / 14 / 15 / 17 / 18 / 20 / 22 — nothing below 12px */
+  main .text-\[9px\], main .text-\[10px\], main .text-\[11px\] { font-size: 12px; line-height: 1.4; }
+  main .text-xs { font-size: 13px; line-height: 1.45; }
+  main .text-\[13px\], main .text-sm { font-size: 14px; line-height: 1.5; }
+  main .text-\[15px\], main .text-base { font-size: 15px; line-height: 1.5; }
+  main .text-lg { font-size: 17px; line-height: 1.4; }
+  main .text-xl { font-size: 18px; line-height: 1.35; }
+  main .text-2xl { font-size: 20px; line-height: 1.3; }
+  main .text-3xl, main .text-4xl, main .text-6xl { font-size: 22px; line-height: 1.3; }
+  main h1 { font-size: 22px !important; line-height: 1.3 !important; }
+  main h2 { font-size: 18px !important; line-height: 1.35 !important; }
+  main h3 { font-size: 15px !important; line-height: 1.4 !important; }
+  span.rounded-full[class*="border"][class*="text-"]:not([class*="w-"]):not([class*="size-"]) { font-size: 12px !important; padding: 2px 8px; }
 }

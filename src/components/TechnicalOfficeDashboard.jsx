@@ -483,7 +483,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
         </div>
 
         {/* Right Column: استفسارات وتعارضات الموقع (Site Requests / RFIs) */}
-        <div className="bg-white rounded-lg border border-[#E3E7EE] shadow-xs overflow-hidden flex flex-col justify-between flex-1">
+        <div className="order-first lg:order-none bg-white rounded-lg border border-[#E3E7EE] shadow-xs overflow-hidden flex flex-col justify-between flex-1">
           <div>
             <div className="p-5 border-b border-[#EEF1F5] flex items-center justify-between">
               <div>
@@ -615,7 +615,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
             <thead className="bg-[#F4F6F9] text-[#475569] font-extrabold border-b border-[#E3E7EE]">
               <tr>
                 <th className="py-3 px-3.5 font-mono">{T("to.44")}</th>
-                <th className="py-3 px-3.5">{T("to.45")}</th>
+                <th className="py-3 px-3.5 min-w-[180px]">{T("to.45")}</th>
                 <th className="py-3 px-3.5 text-center">{T("to.46")}</th>
                 <th className="py-3 px-3.5 text-center">{T("to.47")}</th>
                 <th className="py-3 px-3.5 text-center">{T("to.48")}</th>

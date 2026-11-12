@@ -279,107 +279,6 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
       </div>
 
-      {/* 2. The Visual Timeline (الجدول الزمني المرئي للمشروع) */}
-      <div className="bg-white rounded-lg border border-[#E3E7EE] p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-[#EEF1F5]">
-          <div>
-            <h2 className="text-lg font-black text-[#0F172A] flex items-center gap-2">
-              <Compass className="w-5 h-5 text-[#0F172A]" />
-              {T("cli.43")}
-            </h2>
-            <p className="text-xs text-[#475569] mt-0.5">
-              {T("cli.44")}
-            </p>
-          </div>
-          <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE] self-start sm:self-auto">
-            {T("cli.45")}
-          </span>
-        </div>
-
-        {/* Horizontal Timeline Stepper */}
-        <div className="grid stat-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
-          {PROJECT_PHASES.map((phase, index) => {
-            const isCompleted = phase.status === "completed";
-            const isActive = phase.status === "active";
-            const isPending = phase.status === "pending";
-
-            return (
-              <div
-                key={phase.id}
-                className={`rounded-lg p-4 sm:p-5 border transition-all duration-300 relative flex flex-col justify-between ${
-                  isActive
-                    ? "bg-[#F4F6F9] border-[#CBD2DC] ring-1 ring-[#0F172A]/10 shadow-xs"
-                    : isCompleted
-                    ? "bg-white border-[#E3E7EE] hover:bg-[#F4F6F9]/50"
-                    : "bg-[#F4F6F9] border-[#E3E7EE] opacity-80"
-                }`}
-              >
-                {/* Stepper Header with Icon & Step Number */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-extrabold text-[#475569] font-mono">
-                      {T("cli.46", { v0: phase.id })}
-                    </span>
-
-                    {/* Status Pill */}
-                    <span
-                      className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border ${
-                        isCompleted
-                          ? "bg-emerald-100 text-emerald-800 border-emerald-300"
-                          : isActive
-                          ? "bg-[#0F172A] text-white border-[#1C2540]"
-                          : "bg-[#EEF1F5] text-[#475569] border-[#E3E7EE]"
-                      }`}
-                    >
-                      {phase.badge}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <div
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                        isCompleted
-                          ? "bg-emerald-100 text-emerald-700"
-                          : isActive
-                          ? "bg-[#0F172A] text-white"
-                          : "bg-[#E3E7EE] text-[#475569]"
-                      }`}
-                    >
-                      {isCompleted ? (
-                        <CheckCircle2 className="w-4 h-4" />
-                      ) : isActive ? (
-                        <Sparkles className="w-4 h-4" />
-                      ) : (
-                        <Clock className="w-4 h-4" />
-                      )}
-                    </div>
-
-                    <h3 className="text-sm font-black text-[#0F172A] leading-snug">
-                      {phase.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs text-[#475569] leading-relaxed mt-1">
-                    {phase.subtitle}
-                  </p>
-                </div>
-
-                <div className="pt-4 mt-3 border-t border-[#EEF1F5] flex items-center justify-between text-[11px]">
-                  <span className="text-[#475569] font-medium">{T("cli.47")}</span>
-                  <span
-                    className={`font-bold ${
-                      isActive ? "text-[#0F172A] font-bold" : "text-[#475569]"
-                    }`}
-                  >
-                    {phase.date}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
       {/* 3. Approvals Required (اعتمادات وموافقات مطلوبة منك) */}
       <div className="bg-white rounded-lg border border-[#E3E7EE] p-6 sm:p-8 shadow-xs space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#EEF1F5]">
@@ -480,6 +379,107 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               </div>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* 2. The Visual Timeline (الجدول الزمني المرئي للمشروع) */}
+      <div className="bg-white rounded-lg border border-[#E3E7EE] p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-[#EEF1F5]">
+          <div>
+            <h2 className="text-lg font-black text-[#0F172A] flex items-center gap-2">
+              <Compass className="w-5 h-5 text-[#0F172A]" />
+              {T("cli.43")}
+            </h2>
+            <p className="text-xs text-[#475569] mt-0.5">
+              {T("cli.44")}
+            </p>
+          </div>
+          <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE] self-start sm:self-auto">
+            {T("cli.45")}
+          </span>
+        </div>
+
+        {/* Horizontal Timeline Stepper */}
+        <div className="grid stat-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+          {PROJECT_PHASES.map((phase, index) => {
+            const isCompleted = phase.status === "completed";
+            const isActive = phase.status === "active";
+            const isPending = phase.status === "pending";
+
+            return (
+              <div
+                key={phase.id}
+                className={`rounded-lg p-4 sm:p-5 border transition-all duration-300 relative flex flex-col justify-between ${
+                  isActive
+                    ? "bg-[#F4F6F9] border-[#CBD2DC] ring-1 ring-[#0F172A]/10 shadow-xs"
+                    : isCompleted
+                    ? "bg-white border-[#E3E7EE] hover:bg-[#F4F6F9]/50"
+                    : "bg-[#F4F6F9] border-[#E3E7EE] opacity-80"
+                }`}
+              >
+                {/* Stepper Header with Icon & Step Number */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-extrabold text-[#475569] font-mono">
+                      {T("cli.46", { v0: phase.id })}
+                    </span>
+
+                    {/* Status Pill */}
+                    <span
+                      className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border ${
+                        isCompleted
+                          ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+                          : isActive
+                          ? "bg-[#0F172A] text-white border-[#1C2540]"
+                          : "bg-[#EEF1F5] text-[#475569] border-[#E3E7EE]"
+                      }`}
+                    >
+                      {phase.badge}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
+                        isCompleted
+                          ? "bg-emerald-100 text-emerald-700"
+                          : isActive
+                          ? "bg-[#0F172A] text-white"
+                          : "bg-[#E3E7EE] text-[#475569]"
+                      }`}
+                    >
+                      {isCompleted ? (
+                        <CheckCircle2 className="w-4 h-4" />
+                      ) : isActive ? (
+                        <Sparkles className="w-4 h-4" />
+                      ) : (
+                        <Clock className="w-4 h-4" />
+                      )}
+                    </div>
+
+                    <h3 className="text-sm font-black text-[#0F172A] leading-snug">
+                      {phase.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-xs text-[#475569] leading-relaxed mt-1">
+                    {phase.subtitle}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-3 border-t border-[#EEF1F5] flex items-center justify-between text-[11px]">
+                  <span className="text-[#475569] font-medium">{T("cli.47")}</span>
+                  <span
+                    className={`font-bold ${
+                      isActive ? "text-[#0F172A] font-bold" : "text-[#475569]"
+                    }`}
+                  >
+                    {phase.date}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
