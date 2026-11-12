@@ -81,7 +81,7 @@ const MONTHLY_FINANCIALS = [
 ].map((x) => ({
   ...x,
   get month() {
-    return new Intl.DateTimeFormat(intlLocale(), { month: "long", timeZone: "UTC" }).format(Date.UTC(2026, x.m - 1, 1));
+    return new Intl.DateTimeFormat(intlLocale(), { month: "short", timeZone: "UTC" }).format(Date.UTC(2026, x.m - 1, 1));
   },
 }));
 
@@ -350,145 +350,6 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
       </div>
 
-      <ReceivablesPanel />
-
-      {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
-      <div className="bg-white rounded-xl border border-[#E3E7EE] shadow-sm p-6 md:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#EEF1F5]">
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-[#0F172A]">
-                {t("adm.cfTitle")}
-              </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#0F766E]/15 text-[#0F172A] border border-[#0F766E]/30">
-                {t("adm.margin", { p: toAr(39.4) })}
-              </span>
-            </div>
-            <p className="text-xs text-[#475569] mt-0.5">
-              {t("adm.cfSub")}
-            </p>
-          </div>
-
-          {/* Controls & Legend */}
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-4 text-xs font-medium text-[#475569]">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#0F172A]" />
-                {t("adm.inflows")}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#E3E7EE]" />
-                {t("adm.siteExp")}
-              </span>
-            </div>
-
-            <div className="inline-flex rounded-lg border border-[#E3E7EE] p-0.5 bg-[#F4F6F9] text-xs font-bold">
-              <button
-                onClick={() => setTimeframe("6M")}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  timeframe === "6M"
-                    ? "bg-[#0F172A] text-white shadow-xs"
-                    : "text-[#475569] hover:text-[#0F172A]"
-                }`}
-              >
-                {t("adm.last6")}
-              </button>
-              <button
-                onClick={() => setTimeframe("YTD")}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  timeframe === "YTD"
-                    ? "bg-[#0F172A] text-white shadow-xs"
-                    : "text-[#475569] hover:text-[#0F172A]"
-                }`}
-              >
-                {t("adm.fullYear")}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Dual-bar Chart */}
-        <div className="mt-6 pt-2">
-          <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
-            {activeHoverBar ? (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EEF1F5] border border-[#E3E7EE] text-[#0F172A] animate-in fade-in">
-                <span>{activeHoverBar.month} {toAr(2026)}:</span>
-                <span className="text-[#0F172A] font-bold">
-                  {t("adm.revenue", { amt: `${formatCompact(activeHoverBar.revenue * 1000)} ${currencySymbol()}` })}
-                </span>
-                <span className="text-[#475569]">|</span>
-                <span className="text-[#475569]">
-                  {t("adm.expense", { amt: `${formatCompact(activeHoverBar.expenses * 1000)} ${currencySymbol()}` })}
-                </span>
-                <span className="text-[#0F172A]">
-                  {t("adm.net", { p: toAr(Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)) })}
-                </span>
-              </span>
-            ) : (
-              <span className="text-[#475569] text-xs font-medium">
-                {t("adm.hover")}
-              </span>
-            )}
-          </div>
-
-          <div className="grid grid-cols-6 gap-2 sm:gap-6 items-end h-52 border-b border-dashed border-[#E3E7EE] pb-3">
-            {MONTHLY_FINANCIALS.map((item, idx) => {
-              const revPercent = Math.round((item.revenue / maxVal) * 100);
-              const expPercent = Math.round((item.expenses / maxVal) * 100);
-
-              return (
-                <div
-                  key={item.month}
-                  onMouseEnter={() => setActiveHoverBar(item)}
-                  onMouseLeave={() => setActiveHoverBar(null)}
-                  className="flex flex-col items-center h-full justify-end group cursor-pointer"
-                >
-                  <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
-                    {/* Revenue Bar (Sage Green) */}
-                    <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#0F172A] group-hover:bg-[#0F172A] transition-colors duration-200 bar-grow"
-                      style={{ height: `${revPercent}%`, animationDelay: `${idx * 60}ms` }}
-                    />
-                    {/* Expense Bar */}
-                    <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E3E7EE] group-hover:bg-[#E3E7EE] transition-colors duration-200 bar-grow"
-                      style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
-                    />
-                  </div>
-                  <span className="mt-3 text-xs font-bold text-[#0F172A] group-hover:text-[#0F172A] transition-colors">
-                    {item.month}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Bottom Summary Bar */}
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#475569] pt-1">
-            <div className="flex items-center gap-6">
-              <div>
-                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.rev6")}</span>
-                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
-              </div>
-              <div className="h-6 w-px bg-[#E3E7EE]" />
-              <div>
-                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.cost6")}</span>
-                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
-              </div>
-              <div className="h-6 w-px bg-[#E3E7EE]" />
-              <div>
-                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.profit6")}</span>
-                <span className="font-extrabold text-[#0F172A] text-sm">+{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000 - MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
-              </div>
-            </div>
-
-            <span className="text-[11px] text-[#475569] font-medium">
-              {t("adm.einv")}
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* 4. Split Layout (Projects Health vs Action Center) */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left Column: حالة المشاريع (Projects Health) */}
@@ -611,7 +472,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* Right Column: Action Center (المهام والاعتمادات العاجلة) - Clickable Items & Modal */}
-        <div className="bg-white rounded-xl border border-[#E3E7EE] shadow-sm overflow-hidden flex flex-col justify-between">
+        <div className="order-first lg:order-none bg-white rounded-xl border border-[#E3E7EE] shadow-sm overflow-hidden flex flex-col justify-between">
           <div>
             <div className="p-5 border-b border-[#EEF1F5] flex items-center justify-between">
               <div>
@@ -797,6 +658,146 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem }) {
           </div>
         </div>
       </div>
+
+      {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
+      <div className="bg-white rounded-xl border border-[#E3E7EE] shadow-sm p-6 md:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#EEF1F5]">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-bold text-[#0F172A]">
+                {t("adm.cfTitle")}
+              </h2>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#0F766E]/15 text-[#0F172A] border border-[#0F766E]/30">
+                {t("adm.margin", { p: toAr(39.4) })}
+              </span>
+            </div>
+            <p className="text-xs text-[#475569] mt-0.5">
+              {t("adm.cfSub")}
+            </p>
+          </div>
+
+          {/* Controls & Legend */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-4 text-xs font-medium text-[#475569]">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#0F172A]" />
+                {t("adm.inflows")}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#E3E7EE]" />
+                {t("adm.siteExp")}
+              </span>
+            </div>
+
+            <div className="inline-flex rounded-lg border border-[#E3E7EE] p-0.5 bg-[#F4F6F9] text-xs font-bold">
+              <button
+                onClick={() => setTimeframe("6M")}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  timeframe === "6M"
+                    ? "bg-[#0F172A] text-white shadow-xs"
+                    : "text-[#475569] hover:text-[#0F172A]"
+                }`}
+              >
+                {t("adm.last6")}
+              </button>
+              <button
+                onClick={() => setTimeframe("YTD")}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  timeframe === "YTD"
+                    ? "bg-[#0F172A] text-white shadow-xs"
+                    : "text-[#475569] hover:text-[#0F172A]"
+                }`}
+              >
+                {t("adm.fullYear")}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Dual-bar Chart */}
+        <div className="mt-6 pt-2">
+          <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
+            {activeHoverBar ? (
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EEF1F5] border border-[#E3E7EE] text-[#0F172A] animate-in fade-in">
+                <span>{activeHoverBar.month} {toAr(2026)}:</span>
+                <span className="text-[#0F172A] font-bold">
+                  {t("adm.revenue", { amt: `${formatCompact(activeHoverBar.revenue * 1000)} ${currencySymbol()}` })}
+                </span>
+                <span className="text-[#475569]">|</span>
+                <span className="text-[#475569]">
+                  {t("adm.expense", { amt: `${formatCompact(activeHoverBar.expenses * 1000)} ${currencySymbol()}` })}
+                </span>
+                <span className="text-[#0F172A]">
+                  {t("adm.net", { p: toAr(Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)) })}
+                </span>
+              </span>
+            ) : (
+              <span className="text-[#475569] text-xs font-medium">
+                {t("adm.hover")}
+              </span>
+            )}
+          </div>
+
+          <div className="grid grid-cols-6 gap-2 sm:gap-6 items-end h-52 border-b border-dashed border-[#E3E7EE] pb-3">
+            {MONTHLY_FINANCIALS.map((item, idx) => {
+              const revPercent = Math.round((item.revenue / maxVal) * 100);
+              const expPercent = Math.round((item.expenses / maxVal) * 100);
+
+              return (
+                <div
+                  key={item.month}
+                  onMouseEnter={() => setActiveHoverBar(item)}
+                  onMouseLeave={() => setActiveHoverBar(null)}
+                  className="flex flex-col items-center h-full justify-end group cursor-pointer"
+                >
+                  <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
+                    {/* Revenue Bar (Sage Green) */}
+                    <div
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#0F172A] group-hover:bg-[#0F172A] transition-colors duration-200 bar-grow"
+                      style={{ height: `${revPercent}%`, animationDelay: `${idx * 60}ms` }}
+                    />
+                    {/* Expense Bar */}
+                    <div
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E3E7EE] group-hover:bg-[#E3E7EE] transition-colors duration-200 bar-grow"
+                      style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
+                    />
+                  </div>
+                  <span className="mt-3 text-xs font-bold text-[#0F172A] group-hover:text-[#0F172A] transition-colors">
+                    {item.month}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom Summary Bar */}
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#475569] pt-1">
+            <div className="flex items-center gap-6">
+              <div>
+                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.rev6")}</span>
+                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
+              </div>
+              <div className="h-6 w-px bg-[#E3E7EE]" />
+              <div>
+                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.cost6")}</span>
+                <span className="font-extrabold text-[#0F172A] text-sm">{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+              </div>
+              <div className="h-6 w-px bg-[#E3E7EE]" />
+              <div>
+                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.profit6")}</span>
+                <span className="font-extrabold text-[#0F172A] text-sm">+{formatNumber(MONTHLY_FINANCIALS.reduce((a, x) => a + x.revenue, 0) * 1000 - MONTHLY_FINANCIALS.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+              </div>
+            </div>
+
+            <span className="text-[11px] text-[#475569] font-medium">
+              {t("adm.einv")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <ReceivablesPanel />
     </main>
   );
 }

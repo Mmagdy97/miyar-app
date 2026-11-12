@@ -305,8 +305,8 @@ function SiteEngineerDashboard({ setActionItems }) {
 
           {/* Project Card */}
           <div className="p-4 rounded-lg bg-[#F4F6F9] border border-[#E3E7EE]">
-            <div className="flex items-start justify-between gap-3">
-              <div>
+            <div className="flex flex-col-reverse sm:flex-row items-start sm:justify-between gap-2 sm:gap-3">
+              <div className="min-w-0">
                 <h2 className="text-base sm:text-lg font-black text-[#0F172A] leading-snug">
                   {T("se.9")}
                 </h2>
