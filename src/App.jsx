@@ -4,6 +4,7 @@ import { localize, D } from "./data/dataI18n";
 import Sidebar from "./components/Sidebar";
 import OfflineBanner from "./components/OfflineBanner";
 import Navbar from "./components/Navbar";
+import BottomNav from "./components/BottomNav";
 import MainContent from "./components/MainContent";
 import ActionItemModal from "./components/ActionItemModal";
 import LandingAndLogin from "./components/LandingAndLogin";
@@ -188,9 +189,9 @@ function App() {
 
   return (
     <div
-      className="min-h-screen w-full relative isolate flex flex-col md:flex-row h-screen overflow-hidden font-ibm bg-[#F3EFE6] text-[#1A2236] selection:bg-[#24304D] selection:text-white"
+      className="min-h-screen w-full relative isolate flex flex-col md:flex-row h-screen overflow-hidden font-ibm bg-[#F4F6F9] text-[#0F172A] selection:bg-[#0F172A] selection:text-white"
     >
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#24304D] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#0F172A] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         {D("تخطي إلى المحتوى")}
       </a>
       <OfflineBanner />
@@ -248,6 +249,7 @@ function App() {
           setActionItems={setActionItems}
           setSelectedItem={setSelectedItem}
         />
+        <BottomNav currentRole={currentRole} activeTab={activeTab} setActiveTab={setActiveTab} onMore={() => setIsMobileMenuOpen(true)} />
       </div>
 
       {/* Requirement 2: Global Modal Rendering (Overlays ANY screen) */}

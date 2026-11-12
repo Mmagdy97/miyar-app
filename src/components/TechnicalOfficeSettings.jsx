@@ -28,7 +28,7 @@ const STANDARD_TEMPLATES = localize([
     format: "PDF + DOCX",
     size: "١.٢ ميجابايت",
     category: "استلامات الموقع",
-    color: "from-[#24304D] to-[#1A2236]",
+    color: "from-[#0F172A] to-[#0F172A]",
   },
   {
     id: "RFI",
@@ -58,7 +58,7 @@ const STANDARD_TEMPLATES = localize([
     format: "PDF + EXCEL",
     size: "١.١ ميجابايت",
     category: "المقايسات والعقود",
-    color: "from-[#B5452B] to-[#9A3822]",
+    color: "from-[#0F766E] to-[#0B5F58]",
   },
 ]);
 
@@ -102,7 +102,7 @@ function TechnicalOfficeSettings() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#24304D] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#0F172A] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -115,24 +115,24 @@ function TechnicalOfficeSettings() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#EEF1F5] border border-[#E3E7EE] flex items-center justify-center text-[#0F172A]">
                   <Settings className="w-5 h-5" />
                 </div>
                 <span>{T("to.128")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE]">
                 {T("to.129")}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#535E78]">
+            <p className="text-xs md:text-sm text-[#475569]">
               {T("to.130")}
             </p>
           </div>
 
           <button
             onClick={handleResetSettings}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold text-[#535E78] bg-white border border-[#DAD3C2] hover:bg-[#F3EFE6] transition-colors shadow-2xs self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold text-[#475569] bg-white border border-[#E3E7EE] hover:bg-[#F4F6F9] transition-colors shadow-2xs self-start sm:self-auto cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>{T("to.131")}</span>
@@ -143,15 +143,15 @@ function TechnicalOfficeSettings() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-base md:text-lg font-black text-[#1A2236] flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#1A2236]" />
+              <h2 className="text-base md:text-lg font-black text-[#0F172A] flex items-center gap-2">
+                <FileText className="w-5 h-5 text-[#0F172A]" />
                 <span>{T("to.132")}</span>
               </h2>
-              <p className="text-xs text-[#535E78] mt-0.5">
+              <p className="text-xs text-[#475569] mt-0.5">
                 {T("to.133")}
               </p>
             </div>
-            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#E9E3D5] text-[#535E78]">
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#EEF1F5] text-[#475569]">
               {T("to.134", { v0: STANDARD_TEMPLATES.length })}
             </span>
           </div>
@@ -160,34 +160,34 @@ function TechnicalOfficeSettings() {
             {STANDARD_TEMPLATES.map((tmpl) => (
               <div
                 key={tmpl.id}
-                className="bg-white rounded-lg p-6 border border-[#DAD3C2] shadow-xs hover:border-[#B5452B] transition-all flex flex-col justify-between group"
+                className="bg-white rounded-lg p-6 border border-[#E3E7EE] shadow-xs hover:border-[#0F766E] transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-3">
-                    <span className="text-[11px] font-mono font-extrabold px-2.5 py-1 rounded-lg bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]">
+                    <span className="text-[11px] font-mono font-extrabold px-2.5 py-1 rounded-lg bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE]">
                       {tmpl.code}
                     </span>
-                    <span className="text-[10px] font-bold text-[#535E78] bg-[#E9E3D5] px-2 py-0.5 rounded-md">
+                    <span className="text-[10px] font-bold text-[#475569] bg-[#EEF1F5] px-2 py-0.5 rounded-md">
                       {E(tmpl.category)}
                     </span>
                   </div>
 
-                  <h3 className="text-sm md:text-base font-extrabold text-[#1A2236] leading-snug group-hover:text-[#1A2236] transition-colors">
+                  <h3 className="text-sm md:text-base font-extrabold text-[#0F172A] leading-snug group-hover:text-[#0F172A] transition-colors">
                     {tmpl.name}
                   </h3>
-                  <p className="text-xs text-[#535E78] mt-1.5 leading-relaxed">
+                  <p className="text-xs text-[#475569] mt-1.5 leading-relaxed">
                     {tmpl.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-[#E9E3D5] flex items-center justify-between">
-                  <div className="text-[11px] text-[#535E78]">
-                    <span className="font-bold text-[#535E78]">{tmpl.format}</span> • {tmpl.size}
+                <div className="pt-4 mt-4 border-t border-[#EEF1F5] flex items-center justify-between">
+                  <div className="text-[11px] text-[#475569]">
+                    <span className="font-bold text-[#475569]">{tmpl.format}</span> • {tmpl.size}
                   </div>
 
                   <button
                     onClick={() => handleDownloadTemplate(tmpl)}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#E9E3D5] hover:bg-[#24304D] text-[#1A2236] hover:text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#EEF1F5] hover:bg-[#0F172A] text-[#0F172A] hover:text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>{T("to.135")}</span>
@@ -199,30 +199,30 @@ function TechnicalOfficeSettings() {
         </div>
 
         {/* Section 2: إعدادات المكتب الفني (Technical Office Settings) */}
-        <div className="bg-white rounded-lg p-6 md:p-8 border border-[#DAD3C2] shadow-xs space-y-6">
-          <div className="pb-4 border-b border-[#E9E3D5] flex items-center justify-between">
+        <div className="bg-white rounded-lg p-6 md:p-8 border border-[#E3E7EE] shadow-xs space-y-6">
+          <div className="pb-4 border-b border-[#EEF1F5] flex items-center justify-between">
             <div>
-              <h2 className="text-base md:text-lg font-black text-[#1A2236] flex items-center gap-2">
-                <Sliders className="w-5 h-5 text-[#1A2236]" />
+              <h2 className="text-base md:text-lg font-black text-[#0F172A] flex items-center gap-2">
+                <Sliders className="w-5 h-5 text-[#0F172A]" />
                 <span>{T("to.136")}</span>
               </h2>
-              <p className="text-xs text-[#535E78] mt-0.5">
+              <p className="text-xs text-[#475569] mt-0.5">
                 {T("to.137")}
               </p>
             </div>
-            <span className="text-xs font-bold text-[#1A2236] bg-[#E9E3D5] px-2.5 py-1 rounded-full border border-[#DAD3C2]">
+            <span className="text-xs font-bold text-[#0F172A] bg-[#EEF1F5] px-2.5 py-1 rounded-full border border-[#E3E7EE]">
               {T("to.138")}
             </span>
           </div>
 
           <div className="space-y-3.5">
             {/* Rule 1: Notify site upon drawing approval */}
-            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3EFE6] border border-[#DAD3C2]/60 hover:bg-[#F3EFE6] rounded-lg transition-colors">
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F4F6F9] border border-[#E3E7EE]/60 hover:bg-[#F4F6F9] rounded-lg transition-colors">
               <div>
-                <h4 className="text-xs md:text-sm font-extrabold text-[#1A2236]">
+                <h4 className="text-xs md:text-sm font-extrabold text-[#0F172A]">
                   {T("to.139")}
                 </h4>
-                <p className="text-[11px] text-[#535E78] mt-0.5">
+                <p className="text-[11px] text-[#475569] mt-0.5">
                   {T("to.140")}
                 </p>
               </div>
@@ -234,7 +234,7 @@ function TechnicalOfficeSettings() {
                 aria-checked={settings.notifySiteOnAfc}
                 onClick={() => handleToggle("notifySiteOnAfc")}
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  settings.notifySiteOnAfc ? "bg-[#24304D]" : "bg-[#DAD3C2]"
+                  settings.notifySiteOnAfc ? "bg-[#0F172A]" : "bg-[#E3E7EE]"
                 }`}
               >
                 <span
@@ -246,12 +246,12 @@ function TechnicalOfficeSettings() {
             </div>
 
             {/* Rule 2: Require consultant signature before BOQ export */}
-            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3EFE6] border border-[#DAD3C2]/60 hover:bg-[#F3EFE6] rounded-lg transition-colors">
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F4F6F9] border border-[#E3E7EE]/60 hover:bg-[#F4F6F9] rounded-lg transition-colors">
               <div>
-                <h4 className="text-xs md:text-sm font-extrabold text-[#1A2236]">
+                <h4 className="text-xs md:text-sm font-extrabold text-[#0F172A]">
                   {T("to.141")}
                 </h4>
-                <p className="text-[11px] text-[#535E78] mt-0.5">
+                <p className="text-[11px] text-[#475569] mt-0.5">
                   {T("to.142")}
                 </p>
               </div>
@@ -263,7 +263,7 @@ function TechnicalOfficeSettings() {
                 aria-checked={settings.requireConsultantSign}
                 onClick={() => handleToggle("requireConsultantSign")}
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  settings.requireConsultantSign ? "bg-[#24304D]" : "bg-[#DAD3C2]"
+                  settings.requireConsultantSign ? "bg-[#0F172A]" : "bg-[#E3E7EE]"
                 }`}
               >
                 <span
@@ -275,12 +275,12 @@ function TechnicalOfficeSettings() {
             </div>
 
             {/* Rule 3: Auto-archive revisions */}
-            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3EFE6] border border-[#DAD3C2]/60 hover:bg-[#F3EFE6] rounded-lg transition-colors">
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F4F6F9] border border-[#E3E7EE]/60 hover:bg-[#F4F6F9] rounded-lg transition-colors">
               <div>
-                <h4 className="text-xs md:text-sm font-extrabold text-[#1A2236]">
+                <h4 className="text-xs md:text-sm font-extrabold text-[#0F172A]">
                   {T("to.143")}
                 </h4>
-                <p className="text-[11px] text-[#535E78] mt-0.5">
+                <p className="text-[11px] text-[#475569] mt-0.5">
                   {D("تحويل الإصدار السابق تلقائياً إلى حالة")} "{D("ملغي (Superseded)")}" {D("ونقله لسجل الأرشيف")}
                 </p>
               </div>
@@ -292,7 +292,7 @@ function TechnicalOfficeSettings() {
                 aria-checked={settings.autoArchiveRevisions}
                 onClick={() => handleToggle("autoArchiveRevisions")}
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  settings.autoArchiveRevisions ? "bg-[#24304D]" : "bg-[#DAD3C2]"
+                  settings.autoArchiveRevisions ? "bg-[#0F172A]" : "bg-[#E3E7EE]"
                 }`}
               >
                 <span
@@ -304,12 +304,12 @@ function TechnicalOfficeSettings() {
             </div>
 
             {/* Rule 4: Auto-alert delayed RFI */}
-            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F3EFE6] border border-[#DAD3C2]/60 hover:bg-[#F3EFE6] rounded-lg transition-colors">
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#F4F6F9] border border-[#E3E7EE]/60 hover:bg-[#F4F6F9] rounded-lg transition-colors">
               <div>
-                <h4 className="text-xs md:text-sm font-extrabold text-[#1A2236]">
+                <h4 className="text-xs md:text-sm font-extrabold text-[#0F172A]">
                   {T("to.144")}
                 </h4>
-                <p className="text-[11px] text-[#535E78] mt-0.5">
+                <p className="text-[11px] text-[#475569] mt-0.5">
                   {T("to.145")}
                 </p>
               </div>
@@ -321,7 +321,7 @@ function TechnicalOfficeSettings() {
                 aria-checked={settings.autoAlertDelayedRfi}
                 onClick={() => handleToggle("autoAlertDelayedRfi")}
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  settings.autoAlertDelayedRfi ? "bg-[#24304D]" : "bg-[#DAD3C2]"
+                  settings.autoAlertDelayedRfi ? "bg-[#0F172A]" : "bg-[#E3E7EE]"
                 }`}
               >
                 <span

@@ -58,11 +58,11 @@ const prefixed = (name) => `${{ ar: "م.", en: "Eng.", tr: "Müh." }[getLocale()
 
 export const PEOPLE = [
   { id: "sara", name: "سارة عامر", title: "كبير المعماريين", role: "مدير", email: "sara.amer@miyar.eg", phone: "+20 111 876 5432", status: "نشط", color: "bg-[#1E2429]" },
-  { id: "tarek", name: "طارق يوسف", title: "استشاري MEP", role: "مكتب فني", email: "tarek.youssef@miyar.eg", phone: "+20 122 345 6789", status: "نشط", color: "bg-[#B5452B]" },
-  { id: "layla", name: "ليلى رياض", title: "مصممة الديكور", role: "مكتب فني", email: "layla.riad@miyar.eg", phone: "+20 114 999 8877", status: "في إجازة", color: "bg-[#24304D]" },
-  { id: "ahmed", name: "أحمد الشناوي", title: "مهندس الموقع", role: "مهندس موقع", email: "ahmed.elshennawy@miyar.eg", phone: "+20 100 234 5678", status: "نشط", color: "bg-[#24304D]" },
-  { id: "karim", name: "كريم مصطفى", title: "مهندس الموقع", role: "مهندس موقع", email: "karim.mostafa@miyar.eg", phone: "+20 106 555 4321", status: "نشط", color: "bg-[#24304D]" },
-  { id: "omar", name: "عمر عادل", title: "مهندس الموقع", role: "مهندس موقع", email: "omar.adel@miyar.eg", phone: "+20 101 222 3344", status: "نشط", color: "bg-[#B5452B]" },
+  { id: "tarek", name: "طارق يوسف", title: "استشاري MEP", role: "مكتب فني", email: "tarek.youssef@miyar.eg", phone: "+20 122 345 6789", status: "نشط", color: "bg-[#0F766E]" },
+  { id: "layla", name: "ليلى رياض", title: "مصممة الديكور", role: "مكتب فني", email: "layla.riad@miyar.eg", phone: "+20 114 999 8877", status: "في إجازة", color: "bg-[#0F172A]" },
+  { id: "ahmed", name: "أحمد الشناوي", title: "مهندس الموقع", role: "مهندس موقع", email: "ahmed.elshennawy@miyar.eg", phone: "+20 100 234 5678", status: "نشط", color: "bg-[#0F172A]" },
+  { id: "karim", name: "كريم مصطفى", title: "مهندس الموقع", role: "مهندس موقع", email: "karim.mostafa@miyar.eg", phone: "+20 106 555 4321", status: "نشط", color: "bg-[#0F172A]" },
+  { id: "omar", name: "عمر عادل", title: "مهندس الموقع", role: "مهندس موقع", email: "omar.adel@miyar.eg", phone: "+20 101 222 3344", status: "نشط", color: "bg-[#0F766E]" },
   { id: "youssef", name: "يوسف مدحت", title: "مهندس الموقع", role: "مهندس موقع", email: "youssef.medhat@miyar.eg", phone: "+20 109 888 7766", status: "نشط", color: "bg-[#1E2429]" },
 ].map((p) => localize({ ...p })).map((p) => ({ ...p, displayName: prefixed(p.name) }));
 

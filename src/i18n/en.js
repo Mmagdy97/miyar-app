@@ -3,6 +3,7 @@ export default {
   "brand.tagline": "Contracting & architectural design studio",
   "brand.footer1": "Miyar — Design & Contracting Studio",
   "brand.footer2": "Contracting and interior solutions",
+  "menu.more": "More",
   "menu.main": "Main menu",
   "menu.open": "Open menu",
   "menu.close": "Close menu",

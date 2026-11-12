@@ -3,6 +3,7 @@ export default {
   "brand.tagline": "Müteahhitlik ve mimari tasarım stüdyosu",
   "brand.footer1": "Miyar — Tasarım ve Müteahhitlik Stüdyosu",
   "brand.footer2": "Müteahhitlik ve iç mimari çözümleri",
+  "menu.more": "Daha fazla",
   "menu.main": "Ana menü",
   "menu.open": "Menüyü aç",
   "menu.close": "Menüyü kapat",

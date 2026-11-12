@@ -6,8 +6,8 @@ import { changeOrdersStore } from "../data/stores";
 import { applyChangeOrders, canDecide } from "../lib/changeorders";
 import { whatsappLink } from "../lib/share";
 
-const input = "px-3 py-2 rounded-lg border border-[#DAD3C2] text-xs font-bold text-[#1A2236] bg-white min-w-0";
-const badge = { draft: "bg-[#E9E3D5] text-[#535E78] border-[#DAD3C2]", sent: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200" };
+const input = "px-3 py-2 rounded-lg border border-[#E3E7EE] text-xs font-bold text-[#0F172A] bg-white min-w-0";
+const badge = { draft: "bg-[#EEF1F5] text-[#475569] border-[#E3E7EE]", sent: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200" };
 
 /** Change orders. Admin raises and sends them; the client approves or rejects in their portal. */
 export default function ChangeOrders({ role = "Admin" }) {
@@ -32,8 +32,8 @@ export default function ChangeOrders({ role = "Admin" }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-4xl mx-auto space-y-6">
         <div>
-          <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] flex items-center gap-2.5"><FilePenLine className="w-7 h-7" /><span>{T("co.title")}</span></h1>
-          <p className="text-xs md:text-sm text-[#535E78] mt-1">{T(isClient ? "co.sub.client" : "co.sub")}</p>
+          <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] flex items-center gap-2.5"><FilePenLine className="w-7 h-7" /><span>{T("co.title")}</span></h1>
+          <p className="text-xs md:text-sm text-[#475569] mt-1">{T(isClient ? "co.sub.client" : "co.sub")}</p>
         </div>
 
         {!isClient && (
@@ -44,37 +44,37 @@ export default function ChangeOrders({ role = "Admin" }) {
 
         <div className="grid stat-grid grid-cols-3 gap-3">
           {[["co.k.base", money(project.contractValue, { compact: true })], ["co.k.new", money(adj.value, { compact: true })], ["co.k.days", `+${adj.days}`]].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#DAD3C2] text-center">
-              <span className="text-[11px] font-bold text-[#535E78] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-black text-[#1A2236]">{v}</span>
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E3E7EE] text-center">
+              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-black text-[#0F172A]">{v}</span>
             </div>
           ))}
         </div>
 
         {!isClient && (
-          <form onSubmit={add} className="bg-white rounded-lg border border-[#DAD3C2] p-4 space-y-3">
+          <form onSubmit={add} className="bg-white rounded-lg border border-[#E3E7EE] p-4 space-y-3">
             <div className="flex flex-wrap gap-2">
               <input required placeholder={T("co.f.title")} value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} className={input + " flex-1 min-w-40"} />
               <input required type="number" placeholder={T("co.f.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-36"} />
               <input type="number" min={0} placeholder={T("co.f.days")} value={f.days} onChange={(e) => setF({ ...f, days: e.target.value })} className={input + " w-28"} />
             </div>
             <textarea rows={2} placeholder={T("co.f.desc")} value={f.desc} onChange={(e) => setF({ ...f, desc: e.target.value })} className={input + " w-full"} />
-            <button type="submit" className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer">{T("co.add")}</button>
+            <button type="submit" className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer">{T("co.add")}</button>
           </form>
         )}
 
         <div className="space-y-3">
-          {list.length === 0 && <p className="text-xs text-[#535E78] bg-white rounded-lg border border-[#DAD3C2] p-6 text-center">{T("co.empty")}</p>}
+          {list.length === 0 && <p className="text-xs text-[#475569] bg-white rounded-lg border border-[#E3E7EE] p-6 text-center">{T("co.empty")}</p>}
           {list.map((o) => (
-            <div key={o.id} className="bg-white rounded-lg border border-[#DAD3C2] p-4">
+            <div key={o.id} className="bg-white rounded-lg border border-[#E3E7EE] p-4">
               <div className="flex items-center justify-between gap-2">
-                <p className="text-sm font-extrabold text-[#1A2236]">#{o.no} · {o.title}</p>
+                <p className="text-sm font-extrabold text-[#0F172A]">#{o.no} · {o.title}</p>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${badge[o.status]}`}>{T("co.s." + o.status)}</span>
               </div>
-              {o.desc && <p className="text-xs text-[#535E78] mt-1 leading-relaxed">{o.desc}</p>}
-              <p className="text-xs font-black text-[#1A2236] mt-2">{o.cost >= 0 ? "+" : ""}{money(o.cost)} · {o.days > 0 ? `+${o.days} ${T("co.day")}` : T("co.nodelay")}</p>
+              {o.desc && <p className="text-xs text-[#475569] mt-1 leading-relaxed">{o.desc}</p>}
+              <p className="text-xs font-black text-[#0F172A] mt-2">{o.cost >= 0 ? "+" : ""}{money(o.cost)} · {o.days > 0 ? `+${o.days} ${T("co.day")}` : T("co.nodelay")}</p>
               <div className="mt-3 flex flex-wrap gap-2 justify-end">
-                {!isClient && o.status === "draft" && <button type="button" onClick={() => setStatus(o.id, "sent")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer">{T("co.send")}</button>}
+                {!isClient && o.status === "draft" && <button type="button" onClick={() => setStatus(o.id, "sent")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer">{T("co.send")}</button>}
                 {!isClient && o.status !== "draft" && <a href={whatsappLink(text(o))} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200"><MessageCircle className="w-3.5 h-3.5" />{T("co.wa")}</a>}
                 {isClient && canDecide(o) && (
                   <>

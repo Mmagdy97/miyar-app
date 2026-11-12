@@ -6,7 +6,7 @@ import { poTotal, subBalance, procurementTotals } from "../lib/procurement";
 import { whatsappLink } from "../lib/share";
 
 const PO_NEXT = { draft: "sent", sent: "received" };
-const input = "px-3 py-2 rounded-lg border border-[#DAD3C2] text-xs font-bold text-[#1A2236] bg-white min-w-0";
+const input = "px-3 py-2 rounded-lg border border-[#E3E7EE] text-xs font-bold text-[#0F172A] bg-white min-w-0";
 
 /** Admin: subcontractor contracts & payments, and purchase orders sent to suppliers via WhatsApp. */
 export default function Procurement() {
@@ -36,34 +36,34 @@ export default function Procurement() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-5xl mx-auto space-y-8">
         <div>
-          <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] flex items-center gap-2.5"><HardHat className="w-7 h-7" /><span>{T("proc.title")}</span></h1>
-          <p className="text-xs md:text-sm text-[#535E78] mt-1">{T("proc.sub")}</p>
+          <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] flex items-center gap-2.5"><HardHat className="w-7 h-7" /><span>{T("proc.title")}</span></h1>
+          <p className="text-xs md:text-sm text-[#475569] mt-1">{T("proc.sub")}</p>
         </div>
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
           {[["proc.k.subs", t.subContracts], ["proc.k.subout", t.subOutstanding], ["proc.k.poopen", t.poOpen], ["proc.k.poall", t.poAll]].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#DAD3C2] text-center">
-              <span className="text-[11px] font-bold text-[#535E78] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-black text-[#1A2236]">{money(v, { compact: true })}</span>
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E3E7EE] text-center">
+              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-black text-[#0F172A]">{money(v, { compact: true })}</span>
             </div>
           ))}
         </div>
 
         <section className="space-y-3">
-          <h2 className="text-base font-black text-[#1A2236] flex items-center gap-2"><HardHat className="w-5 h-5" />{T("proc.subs")}</h2>
+          <h2 className="text-base font-black text-[#0F172A] flex items-center gap-2"><HardHat className="w-5 h-5" />{T("proc.subs")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {subs.map((s) => {
               const pctPaid = s.contract ? Math.round((s.paid / s.contract) * 100) : 0;
               return (
-                <div key={s.id} className="bg-white rounded-lg border border-[#DAD3C2] p-4">
-                  <div className="flex justify-between gap-2"><p className="text-sm font-extrabold text-[#1A2236]">{E(s.name)}</p><span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#E9E3D5] border border-[#DAD3C2] h-fit">{E(s.trade)}</span></div>
-                  <div className="h-2 rounded-full bg-[#E9E3D5] mt-3 overflow-hidden"><div className="h-full bg-[#24304D]" style={{ width: pctPaid + "%" }} /></div>
-                  <div className="flex justify-between text-[11px] font-bold text-[#535E78] mt-2">
+                <div key={s.id} className="bg-white rounded-lg border border-[#E3E7EE] p-4">
+                  <div className="flex justify-between gap-2"><p className="text-sm font-extrabold text-[#0F172A]">{E(s.name)}</p><span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EEF1F5] border border-[#E3E7EE] h-fit">{E(s.trade)}</span></div>
+                  <div className="h-2 rounded-full bg-[#EEF1F5] mt-3 overflow-hidden"><div className="h-full bg-[#0F172A]" style={{ width: pctPaid + "%" }} /></div>
+                  <div className="flex justify-between text-[11px] font-bold text-[#475569] mt-2">
                     <span>{T("proc.paid")}: {money(s.paid, { compact: true })} / {money(s.contract, { compact: true })}</span>
                     <span>{T("proc.balance")}: {money(subBalance(s), { compact: true })}</span>
                   </div>
                   {subBalance(s) > 0 && (
-                    <button type="button" onClick={() => paySub(s.id, Math.min(subBalance(s), Math.round(s.contract * 0.1)))} className="mt-3 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer">{T("proc.pay10")}</button>
+                    <button type="button" onClick={() => paySub(s.id, Math.min(subBalance(s), Math.round(s.contract * 0.1)))} className="mt-3 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer">{T("proc.pay10")}</button>
                   )}
                 </div>
               );
@@ -73,30 +73,30 @@ export default function Procurement() {
             <input required placeholder={T("proc.name")} value={sf.name} onChange={(e) => setSf({ ...sf, name: e.target.value })} className={input} />
             <input placeholder={T("proc.trade")} value={sf.trade} onChange={(e) => setSf({ ...sf, trade: e.target.value })} className={input + " w-28"} />
             <input required type="number" min={1} placeholder={T("proc.contract")} value={sf.contract} onChange={(e) => setSf({ ...sf, contract: e.target.value })} className={input + " w-36"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addsub")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addsub")}</button>
           </form>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-base font-black text-[#1A2236] flex items-center gap-2"><ShoppingCart className="w-5 h-5" />{T("proc.pos")}</h2>
+          <h2 className="text-base font-black text-[#0F172A] flex items-center gap-2"><ShoppingCart className="w-5 h-5" />{T("proc.pos")}</h2>
           <form onSubmit={addPo} className="flex flex-wrap gap-2 items-end">
             <input required placeholder={T("proc.supplier")} value={pf.supplier} onChange={(e) => setPf({ ...pf, supplier: e.target.value })} className={input} />
             <input required placeholder={T("proc.item")} value={pf.item} onChange={(e) => setPf({ ...pf, item: e.target.value })} className={input} />
             <input required type="number" min={1} placeholder={T("proc.qty")} value={pf.qty} onChange={(e) => setPf({ ...pf, qty: e.target.value })} className={input + " w-24"} />
             <input required type="number" min={1} placeholder={T("proc.price")} value={pf.price} onChange={(e) => setPf({ ...pf, price: e.target.value })} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addpo")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addpo")}</button>
           </form>
           <div className="space-y-2">
             {pos.map((p) => (
-              <div key={p.id} className="bg-white rounded-lg border border-[#DAD3C2] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
+              <div key={p.id} className="bg-white rounded-lg border border-[#E3E7EE] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-extrabold text-[#1A2236]">{p.no} · {E(p.item)}</p>
-                  <p className="text-[11px] font-bold text-[#535E78]">{E(p.supplier)} · {p.qty} × {money(p.price)} = {money(poTotal(p))}</p>
+                  <p className="text-sm font-extrabold text-[#0F172A]">{p.no} · {E(p.item)}</p>
+                  <p className="text-[11px] font-bold text-[#475569]">{E(p.supplier)} · {p.qty} × {money(p.price)} = {money(poTotal(p))}</p>
                 </div>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${p.status === "received" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : p.status === "sent" ? "bg-amber-50 text-amber-800 border-amber-200" : "bg-[#E9E3D5] text-[#535E78] border-[#DAD3C2]"}`}>{T("proc.s." + p.status)}</span>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${p.status === "received" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : p.status === "sent" ? "bg-amber-50 text-amber-800 border-amber-200" : "bg-[#EEF1F5] text-[#475569] border-[#E3E7EE]"}`}>{T("proc.s." + p.status)}</span>
                 <div className="flex gap-2">
                   <a href={whatsappLink(poText(p))} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100"><MessageCircle className="w-3.5 h-3.5" />{T("proc.wa")}</a>
-                  {PO_NEXT[p.status] && <button type="button" onClick={() => poNext(p.id)} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer">{T("proc.to." + PO_NEXT[p.status])}</button>}
+                  {PO_NEXT[p.status] && <button type="button" onClick={() => poNext(p.id)} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer">{T("proc.to." + PO_NEXT[p.status])}</button>}
                 </div>
               </div>
             ))}

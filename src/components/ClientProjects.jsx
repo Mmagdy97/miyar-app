@@ -49,7 +49,7 @@ const CLIENT_UNITS = localize([
     engineer: "م. ليلى رياض (مصممة الديكور)",
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
-    badgeColor: "bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]",
+    badgeColor: "bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE]",
   },
   {
     id: 3,
@@ -82,7 +82,7 @@ function ClientProjects() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#24304D] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#0F172A] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -95,24 +95,24 @@ function ClientProjects() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#E9E3D5] border border-[#DAD3C2] flex items-center justify-center text-[#1A2236]">
+              <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#EEF1F5] border border-[#E3E7EE] flex items-center justify-center text-[#0F172A]">
                   <Briefcase className="w-5 h-5" />
                 </div>
                 <span>{T("cli.97")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E9E3D5] text-[#1A2236] border border-[#DAD3C2]/80">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE]/80">
                 {T("cli.98", { v0: CLIENT_UNITS.length })}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#535E78]">
+            <p className="text-xs md:text-sm text-[#475569]">
               {T("cli.99")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[#535E78] bg-white px-3.5 py-2 rounded-lg border border-[#DAD3C2] shadow-2xs">
-              {D("العميل:")} <strong className="text-[#1A2236]">{T("cli.100")}</strong>
+            <span className="text-xs font-bold text-[#475569] bg-white px-3.5 py-2 rounded-lg border border-[#E3E7EE] shadow-2xs">
+              {D("العميل:")} <strong className="text-[#0F172A]">{T("cli.100")}</strong>
             </span>
           </div>
         </div>
@@ -122,16 +122,16 @@ function ClientProjects() {
           {CLIENT_UNITS.map((unit) => (
             <div
               key={unit.id}
-              className="bg-white rounded-lg border border-[#DAD3C2] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+              className="bg-white rounded-lg border border-[#E3E7EE] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
             >
               {/* Cover Image with Gradient Overlay */}
-              <div className="relative h-48 overflow-hidden bg-[#24304D]">
+              <div className="relative h-48 overflow-hidden bg-[#0F172A]">
                 <img
                   src={unit.image}
                   alt={unit.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2236]/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
 
                 {/* Status Badge in Photo */}
                 <div className="absolute top-3.5 start-3.5">
@@ -156,18 +156,18 @@ function ClientProjects() {
               <div className="p-5 space-y-4 flex-1">
                 {/* Location & Type */}
                 <div className="space-y-1">
-                  <div className="flex items-center gap-1.5 text-xs text-[#535E78]">
-                    <MapPin className="w-3.5 h-3.5 text-[#535E78] shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs text-[#475569]">
+                    <MapPin className="w-3.5 h-3.5 text-[#475569] shrink-0" />
                     <span className="truncate">{unit.location}</span>
                   </div>
-                  <p className="text-xs font-bold text-[#535E78]">{E(unit.type)}</p>
+                  <p className="text-xs font-bold text-[#475569]">{E(unit.type)}</p>
                 </div>
 
                 {/* Progress Track */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-[#535E78] font-medium">{T("cli.102")}</span>
-                    <span className="text-xs font-bold text-[#1A2236] tracking-wide font-mono">
+                    <span className="text-[#475569] font-medium">{T("cli.102")}</span>
+                    <span className="text-xs font-bold text-[#0F172A] tracking-wide font-mono">
                       {pct(unit.progress)}
                     </span>
                   </div>
@@ -175,35 +175,35 @@ function ClientProjects() {
                 </div>
 
                 {/* Specs List */}
-                <div className="p-3 bg-[#F3EFE6] rounded-lg border border-[#E9E3D5] space-y-2 text-xs">
+                <div className="p-3 bg-[#F4F6F9] rounded-lg border border-[#EEF1F5] space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#535E78]">{T("cli.103")}</span>
-                    <span className="font-bold text-[#1A2236]">{unit.area}</span>
+                    <span className="text-[#475569]">{T("cli.103")}</span>
+                    <span className="font-bold text-[#0F172A]">{unit.area}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#535E78]">{T("cli.104")}</span>
-                    <span className="font-bold text-[#1A2236] font-mono">{unit.expectedHandover}</span>
+                    <span className="text-[#475569]">{T("cli.104")}</span>
+                    <span className="font-bold text-[#0F172A] font-mono">{unit.expectedHandover}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#535E78]">{T("cli.105")}</span>
-                    <span className="font-bold text-[#1A2236] truncate max-w-[160px]">{unit.engineer}</span>
+                    <span className="text-[#475569]">{T("cli.105")}</span>
+                    <span className="font-bold text-[#0F172A] truncate max-w-[160px]">{unit.engineer}</span>
                   </div>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="p-4 bg-[#F3EFE6]/60 border-t border-[#E9E3D5] flex items-center gap-2">
+              <div className="p-4 bg-[#F4F6F9]/60 border-t border-[#EEF1F5] flex items-center gap-2">
                 <button
                   onClick={() => handleAction(unit.name, D("تقرير الإنجاز وصور الموقع"))}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#DAD3C2] bg-white hover:bg-[#F3EFE6] text-[#1A2236] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg border border-[#E3E7EE] bg-white hover:bg-[#F4F6F9] text-[#0F172A] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Eye className="w-3.5 h-3.5 text-[#535E78]" />
+                  <Eye className="w-3.5 h-3.5 text-[#475569]" />
                   <span>{T("cli.106")}</span>
                 </button>
 
                 <button
                   onClick={() => handleAction(unit.name, D("المخططات الهندسية 3D"))}
-                  className="flex-1 py-2 px-3 rounded-lg bg-[#24304D] hover:bg-[#1A2236] text-white hover:bg-[#1A2236] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#0F172A] hover:bg-[#0F172A] text-white hover:bg-[#0F172A] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{T("cli.107")}</span>

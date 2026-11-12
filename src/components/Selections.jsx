@@ -6,7 +6,7 @@ import { selectionsStore } from "../data/stores";
 import { selectionTotals, groupByRoom, linePrice, lineCost } from "../lib/selections";
 import { toCsv, download } from "../lib/accountant";
 
-const input = "px-3 py-2 rounded-lg border border-[#DAD3C2] text-xs font-bold text-[#1A2236] bg-white min-w-0";
+const input = "px-3 py-2 rounded-lg border border-[#E3E7EE] text-xs font-bold text-[#0F172A] bg-white min-w-0";
 const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200" };
 const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "" };
 
@@ -36,10 +36,10 @@ export default function Selections({ role = "Admin", restricted = false }) {
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-[#1A2236] flex items-center gap-2.5"><Armchair className="w-7 h-7" /><span>{T(isClient ? "sel.title.client" : "sel.title")}</span></h1>
-            <p className="text-xs md:text-sm text-[#535E78] mt-1">{T(isClient ? "sel.sub.client" : "sel.sub")}</p>
+            <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] flex items-center gap-2.5"><Armchair className="w-7 h-7" /><span>{T(isClient ? "sel.title.client" : "sel.title")}</span></h1>
+            <p className="text-xs md:text-sm text-[#475569] mt-1">{T(isClient ? "sel.sub.client" : "sel.sub")}</p>
           </div>
-          {!isClient && <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#1A2236] bg-white border border-[#DAD3C2] hover:bg-[#F3EFE6] cursor-pointer w-fit"><Download className="w-4 h-4" />{T("sel.export")}</button>}
+          {!isClient && <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0F172A] bg-white border border-[#E3E7EE] hover:bg-[#F4F6F9] cursor-pointer w-fit"><Download className="w-4 h-4" />{T("sel.export")}</button>}
         </div>
 
         {!isClient && (
@@ -50,35 +50,35 @@ export default function Selections({ role = "Admin", restricted = false }) {
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
           {[["sel.k.approved", t.price], ["sel.k.pending", t.pending], ...(isClient || restricted ? [] : [["sel.k.cost", t.cost], ["sel.k.margin", t.margin]])].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#DAD3C2] text-center">
-              <span className="text-[11px] font-bold text-[#535E78] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-black text-[#1A2236]">{money(v, { compact: true })}</span>
-              {k === "sel.k.margin" && <span className="block text-[10px] font-bold text-[#535E78]">{t.marginPct}%</span>}
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E3E7EE] text-center">
+              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-black text-[#0F172A]">{money(v, { compact: true })}</span>
+              {k === "sel.k.margin" && <span className="block text-[10px] font-bold text-[#475569]">{t.marginPct}%</span>}
             </div>
           ))}
         </div>
 
         {!isClient && (
-          <form onSubmit={add} className="bg-white rounded-lg border border-[#DAD3C2] p-4 flex flex-wrap gap-2 items-end">
+          <form onSubmit={add} className="bg-white rounded-lg border border-[#E3E7EE] p-4 flex flex-wrap gap-2 items-end">
             <input placeholder={T("sel.room")} value={f.room} onChange={(e) => setF({ ...f, room: e.target.value })} className={input + " w-32"} />
             <input required placeholder={T("sel.item")} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} className={input + " flex-1 min-w-36"} />
             <input placeholder={T("sel.supplier")} value={f.supplier} onChange={(e) => setF({ ...f, supplier: e.target.value })} className={input + " w-32"} />
             <input type="number" min={1} placeholder={T("sel.qty")} value={f.qty} onChange={(e) => setF({ ...f, qty: e.target.value })} className={input + " w-20"} />
             {!restricted && <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />}
             <input required type="number" min={1} placeholder={T("sel.price")} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
           </form>
         )}
 
-        {mine.length === 0 && <p className="text-xs text-[#535E78] bg-white rounded-lg border border-[#DAD3C2] p-6 text-center">{T("sel.empty")}</p>}
+        {mine.length === 0 && <p className="text-xs text-[#475569] bg-white rounded-lg border border-[#E3E7EE] p-6 text-center">{T("sel.empty")}</p>}
         {Object.entries(groups).map(([room, list]) => (
           <section key={room} className="space-y-2">
-            <h2 className="text-sm font-black text-[#1A2236]">{room || T("sel.general")}</h2>
+            <h2 className="text-sm font-black text-[#0F172A]">{room || T("sel.general")}</h2>
             {list.map((i) => (
-              <div key={i.id} className="bg-white rounded-lg border border-[#DAD3C2] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
+              <div key={i.id} className="bg-white rounded-lg border border-[#E3E7EE] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-extrabold text-[#1A2236]">{i.name}</p>
-                  <p className="text-[11px] font-bold text-[#535E78]">{i.supplier && i.supplier + " · "}{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && ` · ${T("sel.cost")}: ${money(lineCost(i))}`}</p>
+                  <p className="text-sm font-extrabold text-[#0F172A]">{i.name}</p>
+                  <p className="text-[11px] font-bold text-[#475569]">{i.supplier && i.supplier + " · "}{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && ` · ${T("sel.cost")}: ${money(lineCost(i))}`}</p>
                 </div>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${badge[i.status]}`}>{T("sel.s." + i.status)}</span>
                 <div className="flex gap-2">
@@ -88,8 +88,8 @@ export default function Selections({ role = "Admin", restricted = false }) {
                       <button type="button" onClick={() => setStatus(i.id, "approved")} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 cursor-pointer"><Check className="w-3.5 h-3.5" />{T("sel.approve")}</button>
                     </>
                   )}
-                  {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#24304D] hover:bg-[#1A2236] cursor-pointer">{T("sel.order")}</button>}
-                  {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-[#1A2236] bg-white border border-[#DAD3C2] cursor-pointer">{T("sel.repropose")}</button>}
+                  {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer">{T("sel.order")}</button>}
+                  {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-[#0F172A] bg-white border border-[#E3E7EE] cursor-pointer">{T("sel.repropose")}</button>}
                 </div>
               </div>
             ))}
