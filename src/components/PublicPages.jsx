@@ -20,7 +20,7 @@ export function PricingSection({ onStart }) {
           <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#DAD3C2]">
             {Object.keys(PRICES).map((k) => (
               <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
-                {(() => { try { return new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(k); } catch { return k; } })()}
+                <span className="sm:hidden">{k}</span><span className="hidden sm:inline">{(() => { try { return new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(k); } catch { return k; } })()}</span>
               </button>
             ))}
           </div>
