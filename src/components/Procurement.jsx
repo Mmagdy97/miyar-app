@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { HardHat, ShoppingCart, MessageCircle, Plus } from "lucide-react";
+import { HardHat, ShoppingCart, MessageCircle, Plus, Pencil, Trash2, Undo2, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { subsStore, posStore } from "../data/stores";
-import { poTotal, subBalance, procurementTotals } from "../lib/procurement";
+import { poTotal, subBalance, procurementTotals, subPayments, addPayment, editPayment, removePayment } from "../lib/procurement";
 import { whatsappLink } from "../lib/share";
 
 const PO_NEXT = { draft: "sent", sent: "received" };
@@ -22,7 +22,14 @@ export default function Procurement() {
     setSubs((a) => [...a, { id: Date.now(), name: sf.name.trim(), trade: sf.trade.trim(), contract: Number(sf.contract), paid: 0 }]);
     setSf({ name: "", trade: "", contract: "" });
   };
-  const paySub = (id, amt) => setSubs((a) => a.map((s) => (s.id === id ? { ...s, paid: Math.min(s.contract, s.paid + amt) } : s)));
+  // every payment change keeps a snapshot so the last action can be undone
+  const [undo, setUndo] = useState(null);
+  const [payIn, setPayIn] = useState({});
+  const [editing, setEditing] = useState(null); // { sid, pid, v }
+  const change = (fn) => { setUndo(subs); setSubs((a) => a.map(fn)); };
+  const paySub = (id, amt) => change((s) => (s.id === id ? addPayment(s, amt) : s));
+  const delPay = (id, pid) => change((s) => (s.id === id ? removePayment(s, pid) : s));
+  const savePay = () => { if (editing) { change((s) => (s.id === editing.sid ? editPayment(s, editing.pid, editing.v) : s)); setEditing(null); } };
   const addPo = (e) => {
     e.preventDefault();
     if (!pf.supplier.trim() || !pf.item.trim() || !Number(pf.qty) || !Number(pf.price)) return;
@@ -62,9 +69,35 @@ export default function Procurement() {
                     <span>{T("proc.paid")}: {money(s.paid, { compact: true })} / {money(s.contract, { compact: true })}</span>
                     <span>{T("proc.balance")}: {money(subBalance(s), { compact: true })}</span>
                   </div>
-                  {subBalance(s) > 0 && (
-                    <button type="button" onClick={() => paySub(s.id, Math.min(subBalance(s), Math.round(s.contract * 0.1)))} className="mt-3 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer">{T("proc.pay10")}</button>
-                  )}
+                  <div className="mt-3 border-t border-[#E3E7EE] pt-3 space-y-2">
+                    <p className="text-[11px] font-bold text-[#475569]">{T("proc.payHist")}</p>
+                    {subPayments(s).length === 0 && <p className="text-[11px] text-[#64748B]">{T("proc.noPay")}</p>}
+                    {subPayments(s).map((p) => (
+                      <div key={p.id} className="flex items-center gap-2 text-xs">
+                        <span className="text-[#64748B] tabular-nums w-20 shrink-0">{p.date || T("proc.opening")}</span>
+                        {editing && editing.sid === s.id && editing.pid === p.id ? (
+                          <>
+                            <input type="number" min={1} value={editing.v} autoFocus onChange={(e) => setEditing({ ...editing, v: e.target.value })} className={input + " w-28"} />
+                            <button type="button" onClick={savePay} aria-label={T("proc.save")} className="p-2 rounded-lg bg-[#0F766E] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
+                            <button type="button" onClick={() => setEditing(null)} aria-label={T("proc.cancel")} className="p-2 rounded-lg border border-[#E3E7EE] cursor-pointer"><X className="w-4 h-4" /></button>
+                          </>
+                        ) : (
+                          <>
+                            <span className="flex-1 font-bold text-[#0F172A] tabular-nums">{money(p.amount)}</span>
+                            <button type="button" onClick={() => setEditing({ sid: s.id, pid: p.id, v: p.amount })} aria-label={T("proc.edit")} className="p-2 rounded-lg text-[#475569] hover:bg-[#EEF1F5] cursor-pointer"><Pencil className="w-4 h-4" /></button>
+                            <button type="button" onClick={() => delPay(s.id, p.id)} aria-label={T("proc.del")} className="p-2 rounded-lg text-[#A93226] hover:bg-[#EEF1F5] cursor-pointer"><Trash2 className="w-4 h-4" /></button>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                    {subBalance(s) > 0 && (
+                      <form onSubmit={(e) => { e.preventDefault(); paySub(s.id, payIn[s.id]); setPayIn({ ...payIn, [s.id]: "" }); }} className="flex flex-wrap gap-2 pt-1">
+                        <input type="number" min={1} max={subBalance(s)} placeholder={T("proc.payAmt")} value={payIn[s.id] || ""} onChange={(e) => setPayIn({ ...payIn, [s.id]: e.target.value })} className={input + " flex-1 w-32"} />
+                        <button type="submit" className="px-3 py-2 rounded-lg text-xs font-bold text-white bg-[#0F766E] cursor-pointer">{T("proc.record")}</button>
+                        <button type="button" onClick={() => paySub(s.id, Math.round(s.contract * 0.1))} className="px-3 py-2 rounded-lg text-xs font-bold border border-[#E3E7EE] text-[#0F172A] cursor-pointer">10%</button>
+                      </form>
+                    )}
+                  </div>
                 </div>
               );
             })}
@@ -103,6 +136,13 @@ export default function Procurement() {
           </div>
         </section>
       </div>
+      {undo && (
+        <div role="status" className="fixed z-40 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 bottom-20 md:bottom-6 flex items-center gap-3 rounded-lg bg-[#0F172A] text-white text-xs font-semibold ps-4 pe-2 py-2 shadow-lg">
+          <span>{T("proc.undoMsg")}</span>
+          <button type="button" onClick={() => { setSubs(undo); setUndo(null); }} className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/15 hover:bg-white/25 cursor-pointer"><Undo2 className="w-4 h-4" />{T("proc.undo")}</button>
+          <button type="button" onClick={() => setUndo(null)} aria-label={T("proc.cancel")} className="p-1.5 cursor-pointer"><X className="w-4 h-4" /></button>
+        </div>
+      )}
     </main>
   );
 }
