@@ -39,6 +39,7 @@ export default {
   "nav.Admin.Projects": "المشاريع الجارية",
   "nav.Admin.Financials & Petty Cash": "الحسابات والعهد",
   "nav.Admin.BOQ & Approvals": "المقايسات والاعتمادات",
+  "nav.Admin.Attendance": "الحضور واليوميات",
   "nav.Admin.Team": "فريق العمل",
   "nav.Site Engineer.Dashboard": "لوحة التحكم الميدانية",
   "nav.Site Engineer.My Tasks": "مهامي الميدانية",

@@ -37,6 +37,7 @@ export const ROLE_CONFIG = {
     { id: "Selections", name: "الاختيارات وFF&E", label: "الاختيارات وFF&E", icon: Armchair },
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
     { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
+    { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
   ],
   "Site Engineer": [

@@ -39,6 +39,7 @@ export default {
   "nav.Admin.Projects": "Active projects",
   "nav.Admin.Financials & Petty Cash": "Finance & petty cash",
   "nav.Admin.BOQ & Approvals": "BOQ & approvals",
+  "nav.Admin.Attendance": "Attendance & wages",
   "nav.Admin.Team": "Team",
   "nav.Site Engineer.Dashboard": "Field dashboard",
   "nav.Site Engineer.My Tasks": "My field tasks",

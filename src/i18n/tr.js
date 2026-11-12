@@ -39,6 +39,7 @@ export default {
   "nav.Admin.Projects": "Devam eden projeler",
   "nav.Admin.Financials & Petty Cash": "Finans ve avans",
   "nav.Admin.BOQ & Approvals": "Metraj ve onaylar",
+  "nav.Admin.Attendance": "Puantaj ve yevmiyeler",
   "nav.Admin.Team": "Ekip",
   "nav.Site Engineer.Dashboard": "Saha paneli",
   "nav.Site Engineer.My Tasks": "Saha görevlerim",
