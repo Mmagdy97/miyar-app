@@ -17,6 +17,7 @@ import { Menu, X, Building2, Download } from "lucide-react";
 import { loadAccount, signOut } from "./lib/auth";
 import OwnerAdmin from "./components/OwnerAdmin";
 import { setActiveOrg } from "./lib/entitlements";
+import { attachProjects } from "./data/projects";
 
 // Role-Based Initial Action Items & Notifications in Arabic
 const INITIAL_ACTION_ITEMS = localize([
@@ -117,7 +118,7 @@ function App() {
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {
     if (!isAuthenticated || authMode !== "user") return;
-    loadAccount().then((acc) => { if (acc) setAccount(acc); else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
+    loadAccount().then((acc) => { if (acc) { setAccount(acc); attachProjects(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -199,7 +200,7 @@ function App() {
 
   const doLogout = () => {
     if (authMode === "user") signOut();
-    setAuthMode("guest"); setAccount(null); setOwnerView(true);
+    setAuthMode("guest"); setAccount(null); setOwnerView(true); attachProjects(null);
     setIsAuthenticated(false);
     setCurrentRole("");
   };
@@ -213,7 +214,7 @@ function App() {
     return (
       <LandingAndLogin
         onLogin={(role, mode = "guest", acc = null) => {
-          setAuthMode(mode); setAccount(acc);
+          setAuthMode(mode); setAccount(acc); attachProjects(mode === "user" ? acc?.orgId : null);
           setCurrentRole(role || "Admin");
           setIsAuthenticated(true);
         }}

@@ -280,6 +280,7 @@ export default {
   "proj.2": "{v0} active projects",
   "proj.3": "Track timelines, site progress, and the design, execution and handover phases in real time.",
   "proj.4": "Restore original data",
+  "proj.none": "No projects yet. Add one from Projects first.",
   "proj.5": "Reset",
   "proj.6": "Add new project",
   "proj.7": "Total projects",

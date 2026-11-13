@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useProjectList } from "../data/projects";
 import { Receipt, Lock, Unlock } from "lucide-react";
 import { tr_ as T, E, money, getCurrency } from "../i18n";
 import { pct } from "../data/dataI18n";
-import { PROJECTS } from "../data/seed";
+
 import { certsStore } from "../data/stores";
 import { officeStore, defaultVat } from "../data/office";
 import { computeCertificate, totals } from "../lib/hakedis";
@@ -10,12 +11,12 @@ import { computeCertificate, totals } from "../lib/hakedis";
 const NEXT = { draft: "approved", approved: "paid" };
 
 /** Admin: progress-billing certificates (مستخلصات) with retention (محتجزات) and advance recovery. */
-export default function Certificates() {
+function CertificatesInner({ projects }) {
   const [certs, setCerts] = certsStore.use();
   const [office] = officeStore.use();
   const vatRate = office.vatRate ?? defaultVat(getCurrency());
-  const [projectId, setProjectId] = useState(PROJECTS[0].id);
-  const project = PROJECTS.find((p) => p.id === Number(projectId));
+  const [projectId, setProjectId] = useState(projects[0].id);
+  const project = (projects.find((p) => p.id === Number(projectId)) || projects[0]);
   const mine = certs.filter((c) => c.projectId === project.id).sort((a, b) => a.no - b.no);
   const prev = mine.length ? mine[mine.length - 1] : null;
   const prevPct = prev ? prev.cumPct : 0;
@@ -68,7 +69,7 @@ export default function Certificates() {
         </div>
 
         <select value={projectId} onChange={(e) => setProjectId(e.target.value)} className={input + " max-w-md"}>
-          {PROJECTS.map((p) => (
+          {projects.map((p) => (
             <option key={p.id} value={p.id}>{E(p.name)}</option>
           ))}
         </select>
@@ -140,4 +141,17 @@ export default function Certificates() {
       </div>
     </main>
   );
+}
+
+function NoProjects() {
+  return (
+    <main className="flex-1 flex items-center justify-center p-8 font-ibm">
+      <p className="text-sm text-[#555B53] bg-white rounded-xl border border-[#E6DFD0] p-8 text-center max-w-sm">{T("proj.none")}</p>
+    </main>
+  );
+}
+
+export default function Certificates(props) {
+  const projects = useProjectList();
+  return projects.length ? <CertificatesInner {...props} projects={projects} /> : <NoProjects />;
 }

@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useProjectList } from "../data/projects";
 import { Armchair, Check, X, Download, Plus, ImagePlus, MessageCircle, Clock, Ruler, ChevronDown, Trash2, Printer, Truck } from "lucide-react";
 import Photo from "./Photo";
 import { fileToDataUrl } from "../lib/image";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
-import { PROJECTS, CLIENT_PROJECT_ID } from "../data/seed";
+import { CLIENT_PROJECT_ID } from "../data/seed";
 import { selectionsStore } from "../data/stores";
 import { selectionTotals, groupByRoom, groupBySupplier, linePrice, lineCost, supplierWa, etaOf, isLate, today, STEPS, stepIndex } from "../lib/selections";
 import { printPO, poNumber } from "../lib/po";
@@ -28,10 +29,10 @@ function Thumb({ i, size = "w-full md:w-28 h-44 md:h-28", onZoom }) {
 }
 
 /** Client selections & FF&E schedule. Admin proposes items per room; the client approves or rejects. */
-export default function Selections({ role = "Admin", restricted = false }) {
+function SelectionsInner({ role = "Admin", restricted = false, projects }) {
   const isClient = role === "Client";
   const [items, setItems] = selectionsStore.use();
-  const [projectId, setProjectId] = useState(isClient ? CLIENT_PROJECT_ID : PROJECTS[0].id);
+  const [projectId, setProjectId] = useState(isClient ? (projects.find((p) => p.id === CLIENT_PROJECT_ID)?.id ?? projects[0].id) : projects[0].id);
   const [f, setF] = useState(empty);
   const [more, setMore] = useState(false);
   const [zoom, setZoom] = useState(null);
@@ -41,7 +42,7 @@ export default function Selections({ role = "Admin", restricted = false }) {
     if (!file) return;
     try { setImgErr(false); setF((x) => ({ ...x, image: "" })); const u = await fileToDataUrl(file); setF((x) => ({ ...x, image: u })); } catch { setImgErr(true); }
   };
-  const project = PROJECTS.find((p) => p.id === Number(projectId));
+  const project = (projects.find((p) => p.id === Number(projectId)) || projects[0]);
   const mine = items.filter((i) => i.projectId === project.id);
   const t = selectionTotals(mine);
   const groups = groupByRoom(mine);
@@ -74,7 +75,7 @@ export default function Selections({ role = "Admin", restricted = false }) {
 
         {!isClient && (
           <select value={projectId} onChange={(e) => setProjectId(e.target.value)} className={input + " max-w-md w-full"}>
-            {PROJECTS.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}
+            {projects.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}
           </select>
         )}
 
@@ -217,4 +218,17 @@ export default function Selections({ role = "Admin", restricted = false }) {
       )}
     </main>
   );
+}
+
+function NoProjects() {
+  return (
+    <main className="flex-1 flex items-center justify-center p-8 font-ibm">
+      <p className="text-sm text-[#555B53] bg-white rounded-xl border border-[#E6DFD0] p-8 text-center max-w-sm">{T("proj.none")}</p>
+    </main>
+  );
+}
+
+export default function Selections(props) {
+  const projects = useProjectList();
+  return projects.length ? <SelectionsInner {...props} projects={projects} /> : <NoProjects />;
 }

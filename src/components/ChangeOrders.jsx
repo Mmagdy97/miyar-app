@@ -1,8 +1,9 @@
 import { valueMoment } from "../lib/nudge";
+import { useProjectList } from "../data/projects";
 import { useState } from "react";
 import { FilePenLine, Check, X, MessageCircle } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
-import { PROJECTS, CLIENT_PROJECT_ID } from "../data/seed";
+import { CLIENT_PROJECT_ID } from "../data/seed";
 import { changeOrdersStore } from "../data/stores";
 import { applyChangeOrders, canDecide } from "../lib/changeorders";
 import { whatsappLink } from "../lib/share";
@@ -11,12 +12,12 @@ const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold te
 const badge = { draft: "bg-[#F0EADD] text-[#555B53] border-[#E6DFD0]", sent: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200" };
 
 /** Change orders. Admin raises and sends them; the client approves or rejects in their portal. */
-export default function ChangeOrders({ role = "Admin" }) {
+function ChangeOrdersInner({ role = "Admin", projects }) {
   const isClient = role === "Client";
   const [orders, setOrders] = changeOrdersStore.use();
-  const [projectId, setProjectId] = useState(isClient ? CLIENT_PROJECT_ID : PROJECTS[0].id);
+  const [projectId, setProjectId] = useState(isClient ? (projects.find((p) => p.id === CLIENT_PROJECT_ID)?.id ?? projects[0].id) : projects[0].id);
   const [f, setF] = useState({ title: "", desc: "", cost: "", days: "" });
-  const project = PROJECTS.find((p) => p.id === Number(projectId));
+  const project = (projects.find((p) => p.id === Number(projectId)) || projects[0]);
   const list = orders.filter((o) => o.projectId === project.id && (!isClient || o.status !== "draft"));
   const adj = applyChangeOrders(project.contractValue, orders.filter((o) => o.projectId === project.id));
 
@@ -39,7 +40,7 @@ export default function ChangeOrders({ role = "Admin" }) {
 
         {!isClient && (
           <select value={projectId} onChange={(e) => setProjectId(e.target.value)} className={input + " max-w-md w-full"}>
-            {PROJECTS.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}
+            {projects.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}
           </select>
         )}
 
@@ -90,4 +91,17 @@ export default function ChangeOrders({ role = "Admin" }) {
       </div>
     </main>
   );
+}
+
+function NoProjects() {
+  return (
+    <main className="flex-1 flex items-center justify-center p-8 font-ibm">
+      <p className="text-sm text-[#555B53] bg-white rounded-xl border border-[#E6DFD0] p-8 text-center max-w-sm">{T("proj.none")}</p>
+    </main>
+  );
+}
+
+export default function ChangeOrders(props) {
+  const projects = useProjectList();
+  return projects.length ? <ChangeOrdersInner {...props} projects={projects} /> : <NoProjects />;
 }

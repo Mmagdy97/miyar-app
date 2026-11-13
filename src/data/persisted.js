@@ -2,11 +2,11 @@ import { useSyncExternalStore } from "react";
 
 // Tiny localStorage-backed store; same API shape as useState (supports functional updates).
 // Swapped for Supabase queries later without touching the screens.
-export function createPersistedStore(key, initial, view = (x) => x) {
+export function createPersistedStore(key, initial, view = (x) => x, { persist = true } = {}) {
   const listeners = new Set();
   let state;
   try {
-    const raw = localStorage.getItem(key);
+    const raw = persist ? localStorage.getItem(key) : null;
     state = raw ? JSON.parse(raw) : initial;
   } catch {
     state = initial;
@@ -15,7 +15,7 @@ export function createPersistedStore(key, initial, view = (x) => x) {
   const set = (next) => {
     state = typeof next === "function" ? next(state) : next;
     try {
-      localStorage.setItem(key, JSON.stringify(state));
+      if (persist) localStorage.setItem(key, JSON.stringify(state));
     } catch {
       /* storage full/blocked: keep in-memory only */
     }

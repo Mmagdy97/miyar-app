@@ -15,7 +15,7 @@ export async function loadAccount() {
   let org = null;
   if (p?.org_id) ({ data: org } = await supabase.from("organizations").select("name, plan, status, trial_ends_at, currency, locale, extra_features").eq("id", p.org_id).maybeSingle());
   const { data: owner } = await supabase.rpc("is_platform_admin");
-  return { user, name: p?.full_name || user.email, role: ROLE[p?.role] || "Client", org, isOwner: owner === true, hasOrg: Boolean(p?.org_id) };
+  return { user, name: p?.full_name || user.email, role: ROLE[p?.role] || "Client", org, isOwner: owner === true, hasOrg: Boolean(p?.org_id), orgId: p?.org_id || null };
 }
 
 /** Create the office on first sign-in after signup (needs an authenticated session). */

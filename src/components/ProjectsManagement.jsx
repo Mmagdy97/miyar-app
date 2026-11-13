@@ -1,9 +1,8 @@
 import Photo from "./Photo";
-import { createPersistedStore } from "../data/persisted";
 import { currencySymbol, E } from "../i18n";
 import { D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import ProgressBar from "./ProgressBar";
 import ShareMenu, { projectShare } from "./ShareMenu";
 import { whatsappLink } from "../lib/share";
@@ -31,38 +30,20 @@ import {
   DollarSign,
 } from "lucide-react";
 import {
-  PROJECTS as SEED_PROJECTS,
   PHASES as SEED_PHASES,
   PEOPLE,
-  personById,
   formatEGP,
 } from "../data/seed";
 
 // Standard Phases in Construction & Interior Design
 const PHASES = SEED_PHASES;
 
-// Initial Projects Data (single source of truth: src/data/seed.js)
-const INITIAL_PROJECTS = SEED_PROJECTS.map((p) => ({
-  id: p.id,
-  name: p.name,
-  client: p.client,
-  engineer: personById(p.engineerId).displayName,
-  progress: p.progress,
-  status: p.status,
-  phase: p.phase,
-  startDate: p.startDate,
-  deadline: p.deadline,
-  budget: formatEGP(p.contractValue),
-  location: p.location,
-  image: p.image,
-}));
-
 // Available Engineers for Assignment
 const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
   (p) => p.displayName
 );
 
-const projectsStore = createPersistedStore("miyar:projects:v1", INITIAL_PROJECTS);
+import { projectsStore, INITIAL_PROJECTS, parseAmount } from "../data/projects";
 
 function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [projects, setProjects] = projectsStore.use();
@@ -70,6 +51,11 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("الكل");
   const [toastMessage, setToastMessage] = useState(null);
+  useEffect(() => {
+    const h = (e) => { setToastMessage(String(e.detail)); setTimeout(() => setToastMessage(null), 5000); };
+    window.addEventListener("miyar:error", h);
+    return () => window.removeEventListener("miyar:error", h);
+  }, []);
 
   // Project Details Modal State
   const [selectedProject, setSelectedProject] = useState(null);
@@ -131,6 +117,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       startDate: todayStr,
       deadline: newDeadline || "2027-03-31",
       budget: newBudget.trim() ? `${newBudget.trim()} ${currencySymbol()}` : `${formatEGP(3500000)}`,
+      contractValue: newBudget.trim() ? parseAmount(newBudget) : 3500000,
       location: newLocation.trim() || D("القاهرة الجديدة"),
       image:
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
@@ -243,14 +230,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
         {/* Action Buttons */}
         <div className="flex items-center gap-2.5 flex-wrap">
-          <button
+          {!projectsStore.isLive && <button
             onClick={handleResetProjects}
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#555B53] bg-white border border-[#E6DFD0] hover:bg-[#F7F3EA] transition-colors shadow-2xs cursor-pointer"
             title={T("proj.4")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>{T("proj.5")}</span>
-          </button>
+          </button>}
 
           {/* Requirement 2: Primary Button "+ إضافة مشروع جديد" */}
           <button

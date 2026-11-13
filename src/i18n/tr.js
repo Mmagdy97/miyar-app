@@ -280,6 +280,7 @@ export default {
   "proj.2": "{v0} aktif proje",
   "proj.3": "Zaman çizelgelerini, saha ilerlemesini ve tasarım, uygulama ve teslim aşamalarını anlık takip edin.",
   "proj.4": "Orijinal verileri geri yükle",
+  "proj.none": "Henüz proje yok. Önce Projeler bölümünden ekleyin.",
   "proj.5": "Sıfırla",
   "proj.6": "Yeni proje ekle",
   "proj.7": "Toplam proje",
