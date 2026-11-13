@@ -27,6 +27,7 @@ import { ROLE_CONFIG } from "../config/roles";
 import LiveDashboard from "./LiveDashboard";
 import LiveFinance from "./LiveFinance";
 import LiveBoq from "./LiveBoq";
+import LiveSite from "./LiveSite";
 import LiveTeam from "./LiveTeam";
 import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
@@ -79,6 +80,8 @@ function MainContent({
       }
       if (id === "Financials & Petty Cash") return <LiveFinance />;
       if (id === "Team" && currentRole === "Admin") return <LiveTeam />;
+      const SITE = { "My Tasks": "tasks", "Snag List": "snags", "Material Requests": "requests" };
+      if (SITE[id] && currentRole !== "Client") return <LiveSite kind={SITE[id]} />;
       if ((id === "BOQ & Approvals" || id === "BOQ Management") && currentRole !== "Client") return <LiveBoq />;
       if (!LIVE_READY.has(id)) {
         return (

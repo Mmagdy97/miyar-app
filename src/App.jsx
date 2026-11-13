@@ -27,6 +27,7 @@ import { attachChangeOrders } from "./data/changeorders";
 import { attachCertificates } from "./data/certificates";
 import { attachSelections } from "./data/selections";
 import { attachMood } from "./data/moodboard";
+import { attachSite } from "./data/site";
 
 // Role-Based Initial Action Items & Notifications in Arabic
 const INITIAL_ACTION_ITEMS = localize([
@@ -127,7 +128,7 @@ function App() {
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {
     if (!isAuthenticated || authMode !== "user") return;
-    loadAccount().then((acc) => { if (acc) { setAccount(acc); attachProjects(acc.orgId); attachInvoices(acc.orgId); attachCash(acc.orgId); attachBoq(acc.orgId); attachAttendance(acc.orgId); attachProcurement(acc.orgId); attachChangeOrders(acc.orgId); attachCertificates(acc.orgId); attachSelections(acc.orgId); attachMood(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
+    loadAccount().then((acc) => { if (acc) { setAccount(acc); attachProjects(acc.orgId); attachInvoices(acc.orgId); attachCash(acc.orgId); attachBoq(acc.orgId); attachAttendance(acc.orgId); attachProcurement(acc.orgId); attachChangeOrders(acc.orgId); attachCertificates(acc.orgId); attachSelections(acc.orgId); attachMood(acc.orgId); attachSite(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -209,7 +210,7 @@ function App() {
 
   const doLogout = () => {
     if (authMode === "user") signOut();
-    setAuthMode("guest"); setAccount(null); setOwnerView(true); attachProjects(null); attachInvoices(null); attachCash(null); attachBoq(null); attachAttendance(null); attachProcurement(null); attachChangeOrders(null); attachCertificates(null); attachSelections(null); attachMood(null);
+    setAuthMode("guest"); setAccount(null); setOwnerView(true); attachProjects(null); attachInvoices(null); attachCash(null); attachBoq(null); attachAttendance(null); attachProcurement(null); attachChangeOrders(null); attachCertificates(null); attachSelections(null); attachMood(null); attachSite(null);
     setIsAuthenticated(false);
     setCurrentRole("");
   };
@@ -223,7 +224,7 @@ function App() {
     return (
       <LandingAndLogin
         onLogin={(role, mode = "guest", acc = null) => {
-          setAuthMode(mode); setAccount(acc); attachProjects(mode === "user" ? acc?.orgId : null); attachInvoices(mode === "user" ? acc?.orgId : null); attachCash(mode === "user" ? acc?.orgId : null); attachBoq(mode === "user" ? acc?.orgId : null); attachAttendance(mode === "user" ? acc?.orgId : null); attachProcurement(mode === "user" ? acc?.orgId : null); attachChangeOrders(mode === "user" ? acc?.orgId : null); attachCertificates(mode === "user" ? acc?.orgId : null); attachSelections(mode === "user" ? acc?.orgId : null); attachMood(mode === "user" ? acc?.orgId : null);
+          setAuthMode(mode); setAccount(acc); attachProjects(mode === "user" ? acc?.orgId : null); attachInvoices(mode === "user" ? acc?.orgId : null); attachCash(mode === "user" ? acc?.orgId : null); attachBoq(mode === "user" ? acc?.orgId : null); attachAttendance(mode === "user" ? acc?.orgId : null); attachProcurement(mode === "user" ? acc?.orgId : null); attachChangeOrders(mode === "user" ? acc?.orgId : null); attachCertificates(mode === "user" ? acc?.orgId : null); attachSelections(mode === "user" ? acc?.orgId : null); attachMood(mode === "user" ? acc?.orgId : null); attachSite(mode === "user" ? acc?.orgId : null);
           setCurrentRole(role || "Admin");
           setIsAuthenticated(true);
         }}
