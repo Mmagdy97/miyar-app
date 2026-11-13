@@ -21,7 +21,7 @@ export async function loadAccount() {
 /** Create the office on first sign-in after signup (needs an authenticated session). */
 async function finishOnboarding() {
   let pending; try { pending = JSON.parse(localStorage.getItem(PENDING)); } catch { pending = null; }
-  if (!pending) return;
+  if (!pending || !pending.office) return;
   const { error } = await supabase.rpc("create_organization", { p_name: pending.office, p_country: pending.country, p_currency: pending.currency, p_locale: pending.locale });
   if (!error || /already in an organization/.test(error.message)) localStorage.removeItem(PENDING);
 }

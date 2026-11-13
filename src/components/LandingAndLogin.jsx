@@ -196,7 +196,7 @@ export default function LandingAndLogin({ onLogin }) {
                 <div className="grid gap-2">
                   {mode === "up" && <>
                     <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" />
-                    <input required value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" />
+                    <input value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" />
                   </>}
                   <input required type="email" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" dir="ltr" />
                   <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" dir="ltr" />

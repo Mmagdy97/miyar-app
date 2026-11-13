@@ -9,7 +9,7 @@ const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold te
 const fmt = (d) => (d ? new Date(d).toLocaleDateString(intlLocale(), { day: "numeric", month: "short", year: "numeric" }) : "—");
 
 /** Admin of a real office: invoices / payment milestones per project. */
-export default function LiveInvoices() {
+export default function LiveInvoices({ readOnly = false }) {
   const projects = useProjectList();
   const all = invoicesRepo.use();
   const [pid, setPid] = useState(null);
@@ -29,7 +29,7 @@ export default function LiveInvoices() {
       <div className="max-w-4xl mx-auto space-y-6">
         <div>
           <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] flex items-center gap-2.5"><Receipt className="w-7 h-7" /><span>{T("inv.title")}</span></h1>
-          <p className="text-xs md:text-sm text-[#555B53] mt-1">{T("inv.sub")}</p>
+          <p className="text-xs md:text-sm text-[#555B53] mt-1">{readOnly ? "" : T("inv.sub")}</p>
         </div>
         <select value={project.id} onChange={(e) => setPid(Number(e.target.value))} className={input + " max-w-md w-full"}>
           {projects.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}
@@ -42,12 +42,12 @@ export default function LiveInvoices() {
             </div>
           ))}
         </div>
-        <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E6DFD0] p-4 flex flex-wrap gap-2 items-end">
+        {!readOnly && <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E6DFD0] p-4 flex flex-wrap gap-2 items-end">
           <input required placeholder={T("inv.titlePh")} value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} className={input + " flex-1 min-w-44"} />
           <input required type="number" min={1} placeholder={T("inv.amount")} value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} className={input + " w-32"} />
           <label className="flex items-center gap-1.5 text-[11px] font-bold text-[#555B53]">{T("inv.due")}<input type="date" value={f.dueDate} onChange={(e) => setF({ ...f, dueDate: e.target.value })} className={input} /></label>
           <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer"><Plus className="w-4 h-4" />{T("inv.add")}</button>
-        </form>
+        </form>}
         {rows.length === 0 && <p className="text-xs text-[#555B53] bg-white rounded-lg border border-[#E6DFD0] p-6 text-center">{T("inv.empty")}</p>}
         <div className="grid gap-2">
           {rows.map((i) => {
@@ -61,9 +61,9 @@ export default function LiveInvoices() {
                 <span className="text-sm font-semibold tabular-nums text-[#1F2421]">{money(i.amount)}</span>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${i.paid ? "bg-emerald-50 text-emerald-700 border-emerald-200" : late ? "bg-rose-50 text-rose-700 border-rose-200" : "bg-amber-50 text-amber-800 border-amber-200"}`}>{T(i.paid ? "inv.s.paid" : late ? "inv.s.late" : "inv.s.due")}</span>
                 <div className="flex items-center gap-2">
-                  {!i.paid && <button type="button" onClick={() => invoicesRepo.markPaid(i.id)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer"><Check className="w-4 h-4" />{T("inv.markPaid")}</button>}
+                  {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.markPaid(i.id)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer"><Check className="w-4 h-4" />{T("inv.markPaid")}</button>}
                   {i.paid && <button type="button" onClick={() => printReceipt({ ...i, paidDate: i.paidDate }, project.name)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] cursor-pointer"><Printer className="w-4 h-4" />{T("inv.receipt")}</button>}
-                  {!i.paid && <button type="button" onClick={() => invoicesRepo.remove(i.id)} aria-label={T("inv.delete")} className="p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                  {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.remove(i.id)} aria-label={T("inv.delete")} className="p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
                 </div>
               </article>
             );

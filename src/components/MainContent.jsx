@@ -69,10 +69,14 @@ function MainContent({
       activeTab === "بوابة العميل";
 
     if (projectsStore.isLive) {
-      if (isDashboard) return <LiveDashboard setActiveTab={setActiveTab} />;
+      if (isDashboard) return <LiveDashboard setActiveTab={setActiveTab} role={currentRole} />;
       const id = (ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id;
+      if (currentRole === "Client") {
+        if (id === "Invoices & Payments") return <LiveInvoices readOnly />;
+        if (["My Projects", "Progress Overview", "Schedule"].includes(id)) return <LiveDashboard setActiveTab={setActiveTab} role="Client" />;
+      }
       if (id === "Financials & Petty Cash") return <LiveInvoices />;
-      if (!LIVE_READY.has(id) && !LIVE_LOCAL.has(id)) {
+      if (!LIVE_READY.has(id) && !(LIVE_LOCAL.has(id) && currentRole !== "Client")) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">
             <div className="bg-white rounded-2xl border border-[#E6DFD0] p-8 text-center max-w-md space-y-2">
@@ -308,7 +312,7 @@ function MainContent({
       key={`${currentRole}-${activeTab}`}
       className="flex-1 flex flex-col min-h-0 min-w-0 w-full max-w-full overflow-hidden tab-page-transition outline-none"
     >
-      {projectsStore.isLive && LIVE_LOCAL.has((ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id) && (
+      {projectsStore.isLive && currentRole !== "Client" && LIVE_LOCAL.has((ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id) && (
         <p className="mx-4 md:mx-8 mt-3 text-xs font-semibold text-[#7A5415] bg-[#F6ECD6] border border-[#E9D7AE] rounded-lg px-3 py-2">{T("live.local")}</p>
       )}
       {renderScreen()}

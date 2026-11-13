@@ -25,6 +25,7 @@ const fromRow = (r) => ({
   progress: r.progress ?? 0, status: r.status || "جاري العمل", phase: r.phase || "تصميم",
   startDate: r.start_date || "", deadline: r.deadline || "", contractValue: Number(r.contract_value) || 0,
   budget: money(Number(r.contract_value) || 0), location: r.location || "", image: r.image || DEFAULT_IMG,
+  clientEmail: r.client_email || "", clientLinked: Boolean(r.client_id),
 });
 const toRow = (p) => ({
   code: p.code || null, name: p.name, client_name: p.client || null, engineer_name: p.engineer || null,
@@ -94,4 +95,12 @@ export function useProjectList() {
     id: p.id, name: p.name, code: p.code || `P-${p.id}`,
     contractValue: p.contractValue ?? SEED.find((s) => s.id === p.id)?.contractValue ?? parseAmount(p.budget),
   })), [rows]);
+}
+
+/** Invite a client (by email) to one project. Returns "linked" or "invited". */
+export async function inviteClient(projectId, email) {
+  const { data, error } = await supabase.rpc("invite_client", { p_project: projectId, p_email: email });
+  if (error) throw error;
+  await reload();
+  return data;
 }
