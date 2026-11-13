@@ -2,9 +2,33 @@ const line = (i, k) => Math.round((Number(i.qty) || 0) * (Number(i[k]) || 0));
 export const linePrice = (i) => line(i, "price");
 export const lineCost = (i) => line(i, "cost");
 
+export const COMMITTED = ["approved", "ordered", "delivered", "installed"];
+export const STEPS = ["approved", "ordered", "delivered", "installed"];
+
+const DAY = 86400000;
+const iso = (d) => d.toISOString().slice(0, 10);
+export const today = () => iso(new Date());
+
+/** Expected delivery date (ISO) = order date + lead days; "" when unknown. */
+export function etaOf(i) {
+  if (!i.orderedAt || !(Number(i.leadDays) > 0)) return "";
+  return iso(new Date(new Date(i.orderedAt).getTime() + Number(i.leadDays) * DAY));
+}
+/** Ordered, not yet delivered, and past its ETA. */
+export const isLate = (i, now = today()) => i.status === "ordered" && !!etaOf(i) && etaOf(i) < now;
+/** Index of the item's current step in STEPS (-1 when not yet approved). */
+export const stepIndex = (i) => STEPS.indexOf(i.status);
+
+/** Purchase orders: approved items (not yet ordered) or already-ordered ones grouped per supplier. */
+export function groupBySupplier(items, statuses = ["approved", "ordered", "delivered", "installed"]) {
+  return Object.entries(
+    items.filter((i) => statuses.includes(i.status)).reduce((m, i) => ((m[i.supplier || ""] ||= []).push(i), m), {}),
+  ).map(([supplier, list]) => ({ supplier, list, total: list.reduce((s, i) => s + lineCost(i), 0), phone: list.find((i) => i.phone)?.phone || "" }));
+}
+
 /** Totals for FF&E / client selections. Only approved or ordered lines count as committed. */
 export function selectionTotals(items) {
-  const committed = items.filter((i) => i.status === "approved" || i.status === "ordered");
+  const committed = items.filter((i) => COMMITTED.includes(i.status));
   const price = committed.reduce((s, i) => s + linePrice(i), 0);
   const cost = committed.reduce((s, i) => s + lineCost(i), 0);
   return {

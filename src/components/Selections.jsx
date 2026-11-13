@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Armchair, Check, X, Download, Plus, ImagePlus, MessageCircle, Clock, Ruler, ChevronDown, Trash2 } from "lucide-react";
+import { Armchair, Check, X, Download, Plus, ImagePlus, MessageCircle, Clock, Ruler, ChevronDown, Trash2, Printer, Truck } from "lucide-react";
 import Photo from "./Photo";
 import { fileToDataUrl } from "../lib/image";
-import { tr_ as T, E, money } from "../i18n";
+import { tr_ as T, E, money, intlLocale } from "../i18n";
 import { PROJECTS, CLIENT_PROJECT_ID } from "../data/seed";
 import { selectionsStore } from "../data/stores";
-import { selectionTotals, groupByRoom, linePrice, lineCost, supplierWa } from "../lib/selections";
+import { selectionTotals, groupByRoom, groupBySupplier, linePrice, lineCost, supplierWa, etaOf, isLate, today, STEPS, stepIndex } from "../lib/selections";
+import { printPO, poNumber } from "../lib/po";
 import { toCsv, download } from "../lib/accountant";
 
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
-const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200" };
+const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200", delivered: "bg-teal-50 text-teal-800 border-teal-200", installed: "bg-emerald-100 text-emerald-800 border-emerald-300" };
 const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "", image: "", phone: "", dims: "", material: "", code: "", leadDays: "", color: "#C8A27A" };
 
 /** Photo tile; without a photo it shows the finish colour as a swatch. */
@@ -52,7 +53,11 @@ export default function Selections({ role = "Admin", restricted = false }) {
     setF(empty); setMore(false);
   };
   const remove = (id) => setItems((a) => a.filter((i) => i.id !== id));
-  const setStatus = (id, status) => setItems((a) => a.map((i) => (i.id === id ? { ...i, status } : i)));
+  const setStatus = (id, status) =>
+    setItems((a) => a.map((i) => (i.id === id ? { ...i, status, ...(status === "ordered" ? { orderedAt: today() } : status === "delivered" ? { deliveredAt: today() } : {}) } : i)));
+  const orderAll = (list) => { const ids = new Set(list.filter((i) => i.status === "approved").map((i) => i.id)); setItems((a) => a.map((i) => (ids.has(i.id) ? { ...i, status: "ordered", orderedAt: today() } : i))); };
+  const pos = groupBySupplier(mine, ["approved", "ordered"]);
+  const poWa = (po) => supplierWa(po.phone, T("sel.poMsg", { no: poNumber(project, po.supplier, today()), project: E(project.name), n: po.list.length, total: money(po.total) }));
   const exportCsv = () =>
     download(`ffe-${project.code}.csv`, toCsv([T("sel.room"), T("sel.item"), T("sel.supplier"), T("sel.phone"), T("sel.dims"), T("sel.material"), T("sel.code"), T("sel.lead"), T("sel.qty"), T("sel.price"), T("sel.total"), T("sel.status")], mine.map((i) => [i.room, i.name, i.supplier, i.phone || "", i.dims || "", i.material || "", i.code || "", i.leadDays || "", i.qty, i.price, linePrice(i), T("sel.s." + i.status)])), "text/csv");
 
@@ -122,6 +127,28 @@ export default function Selections({ role = "Admin", restricted = false }) {
           </form>
         )}
 
+        {!isClient && pos.length > 0 && (
+          <section className="space-y-2">
+            <div><h2 className="text-sm font-semibold text-[#1F2421]">{T("sel.orders")}</h2><p className="text-[11px] text-[#555B53]">{T("sel.ordersSub")}</p></div>
+            <div className="grid md:grid-cols-2 gap-3">
+              {pos.map((po) => (
+                <div key={po.supplier} className="bg-white rounded-2xl border border-[#E6DFD0] p-4 space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm font-semibold text-[#1F2421]">{po.supplier || T("sel.noSupplier")}</p>
+                    {!restricted && <span className="text-sm font-semibold tabular-nums text-[#1F2421] shrink-0">{money(po.total)}</span>}
+                  </div>
+                  <p className="text-[11px] text-[#555B53]">{po.list.map((i) => `${i.qty}× ${i.name}`).join(" · ")}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {po.list.some((i) => i.status === "approved") && <button type="button" onClick={() => orderAll(po.list)} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.poAll")}</button>}
+                    <button type="button" onClick={() => printPO(po, project, today())} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] hover:bg-[#F7F3EA] cursor-pointer"><Printer className="w-4 h-4" aria-hidden="true" />{T("sel.po")}</button>
+                    {po.phone && <a href={poWa(po)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#17614F] bg-[#E3EFEA] hover:bg-[#d6e8e1]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.poWa")}</a>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {mine.length === 0 && <p className="text-xs text-[#555B53] bg-white rounded-lg border border-[#E6DFD0] p-6 text-center">{T("sel.empty")}</p>}
         {Object.entries(groups).map(([room, list]) => (
           <section key={room} className="space-y-2">
@@ -145,6 +172,21 @@ export default function Selections({ role = "Admin", restricted = false }) {
                       {i.leadDays > 0 && <li className="inline-flex items-center gap-1 rounded-md bg-[#F6ECD6] border border-[#E9D7AE] text-[#7A5415] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T("sel.leadTag", { d: i.leadDays })}</li>}
                     </ul>
                   )}
+                  {stepIndex(i) >= 0 && (
+                    <ol className="flex items-center gap-1 text-[10px] font-semibold text-[#6F756B]" aria-label={T("sel.track")}>
+                      {STEPS.map((k, n) => (
+                        <li key={k} className={`flex items-center gap-1 ${n <= stepIndex(i) ? "text-[#17614F]" : ""}`}>
+                          <span className={`w-2.5 h-2.5 rounded-full border ${n <= stepIndex(i) ? "bg-[#17614F] border-[#17614F]" : "border-[#D5CCB8] bg-white"}`} aria-hidden="true" />{T("sel.step." + k)}
+                          {n < STEPS.length - 1 && <span className={`w-4 sm:w-6 h-px ${n < stepIndex(i) ? "bg-[#17614F]" : "bg-[#D5CCB8]"}`} aria-hidden="true" />}
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  {i.status === "ordered" && etaOf(i) && (
+                    <p className={`inline-flex items-center gap-1.5 text-[11px] font-bold w-fit rounded-md px-2 py-0.5 border ${isLate(i) ? "bg-rose-50 text-rose-700 border-rose-200" : "bg-sky-50 text-sky-700 border-sky-200"}`}>
+                      <Truck className="w-3 h-3" aria-hidden="true" />{T("sel.eta", { d: new Date(etaOf(i)).toLocaleDateString(intlLocale(), { day: "numeric", month: "short" }) })}{isLate(i) && ` · ${T("sel.late", { n: Math.max(1, Math.round((new Date(today()) - new Date(etaOf(i))) / 86400000)) })}`}
+                    </p>
+                  )}
                   <p className="text-sm font-semibold text-[#1F2421] tabular-nums">{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && <span className="text-xs font-medium text-[#6F756B]">{` · ${T("sel.cost")}: ${money(lineCost(i))}`}</span>}</p>
                   <div className="flex flex-wrap items-center gap-2 mt-auto">
                     {isClient && i.status === "proposed" && (
@@ -154,9 +196,11 @@ export default function Selections({ role = "Admin", restricted = false }) {
                       </>
                     )}
                     {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.order")}</button>}
+                    {!isClient && i.status === "ordered" && <button type="button" onClick={() => setStatus(i.id, "delivered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.deliver")}</button>}
+                    {!isClient && i.status === "delivered" && <button type="button" onClick={() => setStatus(i.id, "installed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.install")}</button>}
                     {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] cursor-pointer">{T("sel.repropose")}</button>}
                     {!isClient && i.phone && <a href={supplierWa(i.phone, T("sel.waMsg", { item: i.name, code: i.code || "-", project: E(project.name) }))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#17614F] bg-[#E3EFEA] hover:bg-[#d6e8e1]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.waBtn")}</a>}
-                    {!isClient && i.status !== "ordered" && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                    {!isClient && (i.status === "proposed" || i.status === "approved" || i.status === "rejected") && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
                   </div>
                 </div>
               </article>
