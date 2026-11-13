@@ -327,3 +327,12 @@ div.bg-\[\#17614F\]:not([class*="text-white"]):is([class^="w-"],[class*=" w-"]):
 .dim::before, .dim::after { content: ""; flex: 1; height: 9px; border-block: 0; border-inline: 1px solid currentColor;
   background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; opacity: .55; }
 .dim::before { max-width: 3rem; } .dim > span { white-space: nowrap; }
+
+/* scroll-linked drawings */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.reveal.in { opacity: 1; transform: none; }
+.dim.reveal::before, .dim.reveal::after { transform: scaleX(0); transition: transform 1s var(--ease-out) .15s; }
+.dim.reveal::before { transform-origin: right; } .dim.reveal::after { transform-origin: left; }
+.dim.reveal.in::before, .dim.reveal.in::after { transform: scaleX(1); }
+.plan-parallax { transform: translateY(calc(var(--sy, 0) * -0.12px)); will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .plan-parallax { transform: none; } }

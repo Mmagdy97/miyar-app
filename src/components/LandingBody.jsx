@@ -6,6 +6,7 @@ import Capabilities from "./Capabilities";
 import RoleModules from "./RoleModules";
 import { BoqLive } from "./Hero";
 import PlanArt from "./PlanArt";
+import ScrollArt from "./ScrollArt";
 import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
 
@@ -30,6 +31,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
   const { t } = useI18n();
   return (
     <>
+      <ScrollArt />
       {/* Nav */}
       <header className="fixed top-0 inset-x-0 z-40 bg-[#F7F3EA]/90 glass">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
@@ -54,7 +56,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       {/* Hero: deep-pine stage, calculator floats on it */}
       <section className="pt-[4.5rem] sm:pt-[5.25rem] px-3 sm:px-6 w-full">
         <div className="relative max-w-7xl mx-auto rounded-[28px] bg-[var(--sand)] text-[var(--sand-ink)] border border-[var(--sand-line)] overflow-hidden zellige">
-          <PlanArt className="pointer-events-none absolute -top-6 start-[34%] w-[760px] max-w-none text-[#1F2421]/[.2] hidden sm:block" />
+          <PlanArt className="plan-parallax pointer-events-none absolute -top-6 start-[34%] w-[760px] max-w-none text-[#1F2421]/[.2] hidden sm:block" />
           <div aria-hidden="true" className="absolute -top-32 -end-24 w-[34rem] h-[34rem] rounded-full bg-[var(--sand-2)] blur-3xl opacity-90" />
           <div aria-hidden="true" className="absolute -bottom-40 -start-20 w-[26rem] h-[26rem] rounded-full bg-[var(--brass)]/15 blur-3xl" />
           <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center px-5 sm:px-12 pt-12 sm:pt-16 pb-14 sm:pb-20">
@@ -89,14 +91,14 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <section key={i} id={p.id} className="py-10 sm:py-16 px-5 sm:px-8">
             <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 items-start">
               <div className="text-start">
-                <div className="dim max-w-sm"><span>{String(i + 1).padStart(2, "0")} · {T(p.kicker).split("•").pop().trim()}</span></div>
+                <div className="dim reveal max-w-sm"><span>{String(i + 1).padStart(2, "0")} · {T(p.kicker).split("•").pop().trim()}</span></div>
                 <h2 className="mt-5 max-w-xl text-3xl sm:text-[2.4rem] font-semibold leading-[1.2] text-[#1F2421] text-balance">{T(p.title)}</h2>
                 <p className="mt-4 max-w-lg text-base sm:text-lg leading-relaxed text-[#555B53]">{T(p.desc)}</p>
                 <div className="mt-6"><Link onClick={() => openModal(p.role)}>{T(p.link)}</Link></div>
               </div>
               <ul className="grid gap-3">
                 {p.pts.map((k, j) => (
-                  <li key={k} className="flex items-start gap-4 rounded-2xl bg-white border border-[#E6DFD0] p-5 sm:p-6 shadow-[var(--shadow-1)]">
+                  <li key={k} style={{ transitionDelay: `${j * 90}ms` }} className="reveal flex items-start gap-4 rounded-2xl bg-white border border-[#E6DFD0] p-5 sm:p-6 shadow-[var(--shadow-1)]">
                     <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--brand-soft)] text-[#17614F]"><Check className="w-4 h-4" aria-hidden="true" /></span>
                     <p className="text-base sm:text-[17px] leading-snug font-medium text-[#1F2421]">{T(k)}</p>
                   </li>
