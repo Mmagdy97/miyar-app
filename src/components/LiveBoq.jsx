@@ -1,11 +1,44 @@
 import { useState } from "react";
-import { Plus, Trash2, ClipboardCheck } from "lucide-react";
+import { Plus, Trash2, ClipboardCheck, Pencil, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
 import { boqRepo, boqTotals, itemPrice } from "../data/boq";
 
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
 const empty = { category: "", name: "", unit: "", quantity: "", unitCost: "", margin: "20" };
+
+function Row({ i }) {
+  const [e, setE] = useState(null);
+  const set = (k) => (ev) => setE({ ...e, [k]: ev.target.value });
+  const save = () => {
+    if (!e.name.trim() || !Number(e.quantity)) return;
+    boqRepo.update(i.id, { category: e.category.trim(), name: e.name.trim(), unit: e.unit.trim(), quantity: Number(e.quantity), unitCost: Number(e.unitCost) || 0, margin: Number(e.margin) || 0 });
+    setE(null);
+  };
+  const ib = "p-1.5 rounded-lg text-[#6F756B] hover:bg-[#F7F3EA] cursor-pointer";
+  if (e) return (
+    <article className="bg-white rounded-xl border border-[#17614F] p-3 flex flex-wrap items-center gap-2 text-xs">
+      <input value={e.category} onChange={set("category")} placeholder={T("boq.cat")} className={input + " w-32"} />
+      <input value={e.name} onChange={set("name")} className={input + " flex-1 min-w-40"} />
+      <input value={e.unit} onChange={set("unit")} className={input + " w-20"} />
+      <input type="number" min={0} step="any" value={e.quantity} onChange={set("quantity")} className={input + " w-20"} />
+      <input type="number" min={0} step="any" value={e.unitCost} onChange={set("unitCost")} className={input + " w-24"} />
+      <input type="number" min={0} step="any" value={e.margin} onChange={set("margin")} className={input + " w-16"} />
+      <button type="button" onClick={save} aria-label={T("boq.save")} className={ib + " text-[#17614F]"}><Check className="w-4 h-4" /></button>
+      <button type="button" onClick={() => setE(null)} aria-label={T("boq.cancel")} className={ib}><X className="w-4 h-4" /></button>
+    </article>
+  );
+  return (
+    <article className="bg-white rounded-xl border border-[#E6DFD0] p-3 flex flex-wrap items-center gap-3 text-xs">
+      <span className="flex-1 min-w-48 font-semibold text-[#1F2421]">{i.name}</span>
+      <span className="text-[#555B53] tabular-nums">{i.quantity} {i.unit} × {money(i.unitCost)}</span>
+      <span className="text-[#6F756B]">+{i.margin}%</span>
+      <span className="font-semibold tabular-nums text-[#1F2421]">{money(itemPrice(i))}</span>
+      <button type="button" onClick={() => setE({ ...i })} aria-label={T("boq.edit")} className={ib}><Pencil className="w-4 h-4" /></button>
+      <button type="button" onClick={() => boqRepo.remove(i.id)} aria-label={T("cash.delete")} className={ib + " hover:text-rose-700 hover:bg-rose-50"}><Trash2 className="w-4 h-4" /></button>
+    </article>
+  );
+}
 
 /** Staff of a real office: bill of quantities per project. */
 export default function LiveBoq() {
@@ -56,15 +89,7 @@ export default function LiveBoq() {
         {groups.map((g) => (
           <section key={g} className="space-y-2">
             <h2 className="text-sm font-semibold text-[#1F2421]">{g || T("boq.noCat")}</h2>
-            {rows.filter((r) => r.category === g).map((i) => (
-              <article key={i.id} className="bg-white rounded-xl border border-[#E6DFD0] p-3 flex flex-wrap items-center gap-3 text-xs">
-                <span className="flex-1 min-w-48 font-semibold text-[#1F2421]">{i.name}</span>
-                <span className="text-[#555B53] tabular-nums">{i.quantity} {i.unit} × {money(i.unitCost)}</span>
-                <span className="text-[#6F756B]">+{i.margin}%</span>
-                <span className="font-semibold tabular-nums text-[#1F2421]">{money(itemPrice(i))}</span>
-                <button type="button" onClick={() => boqRepo.remove(i.id)} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
-              </article>
-            ))}
+            {rows.filter((r) => r.category === g).map((i) => <Row key={i.id} i={i} />)}
           </section>
         ))}
       </div>

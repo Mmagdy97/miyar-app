@@ -27,6 +27,7 @@ const run = async (q) => { const { error } = await q; if (error) fail(error); aw
 export const boqRepo = {
   use: () => live.use()[0],
   add: (i) => run(supabase.from("boq_items").insert({ org_id: orgId, project_id: i.projectId, category: i.category || null, name: i.name, unit: i.unit || null, quantity: i.quantity, unit_cost: i.unitCost, margin: i.margin })),
+  update: (id, i) => run(supabase.from("boq_items").update({ category: i.category || null, name: i.name, unit: i.unit || null, quantity: i.quantity, unit_cost: i.unitCost, margin: i.margin }).eq("id", id)),
   remove: (id) => run(supabase.from("boq_items").delete().eq("id", id)),
 };
 
