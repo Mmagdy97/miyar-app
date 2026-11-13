@@ -110,7 +110,7 @@ export default function LandingAndLogin({ onLogin }) {
     e.preventDefault();
     setIsSubmitting(true);
     setTimeout(() => {
-      onLogin(selectedRole);
+      onLogin(selectedRole, "guest");
     }, 250);
   };
 
@@ -118,7 +118,7 @@ export default function LandingAndLogin({ onLogin }) {
     setSelectedRole(roleId);
     setIsSubmitting(true);
     setTimeout(() => {
-      onLogin(roleId);
+      onLogin(roleId, "guest");
     }, 200);
   };
 
@@ -171,10 +171,22 @@ export default function LandingAndLogin({ onLogin }) {
               </button>
             </div>
 
-            {/* Demo entry: pick a role, enter. No fake credentials. */}
-            <form onSubmit={handleFormSubmit} className="mt-5 relative z-10">
+            {/* Real sign-in: wired to Supabase later; disabled until then. */}
+            <div className="mt-5 relative z-10">
+              <p className="text-sm font-semibold text-[#1F2421] mb-2.5">{T("login.signin")}</p>
+              <div className="grid gap-2">
+                <input type="email" disabled aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] bg-[#F7F3EA] text-sm opacity-70 cursor-not-allowed" />
+                <input type="password" disabled aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] bg-[#F7F3EA] text-sm opacity-70 cursor-not-allowed" />
+                <button type="button" disabled className="h-11 rounded-lg bg-[#E6DFD0] text-[#6F756B] text-sm font-semibold cursor-not-allowed">{T("login.soon")}</button>
+              </div>
+              <div className="flex items-center gap-3 my-5 text-xs text-[#6F756B]"><span className="h-px flex-1 bg-[#E6DFD0]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E6DFD0]" /></div>
+              <p className="text-sm font-semibold text-[#1F2421]">{T("login.guest")}</p>
+            </div>
+
+            {/* Guest entry: pick a role, enter. Sample data, no credentials. */}
+            <form onSubmit={handleFormSubmit} className="mt-2.5 relative z-10">
               <fieldset>
-                <legend className="text-sm font-semibold text-[#1F2421] mb-2.5">{T("login.pick")}</legend>
+                <legend className="sr-only">{T("login.pick")}</legend>
                 <div className="grid sm:grid-cols-2 gap-2.5">
                   {DEMO_ROLES.map((r) => {
                     const RoleIcon = r.icon;

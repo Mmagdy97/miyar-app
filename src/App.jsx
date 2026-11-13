@@ -96,6 +96,8 @@ function App() {
     try { return JSON.parse(sessionStorage.getItem("miyar:session")) || {}; } catch { return {}; }
   })();
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(saved.auth));
+  // "guest" = demo on local sample data; real accounts (Supabase) will add "user".
+  const [authMode, setAuthMode] = useState(saved.mode || "guest");
   const [currentRole, setCurrentRole] = useState(saved.role || "");
   const [activeTab, setActiveTab] = useState(saved.tab || "لوحة التحكم");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -167,9 +169,9 @@ function App() {
 
   useEffect(() => {
     try {
-      sessionStorage.setItem("miyar:session", JSON.stringify({ auth: isAuthenticated, role: currentRole, tab: activeTab }));
+      sessionStorage.setItem("miyar:session", JSON.stringify({ auth: isAuthenticated, role: currentRole, tab: activeTab, mode: authMode }));
     } catch { /* ignore */ }
-  }, [isAuthenticated, currentRole, activeTab]);
+  }, [isAuthenticated, currentRole, activeTab, authMode]);
 
   const goTab = (tab) => withTransition(() => flushSync(() => setActiveTab(tab)));
   useEffect(() => initMotion(), []);
@@ -187,7 +189,8 @@ function App() {
   if (!isAuthenticated) {
     return (
       <LandingAndLogin
-        onLogin={(role) => {
+        onLogin={(role, mode = "guest") => {
+          setAuthMode(mode);
           setCurrentRole(role || "Admin");
           setIsAuthenticated(true);
         }}
