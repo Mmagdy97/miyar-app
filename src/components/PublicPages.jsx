@@ -39,33 +39,33 @@ export function PricingSection({ onStart }) {
             <div
               key={p.key}
               className={`relative rounded-2xl p-6 flex flex-col border ${
-                p.highlight ? "bg-[var(--panel)] text-[var(--panel-ink)] border-[var(--panel-line)] shadow-[var(--shadow-2)] xl:-translate-y-2" : "bg-white border-[#E6DFD0]"
+                p.highlight ? "bg-white border-[var(--brass)] ring-1 ring-[var(--brass)] shadow-[var(--shadow-2)] xl:-translate-y-2" : "bg-white border-[#E6DFD0]"
               }`}
             >
               {p.highlight && <span className="absolute -top-3 start-6 text-[11px] font-bold px-2.5 py-1 rounded-md bg-[var(--brass)] text-[#1F2421]">{t("pricing.popular")}</span>}
-              <h3 className={`font-display text-xl font-semibold ${p.highlight ? "text-[var(--panel-ink)]" : "text-[#1F2421]"}`}>{t(`plan.${p.key}`)}</h3>
-              <p className={`text-xs mb-4 ${p.highlight ? "text-white/65" : "text-[#555B53]"}`}>{t(`plan.${p.key}.tag`)}</p>
+              <h3 className={`font-display text-xl font-semibold text-[#1F2421]`}>{t(`plan.${p.key}`)}</h3>
+              <p className={`text-xs mb-4 text-[#555B53]`}>{t(`plan.${p.key}.tag`)}</p>
               <p className="mb-5">
                 {p.custom ? (
-                  <span className={`font-display text-3xl font-semibold ${p.highlight ? "text-white" : "text-[#1F2421]"}`}>{t("pricing.custom")}</span>
+                  <span className={`font-display text-3xl font-semibold text-[#1F2421]`}>{t("pricing.custom")}</span>
                 ) : (
                   <>
-                    <span className={`font-display text-3xl font-semibold tabular-nums ${p.highlight ? "text-white" : "text-[#1F2421]"}`}>{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
-                    <span className={`text-sm font-semibold ${p.highlight ? "text-white/65" : "text-[#555B53]"}`}>{yearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                    <span className={`font-display text-3xl font-semibold tabular-nums text-[#1F2421]`}>{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
+                    <span className={`text-sm font-semibold text-[#555B53]`}>{yearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
                   </>
                 )}
               </p>
               <ul className="space-y-2.5 mb-6 flex-1">
                 {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
-                  <li key={f} className={`flex items-start gap-2 text-sm ${p.highlight ? "text-white/90" : "text-[#1F2421]"}`}>
-                    <Check className={`w-4 h-4 mt-0.5 shrink-0 ${p.highlight ? "text-[var(--brass)]" : "text-[#17614F]"}`} /> {f}
+                  <li key={f} className={`flex items-start gap-2 text-sm text-[#1F2421]`}>
+                    <Check className={`w-4 h-4 mt-0.5 shrink-0 text-[#17614F]`} /> {f}
                   </li>
                 ))}
               </ul>
               <button
                 onClick={onStart}
                 className={`w-full py-3 rounded-xl font-semibold text-sm cursor-pointer transition-colors ${
-                  p.highlight ? "bg-[var(--brass)] text-[#1F2421] hover:brightness-110" : "bg-[#17614F] text-white hover:bg-[#104A3C]"
+                  "bg-[#17614F] text-white hover:bg-[#104A3C]"
                 }`}
               >
                 {i === 0 ? t("pricing.startFree") : p.custom ? t("pricing.contact") : t("pricing.try")}

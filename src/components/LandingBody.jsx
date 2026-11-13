@@ -53,33 +53,33 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
       {/* Hero: deep-pine stage, calculator floats on it */}
       <section className="pt-[4.5rem] sm:pt-[5.25rem] px-3 sm:px-6 w-full">
-        <div className="relative max-w-7xl mx-auto rounded-[28px] bg-[var(--panel)] text-[var(--panel-ink)] overflow-hidden zellige">
-          <PlanArt className="pointer-events-none absolute -top-6 start-[34%] w-[760px] max-w-none text-white/[.17] hidden sm:block" />
-          <div aria-hidden="true" className="absolute -top-32 -end-24 w-[34rem] h-[34rem] rounded-full bg-[var(--panel-2)] blur-3xl opacity-80" />
+        <div className="relative max-w-7xl mx-auto rounded-[28px] bg-[var(--sand)] text-[var(--sand-ink)] border border-[var(--sand-line)] overflow-hidden zellige">
+          <PlanArt className="pointer-events-none absolute -top-6 start-[34%] w-[760px] max-w-none text-[#1F2421]/[.2] hidden sm:block" />
+          <div aria-hidden="true" className="absolute -top-32 -end-24 w-[34rem] h-[34rem] rounded-full bg-[var(--sand-2)] blur-3xl opacity-90" />
           <div aria-hidden="true" className="absolute -bottom-40 -start-20 w-[26rem] h-[26rem] rounded-full bg-[var(--brass)]/15 blur-3xl" />
           <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center px-5 sm:px-12 pt-12 sm:pt-16 pb-14 sm:pb-20">
             <div className="hero-in text-start">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3 py-1 text-xs font-semibold text-[var(--brass)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--sand-line)] bg-white/70 px-3 py-1 text-xs font-semibold text-[#8A5E1B]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--brass)]" aria-hidden="true" />{T("ld.1")}
               </span>
-              <h1 className="mt-5 max-w-xl font-display text-[2rem] sm:text-5xl xl:text-[3.4rem] font-semibold leading-[1.18] text-[var(--panel-ink)] text-balance">{T("ld.4")}</h1>
-              <p className="mt-5 max-w-lg text-base sm:text-lg leading-relaxed text-white/70">{T("ld.5")}</p>
+              <h1 className="mt-5 max-w-xl font-display text-[2rem] sm:text-5xl xl:text-[3.4rem] font-semibold leading-[1.18] text-[var(--sand-ink)] text-balance">{T("ld.4")}</h1>
+              <p className="mt-5 max-w-lg text-base sm:text-lg leading-relaxed text-[#555B53]">{T("ld.5")}</p>
               <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-xl bg-[var(--brass)] hover:brightness-110 text-[#1F2421] text-[15px] whitespace-nowrap shrink-0 font-semibold cursor-pointer shadow-[0_10px_30px_-10px_rgba(181,129,47,.7)]">{T("ld.6")}</button>
-                <button onClick={() => scrollToSection("comparison")} className="group inline-flex items-center gap-1 text-base font-medium text-white/85 hover:text-white cursor-pointer">
+                <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-xl bg-[#17614F] hover:bg-[#104A3C] text-white text-[15px] whitespace-nowrap shrink-0 font-semibold cursor-pointer shadow-[0_10px_26px_-10px_rgba(23,97,79,.6)]">{T("ld.6")}</button>
+                <button onClick={() => scrollToSection("comparison")} className="group inline-flex items-center gap-1 text-base font-medium text-[#1F2421] hover:text-[#17614F] cursor-pointer">
                   {T("ld.7")}
                   <ChevronRight className="w-5 h-5 rtl:-scale-x-100 transition-transform ltr:group-hover:translate-x-0.5 rtl:group-hover:translate-x-0.5" aria-hidden="true" />
                 </button>
               </div>
-              <ul className="mt-9 grid gap-2.5 text-sm text-white/65">
+              <ul className="mt-9 grid gap-2.5 text-sm text-[#555B53]">
                 {["ld.8", "ld.9", "ld.10"].map((k) => (
-                  <li key={k} className="flex items-center gap-2.5"><Check className="w-4 h-4 text-[var(--brass)] shrink-0" aria-hidden="true" />{T(k)}</li>
+                  <li key={k} className="flex items-center gap-2.5"><Check className="w-4 h-4 text-[#B5812F] shrink-0" aria-hidden="true" />{T(k)}</li>
                 ))}
               </ul>
             </div>
-            <div className="hero-card-in text-start lg:-rotate-[0.6deg] rtl:lg:rotate-[0.6deg]"><div className="rounded-2xl shadow-[0_30px_70px_-25px_rgba(0,0,0,.55)]"><BoqLive /></div></div>
+            <div className="hero-card-in text-start lg:-rotate-[0.6deg] rtl:lg:rotate-[0.6deg]"><div className="rounded-2xl shadow-[0_30px_60px_-28px_rgba(58,44,20,.35)]"><BoqLive /></div></div>
           </div>
-          <div className="ruler text-white/40 absolute bottom-0 inset-x-0" aria-hidden="true" />
+          <div className="ruler text-[#1F2421]/40 absolute bottom-0 inset-x-0" aria-hidden="true" />
         </div>
       </section>
 
@@ -135,12 +135,12 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
       {/* CTA */}
       <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
-        <div className="relative overflow-hidden grain rounded-[28px] bg-[#17614F] text-white text-start px-6 sm:px-14 py-12 sm:py-16">
+        <div className="relative overflow-hidden zellige rounded-[28px] bg-[var(--sand)] border border-[var(--sand-line)] text-[var(--sand-ink)] text-start px-6 sm:px-14 py-12 sm:py-16">
           <h2 className="max-w-3xl font-display text-3xl sm:text-[2.6rem] font-semibold leading-tight text-balance">{T("ld.139")}</h2>
-          <p className="mt-4 max-w-xl text-base sm:text-lg text-white/70 leading-relaxed">{T("ld.140")}</p>
+          <p className="mt-4 max-w-xl text-base sm:text-lg text-[#555B53] leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-            <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-xl bg-[var(--brass)] hover:brightness-110 text-[#1F2421] text-base font-semibold cursor-pointer">{T("ld.141")}</button>
-            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-11 text-base font-medium text-white/90 hover:text-white underline-offset-4 hover:underline"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
+            <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-xl bg-[#17614F] hover:bg-[#104A3C] text-white text-base font-semibold cursor-pointer">{T("ld.141")}</button>
+            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-11 text-base font-medium text-[#1F2421] hover:text-[#17614F] underline-offset-4 hover:underline"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
           </div>
         </div>
       </section>

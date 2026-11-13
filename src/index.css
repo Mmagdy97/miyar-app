@@ -28,7 +28,8 @@
   --ink: #1F2421; --ink-2: #555B53; --ink-3: #6F756B;
   --brand: #17614F; --brand-hover: #104A3C; --brand-soft: #E3EFEA;
   --brass: #B5812F; --brass-soft: #F6ECD6;
-  --panel: #0F3D33; --panel-2: #14493D; --panel-line: #1F5A4C; --panel-ink: #F3EEDF;
+  --panel: #2B2721; --panel-2: #363029; --panel-line: #433B31; --panel-ink: #F3EEDF;
+  --sand: #F0E9D9; --sand-2: #E7DEC8; --sand-line: #DDD2B9; --sand-ink: #1F2421;
   --plaster: var(--paper); --brick: var(--brand); --ink-2-legacy: #555B53;
   --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 24px;
   --shadow-1: 0 1px 2px rgba(58, 44, 20, .05);
@@ -41,7 +42,8 @@ html.dark {
   --ink: #EDE8DA; --ink-2: #A8AFA4; --ink-3: #8A9188;
   --brand: #3FB594; --brand-hover: #2F9A7D; --brand-soft: #16302A;
   --brass: #D9A857; --brass-soft: #2B2412;
-  --panel: #0A2A23; --panel-2: #0F362D; --panel-line: #1B4439;
+  --panel: #1C1914; --panel-2: #26211B; --panel-line: #332D25;
+  --sand: #17231E; --sand-2: #1D2C26; --sand-line: #2A3B34; --sand-ink: #EDE8DA;
   --shadow-1: none; --shadow-2: none;
 }
 
@@ -159,6 +161,7 @@ html.dark .text-\[\#17614F\] { color: var(--brand); }
 .grain { position: relative; }
 .grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
   background-image: radial-gradient(rgba(80, 60, 20, .07) 1px, transparent 1px); background-size: 14px 14px; }
+html.dark .zellige::before { filter: invert(1); opacity: .05; }
 html.dark .grain::after { opacity: .15; mix-blend-mode: screen; }
 .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--brass); text-transform: uppercase; }
 html[lang="ar"] .eyebrow { letter-spacing: 0; text-transform: none; font-size: 13px; }
@@ -314,8 +317,8 @@ div.bg-\[\#17614F\]:not([class*="text-white"]):is([class^="w-"],[class*=" w-"]):
 
 /* Eight-point star lattice (Islamic geometric tiling) as an ultra-quiet texture on pine surfaces */
 .zellige::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23F3EEDF' stroke-width='1'%3E%3Cpath d='M36 4l8.5 15.2L60 12l-7.2 15.5L68 36l-15.2 8.5L60 60l-15.5-7.2L36 68l-8.5-15.2L12 60l7.2-15.5L4 36l15.2-8.5L12 12l15.5 7.2z'/%3E%3Ccircle cx='36' cy='36' r='7'/%3E%3C/svg%3E");
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%231F2421' stroke-width='1'%3E%3Cpath d='M36 4l8.5 15.2L60 12l-7.2 15.5L68 36l-15.2 8.5L60 60l-15.5-7.2L36 68l-8.5-15.2L12 60l7.2-15.5L4 36l15.2-8.5L12 12l15.5 7.2z'/%3E%3Ccircle cx='36' cy='36' r='7'/%3E%3C/svg%3E");
   background-size: 72px 72px;
 }
 

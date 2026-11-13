@@ -58,28 +58,28 @@ function Sidebar({
   return (
     <aside
       ref={sidebarRef}
-      className={`relative flex flex-col h-full bg-[var(--panel)] text-[var(--panel-ink)] transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0 select-none ${
-        hideHeader ? "w-full border-none" : "border-e border-[var(--panel-line)]"
+      className={`relative flex flex-col h-full bg-[var(--sand)] text-[var(--sand-ink)] transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0 select-none ${
+        hideHeader ? "w-full border-none" : "border-e border-[var(--sand-line)]"
       } ${!hideHeader && (collapsed ? "md:w-[72px]" : "w-full md:w-64")}`}
     >
       {/* Sidebar Header */}
       {!hideHeader && (
         <div
-          className={`flex items-center h-14 px-4 border-b border-white/10 ${
+          className={`flex items-center h-14 px-4 border-b border-[var(--sand-line)] ${
             collapsed ? "justify-center" : "justify-between"
           }`}
         >
           {/* Mobile Header: Logo + Close Drawer Button */}
           <div className="flex md:hidden items-center justify-between w-full">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--brass)] text-[#1F2421]">
-                <LogoMark className="w-4 h-4 text-[#1F2421]" />
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#17614F] text-white">
+                <LogoMark className="w-4 h-4 text-white" />
               </div>
-              <span className="font-display text-base font-semibold text-[var(--panel-ink)]">{t("brand")}</span>
+              <span className="font-display text-base font-semibold text-[var(--sand-ink)]">{t("brand")}</span>
             </div>
             <button
               onClick={onCloseMobile || onItemClick}
-              className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-black/[.05] transition-colors cursor-pointer"
               aria-label={t("menu.close")}
             >
               <X className="w-5 h-5" />
@@ -89,13 +89,13 @@ function Sidebar({
           {/* Desktop Header: Label + Collapse Toggle */}
           <div className="hidden md:flex items-center justify-between w-full">
             {!collapsed && (
-              <span className="text-[11px] font-semibold text-white/50 uppercase tracking-widest">
+              <span className="text-[11px] font-semibold text-[#6F756B] uppercase tracking-widest">
                 {t("menu.main")}
               </span>
             )}
             <button
               onClick={toggleSidebar}
-              className="flex items-center justify-center w-8 h-8 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-150 focus:outline-none cursor-pointer"
+              className="flex items-center justify-center w-8 h-8 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-black/[.05] transition-colors duration-150 focus:outline-none cursor-pointer"
               aria-label={collapsed ? t("menu.expand") : t("menu.collapse")}
               title={collapsed ? t("menu.expand") : t("menu.collapse")}
             >
@@ -111,11 +111,11 @@ function Sidebar({
 
       {/* Role Badge inside Sidebar (Pure White & Light Cream on Dark) */}
       {!collapsed && (
-        <div className="mx-3 mt-3 mb-2 p-3 rounded-xl bg-white/[.07] border border-white/10">
-          <p className="text-xs text-white/55 font-medium">
+        <div className="mx-3 mt-3 mb-2 p-3 rounded-xl bg-white/70 border border-[var(--sand-line)]">
+          <p className="text-xs text-[#6F756B] font-medium">
             {t("menu.currentRole")}
           </p>
-          <p className="text-sm font-semibold text-[var(--panel-ink)] mt-0.5 truncate">
+          <p className="text-sm font-semibold text-[var(--sand-ink)] mt-0.5 truncate">
             {roleTitle}
           </p>
         </div>
@@ -123,7 +123,7 @@ function Sidebar({
 
       {/* Nav Items */}
       <nav ref={navRef} className="relative flex-1 px-2.5 mt-2 space-y-0.5 overflow-y-auto">
-        <span aria-hidden="true" className="absolute inset-x-2.5 rounded-xl bg-white/[.12] shadow-[inset_3px_0_0_0_var(--brass)] rtl:shadow-[inset_-3px_0_0_0_var(--brass)] pointer-events-none transition-[transform,height,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]" style={{ transform: `translateY(${ind.y}px)`, height: ind.h, opacity: ind.h ? 1 : 0 }} />
+        <span aria-hidden="true" className="absolute inset-x-2.5 rounded-xl bg-white shadow-[0_1px_2px_rgba(58,44,20,.08),inset_3px_0_0_0_var(--brass)] rtl:shadow-[inset_-3px_0_0_0_var(--brass)] pointer-events-none transition-[transform,height,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]" style={{ transform: `translateY(${ind.y}px)`, height: ind.h, opacity: ind.h ? 1 : 0 }} />
         {items.map((item) => {
           const { id, name, icon: Icon } = item;
           const label = navLabel(currentRole, item);
@@ -155,8 +155,8 @@ function Sidebar({
                 collapsed ? "justify-center px-2 py-3" : "px-3 py-2 gap-3"
               } ${
                 isActive
-                  ? "text-white font-semibold"
-                  : "text-white/70 hover:bg-white/[.06] hover:text-white"
+                  ? "text-[#1F2421] font-semibold"
+                  : "text-[#555B53] hover:bg-black/[.04] hover:text-[#1F2421]"
               }`}
             >
               <Icon
@@ -164,8 +164,8 @@ function Sidebar({
                   collapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
                 } ${
                   isActive
-                    ? "text-white"
-                    : "text-white/60 group-hover:text-white"
+                    ? "text-[#17614F]"
+                    : "text-[#6F756B] group-hover:text-[#1F2421]"
                 }`}
               />
               {!collapsed && (
@@ -189,12 +189,12 @@ function Sidebar({
 
       {/* PWA Install Button (Visible in desktop sidebar and mobile drawer) */}
       {isInstallable && (
-        <div className={`px-3 py-2 border-t border-white/10 ${collapsed ? "flex justify-center" : ""}`}>
+        <div className={`px-3 py-2 border-t border-[var(--sand-line)] ${collapsed ? "flex justify-center" : ""}`}>
           <button
             onClick={onInstallClick}
             onMouseEnter={(e) => handleMouseEnter(e, t("pwa.installTip"))}
             onMouseLeave={handleMouseLeave}
-            className={`flex items-center justify-center gap-2 rounded-lg bg-white/10 text-white border border-white/15 font-medium text-xs hover:bg-white/15 transition-all cursor-pointer shadow-2xs active:scale-95 group ${
+            className={`flex items-center justify-center gap-2 rounded-lg bg-white text-[#17614F] border border-[var(--sand-line)] font-medium text-xs hover:bg-[#E3EFEA] transition-all cursor-pointer shadow-2xs active:scale-95 group ${
               collapsed ? "w-10 h-10 p-0" : "w-full px-3.5 py-2.5"
             }`}
             title={t("pwa.installTip")}
@@ -207,18 +207,18 @@ function Sidebar({
 
       {/* Bottom section */}
       {!hideHeader && (
-        <div className={`p-4 border-t border-white/10 ${collapsed ? "text-center" : ""}`}>
+        <div className={`p-4 border-t border-[var(--sand-line)] ${collapsed ? "text-center" : ""}`}>
           {!collapsed ? (
             <div className="text-center">
-              <p className="text-[11px] font-semibold text-[var(--panel-ink)]">
+              <p className="text-[11px] font-semibold text-[var(--sand-ink)]">
                 {t("brand.footer1")}
               </p>
-              <p className="text-[10px] text-white/50 mt-0.5">
+              <p className="text-[10px] text-[#6F756B] mt-0.5">
                 {t("brand.footer2")}
               </p>
             </div>
           ) : (
-            <p className="text-[10px] font-semibold text-white/50">v1.0</p>
+            <p className="text-[10px] font-semibold text-[#6F756B]">v1.0</p>
           )}
         </div>
       )}
