@@ -5,6 +5,7 @@ import SettingsSwitcher from "./SettingsSwitcher";
 import Capabilities from "./Capabilities";
 import RoleModules from "./RoleModules";
 import { BoqLive } from "./Hero";
+import PlanArt from "./PlanArt";
 import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
 
@@ -52,7 +53,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
       {/* Hero: deep-pine stage, calculator floats on it */}
       <section className="pt-[4.5rem] sm:pt-[5.25rem] px-3 sm:px-6 w-full">
-        <div className="relative max-w-7xl mx-auto rounded-[28px] bg-[var(--panel)] text-[var(--panel-ink)] overflow-hidden grain">
+        <div className="relative max-w-7xl mx-auto rounded-[28px] bg-[var(--panel)] text-[var(--panel-ink)] overflow-hidden zellige">
+          <PlanArt className="pointer-events-none absolute -top-6 start-[34%] w-[760px] max-w-none text-white/[.17] hidden sm:block" />
           <div aria-hidden="true" className="absolute -top-32 -end-24 w-[34rem] h-[34rem] rounded-full bg-[var(--panel-2)] blur-3xl opacity-80" />
           <div aria-hidden="true" className="absolute -bottom-40 -start-20 w-[26rem] h-[26rem] rounded-full bg-[var(--brass)]/15 blur-3xl" />
           <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center px-5 sm:px-12 pt-12 sm:pt-16 pb-14 sm:pb-20">
@@ -87,8 +89,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <section key={i} id={p.id} className="py-10 sm:py-16 px-5 sm:px-8">
             <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 items-start">
               <div className="text-start">
-                <span className="font-display text-5xl sm:text-6xl font-semibold text-[var(--brass)]/80 tabular-nums leading-none">{String(i + 1).padStart(2, "0")}</span>
-                <h2 className="mt-4 max-w-xl text-3xl sm:text-[2.4rem] font-semibold leading-[1.2] text-[#1F2421] text-balance">{T(p.title)}</h2>
+                <div className="dim max-w-sm"><span>{String(i + 1).padStart(2, "0")} · {T(p.kicker).split("•").pop().trim()}</span></div>
+                <h2 className="mt-5 max-w-xl text-3xl sm:text-[2.4rem] font-semibold leading-[1.2] text-[#1F2421] text-balance">{T(p.title)}</h2>
                 <p className="mt-4 max-w-lg text-base sm:text-lg leading-relaxed text-[#555B53]">{T(p.desc)}</p>
                 <div className="mt-6"><Link onClick={() => openModal(p.role)}>{T(p.link)}</Link></div>
               </div>

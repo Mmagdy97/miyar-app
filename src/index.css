@@ -304,3 +304,23 @@ div.bg-\[\#17614F\]:not([class*="text-white"]):is([class^="w-"],[class*=" w-"]):
   background-color: var(--panel) !important; border-color: var(--panel-line) !important;
 }
 :is(div, section).bg-\[\#17614F\] .text-\[\#17614F\] { color: #A7E3CF !important; }
+
+/* ---------- Creative layer: blueprint + zellige + dimension lines ---------- */
+@keyframes planDraw { to { stroke-dashoffset: 0; } }
+.plan-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: planDraw 2.2s var(--ease-out) forwards; }
+.plan-d1 { animation-delay: .1s; } .plan-d2 { animation-delay: 1.1s; } .plan-d3 { animation-delay: 1.5s; } .plan-d4 { animation-delay: 1.9s; animation-duration: 1.4s; }
+.plan-label text { opacity: 0; animation: enterFade .8s ease 2.6s forwards; }
+@media (prefers-reduced-motion: reduce) { .plan-draw { stroke-dashoffset: 0; animation: none; } .plan-label text { opacity: 1; animation: none; } }
+
+/* Eight-point star lattice (Islamic geometric tiling) as an ultra-quiet texture on pine surfaces */
+.zellige::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23F3EEDF' stroke-width='1'%3E%3Cpath d='M36 4l8.5 15.2L60 12l-7.2 15.5L68 36l-15.2 8.5L60 60l-15.5-7.2L36 68l-8.5-15.2L12 60l7.2-15.5L4 36l15.2-8.5L12 12l15.5 7.2z'/%3E%3Ccircle cx='36' cy='36' r='7'/%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+/* Dimension-line label: |——— label ———|, drafting-style section marker */
+.dim { display: flex; align-items: center; gap: .75rem; color: var(--brass); font-family: var(--font-display); font-size: 13px; font-weight: 500; }
+.dim::before, .dim::after { content: ""; flex: 1; height: 9px; border-block: 0; border-inline: 1px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; opacity: .55; }
+.dim::before { max-width: 3rem; } .dim > span { white-space: nowrap; }
