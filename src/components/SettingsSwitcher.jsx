@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { SlidersHorizontal, Check, Sun, Moon, X } from "lucide-react";
+import { Globe, Check, Sun, Moon, X } from "lucide-react";
 import { useI18n, intlLocale } from "../i18n";
 import { CURRENCIES } from "../lib/currency";
 import { LOCALES } from "../config/locale";
@@ -43,10 +43,12 @@ export default function SettingsSwitcher() {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label={t("settings.title")}
+        title={t("settings.title")}
         className="btn-press inline-flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg border border-[#E6DFD0] bg-white px-2.5 h-9 text-xs font-semibold text-[#1F2421] hover:bg-[#F0EADD]"
       >
-        <SlidersHorizontal className="hidden sm:block w-4 h-4" aria-hidden="true" />
+        <Globe className="w-4 h-4" aria-hidden="true" />
         <span className="tabular-nums whitespace-nowrap" dir="ltr">{locale.toUpperCase()} · {currency}</span>
+        {theme === "dark" ? <Moon className="w-3.5 h-3.5 text-[#6F756B]" aria-hidden="true" /> : <Sun className="w-3.5 h-3.5 text-[#B5812F]" aria-hidden="true" />}
       </button>
 
       {open && (

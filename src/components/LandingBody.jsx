@@ -1,5 +1,5 @@
 import { waLink } from "../lib/nudge";
-import { ChevronRight, Check, LogIn, MessageCircle } from "lucide-react";
+import { ChevronRight, Check, LogIn, MessageCircle, Globe, Coins, SunMoon } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import Capabilities from "./Capabilities";
@@ -78,6 +78,14 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
                   <li key={k} className="flex items-center gap-2.5"><Check className="w-4 h-4 text-[#B5812F] shrink-0" aria-hidden="true" />{T(k)}</li>
                 ))}
               </ul>
+              <div className="mt-6">
+                <ul className="flex flex-wrap gap-2 text-xs font-semibold text-[#1F2421]">
+                  {[[Globe, "ld.chip.lang"], [Coins, "ld.chip.cur"], [SunMoon, "ld.chip.theme"]].map(([Ic, k]) => (
+                    <li key={k} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--sand-line)] bg-white/70 px-3 py-1.5"><Ic className="w-3.5 h-3.5 text-[#B5812F]" aria-hidden="true" />{T(k)}</li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-[11px] text-[#6F756B]">{T("ld.chip.hint")}</p>
+              </div>
             </div>
             <div className="hero-card-in text-start lg:-rotate-[0.6deg] rtl:lg:rotate-[0.6deg]"><div className="rounded-2xl shadow-[0_30px_60px_-28px_rgba(58,44,20,.35)]"><BoqLive /></div></div>
           </div>
