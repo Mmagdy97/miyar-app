@@ -193,9 +193,9 @@ function App() {
 
   return (
     <div
-      className="w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm bg-[#F4F6F9] text-[#0F172A] selection:bg-[#0F172A] selection:text-white"
+      className="w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm bg-[#F7F3EA] text-[#1F2421] selection:bg-[#17614F] selection:text-white"
     >
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#0F172A] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#17614F] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         {D("تخطي إلى المحتوى")}
       </a>
       <OfflineBanner />

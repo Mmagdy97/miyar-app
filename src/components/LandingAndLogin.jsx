@@ -136,35 +136,35 @@ export default function LandingAndLogin({ onLogin }) {
   return (
     <div
      
-      className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F4F6F9] text-[#0F172A] selection:bg-[#0F172A] selection:text-white overflow-x-hidden"
+      className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F7F3EA] text-[#1F2421] selection:bg-[#17614F] selection:text-white overflow-x-hidden"
     >
 
       <LandingBody openModal={openModal} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />
 
       {/* 6. The Login & MVP Demo Modal */}
       {isLoginModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0F172A]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 bg-[#1F2421]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
            
-            className="bg-white rounded-xl shadow-2xl border border-[#E3E7EE] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
+            className="bg-white rounded-xl shadow-2xl border border-[#E6DFD0] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
           >
 
             {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#EEF1F5] relative z-10">
+            <div className="flex items-center justify-between pb-4 border-b border-[#F0EADD] relative z-10">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-[#0F766E] text-white flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-[#17614F] text-white flex items-center justify-center">
                   <LogoMark className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-black text-[#0F172A]">
+                  <h3 className="text-base sm:text-lg font-semibold text-[#1F2421]">
                     {T("login.title")}
                   </h3>
-                  <p className="text-xs text-[#475569]">{T("login.sub")}</p>
+                  <p className="text-xs text-[#555B53]">{T("login.sub")}</p>
                 </div>
               </div>
               <button
                 onClick={closeModal}
-                className="p-1.5 rounded-lg text-[#475569] hover:text-[#0F172A] hover:bg-[#EEF1F5] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-[#F0EADD] transition-colors cursor-pointer"
                 aria-label={T("ld.155")}
               >
                 <X className="w-5 h-5" />
@@ -174,31 +174,31 @@ export default function LandingAndLogin({ onLogin }) {
             {/* Demo entry: pick a role, enter. No fake credentials. */}
             <form onSubmit={handleFormSubmit} className="mt-5 relative z-10">
               <fieldset>
-                <legend className="text-sm font-semibold text-[#0F172A] mb-2.5">{T("login.pick")}</legend>
+                <legend className="text-sm font-semibold text-[#1F2421] mb-2.5">{T("login.pick")}</legend>
                 <div className="grid sm:grid-cols-2 gap-2.5">
                   {DEMO_ROLES.map((r) => {
                     const RoleIcon = r.icon;
                     const on = selectedRole === r.id;
                     return (
-                      <label key={r.id} className={`relative flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors ${on ? "border-[#0F766E] bg-[#0F766E]/[0.06] ring-1 ring-[#0F766E]" : "border-[#E3E7EE] bg-white hover:border-[#94A3B8]"}`}>
+                      <label key={r.id} className={`relative flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors ${on ? "border-[#17614F] bg-[#17614F]/[0.06] ring-1 ring-[#17614F]" : "border-[#E6DFD0] bg-white hover:border-[#A39B88]"}`}>
                         <input type="radio" name="role" value={r.id} checked={on} onChange={() => setSelectedRole(r.id)} className="sr-only" />
-                        <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#0F766E] text-white" : "bg-[#EEF1F5] text-[#475569]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
+                        <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#17614F] text-white" : "bg-[#F0EADD] text-[#555B53]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
                         <span className="min-w-0">
-                          <span className="block text-sm font-semibold text-[#0F172A]">{T("login.role." + r.key)}</span>
-                          <span className="block mt-0.5 text-xs leading-relaxed text-[#64748B]">{T("login.desc." + r.key)}</span>
+                          <span className="block text-sm font-semibold text-[#1F2421]">{T("login.role." + r.key)}</span>
+                          <span className="block mt-0.5 text-xs leading-relaxed text-[#6F756B]">{T("login.desc." + r.key)}</span>
                         </span>
-                        {on && <CheckCircle2 className="absolute top-3 end-3 w-4 h-4 text-[#0F766E]" aria-hidden="true" />}
+                        {on && <CheckCircle2 className="absolute top-3 end-3 w-4 h-4 text-[#17614F]" aria-hidden="true" />}
                       </label>
                     );
                   })}
                 </div>
               </fieldset>
               <button type="submit" disabled={isSubmitting}
-                className="btn-press mt-5 w-full h-12 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
+                className="btn-press mt-5 w-full h-12 rounded-lg bg-[#17614F] hover:bg-[#104A3C] text-white font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
                 <LogIn className="w-4 h-4 ltr:-scale-x-100" aria-hidden="true" />
                 <span>{T("login.enter", { role: T("login.role." + (DEMO_ROLES.find((r) => r.id === selectedRole)?.key || "admin")) })}</span>
               </button>
-              <p className="mt-3 text-xs text-center text-[#64748B]">{T("login.note")}</p>
+              <p className="mt-3 text-xs text-center text-[#6F756B]">{T("login.note")}</p>
             </form>
           </div>
         </div>

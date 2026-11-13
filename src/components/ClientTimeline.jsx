@@ -83,23 +83,23 @@ function ClientTimeline() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#EEF1F5] border border-[#E3E7EE] flex items-center justify-center text-[#0F172A]">
+              <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#F0EADD] border border-[#E6DFD0] flex items-center justify-center text-[#1F2421]">
                   <CalendarDays className="w-5 h-5" />
                 </div>
                 <span>{T("cli.123")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE]">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0]">
                 {T("cli.124")}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#475569]">
+            <p className="text-xs md:text-sm text-[#555B53]">
               {T("cli.125")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#EEF1F5] text-[#0F172A] border border-[#E3E7EE] text-xs font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0] text-xs font-bold">
               <Clock className="w-3.5 h-3.5 text-emerald-600" />
               <span>{T("cli.126")}</span>
             </span>
@@ -107,7 +107,7 @@ function ClientTimeline() {
         </div>
 
         {/* Vertical Stepper Container */}
-        <div className="relative border-e-2 border-[#E3E7EE] ms-4 sm:ms-6 ps-6 sm:ps-8 space-y-8 py-2">
+        <div className="relative border-e-2 border-[#E6DFD0] ms-4 sm:ms-6 ps-6 sm:ps-8 space-y-8 py-2">
           {TIMELINE_STEPS.map((step, idx) => {
             const isCompleted = step.statusType === "completed";
             const isActive = step.statusType === "active";
@@ -117,10 +117,10 @@ function ClientTimeline() {
               <div key={step.id} className="relative group">
                 {/* Stepper Node Icon on the vertical border */}
                 <div
-                  className={`absolute -start-[35px] sm:-start-[43px] top-4 w-9 h-9 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                  className={`absolute -start-[35px] sm:-start-[43px] top-4 w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold transition-all ${
                     isCompleted || isActive
-                      ? "bg-[#0F172A] text-white border-4 border-white shadow-sm ring-1 ring-[#E3E7EE]"
-                      : "bg-[#EEF1F5] text-[#475569] border-4 border-white shadow-sm"
+                      ? "bg-[#17614F] text-white border-4 border-white shadow-sm ring-1 ring-[#E6DFD0]"
+                      : "bg-[#F0EADD] text-[#555B53] border-4 border-white shadow-sm"
                   }`}
                 >
                   {isCompleted ? (
@@ -136,16 +136,16 @@ function ClientTimeline() {
                 <div
                   className={`bg-white rounded-2xl p-6 border transition-all duration-300 ${
                     isActive
-                      ? "border-[#0F172A] shadow-sm ring-1 ring-[#0F172A]/10"
-                      : "border-[#E3E7EE] shadow-sm"
+                      ? "border-[#17614F] shadow-sm ring-1 ring-[#17614F]/10"
+                      : "border-[#E6DFD0] shadow-sm"
                   }`}
                 >
                   {/* Card Header */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3
-                        className={`text-base font-black tracking-tight ${
-                          isActive ? "text-emerald-600 font-black" : "text-[#0F172A]"
+                        className={`text-base font-semibold tracking-tight ${
+                          isActive ? "text-emerald-600 font-semibold" : "text-[#1F2421]"
                         }`}
                       >
                         {E(step.phase)}
@@ -160,10 +160,10 @@ function ClientTimeline() {
                     <span
                       className={`inline-block px-3 py-1 rounded-full text-xs font-bold border self-start sm:self-auto ${
                         isCompleted
-                          ? "bg-[#EEF1F5] text-[#0F172A] border-[#E3E7EE]"
+                          ? "bg-[#F0EADD] text-[#1F2421] border-[#E6DFD0]"
                           : isActive
-                          ? "bg-amber-50 text-amber-800 border-amber-200 font-black"
-                          : "bg-[#EEF1F5] text-[#475569] border-[#E3E7EE]"
+                          ? "bg-amber-50 text-amber-800 border-amber-200 font-semibold"
+                          : "bg-[#F0EADD] text-[#555B53] border-[#E6DFD0]"
                       }`}
                     >
                       {E(step.status)}
@@ -171,34 +171,34 @@ function ClientTimeline() {
                   </div>
 
                   {/* Dates */}
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#475569] mb-3">
-                    <CalendarDays className="w-3.5 h-3.5 text-[#475569]" />
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#555B53] mb-3">
+                    <CalendarDays className="w-3.5 h-3.5 text-[#555B53]" />
                     <span>{step.dateRange}</span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs md:text-sm text-[#475569] leading-relaxed mb-4">
+                  <p className="text-xs md:text-sm text-[#555B53] leading-relaxed mb-4">
                     {step.description}
                   </p>
 
                   {/* Deliverables Checklist */}
-                  <div className="p-3.5 rounded-lg bg-[#F4F6F9] border border-[#EEF1F5] space-y-2">
-                    <span className="text-[11px] font-bold text-[#475569] block mb-1">
+                  <div className="p-3.5 rounded-lg bg-[#F7F3EA] border border-[#F0EADD] space-y-2">
+                    <span className="text-[11px] font-bold text-[#555B53] block mb-1">
                       {T("cli.128")}
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                       {step.deliverables.map((item, dIdx) => (
                         <div
                           key={dIdx}
-                          className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-lg border border-[#E3E7EE]/60 text-[#475569] text-[11px]"
+                          className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-lg border border-[#E6DFD0]/60 text-[#555B53] text-[11px]"
                         >
                           <CheckCircle2
                             className={`w-3.5 h-3.5 shrink-0 ${
                               isCompleted
                                 ? "text-emerald-600"
                                 : isActive
-                                ? "text-[#0F172A]"
-                                : "text-[#64748B]"
+                                ? "text-[#1F2421]"
+                                : "text-[#6F756B]"
                             }`}
                           />
                           <span className="truncate">{item}</span>

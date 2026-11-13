@@ -9,7 +9,7 @@ import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
 
 const Link = ({ onClick, children }) => (
-  <button onClick={onClick} className="group inline-flex items-center gap-1 text-base sm:text-lg font-medium text-[#0F766E] hover:underline underline-offset-4 cursor-pointer">
+  <button onClick={onClick} className="group inline-flex items-center gap-1 text-base sm:text-lg font-medium text-[#17614F] hover:underline underline-offset-4 cursor-pointer">
     {children}
     <ChevronRight className="w-5 h-5 ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5 transition-transform" aria-hidden="true" />
   </button>
@@ -30,58 +30,76 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
   return (
     <>
       {/* Nav */}
-      <header className="fixed top-0 inset-x-0 z-40 bg-[#F4F6F9]/95 glass border-b border-[#E3E7EE]/70">
+      <header className="fixed top-0 inset-x-0 z-40 bg-[#F7F3EA]/90 glass">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[9px] bg-[#0F766E] text-white flex items-center justify-center"><LogoMark className="w-4.5 h-4.5 text-white" /></div>
-            <span className="text-lg font-semibold tracking-tight text-[#0F172A]">{T("ld.1")}</span>
+            <div className="w-8 h-8 rounded-[10px] bg-[#17614F] text-white flex items-center justify-center"><LogoMark className="w-4.5 h-4.5 text-white" /></div>
+            <span className="font-display text-lg font-semibold text-[#1F2421]">{T("ld.1")}</span>
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-[#475569]">
-            <button onClick={() => scrollToSection("features")} className="hover:text-[#0F172A] cursor-pointer">{t("landing.features")}</button>
-            <button onClick={() => scrollToSection("comparison")} className="hover:text-[#0F172A] cursor-pointer">{t("landing.why")}</button>
-            <button onClick={() => scrollToSection("pricing")} className="hover:text-[#0F172A] cursor-pointer">{t("landing.pricing")}</button>
+          <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-[#555B53]">
+            <button onClick={() => scrollToSection("features")} className="hover:text-[#1F2421] cursor-pointer">{t("landing.features")}</button>
+            <button onClick={() => scrollToSection("comparison")} className="hover:text-[#1F2421] cursor-pointer">{t("landing.why")}</button>
+            <button onClick={() => scrollToSection("pricing")} className="hover:text-[#1F2421] cursor-pointer">{t("landing.pricing")}</button>
           </nav>
           <div className="flex items-center gap-2">
             <SettingsSwitcher />
-            <button onClick={() => openModal("Admin")} className="btn-press inline-flex items-center gap-1.5 h-9 px-4 rounded-lg bg-[#0F172A] text-white text-[13px] font-medium cursor-pointer">
+            <button onClick={() => openModal("Admin")} className="btn-press inline-flex items-center gap-1.5 h-9 px-4 rounded-xl bg-[#17614F] text-white text-[13px] font-semibold cursor-pointer">
               <LogIn className="w-3.5 h-3.5 ltr:-scale-x-0 rtl:-scale-x-100" aria-hidden="true" />{t("landing.login")}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="pt-24 sm:pt-32 px-5 sm:px-8 w-full">
-        <div className="max-w-6xl mx-auto"><div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center pb-14 sm:pb-20">
-          <div className="hero-in text-start">
-            <h1 className="max-w-xl text-4xl sm:text-[2.75rem] font-semibold leading-[1.2] text-[#0F172A] text-balance">{T("ld.4")}</h1>
-            <p className="mt-5 max-w-lg text-lg leading-relaxed text-[#475569]">{T("ld.5")}</p>
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-              <button onClick={() => openModal("Admin")} className="btn-press h-11 px-6 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white text-[15px] whitespace-nowrap shrink-0 font-semibold cursor-pointer">{T("ld.6")}</button>
-              <Link onClick={() => scrollToSection("comparison")}>{T("ld.7")}</Link>
+      {/* Hero: deep-pine stage, calculator floats on it */}
+      <section className="pt-[4.5rem] sm:pt-[5.25rem] px-3 sm:px-6 w-full">
+        <div className="relative max-w-7xl mx-auto rounded-[28px] bg-[var(--panel)] text-[var(--panel-ink)] overflow-hidden grain">
+          <div aria-hidden="true" className="absolute -top-32 -end-24 w-[34rem] h-[34rem] rounded-full bg-[var(--panel-2)] blur-3xl opacity-80" />
+          <div aria-hidden="true" className="absolute -bottom-40 -start-20 w-[26rem] h-[26rem] rounded-full bg-[var(--brass)]/15 blur-3xl" />
+          <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center px-5 sm:px-12 pt-12 sm:pt-16 pb-14 sm:pb-20">
+            <div className="hero-in text-start">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[.06] px-3 py-1 text-xs font-semibold text-[var(--brass)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brass)]" aria-hidden="true" />{T("ld.1")}
+              </span>
+              <h1 className="mt-5 max-w-xl font-display text-[2rem] sm:text-5xl xl:text-[3.4rem] font-semibold leading-[1.18] text-[var(--panel-ink)] text-balance">{T("ld.4")}</h1>
+              <p className="mt-5 max-w-lg text-base sm:text-lg leading-relaxed text-white/70">{T("ld.5")}</p>
+              <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-xl bg-[var(--brass)] hover:brightness-110 text-[#1F2421] text-[15px] whitespace-nowrap shrink-0 font-semibold cursor-pointer shadow-[0_10px_30px_-10px_rgba(181,129,47,.7)]">{T("ld.6")}</button>
+                <button onClick={() => scrollToSection("comparison")} className="group inline-flex items-center gap-1 text-base font-medium text-white/85 hover:text-white cursor-pointer">
+                  {T("ld.7")}
+                  <ChevronRight className="w-5 h-5 rtl:-scale-x-100 transition-transform ltr:group-hover:translate-x-0.5 rtl:group-hover:translate-x-0.5" aria-hidden="true" />
+                </button>
+              </div>
+              <ul className="mt-9 grid gap-2.5 text-sm text-white/65">
+                {["ld.8", "ld.9", "ld.10"].map((k) => (
+                  <li key={k} className="flex items-center gap-2.5"><Check className="w-4 h-4 text-[var(--brass)] shrink-0" aria-hidden="true" />{T(k)}</li>
+                ))}
+              </ul>
             </div>
+            <div className="hero-card-in text-start lg:-rotate-[0.6deg] rtl:lg:rotate-[0.6deg]"><div className="rounded-2xl shadow-[0_30px_70px_-25px_rgba(0,0,0,.55)]"><BoqLive /></div></div>
           </div>
-          <div className="hero-card-in text-start"><BoqLive /></div>
+          <div className="ruler text-white/40 absolute bottom-0 inset-x-0" aria-hidden="true" />
         </div>
-        <div className="ruler" aria-hidden="true" /></div>
       </section>
 
-      {/* Pillars: one idea per band, ruled cells */}
-      <div className="mt-10 sm:mt-16">
+      {/* Pillars: numbered, one idea each */}
+      <div className="mt-6 sm:mt-10">
         {PILLARS.map((p, i) => (
-          <section key={i} id={p.id} className={`py-12 sm:py-20 px-5 sm:px-8 ${p.dark ? "bg-[#0F172A] text-white" : ""}`}>
-            <div className="max-w-6xl mx-auto">
-              <h2 className={`max-w-3xl text-3xl sm:text-4xl font-semibold leading-[1.2] text-balance ${p.dark ? "text-white" : "text-[#0F172A]"}`}>{T(p.title)}</h2>
-              <p className={`mt-4 max-w-2xl text-base sm:text-lg leading-relaxed ${p.dark ? "text-[#94A3B8]" : "text-[#475569]"}`}>{T(p.desc)}</p>
-              <ul className={`mt-8 grid sm:grid-cols-3 gap-px rounded-xl overflow-hidden border ${p.dark ? "bg-[#1D524E] border-[#1D524E]" : "bg-[#E3E7EE] border-[#E3E7EE]"}`}>
-                {p.pts.map((k) => (
-                  <li key={k} className={`p-5 sm:p-6 ${p.dark ? "bg-[#0B312E]" : "bg-white"}`}>
-                    <Check className="w-4 h-4 text-[#0F766E]" aria-hidden="true" />
-                    <p className={`mt-3 text-base leading-snug font-medium ${p.dark ? "text-[#EEF1F5]" : "text-[#0F172A]"}`}>{T(k)}</p>
+          <section key={i} id={p.id} className="py-10 sm:py-16 px-5 sm:px-8">
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-16 items-start">
+              <div className="text-start">
+                <span className="font-display text-5xl sm:text-6xl font-semibold text-[var(--brass)]/80 tabular-nums leading-none">{String(i + 1).padStart(2, "0")}</span>
+                <h2 className="mt-4 max-w-xl text-3xl sm:text-[2.4rem] font-semibold leading-[1.2] text-[#1F2421] text-balance">{T(p.title)}</h2>
+                <p className="mt-4 max-w-lg text-base sm:text-lg leading-relaxed text-[#555B53]">{T(p.desc)}</p>
+                <div className="mt-6"><Link onClick={() => openModal(p.role)}>{T(p.link)}</Link></div>
+              </div>
+              <ul className="grid gap-3">
+                {p.pts.map((k, j) => (
+                  <li key={k} className="flex items-start gap-4 rounded-2xl bg-white border border-[#E6DFD0] p-5 sm:p-6 shadow-[var(--shadow-1)]">
+                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--brand-soft)] text-[#17614F]"><Check className="w-4 h-4" aria-hidden="true" /></span>
+                    <p className="text-base sm:text-[17px] leading-snug font-medium text-[#1F2421]">{T(k)}</p>
                   </li>
                 ))}
               </ul>
-              <div className="mt-6"><Link onClick={() => openModal(p.role)}>{T(p.link)}</Link></div>
             </div>
           </section>
         ))}
@@ -93,53 +111,53 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       {/* Comparison */}
       <section id="comparison" className="py-12 sm:py-20 px-5 sm:px-8 max-w-6xl mx-auto w-full">
         <div className="text-start mb-8 sm:mb-10">
-          <h2 className="text-3xl sm:text-4xl font-semibold text-[#0F172A] text-balance">{T("ld.109")}</h2>
-          <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#475569] leading-relaxed">{T("ld.110")}</p>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-[#1F2421] text-balance">{T("ld.109")}</h2>
+          <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#555B53] leading-relaxed">{T("ld.110")}</p>
         </div>
         <div className="space-y-4">
           {ROWS.map(([f, m, a, b]) => (
-            <div key={f} className="rounded-xl bg-white border border-[#E3E7EE] p-5 sm:p-6 text-start">
-              <h3 className="text-sm font-semibold text-[#0F766E]">{T(`ld.${f}`)}</h3>
-              <p className="mt-2 text-lg sm:text-xl font-semibold text-[#0F172A] leading-snug">{T(`ld.${m}`)}</p>
-              <div className="mt-5 pt-5 border-t border-[#EEF1F5] grid sm:grid-cols-2 gap-3 text-sm text-[#64748B] leading-relaxed">
-                <p><span className="font-semibold text-[#475569]">{T("ld.114")} — </span>{T(`ld.${a}`)}</p>
-                <p><span className="font-semibold text-[#475569]">{T("ld.115")} — </span>{T(`ld.${b}`)}</p>
+            <div key={f} className="rounded-xl bg-white border border-[#E6DFD0] p-5 sm:p-6 text-start">
+              <h3 className="text-sm font-semibold text-[#17614F]">{T(`ld.${f}`)}</h3>
+              <p className="mt-2 text-lg sm:text-xl font-semibold text-[#1F2421] leading-snug">{T(`ld.${m}`)}</p>
+              <div className="mt-5 pt-5 border-t border-[#F0EADD] grid sm:grid-cols-2 gap-3 text-sm text-[#6F756B] leading-relaxed">
+                <p><span className="font-semibold text-[#555B53]">{T("ld.114")} — </span>{T(`ld.${a}`)}</p>
+                <p><span className="font-semibold text-[#555B53]">{T("ld.115")} — </span>{T(`ld.${b}`)}</p>
               </div>
             </div>
           ))}
         </div>
-        <p className="mt-8 text-start text-lg font-medium text-[#0F172A] text-balance">{T("ld.136")} <span className="text-[#475569] font-normal">{T("ld.137")}</span></p>
+        <p className="mt-8 text-start text-lg font-medium text-[#1F2421] text-balance">{T("ld.136")} <span className="text-[#555B53] font-normal">{T("ld.137")}</span></p>
       </section>
 
       <PricingSection onStart={() => openModal("Admin")} />
 
       {/* CTA */}
       <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
-        <div className="rounded-xl bg-[#0F172A] text-white text-start px-6 sm:px-12 py-12 sm:py-16">
-          <h2 className="max-w-3xl text-3xl sm:text-4xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
-          <p className="mt-4 max-w-xl text-base sm:text-lg text-[#94A3B8] leading-relaxed">{T("ld.140")}</p>
+        <div className="relative overflow-hidden grain rounded-[28px] bg-[#17614F] text-white text-start px-6 sm:px-14 py-12 sm:py-16">
+          <h2 className="max-w-3xl font-display text-3xl sm:text-[2.6rem] font-semibold leading-tight text-balance">{T("ld.139")}</h2>
+          <p className="mt-4 max-w-xl text-base sm:text-lg text-white/70 leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-            <button onClick={() => openModal("Admin")} className="btn-press h-11 px-6 rounded-lg bg-[#0F766E] hover:bg-[#0B5F58] text-white text-base font-medium cursor-pointer">{T("ld.141")}</button>
+            <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-xl bg-[var(--brass)] hover:brightness-110 text-[#1F2421] text-base font-semibold cursor-pointer">{T("ld.141")}</button>
             <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-11 text-base font-medium text-white/90 hover:text-white underline-offset-4 hover:underline"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#E3E7EE] py-10 px-5 mt-auto">
+      <footer className="border-t border-[#E6DFD0] py-10 px-5 mt-auto">
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-5 text-center">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#0F766E] text-white flex items-center justify-center"><LogoMark className="w-4 h-4 text-white" /></div>
-            <span className="font-semibold text-[#0F172A]">{T("ld.1")}</span>
+            <div className="w-7 h-7 rounded-lg bg-[#17614F] text-white flex items-center justify-center"><LogoMark className="w-4 h-4 text-white" /></div>
+            <span className="font-semibold text-[#1F2421]">{T("ld.1")}</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#475569]">
-            <button onClick={() => scrollToSection("features")} className="hover:text-[#0F172A] cursor-pointer">{t("landing.footerFeatures")}</button>
-            <button onClick={() => scrollToSection("comparison")} className="hover:text-[#0F172A] cursor-pointer">{t("landing.footerCompare")}</button>
-            <button onClick={() => openModal("Client")} className="hover:text-[#0F172A] cursor-pointer">{t("landing.clientPortal")}</button>
-            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#0F172A] cursor-pointer">{t("landing.privacy")}</button>
-            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#0F172A] cursor-pointer">{t("landing.terms")}</button>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#555B53]">
+            <button onClick={() => scrollToSection("features")} className="hover:text-[#1F2421] cursor-pointer">{t("landing.footerFeatures")}</button>
+            <button onClick={() => scrollToSection("comparison")} className="hover:text-[#1F2421] cursor-pointer">{t("landing.footerCompare")}</button>
+            <button onClick={() => openModal("Client")} className="hover:text-[#1F2421] cursor-pointer">{t("landing.clientPortal")}</button>
+            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#1F2421] cursor-pointer">{t("landing.privacy")}</button>
+            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#1F2421] cursor-pointer">{t("landing.terms")}</button>
           </div>
-          <p className="text-xs text-[#64748B]">{T("ld.143")}</p>
+          <p className="text-xs text-[#6F756B]">{T("ld.143")}</p>
         </div>
       </footer>
     </>

@@ -23,7 +23,7 @@ export default function ProgressBar({
   }, [actualPercentage]);
 
   // Determine fill color (brand teal; amber when at risk; green when complete)
-  let fillClass = "bg-[#0F766E]";
+  let fillClass = "bg-[#17614F]";
   if (customFillClass) {
     fillClass = customFillClass;
   } else if (isWarning || actualPercentage >= warningThreshold) {
@@ -34,7 +34,7 @@ export default function ProgressBar({
 
   return (
     <div
-      className={`w-full h-2.5 bg-[#EEF1F5] rounded-full overflow-hidden shadow-inner mt-2 ${trackClassName} ${className}`}
+      className={`w-full h-2.5 bg-[#F0EADD] rounded-full overflow-hidden shadow-inner mt-2 ${trackClassName} ${className}`}
     >
       <div
         className={`h-full rounded-full transition-all duration-[800ms] ease-[cubic-bezier(0.23,1,0.32,1)] ${fillClass}`}

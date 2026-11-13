@@ -43,23 +43,23 @@ export default function SiteEngineerAttendance() {
   const exportCsv = () =>
     download(`puantaj-${month}.csv`, toCsv([T("att.worker"), T("att.trade"), T("att.days"), T("att.ot"), T("att.wage")], workers.map((w, i) => [w.name, w.trade, sums[i].days, sums[i].ot, sums[i].wage])), "text/csv");
 
-  const input = "px-3 py-2 rounded-lg border border-[#E3E7EE] text-xs font-bold text-[#0F172A] bg-white";
+  const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white";
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] flex items-center gap-2.5"><UsersRound className="w-7 h-7" /><span>{T("att.title")}</span></h1>
-            <p className="text-xs md:text-sm text-[#475569] mt-1">{T("att.sub")}</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] flex items-center gap-2.5"><UsersRound className="w-7 h-7" /><span>{T("att.title")}</span></h1>
+            <p className="text-xs md:text-sm text-[#555B53] mt-1">{T("att.sub")}</p>
           </div>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value || today())} className={input} />
         </div>
 
         <div className="grid stat-grid grid-cols-3 gap-3">
           {[["att.k.present", `${present}/${workers.length}`], ["att.k.day", money(dayTotal, { compact: true })], ["att.k.month", money(monthTotal, { compact: true })]].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#E3E7EE] text-center">
-              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-black text-[#0F172A]">{v}</span>
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E6DFD0] text-center">
+              <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-semibold text-[#1F2421]">{v}</span>
             </div>
           ))}
         </div>
@@ -68,29 +68,29 @@ export default function SiteEngineerAttendance() {
           {workers.map((w, i) => {
             const e = day[w.id] || { s: "absent", ot: 0 };
             return (
-              <div key={w.id} className="bg-white rounded-lg border border-[#E3E7EE] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
+              <div key={w.id} className="bg-white rounded-lg border border-[#E6DFD0] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-extrabold text-[#0F172A]">{E(w.name)}</p>
+                  <p className="text-sm font-semibold text-[#1F2421]">{E(w.name)}</p>
                   {edit && edit.id === w.id ? (
                     <form onSubmit={(ev) => { ev.preventDefault(); saveRate(); }} className="mt-1.5 flex flex-wrap items-center gap-2">
                       <input type="number" min={1} autoFocus value={edit.v} onChange={(ev) => setEdit({ ...edit, v: ev.target.value })} aria-label={T("att.rate")} className={input + " w-28"} />
-                      <button type="submit" aria-label={T("att.save")} className="p-2 rounded-lg bg-[#0F766E] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
-                      <button type="button" onClick={() => setEdit(null)} aria-label={T("att.cancel")} className="p-2 rounded-lg border border-[#E3E7EE] cursor-pointer"><X className="w-4 h-4" /></button>
-                      <span className="w-full text-[11px] text-[#64748B]">{T("att.rateNote", { 0: date })}</span>
+                      <button type="submit" aria-label={T("att.save")} className="p-2 rounded-lg bg-[#17614F] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
+                      <button type="button" onClick={() => setEdit(null)} aria-label={T("att.cancel")} className="p-2 rounded-lg border border-[#E6DFD0] cursor-pointer"><X className="w-4 h-4" /></button>
+                      <span className="w-full text-[11px] text-[#6F756B]">{T("att.rateNote", { 0: date })}</span>
                     </form>
                   ) : (
-                    <p className="text-[11px] text-[#475569] font-bold flex flex-wrap items-center gap-x-1">
+                    <p className="text-[11px] text-[#555B53] font-bold flex flex-wrap items-center gap-x-1">
                       <span>{E(w.trade)} ·</span>
-                      <button type="button" onClick={() => setEdit({ id: w.id, v: w.rate })} className="inline-flex items-center gap-1 text-[#0F766E] underline-offset-2 hover:underline cursor-pointer">{money(w.rate)} / {T("att.perday")}<Pencil className="w-3 h-3" aria-hidden="true" /></button>
+                      <button type="button" onClick={() => setEdit({ id: w.id, v: w.rate })} className="inline-flex items-center gap-1 text-[#17614F] underline-offset-2 hover:underline cursor-pointer">{money(w.rate)} / {T("att.perday")}<Pencil className="w-3 h-3" aria-hidden="true" /></button>
                       <span>· {T("att.days")}: {sums[i].days}</span>
                     </p>
                   )}
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {STATES.map((s) => (
-                    <button key={s} type="button" onClick={() => mark(w.id, { s })} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border cursor-pointer ${e.s === s ? (s === "absent" ? "bg-rose-600 text-white border-rose-600" : "bg-[#0F172A] text-white border-[#0F172A]") : "bg-white text-[#475569] border-[#E3E7EE]"}`}>{T("att.s." + s)}</button>
+                    <button key={s} type="button" onClick={() => mark(w.id, { s })} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border cursor-pointer ${e.s === s ? (s === "absent" ? "bg-rose-600 text-white border-rose-600" : "bg-[#17614F] text-white border-[#17614F]") : "bg-white text-[#555B53] border-[#E6DFD0]"}`}>{T("att.s." + s)}</button>
                   ))}
-                  <label className="flex items-center gap-1 text-[11px] font-bold text-[#475569]">
+                  <label className="flex items-center gap-1 text-[11px] font-bold text-[#555B53]">
                     {T("att.ot")}
                     <input type="number" min={0} max={8} value={e.ot} disabled={e.s === "absent"} onChange={(ev) => mark(w.id, { ot: ev.target.value })} className={input + " w-16 !py-1"} />
                   </label>
@@ -105,9 +105,9 @@ export default function SiteEngineerAttendance() {
             <input required placeholder={T("att.worker")} value={name} onChange={(e) => setName(e.target.value)} className={input} />
             <input placeholder={T("att.trade")} value={trade} onChange={(e) => setTrade(e.target.value)} className={input + " w-28"} />
             <input required type="number" min={1} placeholder={T("att.rate")} value={rate} onChange={(e) => setRateIn(e.target.value)} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0F172A] hover:bg-[#0F172A] cursor-pointer"><Plus className="w-4 h-4" />{T("att.add")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#17614F] cursor-pointer"><Plus className="w-4 h-4" />{T("att.add")}</button>
           </form>
-          <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0F172A] bg-white border border-[#E3E7EE] hover:bg-[#F4F6F9] cursor-pointer"><Download className="w-4 h-4" />{T("att.export")}</button>
+          <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] hover:bg-[#F7F3EA] cursor-pointer"><Download className="w-4 h-4" />{T("att.export")}</button>
         </div>
       </div>
     </main>
