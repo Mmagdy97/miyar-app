@@ -26,6 +26,7 @@ import ModulePlaceholder from "./ModulePlaceholder";
 import { ROLE_CONFIG } from "../config/roles";
 import LiveDashboard from "./LiveDashboard";
 import LiveFinance from "./LiveFinance";
+import LiveBoq from "./LiveBoq";
 import LiveTeam from "./LiveTeam";
 import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
@@ -79,6 +80,7 @@ function MainContent({
       }
       if (id === "Financials & Petty Cash") return <LiveFinance />;
       if (id === "Team" && currentRole === "Admin") return <LiveTeam />;
+      if ((id === "BOQ & Approvals" || id === "BOQ Management") && currentRole !== "Client") return <LiveBoq />;
       if (!LIVE_READY.has(id) && !(LIVE_LOCAL.has(id) && currentRole !== "Client")) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">

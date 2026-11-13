@@ -20,6 +20,7 @@ import { setActiveOrg } from "./lib/entitlements";
 import { attachProjects } from "./data/projects";
 import { attachInvoices } from "./data/invoices";
 import { attachCash } from "./data/cash";
+import { attachBoq } from "./data/boq";
 
 // Role-Based Initial Action Items & Notifications in Arabic
 const INITIAL_ACTION_ITEMS = localize([
@@ -120,7 +121,7 @@ function App() {
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {
     if (!isAuthenticated || authMode !== "user") return;
-    loadAccount().then((acc) => { if (acc) { setAccount(acc); attachProjects(acc.orgId); attachInvoices(acc.orgId); attachCash(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
+    loadAccount().then((acc) => { if (acc) { setAccount(acc); attachProjects(acc.orgId); attachInvoices(acc.orgId); attachCash(acc.orgId); attachBoq(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -202,7 +203,7 @@ function App() {
 
   const doLogout = () => {
     if (authMode === "user") signOut();
-    setAuthMode("guest"); setAccount(null); setOwnerView(true); attachProjects(null); attachInvoices(null); attachCash(null);
+    setAuthMode("guest"); setAccount(null); setOwnerView(true); attachProjects(null); attachInvoices(null); attachCash(null); attachBoq(null);
     setIsAuthenticated(false);
     setCurrentRole("");
   };
@@ -216,7 +217,7 @@ function App() {
     return (
       <LandingAndLogin
         onLogin={(role, mode = "guest", acc = null) => {
-          setAuthMode(mode); setAccount(acc); attachProjects(mode === "user" ? acc?.orgId : null); attachInvoices(mode === "user" ? acc?.orgId : null); attachCash(mode === "user" ? acc?.orgId : null);
+          setAuthMode(mode); setAccount(acc); attachProjects(mode === "user" ? acc?.orgId : null); attachInvoices(mode === "user" ? acc?.orgId : null); attachCash(mode === "user" ? acc?.orgId : null); attachBoq(mode === "user" ? acc?.orgId : null);
           setCurrentRole(role || "Admin");
           setIsAuthenticated(true);
         }}
