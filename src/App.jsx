@@ -1,3 +1,5 @@
+import { flushSync } from "react-dom";
+import { initMotion, withTransition } from "./lib/motion";
 import { createPersistedStore } from "./data/persisted";
 import { useState, useEffect } from "react";
 import { localize, D } from "./data/dataI18n";
@@ -169,6 +171,8 @@ function App() {
     } catch { /* ignore */ }
   }, [isAuthenticated, currentRole, activeTab]);
 
+  const goTab = (tab) => withTransition(() => flushSync(() => setActiveTab(tab)));
+  useEffect(() => initMotion(), []);
   const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   // Requirement 5: Modal Approval Logic filters out item from actionItems and closes modal
@@ -217,7 +221,7 @@ function App() {
           currentRole={currentRole}
           activeTab={activeTab}
           setActiveTab={(tab) => {
-            setActiveTab(tab);
+            goTab(tab);
             setIsMobileMenuOpen(false);
           }}
           collapsed={sidebarCollapsed}
@@ -248,12 +252,12 @@ function App() {
         <MainContent
           currentRole={currentRole}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={goTab}
           actionItems={actionItems}
           setActionItems={setActionItems}
           setSelectedItem={setSelectedItem}
         />
-        <BottomNav currentRole={currentRole} activeTab={activeTab} setActiveTab={setActiveTab} onMore={() => setIsMobileMenuOpen(true)} />
+        <BottomNav currentRole={currentRole} activeTab={activeTab} setActiveTab={goTab} onMore={() => setIsMobileMenuOpen(true)} />
         <LeadNudge currentRole={currentRole} activeTab={activeTab} />
       </div>
 

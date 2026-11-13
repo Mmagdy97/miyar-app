@@ -336,3 +336,43 @@ div.bg-\[\#17614F\]:not([class*="text-white"]):is([class^="w-"],[class*=" w-"]):
 .dim.reveal.in::before, .dim.reveal.in::after { transform: scaleX(1); }
 .plan-parallax { transform: translateY(calc(var(--sy, 0) * -0.12px)); will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .plan-parallax { transform: none; } }
+
+/* ---------- Motion pass (calm, ease-out, < 400ms) ---------- */
+/* tab changes: soft cross-fade with a hint of lift */
+::view-transition-old(root) { animation: 140ms ease both vtOut; }
+::view-transition-new(root) { animation: 260ms var(--ease-out) both vtIn; }
+@keyframes vtOut { to { opacity: 0; } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(6px); } }
+/* keep the app chrome still during the cross-fade */
+aside { view-transition-name: app-aside; } header.sticky { view-transition-name: app-header; }
+nav[aria-label].md\:hidden { view-transition-name: app-bottomnav; }
+::view-transition-group(app-aside), ::view-transition-group(app-header), ::view-transition-group(app-bottomnav) { animation-duration: 0s; }
+
+/* progress bars fill in from the reading edge */
+@keyframes barFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+main .rounded-full > [style*="width"], main [role="progressbar"] > * { transform-origin: left; animation: barFill 900ms var(--ease-out) 150ms backwards; }
+html[dir="rtl"] main .rounded-full > [style*="width"], html[dir="rtl"] main [role="progressbar"] > * { transform-origin: right; }
+
+/* bottom nav: active pill pops, icon nudges */
+@keyframes pillPop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+nav.md\:hidden button[aria-current="page"] > span:first-child { animation: pillPop 320ms var(--ease-out); }
+nav.md\:hidden button > span:first-child { transition: background-color 200ms ease; }
+
+/* press feedback everywhere, hover lift on pointer devices */
+button:not(:disabled):active, a[role="button"]:active { transform: scale(0.97); }
+button, a { transition-property: color, background-color, border-color, box-shadow, transform, opacity; transition-duration: 160ms; transition-timing-function: var(--ease-out); }
+
+/* sidebar: items slide a hair toward the reading direction on hover (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  aside nav button:hover svg { transform: scale(1.08); }
+  aside nav button svg { transition: transform 200ms var(--ease-out), color 160ms ease; }
+}
+/* notification badge pop */
+@keyframes badgePop { 0% { transform: scale(.4); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+header button > span.rounded-full { animation: badgePop 380ms var(--ease-out); }
+/* modal + dropdown entrance: scale from .96, never from 0 */
+.animate-in.zoom-in-95 { animation-duration: 220ms; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  main .rounded-full > [style*="width"] { animation: none; }
+}
