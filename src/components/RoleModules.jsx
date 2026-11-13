@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isTabAllowed } from "../lib/entitlements";
 import { ChevronRight } from "lucide-react";
 import { tr_ as T } from "../i18n";
 import { ROLE_CONFIG } from "../config/roles";
@@ -9,7 +10,7 @@ const has = (role, id) => T(`md.${role}.${id}.t`) !== `md.${role}.${id}.t`;
 /** Landing: what each role gets, one tab per role. Built from the real navigation config. */
 export default function RoleModules({ openModal }) {
   const [role, setRole] = useState("Admin");
-  const items = ROLE_CONFIG[role].filter((m) => has(role, m.id));
+  const items = ROLE_CONFIG[role].filter((m) => has(role, m.id) && isTabAllowed(m.id));
   return (
     <section id="modules" className="py-14 sm:py-32 px-5 max-w-6xl mx-auto w-full">
       <div className="text-start mb-8 sm:mb-10">

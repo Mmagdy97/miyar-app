@@ -13,7 +13,7 @@ export async function loadAccount() {
   if (!user) return null;
   const { data: p } = await supabase.from("profiles").select("full_name, role, org_id").eq("id", user.id).maybeSingle();
   let org = null;
-  if (p?.org_id) ({ data: org } = await supabase.from("organizations").select("name, plan, status, trial_ends_at, currency, locale").eq("id", p.org_id).maybeSingle());
+  if (p?.org_id) ({ data: org } = await supabase.from("organizations").select("name, plan, status, trial_ends_at, currency, locale, extra_features").eq("id", p.org_id).maybeSingle());
   const { data: owner } = await supabase.rpc("is_platform_admin");
   return { user, name: p?.full_name || user.email, role: ROLE[p?.role] || "Client", org, isOwner: owner === true, hasOrg: Boolean(p?.org_id) };
 }

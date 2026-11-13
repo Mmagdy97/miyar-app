@@ -1,4 +1,5 @@
 import LogoMark from "./LogoMark";
+import { isTabAllowed } from "../lib/entitlements";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Download, Building2, X } from "lucide-react";
 import { ROLE_CONFIG, roleTitle as roleTitleOf, navLabel } from "../config/roles";
@@ -17,7 +18,7 @@ function Sidebar({
   isInstallable = false,
   onInstallClick,
 }) {
-  const items = ROLE_CONFIG[currentRole] || [];
+  const items = (ROLE_CONFIG[currentRole] || []).filter((i) => isTabAllowed(i.id));
   const { t } = useI18n();
   const roleTitle = roleTitleOf(currentRole) || currentRole;
   const [tooltip, setTooltip] = useState({ visible: false, text: "", top: 0 });

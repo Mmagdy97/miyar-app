@@ -16,6 +16,7 @@ import { ROLE_CONFIG, ROLE_TITLES } from "./config/roles";
 import { Menu, X, Building2, Download } from "lucide-react";
 import { loadAccount, signOut } from "./lib/auth";
 import OwnerAdmin from "./components/OwnerAdmin";
+import { setActiveOrg } from "./lib/entitlements";
 
 // Role-Based Initial Action Items & Notifications in Arabic
 const INITIAL_ACTION_ITEMS = localize([
@@ -102,6 +103,7 @@ function App() {
   const [account, setAccount] = useState(null);
   const [ownerView, setOwnerView] = useState(true);
   const [authMode, setAuthMode] = useState(saved.mode || "guest");
+  setActiveOrg(authMode === "user" ? account?.org : null); // sidebar/nav read it during this render
   const [currentRole, setCurrentRole] = useState(saved.role || "");
   const [activeTab, setActiveTab] = useState(saved.tab || "لوحة التحكم");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

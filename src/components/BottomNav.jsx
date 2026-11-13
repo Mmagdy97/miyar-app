@@ -1,11 +1,12 @@
 import { Menu } from "lucide-react";
+import { isTabAllowed } from "../lib/entitlements";
 import { ROLE_CONFIG, navLabel } from "../config/roles";
 import { useI18n } from "../i18n";
 
 // Mobile-only primary navigation: first 4 destinations + "More" (opens the full drawer).
 export default function BottomNav({ currentRole, activeTab, setActiveTab, onMore }) {
   const { t } = useI18n();
-  const items = (ROLE_CONFIG[currentRole] || []).slice(0, 4);
+  const items = (ROLE_CONFIG[currentRole] || []).filter((i) => isTabAllowed(i.id)).slice(0, 4);
   const isActive = (item) => {
     const name = item.name || item.id;
     const dash = (activeTab === "لوحة التحكم" || activeTab === "Dashboard") && (name === "لوحة التحكم" || item.id === "Dashboard");
