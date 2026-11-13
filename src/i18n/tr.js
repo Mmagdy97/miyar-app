@@ -1500,6 +1500,6 @@ export default {
   "pricing.billing": "Ödeme dönemi",
   "pricing.custom": "Teklif ile",
   "pricing.contact": "Bize ulaşın",
-  "pricing.founding": "Lansman teklifi: her pazarda ilk 50 ofise ilk yıl %30 indirim",
-  "pricing.trial": "14 gün deneme, kart yok, kurulum ücreti yok",
+  "pricing.founding": "Lansman fırsatı: her pazarda ilk 50 ofis ilk ödeme döneminde %30 indirim kazanır (dönem indirimiyle birleşmez)",
+  "pricing.trial": "14 gün deneme, kart yok, kurulum ücreti yok · ilk ödemeden sonra 14 gün içinde tam iade",
 };

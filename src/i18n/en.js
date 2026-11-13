@@ -1500,6 +1500,6 @@ export default {
   "pricing.billing": "Billing cycle",
   "pricing.custom": "Custom",
   "pricing.contact": "Contact us",
-  "pricing.founding": "Launch offer: the first 50 offices in each market get 30% off their first year",
-  "pricing.trial": "14-day trial, no card, no setup fee",
+  "pricing.founding": "Launch offer: the first 50 offices in each market get 30% off their first billing cycle (not combined with the cycle discount)",
+  "pricing.trial": "14-day trial, no card, no setup fee · full refund within 14 days of your first payment",
 };
