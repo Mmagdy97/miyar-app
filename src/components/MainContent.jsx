@@ -25,10 +25,11 @@ import ProjectsManagement from "./ProjectsManagement";
 import ModulePlaceholder from "./ModulePlaceholder";
 import { ROLE_CONFIG } from "../config/roles";
 import LiveDashboard from "./LiveDashboard";
+import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
 
 // Real (signed-in) offices: only connected sections show data. Others are held back so no demo data leaks in.
-const LIVE_READY = new Set(["Projects"]);
+const LIVE_READY = new Set(["Projects", "Financials & Petty Cash"]);
 const LIVE_LOCAL = new Set(["Selections", "Moodboard", "Change Orders", "Certificates"]); // work, but stored on this device for now
 
 const DASHBOARD_TAB = "لوحة التحكم";
@@ -70,6 +71,7 @@ function MainContent({
     if (projectsStore.isLive) {
       if (isDashboard) return <LiveDashboard setActiveTab={setActiveTab} />;
       const id = (ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id;
+      if (id === "Financials & Petty Cash") return <LiveInvoices />;
       if (!LIVE_READY.has(id) && !LIVE_LOCAL.has(id)) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">

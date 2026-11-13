@@ -1,6 +1,7 @@
 import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
 import { projectsStore } from "../data/projects";
+import { invoicesRepo, invoiceTotals } from "../data/invoices";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
 
@@ -12,12 +13,13 @@ const needsAttention = (p, now = Date.now()) => p.progress < 100 && p.deadline &
 /** Dashboard for a real office: numbers come only from its own projects (no demo data). */
 export default function LiveDashboard({ setActiveTab }) {
   const [projects] = projectsStore.use();
+  const inv = invoiceTotals(invoicesRepo.use());
   const org = getActiveOrg();
   const total = projects.reduce((s, p) => s + (Number(p.contractValue) || 0), 0);
   const avg = projects.length ? Math.round(projects.reduce((s, p) => s + (Number(p.progress) || 0), 0) / projects.length) : 0;
   const attn = projects.filter((p) => needsAttention(p)).length;
   const max = org ? projectLimit(org.plan) : Infinity;
-  const stats = [[T("live.projects"), projects.length, FolderKanban], [T("live.contracts"), money(total, { compact: true }), Wallet], [T("live.avg"), `${avg}%`, Gauge], [T("live.attn"), attn, AlertTriangle]];
+  const stats = [[T("live.projects"), projects.length, FolderKanban], [T("live.contracts"), money(total, { compact: true }), Wallet], [T("live.avg"), `${avg}%`, Gauge], [T("live.attn"), attn, AlertTriangle], [T("inv.paidTotal"), money(inv.paid, { compact: true }), Wallet], [T("inv.dueTotal"), money(inv.due, { compact: true }), Wallet]];
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-5xl mx-auto space-y-6">
@@ -28,7 +30,7 @@ export default function LiveDashboard({ setActiveTab }) {
           </div>
           {org && <p className="text-xs font-bold text-[#555B53] bg-white border border-[#E6DFD0] rounded-lg px-3 py-1.5 w-fit">{T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") })} · {Number.isFinite(max) ? T("live.usage", { n: projects.length, max }) : T("live.unlimited", { n: projects.length })}</p>}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {stats.map(([l, v, Ic]) => (
             <div key={l} className="bg-white rounded-xl border border-[#E6DFD0] p-4">
               <p className="text-[11px] font-bold text-[#555B53] flex items-center gap-1.5"><Ic className="w-3.5 h-3.5" aria-hidden="true" />{l}</p>
