@@ -24,6 +24,12 @@ import TeamManagement from "./TeamManagement";
 import ProjectsManagement from "./ProjectsManagement";
 import ModulePlaceholder from "./ModulePlaceholder";
 import { ROLE_CONFIG } from "../config/roles";
+import LiveDashboard from "./LiveDashboard";
+import { projectsStore } from "../data/projects";
+
+// Real (signed-in) offices: only connected sections show data. Others are held back so no demo data leaks in.
+const LIVE_READY = new Set(["Projects"]);
+const LIVE_LOCAL = new Set(["Selections", "Moodboard", "Change Orders", "Certificates"]); // work, but stored on this device for now
 
 const DASHBOARD_TAB = "لوحة التحكم";
 
@@ -60,6 +66,21 @@ function MainContent({
       activeTab === "لوحة التحكم الميدانية" ||
       activeTab === "لوحة التحكم الهندسية" ||
       activeTab === "بوابة العميل";
+
+    if (projectsStore.isLive) {
+      if (isDashboard) return <LiveDashboard setActiveTab={setActiveTab} />;
+      const id = (ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id;
+      if (!LIVE_READY.has(id) && !LIVE_LOCAL.has(id)) {
+        return (
+          <main className="flex-1 flex items-center justify-center p-6 font-ibm">
+            <div className="bg-white rounded-2xl border border-[#E6DFD0] p-8 text-center max-w-md space-y-2">
+              <h1 className="text-lg font-semibold text-[#1F2421]">{T("live.soonTitle")}</h1>
+              <p className="text-sm text-[#555B53]">{T("live.soonBody")}</p>
+            </div>
+          </main>
+        );
+      }
+    }
 
     if (isDashboard) {
       if (currentRole === "Admin") {
@@ -285,6 +306,9 @@ function MainContent({
       key={`${currentRole}-${activeTab}`}
       className="flex-1 flex flex-col min-h-0 min-w-0 w-full max-w-full overflow-hidden tab-page-transition outline-none"
     >
+      {projectsStore.isLive && LIVE_LOCAL.has((ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id) && (
+        <p className="mx-4 md:mx-8 mt-3 text-xs font-semibold text-[#7A5415] bg-[#F6ECD6] border border-[#E9D7AE] rounded-lg px-3 py-2">{T("live.local")}</p>
+      )}
       {renderScreen()}
     </main>
   );

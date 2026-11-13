@@ -22,3 +22,4 @@ export const orgFeatures = (org) => new Set([...(PLAN_FEATURES[org?.plan] || [])
 let active = null; // real office of the signed-in user; null = guest/demo (everything enabled)
 export const setActiveOrg = (org) => { active = org || null; };
 export const isTabAllowed = (id) => !active || !TAB_FEATURE[id] || orgFeatures(active).has(TAB_FEATURE[id]);
+export const getActiveOrg = () => active;
