@@ -41,7 +41,14 @@ export const posStore = createPersistedStore("miyar:pos:v1", [
 export const changeOrdersStore = createPersistedStore("miyar:changeorders:v1", [], (x) => x);
 
 // Client selections / FF&E schedule lines: proposed -> approved/rejected -> ordered.
-export const selectionsStore = createPersistedStore("miyar:selections:v1", [], (x) => x);
+export const selectionsStore = createPersistedStore("miyar:selections:v2", [
+  { id: 201, projectId: 1, room: "الريسبشن", name: "كنبة ثلاثية مخمل", supplier: "معرض دار الأثاث - مدينة نصر", phone: "01001234567", dims: "٢٤٠×٩٥×٨٥ سم", material: "مخمل مع هيكل خشب زان", code: "SF-240", leadDays: 21, color: "#8C7A5B", image: "", qty: 1, cost: 38000, price: 46000, status: "proposed" },
+  { id: 202, projectId: 1, room: "الريسبشن", name: "طاولة قهوة رخام", supplier: "ورشة النخبة للرخام - العبور", phone: "01112223334", dims: "١٢٠×٦٠×٤٥ سم", material: "رخام كرارا بقاعدة نحاس", code: "CT-120", leadDays: 14, color: "#E8E2D6", image: "", qty: 1, cost: 9000, price: 12500, status: "approved" },
+  { id: 203, projectId: 1, room: "غرفة الماستر", name: "سرير كينج بظهر منجد", supplier: "ورشة الأمل للأثاث - دمياط", phone: "01223334445", dims: "٢٠٠×٢٢٠ سم", material: "قماش كتان وخشب زان", code: "BD-200", leadDays: 30, color: "#B7A58C", image: "", qty: 1, cost: 52000, price: 65000, status: "proposed" },
+  { id: 204, projectId: 1, room: "غرفة الماستر", name: "ستارة بلاك آوت مع شير", supplier: "دار الستائر - مصر الجديدة", phone: "01005556667", dims: "عرض ٤ م × ارتفاع ٢٫٨ م", material: "كتان مع بطانة عازلة", code: "CR-01", leadDays: 10, color: "#6B5B4B", image: "", qty: 1, cost: 14000, price: 18500, status: "approved" },
+  { id: 205, projectId: 1, room: "المطبخ", name: "جزيرة مطبخ بسطح كوارتز", supplier: "ورشة المطابخ الحديثة - ١٠ رمضان", phone: "01556667778", dims: "٢٨٠×١١٠×٩٠ سم", material: "كوارتز أبيض وجوانب خشب جوز", code: "KI-280", leadDays: 28, color: "#D9D4CB", image: "", qty: 1, cost: 86000, price: 110000, status: "ordered" },
+  { id: 206, projectId: 1, room: "الريسبشن", name: "ثريا كريستال معاصرة", supplier: "معرض الإضاءة الذهبي - وسط البلد", phone: "01067778889", dims: "قطر ٩٠ سم", material: "كريستال وإطار نحاسي", code: "LT-90", leadDays: 12, color: "#C8A27A", image: "", qty: 1, cost: 21000, price: 27500, status: "proposed" },
+], localize);
 
 // Electronic quote acceptances keyed by quote number: { name, img (png data URL), total, at }.
 export const signaturesStore = createPersistedStore("miyar:signatures:v1", {}, (x) => x);

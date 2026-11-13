@@ -21,3 +21,12 @@ export const groupByRoom = (items) =>
     (m[i.room || ""] ||= []).push(i);
     return m;
   }, {});
+
+/** wa.me link to a supplier (digits only; Egyptian local 01xxxxxxxxx -> 20 prefix). */
+export function supplierWa(phone, text = "") {
+  let d = String(phone || "").replace(/\D/g, "");
+  if (!d) return "";
+  if (d.startsWith("00")) d = d.slice(2);
+  else if (d.startsWith("0")) d = "20" + d.slice(1);
+  return `https://wa.me/${d}${text ? "?text=" + encodeURIComponent(text) : ""}`;
+}

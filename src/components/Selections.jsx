@@ -1,14 +1,30 @@
 import { useState } from "react";
-import { Armchair, Check, X, Download, Plus } from "lucide-react";
+import { Armchair, Check, X, Download, Plus, ImagePlus, MessageCircle, Clock, Ruler, ChevronDown, Trash2 } from "lucide-react";
+import Photo from "./Photo";
+import { fileToDataUrl } from "../lib/image";
 import { tr_ as T, E, money } from "../i18n";
 import { PROJECTS, CLIENT_PROJECT_ID } from "../data/seed";
 import { selectionsStore } from "../data/stores";
-import { selectionTotals, groupByRoom, linePrice, lineCost } from "../lib/selections";
+import { selectionTotals, groupByRoom, linePrice, lineCost, supplierWa } from "../lib/selections";
 import { toCsv, download } from "../lib/accountant";
 
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
 const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200" };
-const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "" };
+const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "", image: "", phone: "", dims: "", material: "", code: "", leadDays: "", color: "#C8A27A" };
+
+/** Photo tile; without a photo it shows the finish colour as a swatch. */
+function Thumb({ i, size = "w-full md:w-28 h-44 md:h-28", onZoom }) {
+  const swatch = (
+    <div className="w-full h-full flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${i.color || "#D9D4CB"}, color-mix(in srgb, ${i.color || "#D9D4CB"} 55%, white))` }}>
+      <Armchair className="w-8 h-8 text-white/80" aria-hidden="true" />
+    </div>
+  );
+  return (
+    <button type="button" disabled={!i.image} onClick={onZoom} aria-label={T("sel.zoom")} className={`${size} shrink-0 overflow-hidden rounded-xl border border-[#E6DFD0] bg-[#F0EADD] ${i.image ? "cursor-zoom-in" : "cursor-default"}`}>
+      {i.image ? <Photo src={i.image} alt={i.name} className="w-full h-full object-cover" fallbackClass="" /> : swatch}
+    </button>
+  );
+}
 
 /** Client selections & FF&E schedule. Admin proposes items per room; the client approves or rejects. */
 export default function Selections({ role = "Admin", restricted = false }) {
@@ -16,6 +32,14 @@ export default function Selections({ role = "Admin", restricted = false }) {
   const [items, setItems] = selectionsStore.use();
   const [projectId, setProjectId] = useState(isClient ? CLIENT_PROJECT_ID : PROJECTS[0].id);
   const [f, setF] = useState(empty);
+  const [more, setMore] = useState(false);
+  const [zoom, setZoom] = useState(null);
+  const [imgErr, setImgErr] = useState(false);
+  const pick = async (e) => {
+    const file = e.target.files?.[0]; e.target.value = "";
+    if (!file) return;
+    try { setImgErr(false); setF((x) => ({ ...x, image: "" })); const u = await fileToDataUrl(file); setF((x) => ({ ...x, image: u })); } catch { setImgErr(true); }
+  };
   const project = PROJECTS.find((p) => p.id === Number(projectId));
   const mine = items.filter((i) => i.projectId === project.id);
   const t = selectionTotals(mine);
@@ -24,12 +48,13 @@ export default function Selections({ role = "Admin", restricted = false }) {
   const add = (e) => {
     e.preventDefault();
     if (!f.name.trim() || !Number(f.price)) return;
-    setItems((a) => [...a, { id: Date.now(), projectId: project.id, room: f.room.trim(), name: f.name.trim(), supplier: f.supplier.trim(), qty: Number(f.qty) || 1, cost: Number(f.cost) || 0, price: Number(f.price), status: "proposed" }]);
-    setF(empty);
+    setItems((a) => [...a, { id: Date.now(), projectId: project.id, room: f.room.trim(), name: f.name.trim(), supplier: f.supplier.trim(), phone: f.phone.trim(), dims: f.dims.trim(), material: f.material.trim(), code: f.code.trim(), leadDays: Number(f.leadDays) || 0, color: f.color, image: f.image.trim(), qty: Number(f.qty) || 1, cost: Number(f.cost) || 0, price: Number(f.price), status: "proposed" }]);
+    setF(empty); setMore(false);
   };
+  const remove = (id) => setItems((a) => a.filter((i) => i.id !== id));
   const setStatus = (id, status) => setItems((a) => a.map((i) => (i.id === id ? { ...i, status } : i)));
   const exportCsv = () =>
-    download(`ffe-${project.code}.csv`, toCsv([T("sel.room"), T("sel.item"), T("sel.supplier"), T("sel.qty"), T("sel.price"), T("sel.total"), T("sel.status")], mine.map((i) => [i.room, i.name, i.supplier, i.qty, i.price, linePrice(i), T("sel.s." + i.status)])), "text/csv");
+    download(`ffe-${project.code}.csv`, toCsv([T("sel.room"), T("sel.item"), T("sel.supplier"), T("sel.phone"), T("sel.dims"), T("sel.material"), T("sel.code"), T("sel.lead"), T("sel.qty"), T("sel.price"), T("sel.total"), T("sel.status")], mine.map((i) => [i.room, i.name, i.supplier, i.phone || "", i.dims || "", i.material || "", i.code || "", i.leadDays || "", i.qty, i.price, linePrice(i), T("sel.s." + i.status)])), "text/csv");
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -59,14 +84,41 @@ export default function Selections({ role = "Admin", restricted = false }) {
         </div>
 
         {!isClient && (
-          <form onSubmit={add} className="bg-white rounded-lg border border-[#E6DFD0] p-4 flex flex-wrap gap-2 items-end">
-            <input placeholder={T("sel.room")} value={f.room} onChange={(e) => setF({ ...f, room: e.target.value })} className={input + " w-32"} />
-            <input required placeholder={T("sel.item")} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} className={input + " flex-1 min-w-36"} />
-            <input placeholder={T("sel.supplier")} value={f.supplier} onChange={(e) => setF({ ...f, supplier: e.target.value })} className={input + " w-32"} />
-            <input type="number" min={1} placeholder={T("sel.qty")} value={f.qty} onChange={(e) => setF({ ...f, qty: e.target.value })} className={input + " w-20"} />
-            {!restricted && <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />}
-            <input required type="number" min={1} placeholder={T("sel.price")} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#17614F] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
+          <form onSubmit={add} className="bg-white rounded-2xl border border-[#E6DFD0] p-4 space-y-3">
+            <div className="flex flex-wrap gap-2 items-end">
+              <input placeholder={T("sel.room")} value={f.room} onChange={(e) => setF({ ...f, room: e.target.value })} className={input + " w-32"} />
+              <input required placeholder={T("sel.item")} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} className={input + " flex-1 min-w-36"} />
+              <input placeholder={T("sel.supplier")} value={f.supplier} onChange={(e) => setF({ ...f, supplier: e.target.value })} className={input + " w-40"} />
+              <input type="number" min={1} placeholder={T("sel.qty")} value={f.qty} onChange={(e) => setF({ ...f, qty: e.target.value })} className={input + " w-20"} />
+              {!restricted && <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />}
+              <input required type="number" min={1} placeholder={T("sel.price")} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} className={input + " w-28"} />
+            </div>
+            <button type="button" onClick={() => setMore((v) => !v)} aria-expanded={more} className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#17614F] cursor-pointer">
+              <ChevronDown className={`w-4 h-4 transition-transform ${more ? "rotate-180" : ""}`} aria-hidden="true" />{T("sel.details")}
+            </button>
+            {more && (
+              <div className="grid md:grid-cols-[11rem_1fr] gap-4 animate-in">
+                <div>
+                  <p className="text-[11px] font-bold text-[#555B53] mb-1.5">{T("sel.photo")}</p>
+                  <div className="h-36 rounded-xl overflow-hidden border border-dashed border-[#D5CCB8] bg-[#F7F3EA]">
+                    {f.image ? <Photo src={f.image} alt="" className="w-full h-full object-cover" /> : <label className="h-full flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#555B53] cursor-pointer"><ImagePlus className="w-6 h-6" aria-hidden="true" />{T("sel.photo.add")}<input type="file" accept="image/*" onChange={pick} className="sr-only" /></label>}
+                  </div>
+                  {f.image
+                    ? <button type="button" onClick={() => setF({ ...f, image: "" })} className="mt-1.5 text-[11px] font-semibold text-rose-700 cursor-pointer">{T("sel.photo.remove")}</button>
+                    : <input placeholder={T("sel.photo.url")} value={f.image} onChange={(e) => setF({ ...f, image: e.target.value })} className={input + " mt-1.5 w-full"} />}
+                  {imgErr && <p className="mt-1 text-[11px] text-rose-700">{T("sel.uploadFail")}</p>}
+                </div>
+                <div className="grid sm:grid-cols-2 gap-2 content-start">
+                  <input placeholder={T("sel.phone")} inputMode="tel" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} className={input} />
+                  <input placeholder={T("sel.lead")} type="number" min={0} value={f.leadDays} onChange={(e) => setF({ ...f, leadDays: e.target.value })} className={input} />
+                  <input placeholder={T("sel.dims")} value={f.dims} onChange={(e) => setF({ ...f, dims: e.target.value })} className={input} />
+                  <input placeholder={T("sel.code")} value={f.code} onChange={(e) => setF({ ...f, code: e.target.value })} className={input} />
+                  <input placeholder={T("sel.material")} value={f.material} onChange={(e) => setF({ ...f, material: e.target.value })} className={input + " sm:col-span-2"} />
+                  <label className="flex items-center gap-2 text-[11px] font-bold text-[#555B53]">{T("sel.color")}<input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} className="h-8 w-10 rounded-md border border-[#E6DFD0] bg-white p-0.5" /></label>
+                </div>
+              </div>
+            )}
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
           </form>
         )}
 
@@ -75,27 +127,50 @@ export default function Selections({ role = "Admin", restricted = false }) {
           <section key={room} className="space-y-2">
             <h2 className="text-sm font-semibold text-[#1F2421]">{room || T("sel.general")}</h2>
             {list.map((i) => (
-              <div key={i.id} className="bg-white rounded-lg border border-[#E6DFD0] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#1F2421]">{i.name}</p>
-                  <p className="text-[11px] font-bold text-[#555B53]">{i.supplier && i.supplier + " · "}{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && ` · ${T("sel.cost")}: ${money(lineCost(i))}`}</p>
-                </div>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${badge[i.status]}`}>{T("sel.s." + i.status)}</span>
-                <div className="flex gap-2">
-                  {isClient && i.status === "proposed" && (
-                    <>
-                      <button type="button" onClick={() => setStatus(i.id, "rejected")} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-bold text-rose-700 bg-rose-50 border border-rose-200 cursor-pointer"><X className="w-3.5 h-3.5" />{T("sel.reject")}</button>
-                      <button type="button" onClick={() => setStatus(i.id, "approved")} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 cursor-pointer"><Check className="w-3.5 h-3.5" />{T("sel.approve")}</button>
-                    </>
+              <article key={i.id} className="bg-white rounded-2xl border border-[#E6DFD0] p-3 md:p-4 flex flex-col md:flex-row gap-3 md:gap-4">
+                <Thumb i={i} onZoom={() => i.image && setZoom(i)} />
+                <div className="flex-1 min-w-0 flex flex-col gap-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <p className="text-base font-semibold text-[#1F2421] leading-snug">{i.name}</p>
+                      {i.supplier && <p className="text-xs text-[#555B53] mt-0.5">{i.supplier}</p>}
+                    </div>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit shrink-0 ${badge[i.status]}`}>{T("sel.s." + i.status)}</span>
+                  </div>
+                  {(i.dims || i.material || i.code || i.leadDays > 0) && (
+                    <ul className="flex flex-wrap gap-1.5 text-[11px] text-[#555B53]">
+                      {i.dims && <li className="inline-flex items-center gap-1 rounded-md bg-[#F7F3EA] border border-[#E6DFD0] px-2 py-0.5"><Ruler className="w-3 h-3" aria-hidden="true" />{i.dims}</li>}
+                      {i.material && <li className="inline-flex items-center gap-1.5 rounded-md bg-[#F7F3EA] border border-[#E6DFD0] px-2 py-0.5"><span className="w-2.5 h-2.5 rounded-full border border-black/10" style={{ background: i.color }} aria-hidden="true" />{i.material}</li>}
+                      {i.code && <li className="rounded-md bg-[#F7F3EA] border border-[#E6DFD0] px-2 py-0.5 tabular-nums">{i.code}</li>}
+                      {i.leadDays > 0 && <li className="inline-flex items-center gap-1 rounded-md bg-[#F6ECD6] border border-[#E9D7AE] text-[#7A5415] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T("sel.leadTag", { d: i.leadDays })}</li>}
+                    </ul>
                   )}
-                  {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#17614F] hover:bg-[#17614F] cursor-pointer">{T("sel.order")}</button>}
-                  {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-[#1F2421] bg-white border border-[#E6DFD0] cursor-pointer">{T("sel.repropose")}</button>}
+                  <p className="text-sm font-semibold text-[#1F2421] tabular-nums">{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && <span className="text-xs font-medium text-[#6F756B]">{` · ${T("sel.cost")}: ${money(lineCost(i))}`}</span>}</p>
+                  <div className="flex flex-wrap items-center gap-2 mt-auto">
+                    {isClient && i.status === "proposed" && (
+                      <>
+                        <button type="button" onClick={() => setStatus(i.id, "approved")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 cursor-pointer"><Check className="w-4 h-4" />{T("sel.approve")}</button>
+                        <button type="button" onClick={() => setStatus(i.id, "rejected")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 cursor-pointer"><X className="w-4 h-4" />{T("sel.reject")}</button>
+                      </>
+                    )}
+                    {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.order")}</button>}
+                    {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] cursor-pointer">{T("sel.repropose")}</button>}
+                    {!isClient && i.phone && <a href={supplierWa(i.phone, T("sel.waMsg", { item: i.name, code: i.code || "-", project: E(project.name) }))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#17614F] bg-[#E3EFEA] hover:bg-[#d6e8e1]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.waBtn")}</a>}
+                    {!isClient && i.status !== "ordered" && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </section>
         ))}
       </div>
+      {zoom && (
+        <div role="dialog" aria-modal="true" aria-label={zoom.name} onClick={() => setZoom(null)} className="fixed inset-0 z-50 bg-[#1F2421]/80 flex flex-col items-center justify-center p-4 animate-in fade-in">
+          <button type="button" onClick={() => setZoom(null)} aria-label={T("sel.close")} className="absolute top-4 end-4 p-2 rounded-full bg-white/90 text-[#1F2421] cursor-pointer"><X className="w-5 h-5" /></button>
+          <Photo src={zoom.image} alt={zoom.name} className="max-h-[78vh] max-w-full rounded-2xl object-contain" />
+          <p className="mt-3 text-sm font-semibold text-white">{zoom.name}</p>
+        </div>
+      )}
     </main>
   );
 }
