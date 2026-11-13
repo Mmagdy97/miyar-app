@@ -12,7 +12,7 @@ export const PRICES = {
 export const PLANS = [
   { key: "free", n: 4, projects: 1 },
   { key: "pro", n: 5, projects: 3, highlight: true },
-  { key: "office", n: 5, projects: 10 },
+  { key: "office", n: 5, projects: 12 },
   { key: "enterprise", n: 4, projects: Infinity, custom: true },
 ];
 

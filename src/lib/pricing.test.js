@@ -16,7 +16,7 @@ describe("pricing", () => {
   it("limits by active projects", () => {
     expect(projectLimit("free")).toBe(1);
     expect(projectLimit("pro")).toBe(3);
-    expect(projectLimit("office")).toBe(10);
+    expect(projectLimit("office")).toBe(12);
     expect(PLANS.length).toBe(4);
   });
 });
