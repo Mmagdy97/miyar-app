@@ -16,14 +16,20 @@ export const PLANS = [
   { key: "enterprise", n: 4, projects: Infinity, custom: true },
 ];
 
-/** Annual billing = pay 10 months. */
-export const YEAR_MONTHS = 10;
+/** Billing cycles: months prepaid and the share of the list price paid (12 months = pay 10). */
+export const CYCLES = [
+  { months: 1, factor: 1, save: 0 },
+  { months: 3, factor: 0.95, save: 5 },
+  { months: 6, factor: 0.88, save: 12 },
+  { months: 12, factor: 10 / 12, save: 17 },
+];
 
-export function planPrice(currency, index, yearly = false) {
+/** Total due for one billing cycle (monthly list price x months x cycle factor). */
+export function planPrice(currency, index, months = 1) {
   const list = PRICES[currency];
   if (!list || PLANS[index]?.custom) return null;
-  const m = list[index];
-  return yearly ? m * YEAR_MONTHS : m;
+  const c = CYCLES.find((x) => x.months === months) || CYCLES[0];
+  return Math.round(list[index] * c.months * c.factor);
 }
 
 export function projectLimit(planKey) {

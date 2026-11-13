@@ -4,12 +4,12 @@ import { Check, ArrowRight } from "lucide-react";
 import { formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
 
-import { PRICES, PLANS, planPrice } from "../lib/pricing";
+import { PRICES, PLANS, CYCLES, planPrice } from "../lib/pricing";
 
 export function PricingSection({ onStart }) {
   const { t, currency } = useI18n();
   const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
-  const [yearly, setYearly] = useState(false);
+  const [months, setMonths] = useState(12);
   const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#17614F] text-white" : "text-[#555B53] hover:bg-[#F0EADD]"}`;
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
@@ -24,17 +24,19 @@ export function PricingSection({ onStart }) {
               </button>
             ))}
           </div>
-          <div role="group" aria-label={t("pricing.billing")} className="inline-flex gap-1 p-1 rounded-xl bg-white border border-[#E6DFD0]">
-            <button onClick={() => setYearly(false)} aria-pressed={!yearly} className={pill(!yearly)}>{t("pricing.monthly")}</button>
-            <button onClick={() => setYearly(true)} aria-pressed={yearly} className={pill(yearly)}>
-              {t("pricing.yearly")} <span className={yearly ? "text-[#FDBA74]" : "text-[#17614F]"}>· {t("pricing.save")}</span>
-            </button>
+          <div role="group" aria-label={t("pricing.billing")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#E6DFD0]">
+            {CYCLES.map((c) => (
+              <button key={c.months} onClick={() => setMonths(c.months)} aria-pressed={months === c.months} className={pill(months === c.months)}>
+                {t(`pricing.cycle.${c.months}`)}
+                {c.save > 0 && <span className={`ms-1.5 ${months === c.months ? "text-[#FDBA74]" : "text-[#17614F]"}`}>· {c.months === 12 ? t("pricing.save12") : t("pricing.save", { n: c.save })}</span>}
+              </button>
+            ))}
           </div>
         </div>
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
         {PLANS.map((p, i) => {
-          const price = planPrice(cur, i, yearly);
+          const price = planPrice(cur, i, months);
           return (
             <div
               key={p.key}
@@ -51,7 +53,8 @@ export function PricingSection({ onStart }) {
                 ) : (
                   <>
                     <span className={`font-display text-3xl font-semibold tabular-nums text-[#1F2421]`}>{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
-                    <span className={`text-sm font-semibold text-[#555B53]`}>{yearly ? t("pricing.perYear") : t("pricing.perMonth")}</span>
+                    {price > 0 && <span className={`text-sm font-semibold text-[#555B53]`}>{t(`pricing.per.${months}`)}</span>}
+                    {months > 1 && price > 0 && <span className="block mt-1 text-xs text-[#6F756B] tabular-nums">{t("pricing.eq", { p: formatMoney(Math.round(price / months), cur, intlLocale(), { compact: true }) })}</span>}
                   </>
                 )}
               </p>
