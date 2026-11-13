@@ -6,13 +6,15 @@ import { tr_ as T, E } from "../i18n";
 import { CLIENT_PROJECT_ID } from "../data/seed";
 import { moodStore } from "../data/stores";
 import { cleanTile } from "../lib/moodboard";
+import { moodRepo } from "../data/moodboard";
+import { projectsStore } from "../data/projects";
 
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
 
 /** Moodboard: the designer pins images, colours and notes; the client likes the ones they love. */
-function MoodboardInner({ role = "Admin", projects }) {
+function MoodboardInner({ role = "Admin", projects, data }) {
   const isClient = role === "Client";
-  const [tiles, setTiles] = moodStore.use();
+  const tiles = data.tiles;
   const [projectId, setProjectId] = useState(isClient ? (projects.find((p) => p.id === CLIENT_PROJECT_ID)?.id ?? projects[0].id) : projects[0].id);
   const [kind, setKind] = useState("image");
   const [value, setValue] = useState("#c8a27a");
@@ -26,12 +28,12 @@ function MoodboardInner({ role = "Admin", projects }) {
     const t = cleanTile({ kind, value, caption });
     if (!t) return setBad(true);
     setBad(false);
-    setTiles((a) => [{ id: Date.now(), projectId: project.id, liked: false, ...t }, ...a]);
+    data.add({ projectId: project.id, ...t });
     setCaption("");
     if (kind !== "color") setValue("");
   };
-  const like = (id) => setTiles((a) => a.map((t) => (t.id === id ? { ...t, liked: !t.liked } : t)));
-  const del = (id) => setTiles((a) => a.filter((t) => t.id !== id));
+  const like = (id) => data.like(id);
+  const del = (id) => data.remove(id);
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -92,5 +94,15 @@ function NoProjects() {
 
 export default function Moodboard(props) {
   const projects = useProjectList();
-  return projects.length ? <MoodboardInner {...props} projects={projects} /> : <NoProjects />;
+  const [demo, setDemo] = moodStore.use();
+  const liveTiles = moodRepo.use();
+  const data = projectsStore.isLive
+    ? { tiles: liveTiles, add: moodRepo.add, like: moodRepo.toggleLike, remove: moodRepo.remove }
+    : {
+        tiles: demo,
+        add: (t) => setDemo((a) => [{ id: Date.now(), liked: false, ...t }, ...a]),
+        like: (id) => setDemo((a) => a.map((t) => (t.id === id ? { ...t, liked: !t.liked } : t))),
+        remove: (id) => setDemo((a) => a.filter((t) => t.id !== id)),
+      };
+  return projects.length ? <MoodboardInner {...props} projects={projects} data={data} /> : <NoProjects />;
 }

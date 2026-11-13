@@ -32,8 +32,7 @@ import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
 
 // Real (signed-in) offices: only connected sections show data. Others are held back so no demo data leaks in.
-const LIVE_READY = new Set(["Projects", "Financials & Petty Cash", "Attendance", "Procurement", "Change Orders", "Certificates", "Selections"]);
-const LIVE_LOCAL = new Set(["Moodboard"]); // work, but stored on this device for now
+const LIVE_READY = new Set(["Projects", "Financials & Petty Cash", "Attendance", "Procurement", "Change Orders", "Certificates", "Selections", "Moodboard"]);
 
 const DASHBOARD_TAB = "لوحة التحكم";
 
@@ -81,7 +80,7 @@ function MainContent({
       if (id === "Financials & Petty Cash") return <LiveFinance />;
       if (id === "Team" && currentRole === "Admin") return <LiveTeam />;
       if ((id === "BOQ & Approvals" || id === "BOQ Management") && currentRole !== "Client") return <LiveBoq />;
-      if (!LIVE_READY.has(id) && !(LIVE_LOCAL.has(id) && currentRole !== "Client")) {
+      if (!LIVE_READY.has(id)) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">
             <div className="bg-white rounded-2xl border border-[#E6DFD0] p-8 text-center max-w-md space-y-2">
@@ -317,9 +316,6 @@ function MainContent({
       key={`${currentRole}-${activeTab}`}
       className="flex-1 flex flex-col min-h-0 min-w-0 w-full max-w-full overflow-hidden tab-page-transition outline-none"
     >
-      {projectsStore.isLive && currentRole !== "Client" && LIVE_LOCAL.has((ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id) && (
-        <p className="mx-4 md:mx-8 mt-3 text-xs font-semibold text-[#7A5415] bg-[#F6ECD6] border border-[#E9D7AE] rounded-lg px-3 py-2">{T("live.local")}</p>
-      )}
       {renderScreen()}
     </main>
   );
