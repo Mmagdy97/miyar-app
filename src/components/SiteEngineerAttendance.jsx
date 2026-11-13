@@ -4,14 +4,43 @@ import { tr_ as T, E, money } from "../i18n";
 import { workersStore, attendanceStore } from "../data/stores";
 import { dayWage, monthSummary, entryRate, setRate } from "../lib/puantaj";
 import { toCsv, download } from "../lib/accountant";
+import { attendanceRepo } from "../data/attendance";
+import { projectsStore } from "../data/projects";
 
 const STATES = ["present", "half", "absent"];
 const today = () => new Date().toISOString().slice(0, 10);
 
 /** Site engineer: daily labour attendance (puantaj) with overtime and monthly wage totals. */
-export default function SiteEngineerAttendance() {
+function useDemoData() {
   const [workers, setWorkers] = workersStore.use();
   const [records, setRecords] = attendanceStore.use();
+  return {
+    workers, records,
+    mark: (id, date, entry) => setRecords((r) => ({ ...r, [date]: { ...(r[date] || {}), [id]: entry } })),
+    addWorker: (w) => setWorkers((ws) => [...ws, { id: Date.now(), ...w }]),
+    changeRate: (id, v, date) => { const res = setRate(workers, records, id, v, date); setWorkers(res.workers); setRecords(res.records); },
+  };
+}
+
+function useLiveData() {
+  const { workers, records } = attendanceRepo.use();
+  return {
+    workers, records,
+    mark: (id, date, entry) => attendanceRepo.mark(id, date, entry),
+    addWorker: (w) => attendanceRepo.addWorker(w),
+    changeRate: (id, v, date) => attendanceRepo.setRate(id, v, date, Boolean(records[date]?.[id])),
+  };
+}
+
+/** Site engineer: daily labour attendance (puantaj) with overtime and monthly wage totals. */
+const Live = () => <AttendanceView data={useLiveData()} />;
+const Demo = () => <AttendanceView data={useDemoData()} />;
+export default function SiteEngineerAttendance() {
+  return projectsStore.isLive ? <Live /> : <Demo />;
+}
+
+function AttendanceView({ data }) {
+  const { workers, records } = data;
   const [date, setDate] = useState(today());
   const [name, setName] = useState("");
   const [trade, setTrade] = useState("");
@@ -27,17 +56,16 @@ export default function SiteEngineerAttendance() {
   // each entry stores the rate of that day, so a later rate change never rewrites history
   const mark = (id, patch) => {
     const w = workers.find((x) => x.id === id);
-    setRecords((r) => ({ ...r, [date]: { ...(r[date] || {}), [id]: { s: "absent", ot: 0, r: w?.rate, ...(r[date]?.[id] || {}), ...patch } } }));
+    data.mark(id, date, { s: "absent", ot: 0, r: w?.rate, ...(records[date]?.[id] || {}), ...patch });
   };
   const saveRate = () => {
     if (!edit) return;
-    const res = setRate(workers, records, edit.id, edit.v, date);
-    setWorkers(res.workers); setRecords(res.records); setEdit(null);
+    data.changeRate(edit.id, edit.v, date); setEdit(null);
   };
   const addWorker = (e) => {
     e.preventDefault();
     if (!name.trim() || !Number(rate)) return;
-    setWorkers((w) => [...w, { id: Date.now(), name: name.trim(), trade: trade.trim(), rate: Number(rate) }]);
+    data.addWorker({ name: name.trim(), trade: trade.trim(), rate: Number(rate) });
     setName(""); setTrade(""); setRateIn("");
   };
   const exportCsv = () =>
