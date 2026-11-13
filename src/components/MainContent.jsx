@@ -26,6 +26,7 @@ import ModulePlaceholder from "./ModulePlaceholder";
 import { ROLE_CONFIG } from "../config/roles";
 import LiveDashboard from "./LiveDashboard";
 import LiveFinance from "./LiveFinance";
+import LiveTeam from "./LiveTeam";
 import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
 
@@ -77,6 +78,7 @@ function MainContent({
         if (["My Projects", "Progress Overview", "Schedule"].includes(id)) return <LiveDashboard setActiveTab={setActiveTab} role="Client" />;
       }
       if (id === "Financials & Petty Cash") return <LiveFinance />;
+      if (id === "Team" && currentRole === "Admin") return <LiveTeam />;
       if (!LIVE_READY.has(id) && !(LIVE_LOCAL.has(id) && currentRole !== "Client")) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">
