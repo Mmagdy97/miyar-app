@@ -15,6 +15,7 @@ import LandingAndLogin from "./components/LandingAndLogin";
 import { ROLE_CONFIG, ROLE_TITLES } from "./config/roles";
 import { Menu, X, Building2, Download } from "lucide-react";
 import { loadAccount, signOut } from "./lib/auth";
+import OwnerAdmin from "./components/OwnerAdmin";
 
 // Role-Based Initial Action Items & Notifications in Arabic
 const INITIAL_ACTION_ITEMS = localize([
@@ -99,6 +100,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(saved.auth));
   // "guest" = demo on local sample data; real accounts (Supabase) will add "user".
   const [account, setAccount] = useState(null);
+  const [ownerView, setOwnerView] = useState(true);
   const [authMode, setAuthMode] = useState(saved.mode || "guest");
   const [currentRole, setCurrentRole] = useState(saved.role || "");
   const [activeTab, setActiveTab] = useState(saved.tab || "لوحة التحكم");
@@ -193,6 +195,17 @@ function App() {
     }
   };
 
+  const doLogout = () => {
+    if (authMode === "user") signOut();
+    setAuthMode("guest"); setAccount(null); setOwnerView(true);
+    setIsAuthenticated(false);
+    setCurrentRole("");
+  };
+  // Platform owner lands on the owner dashboard; can open the regular app from there.
+  if (isAuthenticated && authMode === "user" && account?.isOwner && ownerView) {
+    return <OwnerAdmin name={account.name} onOpenApp={() => setOwnerView(false)} onLogout={doLogout} />;
+  }
+
   // Public Landing & Login Screen if not authenticated
   if (!isAuthenticated) {
     return (
@@ -214,6 +227,9 @@ function App() {
         {D("تخطي إلى المحتوى")}
       </a>
       <OfflineBanner />
+      {account?.isOwner && (
+        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--brass)] text-[#1F2421] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
+      )}
       {/* Mobile Drawer Backdrop Overlay */}
       {isMobileMenuOpen && (
         <div
@@ -252,12 +268,7 @@ function App() {
           onRoleChange={handleRoleChange}
           actionItems={actionItems}
           setSelectedItem={setSelectedItem}
-          onLogout={() => {
-            if (authMode === "user") signOut();
-            setAuthMode("guest"); setAccount(null);
-            setIsAuthenticated(false);
-            setCurrentRole("");
-          }}
+          onLogout={doLogout}
           onToggleMobileMenu={() => setIsMobileMenuOpen((prev) => !prev)}
           isInstallable={isInstallable}
           onInstallClick={handleInstallClick}
