@@ -7,12 +7,14 @@ import { pct } from "../data/dataI18n";
 import { certsStore } from "../data/stores";
 import { officeStore, defaultVat } from "../data/office";
 import { computeCertificate, totals } from "../lib/hakedis";
+import { certificatesRepo } from "../data/certificates";
+import { projectsStore } from "../data/projects";
 
 const NEXT = { draft: "approved", approved: "paid" };
 
 /** Admin: progress-billing certificates (مستخلصات) with retention (محتجزات) and advance recovery. */
-function CertificatesInner({ projects }) {
-  const [certs, setCerts] = certsStore.use();
+function CertificatesInner({ projects, data }) {
+  const certs = data.certs;
   const [office] = officeStore.use();
   const vatRate = office.vatRate ?? defaultVat(getCurrency());
   const [projectId, setProjectId] = useState(projects[0].id);
@@ -39,15 +41,12 @@ function CertificatesInner({ projects }) {
 
   const issue = () => {
     if (!valid) return;
-    setCerts((p) => [
-      ...p,
-      { id: Date.now(), projectId: project.id, no: mine.length + 1, date: new Date().toISOString().slice(0, 10), cumPct: pctNum, retentionPct: Number(retPct), vatRate, ...calc, status: "draft", retentionReleased: false },
-    ]);
+    data.add({ projectId: project.id, no: mine.length + 1, cumPct: pctNum, retentionPct: Number(retPct), vatRate, ...calc });
     setCumPct("");
     setAdvance(0);
   };
-  const advanceStatus = (id) => setCerts((p) => p.map((c) => (c.id === id && NEXT[c.status] ? { ...c, status: NEXT[c.status] } : c)));
-  const release = (id) => setCerts((p) => p.map((c) => (c.id === id ? { ...c, retentionReleased: !c.retentionReleased } : c)));
+  const advanceStatus = (id) => { const c = certs.find((x) => x.id === id); if (c && NEXT[c.status]) data.setStatus(id, NEXT[c.status]); };
+  const release = (id) => { const c = certs.find((x) => x.id === id); if (c) data.setReleased(id, !c.retentionReleased); };
 
   const row = (k, v, strong) => (
     <div className={`flex items-center justify-between text-xs ${strong ? "font-semibold text-[#1F2421] pt-2 border-t border-[#F0EADD]" : "text-[#555B53] font-bold"}`}>
@@ -153,5 +152,15 @@ function NoProjects() {
 
 export default function Certificates(props) {
   const projects = useProjectList();
-  return projects.length ? <CertificatesInner {...props} projects={projects} /> : <NoProjects />;
+  const [demo, setDemo] = certsStore.use();
+  const liveCerts = certificatesRepo.use();
+  const data = projectsStore.isLive
+    ? { certs: liveCerts, add: certificatesRepo.add, setStatus: certificatesRepo.setStatus, setReleased: certificatesRepo.setReleased }
+    : {
+        certs: demo,
+        add: (c) => setDemo((p) => [...p, { id: Date.now(), date: new Date().toISOString().slice(0, 10), ...c, status: "draft", retentionReleased: false }]),
+        setStatus: (id, status) => setDemo((p) => p.map((c) => (c.id === id ? { ...c, status } : c))),
+        setReleased: (id, v) => setDemo((p) => p.map((c) => (c.id === id ? { ...c, retentionReleased: v } : c))),
+      };
+  return projects.length ? <CertificatesInner {...props} projects={projects} data={data} /> : <NoProjects />;
 }

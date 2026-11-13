@@ -32,8 +32,8 @@ import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
 
 // Real (signed-in) offices: only connected sections show data. Others are held back so no demo data leaks in.
-const LIVE_READY = new Set(["Projects", "Financials & Petty Cash", "Attendance", "Procurement", "Change Orders"]);
-const LIVE_LOCAL = new Set(["Selections", "Moodboard", "Certificates"]); // work, but stored on this device for now
+const LIVE_READY = new Set(["Projects", "Financials & Petty Cash", "Attendance", "Procurement", "Change Orders", "Certificates"]);
+const LIVE_LOCAL = new Set(["Selections", "Moodboard"]); // work, but stored on this device for now
 
 const DASHBOARD_TAB = "لوحة التحكم";
 
