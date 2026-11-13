@@ -87,6 +87,8 @@ const DEMO_ROLES = [
   },
 ];
 
+import { signIn, signUp, isSupabaseConfigured } from "../lib/auth";
+
 export default function LandingAndLogin({ onLogin }) {
   const { t } = useI18n();
   const [legalPage, setLegalPage] = useState(null);
@@ -95,6 +97,20 @@ export default function LandingAndLogin({ onLogin }) {
   const [password, setPassword] = useState("••••••••");
   const [selectedRole, setSelectedRole] = useState("Admin");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mode, setMode] = useState("in");
+  const [f, setF] = useState({ email: "", password: "", name: "", office: "" });
+  const [msg, setMsg] = useState("");
+  const { currency: curNow, locale: locNow } = useI18n();
+  const submitAuth = async (e) => {
+    e.preventDefault(); setMsg("");
+    if (mode === "up" && f.password.length < 8) { setMsg(T("login.pass8")); return; }
+    setIsSubmitting(true);
+    try {
+      const acc = mode === "in" ? await signIn(f.email.trim(), f.password) : await signUp({ email: f.email.trim(), password: f.password, name: f.name.trim(), office: f.office.trim(), country: { EGP: "EG", SAR: "SA", AED: "AE", TRY: "TR" }[curNow] || "EG", currency: curNow, locale: locNow });
+      if (!acc) { setMsg(T("login.check")); setIsSubmitting(false); return; }
+      onLogin(acc.role, "user", acc);
+    } catch (err) { setMsg(T("login.err") + (err.message || "")); setIsSubmitting(false); }
+  };
 
   const openModal = (roleId = "Admin") => {
     setSelectedRole(roleId);
@@ -171,17 +187,26 @@ export default function LandingAndLogin({ onLogin }) {
               </button>
             </div>
 
-            {/* Real sign-in: wired to Supabase later; disabled until then. */}
-            <div className="mt-5 relative z-10">
-              <p className="text-sm font-semibold text-[#1F2421] mb-2.5">{T("login.signin")}</p>
-              <div className="grid gap-2">
-                <input type="email" disabled aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] bg-[#F7F3EA] text-sm opacity-70 cursor-not-allowed" />
-                <input type="password" disabled aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] bg-[#F7F3EA] text-sm opacity-70 cursor-not-allowed" />
-                <button type="button" disabled className="h-11 rounded-lg bg-[#E6DFD0] text-[#6F756B] text-sm font-semibold cursor-not-allowed">{T("login.soon")}</button>
-              </div>
-              <div className="flex items-center gap-3 my-5 text-xs text-[#6F756B]"><span className="h-px flex-1 bg-[#E6DFD0]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E6DFD0]" /></div>
-              <p className="text-sm font-semibold text-[#1F2421]">{T("login.guest")}</p>
-            </div>
+            {/* Real account (Supabase) */}
+            {isSupabaseConfigured && (
+              <form onSubmit={submitAuth} className="mt-5 relative z-10">
+                <div role="tablist" className="inline-flex gap-1 p-1 mb-3 rounded-xl bg-[#F7F3EA] border border-[#E6DFD0]">
+                  {["in", "up"].map((k) => <button key={k} type="button" role="tab" aria-selected={mode === k} onClick={() => { setMode(k); setMsg(""); }} className={`px-4 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${mode === k ? "bg-[#17614F] text-white" : "text-[#555B53]"}`}>{T("login.tab." + k)}</button>)}
+                </div>
+                <div className="grid gap-2">
+                  {mode === "up" && <>
+                    <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" />
+                    <input required value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" />
+                  </>}
+                  <input required type="email" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" dir="ltr" />
+                  <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#E6DFD0] text-sm bg-white" dir="ltr" />
+                  <button type="submit" disabled={isSubmitting} className="btn-press h-11 rounded-lg bg-[#17614F] hover:bg-[#104A3C] text-white text-sm font-semibold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
+                  {msg && <p role="alert" className="text-xs text-rose-700">{msg}</p>}
+                </div>
+              </form>
+            )}
+            <div className="flex items-center gap-3 my-5 text-xs text-[#6F756B]"><span className="h-px flex-1 bg-[#E6DFD0]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E6DFD0]" /></div>
+            <p className="text-sm font-semibold text-[#1F2421]">{T("login.guest")}</p>
 
             {/* Guest entry: pick a role, enter. Sample data, no credentials. */}
             <form onSubmit={handleFormSubmit} className="mt-2.5 relative z-10">

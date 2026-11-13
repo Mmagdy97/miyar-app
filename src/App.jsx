@@ -14,6 +14,7 @@ import ActionItemModal from "./components/ActionItemModal";
 import LandingAndLogin from "./components/LandingAndLogin";
 import { ROLE_CONFIG, ROLE_TITLES } from "./config/roles";
 import { Menu, X, Building2, Download } from "lucide-react";
+import { loadAccount, signOut } from "./lib/auth";
 
 // Role-Based Initial Action Items & Notifications in Arabic
 const INITIAL_ACTION_ITEMS = localize([
@@ -97,6 +98,7 @@ function App() {
   })();
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(saved.auth));
   // "guest" = demo on local sample data; real accounts (Supabase) will add "user".
+  const [account, setAccount] = useState(null);
   const [authMode, setAuthMode] = useState(saved.mode || "guest");
   const [currentRole, setCurrentRole] = useState(saved.role || "");
   const [activeTab, setActiveTab] = useState(saved.tab || "لوحة التحكم");
@@ -108,6 +110,12 @@ function App() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   useEffect(() => watchTableLabels(), []);
+  // Restore a real account after reload; drop the session if it expired.
+  useEffect(() => {
+    if (!isAuthenticated || authMode !== "user") return;
+    loadAccount().then((acc) => { if (acc) setAccount(acc); else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
@@ -189,8 +197,8 @@ function App() {
   if (!isAuthenticated) {
     return (
       <LandingAndLogin
-        onLogin={(role, mode = "guest") => {
-          setAuthMode(mode);
+        onLogin={(role, mode = "guest", acc = null) => {
+          setAuthMode(mode); setAccount(acc);
           setCurrentRole(role || "Admin");
           setIsAuthenticated(true);
         }}
@@ -245,6 +253,8 @@ function App() {
           actionItems={actionItems}
           setSelectedItem={setSelectedItem}
           onLogout={() => {
+            if (authMode === "user") signOut();
+            setAuthMode("guest"); setAccount(null);
             setIsAuthenticated(false);
             setCurrentRole("");
           }}
