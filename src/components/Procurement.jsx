@@ -4,14 +4,50 @@ import { tr_ as T, E, money } from "../i18n";
 import { subsStore, posStore } from "../data/stores";
 import { poTotal, subBalance, procurementTotals, subPayments, addPayment, editPayment, removePayment } from "../lib/procurement";
 import { whatsappLink } from "../lib/share";
+import { procurementRepo } from "../data/procurement";
+import { projectsStore } from "../data/projects";
 
 const PO_NEXT = { draft: "sent", sent: "received" };
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
 
-/** Admin: subcontractor contracts & payments, and purchase orders sent to suppliers via WhatsApp. */
-export default function Procurement() {
+function useDemoData() {
   const [subs, setSubs] = subsStore.use();
   const [pos, setPos] = posStore.use();
+  return {
+    subs, pos, canUndo: true, restore: setSubs,
+    addSub: (v) => setSubs((a) => [...a, { id: Date.now(), ...v, paid: 0 }]),
+    pay: (id, amt) => setSubs((a) => a.map((s) => (s.id === id ? addPayment(s, amt) : s))),
+    editPay: (id, pid, v) => setSubs((a) => a.map((s) => (s.id === id ? editPayment(s, pid, v) : s))),
+    delPay: (id, pid) => setSubs((a) => a.map((s) => (s.id === id ? removePayment(s, pid) : s))),
+    addPo: (po) => setPos((a) => [{ id: Date.now(), no: "PO-" + String(a.length + 1).padStart(3, "0"), ...po, status: "draft" }, ...a]),
+    poNext: (id, status) => setPos((a) => a.map((p) => (p.id === id ? { ...p, status } : p))),
+  };
+}
+
+function useLiveData() {
+  const { subs, pos } = procurementRepo.use();
+  const sub = (id) => subs.find((s) => s.id === id);
+  return {
+    subs, pos, canUndo: false, restore: () => {},
+    addSub: (v) => procurementRepo.addSub(v),
+    pay: (id, amt) => sub(id) && procurementRepo.pay(sub(id), amt),
+    editPay: (id, pid, v) => sub(id) && procurementRepo.editPay(sub(id), pid, v),
+    delPay: (id, pid) => procurementRepo.delPay(pid),
+    addPo: (po) => procurementRepo.addPo(po, pos.length),
+    poNext: (id, status) => procurementRepo.setPoStatus(id, status),
+  };
+}
+
+const Live = () => <ProcurementView data={useLiveData()} />;
+const Demo = () => <ProcurementView data={useDemoData()} />;
+
+/** Admin: subcontractor contracts & payments, and purchase orders sent to suppliers via WhatsApp. */
+export default function Procurement() {
+  return projectsStore.isLive ? <Live /> : <Demo />;
+}
+
+function ProcurementView({ data }) {
+  const { subs, pos } = data;
   const t = procurementTotals(subs, pos);
   const [sf, setSf] = useState({ name: "", trade: "", contract: "" });
   const [pf, setPf] = useState({ supplier: "", item: "", qty: "", price: "" });
@@ -19,24 +55,24 @@ export default function Procurement() {
   const addSub = (e) => {
     e.preventDefault();
     if (!sf.name.trim() || !Number(sf.contract)) return;
-    setSubs((a) => [...a, { id: Date.now(), name: sf.name.trim(), trade: sf.trade.trim(), contract: Number(sf.contract), paid: 0 }]);
+    data.addSub({ name: sf.name.trim(), trade: sf.trade.trim(), contract: Number(sf.contract) });
     setSf({ name: "", trade: "", contract: "" });
   };
   // every payment change keeps a snapshot so the last action can be undone
   const [undo, setUndo] = useState(null);
   const [payIn, setPayIn] = useState({});
   const [editing, setEditing] = useState(null); // { sid, pid, v }
-  const change = (fn) => { setUndo(subs); setSubs((a) => a.map(fn)); };
-  const paySub = (id, amt) => change((s) => (s.id === id ? addPayment(s, amt) : s));
-  const delPay = (id, pid) => change((s) => (s.id === id ? removePayment(s, pid) : s));
-  const savePay = () => { if (editing) { change((s) => (s.id === editing.sid ? editPayment(s, editing.pid, editing.v) : s)); setEditing(null); } };
+  const snap = () => data.canUndo && setUndo(subs);
+  const paySub = (id, amt) => { snap(); data.pay(id, amt); };
+  const delPay = (id, pid) => { snap(); data.delPay(id, pid); };
+  const savePay = () => { if (editing) { snap(); data.editPay(editing.sid, editing.pid, editing.v); setEditing(null); } };
   const addPo = (e) => {
     e.preventDefault();
     if (!pf.supplier.trim() || !pf.item.trim() || !Number(pf.qty) || !Number(pf.price)) return;
-    setPos((a) => [{ id: Date.now(), no: "PO-" + String(a.length + 1).padStart(3, "0"), supplier: pf.supplier.trim(), item: pf.item.trim(), qty: Number(pf.qty), price: Number(pf.price), status: "draft" }, ...a]);
+    data.addPo({ supplier: pf.supplier.trim(), item: pf.item.trim(), qty: Number(pf.qty), price: Number(pf.price) });
     setPf({ supplier: "", item: "", qty: "", price: "" });
   };
-  const poNext = (id) => setPos((a) => a.map((p) => (p.id === id && PO_NEXT[p.status] ? { ...p, status: PO_NEXT[p.status] } : p)));
+  const poNext = (id) => { const p = pos.find((x) => x.id === id); if (p && PO_NEXT[p.status]) data.poNext(id, PO_NEXT[p.status]); };
   const poText = (p) => T("proc.msg", { 0: p.no, 1: E(p.item), 2: `${p.qty}`, 3: money(poTotal(p)) });
 
   return (
@@ -139,7 +175,7 @@ export default function Procurement() {
       {undo && (
         <div role="status" className="fixed z-40 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 bottom-20 md:bottom-6 flex items-center gap-3 rounded-lg bg-[#17614F] text-white text-xs font-semibold ps-4 pe-2 py-2 shadow-lg">
           <span>{T("proc.undoMsg")}</span>
-          <button type="button" onClick={() => { setSubs(undo); setUndo(null); }} className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/15 hover:bg-white/25 cursor-pointer"><Undo2 className="w-4 h-4" />{T("proc.undo")}</button>
+          <button type="button" onClick={() => { data.restore(undo); setUndo(null); }} className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/15 hover:bg-white/25 cursor-pointer"><Undo2 className="w-4 h-4" />{T("proc.undo")}</button>
           <button type="button" onClick={() => setUndo(null)} aria-label={T("proc.cancel")} className="p-1.5 cursor-pointer"><X className="w-4 h-4" /></button>
         </div>
       )}
