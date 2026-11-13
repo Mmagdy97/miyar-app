@@ -7,14 +7,16 @@ import { CLIENT_PROJECT_ID } from "../data/seed";
 import { changeOrdersStore } from "../data/stores";
 import { applyChangeOrders, canDecide } from "../lib/changeorders";
 import { whatsappLink } from "../lib/share";
+import { changeOrdersRepo } from "../data/changeorders";
+import { projectsStore } from "../data/projects";
 
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
 const badge = { draft: "bg-[#F0EADD] text-[#555B53] border-[#E6DFD0]", sent: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200" };
 
 /** Change orders. Admin raises and sends them; the client approves or rejects in their portal. */
-function ChangeOrdersInner({ role = "Admin", projects }) {
+function ChangeOrdersInner({ role = "Admin", projects, data }) {
   const isClient = role === "Client";
-  const [orders, setOrders] = changeOrdersStore.use();
+  const orders = data.orders;
   const [projectId, setProjectId] = useState(isClient ? (projects.find((p) => p.id === CLIENT_PROJECT_ID)?.id ?? projects[0].id) : projects[0].id);
   const [f, setF] = useState({ title: "", desc: "", cost: "", days: "" });
   const project = (projects.find((p) => p.id === Number(projectId)) || projects[0]);
@@ -24,10 +26,10 @@ function ChangeOrdersInner({ role = "Admin", projects }) {
   const add = (e) => {
     e.preventDefault();
     if (!f.title.trim() || f.cost === "") return;
-    setOrders((a) => [{ id: Date.now(), projectId: project.id, no: a.filter((o) => o.projectId === project.id).length + 1, title: f.title.trim(), desc: f.desc.trim(), cost: Number(f.cost), days: Number(f.days) || 0, status: "draft", date: new Date().toISOString().slice(0, 10) }, ...a]);
+    data.add({ projectId: project.id, no: orders.filter((o) => o.projectId === project.id).length + 1, title: f.title.trim(), desc: f.desc.trim(), cost: Number(f.cost), days: Number(f.days) || 0 });
     setF({ title: "", desc: "", cost: "", days: "" });
   };
-  const setStatus = (id, status) => { valueMoment("co-" + status); setOrders((a) => a.map((o) => (o.id === id ? { ...o, status } : o))); };
+  const setStatus = (id, status) => { valueMoment("co-" + status); data.setStatus(id, status); };
   const text = (o) => T("co.msg", { 0: `${o.no}`, 1: o.title, 2: money(o.cost), 3: `${o.days}` });
 
   return (
@@ -103,5 +105,14 @@ function NoProjects() {
 
 export default function ChangeOrders(props) {
   const projects = useProjectList();
-  return projects.length ? <ChangeOrdersInner {...props} projects={projects} /> : <NoProjects />;
+  const [demo, setDemo] = changeOrdersStore.use();
+  const liveOrders = changeOrdersRepo.use();
+  const data = projectsStore.isLive
+    ? { orders: liveOrders, add: changeOrdersRepo.add, setStatus: changeOrdersRepo.setStatus }
+    : {
+        orders: demo,
+        add: (o) => setDemo((a) => [{ id: Date.now(), ...o, status: "draft", date: new Date().toISOString().slice(0, 10) }, ...a]),
+        setStatus: (id, status) => setDemo((a) => a.map((o) => (o.id === id ? { ...o, status } : o))),
+      };
+  return projects.length ? <ChangeOrdersInner {...props} projects={projects} data={data} /> : <NoProjects />;
 }
