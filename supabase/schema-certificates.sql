@@ -12,5 +12,6 @@ create table if not exists certificates (
   created_at timestamptz not null default now()
 );
 alter table certificates enable row level security;
+drop policy if exists cert_admin on certificates;
 create policy cert_admin on certificates for all
   using (org_id = auth_org() and auth_role() = 'admin') with check (org_id = auth_org() and auth_role() = 'admin');

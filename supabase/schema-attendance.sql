@@ -18,7 +18,9 @@ create table if not exists attendance (
 );
 alter table workers enable row level security;
 alter table attendance enable row level security;
+drop policy if exists workers_staff on workers;
 create policy workers_staff on workers for all
   using (org_id = auth_org() and is_staff()) with check (org_id = auth_org() and is_staff());
+drop policy if exists attendance_staff on attendance;
 create policy attendance_staff on attendance for all
   using (org_id = auth_org() and is_staff()) with check (org_id = auth_org() and is_staff());

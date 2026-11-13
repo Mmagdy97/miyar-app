@@ -3,7 +3,7 @@
 
 alter table projects add column if not exists client_email text;
 
-create table client_invites (
+create table if not exists client_invites (
   email text not null,
   project_id bigint not null references projects(id) on delete cascade,
   org_id uuid not null references organizations(id) on delete cascade,
@@ -31,7 +31,7 @@ begin
 end $$;
 
 -- Office admin / technical office invites a client to a project
-create function invite_client(p_project bigint, p_email text) returns text
+create or replace function invite_client(p_project bigint, p_email text) returns text
 language plpgsql security definer set search_path = public as $$
 declare v_org uuid; v_email text := lower(trim(p_email)); v_user uuid; v_user_org uuid; v_user_role app_role;
 begin

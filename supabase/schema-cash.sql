@@ -19,7 +19,9 @@ create table if not exists cash_expenses (
 );
 alter table cash_custodies enable row level security;
 alter table cash_expenses enable row level security;
+drop policy if exists cust_admin on cash_custodies;
 create policy cust_admin on cash_custodies for all
   using (org_id = auth_org() and auth_role() = 'admin') with check (org_id = auth_org() and auth_role() = 'admin');
+drop policy if exists cexp_admin on cash_expenses;
 create policy cexp_admin on cash_expenses for all
   using (org_id = auth_org() and auth_role() = 'admin') with check (org_id = auth_org() and auth_role() = 'admin');

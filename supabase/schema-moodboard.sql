@@ -10,9 +10,11 @@ create table if not exists mood_tiles (
   created_at timestamptz not null default now()
 );
 alter table mood_tiles enable row level security;
+drop policy if exists mood_staff on mood_tiles;
 create policy mood_staff on mood_tiles for all
   using (org_id = auth_org() and auth_role() in ('admin','technical_office'))
   with check (org_id = auth_org() and auth_role() in ('admin','technical_office'));
+drop policy if exists mood_client on mood_tiles;
 create policy mood_client on mood_tiles for select
   using (exists (select 1 from projects p where p.id = project_id and p.client_id = auth.uid()));
 

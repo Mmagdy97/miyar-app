@@ -13,6 +13,7 @@ create table if not exists selections (
   created_at timestamptz not null default now()
 );
 alter table selections enable row level security;
+drop policy if exists sel_staff on selections;
 create policy sel_staff on selections for all
   using (org_id = auth_org() and auth_role() in ('admin','technical_office'))
   with check (org_id = auth_org() and auth_role() in ('admin','technical_office'));

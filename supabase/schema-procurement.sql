@@ -24,6 +24,7 @@ create table if not exists purchase_orders (
 do $$ declare t text; begin
   foreach t in array array['subcontractors','sub_payments','purchase_orders'] loop
     execute format('alter table %I enable row level security', t);
+    execute format('drop policy if exists %I on %I', t||'_admin', t);
     execute format('create policy %I on %I for all using (org_id = auth_org() and auth_role() = ''admin'') with check (org_id = auth_org() and auth_role() = ''admin'')', t||'_admin', t);
   end loop;
 end $$;

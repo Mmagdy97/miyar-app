@@ -1,4 +1,4 @@
--- Run ONCE in Supabase SQL Editor, AFTER schema.sql, schema-saas.sql, schema-owner.sql, schema-projects.sql (already run).
+-- Safe to re-run. Run AFTER schema.sql, schema-saas.sql, schema-owner.sql, schema-projects.sql.
 -- Contains: clients, cash, team, attendance, procurement, changeorders, certificates, selections, moodboard.
 
 -- ===== schema-clients.sql =====
@@ -7,7 +7,7 @@
 
 alter table projects add column if not exists client_email text;
 
-create table client_invites (
+create table if not exists client_invites (
   email text not null,
   project_id bigint not null references projects(id) on delete cascade,
   org_id uuid not null references organizations(id) on delete cascade,
@@ -35,7 +35,7 @@ begin
 end $$;
 
 -- Office admin / technical office invites a client to a project
-create function invite_client(p_project bigint, p_email text) returns text
+create or replace function invite_client(p_project bigint, p_email text) returns text
 language plpgsql security definer set search_path = public as $$
 declare v_org uuid; v_email text := lower(trim(p_email)); v_user uuid; v_user_org uuid; v_user_role app_role;
 begin
@@ -54,6 +54,7 @@ begin
   update projects set client_id = v_user where id = p_project;
   return 'linked';
 end $$;
+
 
 -- ===== schema-cash.sql =====
 -- Petty cash (العهد): admin gives a custody to a named holder, then records expenses against it.
@@ -77,10 +78,13 @@ create table if not exists cash_expenses (
 );
 alter table cash_custodies enable row level security;
 alter table cash_expenses enable row level security;
+drop policy if exists cust_admin on cash_custodies;
 create policy cust_admin on cash_custodies for all
   using (org_id = auth_org() and auth_role() = 'admin') with check (org_id = auth_org() and auth_role() = 'admin');
+drop policy if exists cexp_admin on cash_expenses;
 create policy cexp_admin on cash_expenses for all
   using (org_id = auth_org() and auth_role() = 'admin') with check (org_id = auth_org() and auth_role() = 'admin');
+
 
 -- ===== schema-team.sql =====
 -- Team members. Run AFTER schema-clients.sql.
@@ -169,6 +173,7 @@ begin
   end if;
 end $$;
 
+
 -- ===== schema-attendance.sql =====
 -- Labour attendance (الحضور والعمالة). Run AFTER schema-team.sql.
 create table if not exists workers (
@@ -190,10 +195,13 @@ create table if not exists attendance (
 );
 alter table workers enable row level security;
 alter table attendance enable row level security;
+drop policy if exists workers_staff on workers;
 create policy workers_staff on workers for all
   using (org_id = auth_org() and is_staff()) with check (org_id = auth_org() and is_staff());
+drop policy if exists attendance_staff on attendance;
 create policy attendance_staff on attendance for all
   using (org_id = auth_org() and is_staff()) with check (org_id = auth_org() and is_staff());
+
 
 -- ===== schema-procurement.sql =====
 -- Subcontractors, their payments, and purchase orders. Run AFTER schema-attendance.sql. Admin only.
@@ -222,9 +230,11 @@ create table if not exists purchase_orders (
 do $$ declare t text; begin
   foreach t in array array['subcontractors','sub_payments','purchase_orders'] loop
     execute format('alter table %I enable row level security', t);
+    execute format('drop policy if exists %I on %I', t||'_admin', t);
     execute format('create policy %I on %I for all using (org_id = auth_org() and auth_role() = ''admin'') with check (org_id = auth_org() and auth_role() = ''admin'')', t||'_admin', t);
   end loop;
 end $$;
+
 
 -- ===== schema-changeorders.sql =====
 -- Change orders. Run AFTER schema-procurement.sql.
@@ -241,9 +251,11 @@ create table if not exists change_orders (
   created_at timestamptz not null default now()
 );
 alter table change_orders enable row level security;
+drop policy if exists co_staff on change_orders;
 create policy co_staff on change_orders for all
   using (org_id = auth_org() and auth_role() in ('admin','technical_office'))
   with check (org_id = auth_org() and auth_role() in ('admin','technical_office'));
+drop policy if exists co_client on change_orders;
 create policy co_client on change_orders for select
   using (status <> 'draft' and exists (select 1 from projects p where p.id = project_id and p.client_id = auth.uid()));
 
@@ -256,6 +268,7 @@ begin
       and exists (select 1 from projects p where p.id = c.project_id and p.client_id = auth.uid());
   if not found then raise exception 'not allowed'; end if;
 end $$;
+
 
 -- ===== schema-certificates.sql =====
 -- Progress-billing certificates (مستخلصات). Run AFTER schema-changeorders.sql. Admin only.
@@ -272,8 +285,10 @@ create table if not exists certificates (
   created_at timestamptz not null default now()
 );
 alter table certificates enable row level security;
+drop policy if exists cert_admin on certificates;
 create policy cert_admin on certificates for all
   using (org_id = auth_org() and auth_role() = 'admin') with check (org_id = auth_org() and auth_role() = 'admin');
+
 
 -- ===== schema-selections.sql =====
 -- Client selections / FF&E. Run AFTER schema-certificates.sql.
@@ -291,6 +306,7 @@ create table if not exists selections (
   created_at timestamptz not null default now()
 );
 alter table selections enable row level security;
+drop policy if exists sel_staff on selections;
 create policy sel_staff on selections for all
   using (org_id = auth_org() and auth_role() in ('admin','technical_office'))
   with check (org_id = auth_org() and auth_role() in ('admin','technical_office'));
@@ -316,6 +332,7 @@ begin
   if not found then raise exception 'not allowed'; end if;
 end $$;
 
+
 -- ===== schema-moodboard.sql =====
 -- Moodboard tiles. Run AFTER schema-selections.sql.
 -- Staff manage tiles; the project's client reads them and toggles "liked" through toggle_tile_like().
@@ -329,9 +346,11 @@ create table if not exists mood_tiles (
   created_at timestamptz not null default now()
 );
 alter table mood_tiles enable row level security;
+drop policy if exists mood_staff on mood_tiles;
 create policy mood_staff on mood_tiles for all
   using (org_id = auth_org() and auth_role() in ('admin','technical_office'))
   with check (org_id = auth_org() and auth_role() in ('admin','technical_office'));
+drop policy if exists mood_client on mood_tiles;
 create policy mood_client on mood_tiles for select
   using (exists (select 1 from projects p where p.id = project_id and p.client_id = auth.uid()));
 
