@@ -9,6 +9,8 @@ import { selectionsStore } from "../data/stores";
 import { selectionTotals, groupByRoom, groupBySupplier, linePrice, lineCost, supplierWa, etaOf, isLate, today, STEPS, stepIndex } from "../lib/selections";
 import { printPO, poNumber } from "../lib/po";
 import { toCsv, download } from "../lib/accountant";
+import { selectionsRepo } from "../data/selections";
+import { projectsStore } from "../data/projects";
 
 const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
 const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200", delivered: "bg-teal-50 text-teal-800 border-teal-200", installed: "bg-emerald-100 text-emerald-800 border-emerald-300" };
@@ -29,9 +31,9 @@ function Thumb({ i, size = "w-full md:w-28 h-44 md:h-28", onZoom }) {
 }
 
 /** Client selections & FF&E schedule. Admin proposes items per room; the client approves or rejects. */
-function SelectionsInner({ role = "Admin", restricted = false, projects }) {
+function SelectionsInner({ role = "Admin", restricted = false, projects, data }) {
   const isClient = role === "Client";
-  const [items, setItems] = selectionsStore.use();
+  const items = data.items;
   const [projectId, setProjectId] = useState(isClient ? (projects.find((p) => p.id === CLIENT_PROJECT_ID)?.id ?? projects[0].id) : projects[0].id);
   const [f, setF] = useState(empty);
   const [more, setMore] = useState(false);
@@ -50,13 +52,12 @@ function SelectionsInner({ role = "Admin", restricted = false, projects }) {
   const add = (e) => {
     e.preventDefault();
     if (!f.name.trim() || !Number(f.price)) return;
-    setItems((a) => [...a, { id: Date.now(), projectId: project.id, room: f.room.trim(), name: f.name.trim(), supplier: f.supplier.trim(), phone: f.phone.trim(), dims: f.dims.trim(), material: f.material.trim(), code: f.code.trim(), leadDays: Number(f.leadDays) || 0, color: f.color, image: f.image.trim(), qty: Number(f.qty) || 1, cost: Number(f.cost) || 0, price: Number(f.price), status: "proposed" }]);
+    data.add({ projectId: project.id, room: f.room.trim(), name: f.name.trim(), supplier: f.supplier.trim(), phone: f.phone.trim(), dims: f.dims.trim(), material: f.material.trim(), code: f.code.trim(), leadDays: Number(f.leadDays) || 0, color: f.color, image: f.image.trim(), qty: Number(f.qty) || 1, cost: Number(f.cost) || 0, price: Number(f.price) });
     setF(empty); setMore(false);
   };
-  const remove = (id) => setItems((a) => a.filter((i) => i.id !== id));
-  const setStatus = (id, status) =>
-    setItems((a) => a.map((i) => (i.id === id ? { ...i, status, ...(status === "ordered" ? { orderedAt: today() } : status === "delivered" ? { deliveredAt: today() } : {}) } : i)));
-  const orderAll = (list) => { const ids = new Set(list.filter((i) => i.status === "approved").map((i) => i.id)); setItems((a) => a.map((i) => (ids.has(i.id) ? { ...i, status: "ordered", orderedAt: today() } : i))); };
+  const remove = (id) => data.remove(id);
+  const setStatus = (id, status) => data.setStatus(id, status);
+  const orderAll = (list) => data.orderAll(list.filter((i) => i.status === "approved").map((i) => i.id));
   const pos = groupBySupplier(mine, ["approved", "ordered"]);
   const poWa = (po) => supplierWa(po.phone, T("sel.poMsg", { no: poNumber(project, po.supplier, today()), project: E(project.name), n: po.list.length, total: money(po.total) }));
   const exportCsv = () =>
@@ -230,5 +231,16 @@ function NoProjects() {
 
 export default function Selections(props) {
   const projects = useProjectList();
-  return projects.length ? <SelectionsInner {...props} projects={projects} /> : <NoProjects />;
+  const [demo, setDemo] = selectionsStore.use();
+  const liveItems = selectionsRepo.use();
+  const data = projectsStore.isLive
+    ? { items: liveItems, add: selectionsRepo.add, remove: selectionsRepo.remove, setStatus: selectionsRepo.setStatus, orderAll: selectionsRepo.orderAll }
+    : {
+        items: demo,
+        add: (i) => setDemo((a) => [...a, { id: Date.now(), ...i, status: "proposed" }]),
+        remove: (id) => setDemo((a) => a.filter((i) => i.id !== id)),
+        setStatus: (id, status) => setDemo((a) => a.map((i) => (i.id === id ? { ...i, status, ...(status === "ordered" ? { orderedAt: today() } : status === "delivered" ? { deliveredAt: today() } : {}) } : i))),
+        orderAll: (ids) => { const set = new Set(ids); setDemo((a) => a.map((i) => (set.has(i.id) ? { ...i, status: "ordered", orderedAt: today() } : i))); },
+      };
+  return projects.length ? <SelectionsInner {...props} projects={projects} data={data} /> : <NoProjects />;
 }
