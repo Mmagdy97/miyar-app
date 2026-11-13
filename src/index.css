@@ -38,12 +38,12 @@
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 html.dark {
-  --paper: #0D1512; --paper-2: #121C18; --surface: #14201B; --line: #26352F; --line-2: #33453D;
-  --ink: #EDE8DA; --ink-2: #A8AFA4; --ink-3: #8A9188;
-  --brand: #3FB594; --brand-hover: #2F9A7D; --brand-soft: #16302A;
-  --brass: #D9A857; --brass-soft: #2B2412;
-  --panel: #1C1914; --panel-2: #26211B; --panel-line: #332D25;
-  --sand: #17231E; --sand-2: #1D2C26; --sand-line: #2A3B34; --sand-ink: #EDE8DA;
+  --paper: #121210; --paper-2: #181816; --surface: #1C1B18; --line: #2E2C27; --line-2: #3A3730;
+  --ink: #ECE7DA; --ink-2: #B0AB9E; --ink-3: #8D887C;
+  --brand: #5BB89C; --brand-hover: #49A287; --brand-soft: #1F2B26;
+  --brass: #D4A55A; --brass-soft: #2A2416;
+  --panel: #232019; --panel-2: #2B2720; --panel-line: #38332A;
+  --sand: #1A1916; --sand-2: #201F1B; --sand-line: #2E2C27; --sand-ink: #ECE7DA;
   --shadow-1: none; --shadow-2: none;
 }
 
@@ -376,3 +376,21 @@ header button > span.rounded-full { animation: badgePop 380ms var(--ease-out); }
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
   main .rounded-full > [style*="width"] { animation: none; }
 }
+
+/* Dark: warm-neutral overrides (replace the cool/navy generated values) */
+html.dark .bg-white\/5, html.dark .bg-white\/10, html.dark .bg-white\/15 { background-color: rgb(255 255 255 / .05); }
+html.dark .bg-white\/70, html.dark .bg-white\/80, html.dark .bg-white\/90, html.dark .bg-white\/95 { background-color: color-mix(in srgb, var(--surface) 88%, transparent); }
+html.dark .bg-\[\#E3EFEA\] { background-color: var(--brand-soft); }
+html.dark .hover\:bg-\[\#d6e8e1\]:hover { background-color: #263630; }
+html.dark .bg-\[\#F6ECD6\] { background-color: var(--brass-soft); }
+html.dark .border-\[\#E9D7AE\] { border-color: #4A3E22; }
+html.dark .text-\[\#7A5415\] { color: var(--brass); }
+html.dark .bg-sky-50, html.dark .bg-teal-50, html.dark .bg-emerald-50, html.dark .bg-amber-50, html.dark .bg-rose-50, html.dark .bg-emerald-100 { background-color: color-mix(in srgb, var(--surface) 80%, currentColor 8%); }
+html.dark .border-sky-200, html.dark .border-teal-200, html.dark .border-emerald-200, html.dark .border-amber-200, html.dark .border-rose-200, html.dark .border-emerald-300 { border-color: color-mix(in srgb, currentColor 30%, var(--line)); }
+html.dark .text-sky-700, html.dark .text-teal-800 { color: #8CC4DE; }
+html.dark .text-emerald-700, html.dark .text-emerald-800 { color: #7FD0B4; }
+html.dark .text-amber-800 { color: #E0B46A; }
+html.dark .text-rose-700 { color: #F0958F; }
+html.dark button.bg-\[\#17614F\], html.dark a.bg-\[\#17614F\] { background-color: var(--brand); }
+html.dark button.bg-\[\#17614F\]:hover { background-color: var(--brand-hover); }
+html.dark .bg-\[\#F7F3EA\]\/90, html.dark .bg-\[\#F7F3EA\]\/80, html.dark .bg-\[\#F7F3EA\]\/95 { background-color: color-mix(in srgb, var(--paper) 90%, transparent); }
