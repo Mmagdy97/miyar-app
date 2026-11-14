@@ -327,7 +327,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
       {/* Requirement 3: Projects Grid Layout (Cards in grid-cols-1 md:grid-cols-2) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredProjects.map((project) => {
+        {filteredProjects.map((project, pi) => {
           const isDelayed = project.status === "متأخر";
           const isAhead = project.status === "متقدم عن الجدول";
 
@@ -348,8 +348,9 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           return (
             <div
               key={project.id}
-              className="bg-white rounded-lg border border-[#DCE4DC] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+              className="bg-white rounded-[28px] border border-[#DCE4DC] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
             >
+              <img src={`/landing/${["villa", "living", "kitchen", "office", "site"][pi % 5]}-s.webp`} alt="" loading="lazy" className="w-full h-36 sm:h-44 object-cover" />
               {/* Card Header: Project Name & Client Name + Status Badge */}
               <div className="p-5 md:p-6 pb-4 border-b border-[#E8EFE9] flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
