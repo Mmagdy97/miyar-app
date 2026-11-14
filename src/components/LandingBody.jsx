@@ -11,43 +11,20 @@ import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
 
 const ROLES = [
-  { id: "Admin", key: "admin", Icon: Building2, tone: "lp-t1" },
-  { id: "Site Engineer", key: "site", Icon: HardHat, tone: "lp-t2" },
-  { id: "Technical Office", key: "tech", Icon: FileCode, tone: "lp-t3" },
-  { id: "Client", key: "client", Icon: ShieldCheck, tone: "lp-t4" },
+  { id: "Admin", key: "admin", Icon: Building2, tone: "lp-t1", img: "villa" },
+  { id: "Site Engineer", key: "site", Icon: HardHat, tone: "lp-t2", img: "site" },
+  { id: "Technical Office", key: "tech", Icon: FileCode, tone: "lp-t3", img: "living" },
+  { id: "Client", key: "client", Icon: ShieldCheck, tone: "lp-t4", img: "couple" },
 ];
 
 const FEATURES = [
-  { k: "f1", Icon: Calculator, tone: "lp-t1", wide: true },
+  { k: "f1", Icon: Calculator, tone: "lp-t1", wide: true, img: "kitchen" },
   { k: "f2", Icon: Wallet, tone: "lp-t2" },
   { k: "f3", Icon: Coins, tone: "lp-t3" },
   { k: "f4", Icon: CheckCheck, tone: "lp-t4" },
   { k: "f5", Icon: ClipboardList, tone: "lp-t1" },
-  { k: "f6", Icon: WifiOff, tone: "lp-t2", wide: true },
+  { k: "f6", Icon: WifiOff, tone: "lp-t2", wide: true, img: "site" },
 ];
-
-function HeroArt() {
-  // Stylised modern building at dusk: curved volumes, lit windows, pool
-  return (
-    <svg aria-hidden="true" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" className="absolute inset-x-0 bottom-0 w-full h-[40%] -z-10">
-      <defs>
-        <linearGradient id="lpg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F7F3EE" /><stop offset="1" stopColor="#E2D6CA" /></linearGradient>
-        <linearGradient id="lpg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FFD9A8" /><stop offset="1" stopColor="#F2A87C" /></linearGradient>
-        <linearGradient id="lpg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#8EC5D2" /><stop offset="1" stopColor="#5FA3B5" /></linearGradient>
-      </defs>
-      <path d="M0 300 C200 240 360 280 560 250 C760 220 980 270 1200 230 V420 H0Z" fill="#9DB8A6" opacity=".35" />
-      <path d="M0 340 C240 300 420 330 640 305 C860 280 1020 320 1200 300 V420 H0Z" fill="#7F9C8A" opacity=".45" />
-      <rect x="250" y="236" width="700" height="62" rx="31" fill="url(#lpg1)" />
-      <rect x="320" y="176" width="520" height="72" rx="36" fill="#fff" opacity=".96" />
-      <rect x="360" y="192" width="440" height="40" rx="20" fill="url(#lpg2)" />
-      <g fill="#fff" opacity=".7"><rect x="392" y="200" width="54" height="24" rx="12" /><rect x="462" y="200" width="54" height="24" rx="12" /><rect x="532" y="200" width="54" height="24" rx="12" /><rect x="602" y="200" width="54" height="24" rx="12" /><rect x="672" y="200" width="54" height="24" rx="12" /></g>
-      <rect x="290" y="252" width="620" height="30" rx="15" fill="url(#lpg2)" opacity=".9" />
-      <rect x="230" y="296" width="740" height="124" rx="40" fill="url(#lpg3)" />
-      <path d="M260 318 H940" stroke="#fff" strokeOpacity=".5" strokeWidth="3" strokeLinecap="round" />
-      <path d="M300 346 H900" stroke="#fff" strokeOpacity=".3" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 export default function LandingBody({ openModal, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
@@ -58,8 +35,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       <ScrollArt bare />
       <div className="p-3 sm:p-4 w-full">
         <section className="lp-hero">
-          <div className="lp-sun" aria-hidden="true" />
-          <HeroArt />
+          <img src="/landing/villa.webp" alt="" fetchpriority="high" className="absolute inset-0 w-full h-full object-cover -z-20" />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
 
           {/* Floating pill nav */}
           <header className="lp-nav relative z-10 flex items-center justify-between gap-3 px-4 sm:px-8 pt-4 sm:pt-6">
@@ -84,8 +61,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           {/* Headline */}
           <div className="relative z-10 px-5 sm:px-12 pt-10 sm:pt-16 text-start max-w-3xl hero-in">
             <p className="text-[11px] sm:text-xs tracking-[.18em] uppercase font-semibold opacity-70">{T("lp.kicker")}</p>
-            <h1 className="mt-4 font-display font-semibold leading-[1.1] text-[2.6rem] sm:text-6xl xl:text-7xl">
-              {T("lp.h1a")}<br /><span className="text-[#C4724F]">{T("lp.h1b")}</span>
+            <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.6rem] sm:text-6xl xl:text-7xl">
+              {T("lp.h1a")}<br /><span className="text-[#FFD2B5]">{T("lp.h1b")}</span>
             </h1>
             <p className="mt-5 max-w-lg text-base sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -115,12 +92,13 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
           {/* Bottom glass cards */}
           <div className="lp-bottom relative z-10 mt-8 sm:mt-10 px-4 sm:px-12 pb-6 sm:pb-10 grid lg:grid-cols-[1fr_1.35fr_1fr] gap-3 sm:gap-4 text-start">
-            <div className="lp-glass rounded-[28px] p-5">
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[var(--mint,#DAEBE3)] text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />{T("lp.fp.tag")}</span>
+            <div className="lp-glass rounded-[28px] p-3 pb-5">
+              <img src="/landing/living-s.webp" alt="" loading="lazy" className="w-full h-28 object-cover rounded-[20px]" />
+              <div className="px-2 pt-3"><span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[var(--mint,#DAEBE3)] text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />{T("lp.fp.tag")}</span>
               <h3 className="mt-3 font-display text-lg font-semibold">{T("lp.fp.name")}</h3>
               <p className="text-sm opacity-70">{T("lp.fp.meta")}</p>
               <div className="mt-4 h-2.5 rounded-full bg-black/10 overflow-hidden"><div className="h-full w-[65%] rounded-full bg-[var(--peach)]" /></div>
-              <p className="mt-2 text-xs font-semibold opacity-80">{T("lp.fp.prog")}</p>
+              <p className="mt-2 text-xs font-semibold opacity-80">{T("lp.fp.prog")}</p></div>
             </div>
             <div className="lp-glass rounded-[28px] p-5 grid grid-cols-4 gap-2 items-center text-center">
               {stats.map(([n, k]) => (
@@ -130,7 +108,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
                 </div>
               ))}
             </div>
-            <button onClick={() => openModal("Client")} className="lp-pill-dark rounded-[28px] p-5 text-start flex flex-col justify-between gap-4 min-h-[140px] group">
+            <button onClick={() => openModal("Client")} className="relative overflow-hidden text-white rounded-[28px] p-5 text-start flex flex-col justify-between gap-4 min-h-[170px] group isolate">
+              <img src="/landing/couple-s.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
               <div className="flex items-center justify-between"><ShieldCheck className="w-6 h-6 text-[var(--peach)]" aria-hidden="true" /><span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center group-hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span></div>
               <div><h3 className="font-display text-lg font-semibold">{T("lp.cl.t")}</h3><p className="mt-1 text-sm opacity-75 leading-relaxed">{T("lp.cl.d")}</p></div>
             </button>
@@ -146,13 +125,17 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         </div>
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {ROLES.map((r, i) => (
-            <button key={r.id} onClick={() => openModal(r.id)} style={{ transitionDelay: `${i * 70}ms` }} className="lp-card reveal p-6 text-start flex flex-col gap-4">
-              <span className={`lp-ic ${r.tone}`}><r.Icon className="w-5 h-5" aria-hidden="true" /></span>
-              <div>
-                <h3 className="font-display text-lg font-semibold text-[#1F2A26]">{T("login.role." + r.key)}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#56635B]">{T("login.desc." + r.key)}</p>
+            <button key={r.id} onClick={() => openModal(r.id)} style={{ transitionDelay: `${i * 70}ms` }} className="reveal group relative isolate overflow-hidden rounded-[28px] min-h-[380px] p-5 text-start text-white flex flex-col justify-between">
+              <img src={`/landing/${r.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20 transition-transform duration-700 group-hover:scale-105" />
+              <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
+              <div className="flex items-center justify-between">
+                <span className="lp-ic bg-white/25 backdrop-blur text-white"><r.Icon className="w-5 h-5" aria-hidden="true" /></span>
+                <span className="w-10 h-10 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </div>
-              <ArrowUpRight className="w-5 h-5 mt-auto self-end text-[#56635B] rtl:-scale-x-100" aria-hidden="true" />
+              <div>
+                <h3 className="font-display text-xl font-semibold">{T("login.role." + r.key)}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed opacity-85">{T("login.desc." + r.key)}</p>
+              </div>
             </button>
           ))}
         </div>
@@ -163,10 +146,11 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#1F2A26] text-balance">{T("lp.f.t")}</h2>
         <div className="mt-8 grid md:grid-cols-4 gap-4">
           {FEATURES.map((f, i) => (
-            <div key={f.k} style={{ transitionDelay: `${i * 60}ms` }} className={`lp-card reveal p-6 sm:p-7 text-start ${f.wide ? "md:col-span-2" : ""}`}>
-              <span className={`lp-ic ${f.tone}`}><f.Icon className="w-5 h-5" aria-hidden="true" /></span>
-              <h3 className="mt-5 font-display text-xl font-semibold text-[#1F2A26]">{T(`lp.${f.k}.t`)}</h3>
-              <p className="mt-2 text-sm sm:text-base leading-relaxed text-[#56635B]">{T(`lp.${f.k}.d`)}</p>
+            <div key={f.k} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start ${f.wide ? "md:col-span-2 min-h-[260px]" : ""} ${f.img ? "rounded-[28px] p-6 sm:p-7 text-white flex flex-col justify-end" : "lp-card p-6 sm:p-7"}`}>
+              {f.img && <><img src={`/landing/${f.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" /></>}
+              <span className={f.img ? "lp-ic bg-white/25 backdrop-blur text-white" : `lp-ic ${f.tone}`}><f.Icon className="w-5 h-5" aria-hidden="true" /></span>
+              <h3 className={`mt-5 font-display text-xl font-semibold ${f.img ? "" : "text-[#1F2A26]"}`}>{T(`lp.${f.k}.t`)}</h3>
+              <p className={`mt-2 text-sm sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[#56635B]"}`}>{T(`lp.${f.k}.d`)}</p>
             </div>
           ))}
         </div>
@@ -193,7 +177,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       {/* CTA */}
       <section id="cta" className="px-4 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
         <div className="lp-hero !min-h-0 px-6 sm:px-14 py-12 sm:py-16 text-start">
-          <div className="lp-sun !w-80 !h-80 !top-0" aria-hidden="true" />
+          <img src="/landing/living.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
           <h2 className="max-w-3xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
           <p className="mt-4 max-w-xl text-base sm:text-lg opacity-80 leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">

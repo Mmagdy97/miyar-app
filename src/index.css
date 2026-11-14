@@ -436,7 +436,7 @@ html.dark .chip-ic { background: var(--paper-2); }
 
 /* ---- Landing v5 ---- */
 .lp-hero{position:relative;isolation:isolate;overflow:hidden;border-radius:34px;min-height:max(1020px,calc(100vh - 24px));display:flex;flex-direction:column;
-  background:linear-gradient(180deg,#BBDCE6 0%,#DCEEF2 34%,#FCE9D6 68%,#F4CDB2 100%);color:#1F2A26}
+  background:#2a3a44;color:#fff}
 html.dark .lp-hero{background:linear-gradient(180deg,#0B1826 0%,#13304C 45%,#3A3560 78%,#7A4B6E 100%);color:#E8EEF5}
 .lp-sun{position:absolute;z-index:-1;width:520px;height:520px;border-radius:50%;inset-inline-end:8%;top:14%;
   background:radial-gradient(circle,#FFF3DF 0%,rgba(255,231,200,.65) 38%,transparent 70%);filter:blur(6px)}
@@ -453,3 +453,9 @@ html.dark .lp-t1,html.dark .lp-t2,html.dark .lp-t3,html.dark .lp-t4{background:r
 .lp-nav a,.lp-nav button{cursor:pointer}
 
 .lp-hero>.lp-bottom{margin-top:auto}
+
+.lp-shade{background:linear-gradient(180deg,rgba(8,18,28,.6) 0%,rgba(8,18,28,.34) 45%,rgba(8,18,28,.35) 70%,rgba(8,18,28,.62) 100%)}
+.lp-shade-card{background:linear-gradient(180deg,rgba(8,18,28,.25) 0%,rgba(8,18,28,.05) 35%,rgba(8,18,28,.78) 100%)}
+.lp-glass{color:#1F2A26}
+html.dark .lp-glass{color:var(--ink)}
+.lp-glass{background:rgba(255,255,255,.72)}
