@@ -8,7 +8,7 @@ const PLANS = { free: "مجاني", pro: "احترافي", office: "المكتب
 const STATUS = { trial: "تجربة", active: "نشط", suspended: "موقوف" };
 const TONE = { trial: "bg-amber-50 text-amber-800 border-amber-200", active: "bg-emerald-50 text-emerald-700 border-emerald-200", suspended: "bg-rose-50 text-rose-700 border-rose-200" };
 const sel = "h-9 px-2 rounded-lg border border-[#DCE4DC] bg-white text-xs font-bold text-[#1F2A26] min-w-0";
-const fmt = (d) => (d ? new Date(d).toLocaleDateString("ar-EG", { day: "numeric", month: "short", year: "numeric" }) : "—");
+const fmt = (d) => (d ? new Date(d).toLocaleDateString("ar-EG-u-nu-latn", { day: "numeric", month: "short", year: "numeric" }) : "—");
 const daysLeft = (d) => Math.ceil((new Date(d) - new Date()) / 86400000);
 
 /** Plan features are locked (come with the plan); the owner can grant any other feature on top. */

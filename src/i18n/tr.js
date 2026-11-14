@@ -419,6 +419,7 @@ export default {
   "a11y.dec": "Azalt",
   "a11y.like": "Beğen",
   "a11y.carousel": "Projeler, yana kaydır",
+  "quote.clientPh": "Müşteri adını yazın",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",

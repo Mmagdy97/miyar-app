@@ -419,6 +419,7 @@ export default {
   "a11y.dec": "Decrease",
   "a11y.like": "Like",
   "a11y.carousel": "Projects, scroll sideways",
+  "quote.clientPh": "Type the client name",
   "inv.title": "Invoices & payments",
   "inv.sub": "Record each project's payments and track collected vs due.",
   "inv.total": "Total billed",

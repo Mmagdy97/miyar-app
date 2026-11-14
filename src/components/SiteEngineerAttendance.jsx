@@ -94,7 +94,7 @@ function AttendanceView({ data }) {
 
         <div className="space-y-2">
           {workers.map((w, i) => {
-            const e = day[w.id] || { s: "absent", ot: 0 };
+            const rec = day[w.id]; const e = rec || { s: "absent", ot: 0 };
             return (
               <div key={w.id} className="bg-white rounded-lg border border-[#DCE4DC] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
@@ -116,7 +116,7 @@ function AttendanceView({ data }) {
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {STATES.map((s) => (
-                    <button key={s} type="button" onClick={() => mark(w.id, { s })} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border cursor-pointer ${e.s === s ? (s === "absent" ? "bg-rose-600 text-white border-rose-600" : "bg-[#5F6C61] text-white border-[#5F6C61]") : "bg-white text-[#56635B] border-[#DCE4DC]"}`}>{T("att.s." + s)}</button>
+                    <button key={s} type="button" onClick={() => mark(w.id, { s })} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border cursor-pointer ${rec && e.s === s ? (s === "absent" ? "bg-rose-600 text-white border-rose-600" : "bg-[#5F6C61] text-white border-[#5F6C61]") : "bg-white text-[#56635B] border-[#DCE4DC]"}`}>{T("att.s." + s)}</button>
                   ))}
                   <label className="flex items-center gap-1 text-[11px] font-bold text-[#56635B]">
                     {T("att.ot")}

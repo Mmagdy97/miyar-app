@@ -229,6 +229,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
               value={quoteClient}
               onChange={(e) => setQuoteClient(e.target.value)}
               maxLength={80}
+              placeholder={T("quote.clientPh")}
               className="w-full rounded-xl border border-[#DCE4DC] bg-white px-3 py-2 text-sm"
             />
           </label>

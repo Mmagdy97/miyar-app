@@ -126,7 +126,7 @@ export function LegalPage({ kind, onBack }) {
         <div className="space-y-6">
           {doc.sections.map(([h, t], i) => (
             <section key={h}>
-              <h2 className="text-lg font-semibold text-[#1F2A26] mb-1">{`${(i + 1).toLocaleString("ar-EG")}. ${h}`}</h2>
+              <h2 className="text-lg font-semibold text-[#1F2A26] mb-1">{`${(i + 1).toLocaleString("ar-EG-u-nu-latn")}. ${h}`}</h2>
               <p className="text-sm leading-7 text-[#56635B]">{t}</p>
             </section>
           ))}

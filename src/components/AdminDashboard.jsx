@@ -181,7 +181,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
         <div className="text-start">
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full bg-white/20 backdrop-blur px-3 py-1"><Calendar className="w-3.5 h-3.5" />{todayArabic}</span>
           <h1 className="mt-3 font-display text-3xl md:text-5xl font-semibold text-balance [text-shadow:0_2px_20px_rgba(0,0,0,.35)]">{t("adm.title")}</h1>
-          <p className="mt-2 text-sm md:text-base opacity-90 max-w-xl">{rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}</p>
+          <p className="mt-2 text-sm md:text-base text-white/90 max-w-xl [&_*]:!text-white">{rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 sm:items-stretch text-start">
           <div className="lp-glass rounded-[22px] px-5 py-3.5 flex-1 sm:flex-none sm:min-w-[250px]">
@@ -192,7 +192,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             <span><span className="text-xs font-semibold opacity-70 block">{t("adm.heroGo")}</span><span className="font-display text-lg font-semibold">{t("adm.heroPend", { n: toAr(pendingCount) })}</span></span>
             <span className="w-10 h-10 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center shrink-0"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
           </button>
-          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="btn-press lp-pill-dark rounded-full px-6 h-12 sm:h-auto sm:self-center text-sm font-semibold whitespace-nowrap">{t("adm.heroProj")}</button>
+          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="btn-press lp-pill-dark rounded-full px-6 h-12 sm:h-12 sm:self-end sm:ms-auto text-sm font-semibold whitespace-nowrap">{t("adm.heroProj")}</button>
         </div>
       </section>
 

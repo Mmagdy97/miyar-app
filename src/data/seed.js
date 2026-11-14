@@ -10,11 +10,10 @@
 import { getLocale, intlLocale, currencySymbol } from "../i18n";
 import { localize } from "./dataI18n";
 
-const AR_DIGITS = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
 
-/** Arabic-Indic digits only when the UI language is Arabic. */
+/** Latin digits everywhere (one numeral system across the UI). */
 export const toAr = (value) =>
-  getLocale() === "ar" ? String(value).replace(/\d/g, (d) => AR_DIGITS[Number(d)]) : String(value);
+  String(value);
 
 /** 5400000 -> "٥,٤٠٠,٠٠٠" (ar) | "5,400,000" (en) | "5.400.000" (tr) */
 export const formatNumber = (n) =>
