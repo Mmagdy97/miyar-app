@@ -451,3 +451,16 @@ html.dark .lp-glass{color:var(--ink)}
 .lp-glass{background:rgba(255,255,255,.72)}
 
 @media (max-width:639px){.lp-hero{min-height:0;border-radius:28px}}
+
+/* Form controls + secondary buttons inside the app: soft pills */
+.app-main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]), select, textarea) {
+  border-radius: 16px; border-color: var(--line); background-color: var(--paper);
+}
+.app-main :is(input, select, textarea):focus { outline: 2px solid var(--peach); outline-offset: 1px; border-color: transparent; }
+.app-main button.bg-white.border, .app-main button[class*="bg-[#E8EFE9]"] { border-radius: 999px; }
+/* Tables: soft header band */
+.app-main thead tr { background: var(--paper-2); }
+.app-main thead th:first-child { border-start-start-radius: 14px; border-end-start-radius: 14px; }
+.app-main thead th:last-child { border-start-end-radius: 14px; border-end-end-radius: 14px; }
+/* Segmented filter chips */
+.app-main button.rounded-full.bg-\[\#5F6C61\] { box-shadow: 0 6px 16px -8px var(--brand); }
