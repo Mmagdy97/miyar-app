@@ -39,7 +39,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
 
           {/* Floating pill nav */}
-          <header className="lp-nav relative z-10 flex items-center justify-between gap-3 px-4 sm:px-8 pt-4 sm:pt-6">
+          <header className="lp-nav relative z-[95] flex items-center justify-between gap-3 px-4 sm:px-8 pt-4 sm:pt-6">
             <div className="flex items-center gap-2.5">
               <div className="w-10 h-10 rounded-full lp-pill-dark flex items-center justify-center"><LogoMark className="w-5 h-5 text-white" /></div>
               <span className="font-display text-lg font-semibold">{T("ld.1")}</span>
