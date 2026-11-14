@@ -13,10 +13,10 @@ export function PricingSection({ onStart }) {
   const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#5F6C61] text-white" : "text-[#56635B] hover:bg-[#E8EFE9]"}`;
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-      <div className="text-start max-w-2xl mb-10">
+      <div className="text-center max-w-3xl mx-auto mb-10">
         <h2 className="font-display text-3xl sm:text-[2.4rem] font-semibold text-[#1F2A26] mb-3">{t("pricing.title")}</h2>
         <p className="text-[#56635B] mb-6">{t("pricing.sub")}</p>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#DCE4DC]">
             {Object.keys(PRICES).map((k) => (
               <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
