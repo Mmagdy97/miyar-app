@@ -420,6 +420,7 @@ export default {
   "a11y.like": "إعجاب",
   "a11y.carousel": "المشاريع، مرّر أفقيًا",
   "quote.clientPh": "اكتب اسم العميل",
+  "settings.countryCurrency": "الدولة والعملة",
   "inv.title": "الفواتير والدفعات",
   "inv.sub": "سجّل دفعات كل مشروع وتابع المحصّل والمستحق.",
   "inv.total": "إجمالي الدفعات",

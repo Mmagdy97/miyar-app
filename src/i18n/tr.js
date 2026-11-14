@@ -420,6 +420,7 @@ export default {
   "a11y.like": "Beğen",
   "a11y.carousel": "Projeler, yana kaydır",
   "quote.clientPh": "Müşteri adını yazın",
+  "settings.countryCurrency": "Ülke ve para birimi",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",

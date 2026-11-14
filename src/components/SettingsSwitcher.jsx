@@ -30,6 +30,9 @@ export default function SettingsSwitcher() {
   const curName = (code) => {
     try { return new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(code); } catch { return code; }
   };
+  const countryName = (code) => {
+    try { return new Intl.DisplayNames(intlLocale(), { type: "region" }).of(code); } catch { return code; }
+  };
   const row = (active) =>
     `w-full flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-start btn-press ${
       active ? "bg-[#5F6C61]/10 text-[#5F6C61] font-semibold" : "text-[#1F2A26] hover:bg-[#E8EFE9]"
@@ -76,13 +79,13 @@ export default function SettingsSwitcher() {
               ))}
             </div>
 
-            <p className={SECTION}>{t("settings.currency")}</p>
+            <p className={SECTION}>{t("settings.countryCurrency")}</p>
             <div className="mb-4 grid grid-cols-2 gap-1.5">
               {Object.values(CURRENCIES).map((c) => (
-                <button key={c.code} type="button" onClick={() => setCurrency(c.code)} className={`${row(c.code === currency)} !px-2.5`} title={curName(c.code)}>
+                <button key={c.code} type="button" onClick={() => setCurrency(c.code)} className={`${row(c.code === currency)} !px-2.5`} title={`${countryName(c.country)} · ${curName(c.code)}`}>
                   <span className="flex flex-col items-start leading-tight min-w-0">
-                    <span className="font-semibold tabular-nums" dir="ltr">{c.code}</span>
-                    <span className="text-[11px] opacity-70 truncate max-w-full">{curName(c.code)}</span>
+                    <span className="font-semibold">{countryName(c.country)}</span>
+                    <span className="text-[11px] opacity-70 truncate max-w-full">{curName(c.code)} · <bdi dir="ltr">{c.code}</bdi></span>
                   </span>
                   {c.code === currency && <Check className="w-4 h-4 shrink-0" aria-hidden="true" />}
                 </button>
