@@ -454,7 +454,7 @@ html.dark .lp-glass{color:var(--ink)}
 
 /* Form controls + secondary buttons inside the app: soft pills */
 .app-main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]), select, textarea) {
-  border-radius: 16px; border-color: var(--line); background-color: var(--paper);
+  border-radius: 16px; border: 1px solid var(--line-2); background-color: var(--surface); color: var(--ink);
 }
 .app-main :is(input, select, textarea):focus { outline: 2px solid var(--peach); outline-offset: 1px; border-color: transparent; }
 .app-main button.bg-white.border, .app-main button[class*="bg-[#E8EFE9]"] { border-radius: 999px; }
