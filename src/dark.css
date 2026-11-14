@@ -2,11 +2,13 @@
 html.dark .accent-\[\#5F6C61\]{accent-color:#9cab9f}
 html.dark .accent-zinc-900{accent-color:#e6e6ea}
 html.dark .bg-\[\#1F2A26\]\/40{background-color:rgb(0 0 0 / 0.4)}
+html.dark .bg-\[\#1F2A26\]\/45{background-color:rgb(0 0 0 / 0.45)}
 html.dark .bg-\[\#1F2A26\]\/50{background-color:rgb(0 0 0 / 0.5)}
 html.dark .bg-\[\#1F2A26\]\/60{background-color:rgb(0 0 0 / 0.6)}
 html.dark .bg-\[\#1F2A26\]\/70{background-color:rgb(0 0 0 / 0.7)}
 html.dark .bg-\[\#1F2A26\]\/80{background-color:rgb(0 0 0 / 0.8)}
 html.dark .bg-\[\#2E7D5B\]\/10{background-color:rgb(46 125 91 / 0.1)}
+html.dark .bg-\[\#3E5A48\]{background-color:#3e5a48}
 html.dark .bg-\[\#56635B\]{background-color:#56635b}
 html.dark .bg-\[\#5F6C61\]{background-color:#5f6c61}
 html.dark .bg-\[\#5F6C61\]\/10{background-color:rgb(95 108 97 / 0.1)}
@@ -20,6 +22,8 @@ html.dark .bg-\[\#B23A2B\]\/10{background-color:rgb(178 58 43 / 0.1)}
 html.dark .bg-\[\#C6D0C6\]{background-color:#15161a}
 html.dark .bg-\[\#DAEBE3\]{background-color:#172b22}
 html.dark .bg-\[\#DCE4DC\]{background-color:#1d251d}
+html.dark .bg-\[\#DDEFE3\]{background-color:#152d1d}
+html.dark .bg-\[\#E3ECF7\]{background-color:#122030}
 html.dark .bg-\[\#E8EFE9\]{background-color:#1b271d}
 html.dark .bg-\[\#E9EFEA\]{background-color:#1c261e}
 html.dark .bg-\[\#F2F5F1\]{background-color:#1e271c}
@@ -27,7 +31,10 @@ html.dark .bg-\[\#F2F5F1\]\/50{background-color:rgb(30 39 28 / 0.5)}
 html.dark .bg-\[\#F2F5F1\]\/60{background-color:rgb(30 39 28 / 0.6)}
 html.dark .bg-\[\#F2F5F1\]\/70{background-color:rgb(30 39 28 / 0.7)}
 html.dark .bg-\[\#F2F5F1\]\/90{background-color:rgb(30 39 28 / 0.9)}
+html.dark .bg-\[\#FBE4DF\]{background-color:#301812}
+html.dark .bg-\[\#FBEFD9\]{background-color:#302612}
 html.dark .bg-\[\#FDE8D3\]{background-color:#302112}
+html.dark .bg-\[\#FDE8D3\]\/95{background-color:rgb(48 33 18 / 0.95)}
 html.dark .bg-amber-100{background-color:#302a12}
 html.dark .bg-amber-400{background-color:#ffb900}
 html.dark .bg-amber-50{background-color:#302a12}
@@ -53,9 +60,11 @@ html.dark .bg-teal-50{background-color:#123029}
 html.dark .bg-white{background-color:#151d33}
 html.dark .bg-white\/10{background-color:rgb(21 29 51 / 0.1)}
 html.dark .bg-white\/15{background-color:rgb(21 29 51 / 0.15)}
+html.dark .bg-white\/20{background-color:rgb(21 29 51 / 0.2)}
 html.dark .bg-white\/25{background-color:rgb(21 29 51 / 0.25)}
 html.dark .bg-white\/5{background-color:rgb(21 29 51 / 0.05)}
 html.dark .bg-white\/80{background-color:rgb(21 29 51 / 0.8)}
+html.dark .bg-white\/85{background-color:rgb(21 29 51 / 0.85)}
 html.dark .bg-white\/90{background-color:rgb(21 29 51 / 0.9)}
 html.dark .bg-white\/95{background-color:rgb(21 29 51 / 0.95)}
 html.dark .border-\[\#4B574D\]{border-color:#4b574d}
@@ -63,9 +72,11 @@ html.dark .border-\[\#5F6C61\]{border-color:#5f6c61}
 html.dark .border-\[\#5F6C61\]\/30{border-color:rgb(95 108 97 / 0.3)}
 html.dark .border-\[\#BFD9CD\]{border-color:#315344}
 html.dark .border-\[\#C6D0C6\]{border-color:#1b1d21}
+html.dark .border-\[\#C9D3CA\]{border-color:#1b1c21}
 html.dark .border-\[\#DCE4DC\]{border-color:#3a4b3a}
 html.dark .border-\[\#DCE4DC\]\/60{border-color:rgb(58 75 58 / 0.6)}
 html.dark .border-\[\#DCE4DC\]\/80{border-color:rgb(58 75 58 / 0.8)}
+html.dark .border-\[\#E6ECE6\]{border-color:#394b39}
 html.dark .border-\[\#E8EFE9\]{border-color:#364e3a}
 html.dark .border-\[\#E9EFEA\]{border-color:#384d3b}
 html.dark .border-\[\#F3C3B2\]{border-color:#5d3628}
@@ -89,6 +100,7 @@ html.dark .border-white\/10{border-color:rgb(39 50 80 / 0.1)}
 html.dark .border-white\/15{border-color:rgb(39 50 80 / 0.15)}
 html.dark .border-white\/20{border-color:rgb(39 50 80 / 0.2)}
 html.dark .divide-\[\#DCE4DC\]\/60{border-color:rgb(58 75 58 / 0.6)}
+html.dark .divide-\[\#E6ECE6\]{border-color:#394b39}
 html.dark .divide-\[\#E8EFE9\]{border-color:#364e3a}
 html.dark .fill-rose-500{fill:#ff2056}
 html.dark .fill-rose-600{fill:#ff5c87}
@@ -120,7 +132,7 @@ html.dark .hover\:bg-\[\#E8EFE9\]:hover{background-color:#1b271d}
 html.dark .hover\:bg-\[\#E8EFE9\]\/20:hover{background-color:rgb(27 39 29 / 0.2)}
 html.dark .hover\:bg-\[\#F2F5F1\]:hover{background-color:#1e271c}
 html.dark .hover\:bg-\[\#F2F5F1\]\/50:hover{background-color:rgb(30 39 28 / 0.5)}
-html.dark .hover\:bg-\[\#F2F5F1\]\/70:hover{background-color:rgb(30 39 28 / 0.7)}
+html.dark .hover\:bg-\[\#FBE4DF\]:hover{background-color:#301812}
 html.dark .hover\:bg-amber-100:hover{background-color:#302a12}
 html.dark .hover\:bg-emerald-100:hover{background-color:#123021}
 html.dark .hover\:bg-emerald-700:hover{background-color:#007a55}
@@ -151,13 +163,20 @@ html.dark .shadow-emerald-600\/25{--tw-shadow-color:rgb(0 153 102 / 0.25)}
 html.dark .shadow-stone-900\/10{--tw-shadow-color:rgb(28 25 23 / 0.1)}
 html.dark .text-\[\#1F2A26\]{color:#a1bab1}
 html.dark .text-\[\#1F2A26\]\/30{color:rgb(161 186 177 / 0.3)}
+html.dark .text-\[\#1F6B49\]{color:#80dab2}
+html.dark .text-\[\#2B4A72\]{color:#88a9d2}
 html.dark .text-\[\#2E7D5B\]{color:#88d3b3}
 html.dark .text-\[\#2F4A3E\]{color:#9bc0af}
+html.dark .text-\[\#3E5A48\]{color:#9ebca9}
 html.dark .text-\[\#56635B\]{color:#a5b2aa}
 html.dark .text-\[\#56635B\]\/40{color:rgb(165 178 170 / 0.4)}
 html.dark .text-\[\#5F6C61\]{color:#9cab9f}
 html.dark .text-\[\#6E7B72\]{color:#8e9f93}
+html.dark .text-\[\#7A4B0C\]{color:#f0b76a}
+html.dark .text-\[\#8A4A30\]{color:#d59d86}
+html.dark .text-\[\#9A2E20\]{color:#e38478}
 html.dark .text-\[\#9A4F35\]{color:#d59a86}
+html.dark .text-\[\#A3AE9F\]{color:#a3ae9f}
 html.dark .text-\[\#B23A2B\]{color:#df877c}
 html.dark .text-\[\#B45309\]{color:#f7a364}
 html.dark .text-\[\#CBD4CA\]{color:#cbd4ca}

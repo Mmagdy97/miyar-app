@@ -33,7 +33,7 @@ const CLIENT_UNITS = localize([
     expectedHandover: "ديسمبر 2026",
     engineer: "م. كريم مصطفى (الموقع) / م. سارة (التصميم)",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+      "/landing/villa.webp",
     badgeColor: "bg-emerald-50 text-emerald-800 border-emerald-200",
   },
   {
@@ -49,7 +49,7 @@ const CLIENT_UNITS = localize([
     expectedHandover: "مايو 2027",
     engineer: "م. ليلى رياض (مصممة الديكور)",
     image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
+      "/landing/villa.webp",
     badgeColor: "bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]",
   },
   {
@@ -65,7 +65,7 @@ const CLIENT_UNITS = localize([
     expectedHandover: "أغسطس 2027",
     engineer: "المكتب الفني / قسم التعاقدات",
     image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80",
+      "/landing/living.webp",
     badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
   },
 ]);

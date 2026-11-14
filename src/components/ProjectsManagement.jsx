@@ -120,7 +120,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       contractValue: newBudget.trim() ? parseAmount(newBudget) : 3500000,
       location: newLocation.trim() || D("القاهرة الجديدة"),
       image:
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "/landing/kitchen.webp",
     };
 
     setProjects((prev) => [newProject, ...prev]);

@@ -101,7 +101,7 @@ export const PROJECTS = [
     spentActual: 2_430_000,
     location: "التجمع الخامس - القاهرة الجديدة",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "/landing/villa.webp",
   },
   {
     id: 2,
@@ -124,7 +124,7 @@ export const PROJECTS = [
     spentActual: 1_350_000,
     location: "بوليجون سوديك - الشيخ زايد",
     image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+      "/landing/office.webp",
   },
   {
     id: 3,
@@ -147,7 +147,7 @@ export const PROJECTS = [
     spentActual: 1_980_000,
     location: "نيو جيزة - طريق الإسكندرية الصحراوي",
     image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+      "/landing/living.webp",
   },
   {
     id: 4,
@@ -170,7 +170,7 @@ export const PROJECTS = [
     spentActual: 420_000,
     location: "مصر الجديدة - القاهرة",
     image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+      "/landing/living.webp",
   },
 ].map(localize);
 

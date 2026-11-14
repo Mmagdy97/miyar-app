@@ -26,7 +26,7 @@ export const INITIAL_PENDING_EXPENSES = [
     category: "تشوين ونولون",
     receiptNumber: "REC-9821",
     invoiceImg:
-      "https://images.unsplash.com/photo-1554415707-9e4c018a482a?auto=format&fit=crop&w=700&q=80",
+      "/landing/site.webp",
   },
   {
     id: 102,
@@ -38,7 +38,7 @@ export const INITIAL_PENDING_EXPENSES = [
     category: "خامات سباكة",
     receiptNumber: "REC-9822",
     invoiceImg:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700&q=80",
+      "/landing/site.webp",
   },
   {
     id: 103,
@@ -50,7 +50,7 @@ export const INITIAL_PENDING_EXPENSES = [
     category: "مصاريف عمالة",
     receiptNumber: "REC-9823",
     invoiceImg:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=700&q=80",
+      "/landing/site.webp",
   },
   {
     id: 104,
@@ -62,7 +62,7 @@ export const INITIAL_PENDING_EXPENSES = [
     category: "نقل ونثريات",
     receiptNumber: "REC-9824",
     invoiceImg:
-      "https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?auto=format&fit=crop&w=700&q=80",
+      "/landing/site.webp",
   },
 ];
 

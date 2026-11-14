@@ -37,7 +37,7 @@ const PROJECT = clientProject();
 const PROJECT_PHASES = localize([
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+    image: "/landing/living.webp",
     title: "التصميم والمخططات",
     subtitle: "المخططات الهندسية والمود بورد ثلاثي الأبعاد",
     status: "completed",
@@ -46,7 +46,7 @@ const PROJECT_PHASES = localize([
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+    image: "/landing/kitchen.webp",
     title: "أعمال التأسيس وMEP",
     subtitle: "شبكات الصرف والتغذية والتكييف والكهرباء الذكية",
     status: "completed",
@@ -55,7 +55,7 @@ const PROJECT_PHASES = localize([
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+    image: "/landing/living.webp",
     title: "أعمال التشطيب والديكور",
     subtitle: "تركيب الرخام المستورد وتجليد الحوائط والأسقف",
     status: "active",
@@ -64,7 +64,7 @@ const PROJECT_PHASES = localize([
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    image: "/landing/villa.webp",
     title: "الفرش والتسليم النهائي",
     subtitle: "المطابخ والأثاث المخصص والفحص الشامل واستلام المفتاح",
     status: "pending",
