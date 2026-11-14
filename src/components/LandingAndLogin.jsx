@@ -219,17 +219,17 @@ export default function LandingAndLogin({ onLogin }) {
             <form onSubmit={handleFormSubmit} className="mt-2.5 relative z-10">
               <fieldset>
                 <legend className="sr-only">{T("login.pick")}</legend>
-                <div className="grid sm:grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-2 gap-2">
                   {DEMO_ROLES.map((r) => {
                     const RoleIcon = r.icon;
                     const on = selectedRole === r.id;
                     return (
-                      <label key={r.id} className={`relative flex items-start gap-3 p-3.5 rounded-[20px] border cursor-pointer transition-colors ${on ? "border-[#5F6C61] bg-[#5F6C61]/[0.06] ring-1 ring-[#5F6C61]" : "border-[#DCE4DC] bg-white hover:border-[#A3AE9F]"}`}>
+                      <label key={r.id} className={`relative flex flex-col sm:flex-row items-start gap-2 sm:gap-3 p-3 sm:p-3.5 rounded-[20px] border cursor-pointer transition-colors ${on ? "border-[#5F6C61] bg-[#5F6C61]/[0.06] ring-1 ring-[#5F6C61]" : "border-[#DCE4DC] bg-white hover:border-[#A3AE9F]"}`}>
                         <input type="radio" name="role" value={r.id} checked={on} onChange={() => setSelectedRole(r.id)} className="sr-only" />
                         <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#5F6C61] text-white" : "bg-[#E8EFE9] text-[#56635B]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
                         <span className="min-w-0">
                           <span className="block text-sm font-semibold text-[#1F2A26]">{T("login.role." + r.key)}</span>
-                          <span className="block mt-0.5 text-xs leading-relaxed text-[#6E7B72]">{T("login.desc." + r.key)}</span>
+                          <span className="hidden sm:block mt-0.5 text-xs leading-relaxed text-[#6E7B72]">{T("login.desc." + r.key)}</span>
                         </span>
                         {on && <CheckCircle2 className="absolute top-3 end-3 w-4 h-4 text-[#5F6C61]" aria-hidden="true" />}
                       </label>
@@ -237,12 +237,14 @@ export default function LandingAndLogin({ onLogin }) {
                   })}
                 </div>
               </fieldset>
+              <div className="sticky bottom-0 -mx-6 sm:mx-0 px-6 sm:px-0 pt-3 pb-3 sm:pb-0 mt-3 bg-white/95 backdrop-blur sm:bg-transparent">
               <button type="submit" disabled={isSubmitting}
-                className="btn-press mt-5 w-full h-12 rounded-full lp-pill-dark font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
+                className="btn-press w-full h-12 rounded-full lp-pill-dark font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
                 <LogIn className="w-4 h-4 ltr:-scale-x-100" aria-hidden="true" />
                 <span>{T("login.enter", { role: T("login.role." + (DEMO_ROLES.find((r) => r.id === selectedRole)?.key || "admin")) })}</span>
               </button>
-              <p className="mt-3 text-xs text-center text-[#6E7B72]">{T("login.note")}</p>
+              </div>
+              <p className="mt-1 text-xs text-center text-[#6E7B72]">{T("login.note")}</p>
             </form>
             </div>
           </div>
