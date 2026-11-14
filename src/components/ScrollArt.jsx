@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 /** Blueprint that keeps drawing as the page scrolls: a wall-path along the edge + a measuring tape with a brass gauge. */
-export default function ScrollArt() {
+export default function ScrollArt({ bare = false }) {
   const path = useRef(null), gauge = useRef(null), label = useRef(null);
   useEffect(() => {
     const root = document.documentElement;
@@ -26,6 +26,7 @@ export default function ScrollArt() {
     return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); io.disconnect(); if (raf) cancelAnimationFrame(raf); };
   }, []);
 
+  if (bare) return null;
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-y-0 end-0 z-30 hidden w-14 xl:block text-[#1F2A26]/30">
       {/* wall path: draws with scroll */}
