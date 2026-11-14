@@ -224,25 +224,15 @@ header.fixed.glass { position: fixed; }
     background: transparent !important; border: 0 !important; border-radius: 0 !important; overflow: visible !important;
   }
   .stat-grid:not(.stat-swipe) > * {
-    padding: .75rem !important; border: 1px solid var(--line) !important; border-radius: var(--r-md) !important;
-    background-color: var(--surface) !important; min-width: 0; gap: .375rem;
+    padding: .75rem !important; border-radius: var(--r-lg) !important; min-width: 0; gap: .375rem;
   }
   .stat-grid:not(.stat-swipe) > *:nth-child(odd):last-child { grid-column: span 2; }
   .stat-grid:not(.stat-swipe) .text-2xl, .stat-grid:not(.stat-swipe) .text-3xl, .stat-grid:not(.stat-swipe) .text-4xl { font-size: 20px !important; }
-  .stat-swipe {
-    display: flex !important; overflow-x: auto; gap: 10px !important; background: transparent !important;
-    border: 0 !important; border-radius: 0 !important; scroll-snap-type: x mandatory; scrollbar-width: none;
-    margin-inline: -1rem; padding-inline: 1rem; scroll-padding-inline: 1rem; padding-bottom: 2px;
-  }
+  .stat-swipe { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px !important; background: transparent !important; border: 0 !important; }
   .stat-swipe::-webkit-scrollbar { display: none; }
-  .stat-swipe > * {
-    flex: 0 0 82%; scroll-snap-align: start; border: 1px solid var(--line) !important; border-radius: var(--r-lg) !important;
-    background-color: var(--surface) !important; justify-content: flex-start !important; gap: .75rem;
-  }
-  /* full-width sections go edge-to-edge (no card-in-card squeeze); cards inside grids and form controls keep their box */
-  main main > .bg-white.border:not(select):not(input):not(textarea), main main > [class*="space-y"] > .bg-white.border:not(select):not(input):not(textarea), main main > .flex-col > .bg-white.border:not(select):not(input):not(textarea) {
-    margin-inline: -1rem; border-radius: 0 !important; border-inline-width: 0 !important; max-width: none; width: auto;
-  }
+  .stat-swipe > * { min-width: 0; padding: .875rem !important; flex: none; }
+  .stat-swipe > :last-child:nth-child(odd) { grid-column: span 2; }
+  .stat-swipe .text-2xl, .stat-swipe .text-3xl, .stat-swipe .text-4xl { font-size: 1.3rem !important; line-height: 1.2; }
   main main select, main main input, main main textarea { max-width: 100%; }
   /* data tables become stacked cards: one card per row, each cell labelled with its column */
   main table.has-labels:not(.keep-table) { display: block; min-width: 0 !important; width: 100% !important; }

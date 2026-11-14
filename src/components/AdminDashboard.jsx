@@ -384,15 +384,17 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="divide-y divide-[#E8EFE9]">
-              {INITIAL_PROJECTS.map((project) => {
+              {INITIAL_PROJECTS.map((project, pi) => {
                 const isOnTrack = project.status === "جاري العمل";
                 const team = TEAM_MEMBERS[project.id] || [];
 
                 return (
                   <div
                     key={project.id}
-                    className="p-5 hover:bg-[#F2F5F1]/70 transition-all duration-200 group"
+                    className="p-4 sm:p-5 hover:bg-[#F2F5F1]/70 transition-all duration-200 group flex gap-4 items-start"
                   >
+                    <img src={`/landing/${["villa", "living", "kitchen", "office"][pi % 4]}-s.webp`} alt="" loading="lazy" className="hidden sm:block w-28 h-28 shrink-0 rounded-[22px] object-cover" />
+                    <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
@@ -463,6 +465,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                       <span className="shrink-0 font-bold text-[#56635B] ms-2">
                         {t("adm.due", { d: project.dueDate })}
                       </span>
+                    </div>
                     </div>
                   </div>
                 );
