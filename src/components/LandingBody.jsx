@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { waLink } from "../lib/nudge";
-import {
-  ArrowUpRight, LogIn, MessageCircle, Building2, HardHat, FileCode, ShieldCheck,
-  Calculator, Wallet, Coins, CheckCheck, ClipboardList, WifiOff,
-} from "lucide-react";
+import { ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Ruler, Share2, ShieldCheck, Wallet, WifiOff } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import ScrollArt from "./ScrollArt";
@@ -90,38 +87,55 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             </div>
           </div>
 
-          {/* Bottom cards: live project · numbers · client portal (equal height) */}
-          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 px-4 sm:px-12 pb-5 sm:pb-10 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-start">
-            <div className="lp-glass rounded-[28px] p-3 flex gap-3 items-stretch lg:min-h-[184px]">
-              <img src="/landing/living-s.webp" alt="" loading="lazy" className="hidden sm:block w-28 lg:w-32 shrink-0 object-cover rounded-[20px]" />
-              <div className="min-w-0 flex-1 flex flex-col justify-between gap-3 p-1 sm:p-2">
-                <div>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[var(--mint,#DAEBE3)] text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
-                  <h3 className="mt-2.5 font-display text-base sm:text-lg font-semibold leading-snug">{T("lp.fp.name")}</h3>
-                  <p className="text-xs sm:text-sm opacity-70">{T("lp.fp.meta")}</p>
+          {/* Bottom: frosted project card (start) + paper "notch" card cut into the hero corner (end) */}
+          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-end justify-between gap-3 text-start">
+            <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:ms-12 lg:me-0 w-auto lg:w-[400px] rounded-[30px] p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
+                  <h3 className="mt-2.5 font-display text-xl font-semibold">{T("lp.fp.name")}</h3>
+                  <p className="mt-0.5 flex items-center gap-1 text-xs opacity-75"><MapPin className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.meta")}</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <svg viewBox="0 0 36 36" className="w-11 h-11 shrink-0 -rotate-90" aria-hidden="true">
-                    <circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" strokeOpacity=".12" strokeWidth="4" />
-                    <circle cx="18" cy="18" r="15" fill="none" stroke="var(--peach)" strokeWidth="4" strokeLinecap="round" strokeDasharray="94.25" strokeDashoffset={94.25 * 0.35} />
-                  </svg>
-                  <p className="text-xs font-semibold leading-tight"><span className="block font-display text-xl">65%</span><span className="opacity-70">{T("lp.fp.prog").replace(/[\d%٪]+/g, "").trim()}</span></p>
+                <button type="button" onClick={() => openModal("Admin")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#1F2A26] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+              </div>
+              <p className="mt-3 text-xs sm:text-sm leading-relaxed opacity-85">{T("lp.fp.d")}</p>
+              <div className="mt-4 flex items-end justify-between gap-3">
+                <ul className="text-xs space-y-1.5 opacity-90">
+                  <li className="flex items-center gap-1.5"><Ruler className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.area")}</li>
+                  <li className="flex items-center gap-1.5"><Hammer className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.phase")}</li>
+                </ul>
+                <div className="flex gap-2">
+                  {[[ClipboardCheck, "lp.fp.a1", "12"], [Heart, "lp.fp.a2", "8"], [Share2, "lp.fp.a3", ""]].map(([Icon, k, n]) => (
+                    <span key={k} className="flex flex-col items-center gap-1" title={T(k)}>
+                      <span className="w-10 h-10 rounded-full bg-white/60 border border-white/70 flex items-center justify-center"><Icon className="w-4 h-4" aria-hidden="true" /></span>
+                      <span className="text-[10px] font-semibold opacity-80 h-3">{n}</span>
+                    </span>
+                  ))}
                 </div>
               </div>
-            </div>
-            <div className="rounded-[28px] p-4 sm:p-6 bg-[var(--panel)] text-white col-span-2 lg:col-span-1 order-first lg:order-none grid grid-cols-4 lg:grid-cols-[repeat(2,auto)] gap-x-2 lg:gap-x-16 gap-y-4 lg:gap-y-6 content-center justify-center lg:min-h-[184px] shadow-[0_18px_40px_-18px_rgba(0,0,0,.6)]">
-              {stats.map(([n, k]) => (
-                <div key={k} className="text-center lg:text-start">
-                  <div className="font-display text-2xl sm:text-4xl font-semibold text-[var(--peach)] leading-none">{n}</div>
-                  <div className="mt-1.5 text-[11px] sm:text-xs text-white/75 leading-tight">{T(k)}</div>
+              <div className="mt-3 flex items-center gap-2">
+                <div className="flex-1 h-2 rounded-full bg-black/10 overflow-hidden"><div className="h-full w-[65%] rounded-full bg-[var(--brand)]" /></div>
+                <span className="text-xs font-bold">65%</span>
+              </div>
+            </article>
+
+            <div className="lp-notch w-full lg:w-[460px] px-5 pt-5 pb-5 sm:px-7 sm:pt-7 sm:pb-8">
+              <h3 className="font-display text-lg sm:text-xl font-semibold">{T("lp.n.t")}</h3>
+              <p className="mt-1.5 text-sm text-[#56635B] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
+              <div className="mt-5 flex items-center justify-between gap-3">
+                <div>
+                  <div className="font-display text-4xl sm:text-5xl font-semibold leading-none">16+</div>
+                  <div className="mt-1 text-xs text-[#56635B]">{T("lp.st1")}</div>
                 </div>
-              ))}
+                <div className="flex items-center">
+                  <span className="flex -space-x-3 rtl:space-x-reverse">
+                    {["site", "office", "couple"].map((im) => <img key={im} src={`/landing/${im}-s.webp`} alt="" loading="lazy" className="w-11 h-11 rounded-full object-cover border-[3px] border-[var(--paper)]" />)}
+                  </span>
+                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[#DCE4DC] bg-white text-[#1F2A26] flex items-center justify-center hover:bg-[#F2F5F1]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                </div>
+              </div>
+              <p className="mt-4 text-xs text-[#56635B]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
             </div>
-            <button onClick={() => openModal("Client")} className="relative overflow-hidden text-white rounded-[28px] p-4 sm:p-5 text-start flex flex-col justify-between gap-4 min-h-[170px] lg:min-h-[184px] group isolate">
-              <img src="/landing/couple-s.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20 group-hover:scale-105 transition-transform duration-500" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
-              <div className="flex items-center justify-between"><ShieldCheck className="w-6 h-6 text-[var(--peach)]" aria-hidden="true" /><span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center group-hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span></div>
-              <div><h3 className="font-display text-base sm:text-lg font-semibold">{T("lp.cl.t")}</h3><p className="mt-1 text-xs sm:text-sm opacity-80 leading-relaxed">{T("lp.cl.d")}</p></div>
-            </button>
           </div>
         </section>
       </div>

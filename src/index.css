@@ -486,3 +486,18 @@ html:not(.dark) :where(a, button, input, select, textarea, [tabindex]):focus-vis
 .on-photo { background: rgba(8,18,28,.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 22px; }
 
 @media (max-width: 639px) { html { font-size: 14.5px; } }
+
+/* Landing hero bottom: frosted card + paper notch cut into the hero corner */
+.lp-frost{background:rgba(236,240,244,.62);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.55);color:#1F2A26;box-shadow:0 24px 50px -24px rgba(0,0,0,.45)}
+html.dark .lp-frost{background:rgba(20,32,44,.6);border-color:rgba(255,255,255,.12);color:var(--ink)}
+.lp-notch{position:relative;background:var(--paper);color:#1F2A26}
+html.dark .lp-notch{color:var(--ink)}
+@media (min-width:1024px){
+  .lp-notch::before,.lp-notch::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none;
+    background:radial-gradient(circle at 0 0,transparent 29.5px,var(--paper) 30px)}
+  .lp-notch::before{bottom:100%;inset-inline-end:0}
+  .lp-notch::after{bottom:0;inset-inline-end:100%}
+  [dir=rtl] .lp-notch::before,[dir=rtl] .lp-notch::after{background:radial-gradient(circle at 100% 0,transparent 29.5px,var(--paper) 30px)}
+}
+.lp-notch{border-radius:30px 30px 0 0}
+@media (min-width:1024px){.lp-notch{border-radius:0;border-start-start-radius:30px}}
