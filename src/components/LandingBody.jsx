@@ -35,7 +35,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       <ScrollArt bare />
       <div className="p-3 sm:p-4 w-full">
         <section className="lp-hero">
-          <img src="/landing/villa.webp" alt="" fetchpriority="high" className="absolute inset-0 w-full h-full object-cover -z-20" />
+          <img src="/landing/villa.webp" alt="" fetchpriority="high" className="absolute inset-0 w-full h-full object-cover object-[64%_50%] sm:object-center -z-20" />
           <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
 
           {/* Floating pill nav */}
@@ -91,7 +91,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           </div>
 
           {/* Bottom glass cards */}
-          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 px-4 sm:px-12 pb-6 sm:pb-10 grid lg:grid-cols-[1fr_1.35fr_1fr] gap-3 sm:gap-4 text-start">
+          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 px-4 sm:px-12 pb-5 sm:pb-10 grid grid-cols-2 lg:grid-cols-[1fr_1.35fr_1fr] gap-3 sm:gap-4 text-start">
             <div className="lp-glass rounded-[28px] p-3 pb-5">
               <img src="/landing/living-s.webp" alt="" loading="lazy" className="w-full h-28 object-cover rounded-[20px]" />
               <div className="px-2 pt-3"><span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[var(--mint,#DAEBE3)] text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />{T("lp.fp.tag")}</span>
@@ -100,7 +100,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
               <div className="mt-4 h-2.5 rounded-full bg-black/10 overflow-hidden"><div className="h-full w-[65%] rounded-full bg-[var(--peach)]" /></div>
               <p className="mt-2 text-xs font-semibold opacity-80">{T("lp.fp.prog")}</p></div>
             </div>
-            <div className="lp-glass rounded-[28px] p-5 grid grid-cols-4 gap-2 items-center text-center">
+            <div className="lp-glass rounded-[28px] p-4 sm:p-5 grid grid-cols-4 gap-2 items-center text-center col-span-2 lg:col-span-1 order-first lg:order-none">
               {stats.map(([n, k]) => (
                 <div key={k} className="px-1 border-s first:border-s-0 border-black/10">
                   <div className="font-display text-3xl sm:text-4xl font-semibold">{n}</div>
@@ -123,9 +123,9 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#1F2A26] text-balance">{T("lp.roles.t")}</h2>
           <p className="mt-3 text-base sm:text-lg text-[#56635B]">{T("lp.roles.d")}</p>
         </div>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {ROLES.map((r, i) => (
-            <button key={r.id} onClick={() => openModal(r.id)} style={{ transitionDelay: `${i * 70}ms` }} className="reveal group relative isolate overflow-hidden rounded-[28px] min-h-[380px] p-5 text-start text-white flex flex-col justify-between">
+            <button key={r.id} onClick={() => openModal(r.id)} style={{ transitionDelay: `${i * 70}ms` }} className="reveal group relative isolate overflow-hidden rounded-[24px] sm:rounded-[28px] min-h-[250px] sm:min-h-[380px] p-3.5 sm:p-5 text-start text-white flex flex-col justify-between">
               <img src={`/landing/${r.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20 transition-transform duration-700 group-hover:scale-105" />
               <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
               <div className="flex items-center justify-between">
@@ -133,8 +133,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
                 <span className="w-10 h-10 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold">{T("login.role." + r.key)}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed opacity-85">{T("login.desc." + r.key)}</p>
+                <h3 className="font-display text-base sm:text-xl font-semibold">{T("login.role." + r.key)}</h3>
+                <p className="mt-1.5 text-xs sm:text-sm leading-relaxed opacity-85 line-clamp-3">{T("login.desc." + r.key)}</p>
               </div>
             </button>
           ))}
@@ -144,13 +144,13 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       {/* Features bento */}
       <section id="features" className="px-5 sm:px-8 pb-14 sm:pb-20 max-w-6xl mx-auto w-full">
         <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#1F2A26] text-balance">{T("lp.f.t")}</h2>
-        <div className="mt-8 grid md:grid-cols-4 gap-4">
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {FEATURES.map((f, i) => (
-            <div key={f.k} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start ${f.wide ? "md:col-span-2 min-h-[260px]" : ""} ${f.img ? "rounded-[28px] p-6 sm:p-7 text-white flex flex-col justify-end" : "lp-card p-6 sm:p-7"}`}>
+            <div key={f.k} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start ${f.wide ? "col-span-2 min-h-[220px] sm:min-h-[260px]" : ""} ${f.img ? "rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 text-white flex flex-col justify-end" : "lp-card p-4 sm:p-7"}`}>
               {f.img && <><img src={`/landing/${f.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" /></>}
               <span className={f.img ? "lp-ic bg-white/25 backdrop-blur text-white" : `lp-ic ${f.tone}`}><f.Icon className="w-5 h-5" aria-hidden="true" /></span>
-              <h3 className={`mt-5 font-display text-xl font-semibold ${f.img ? "" : "text-[#1F2A26]"}`}>{T(`lp.${f.k}.t`)}</h3>
-              <p className={`mt-2 text-sm sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[#56635B]"}`}>{T(`lp.${f.k}.d`)}</p>
+              <h3 className={`mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold ${f.img ? "" : "text-[#1F2A26]"}`}>{T(`lp.${f.k}.t`)}</h3>
+              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[#56635B]"}`}>{T(`lp.${f.k}.d`)}</p>
             </div>
           ))}
         </div>

@@ -449,3 +449,5 @@ html.dark .lp-t1,html.dark .lp-t2,html.dark .lp-t3,html.dark .lp-t4{background:r
 .lp-glass{color:#1F2A26}
 html.dark .lp-glass{color:var(--ink)}
 .lp-glass{background:rgba(255,255,255,.72)}
+
+@media (max-width:639px){.lp-hero{min-height:0;border-radius:28px}}
