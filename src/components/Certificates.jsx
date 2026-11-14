@@ -87,7 +87,7 @@ function CertificatesInner({ projects, data }) {
             <h2 className="text-sm font-semibold text-[#1F2A26]">{T("cert.new")} #{mine.length + 1}</h2>
             <div>
               <label className="block text-xs font-bold text-[#56635B] mb-1.5">{T("cert.cum")} ({T("cert.prev")}: {pct(prevPct)})</label>
-              <input type="number" min={prevPct} max={100} value={cumPct} placeholder={String(project.progress)} onChange={(e) => setCumPct(e.target.value)} className={input} />
+              <input type="number" min={prevPct} max={100} value={cumPct} placeholder={project.progress != null ? String(project.progress) : "0"} onChange={(e) => setCumPct(e.target.value)} className={input} />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
