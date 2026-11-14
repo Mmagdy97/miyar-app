@@ -86,7 +86,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
                   </button>
                 ))}
               </div>
-              <button onClick={() => openModal(role)} className="btn-press h-11 px-6 rounded-full bg-[var(--peach)] text-[var(--on-peach)] text-[14px] font-bold shrink-0">{T("lp.go")}</button>
+              <button onClick={() => openModal(role)} className="btn-press lp-pill-dark h-11 px-6 rounded-full text-[14px] font-bold shrink-0">{T("lp.go")}</button>
             </div>
           </div>
 

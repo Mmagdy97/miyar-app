@@ -207,7 +207,7 @@ export default function LandingAndLogin({ onLogin }) {
                   </>}
                   <input required type="email" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#DCE4DC] text-sm bg-white" dir="ltr" />
                   <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#DCE4DC] text-sm bg-white" dir="ltr" />
-                  <button type="submit" disabled={isSubmitting} className="btn-press h-12 rounded-full bg-[var(--peach)] text-[var(--on-peach)] text-sm font-bold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
+                  <button type="submit" disabled={isSubmitting} className="btn-press h-12 rounded-full lp-pill-dark text-sm font-bold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
                   {msg && <p role="alert" className="text-xs text-rose-700">{msg}</p>}
                 </div>
               </form>

@@ -10,7 +10,6 @@ html.dark .bg-\[\#2E7D5B\]\/10{background-color:rgb(46 125 91 / 0.1)}
 html.dark .bg-\[\#56635B\]{background-color:#56635b}
 html.dark .bg-\[\#5F6C61\]{background-color:#5f6c61}
 html.dark .bg-\[\#5F6C61\]\/10{background-color:rgb(95 108 97 / 0.1)}
-html.dark .bg-\[\#5F6C61\]\/12{background-color:rgb(95 108 97 / 0.12)}
 html.dark .bg-\[\#5F6C61\]\/15{background-color:rgb(95 108 97 / 0.15)}
 html.dark .bg-\[\#5F6C61\]\/5{background-color:rgb(95 108 97 / 0.05)}
 html.dark .bg-\[\#6E7B72\]{background-color:#6e7b72}
@@ -54,8 +53,8 @@ html.dark .bg-teal-50{background-color:#123029}
 html.dark .bg-white{background-color:#151d33}
 html.dark .bg-white\/10{background-color:rgb(21 29 51 / 0.1)}
 html.dark .bg-white\/15{background-color:rgb(21 29 51 / 0.15)}
+html.dark .bg-white\/25{background-color:rgb(21 29 51 / 0.25)}
 html.dark .bg-white\/5{background-color:rgb(21 29 51 / 0.05)}
-html.dark .bg-white\/70{background-color:rgb(21 29 51 / 0.7)}
 html.dark .bg-white\/80{background-color:rgb(21 29 51 / 0.8)}
 html.dark .bg-white\/90{background-color:rgb(21 29 51 / 0.9)}
 html.dark .bg-white\/95{background-color:rgb(21 29 51 / 0.95)}
@@ -116,7 +115,6 @@ html.dark .group:hover .group-hover\:text-amber-800{color:#ff9d5c}
 html.dark .hover\:bg-\[\#4B574D\]:hover{background-color:#4b574d}
 html.dark .hover\:bg-\[\#5F6C61\]:hover{background-color:#5f6c61}
 html.dark .hover\:bg-\[\#CDE3D8\]:hover{background-color:#182a21}
-html.dark .hover\:bg-\[\#DAEBE3\]:hover{background-color:#172b22}
 html.dark .hover\:bg-\[\#DCE4DC\]:hover{background-color:#1d251d}
 html.dark .hover\:bg-\[\#E8EFE9\]:hover{background-color:#1b271d}
 html.dark .hover\:bg-\[\#E8EFE9\]\/20:hover{background-color:rgb(27 39 29 / 0.2)}
@@ -130,6 +128,8 @@ html.dark .hover\:bg-rose-100:hover{background-color:#301214}
 html.dark .hover\:bg-rose-50:hover{background-color:#301214}
 html.dark .hover\:bg-rose-700:hover{background-color:#c70036}
 html.dark .hover\:bg-white:hover{background-color:#151d33}
+html.dark .hover\:bg-white\/10:hover{background-color:rgb(21 29 51 / 0.1)}
+html.dark .hover\:bg-white\/15:hover{background-color:rgb(21 29 51 / 0.15)}
 html.dark .hover\:bg-white\/25:hover{background-color:rgb(21 29 51 / 0.25)}
 html.dark .hover\:border-\[\#5F6C61\]:hover{border-color:#5f6c61}
 html.dark .hover\:border-\[\#A3AE9F\]:hover{border-color:#202227}
@@ -151,8 +151,8 @@ html.dark .shadow-emerald-600\/25{--tw-shadow-color:rgb(0 153 102 / 0.25)}
 html.dark .shadow-stone-900\/10{--tw-shadow-color:rgb(28 25 23 / 0.1)}
 html.dark .text-\[\#1F2A26\]{color:#a1bab1}
 html.dark .text-\[\#1F2A26\]\/30{color:rgb(161 186 177 / 0.3)}
-html.dark .text-\[\#1F2A26\]\/40{color:rgb(161 186 177 / 0.4)}
 html.dark .text-\[\#2E7D5B\]{color:#88d3b3}
+html.dark .text-\[\#2F4A3E\]{color:#9bc0af}
 html.dark .text-\[\#56635B\]{color:#a5b2aa}
 html.dark .text-\[\#56635B\]\/40{color:rgb(165 178 170 / 0.4)}
 html.dark .text-\[\#5F6C61\]{color:#9cab9f}
@@ -165,6 +165,7 @@ html.dark .text-\[\#D98E73\]{color:#d98e73}
 html.dark .text-\[\#E8EFE9\]{color:#e8efe9}
 html.dark .text-\[\#E8EFE9\]\/80{color:rgb(232 239 233 / 0.8)}
 html.dark .text-\[\#FDBA74\]{color:#fdba74}
+html.dark .text-\[\#FFD2B5\]{color:#ffd2b5}
 html.dark .text-amber-300{color:#ffd230}
 html.dark .text-amber-400{color:#ffb900}
 html.dark .text-amber-500{color:#ffbf5c}
