@@ -90,28 +90,37 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             </div>
           </div>
 
-          {/* Bottom glass cards */}
-          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 px-4 sm:px-12 pb-5 sm:pb-10 grid grid-cols-2 lg:grid-cols-[1fr_1.35fr_1fr] gap-3 sm:gap-4 text-start">
-            <div className="lp-glass rounded-[28px] p-3 pb-5">
-              <img src="/landing/living-s.webp" alt="" loading="lazy" className="w-full h-28 object-cover rounded-[20px]" />
-              <div className="px-2 pt-3"><span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[var(--mint,#DAEBE3)] text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />{T("lp.fp.tag")}</span>
-              <h3 className="mt-3 font-display text-lg font-semibold">{T("lp.fp.name")}</h3>
-              <p className="text-sm opacity-70">{T("lp.fp.meta")}</p>
-              <div className="mt-4 h-2.5 rounded-full bg-black/10 overflow-hidden"><div className="h-full w-[65%] rounded-full bg-[var(--peach)]" /></div>
-              <p className="mt-2 text-xs font-semibold opacity-80">{T("lp.fp.prog")}</p></div>
+          {/* Bottom cards: live project · numbers · client portal (equal height) */}
+          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 px-4 sm:px-12 pb-5 sm:pb-10 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-start">
+            <div className="lp-glass rounded-[28px] p-3 flex gap-3 items-stretch lg:min-h-[184px]">
+              <img src="/landing/living-s.webp" alt="" loading="lazy" className="hidden sm:block w-28 lg:w-32 shrink-0 object-cover rounded-[20px]" />
+              <div className="min-w-0 flex-1 flex flex-col justify-between gap-3 p-1 sm:p-2">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[var(--mint,#DAEBE3)] text-[#2F4A3E]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
+                  <h3 className="mt-2.5 font-display text-base sm:text-lg font-semibold leading-snug">{T("lp.fp.name")}</h3>
+                  <p className="text-xs sm:text-sm opacity-70">{T("lp.fp.meta")}</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg viewBox="0 0 36 36" className="w-11 h-11 shrink-0 -rotate-90" aria-hidden="true">
+                    <circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" strokeOpacity=".12" strokeWidth="4" />
+                    <circle cx="18" cy="18" r="15" fill="none" stroke="var(--peach)" strokeWidth="4" strokeLinecap="round" strokeDasharray="94.25" strokeDashoffset={94.25 * 0.35} />
+                  </svg>
+                  <p className="text-xs font-semibold leading-tight"><span className="block font-display text-xl">65%</span><span className="opacity-70">{T("lp.fp.prog").replace(/[\d%٪]+/g, "").trim()}</span></p>
+                </div>
+              </div>
             </div>
-            <div className="lp-glass rounded-[28px] p-4 sm:p-5 grid grid-cols-4 gap-2 items-center text-center col-span-2 lg:col-span-1 order-first lg:order-none">
+            <div className="rounded-[28px] p-4 sm:p-6 bg-[var(--panel)] text-white col-span-2 lg:col-span-1 order-first lg:order-none grid grid-cols-4 lg:grid-cols-[repeat(2,auto)] gap-x-2 lg:gap-x-16 gap-y-4 lg:gap-y-6 content-center justify-center lg:min-h-[184px] shadow-[0_18px_40px_-18px_rgba(0,0,0,.6)]">
               {stats.map(([n, k]) => (
-                <div key={k} className="px-1 border-s first:border-s-0 border-black/10">
-                  <div className="font-display text-3xl sm:text-4xl font-semibold">{n}</div>
-                  <div className="mt-1 text-[11px] sm:text-xs opacity-70 leading-tight">{T(k)}</div>
+                <div key={k} className="text-center lg:text-start">
+                  <div className="font-display text-2xl sm:text-4xl font-semibold text-[var(--peach)] leading-none">{n}</div>
+                  <div className="mt-1.5 text-[11px] sm:text-xs text-white/75 leading-tight">{T(k)}</div>
                 </div>
               ))}
             </div>
-            <button onClick={() => openModal("Client")} className="relative overflow-hidden text-white rounded-[28px] p-5 text-start flex flex-col justify-between gap-4 min-h-[170px] group isolate">
-              <img src="/landing/couple-s.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
+            <button onClick={() => openModal("Client")} className="relative overflow-hidden text-white rounded-[28px] p-4 sm:p-5 text-start flex flex-col justify-between gap-4 min-h-[170px] lg:min-h-[184px] group isolate">
+              <img src="/landing/couple-s.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20 group-hover:scale-105 transition-transform duration-500" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
               <div className="flex items-center justify-between"><ShieldCheck className="w-6 h-6 text-[var(--peach)]" aria-hidden="true" /><span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center group-hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span></div>
-              <div><h3 className="font-display text-lg font-semibold">{T("lp.cl.t")}</h3><p className="mt-1 text-sm opacity-75 leading-relaxed">{T("lp.cl.d")}</p></div>
+              <div><h3 className="font-display text-base sm:text-lg font-semibold">{T("lp.cl.t")}</h3><p className="mt-1 text-xs sm:text-sm opacity-80 leading-relaxed">{T("lp.cl.d")}</p></div>
             </button>
           </div>
         </section>
