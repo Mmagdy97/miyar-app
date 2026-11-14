@@ -18,6 +18,7 @@ import Procurement from "./Procurement";
 import ChangeOrders from "./ChangeOrders";
 import Selections from "./Selections";
 import Moodboard from "./Moodboard";
+import AuditLog from "./AuditLog";
 import SiteEngineerAttendance from "./SiteEngineerAttendance";
 import FinancialsDashboard from "./FinancialsDashboard";
 import TeamManagement from "./TeamManagement";
@@ -136,6 +137,7 @@ function MainContent({
       }
     }
 
+    if ((activeTab === "سجل المراجعة" || activeTab === "Audit Log") && currentRole === "Admin") return <AuditLog />;
     if (activeTab === "الموودبورد" || activeTab === "Moodboard") return <Moodboard role={currentRole === "Client" ? "Client" : "Admin"} />;
     if (activeTab === "الاختيارات وFF&E" || activeTab === "اختياراتي" || activeTab === "Selections") return <Selections role={currentRole === "Client" ? "Client" : "Admin"} restricted={currentRole === "Technical Office"} />;
     if (activeTab === "أوامر التغيير" || activeTab === "Change Orders") return <ChangeOrders role={currentRole === "Client" ? "Client" : "Admin"} />;

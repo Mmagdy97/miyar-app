@@ -1,4 +1,5 @@
 import {
+  History,
   LayoutDashboard,
   Receipt,
   Palette,
@@ -39,6 +40,7 @@ export const ROLE_CONFIG = {
     { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
     { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
+    { id: "Audit Log", name: "سجل المراجعة", label: "سجل المراجعة", icon: History },
   ],
   "Site Engineer": [
     { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم الميدانية", icon: LayoutDashboard },
