@@ -234,14 +234,14 @@ function App() {
 
   return (
     <div
-      className="w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm bg-[#F7F3EA] text-[#1F2421] selection:bg-[#17614F] selection:text-white"
+      className="app-shell w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm text-[#1F2A26] selection:bg-[#5F6C61] selection:text-white"
     >
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#17614F] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#5F6C61] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         {D("تخطي إلى المحتوى")}
       </a>
       <OfflineBanner />
       {account?.isOwner && (
-        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--brass)] text-[#1F2421] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
+        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--brass)] text-[#1F2A26] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
       )}
       {/* Mobile Drawer Backdrop Overlay */}
       {isMobileMenuOpen && (
@@ -255,7 +255,7 @@ function App() {
       <div
         className={`fixed inset-y-0 start-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:ltr:translate-x-0 md:rtl:translate-x-0 md:block ${
           isMobileMenuOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"
-        } ${sidebarCollapsed ? "md:w-[72px]" : "md:w-64"} w-72 shrink-0 h-full`}
+        } ${sidebarCollapsed ? "md:w-[96px]" : "md:w-72"} w-72 shrink-0 h-full app-side`}
       >
         <Sidebar
           currentRole={currentRole}
@@ -275,7 +275,7 @@ function App() {
       </div>
 
       {/* Main Area: Navbar + Content */}
-      <div className="flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden relative h-full">
+      <div className="app-main flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden relative h-full md:h-auto">
         <Navbar
           currentRole={currentRole}
           onRoleChange={handleRoleChange}

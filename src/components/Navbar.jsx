@@ -60,25 +60,25 @@ function Navbar({
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-14 px-3 sm:px-4 md:px-6 bg-white/80 glass border-b border-[#E6DFD0] w-full max-w-full">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-3 sm:px-4 md:px-8 bg-[var(--paper)]/90 glass border-b border-[#DCE4DC] md:border-transparent w-full max-w-full">
       {/* Right in RTL: Mobile Menu Toggle + Logo & Platform Identity */}
       <div className="flex items-center gap-2 sm:gap-3 min-w-0">
         {/* Hamburger Menu Toggle (Visible on Mobile < md) */}
         <button
           onClick={onToggleMobileMenu}
-          className="hidden p-1.5 -ms-1 rounded-lg text-[#1F2421] hover:bg-[#F7F3EA] transition-colors cursor-pointer"
+          className="hidden p-1.5 -ms-1 rounded-lg text-[#1F2A26] hover:bg-[#F2F5F1] transition-colors cursor-pointer"
           aria-label={t("menu.open")}
         >
-          <Menu className="w-6 h-6 text-[#1F2421]" />
+          <Menu className="w-6 h-6 text-[#1F2A26]" />
         </button>
 
         {/* Brand Icon + Name */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] bg-[#17614F] text-white transition-transform hover:scale-105 cursor-pointer">
+          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] bg-[#5F6C61] text-white transition-transform hover:scale-105 cursor-pointer">
             <LogoMark className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-base sm:text-lg font-semibold text-[#1F2421] leading-tight flex items-center gap-1.5">
+            <span className="font-display text-base sm:text-lg font-semibold text-[#1F2A26] leading-tight flex items-center gap-1.5">
               <span>{t("brand")}</span>
             </span>
           </div>
@@ -91,7 +91,7 @@ function Navbar({
         {isInstallable && (
           <button
             onClick={onInstallClick}
-            className="inline-flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold bg-[#17614F] text-white hover:bg-[#17614F] transition-all cursor-pointer shadow-2xs active:scale-95"
+            className="inline-flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold bg-[#5F6C61] text-white hover:bg-[#5F6C61] transition-all cursor-pointer shadow-2xs active:scale-95"
             title={t("pwa.installTip")}
           >
             <Download className="w-3.5 h-3.5" />
@@ -105,17 +105,17 @@ function Navbar({
         <div className="relative" ref={notificationsRef}>
           <button
             onClick={() => setIsNotificationsOpen((prev) => !prev)}
-            className={`relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg transition-colors cursor-pointer ${
+            className={`relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-[var(--shadow-1)] transition-colors cursor-pointer ${
               isNotificationsOpen
-                ? "bg-[#F7F3EA] text-[#1F2421] border border-[#E6DFD0]"
-                : "text-[#555B53] hover:text-[#1F2421] hover:bg-[#F7F3EA]"
+                ? "bg-[#F2F5F1] text-[#1F2A26] border border-[#DCE4DC]"
+                : "text-[#56635B] hover:text-[#1F2A26] hover:bg-[#F2F5F1]"
             }`}
             title={`${t("notif.title")} (${roleNotifications.length})`}
             aria-label={t("notif.title")}
           >
             <Bell className="w-4 h-4" />
             {roleNotifications.length > 0 && (
-              <span className="absolute -top-1 -start-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#17614F] text-white font-semibold text-[10px] flex items-center justify-center ring-2 ring-white shadow-xs">
+              <span className="absolute -top-1 -start-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#5F6C61] text-white font-semibold text-[10px] flex items-center justify-center ring-2 ring-white shadow-xs">
                 {roleNotifications.length}
               </span>
             )}
@@ -123,44 +123,44 @@ function Navbar({
 
           {/* Minimalist Notifications Dropdown Card (Constrained so it NEVER bleeds off-screen) */}
           {isNotificationsOpen && (
-            <div className="fixed sm:absolute top-16 sm:top-auto end-2 start-2 sm:end-0 sm:right-auto mt-2 w-[90vw] sm:w-80 max-w-[calc(100vw-1rem)] mx-auto sm:mx-0 bg-white rounded-xl shadow-lg border border-[#E6DFD0] py-3 z-50 text-start animate-in fade-in slide-in-from-top-1">
+            <div className="fixed sm:absolute top-16 sm:top-auto end-2 start-2 sm:end-0 sm:right-auto mt-2 w-[90vw] sm:w-80 max-w-[calc(100vw-1rem)] mx-auto sm:mx-0 bg-white rounded-xl shadow-lg border border-[#DCE4DC] py-3 z-50 text-start animate-in fade-in slide-in-from-top-1">
               {/* Dropdown Header */}
-              <div className="px-4 pb-3 border-b border-[#E6DFD0] flex items-center justify-between">
+              <div className="px-4 pb-3 border-b border-[#DCE4DC] flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-semibold text-[#1F2421] tracking-tight">
+                    <h3 className="text-sm font-semibold text-[#1F2A26] tracking-tight">
                       {t("notif.title")}
                     </h3>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#F7F3EA] text-[#1F2421] border border-[#E6DFD0]">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#F2F5F1] text-[#1F2A26] border border-[#DCE4DC]">
                       {roleNotifications.length}
                     </span>
                   </div>
-                  <p className="text-[11px] text-[#555B53] font-medium mt-0.5">
+                  <p className="text-[11px] text-[#56635B] font-medium mt-0.5">
                     {t("notif.forRole")}{" "}
-                    <strong className="text-[#1F2421]">
+                    <strong className="text-[#1F2A26]">
                       {roleShort(currentRole)}
                     </strong>
                   </p>
                 </div>
 
                 {pendingCount > 0 && (
-                  <span className="text-[10px] font-bold text-[#1F2421] bg-[#17614F]/15 border border-[#17614F]/30 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold text-[#1F2A26] bg-[#5F6C61]/15 border border-[#5F6C61]/30 px-2 py-0.5 rounded-full">
                     {pendingCount} {t("notif.pending")}
                   </span>
                 )}
               </div>
 
               {/* Notification Items List or Empty State */}
-              <div className="max-h-80 overflow-y-auto divide-y divide-[#E6DFD0]/60 px-2 py-1">
+              <div className="max-h-80 overflow-y-auto divide-y divide-[#DCE4DC]/60 px-2 py-1">
                 {roleNotifications.length === 0 ? (
-                  <div className="py-8 text-center text-[#555B53] space-y-2">
-                    <div className="w-10 h-10 rounded-lg bg-[#F7F3EA] flex items-center justify-center mx-auto text-[#555B53] border border-[#E6DFD0]">
+                  <div className="py-8 text-center text-[#56635B] space-y-2">
+                    <div className="w-10 h-10 rounded-lg bg-[#F2F5F1] flex items-center justify-center mx-auto text-[#56635B] border border-[#DCE4DC]">
                       <Inbox className="w-5 h-5" />
                     </div>
-                    <p className="text-xs font-bold text-[#1F2421]">
+                    <p className="text-xs font-bold text-[#1F2A26]">
                       {t("notif.none")}
                     </p>
-                    <p className="text-[11px] text-[#555B53] max-w-[200px] mx-auto">
+                    <p className="text-[11px] text-[#56635B] max-w-[200px] mx-auto">
                       {t("notif.noneDesc")}
                     </p>
                   </div>
@@ -176,47 +176,47 @@ function Navbar({
                           if (setSelectedItem) setSelectedItem(item);
                           setIsNotificationsOpen(false);
                         }}
-                        className={`p-3 rounded-lg transition-colors hover:bg-[#F7F3EA] flex items-start gap-3 my-1 cursor-pointer ${
+                        className={`p-3 rounded-lg transition-colors hover:bg-[#F2F5F1] flex items-start gap-3 my-1 cursor-pointer ${
                           isNew
-                            ? "bg-[#F7F3EA]/70 border border-[#E6DFD0]"
+                            ? "bg-[#F2F5F1]/70 border border-[#DCE4DC]"
                             : ""
                         }`}
                       >
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 bg-[#F7F3EA] text-[#1F2421] border border-[#E6DFD0]">
-                          <CheckCircle2 className="w-4 h-4 text-[#17614F]" />
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 bg-[#F2F5F1] text-[#1F2A26] border border-[#DCE4DC]">
+                          <CheckCircle2 className="w-4 h-4 text-[#5F6C61]" />
                         </div>
 
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-1">
-                            <span className="text-[10px] font-bold text-[#555B53] uppercase tracking-wider truncate">
+                            <span className="text-[10px] font-bold text-[#56635B] uppercase tracking-wider truncate">
                               {item.category ? D(item.category) : D("تنبيه")}
                             </span>
-                            <span className="text-[10px] font-bold text-[#555B53] shrink-0">
+                            <span className="text-[10px] font-bold text-[#56635B] shrink-0">
                               {item.timestamp || item.time}
                             </span>
                           </div>
 
-                          <h4 className="text-xs font-bold text-[#1F2421] mt-0.5 leading-snug">
+                          <h4 className="text-xs font-bold text-[#1F2A26] mt-0.5 leading-snug">
                             {D(item.title)}
                           </h4>
 
                           {item.subtitle && (
-                            <p className="text-[11px] text-[#555B53] mt-0.5 line-clamp-1">
+                            <p className="text-[11px] text-[#56635B] mt-0.5 line-clamp-1">
                               {item.subtitle}
                             </p>
                           )}
 
                           <div className="flex items-center justify-between gap-2 mt-2">
-                            <span className="text-[10px] text-[#555B53]">
+                            <span className="text-[10px] text-[#56635B]">
                               {t("notif.project")}{" "}
-                              <strong className="text-[#1F2421]">
+                              <strong className="text-[#1F2A26]">
                                 {item.project || D("الموقع")}
                               </strong>
                             </span>
 
                             {isNew && (
-                              <span className="inline-flex items-center gap-1 text-[9px] font-bold text-[#1F2421] bg-[#17614F]/15 px-1.5 py-0.5 rounded-full border border-[#17614F]/30">
-                                <span className="w-1 h-1 rounded-full bg-[#17614F]" />
+                              <span className="inline-flex items-center gap-1 text-[9px] font-bold text-[#1F2A26] bg-[#5F6C61]/15 px-1.5 py-0.5 rounded-full border border-[#5F6C61]/30">
+                                <span className="w-1 h-1 rounded-full bg-[#5F6C61]" />
                                 {t("notif.new")}
                               </span>
                             )}
@@ -229,9 +229,9 @@ function Navbar({
               </div>
 
               {/* Dropdown Footer */}
-              <div className="px-4 pt-2.5 mt-1 border-t border-[#E6DFD0] flex items-center justify-between text-[11px] text-[#555B53]">
+              <div className="px-4 pt-2.5 mt-1 border-t border-[#DCE4DC] flex items-center justify-between text-[11px] text-[#56635B]">
                 <span>{t("notif.live")}</span>
-                <span className="text-[#1F2421] font-bold hover:text-[#17614F] cursor-pointer">
+                <span className="text-[#1F2A26] font-bold hover:text-[#5F6C61] cursor-pointer">
                   {t("notif.markAll")}
                 </span>
               </div>
@@ -243,16 +243,16 @@ function Navbar({
         <div className="relative hidden md:block" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2 px-3 py-1.5 md:px-3.5 md:py-2 text-xs md:text-sm font-semibold text-[#1F2421] bg-[#F7F3EA] hover:bg-white rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-[#17614F] border border-[#E6DFD0] shadow-2xs cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 md:px-3.5 md:py-2 text-xs md:text-sm font-semibold text-[#1F2A26] bg-[#F2F5F1] hover:bg-white rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-[#5F6C61] border border-[#DCE4DC] shadow-2xs cursor-pointer"
           >
-            <span className="text-[#555B53] font-normal">
+            <span className="text-[#56635B] font-normal">
               {t("role.label")}
             </span>
-            <span className="text-[#1F2421] font-bold">
+            <span className="text-[#1F2A26] font-bold">
               {roleShort(currentRole) || currentRole}
             </span>
             <ChevronDown
-              className={`w-3.5 h-3.5 text-[#555B53] transition-transform duration-200 ${
+              className={`w-3.5 h-3.5 text-[#56635B] transition-transform duration-200 ${
                 dropdownOpen ? "rotate-180" : ""
               }`}
             />
@@ -260,9 +260,9 @@ function Navbar({
 
           {/* Role Dropdown Menu */}
           {dropdownOpen && (
-            <div className="absolute end-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-[#E6DFD0] py-2 z-50 animate-in fade-in slide-in-from-top-1">
-              <div className="px-3.5 py-1.5 mb-1 border-b border-[#E6DFD0]">
-                <p className="text-[11px] font-bold text-[#555B53] uppercase tracking-wider">
+            <div className="absolute end-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-[#DCE4DC] py-2 z-50 animate-in fade-in slide-in-from-top-1">
+              <div className="px-3.5 py-1.5 mb-1 border-b border-[#DCE4DC]">
+                <p className="text-[11px] font-bold text-[#56635B] uppercase tracking-wider">
                   {t("role.switch")}
                 </p>
               </div>
@@ -277,8 +277,8 @@ function Navbar({
                     }}
                     className={`w-full text-start px-3.5 py-2.5 text-xs md:text-sm font-semibold flex items-center justify-between transition-colors duration-150 cursor-pointer ${
                       isSelected
-                        ? "bg-[#17614F] text-white font-bold rounded-lg shadow-xs"
-                        : "text-[#555B53] hover:bg-[#F7F3EA] hover:text-[#1F2421]"
+                        ? "bg-[#5F6C61] text-white font-bold rounded-lg shadow-xs"
+                        : "text-[#56635B] hover:bg-[#F2F5F1] hover:text-[#1F2A26]"
                     }`}
                   >
                     <span>{roleTitle(role) || role}</span>
@@ -293,19 +293,19 @@ function Navbar({
         </div>
 
         {/* Divider (Hidden on mobile < md) */}
-        <div className="w-px h-6 bg-[#E6DFD0] hidden md:block" />
+        <div className="w-px h-6 bg-[#DCE4DC] hidden md:block" />
 
         {/* User Avatar & Profile */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#F7F3EA] text-[#1F2421] font-semibold text-xs border border-[#E6DFD0] shadow-2xs shrink-0">
+          <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#F2F5F1] text-[#1F2A26] font-semibold text-xs border border-[#DCE4DC] shadow-2xs shrink-0">
             {D("م.أ")}
           </div>
           {/* Profile Name & Role (Hidden on mobile < md as instructed) */}
           <div className="hidden md:block text-start">
-            <p className="text-xs font-bold text-[#1F2421] leading-tight">
+            <p className="text-xs font-bold text-[#1F2A26] leading-tight">
               {D("م. محمد أحمد")}
             </p>
-            <p className="text-[10px] text-[#555B53] font-medium leading-tight mt-0.5">
+            <p className="text-[10px] text-[#56635B] font-medium leading-tight mt-0.5">
               {roleShort(currentRole)}
             </p>
           </div>
@@ -315,7 +315,7 @@ function Navbar({
         {onLogout && (
           <button
             onClick={onLogout}
-            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-[#555B53] hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
+            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-[#56635B] hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
             title={t("logout")}
             aria-label={t("logout")}
           >

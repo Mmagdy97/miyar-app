@@ -27,7 +27,7 @@ export default function ScrollArt() {
   }, []);
 
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-y-0 end-0 z-30 hidden w-14 xl:block text-[#1F2421]/30">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-y-0 end-0 z-30 hidden w-14 xl:block text-[#1F2A26]/30">
       {/* wall path: draws with scroll */}
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 56 1000" preserveAspectRatio="none" fill="none">
         <path ref={path} pathLength="1" d="M28 0V140H10V330H46V540H14V760H40V1000" stroke="currentColor" strokeWidth="2" vectorEffect="non-scaling-stroke" strokeLinejoin="miter" style={{ strokeDasharray: 1, strokeDashoffset: 1 }} />
@@ -36,7 +36,7 @@ export default function ScrollArt() {
       <div className="absolute inset-y-16 end-1.5 w-3" style={{ background: "repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 12px) right/6px 100% no-repeat, repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 60px) right/12px 100% no-repeat" }}>
         <div ref={gauge} className="absolute -top-px end-0 will-change-transform" style={{ height: "100%", width: "100%" }}>
           <div className="absolute end-3 -translate-y-1/2 flex items-center gap-1" style={{ top: 0 }}>
-            <span className="rounded-md bg-[var(--brass)] px-1.5 py-0.5 font-display text-[10px] font-semibold text-[#1F2421] tabular-nums"><span ref={label}>0.0</span></span>
+            <span className="rounded-md bg-[var(--brass)] px-1.5 py-0.5 font-display text-[10px] font-semibold text-[#1F2A26] tabular-nums"><span ref={label}>0.0</span></span>
             <span className="h-px w-3 bg-[var(--brass)]" />
           </div>
         </div>

@@ -59,7 +59,7 @@ const INITIAL_SNAGS = localize([
 const SEVERITY_COLORS = localize({
   حرجة: "bg-rose-50 text-rose-800 border-rose-200",
   متوسطة: "bg-amber-50 text-amber-800 border-amber-200",
-  طفيفة: "bg-[#F0EADD] text-[#555B53] border-[#E6DFD0]",
+  طفيفة: "bg-[#E8EFE9] text-[#56635B] border-[#DCE4DC]",
 });
 
 const snagsStore = createPersistedStore("miyar:snags:v1", INITIAL_SNAGS);
@@ -139,7 +139,7 @@ function SiteEngineerSnagList() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#17614F] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#5F6C61] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -152,8 +152,8 @@ function SiteEngineerSnagList() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#F0EADD] border border-[#E6DFD0] flex items-center justify-center text-[#1F2421]">
+              <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2A26] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#E8EFE9] border border-[#DCE4DC] flex items-center justify-center text-[#1F2A26]">
                   <AlertTriangle className="w-5 h-5" />
                 </div>
                 <span>{T("se.80")}</span>
@@ -162,7 +162,7 @@ function SiteEngineerSnagList() {
                 {T("se.81", { v0: stats.pending })}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#555B53]">
+            <p className="text-xs md:text-sm text-[#56635B]">
               {T("se.82")}
             </p>
           </div>
@@ -170,7 +170,7 @@ function SiteEngineerSnagList() {
           {/* Button: + إضافة ملاحظة جديدة */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#17614F] hover:bg-[#17614F] transition-colors shadow-sm transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#5F6C61] hover:bg-[#5F6C61] transition-colors shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{T("se.83")}</span>
@@ -179,18 +179,18 @@ function SiteEngineerSnagList() {
 
         {/* Stats Row */}
         <div className="grid stat-grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-          <div className="bg-white rounded-lg p-4 border border-[#E6DFD0] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T("se.84")}</span>
-            <span className="text-xl md:text-2xl font-semibold text-[#1F2421]">{stats.total}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#DCE4DC] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("se.84")}</span>
+            <span className="text-xl md:text-2xl font-semibold text-[#1F2A26]">{stats.total}</span>
           </div>
 
-          <div className="bg-white rounded-lg p-4 border border-[#E6DFD0] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T("se.85")}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#DCE4DC] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("se.85")}</span>
             <span className="text-xl md:text-2xl font-semibold text-rose-700">{stats.pending}</span>
           </div>
 
-          <div className="bg-white rounded-lg p-4 border border-[#E6DFD0] shadow-xs text-center">
-            <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T("se.86")}</span>
+          <div className="bg-white rounded-lg p-4 border border-[#DCE4DC] shadow-xs text-center">
+            <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("se.86")}</span>
             <span className="text-xl md:text-2xl font-semibold text-emerald-700">{stats.resolved}</span>
           </div>
         </div>
@@ -203,8 +203,8 @@ function SiteEngineerSnagList() {
               onClick={() => setFilter(tab)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 filter === tab
-                  ? "bg-[#17614F] text-white shadow-sm"
-                  : "bg-white text-[#555B53] border border-[#E6DFD0] hover:bg-[#F7F3EA]"
+                  ? "bg-[#5F6C61] text-white shadow-sm"
+                  : "bg-white text-[#56635B] border border-[#DCE4DC] hover:bg-[#F2F5F1]"
               }`}
             >
               {E(tab)}
@@ -225,7 +225,7 @@ function SiteEngineerSnagList() {
                 className={`bg-white rounded-lg p-5 border transition-all duration-200 ${
                   isResolved
                     ? "border-emerald-200/70 bg-emerald-50/15 rounded-lg"
-                    : "border-[#E6DFD0] rounded-lg shadow-xs"
+                    : "border-[#DCE4DC] rounded-lg shadow-xs"
                 }`}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -236,12 +236,12 @@ function SiteEngineerSnagList() {
                       >
                         {T("se.87", { v0: D(snag.severity) })}
                       </span>
-                      <span className="text-[11px] text-[#555B53]">{snag.date}</span>
+                      <span className="text-[11px] text-[#56635B]">{snag.date}</span>
                     </div>
 
                     <h3
                       className={`text-sm md:text-base font-semibold leading-snug ${
-                        isResolved ? "line-through text-[#555B53]" : "text-[#1F2421]"
+                        isResolved ? "line-through text-[#56635B]" : "text-[#1F2A26]"
                       }`}
                     >
                       {snag.description}
@@ -254,7 +254,7 @@ function SiteEngineerSnagList() {
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                       isResolved
                         ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-                        : "bg-[#F0EADD] text-[#555B53] border border-[#E6DFD0] hover:bg-[#E6DFD0]"
+                        : "bg-[#E8EFE9] text-[#56635B] border border-[#DCE4DC] hover:bg-[#DCE4DC]"
                     }`}
                   >
                     {isResolved ? (
@@ -271,15 +271,15 @@ function SiteEngineerSnagList() {
                   </button>
                 </div>
 
-                <div className="pt-3 border-t border-[#F0EADD] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#555B53]">
-                  <span className="flex items-center gap-1 text-[#555B53]">
-                    <Building2 className="w-3.5 h-3.5 text-[#555B53]" />
-                    <span>{T("se.90")} <strong className="text-[#555B53]">{snag.location}</strong></span>
+                <div className="pt-3 border-t border-[#E8EFE9] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#56635B]">
+                  <span className="flex items-center gap-1 text-[#56635B]">
+                    <Building2 className="w-3.5 h-3.5 text-[#56635B]" />
+                    <span>{T("se.90")} <strong className="text-[#56635B]">{snag.location}</strong></span>
                   </span>
 
-                  <span className="flex items-center gap-1 text-[#555B53]">
-                    <User className="w-3.5 h-3.5 text-[#555B53]" />
-                    <span>{T("se.91")} <strong className="text-[#1F2421]">{snag.contractor}</strong></span>
+                  <span className="flex items-center gap-1 text-[#56635B]">
+                    <User className="w-3.5 h-3.5 text-[#56635B]" />
+                    <span>{T("se.91")} <strong className="text-[#1F2A26]">{snag.contractor}</strong></span>
                   </span>
                 </div>
               </div>
@@ -287,10 +287,10 @@ function SiteEngineerSnagList() {
           })}
 
           {filteredSnags.length === 0 && (
-            <div className="py-12 text-center bg-white rounded-lg border border-[#E6DFD0] p-8">
+            <div className="py-12 text-center bg-white rounded-lg border border-[#DCE4DC] p-8">
               <CheckCircle2 className="w-10 h-10 mx-auto mb-2 text-emerald-500" />
-              <h4 className="text-sm font-bold text-[#1F2421]">{T("se.92")}</h4>
-              <p className="text-xs text-[#555B53] mt-1">
+              <h4 className="text-sm font-bold text-[#1F2A26]">{T("se.92")}</h4>
+              <p className="text-xs text-[#56635B] mt-1">
                 {T("se.93")}
               </p>
             </div>
@@ -300,16 +300,16 @@ function SiteEngineerSnagList() {
 
       {/* Add Snag Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#1F2421]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E6DFD0] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#F0EADD]">
-              <h3 className="text-base font-semibold text-[#1F2421] flex items-center gap-2">
+        <div className="fixed inset-0 z-50 bg-[#1F2A26]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#DCE4DC] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E8EFE9]">
+              <h3 className="text-base font-semibold text-[#1F2A26] flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-500" />
                 <span>{T("se.94")}</span>
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-[#F0EADD]"
+                className="p-1 rounded-lg text-[#56635B] hover:text-[#1F2A26] hover:bg-[#E8EFE9]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -317,7 +317,7 @@ function SiteEngineerSnagList() {
 
             <form onSubmit={handleAddSnag} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                   وصف الملاحظة / العيب بالتفصيل <span className="text-rose-500">*</span>
                 </label>
                 <textarea
@@ -326,12 +326,12 @@ function SiteEngineerSnagList() {
                   placeholder={T("se.95")}
                   value={newDesc}
                   onChange={(e) => setNewDesc(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E6DFD0] text-xs md:text-sm font-semibold text-[#1F2421] focus:outline-none focus:ring-2 focus:ring-[#17614F]/10 focus:border-[#17614F]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DCE4DC] text-xs md:text-sm font-semibold text-[#1F2A26] focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/10 focus:border-[#5F6C61]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                   المكان / الغرفة بالموقع <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -340,17 +340,17 @@ function SiteEngineerSnagList() {
                   placeholder={T("se.96")}
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E6DFD0] text-xs md:text-sm font-semibold text-[#1F2421] focus:outline-none focus:ring-2 focus:ring-[#17614F]/10 focus:border-[#17614F]"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DCE4DC] text-xs md:text-sm font-semibold text-[#1F2A26] focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/10 focus:border-[#5F6C61]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#555B53] mb-1.5">{T("se.97")}</label>
+                  <label className="block text-xs font-bold text-[#56635B] mb-1.5">{T("se.97")}</label>
                   <select
                     value={newSeverity}
                     onChange={(e) => setNewSeverity(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white"
+                    className="w-full px-3 py-2 rounded-lg border border-[#DCE4DC] text-xs font-bold text-[#1F2A26] bg-white"
                   >
                     <option value="طفيفة">{T("se.98")}</option>
                     <option value="متوسطة">{T("se.99")}</option>
@@ -359,28 +359,28 @@ function SiteEngineerSnagList() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#555B53] mb-1.5">{T("se.101")}</label>
+                  <label className="block text-xs font-bold text-[#56635B] mb-1.5">{T("se.101")}</label>
                   <input
                     type="text"
                     placeholder={T("se.102")}
                     value={newContractor}
                     onChange={(e) => setNewContractor(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-semibold text-[#1F2421]"
+                    className="w-full px-3 py-2 rounded-lg border border-[#DCE4DC] text-xs font-semibold text-[#1F2A26]"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#F0EADD]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#E8EFE9]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#555B53] hover:bg-[#F0EADD]"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#56635B] hover:bg-[#E8EFE9]"
                 >
                   {T("se.124")}
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#17614F] hover:bg-[#17614F] hover:bg-[#17614F] text-white font-bold text-xs shadow-sm"
+                  className="px-5 py-2 rounded-lg bg-[#5F6C61] hover:bg-[#5F6C61] hover:bg-[#5F6C61] text-white font-bold text-xs shadow-sm"
                 >
                   {T("se.104")}
                 </button>

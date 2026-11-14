@@ -86,9 +86,9 @@ function MainContent({
       if (!LIVE_READY.has(id)) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">
-            <div className="bg-white rounded-2xl border border-[#E6DFD0] p-8 text-center max-w-md space-y-2">
-              <h1 className="text-lg font-semibold text-[#1F2421]">{T("live.soonTitle")}</h1>
-              <p className="text-sm text-[#555B53]">{T("live.soonBody")}</p>
+            <div className="bg-white rounded-2xl border border-[#DCE4DC] p-8 text-center max-w-md space-y-2">
+              <h1 className="text-lg font-semibold text-[#1F2A26]">{T("live.soonTitle")}</h1>
+              <p className="text-sm text-[#56635B]">{T("live.soonBody")}</p>
             </div>
           </main>
         );

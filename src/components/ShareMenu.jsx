@@ -53,7 +53,7 @@ export default function ShareMenu({ project, className = "" }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E6DFD0] bg-white hover:bg-[#F7F3EA] text-xs font-bold text-[#1F2421] cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DCE4DC] bg-white hover:bg-[#F2F5F1] text-xs font-bold text-[#1F2A26] cursor-pointer"
       >
         <Share2 className="w-3.5 h-3.5" />
         {T("share.btn")}
@@ -67,14 +67,14 @@ export default function ShareMenu({ project, className = "" }) {
             role="dialog"
             aria-label={T("share.title")}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm rounded-2xl border border-[#E6DFD0] bg-white p-4 space-y-2.5 shadow-xl"
+            className="w-full max-w-sm rounded-2xl border border-[#DCE4DC] bg-white p-4 space-y-2.5 shadow-xl"
           >
             <div className="flex items-start justify-between gap-2">
               <div>
                 <p className="text-sm font-semibold">{T("share.title")}</p>
-                <p className="text-[11px] text-[#555B53]">{T("share.noLogin")}</p>
+                <p className="text-[11px] text-[#56635B]">{T("share.noLogin")}</p>
               </div>
-              <button type="button" onClick={() => setOpen(false)} aria-label="×" className="p-1 rounded-md hover:bg-[#F0EADD] cursor-pointer">
+              <button type="button" onClick={() => setOpen(false)} aria-label="×" className="p-1 rounded-md hover:bg-[#E8EFE9] cursor-pointer">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -90,7 +90,7 @@ export default function ShareMenu({ project, className = "" }) {
             <button
               type="button"
               onClick={copy}
-              className="w-full flex items-center gap-2 rounded-xl border border-[#E6DFD0] text-xs font-bold px-3 py-2.5 hover:bg-[#F7F3EA] cursor-pointer"
+              className="w-full flex items-center gap-2 rounded-xl border border-[#DCE4DC] text-xs font-bold px-3 py-2.5 hover:bg-[#F2F5F1] cursor-pointer"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-700" /> : <Link2 className="w-4 h-4" />}
               {copied ? T("share.copied") : T("share.copy")}
@@ -99,7 +99,7 @@ export default function ShareMenu({ project, className = "" }) {
               <input type="checkbox" checked={withPayments} onChange={(e) => setWithPayments(e.target.checked)} />
               {T("share.payments")}
             </label>
-            <p className="text-[10px] leading-relaxed text-[#555B53]">{T("share.snapshot")}</p>
+            <p className="text-[10px] leading-relaxed text-[#56635B]">{T("share.snapshot")}</p>
           </div>
         </div>,
         document.body

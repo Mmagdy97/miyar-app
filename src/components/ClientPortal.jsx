@@ -82,7 +82,7 @@ const SITE_UPDATES = localize([
     category: "رخام مستورد",
     description: "مطابقة عروق الرخام بنمط Bookmatched مع فواصل إيبوكسي شفافة مقاومة لامتصاص الرطوبة.",
     photographer: "م. كريم مصطفى (الموقع)",
-    bgGradient: "from-amber-100 via-[#F0EADD] to-amber-50",
+    bgGradient: "from-amber-100 via-[#E8EFE9] to-amber-50",
     likes: 12,
   },
   {
@@ -92,7 +92,7 @@ const SITE_UPDATES = localize([
     category: "سمارت هوم KNX",
     description: "تمديد مسارات كابلات التحكم المركزي بالمكيفات والستائر والإضاءة المعمارية المحيطية.",
     photographer: "م. طارق يوسف (MEP)",
-    bgGradient: "from-[#F0EADD] via-[#E6DFD0] to-[#F7F3EA]",
+    bgGradient: "from-[#E8EFE9] via-[#DCE4DC] to-[#F2F5F1]",
     likes: 9,
   },
   {
@@ -102,7 +102,7 @@ const SITE_UPDATES = localize([
     category: "نجارة وديكور",
     description: "استلام شرائح قشرة خشب الجوز الطبيعي بدهانات بولي يوريثان مط ضد الخدش والأتربة.",
     photographer: "سارة عامر (كبير المعماريين)",
-    bgGradient: "from-amber-200 via-orange-100 to-[#E6DFD0]",
+    bgGradient: "from-amber-200 via-orange-100 to-[#DCE4DC]",
     likes: 15,
   },
   {
@@ -112,7 +112,7 @@ const SITE_UPDATES = localize([
     category: "أسقف وجبس بورد",
     description: "تشكيل بروفايلات الليد المنحنية بالريسبشن وفقاً للرسومات التنفيذية المعمارية.",
     photographer: "م. كريم مصطفى (الموقع)",
-    bgGradient: "from-[#F7F3EA] via-[#F0EADD] to-[#F7F3EA]",
+    bgGradient: "from-[#F2F5F1] via-[#E8EFE9] to-[#F2F5F1]",
     likes: 8,
   },
 ]);
@@ -181,7 +181,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Premium Header (Welcome Banner) */}
-      <div className="relative rounded-2xl p-6 sm:p-8 md:p-10 bg-[#17614F] text-white shadow-sm border border-[#1B4A40] overflow-hidden">
+      <div className="relative rounded-2xl p-6 sm:p-8 md:p-10 bg-[#5F6C61] text-white shadow-sm border border-[#4B574D] overflow-hidden">
         {/* Subtle Ambient Glows */}
         
 
@@ -193,7 +193,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <Sparkles className="w-3.5 h-3.5 text-white" />
                 {T("cli.28")}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 text-[#F0EADD] border border-white/15">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/10 text-[#E8EFE9] border border-white/15">
                 {T("cli.29")}
               </span>
             </div>
@@ -206,12 +206,12 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               <span className="text-lg sm:text-xl font-bold text-white">
                 {T("cli.31")}
               </span>
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-[#D8D0BD] border border-white/20">
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-[#CBD4CA] border border-white/20">
                 {T("cli.32")}
               </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#F0EADD] leading-relaxed pt-1 flex items-center gap-2 flex-wrap">
+            <p className="text-xs sm:text-sm text-[#E8EFE9] leading-relaxed pt-1 flex items-center gap-2 flex-wrap">
               <span className="inline-flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-rose-400" />
                 {T("cli.33")}
@@ -238,8 +238,8 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 {/* Active Gradient Ring */}
                 <defs>
                   <linearGradient id="clientProgressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#17614F" />
-                    <stop offset="100%" stopColor="#6F756B" />
+                    <stop offset="0%" stopColor="#5F6C61" />
+                    <stop offset="100%" stopColor="#6E7B72" />
                   </linearGradient>
                 </defs>
                 <circle
@@ -259,23 +259,23 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <span className="text-2xl font-semibold text-white leading-none">
                   {T("cli.37", { v0: toAr(PROJECT.progress) })}
                 </span>
-                <span className="text-[10px] text-[#F0EADD] font-medium mt-0.5">
+                <span className="text-[10px] text-[#E8EFE9] font-medium mt-0.5">
                   {T("cli.38")}
                 </span>
               </div>
             </div>
 
             <div className="space-y-1">
-              <span className="text-xs font-bold text-[#D8D0BD] block">
+              <span className="text-xs font-bold text-[#CBD4CA] block">
                 {T("cli.119")}
               </span>
               <p className="text-sm font-semibold text-white">
                 {T("cli.40", { v0: toAr(PROJECT.progress) })}
               </p>
-              <p className="text-[11px] text-[#F0EADD]/80">
+              <p className="text-[11px] text-[#E8EFE9]/80">
                 {T("cli.41", { v0: formatMonthYearAr(PROJECT.deadline) })}
               </p>
-              <div className="flex items-center gap-1.5 pt-1 text-[11px] text-[#D8D0BD] font-semibold">
+              <div className="flex items-center gap-1.5 pt-1 text-[11px] text-[#CBD4CA] font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>{T("cli.42")}</span>
               </div>
@@ -285,17 +285,17 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       </div>
 
       {/* 3. Approvals Required (اعتمادات وموافقات مطلوبة منك) */}
-      <div className="bg-white rounded-lg border border-[#E6DFD0] p-6 sm:p-8 shadow-xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#F0EADD]">
+      <div className="bg-white rounded-lg border border-[#DCE4DC] p-6 sm:p-8 shadow-xs space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#E8EFE9]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-lg bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC] flex items-center justify-center font-bold">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-semibold text-[#1F2421]">
+              <h2 className="text-base sm:text-lg font-semibold text-[#1F2A26]">
                 {T("cli.48")}
               </h2>
-              <p className="text-xs text-[#555B53] mt-0.5">
+              <p className="text-xs text-[#56635B] mt-0.5">
                 {T("cli.49")}
               </p>
             </div>
@@ -307,24 +307,24 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         </div>
 
         {/* Approval Item Card */}
-        <div className="bg-[#F7F3EA]/50 rounded-lg p-5 border border-[#E6DFD0] shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="bg-[#F2F5F1]/50 rounded-lg p-5 border border-[#DCE4DC] shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
                 {T("cli.51")}
               </span>
-              <span className="text-xs text-[#555B53]">{T("cli.52")}</span>
+              <span className="text-xs text-[#56635B]">{T("cli.52")}</span>
             </div>
 
-            <h3 className="text-base font-semibold text-[#1F2421]">
+            <h3 className="text-base font-semibold text-[#1F2A26]">
               {T("cli.53")}
             </h3>
 
-            <p className="text-xs text-[#555B53] leading-relaxed">
+            <p className="text-xs text-[#56635B] leading-relaxed">
               {T("cli.54")}
             </p>
 
-            <div className="flex items-center gap-4 text-xs text-[#555B53] pt-1 font-medium">
+            <div className="flex items-center gap-4 text-xs text-[#56635B] pt-1 font-medium">
               <span>{T("cli.55")}</span>
               <span>{T("cli.56")}</span>
             </div>
@@ -336,7 +336,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               <>
                 <button
                   onClick={() => handleClientApproval("marble", "approved")}
-                  className="px-5 py-3 rounded-lg text-xs sm:text-sm font-medium text-white bg-[#17614F] hover:bg-[#17614F] hover:bg-[#17614F] shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="px-5 py-3 rounded-lg text-xs sm:text-sm font-medium text-white bg-[#5F6C61] hover:bg-[#5F6C61] hover:bg-[#5F6C61] shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
                   <span>{T("cli.57")}</span>
@@ -344,7 +344,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
                 <button
                   onClick={() => handleClientApproval("marble", "rejected")}
-                  className="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-[#555B53] bg-white border border-[#E6DFD0] hover:bg-[#F0EADD] hover:text-rose-700 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-[#56635B] bg-white border border-[#DCE4DC] hover:bg-[#E8EFE9] hover:text-rose-700 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                   <span>{T("cli.58")}</span>
@@ -361,7 +361,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </p>
                 <button
                   onClick={() => handleClientApproval("marble", "pending")}
-                  className="text-[10px] text-[#555B53] hover:text-[#555B53] underline font-medium pt-1"
+                  className="text-[10px] text-[#56635B] hover:text-[#56635B] underline font-medium pt-1"
                 >
                   {T("cli.61")}
                 </button>
@@ -377,7 +377,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </p>
                 <button
                   onClick={() => handleClientApproval("marble", "pending")}
-                  className="text-[10px] text-[#555B53] hover:text-[#555B53] underline font-medium pt-1"
+                  className="text-[10px] text-[#56635B] hover:text-[#56635B] underline font-medium pt-1"
                 >
                   {T("cli.64")}
                 </button>
@@ -388,18 +388,18 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       </div>
 
       {/* 2. The Visual Timeline (الجدول الزمني المرئي للمشروع) */}
-      <div className="bg-white rounded-lg border border-[#E6DFD0] p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-[#F0EADD]">
+      <div className="bg-white rounded-lg border border-[#DCE4DC] p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-[#E8EFE9]">
           <div>
-            <h2 className="text-lg font-semibold text-[#1F2421] flex items-center gap-2">
-              <Compass className="w-5 h-5 text-[#1F2421]" />
+            <h2 className="text-lg font-semibold text-[#1F2A26] flex items-center gap-2">
+              <Compass className="w-5 h-5 text-[#1F2A26]" />
               {T("cli.43")}
             </h2>
-            <p className="text-xs text-[#555B53] mt-0.5">
+            <p className="text-xs text-[#56635B] mt-0.5">
               {T("cli.44")}
             </p>
           </div>
-          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0] self-start sm:self-auto">
+          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC] self-start sm:self-auto">
             {T("cli.45")}
           </span>
         </div>
@@ -416,16 +416,16 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 key={phase.id}
                 className={`rounded-lg p-4 sm:p-5 border transition-all duration-300 relative flex flex-col justify-between ${
                   isActive
-                    ? "bg-[#F7F3EA] border-[#D5CCB8] ring-1 ring-[#17614F]/10 shadow-xs"
+                    ? "bg-[#F2F5F1] border-[#C6D0C6] ring-1 ring-[#5F6C61]/10 shadow-xs"
                     : isCompleted
-                    ? "bg-white border-[#E6DFD0] hover:bg-[#F7F3EA]/50"
-                    : "bg-[#F7F3EA] border-[#E6DFD0] opacity-80"
+                    ? "bg-white border-[#DCE4DC] hover:bg-[#F2F5F1]/50"
+                    : "bg-[#F2F5F1] border-[#DCE4DC] opacity-80"
                 }`}
               >
                 {/* Stepper Header with Icon & Step Number */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-semibold text-[#555B53] font-mono">
+                    <span className="text-[11px] font-semibold text-[#56635B] font-mono">
                       {T("cli.46", { v0: phase.id })}
                     </span>
 
@@ -435,8 +435,8 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                         isCompleted
                           ? "bg-emerald-100 text-emerald-800 border-emerald-300"
                           : isActive
-                          ? "bg-[#17614F] text-white border-[#1B4A40]"
-                          : "bg-[#F0EADD] text-[#555B53] border-[#E6DFD0]"
+                          ? "bg-[#5F6C61] text-white border-[#4B574D]"
+                          : "bg-[#E8EFE9] text-[#56635B] border-[#DCE4DC]"
                       }`}
                     >
                       {phase.badge}
@@ -449,8 +449,8 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                         isCompleted
                           ? "bg-emerald-100 text-emerald-700"
                           : isActive
-                          ? "bg-[#17614F] text-white"
-                          : "bg-[#E6DFD0] text-[#555B53]"
+                          ? "bg-[#5F6C61] text-white"
+                          : "bg-[#DCE4DC] text-[#56635B]"
                       }`}
                     >
                       {isCompleted ? (
@@ -462,21 +462,21 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                       )}
                     </div>
 
-                    <h3 className="text-sm font-semibold text-[#1F2421] leading-snug">
+                    <h3 className="text-sm font-semibold text-[#1F2A26] leading-snug">
                       {phase.title}
                     </h3>
                   </div>
 
-                  <p className="text-xs text-[#555B53] leading-relaxed mt-1">
+                  <p className="text-xs text-[#56635B] leading-relaxed mt-1">
                     {phase.subtitle}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-3 border-t border-[#F0EADD] flex items-center justify-between text-[11px]">
-                  <span className="text-[#555B53] font-medium">{T("cli.47")}</span>
+                <div className="pt-4 mt-3 border-t border-[#E8EFE9] flex items-center justify-between text-[11px]">
+                  <span className="text-[#56635B] font-medium">{T("cli.47")}</span>
                   <span
                     className={`font-bold ${
-                      isActive ? "text-[#1F2421] font-bold" : "text-[#555B53]"
+                      isActive ? "text-[#1F2A26] font-bold" : "text-[#56635B]"
                     }`}
                   >
                     {phase.date}
@@ -489,21 +489,21 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       </div>
 
       {/* 4. Latest Site Updates (آخر تحديثات الموقع الميدانية - Instagram Style) */}
-      <div className="bg-white rounded-lg border border-[#E6DFD0] p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#F0EADD]">
+      <div className="bg-white rounded-lg border border-[#DCE4DC] p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#E8EFE9]">
           <div>
             <div className="flex items-center gap-2">
-              <Camera className="w-5 h-5 text-[#1F2421]" />
-              <h2 className="text-lg font-semibold text-[#1F2421]">
+              <Camera className="w-5 h-5 text-[#1F2A26]" />
+              <h2 className="text-lg font-semibold text-[#1F2A26]">
                 {T("cli.65")}
               </h2>
             </div>
-            <p className="text-xs text-[#555B53] mt-0.5">
+            <p className="text-xs text-[#56635B] mt-0.5">
               {T("cli.66")}
             </p>
           </div>
 
-          <span className="text-xs font-bold text-[#1F2421] bg-[#F0EADD] px-3 py-1 rounded-full border border-[#E6DFD0] self-start sm:self-auto">
+          <span className="text-xs font-bold text-[#1F2A26] bg-[#E8EFE9] px-3 py-1 rounded-full border border-[#DCE4DC] self-start sm:self-auto">
             {T("cli.67")}
           </span>
         </div>
@@ -517,7 +517,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
               <div
                 key={photo.id}
                 onClick={() => setActivePhoto(photo)}
-                className="group bg-white rounded-lg border border-[#E6DFD0] overflow-hidden shadow-xs hover:shadow-xl hover:border-[#17614F] transition-all duration-300 flex flex-col justify-between cursor-pointer"
+                className="group bg-white rounded-lg border border-[#DCE4DC] overflow-hidden shadow-xs hover:shadow-xl hover:border-[#5F6C61] transition-all duration-300 flex flex-col justify-between cursor-pointer"
               >
                 {/* Photo Preview Container (Mimicking high-end architectural photo) */}
                 <div
@@ -528,17 +528,17 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]" />
 
                   {/* Camera icon badge */}
-                  <div className="w-12 h-12 rounded-lg bg-white/90 backdrop-blur-xs text-[#1F2421] flex items-center justify-center shadow-md shadow-stone-900/10 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-lg bg-white/90 backdrop-blur-xs text-[#1F2A26] flex items-center justify-center shadow-md shadow-stone-900/10 group-hover:scale-110 transition-transform">
                     <Camera className="w-6 h-6" />
                   </div>
 
-                  <span className="text-xs font-semibold text-[#1F2421] bg-white/95 px-3 py-1 rounded-full shadow-xs mt-3 backdrop-blur-sm">
+                  <span className="text-xs font-semibold text-[#1F2A26] bg-white/95 px-3 py-1 rounded-full shadow-xs mt-3 backdrop-blur-sm">
                     {E(photo.category)}
                   </span>
 
                   {/* Top Heart and Date Badge */}
                   <div className="absolute top-3 start-3 end-3 flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-[#555B53] bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md">
+                    <span className="text-[10px] font-bold text-[#56635B] bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md">
                       {photo.date}
                     </span>
 
@@ -551,7 +551,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                       className={`p-1.5 rounded-full backdrop-blur-sm transition-all ${
                         isLiked
                           ? "bg-rose-50 text-rose-600 scale-110"
-                          : "bg-white/80 text-[#555B53] hover:text-rose-600"
+                          : "bg-white/80 text-[#56635B] hover:text-rose-600"
                       }`}
                     >
                       <Heart
@@ -564,19 +564,19 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 {/* Caption & Metadata */}
                 <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-xs sm:text-sm font-semibold text-[#1F2421] leading-snug group-hover:text-[#1F2421] transition-colors line-clamp-2">
+                    <h3 className="text-xs sm:text-sm font-semibold text-[#1F2A26] leading-snug group-hover:text-[#1F2A26] transition-colors line-clamp-2">
                       {photo.title}
                     </h3>
-                    <p className="text-[11px] text-[#555B53] mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-[11px] text-[#56635B] mt-1 line-clamp-2 leading-relaxed">
                       {photo.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-[#F0EADD] flex items-center justify-between text-[10px] text-[#555B53]">
+                  <div className="pt-3 border-t border-[#E8EFE9] flex items-center justify-between text-[10px] text-[#56635B]">
                     <span className="truncate max-w-[140px]">
                       {T("cli.68", { v0: photo.photographer })}
                     </span>
-                    <span className="font-bold text-[#1F2421] flex items-center gap-1 group-hover:underline">
+                    <span className="font-bold text-[#1F2A26] flex items-center gap-1 group-hover:underline">
                       {D("معاينة")} <Eye className="w-3 h-3" />
                     </span>
                   </div>
@@ -588,16 +588,16 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       </div>
 
       {/* 5. Financial Overview (الملخص المالي المبسط للعميل) */}
-      <div className="bg-white rounded-lg border border-[#E6DFD0] p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#F0EADD]">
+      <div className="bg-white rounded-lg border border-[#DCE4DC] p-6 sm:p-8 shadow-xs space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#E8EFE9]">
           <div>
             <div className="flex items-center gap-2">
-              <CreditCard className="w-5 h-5 text-[#1F2421]" />
-              <h2 className="text-lg font-semibold text-[#1F2421]">
+              <CreditCard className="w-5 h-5 text-[#1F2A26]" />
+              <h2 className="text-lg font-semibold text-[#1F2A26]">
                 {T("cli.69")}
               </h2>
             </div>
-            <p className="text-xs text-[#555B53] mt-0.5">
+            <p className="text-xs text-[#56635B] mt-0.5">
               {T("cli.70")}
             </p>
           </div>
@@ -612,40 +612,40 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
         {/* 3 Metric Cards + Highlighted Next Due Payment */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Metric 1: Total Contract */}
-          <div className="p-5 rounded-lg bg-[#F7F3EA] border border-[#E6DFD0] space-y-2">
-            <span className="text-xs font-bold text-[#555B53] uppercase tracking-wider">
+          <div className="p-5 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] space-y-2">
+            <span className="text-xs font-bold text-[#56635B] uppercase tracking-wider">
               {T("cli.72")}
             </span>
-            <div className="text-2xl sm:text-3xl font-semibold text-[#1F2421] font-ibm">
-              {formatNumber(PAY.total)} <span className="text-sm font-bold text-[#555B53]">{currencySymbol()}</span>
+            <div className="text-2xl sm:text-3xl font-semibold text-[#1F2A26] font-ibm">
+              {formatNumber(PAY.total)} <span className="text-sm font-bold text-[#56635B]">{currencySymbol()}</span>
             </div>
-            <p className="text-[11px] text-[#555B53]">
+            <p className="text-[11px] text-[#56635B]">
               {T("cli.73")}
             </p>
           </div>
 
           {/* Metric 2: Total Paid */}
-          <div className="p-5 rounded-2xl bg-white border border-[#E6DFD0] shadow-sm space-y-2">
+          <div className="p-5 rounded-2xl bg-white border border-[#DCE4DC] shadow-sm space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#1F2421] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#1F2A26] uppercase tracking-wider">
                 {T("cli.74")}
               </span>
-              <span className="text-xs font-bold text-[#1F2421] tracking-wide font-mono">
+              <span className="text-xs font-bold text-[#1F2A26] tracking-wide font-mono">
                 {T("cli.37", { v0: toAr(PAY.paidPct) })}
               </span>
             </div>
-            <div className="text-2xl sm:text-3xl font-semibold text-[#1F2421] font-ibm">
-              {formatNumber(PAY.paid)} <span className="text-sm font-bold text-[#F0EADD]/80">{currencySymbol()}</span>
+            <div className="text-2xl sm:text-3xl font-semibold text-[#1F2A26] font-ibm">
+              {formatNumber(PAY.paid)} <span className="text-sm font-bold text-[#E8EFE9]/80">{currencySymbol()}</span>
             </div>
             {/* Horizontal progress bar */}
             <ProgressBar value={PAY.paidPct} />
-            <p className="text-[11px] text-[#555B53] font-medium">
+            <p className="text-[11px] text-[#56635B] font-medium">
               {T("cli.75")}
             </p>
           </div>
 
           {/* Metric 3: Next Due Payment (Highlighted with Sage Theme) */}
-          <div className="p-5 rounded-xl bg-[#17614F] text-white border border-[#1B4A40] shadow-sm space-y-3 flex flex-col justify-between">
+          <div className="p-5 rounded-xl bg-[#5F6C61] text-white border border-[#4B574D] shadow-sm space-y-3 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider">
@@ -665,7 +665,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <button
               onClick={() => setPaymentModalOpen(true)}
-              className="w-full py-2.5 px-4 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#1F2421] hover:bg-[#F0EADD] active:scale-98 transition-all shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+              className="w-full py-2.5 px-4 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#1F2A26] hover:bg-[#E8EFE9] active:scale-98 transition-all shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <CreditCard className="w-4 h-4" />
               <span>{T("cli.78")}</span>
@@ -677,28 +677,28 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       {/* Photo Preview Modal */}
       {activePhoto && (
         <div
-          className="fixed inset-0 bg-[#1F2421]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-[#1F2A26]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setActivePhoto(null)}
         >
           <div
            
-            className="bg-white rounded-lg shadow-2xl border border-[#E6DFD0] max-w-xl w-full overflow-hidden border border-[#E6DFD0] text-start animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl border border-[#DCE4DC] max-w-xl w-full overflow-hidden border border-[#DCE4DC] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Image Placeholder Frame */}
             <div
               className={`h-64 sm:h-80 bg-gradient-to-br ${activePhoto.bgGradient} flex flex-col items-center justify-center relative p-6`}
             >
-              <div className="w-16 h-16 rounded-xl bg-white/95 text-[#1F2421] flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-xl bg-white/95 text-[#1F2A26] flex items-center justify-center shadow-lg">
                 <Camera className="w-8 h-8" />
               </div>
-              <span className="mt-4 px-4 py-1 rounded-full text-xs font-semibold bg-[#17614F] text-white shadow-sm">
+              <span className="mt-4 px-4 py-1 rounded-full text-xs font-semibold bg-[#5F6C61] text-white shadow-sm">
                 {E(activePhoto.category)}
               </span>
 
               <button
                 onClick={() => setActivePhoto(null)}
-                className="absolute top-4 end-4 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#555B53] flex items-center justify-center font-bold text-sm shadow-md"
+                className="absolute top-4 end-4 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#56635B] flex items-center justify-center font-bold text-sm shadow-md"
               >
                 ✕
               </button>
@@ -706,19 +706,19 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
             <div className="p-6 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#1F2421]">
+                <span className="text-xs font-bold text-[#1F2A26]">
                   {T("cli.79", { v0: activePhoto.date })}
                 </span>
-                <span className="text-xs text-[#555B53]">
+                <span className="text-xs text-[#56635B]">
                   {T("cli.80", { v0: activePhoto.photographer })}
                 </span>
               </div>
 
-              <h3 className="text-lg font-semibold text-[#1F2421]">
+              <h3 className="text-lg font-semibold text-[#1F2A26]">
                 {activePhoto.title}
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#555B53] leading-relaxed bg-[#F7F3EA] p-4 rounded-lg border border-[#F0EADD]">
+              <p className="text-xs sm:text-sm text-[#56635B] leading-relaxed bg-[#F2F5F1] p-4 rounded-lg border border-[#E8EFE9]">
                 {activePhoto.description}
               </p>
 
@@ -728,7 +728,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                     likedPhotos[activePhoto.id]
                       ? "bg-rose-50 text-rose-600 border border-rose-200"
-                      : "bg-[#F0EADD] text-[#555B53] hover:bg-[#E6DFD0]"
+                      : "bg-[#E8EFE9] text-[#56635B] hover:bg-[#DCE4DC]"
                   }`}
                 >
                   <Heart
@@ -745,7 +745,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
                 <button
                   onClick={() => setActivePhoto(null)}
-                  className="px-5 py-2 rounded-lg text-xs font-medium text-white bg-[#17614F] hover:bg-[#17614F] hover:bg-[#17614F] transition-colors shadow-sm"
+                  className="px-5 py-2 rounded-lg text-xs font-medium text-white bg-[#5F6C61] hover:bg-[#5F6C61] hover:bg-[#5F6C61] transition-colors shadow-sm"
                 >
                   {T("cli.81")}
                 </button>
@@ -758,24 +758,24 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
       {/* Payment Details Modal */}
       {paymentModalOpen && (
         <div
-          className="fixed inset-0 bg-[#1F2421]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-[#1F2A26]/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setPaymentModalOpen(false)}
         >
           <div
            
-            className="bg-white rounded-lg shadow-2xl border border-[#E6DFD0] max-w-lg w-full overflow-hidden border border-[#E6DFD0] text-start animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-lg shadow-2xl border border-[#DCE4DC] max-w-lg w-full overflow-hidden border border-[#DCE4DC] text-start animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-[#F0EADD] bg-[#F7F3EA]">
+            <div className="flex items-center justify-between p-6 border-b border-[#E8EFE9] bg-[#F2F5F1]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#F0EADD] text-[#1F2421] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-lg bg-[#E8EFE9] text-[#1F2A26] flex items-center justify-center font-bold">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-[#1F2421]">
+                  <h3 className="text-base font-semibold text-[#1F2A26]">
                     {T("cli.82")}
                   </h3>
-                  <p className="text-xs text-[#555B53]">
+                  <p className="text-xs text-[#56635B]">
                     {T("cli.83")}
                   </p>
                 </div>
@@ -783,35 +783,35 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
 
               <button
                 onClick={() => setPaymentModalOpen(false)}
-                className="w-8 h-8 rounded-lg text-[#555B53] hover:text-[#555B53] hover:bg-[#E6DFD0] flex items-center justify-center text-sm font-bold"
+                className="w-8 h-8 rounded-lg text-[#56635B] hover:text-[#56635B] hover:bg-[#DCE4DC] flex items-center justify-center text-sm font-bold"
               >
                 ✕
               </button>
             </div>
 
             <div className="p-6 space-y-4 text-xs sm:text-sm">
-              <div className="p-4 rounded-lg bg-[#F7F3EA] border border-[#E6DFD0] flex items-center justify-between">
+              <div className="p-4 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex items-center justify-between">
                 <div>
-                  <span className="text-[#555B53] text-xs block">{T("cli.84")}</span>
-                  <span className="text-2xl font-semibold text-[#1F2421] font-ibm">
+                  <span className="text-[#56635B] text-xs block">{T("cli.84")}</span>
+                  <span className="text-2xl font-semibold text-[#1F2A26] font-ibm">
                     {PAY.next ? formatNumber(PAY.next.amount) : "٠"} {currencySymbol()}
                   </span>
                 </div>
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#1F2421] border border-[#E6DFD0] shadow-xs">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#1F2A26] border border-[#DCE4DC] shadow-xs">
                   تستحق: {PAY.next ? formatMonthYearAr(PAY.next.dueIso) : "—"}
                 </span>
               </div>
 
               {/* Bank Transfer Details */}
-              <div className="space-y-2 p-4 rounded-lg bg-[#F7F3EA] border border-[#E6DFD0]">
-                <h4 className="font-bold text-[#1F2421] text-xs uppercase tracking-wider">
+              <div className="space-y-2 p-4 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC]">
+                <h4 className="font-bold text-[#1F2A26] text-xs uppercase tracking-wider">
                   {T("cli.85")}
                 </h4>
-                <div className="space-y-1 text-xs text-[#555B53] font-medium">
-                  <p>{T("cli.86")} <strong className="text-[#1F2421]">{T("cli.87")}</strong></p>
-                  <p>{T("cli.88")} <strong className="text-[#1F2421]">{T("cli.89")}</strong></p>
-                  <p>{T("cli.90")} <strong className="text-[#1F2421] font-mono">EG4200100003000001234567890</strong></p>
-                  <p>{T("cli.91")} <strong className="text-[#1F2421] font-mono">{T("cli.92")}</strong></p>
+                <div className="space-y-1 text-xs text-[#56635B] font-medium">
+                  <p>{T("cli.86")} <strong className="text-[#1F2A26]">{T("cli.87")}</strong></p>
+                  <p>{T("cli.88")} <strong className="text-[#1F2A26]">{T("cli.89")}</strong></p>
+                  <p>{T("cli.90")} <strong className="text-[#1F2A26] font-mono">EG4200100003000001234567890</strong></p>
+                  <p>{T("cli.91")} <strong className="text-[#1F2A26] font-mono">{T("cli.92")}</strong></p>
                 </div>
               </div>
 
@@ -829,13 +829,13 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div className="flex items-center gap-2.5 pt-2">
                   <button
                     onClick={() => setTransferConfirmed(true)}
-                    className="flex-1 py-3 rounded-lg text-xs sm:text-sm font-medium text-white bg-[#17614F] hover:bg-[#17614F] hover:bg-[#17614F] active:scale-95 transition-all shadow-sm"
+                    className="flex-1 py-3 rounded-lg text-xs sm:text-sm font-medium text-white bg-[#5F6C61] hover:bg-[#5F6C61] hover:bg-[#5F6C61] active:scale-95 transition-all shadow-sm"
                   >
                     {T("cli.95")}
                   </button>
                   <button
                     onClick={() => setPaymentModalOpen(false)}
-                    className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#555B53] bg-[#F0EADD] hover:bg-[#E6DFD0]"
+                    className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#56635B] bg-[#E8EFE9] hover:bg-[#DCE4DC]"
                   >
                     {T("cli.96")}
                   </button>

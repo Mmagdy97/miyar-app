@@ -50,7 +50,7 @@ const CLIENT_UNITS = localize([
     engineer: "م. ليلى رياض (مصممة الديكور)",
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80",
-    badgeColor: "bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0]",
+    badgeColor: "bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]",
   },
   {
     id: 3,
@@ -83,7 +83,7 @@ function ClientProjects() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#17614F] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#5F6C61] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -96,24 +96,24 @@ function ClientProjects() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5 flex-wrap mb-1">
-              <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] tracking-tight flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-[#F0EADD] border border-[#E6DFD0] flex items-center justify-center text-[#1F2421]">
+              <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2A26] tracking-tight flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#E8EFE9] border border-[#DCE4DC] flex items-center justify-center text-[#1F2A26]">
                   <Briefcase className="w-5 h-5" />
                 </div>
                 <span>{T("cli.97")}</span>
               </h1>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0]/80">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]/80">
                 {T("cli.98", { v0: CLIENT_UNITS.length })}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#555B53]">
+            <p className="text-xs md:text-sm text-[#56635B]">
               {T("cli.99")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[#555B53] bg-white px-3.5 py-2 rounded-lg border border-[#E6DFD0] shadow-2xs">
-              {D("العميل:")} <strong className="text-[#1F2421]">{T("cli.100")}</strong>
+            <span className="text-xs font-bold text-[#56635B] bg-white px-3.5 py-2 rounded-lg border border-[#DCE4DC] shadow-2xs">
+              {D("العميل:")} <strong className="text-[#1F2A26]">{T("cli.100")}</strong>
             </span>
           </div>
         </div>
@@ -123,12 +123,12 @@ function ClientProjects() {
           {CLIENT_UNITS.map((unit) => (
             <div
               key={unit.id}
-              className="bg-white rounded-lg border border-[#E6DFD0] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+              className="bg-white rounded-lg border border-[#DCE4DC] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
             >
               {/* Cover Image with Gradient Overlay */}
-              <div className="relative h-48 overflow-hidden bg-[#17614F]">
+              <div className="relative h-48 overflow-hidden bg-[#5F6C61]">
                 <Photo src={unit.image} alt={unit.name} label={unit.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#17614F]/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#5F6C61]/80 via-transparent to-transparent" />
 
                 {/* Status Badge in Photo */}
                 <div className="absolute top-3.5 start-3.5">
@@ -153,18 +153,18 @@ function ClientProjects() {
               <div className="p-5 space-y-4 flex-1">
                 {/* Location & Type */}
                 <div className="space-y-1">
-                  <div className="flex items-center gap-1.5 text-xs text-[#555B53]">
-                    <MapPin className="w-3.5 h-3.5 text-[#555B53] shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs text-[#56635B]">
+                    <MapPin className="w-3.5 h-3.5 text-[#56635B] shrink-0" />
                     <span className="truncate">{unit.location}</span>
                   </div>
-                  <p className="text-xs font-bold text-[#555B53]">{E(unit.type)}</p>
+                  <p className="text-xs font-bold text-[#56635B]">{E(unit.type)}</p>
                 </div>
 
                 {/* Progress Track */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-[#555B53] font-medium">{T("cli.102")}</span>
-                    <span className="text-xs font-bold text-[#1F2421] tracking-wide font-mono">
+                    <span className="text-[#56635B] font-medium">{T("cli.102")}</span>
+                    <span className="text-xs font-bold text-[#1F2A26] tracking-wide font-mono">
                       {pct(unit.progress)}
                     </span>
                   </div>
@@ -172,35 +172,35 @@ function ClientProjects() {
                 </div>
 
                 {/* Specs List */}
-                <div className="p-3 bg-[#F7F3EA] rounded-lg border border-[#F0EADD] space-y-2 text-xs">
+                <div className="p-3 bg-[#F2F5F1] rounded-lg border border-[#E8EFE9] space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#555B53]">{T("cli.103")}</span>
-                    <span className="font-bold text-[#1F2421]">{unit.area}</span>
+                    <span className="text-[#56635B]">{T("cli.103")}</span>
+                    <span className="font-bold text-[#1F2A26]">{unit.area}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#555B53]">{T("cli.104")}</span>
-                    <span className="font-bold text-[#1F2421] font-mono">{unit.expectedHandover}</span>
+                    <span className="text-[#56635B]">{T("cli.104")}</span>
+                    <span className="font-bold text-[#1F2A26] font-mono">{unit.expectedHandover}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#555B53]">{T("cli.105")}</span>
-                    <span className="font-bold text-[#1F2421] truncate max-w-[160px]">{unit.engineer}</span>
+                    <span className="text-[#56635B]">{T("cli.105")}</span>
+                    <span className="font-bold text-[#1F2A26] truncate max-w-[160px]">{unit.engineer}</span>
                   </div>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="p-4 bg-[#F7F3EA]/60 border-t border-[#F0EADD] flex items-center gap-2">
+              <div className="p-4 bg-[#F2F5F1]/60 border-t border-[#E8EFE9] flex items-center gap-2">
                 <button
                   onClick={() => handleAction(unit.name, D("تقرير الإنجاز وصور الموقع"))}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#E6DFD0] bg-white hover:bg-[#F7F3EA] text-[#1F2421] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg border border-[#DCE4DC] bg-white hover:bg-[#F2F5F1] text-[#1F2A26] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Eye className="w-3.5 h-3.5 text-[#555B53]" />
+                  <Eye className="w-3.5 h-3.5 text-[#56635B]" />
                   <span>{T("cli.106")}</span>
                 </button>
 
                 <button
                   onClick={() => handleAction(unit.name, D("المخططات الهندسية 3D"))}
-                  className="flex-1 py-2 px-3 rounded-lg bg-[#17614F] hover:bg-[#17614F] text-white hover:bg-[#17614F] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#5F6C61] hover:bg-[#5F6C61] text-white hover:bg-[#5F6C61] transition-colors text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{T("cli.107")}</span>

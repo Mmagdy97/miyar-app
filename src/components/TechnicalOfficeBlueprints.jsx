@@ -157,7 +157,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#17614F] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#5F6C61] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -169,17 +169,17 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#F0EADD] border border-[#E6DFD0] flex items-center justify-center text-[#1F2421]">
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2A26] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#E8EFE9] border border-[#DCE4DC] flex items-center justify-center text-[#1F2A26]">
                 <FileCode className="w-5 h-5" />
               </div>
               <span>{T("to.87")}</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0]">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]">
               {T("to.88")}
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#555B53]">
+          <p className="text-xs md:text-sm text-[#56635B]">
             {T("to.89")}
           </p>
         </div>
@@ -188,7 +188,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleReset}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#555B53] bg-white border border-[#E6DFD0] hover:bg-[#F7F3EA] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#56635B] bg-white border border-[#DCE4DC] hover:bg-[#F2F5F1] transition-colors shadow-2xs cursor-pointer"
             title={T("to.90")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -198,7 +198,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
           {/* Primary Action Button: + رفع مخطط جديد */}
           <button
             onClick={() => setIsUploadModalOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#17614F] hover:bg-[#17614F] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#5F6C61] hover:bg-[#5F6C61] transition-colors shadow-sm cursor-pointer"
           >
             <UploadCloud className="w-4 h-4" />
             <span>{T("to.92")}</span>
@@ -208,18 +208,18 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
       {/* KPI Stats Bar */}
       <div className="grid stat-grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-lg p-4 border border-[#E6DFD0] shadow-xs">
-          <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T("to.93")}</span>
+        <div className="bg-white rounded-lg p-4 border border-[#DCE4DC] shadow-xs">
+          <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("to.93")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#1F2421]">{stats.total}</span>
-            <span className="text-[11px] font-bold text-[#1F2421] bg-[#F0EADD] border border-[#E6DFD0] px-2 py-0.5 rounded-md">
+            <span className="text-xl md:text-2xl font-semibold text-[#1F2A26]">{stats.total}</span>
+            <span className="text-[11px] font-bold text-[#1F2A26] bg-[#E8EFE9] border border-[#DCE4DC] px-2 py-0.5 rounded-md">
               {T("to.94")}
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-4 border border-[#E6DFD0] shadow-xs">
-          <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T("to.95")}</span>
+        <div className="bg-white rounded-lg p-4 border border-[#DCE4DC] shadow-xs">
+          <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("to.95")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-emerald-600">{stats.afc}</span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
@@ -228,8 +228,8 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-4 border border-[#E6DFD0] shadow-xs">
-          <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T("to.97")}</span>
+        <div className="bg-white rounded-lg p-4 border border-[#DCE4DC] shadow-xs">
+          <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("to.97")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-amber-600">{stats.review}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
@@ -240,16 +240,16 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       </div>
 
       {/* Search and Discipline Filters */}
-      <div className="bg-white rounded-lg border border-[#E6DFD0] p-3.5 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="bg-white rounded-lg border border-[#DCE4DC] p-3.5 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-[#555B53] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#56635B] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder={T("to.99")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E6DFD0] bg-[#F7F3EA] text-xs md:text-sm font-semibold text-[#1F2421] placeholder-[#555B53]/50 focus:outline-none focus:ring-2 focus:ring-[#17614F]/10 focus:border-[#17614F] transition-all"
+            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#DCE4DC] bg-[#F2F5F1] text-xs md:text-sm font-semibold text-[#1F2A26] placeholder-[#56635B]/50 focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/10 focus:border-[#5F6C61] transition-all"
           />
         </div>
 
@@ -261,8 +261,8 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
               onClick={() => setSelectedDiscipline(disc)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedDiscipline === disc
-                  ? "bg-[#17614F] text-white shadow-sm"
-                  : "bg-[#F0EADD] text-[#1F2421] hover:bg-[#E6DFD0]"
+                  ? "bg-[#5F6C61] text-white shadow-sm"
+                  : "bg-[#E8EFE9] text-[#1F2A26] hover:bg-[#DCE4DC]"
               }`}
             >
               {E(disc)}
@@ -272,11 +272,11 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       </div>
 
       {/* Main Document Control Data Table */}
-      <div className="bg-white rounded-lg border border-[#E6DFD0] shadow-xs overflow-hidden">
+      <div className="bg-white rounded-lg border border-[#DCE4DC] shadow-xs overflow-hidden">
         <div className="overflow-x-auto w-full">
           <table className="w-full text-start border-collapse">
             <thead>
-              <tr className="bg-[#F7F3EA] text-[#555B53] text-xs font-bold border-b border-[#E6DFD0]">
+              <tr className="bg-[#F2F5F1] text-[#56635B] text-xs font-bold border-b border-[#DCE4DC]">
                 <th className="py-4 px-5 min-w-[260px]">{T("to.100")}</th>
                 <th className="py-4 px-4 w-32 text-center">{T("to.101")}</th>
                 <th className="py-4 px-4 w-28 text-center">{T("to.102")}</th>
@@ -285,7 +285,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                 <th className="py-4 px-5 w-32 text-center">{T("to.105")}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F0EADD] text-xs md:text-sm">
+            <tbody className="divide-y divide-[#E8EFE9] text-xs md:text-sm">
               {filteredDrawings.map((dwg) => {
                 const isAfc = dwg.status === "معتمد للتنفيذ (AFC)";
                 const isOld = dwg.status === ARCHIVED;
@@ -293,20 +293,20 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                 return (
                   <tr
                     key={dwg.id}
-                    className={`hover:bg-[#F7F3EA] transition-colors duration-150 group ${isOld ? "opacity-55" : ""}`}
+                    className={`hover:bg-[#F2F5F1] transition-colors duration-150 group ${isOld ? "opacity-55" : ""}`}
                   >
                     {/* Drawing Name & Discipline */}
                     <td className="py-4 px-5">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-[#F0EADD] text-[#1F2421] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#E6DFD0]">
+                        <div className="w-10 h-10 rounded-lg bg-[#E8EFE9] text-[#1F2A26] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#DCE4DC]">
                           <FileCode className="w-5 h-5" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-[#1F2421] leading-snug group-hover:text-[#1F2421] transition-colors">
+                          <h4 className="font-semibold text-[#1F2A26] leading-snug group-hover:text-[#1F2A26] transition-colors">
                             {dwg.name}
                           </h4>
-                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#555B53]">
-                            <span className="text-[#555B53] font-semibold">{E(dwg.discipline)}</span>
+                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#56635B]">
+                            <span className="text-[#56635B] font-semibold">{E(dwg.discipline)}</span>
                             <span>{D(dwg.fileSize)}</span>
                             <span>{dwg.project}</span>
                           </div>
@@ -316,20 +316,20 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
                     {/* Code */}
                     <td className="py-4 px-4 text-center">
-                      <span className="font-mono font-semibold text-[#1F2421] bg-[#F0EADD] px-2.5 py-1 rounded-lg text-xs text-[#1F2421]">
+                      <span className="font-mono font-semibold text-[#1F2A26] bg-[#E8EFE9] px-2.5 py-1 rounded-lg text-xs text-[#1F2A26]">
                         {dwg.code}
                       </span>
                     </td>
 
                     {/* Revision */}
                     <td className="py-4 px-4 text-center">
-                      <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-[#F0EADD] text-[#1F2421] border border-[#E6DFD0]">
+                      <span className="inline-block px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]">
                         {dwg.rev}
                       </span>
                     </td>
 
                     {/* Upload Date */}
-                    <td className="py-4 px-4 text-center text-xs text-[#555B53] font-medium">
+                    <td className="py-4 px-4 text-center text-xs text-[#56635B] font-medium">
                       {D(dwg.uploadDate)}
                     </td>
 
@@ -340,13 +340,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                           isAfc
                             ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                             : isOld
-                            ? "bg-[#F0EADD] text-[#6F756B] border-[#E6DFD0]"
+                            ? "bg-[#E8EFE9] text-[#6E7B72] border-[#DCE4DC]"
                             : "bg-amber-50 text-amber-700 border-amber-200"
                         }`}
                       >
                         <span
                           className={`w-1.5 h-1.5 rounded-full ${
-                            isAfc ? "bg-emerald-600" : isOld ? "bg-[#A39B88]" : "bg-amber-500"
+                            isAfc ? "bg-emerald-600" : isOld ? "bg-[#A3AE9F]" : "bg-amber-500"
                           }`}
                         />
                         <span>{E(dwg.status)}</span>
@@ -359,7 +359,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         {/* Preview */}
                         <button
                           onClick={() => handlePreviewDrawing(dwg.name, dwg.code)}
-                          className="p-1.5 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-[#F0EADD] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#56635B] hover:text-[#1F2A26] hover:bg-[#E8EFE9] transition-colors cursor-pointer"
                           title={T("to.106")}
                         >
                           <Eye className="w-4 h-4" />
@@ -368,7 +368,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         {/* Download */}
                         <button
                           onClick={() => handleDownloadDrawing(dwg.name, dwg.code)}
-                          className="p-1.5 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-[#F0EADD] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#56635B] hover:text-[#1F2A26] hover:bg-[#E8EFE9] transition-colors cursor-pointer"
                           title={T("to.107")}
                         >
                           <Download className="w-4 h-4" />
@@ -377,7 +377,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                         {/* Delete */}
                         <button
                           onClick={() => handleDeleteDrawing(dwg.id, dwg.name)}
-                          className="p-1.5 rounded-lg text-[#555B53] hover:text-rose-700 hover:bg-[#F0EADD] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#56635B] hover:text-rose-700 hover:bg-[#E8EFE9] transition-colors cursor-pointer"
                           title={T("to.108")}
                         >
                           <Trash2 className="w-4 h-4" />
@@ -390,10 +390,10 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
               {filteredDrawings.length === 0 && (
                 <tr>
-                  <td colSpan="6" className="py-12 text-center text-[#555B53]">
-                    <FileText className="w-8 h-8 mx-auto mb-2 text-[#6F756B]" />
-                    <p className="font-bold text-[#555B53]">{T("to.109")}</p>
-                    <p className="text-xs text-[#555B53] mt-1">
+                  <td colSpan="6" className="py-12 text-center text-[#56635B]">
+                    <FileText className="w-8 h-8 mx-auto mb-2 text-[#6E7B72]" />
+                    <p className="font-bold text-[#56635B]">{T("to.109")}</p>
+                    <p className="text-xs text-[#56635B] mt-1">
                       جرّب تعديل كلمة البحث أو الضغط على D("+ رفع مخطط جديد")
                     </p>
                   </td>
@@ -404,12 +404,12 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
         </div>
 
         {/* Table Footer */}
-        <div className="p-4 bg-[#F7F3EA] border-t border-[#E6DFD0] flex items-center justify-between text-xs text-[#555B53]">
+        <div className="p-4 bg-[#F2F5F1] border-t border-[#DCE4DC] flex items-center justify-between text-xs text-[#56635B]">
           <span>
-            {D("عرض")} <strong className="text-[#1F2421]">{filteredDrawings.length}</strong> {D("من أصل")}{" "}
-            <strong className="text-[#1F2421]">{drawings.length}</strong> {D("مخطط")}
+            {D("عرض")} <strong className="text-[#1F2A26]">{filteredDrawings.length}</strong> {D("من أصل")}{" "}
+            <strong className="text-[#1F2A26]">{drawings.length}</strong> {D("مخطط")}
           </span>
-          <span className="text-[11px] text-[#555B53]">
+          <span className="text-[11px] text-[#56635B]">
             {D("* جميع اللوحات المعتمدة تحمل خاتم AFC الرقمي وتصل فوراً لمهندسي المواقع.")}
           </span>
         </div>
@@ -417,16 +417,16 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
       {/* Upload Drawing Modal */}
       {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#1F2421]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E6DFD0] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#F0EADD]">
-              <h3 className="text-lg font-semibold text-[#1F2421] flex items-center gap-2">
-                <UploadCloud className="w-5 h-5 text-[#1F2421]" />
+        <div className="fixed inset-0 z-50 bg-[#1F2A26]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#DCE4DC] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E8EFE9]">
+              <h3 className="text-lg font-semibold text-[#1F2A26] flex items-center gap-2">
+                <UploadCloud className="w-5 h-5 text-[#1F2A26]" />
                 <span>{T("to.110")}</span>
               </h3>
               <button
                 onClick={() => setIsUploadModalOpen(false)}
-                className="p-1.5 rounded-lg text-[#555B53] hover:text-[#1F2421] hover:bg-[#F0EADD] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#56635B] hover:text-[#1F2A26] hover:bg-[#E8EFE9] cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -434,7 +434,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
             <form onSubmit={handleUploadSubmit} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                   اسم اللوحة / المخطط <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -443,13 +443,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                   placeholder={T("to.111")}
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E6DFD0] text-xs md:text-sm font-semibold text-[#1F2421] focus:outline-none focus:ring-2 focus:ring-[#17614F]/10 focus:border-[#17614F] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#DCE4DC] text-xs md:text-sm font-semibold text-[#1F2A26] focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/10 focus:border-[#5F6C61] transition-all"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                  <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                     كود اللوحة (Drawing Code) <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -458,18 +458,18 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                     placeholder={T("to.112")}
                     value={newCode}
                     onChange={(e) => setNewCode(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E6DFD0] text-xs font-mono font-bold text-[#1F2421] focus:outline-none focus:ring-2 focus:ring-[#17614F]/10 focus:border-[#17614F]"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DCE4DC] text-xs font-mono font-bold text-[#1F2A26] focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/10 focus:border-[#5F6C61]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                  <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                     {T("to.113")}
                   </label>
                   <select
                     value={newRev}
                     onChange={(e) => setNewRev(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DCE4DC] text-xs font-bold text-[#1F2A26] bg-white"
                   >
                     <option value="Rev. 00">{T("to.114")}</option>
                     <option value="Rev. 01">Rev. 01</option>
@@ -481,13 +481,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                  <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                     {T("to.115")}
                   </label>
                   <select
                     value={newDiscipline}
                     onChange={(e) => setNewDiscipline(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DCE4DC] text-xs font-bold text-[#1F2A26] bg-white"
                   >
                     <option value="معماري وديكور">{T("to.116")}</option>
                     <option value="كهرباء">{T("to.117")}</option>
@@ -498,13 +498,13 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#555B53] mb-1.5">
+                  <label className="block text-xs font-bold text-[#56635B] mb-1.5">
                     {T("to.121")}
                   </label>
                   <select
                     value={newStatus}
                     onChange={(e) => setNewStatus(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#DCE4DC] text-xs font-bold text-[#1F2A26] bg-white"
                   >
                     <option value="معتمد للتنفيذ (AFC)">{T("to.122")}</option>
                     <option value="قيد المراجعة">{T("to.123")}</option>
@@ -513,27 +513,27 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
               </div>
 
               {/* Upload Zone Mock */}
-              <div className="border-2 border-dashed border-[#D5CCB8] hover:border-[#17614F] rounded-lg p-6 text-center bg-[#F7F3EA] hover:bg-[#F0EADD] transition-all cursor-pointer">
-                <UploadCloud className="w-8 h-8 text-[#555B53] mx-auto mb-2" />
-                <p className="text-xs font-bold text-[#1F2421]">
+              <div className="border-2 border-dashed border-[#C6D0C6] hover:border-[#5F6C61] rounded-lg p-6 text-center bg-[#F2F5F1] hover:bg-[#E8EFE9] transition-all cursor-pointer">
+                <UploadCloud className="w-8 h-8 text-[#56635B] mx-auto mb-2" />
+                <p className="text-xs font-bold text-[#1F2A26]">
                   {T("to.124")}
                 </p>
-                <p className="text-[10px] text-[#555B53] mt-1">
+                <p className="text-[10px] text-[#56635B] mt-1">
                   {T("to.125")}
                 </p>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#F0EADD]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#E8EFE9]">
                 <button
                   type="button"
                   onClick={() => setIsUploadModalOpen(false)}
-                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#555B53] hover:bg-[#F0EADD] cursor-pointer"
+                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#56635B] hover:bg-[#E8EFE9] cursor-pointer"
                 >
                   {T("to.126")}
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#17614F] hover:bg-[#17614F] hover:bg-[#17614F] text-white font-bold text-xs md:text-sm shadow-sm transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#5F6C61] hover:bg-[#5F6C61] hover:bg-[#5F6C61] text-white font-bold text-xs md:text-sm shadow-sm transition-all cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
                   <span>{T("to.127")}</span>

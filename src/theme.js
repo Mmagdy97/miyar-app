@@ -6,7 +6,7 @@ export const applyTheme = (t = getTheme()) => {
   const root = document.documentElement;
   root.classList.toggle("dark", t === "dark");
   const m = document.querySelector('meta[name="theme-color"]');
-  if (m) m.setAttribute("content", t === "dark" ? "#0c1120" : "#1F2421");
+  if (m) m.setAttribute("content", t === "dark" ? "#0c1120" : "#1F2A26");
 };
 export const setTheme = (t) => {
   try { localStorage.setItem(KEY, t); } catch { /* storage unavailable */ }

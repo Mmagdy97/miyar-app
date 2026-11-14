@@ -12,7 +12,7 @@ import { toCsv, download } from "../lib/accountant";
 import { selectionsRepo } from "../data/selections";
 import { projectsStore } from "../data/projects";
 
-const input = "px-3 py-2 rounded-lg border border-[#E6DFD0] text-xs font-bold text-[#1F2421] bg-white min-w-0";
+const input = "px-3 py-2 rounded-lg border border-[#DCE4DC] text-xs font-bold text-[#1F2A26] bg-white min-w-0";
 const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200", delivered: "bg-teal-50 text-teal-800 border-teal-200", installed: "bg-emerald-100 text-emerald-800 border-emerald-300" };
 const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "", image: "", phone: "", dims: "", material: "", code: "", leadDays: "", color: "#C8A27A" };
 
@@ -24,7 +24,7 @@ function Thumb({ i, size = "w-full md:w-28 h-44 md:h-28", onZoom }) {
     </div>
   );
   return (
-    <button type="button" disabled={!i.image} onClick={onZoom} aria-label={T("sel.zoom")} className={`${size} shrink-0 overflow-hidden rounded-xl border border-[#E6DFD0] bg-[#F0EADD] ${i.image ? "cursor-zoom-in" : "cursor-default"}`}>
+    <button type="button" disabled={!i.image} onClick={onZoom} aria-label={T("sel.zoom")} className={`${size} shrink-0 overflow-hidden rounded-xl border border-[#DCE4DC] bg-[#E8EFE9] ${i.image ? "cursor-zoom-in" : "cursor-default"}`}>
       {i.image ? <Photo src={i.image} alt={i.name} className="w-full h-full object-cover" fallbackClass="" /> : swatch}
     </button>
   );
@@ -68,10 +68,10 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2421] flex items-center gap-2.5"><Armchair className="w-7 h-7" /><span>{T(isClient ? "sel.title.client" : "sel.title")}</span></h1>
-            <p className="text-xs md:text-sm text-[#555B53] mt-1">{T(isClient ? "sel.sub.client" : "sel.sub")}</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2A26] flex items-center gap-2.5"><Armchair className="w-7 h-7" /><span>{T(isClient ? "sel.title.client" : "sel.title")}</span></h1>
+            <p className="text-xs md:text-sm text-[#56635B] mt-1">{T(isClient ? "sel.sub.client" : "sel.sub")}</p>
           </div>
-          {!isClient && <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] hover:bg-[#F7F3EA] cursor-pointer w-fit"><Download className="w-4 h-4" />{T("sel.export")}</button>}
+          {!isClient && <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#1F2A26] bg-white border border-[#DCE4DC] hover:bg-[#F2F5F1] cursor-pointer w-fit"><Download className="w-4 h-4" />{T("sel.export")}</button>}
         </div>
 
         {!isClient && (
@@ -82,16 +82,16 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
           {[["sel.k.approved", t.price], ["sel.k.pending", t.pending], ...(isClient || restricted ? [] : [["sel.k.cost", t.cost], ["sel.k.margin", t.margin]])].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#E6DFD0] text-center">
-              <span className="text-[11px] font-bold text-[#555B53] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-semibold text-[#1F2421]">{money(v, { compact: true })}</span>
-              {k === "sel.k.margin" && <span className="block text-[10px] font-bold text-[#555B53]">{t.marginPct}%</span>}
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#DCE4DC] text-center">
+              <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-semibold text-[#1F2A26]">{money(v, { compact: true })}</span>
+              {k === "sel.k.margin" && <span className="block text-[10px] font-bold text-[#56635B]">{t.marginPct}%</span>}
             </div>
           ))}
         </div>
 
         {!isClient && (
-          <form onSubmit={add} className="bg-white rounded-2xl border border-[#E6DFD0] p-4 space-y-3">
+          <form onSubmit={add} className="bg-white rounded-2xl border border-[#DCE4DC] p-4 space-y-3">
             <div className="flex flex-wrap gap-2 items-end">
               <input placeholder={T("sel.room")} value={f.room} onChange={(e) => setF({ ...f, room: e.target.value })} className={input + " w-32"} />
               <input required placeholder={T("sel.item")} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} className={input + " flex-1 min-w-36"} />
@@ -100,15 +100,15 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
               {!restricted && <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />}
               <input required type="number" min={1} placeholder={T("sel.price")} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} className={input + " w-28"} />
             </div>
-            <button type="button" onClick={() => setMore((v) => !v)} aria-expanded={more} className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#17614F] cursor-pointer">
+            <button type="button" onClick={() => setMore((v) => !v)} aria-expanded={more} className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5F6C61] cursor-pointer">
               <ChevronDown className={`w-4 h-4 transition-transform ${more ? "rotate-180" : ""}`} aria-hidden="true" />{T("sel.details")}
             </button>
             {more && (
               <div className="grid md:grid-cols-[11rem_1fr] gap-4 animate-in">
                 <div>
-                  <p className="text-[11px] font-bold text-[#555B53] mb-1.5">{T("sel.photo")}</p>
-                  <div className="h-36 rounded-xl overflow-hidden border border-dashed border-[#D5CCB8] bg-[#F7F3EA]">
-                    {f.image ? <Photo src={f.image} alt="" className="w-full h-full object-cover" /> : <label className="h-full flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#555B53] cursor-pointer"><ImagePlus className="w-6 h-6" aria-hidden="true" />{T("sel.photo.add")}<input type="file" accept="image/*" onChange={pick} className="sr-only" /></label>}
+                  <p className="text-[11px] font-bold text-[#56635B] mb-1.5">{T("sel.photo")}</p>
+                  <div className="h-36 rounded-xl overflow-hidden border border-dashed border-[#C6D0C6] bg-[#F2F5F1]">
+                    {f.image ? <Photo src={f.image} alt="" className="w-full h-full object-cover" /> : <label className="h-full flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#56635B] cursor-pointer"><ImagePlus className="w-6 h-6" aria-hidden="true" />{T("sel.photo.add")}<input type="file" accept="image/*" onChange={pick} className="sr-only" /></label>}
                   </div>
                   {f.image
                     ? <button type="button" onClick={() => setF({ ...f, image: "" })} className="mt-1.5 text-[11px] font-semibold text-rose-700 cursor-pointer">{T("sel.photo.remove")}</button>
@@ -121,29 +121,29 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                   <input placeholder={T("sel.dims")} value={f.dims} onChange={(e) => setF({ ...f, dims: e.target.value })} className={input} />
                   <input placeholder={T("sel.code")} value={f.code} onChange={(e) => setF({ ...f, code: e.target.value })} className={input} />
                   <input placeholder={T("sel.material")} value={f.material} onChange={(e) => setF({ ...f, material: e.target.value })} className={input + " sm:col-span-2"} />
-                  <label className="flex items-center gap-2 text-[11px] font-bold text-[#555B53]">{T("sel.color")}<input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} className="h-8 w-10 rounded-md border border-[#E6DFD0] bg-white p-0.5" /></label>
+                  <label className="flex items-center gap-2 text-[11px] font-bold text-[#56635B]">{T("sel.color")}<input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} className="h-8 w-10 rounded-md border border-[#DCE4DC] bg-white p-0.5" /></label>
                 </div>
               </div>
             )}
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
           </form>
         )}
 
         {!isClient && pos.length > 0 && (
           <section className="space-y-2">
-            <div><h2 className="text-sm font-semibold text-[#1F2421]">{T("sel.orders")}</h2><p className="text-[11px] text-[#555B53]">{T("sel.ordersSub")}</p></div>
+            <div><h2 className="text-sm font-semibold text-[#1F2A26]">{T("sel.orders")}</h2><p className="text-[11px] text-[#56635B]">{T("sel.ordersSub")}</p></div>
             <div className="grid md:grid-cols-2 gap-3">
               {pos.map((po) => (
-                <div key={po.supplier} className="bg-white rounded-2xl border border-[#E6DFD0] p-4 space-y-2">
+                <div key={po.supplier} className="bg-white rounded-2xl border border-[#DCE4DC] p-4 space-y-2">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm font-semibold text-[#1F2421]">{po.supplier || T("sel.noSupplier")}</p>
-                    {!restricted && <span className="text-sm font-semibold tabular-nums text-[#1F2421] shrink-0">{money(po.total)}</span>}
+                    <p className="text-sm font-semibold text-[#1F2A26]">{po.supplier || T("sel.noSupplier")}</p>
+                    {!restricted && <span className="text-sm font-semibold tabular-nums text-[#1F2A26] shrink-0">{money(po.total)}</span>}
                   </div>
-                  <p className="text-[11px] text-[#555B53]">{po.list.map((i) => `${i.qty}× ${i.name}`).join(" · ")}</p>
+                  <p className="text-[11px] text-[#56635B]">{po.list.map((i) => `${i.qty}× ${i.name}`).join(" · ")}</p>
                   <div className="flex flex-wrap gap-2">
-                    {po.list.some((i) => i.status === "approved") && <button type="button" onClick={() => orderAll(po.list)} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.poAll")}</button>}
-                    <button type="button" onClick={() => printPO(po, project, today())} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] hover:bg-[#F7F3EA] cursor-pointer"><Printer className="w-4 h-4" aria-hidden="true" />{T("sel.po")}</button>
-                    {po.phone && <a href={poWa(po)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#17614F] bg-[#E3EFEA] hover:bg-[#d6e8e1]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.poWa")}</a>}
+                    {po.list.some((i) => i.status === "approved") && <button type="button" onClick={() => orderAll(po.list)} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer">{T("sel.poAll")}</button>}
+                    <button type="button" onClick={() => printPO(po, project, today())} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2A26] bg-white border border-[#DCE4DC] hover:bg-[#F2F5F1] cursor-pointer"><Printer className="w-4 h-4" aria-hidden="true" />{T("sel.po")}</button>
+                    {po.phone && <a href={poWa(po)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#5F6C61] bg-[#DAEBE3] hover:bg-[#CDE3D8]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.poWa")}</a>}
                   </div>
                 </div>
               ))}
@@ -151,35 +151,35 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
           </section>
         )}
 
-        {mine.length === 0 && <p className="text-xs text-[#555B53] bg-white rounded-lg border border-[#E6DFD0] p-6 text-center">{T("sel.empty")}</p>}
+        {mine.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("sel.empty")}</p>}
         {Object.entries(groups).map(([room, list]) => (
           <section key={room} className="space-y-2">
-            <h2 className="text-sm font-semibold text-[#1F2421]">{room || T("sel.general")}</h2>
+            <h2 className="text-sm font-semibold text-[#1F2A26]">{room || T("sel.general")}</h2>
             {list.map((i) => (
-              <article key={i.id} className="bg-white rounded-2xl border border-[#E6DFD0] p-3 md:p-4 flex flex-col md:flex-row gap-3 md:gap-4">
+              <article key={i.id} className="bg-white rounded-2xl border border-[#DCE4DC] p-3 md:p-4 flex flex-col md:flex-row gap-3 md:gap-4">
                 <Thumb i={i} onZoom={() => i.image && setZoom(i)} />
                 <div className="flex-1 min-w-0 flex flex-col gap-2">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <p className="text-base font-semibold text-[#1F2421] leading-snug">{i.name}</p>
-                      {i.supplier && <p className="text-xs text-[#555B53] mt-0.5">{i.supplier}</p>}
+                      <p className="text-base font-semibold text-[#1F2A26] leading-snug">{i.name}</p>
+                      {i.supplier && <p className="text-xs text-[#56635B] mt-0.5">{i.supplier}</p>}
                     </div>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit shrink-0 ${badge[i.status]}`}>{T("sel.s." + i.status)}</span>
                   </div>
                   {(i.dims || i.material || i.code || i.leadDays > 0) && (
-                    <ul className="flex flex-wrap gap-1.5 text-[11px] text-[#555B53]">
-                      {i.dims && <li className="inline-flex items-center gap-1 rounded-md bg-[#F7F3EA] border border-[#E6DFD0] px-2 py-0.5"><Ruler className="w-3 h-3" aria-hidden="true" />{i.dims}</li>}
-                      {i.material && <li className="inline-flex items-center gap-1.5 rounded-md bg-[#F7F3EA] border border-[#E6DFD0] px-2 py-0.5"><span className="w-2.5 h-2.5 rounded-full border border-black/10" style={{ background: i.color }} aria-hidden="true" />{i.material}</li>}
-                      {i.code && <li className="rounded-md bg-[#F7F3EA] border border-[#E6DFD0] px-2 py-0.5 tabular-nums">{i.code}</li>}
-                      {i.leadDays > 0 && <li className="inline-flex items-center gap-1 rounded-md bg-[#F6ECD6] border border-[#E9D7AE] text-[#7A5415] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T("sel.leadTag", { d: i.leadDays })}</li>}
+                    <ul className="flex flex-wrap gap-1.5 text-[11px] text-[#56635B]">
+                      {i.dims && <li className="inline-flex items-center gap-1 rounded-md bg-[#F2F5F1] border border-[#DCE4DC] px-2 py-0.5"><Ruler className="w-3 h-3" aria-hidden="true" />{i.dims}</li>}
+                      {i.material && <li className="inline-flex items-center gap-1.5 rounded-md bg-[#F2F5F1] border border-[#DCE4DC] px-2 py-0.5"><span className="w-2.5 h-2.5 rounded-full border border-black/10" style={{ background: i.color }} aria-hidden="true" />{i.material}</li>}
+                      {i.code && <li className="rounded-md bg-[#F2F5F1] border border-[#DCE4DC] px-2 py-0.5 tabular-nums">{i.code}</li>}
+                      {i.leadDays > 0 && <li className="inline-flex items-center gap-1 rounded-md bg-[#FDE8D3] border border-[#F3C3B2] text-[#9A4F35] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T("sel.leadTag", { d: i.leadDays })}</li>}
                     </ul>
                   )}
                   {stepIndex(i) >= 0 && (
-                    <ol className="flex items-center gap-1 text-[10px] font-semibold text-[#6F756B]" aria-label={T("sel.track")}>
+                    <ol className="flex items-center gap-1 text-[10px] font-semibold text-[#6E7B72]" aria-label={T("sel.track")}>
                       {STEPS.map((k, n) => (
-                        <li key={k} className={`flex items-center gap-1 ${n <= stepIndex(i) ? "text-[#17614F]" : ""}`}>
-                          <span className={`w-2.5 h-2.5 rounded-full border ${n <= stepIndex(i) ? "bg-[#17614F] border-[#17614F]" : "border-[#D5CCB8] bg-white"}`} aria-hidden="true" />{T("sel.step." + k)}
-                          {n < STEPS.length - 1 && <span className={`w-4 sm:w-6 h-px ${n < stepIndex(i) ? "bg-[#17614F]" : "bg-[#D5CCB8]"}`} aria-hidden="true" />}
+                        <li key={k} className={`flex items-center gap-1 ${n <= stepIndex(i) ? "text-[#5F6C61]" : ""}`}>
+                          <span className={`w-2.5 h-2.5 rounded-full border ${n <= stepIndex(i) ? "bg-[#5F6C61] border-[#5F6C61]" : "border-[#C6D0C6] bg-white"}`} aria-hidden="true" />{T("sel.step." + k)}
+                          {n < STEPS.length - 1 && <span className={`w-4 sm:w-6 h-px ${n < stepIndex(i) ? "bg-[#5F6C61]" : "bg-[#C6D0C6]"}`} aria-hidden="true" />}
                         </li>
                       ))}
                     </ol>
@@ -189,7 +189,7 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                       <Truck className="w-3 h-3" aria-hidden="true" />{T("sel.eta", { d: new Date(etaOf(i)).toLocaleDateString(intlLocale(), { day: "numeric", month: "short" }) })}{isLate(i) && ` · ${T("sel.late", { n: Math.max(1, Math.round((new Date(today()) - new Date(etaOf(i))) / 86400000)) })}`}
                     </p>
                   )}
-                  <p className="text-sm font-semibold text-[#1F2421] tabular-nums">{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && <span className="text-xs font-medium text-[#6F756B]">{` · ${T("sel.cost")}: ${money(lineCost(i))}`}</span>}</p>
+                  <p className="text-sm font-semibold text-[#1F2A26] tabular-nums">{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && <span className="text-xs font-medium text-[#6E7B72]">{` · ${T("sel.cost")}: ${money(lineCost(i))}`}</span>}</p>
                   <div className="flex flex-wrap items-center gap-2 mt-auto">
                     {isClient && i.status === "proposed" && (
                       <>
@@ -197,12 +197,12 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                         <button type="button" onClick={() => setStatus(i.id, "rejected")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 cursor-pointer"><X className="w-4 h-4" />{T("sel.reject")}</button>
                       </>
                     )}
-                    {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.order")}</button>}
-                    {!isClient && i.status === "ordered" && <button type="button" onClick={() => setStatus(i.id, "delivered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.deliver")}</button>}
-                    {!isClient && i.status === "delivered" && <button type="button" onClick={() => setStatus(i.id, "installed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#17614F] hover:bg-[#104A3C] cursor-pointer">{T("sel.install")}</button>}
-                    {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2421] bg-white border border-[#E6DFD0] cursor-pointer">{T("sel.repropose")}</button>}
-                    {!isClient && i.phone && <a href={supplierWa(i.phone, T("sel.waMsg", { item: i.name, code: i.code || "-", project: E(project.name) }))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#17614F] bg-[#E3EFEA] hover:bg-[#d6e8e1]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.waBtn")}</a>}
-                    {!isClient && (i.status === "proposed" || i.status === "approved" || i.status === "rejected") && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#6F756B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                    {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer">{T("sel.order")}</button>}
+                    {!isClient && i.status === "ordered" && <button type="button" onClick={() => setStatus(i.id, "delivered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer">{T("sel.deliver")}</button>}
+                    {!isClient && i.status === "delivered" && <button type="button" onClick={() => setStatus(i.id, "installed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer">{T("sel.install")}</button>}
+                    {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#1F2A26] bg-white border border-[#DCE4DC] cursor-pointer">{T("sel.repropose")}</button>}
+                    {!isClient && i.phone && <a href={supplierWa(i.phone, T("sel.waMsg", { item: i.name, code: i.code || "-", project: E(project.name) }))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#5F6C61] bg-[#DAEBE3] hover:bg-[#CDE3D8]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.waBtn")}</a>}
+                    {!isClient && (i.status === "proposed" || i.status === "approved" || i.status === "rejected") && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#6E7B72] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
                   </div>
                 </div>
               </article>
@@ -211,8 +211,8 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
         ))}
       </div>
       {zoom && (
-        <div role="dialog" aria-modal="true" aria-label={zoom.name} onClick={() => setZoom(null)} className="fixed inset-0 z-50 bg-[#1F2421]/80 flex flex-col items-center justify-center p-4 animate-in fade-in">
-          <button type="button" onClick={() => setZoom(null)} aria-label={T("sel.close")} className="absolute top-4 end-4 p-2 rounded-full bg-white/90 text-[#1F2421] cursor-pointer"><X className="w-5 h-5" /></button>
+        <div role="dialog" aria-modal="true" aria-label={zoom.name} onClick={() => setZoom(null)} className="fixed inset-0 z-50 bg-[#1F2A26]/80 flex flex-col items-center justify-center p-4 animate-in fade-in">
+          <button type="button" onClick={() => setZoom(null)} aria-label={T("sel.close")} className="absolute top-4 end-4 p-2 rounded-full bg-white/90 text-[#1F2A26] cursor-pointer"><X className="w-5 h-5" /></button>
           <Photo src={zoom.image} alt={zoom.name} className="max-h-[78vh] max-w-full rounded-2xl object-contain" />
           <p className="mt-3 text-sm font-semibold text-white">{zoom.name}</p>
         </div>
@@ -224,7 +224,7 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
 function NoProjects() {
   return (
     <main className="flex-1 flex items-center justify-center p-8 font-ibm">
-      <p className="text-sm text-[#555B53] bg-white rounded-xl border border-[#E6DFD0] p-8 text-center max-w-sm">{T("proj.none")}</p>
+      <p className="text-sm text-[#56635B] bg-white rounded-xl border border-[#DCE4DC] p-8 text-center max-w-sm">{T("proj.none")}</p>
     </main>
   );
 }

@@ -7,11 +7,11 @@ export default class ErrorBoundary extends Component {
   render() {
     if (!this.state.failed) return this.props.children;
     return (
-      <div className="min-h-screen flex items-center justify-center p-6 bg-[#F7F3EA] text-[#1F2421] text-center">
+      <div className="min-h-screen flex items-center justify-center p-6 bg-[#F2F5F1] text-[#1F2A26] text-center">
         <div>
           <h1 className="text-xl font-bold">{T("nf.title")}</h1>
-          <p className="mt-2 text-sm text-[#555B53]">{T("nf.desc")}</p>
-          <button onClick={() => window.location.reload()} className="mt-5 px-5 py-2.5 rounded-lg bg-[#17614F] text-white text-sm font-bold cursor-pointer">{T("nf.reload")}</button>
+          <p className="mt-2 text-sm text-[#56635B]">{T("nf.desc")}</p>
+          <button onClick={() => window.location.reload()} className="mt-5 px-5 py-2.5 rounded-lg bg-[#5F6C61] text-white text-sm font-bold cursor-pointer">{T("nf.reload")}</button>
         </div>
       </div>
     );
