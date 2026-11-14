@@ -96,6 +96,7 @@ export const PROJECTS = [
     startDate: "2026-09-01",
     deadline: "2026-12-30",
     contractValue: 5_400_000,
+    budget: 4_200_000,
     collected: 2_700_000,
     spentActual: 2_430_000,
     location: "التجمع الخامس - القاهرة الجديدة",
@@ -118,7 +119,9 @@ export const PROJECTS = [
     startDate: "2026-08-15",
     deadline: "2026-11-20",
     contractValue: 3_200_000,
+    budget: 2_500_000,
     collected: 1_600_000,
+    spentActual: 1_350_000,
     location: "بوليجون سوديك - الشيخ زايد",
     image:
       "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
@@ -139,7 +142,9 @@ export const PROJECTS = [
     startDate: "2026-06-10",
     deadline: "2026-12-05",
     contractValue: 2_850_000,
+    budget: 2_200_000,
     collected: 2_280_000,
+    spentActual: 1_980_000,
     location: "نيو جيزة - طريق الإسكندرية الصحراوي",
     image:
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
@@ -160,7 +165,9 @@ export const PROJECTS = [
     startDate: "2026-10-01",
     deadline: "2027-02-28",
     contractValue: 4_100_000,
+    budget: 3_200_000,
     collected: 820_000,
+    spentActual: 420_000,
     location: "مصر الجديدة - القاهرة",
     image:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",

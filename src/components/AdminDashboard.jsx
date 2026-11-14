@@ -1,4 +1,5 @@
 import QuickActions from "./QuickActions";
+import DecisionPanel from "./DecisionPanel";
 import { D } from "../data/dataI18n";
 import { currencySymbol, intlLocale, useI18n, E } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
@@ -197,6 +198,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
       </section>
 
       <QuickActions setActiveTab={setActiveTab} compact />
+
+      <DecisionPanel projects={SEED_PROJECTS} onOpen={() => setActiveTab?.("المشاريع الجارية")} />
 
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
