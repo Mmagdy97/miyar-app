@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "./EmptyState";
 import { Plus, Trash2, ListTodo, AlertTriangle, PackageSearch, Check } from "lucide-react";
 import { tr_ as T, E } from "../i18n";
 import { useProjectList } from "../data/projects";
@@ -54,7 +55,7 @@ export default function LiveSite({ kind }) {
           {kind !== "requests" && <select value={f.level} onChange={set("level")} className={input}>{["high", "medium", "low"].map((l) => <option key={l} value={l}>{T("site.lv." + l)}</option>)}</select>}
           <button type="submit" className={btn}><Plus className="w-4 h-4" />{T("site.add")}</button>
         </form>
-        {mine.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("site.empty")}</p>}
+        {mine.length === 0 && <EmptyState title={T("site.empty")} hint={T("site.emptyHint")} />}
         <div className="grid gap-2">
           {kind === "tasks" && mine.map((x) => (
             <Card key={x.id} done={x.done}>

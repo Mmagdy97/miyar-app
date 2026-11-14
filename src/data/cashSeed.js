@@ -22,7 +22,7 @@ export const INITIAL_PENDING_EXPENSES = [
     engName: "م. أحمد الشناوي (موقع زايد)",
     description: "تشوين أسمنت ورمل سريع لعزل البدروم",
     amount: 1500,
-    date: "اليوم، ١١:٣٠ ص",
+    date: "اليوم، 11:30 ص",
     category: "تشوين ونولون",
     receiptNumber: "REC-9821",
     invoiceImg:
@@ -34,7 +34,7 @@ export const INITIAL_PENDING_EXPENSES = [
     engName: "م. كريم مصطفى (فيلا الياسمين)",
     description: "شراء وصلات سباكة نحاس إضافية وغراء عزل",
     amount: 2850,
-    date: "اليوم، ٠٩:٤٥ ص",
+    date: "اليوم، 09:45 ص",
     category: "خامات سباكة",
     receiptNumber: "REC-9822",
     invoiceImg:
@@ -46,7 +46,7 @@ export const INITIAL_PENDING_EXPENSES = [
     engName: "م. عمر عادل (نيو جيزة)",
     description: "يومية عمالة طارئة لتنزيل ألواح الجبسوم بورد",
     amount: 1200,
-    date: "أمس، ٠٥:١٥ م",
+    date: "أمس، 05:15 م",
     category: "مصاريف عمالة",
     receiptNumber: "REC-9823",
     invoiceImg:
@@ -58,7 +58,7 @@ export const INITIAL_PENDING_EXPENSES = [
     engName: "م. كريم مصطفى (فيلا الياسمين)",
     description: "إكراميات ونولون نقل عينات رخام من شق التعبان",
     amount: 650,
-    date: "أمس، ٠٢:٠٠ م",
+    date: "أمس، 02:00 م",
     category: "نقل ونثريات",
     receiptNumber: "REC-9824",
     invoiceImg:

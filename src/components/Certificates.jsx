@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "./EmptyState";
 import { useProjectList } from "../data/projects";
 import { Receipt, Lock, Unlock } from "lucide-react";
 import { tr_ as T, E, money, getCurrency } from "../i18n";
@@ -111,7 +112,7 @@ function CertificatesInner({ projects, data }) {
           </section>
 
           <section className="lg:col-span-3 space-y-3">
-            {mine.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("cert.empty")}</p>}
+            {mine.length === 0 && <EmptyState title={T("cert.empty")} hint={T("cert.emptyHint")} />}
             {[...mine].reverse().map((c) => (
               <div key={c.id} className="bg-white rounded-lg border border-[#DCE4DC] p-4">
                 <div className="flex items-center justify-between gap-2 mb-2">

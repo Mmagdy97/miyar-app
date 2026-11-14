@@ -1,16 +1,16 @@
 // Calm motion helpers: figure count-up + tab cross-fade. All respect prefers-reduced-motion.
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const AR = "٠١٢٣٤٥٦٧٨٩";
-const TOKEN = /[0-9٠-٩][0-9٠-٩.,٫٬]*/;
+const AR = "0123456789";
+const TOKEN = /[0-90-9][0-90-9.,.٬]*/;
 
 function parse(tok) {
-  const arabic = /[٠-٩]/.test(tok);
-  const latin = tok.replace(/[٠-٩]/g, (d) => String(AR.indexOf(d)));
+  const arabic = /[0-9]/.test(tok);
+  const latin = tok.replace(/[0-9]/g, (d) => String(AR.indexOf(d)));
   const hasThousands = /[,٬]/.test(latin);
-  const dec = /[.٫]/.exec(latin);
+  const dec = /[..]/.exec(latin);
   const thouChar = hasThousands ? (/٬/.test(latin) ? "٬" : ",") : "";
   const decChar = dec ? dec[0] : "";
-  const clean = latin.replace(/[,٬]/g, "").replace(/٫/g, ".");
+  const clean = latin.replace(/[,٬]/g, "").replace(/./g, ".");
   const value = parseFloat(clean);
   if (!isFinite(value)) return null;
   const places = decChar ? clean.split(".")[1]?.length ?? 0 : 0;

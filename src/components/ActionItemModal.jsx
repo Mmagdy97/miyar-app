@@ -70,7 +70,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
             </h4>
             <div className="p-3.5 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] text-xs sm:text-sm text-[#1F2A26] leading-relaxed font-medium">
               {D(selectedItem.subtitle) ||
-                D("تم استكمال تمديدات شبكة الصرف والتغذية بالبدروم بنجاح، وتشوين شحنة أسمنت العزل المقاوم، وفحص ضغط الشبكة على ٨ بار لمدة ساعتين بدون أي تسريب مع مطابقة المنسوب المعماري.")}
+                D("تم استكمال تمديدات شبكة الصرف والتغذية بالبدروم بنجاح، وتشوين شحنة أسمنت العزل المقاوم، وفحص ضغط الشبكة على 8 بار لمدة ساعتين بدون أي تسريب مع مطابقة المنسوب المعماري.")}
             </div>
           </div>
 
@@ -79,7 +79,7 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
             <div className="p-3 rounded-lg border border-[#DCE4DC] bg-white">
               <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T("ld.159")}</span>
               <span className="text-xs font-bold text-[#1F2A26] flex items-center gap-1.5">
-                ☀️ مشمس ومستقر (٢٦° م)
+                ☀️ مشمس ومستقر (26° م)
               </span>
             </div>
             <div className="p-3 rounded-lg border border-[#DCE4DC] bg-white">
@@ -98,25 +98,25 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
                 {T("ld.163")}
               </span>
               <span className="text-xs font-bold text-[#1F2A26] bg-[#5F6C61]/15 px-2 py-0.5 rounded-md border border-[#5F6C61]/30">
-                إجمالي ١١ عاملاً
+                إجمالي 11 عاملاً
               </span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-[11px] text-[#56635B] font-semibold">
               <span className="p-2 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex items-center justify-between">
                 <span>{T("ld.165")}</span>
-                <strong className="text-[#1F2A26] font-mono">٢</strong>
+                <strong className="text-[#1F2A26] font-mono">2</strong>
               </span>
               <span className="p-2 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex items-center justify-between">
                 <span>{T("ld.167")}</span>
-                <strong className="text-[#1F2A26] font-mono">٣</strong>
+                <strong className="text-[#1F2A26] font-mono">3</strong>
               </span>
               <span className="p-2 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex items-center justify-between">
                 <span>{T("ld.169")}</span>
-                <strong className="text-[#1F2A26] font-mono">٤</strong>
+                <strong className="text-[#1F2A26] font-mono">4</strong>
               </span>
               <span className="p-2 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex items-center justify-between">
                 <span>{T("ld.171")}</span>
-                <strong className="text-[#1F2A26] font-mono">٢</strong>
+                <strong className="text-[#1F2A26] font-mono">2</strong>
               </span>
             </div>
           </div>
@@ -125,23 +125,23 @@ function ActionItemModal({ selectedItem, onClose, onApprove }) {
           <div>
             <span className="text-xs font-bold text-[#1F2A26] mb-2 block flex items-center gap-1.5">
               <Camera className="w-3.5 h-3.5 text-[#1F2A26]" />
-              التوثيق البصري المرفق من الموقع (٣ صور معتمدة):
+              التوثيق البصري المرفق من الموقع (3 صور معتمدة):
             </span>
             <div className="grid grid-cols-3 gap-2.5">
               <div className="h-24 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex flex-col items-center justify-center text-[#56635B] hover:bg-white transition-colors p-2 text-center group cursor-pointer">
                 <Camera className="w-5 h-5 text-[#56635B] mb-1" />
                 <span className="text-[10px] font-bold text-[#1F2A26] truncate w-full">{T("ld.173")}</span>
-                <span className="text-[9px] text-[#56635B]">١٠:١٥ ص</span>
+                <span className="text-[9px] text-[#56635B]">10:15 ص</span>
               </div>
               <div className="h-24 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex flex-col items-center justify-center text-[#56635B] hover:bg-white transition-colors p-2 text-center group cursor-pointer">
                 <Camera className="w-5 h-5 text-[#56635B] mb-1" />
                 <span className="text-[10px] font-bold text-[#1F2A26] truncate w-full">{T("ld.175")}</span>
-                <span className="text-[9px] text-[#56635B]">١١:٢٥ ص</span>
+                <span className="text-[9px] text-[#56635B]">11:25 ص</span>
               </div>
               <div className="h-24 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] flex flex-col items-center justify-center text-[#56635B] hover:bg-white transition-colors p-2 text-center group cursor-pointer">
                 <Camera className="w-5 h-5 text-[#56635B] mb-1" />
                 <span className="text-[10px] font-bold text-[#1F2A26] truncate w-full">{T("ld.177")}</span>
-                <span className="text-[9px] text-[#56635B]">١٢:٠٠ م</span>
+                <span className="text-[9px] text-[#56635B]">12:00 م</span>
               </div>
             </div>
           </div>

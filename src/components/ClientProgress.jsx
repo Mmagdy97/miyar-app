@@ -27,7 +27,7 @@ const DISCIPLINES_PROGRESS = localize([
     statusBadge: "bg-emerald-50 text-emerald-800 border-emerald-200",
     color: "bg-emerald-700",
     icon: Droplets,
-    details: "تم اختبار شبكة التغذية على ٨ بار وعزل الحمامات كيميائياً بالكامل.",
+    details: "تم اختبار شبكة التغذية على 8 بار وعزل الحمامات كيميائياً بالكامل.",
   },
   {
     id: 2,

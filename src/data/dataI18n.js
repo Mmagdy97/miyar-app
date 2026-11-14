@@ -7,7 +7,7 @@ const LOGIC_KEYS = new Set(["status","phase","role","priority","severity","id","
 
 /** Translate one demo string; user-entered text passes through untouched. */
 export { MAPS };
-const toLatin = (v) => v.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/٪/g, "%").replace(/٫/g, ".");
+const toLatin = (v) => v.replace(/[0-9]/g, (d) => "0123456789".indexOf(d)).replace(/٪/g, "%").replace(/./g, ".");
 export const D = (v) => {
   if (typeof v !== "string") return v;
   const loc = getLocale();

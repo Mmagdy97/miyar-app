@@ -49,7 +49,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
   const [weatherSelected, setWeatherSelected] = useState("sunny");
   const [worksChecklist, setWorksChecklist] = useState(INITIAL_WORKS_CHECKLIST);
-  const [customNotes, setCustomNotes] = useState("تم فحص ضغط شبكة التغذية على ٨ بار لمدة ساعتين بحضور مندوب الشركة الموردة، وتم توثيق شهادة الاختبار بنجاح."
+  const [customNotes, setCustomNotes] = useState("تم فحص ضغط شبكة التغذية على 8 بار لمدة ساعتين بحضور مندوب الشركة الموردة، وتم توثيق شهادة الاختبار بنجاح."
   );
 
   // Mock Uploaded Photos
@@ -57,14 +57,14 @@ function SiteEngineerDashboard({ setActionItems }) {
     {
       id: 1,
       name: "تمديدات_صرف_البدروم_اختبار_الضغط.jpg",
-      time: "١٠:١٥ ص",
-      size: "٢.٤ ميجابايت",
+      time: "10:15 ص",
+      size: "2.4 ميجابايت",
     },
     {
       id: 2,
       name: "تشوين_أسمنت_المقاوم_المخزن.jpg",
-      time: "١١:٢٥ ص",
-      size: "١.٨ ميجابايت",
+      time: "11:25 ص",
+      size: "1.8 ميجابايت",
     },
   ]);
 
@@ -110,7 +110,7 @@ function SiteEngineerDashboard({ setActionItems }) {
         id: newId,
         name: DF("لقطة_ميدانية_جديدة_رقم_{0}.jpg", newId),
         time: "الآن",
-        size: "٣.١ ميجابايت",
+        size: "3.1 ميجابايت",
       },
     ]);
   };
@@ -295,7 +295,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
             {/* Quick Metrics */}
             <div className="mt-4 pt-3 border-t border-[#DCE4DC] flex items-center justify-between text-xs text-[#56635B] font-medium">
-              <span>{T("se.12")} <strong className="text-xs font-bold text-[#1F2A26] tracking-wide font-mono">{D("٧٨٪")}</strong></span>
+              <span>{T("se.12")} <strong className="text-xs font-bold text-[#1F2A26] tracking-wide font-mono">{D("78٪")}</strong></span>
               <span className="text-[#56635B]">{T("se.14")} <strong className="text-[#1F2A26]">{T("se.15")}</strong></span>
             </div>
 

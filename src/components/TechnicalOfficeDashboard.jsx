@@ -125,7 +125,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       discipline: newDwgDiscipline,
       project: newDwgProject,
       date: "الآن",
-      size: "٤.٥ ميجابايت",
+      size: "4.5 ميجابايت",
       status: "review",
       statusLabel: "بانتظار المراجعة",
     };
@@ -219,7 +219,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
       )}
 
       {/* 1. Hero */}
-      <DashHero img="office" kicker={todayArabic} title={T("to.4")} sub={`${D("متابعة مستندات")} ${D("٤ مشاريع تنفيذية")} ${D("وجداول الحصر والمقايسات")}`}>
+      <DashHero img="office" kicker={todayArabic} title={T("to.4")} sub={`${D("متابعة مستندات")} ${D("4 مشاريع تنفيذية")} ${D("وجداول الحصر والمقايسات")}`}>
         <button onClick={() => setUploadModalOpen(true)} className="btn-press lp-pill-dark rounded-full px-6 h-12 text-sm font-semibold inline-flex items-center justify-center gap-2 cursor-pointer sm:self-center">
           <UploadCloud className="w-4 h-4 shrink-0" />
           <span>{T("to.6")}</span>
@@ -293,7 +293,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
           </div>
           <div className="mt-3.5 flex items-baseline gap-2">
             <span className="text-3xl font-semibold tracking-tight text-[#1F2A26] font-ibm">
-              {D("٣")}
+              {D("3")}
             </span>
             <span className="text-xs font-bold text-emerald-700 bg-[#E8EFE9] border border-[#DCE4DC] px-2 py-0.5 rounded-full text-[#1F2A26]">
               {T("to.17")}
@@ -568,7 +568,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
 
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]">
-              {D("إجمالي البنود: ٥ بنود رئيسية")}
+              {D("إجمالي البنود: 5 بنود رئيسية")}
             </span>
           </div>
         </div>

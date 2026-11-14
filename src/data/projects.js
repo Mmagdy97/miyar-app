@@ -7,7 +7,7 @@ import { money } from "../i18n";
 const DEFAULT_IMG = "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80";
 
 /** Digits (Arabic-Indic or Latin) in a formatted amount -> number. */
-export const parseAmount = (str) => Number(String(str ?? "").replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^\d]/g, "")) || 0;
+export const parseAmount = (str) => Number(String(str ?? "").replace(/[0-9]/g, (d) => "0123456789".indexOf(d)).replace(/[^\d]/g, "")) || 0;
 
 // Demo (guest) projects: single source is src/data/seed.js
 export const INITIAL_PROJECTS = SEED.map((p) => ({

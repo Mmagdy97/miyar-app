@@ -218,7 +218,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="mt-4">
-              <span className="text-3xl font-bold tracking-tight text-[#1F2A26] font-ibm">
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#1F2A26] font-ibm">
                 {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#56635B]">{currencySymbol()}</span>
               </span>
             </div>
@@ -263,7 +263,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
-              <span className="text-3xl font-bold tracking-tight text-[#1F2A26] font-ibm">
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#1F2A26] font-ibm">
                 {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#56635B]">{currencySymbol()}</span>
               </span>
             </div>
@@ -307,7 +307,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="mt-4">
-              <span className="text-3xl font-bold tracking-tight text-[#B23A2B] font-ibm">
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#B23A2B] font-ibm">
                 {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#56635B]">{currencySymbol()}</span>
               </span>
             </div>
@@ -342,7 +342,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
-              <span className="text-3xl font-bold tracking-tight text-[#1F2A26] font-ibm">
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#1F2A26] font-ibm">
                 {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#56635B]">{currencySymbol()}</span>
               </span>
             </div>

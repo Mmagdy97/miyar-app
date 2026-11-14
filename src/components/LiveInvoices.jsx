@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "./EmptyState";
 import { Plus, Printer, Check, Trash2, Receipt } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
 import { useProjectList } from "../data/projects";
@@ -48,7 +49,7 @@ export default function LiveInvoices({ readOnly = false }) {
           <label className="flex items-center gap-1.5 text-[11px] font-bold text-[#56635B]">{T("inv.due")}<input type="date" value={f.dueDate} onChange={(e) => setF({ ...f, dueDate: e.target.value })} className={input} /></label>
           <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer"><Plus className="w-4 h-4" />{T("inv.add")}</button>
         </form>}
-        {rows.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("inv.empty")}</p>}
+        {rows.length === 0 && <EmptyState title={T("inv.empty")} hint={T("inv.emptyHint")} />}
         <div className="grid gap-2">
           {rows.map((i) => {
             const late = isOverdue(i);

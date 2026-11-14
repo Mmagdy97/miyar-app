@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "./EmptyState";
 import { useProjectList } from "../data/projects";
 import { Armchair, Check, X, Download, Plus, ImagePlus, MessageCircle, Clock, Ruler, ChevronDown, Trash2, Printer, Truck } from "lucide-react";
 import Photo from "./Photo";
@@ -151,7 +152,7 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
           </section>
         )}
 
-        {mine.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("sel.empty")}</p>}
+        {mine.length === 0 && <EmptyState title={T("sel.empty")} hint={T("sel.emptyHint")} />}
         {Object.entries(groups).map(([room, list]) => (
           <section key={room} className="space-y-2">
             <h2 className="text-sm font-semibold text-[#1F2A26]">{room || T("sel.general")}</h2>

@@ -1,4 +1,5 @@
 import Photo from "./Photo";
+import EmptyState from "./EmptyState";
 import { useProjectList } from "../data/projects";
 import { useState } from "react";
 import { Palette, Heart, Trash2, Plus } from "lucide-react";
@@ -62,7 +63,7 @@ function MoodboardInner({ role = "Admin", projects, data }) {
             </form>
           </>
         )}
-        {mine.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("mood.empty")}</p>}
+        {mine.length === 0 && <EmptyState title={T("mood.empty")} hint={T("mood.emptyHint")} />}
         <div className="columns-2 md:columns-3 gap-3 [&>*]:mb-3">
           {mine.map((t) => (
             <figure key={t.id} className="break-inside-avoid bg-white rounded-lg border border-[#DCE4DC] overflow-hidden">

@@ -89,7 +89,7 @@ function TechnicalOfficeBlueprints({ actionItems, setActionItems }) {
       discipline: newDiscipline,
       project: "فيلا الياسمين - التجمع الخامس",
       uploadDate: "الآن",
-      fileSize: "٤.٠ ميجابايت",
+      fileSize: "4.0 ميجابايت",
       status: newStatus,
     };
 

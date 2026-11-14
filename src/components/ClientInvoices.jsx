@@ -294,7 +294,7 @@ function ClientInvoices() {
                   <input
                     type="text"
                     required
-                    defaultValue="٤٢٤٢ •••• •••• ٤٢٤٢"
+                    defaultValue="4242 •••• •••• 4242"
                     className="w-full pe-3 ps-10 py-2 rounded-lg border border-[#DCE4DC] text-xs font-mono font-bold text-[#1F2A26] focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/10 focus:border-[#5F6C61]"
                   />
                   <CreditCard className="w-4 h-4 text-[#56635B] absolute start-3.5 top-1/2 -translate-y-1/2" />
@@ -307,7 +307,7 @@ function ClientInvoices() {
                   <input
                     type="text"
                     required
-                    defaultValue="١٢/٢٨"
+                    defaultValue="12/28"
                     className="w-full px-3 py-2 rounded-lg border border-[#DCE4DC] text-xs font-mono text-center text-[#1F2A26]"
                   />
                 </div>
@@ -316,7 +316,7 @@ function ClientInvoices() {
                   <input
                     type="text"
                     required
-                    defaultValue="٨٨٨"
+                    defaultValue="888"
                     className="w-full px-3 py-2 rounded-lg border border-[#DCE4DC] text-xs font-mono text-center text-[#1F2A26]"
                   />
                 </div>

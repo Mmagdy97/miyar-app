@@ -122,7 +122,7 @@ export function LegalPage({ kind, onBack }) {
           <ArrowRight className="w-4 h-4 ltr:-scale-x-100 rtl:scale-x-100" /> العودة للصفحة الرئيسية
         </button>
         <h1 className="text-3xl font-semibold text-[#1F2A26] mb-2">{doc.title}</h1>
-        <p className="text-xs text-[#56635B] mb-8">آخر تحديث: نوفمبر ٢٠٢٦ — مسودة تُراجع قانونياً قبل الإطلاق</p>
+        <p className="text-xs text-[#56635B] mb-8">آخر تحديث: نوفمبر 2026 — مسودة تُراجع قانونياً قبل الإطلاق</p>
         <div className="space-y-6">
           {doc.sections.map(([h, t], i) => (
             <section key={h}>

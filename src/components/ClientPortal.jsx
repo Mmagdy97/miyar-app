@@ -41,7 +41,7 @@ const PROJECT_PHASES = localize([
     title: "التصميم والمخططات",
     subtitle: "المخططات الهندسية والمود بورد ثلاثي الأبعاد",
     status: "completed",
-    date: "٢٥ سبتمبر ٢٠٢٦",
+    date: "25 سبتمبر 2026",
     badge: "مكتمل بنجاح",
   },
   {
@@ -50,7 +50,7 @@ const PROJECT_PHASES = localize([
     title: "أعمال التأسيس وMEP",
     subtitle: "شبكات الصرف والتغذية والتكييف والكهرباء الذكية",
     status: "completed",
-    date: "٢٠ أكتوبر ٢٠٢٦",
+    date: "20 أكتوبر 2026",
     badge: "مكتمل بنجاح",
   },
   {
@@ -59,7 +59,7 @@ const PROJECT_PHASES = localize([
     title: "أعمال التشطيب والديكور",
     subtitle: "تركيب الرخام المستورد وتجليد الحوائط والأسقف",
     status: "active",
-    date: "١٥ ديسمبر ٢٠٢٦",
+    date: "15 ديسمبر 2026",
     badge: "المرحلة الحالية",
   },
   {
@@ -78,7 +78,7 @@ const SITE_UPDATES = localize([
   {
     id: 1,
     title: "تركيب رخام الكلكتا الإيطالي بهو المدخل",
-    date: "٦ نوفمبر ٢٠٢٦",
+    date: "6 نوفمبر 2026",
     category: "رخام مستورد",
     description: "مطابقة عروق الرخام بنمط Bookmatched مع فواصل إيبوكسي شفافة مقاومة لامتصاص الرطوبة.",
     photographer: "م. كريم مصطفى (الموقع)",
@@ -88,7 +88,7 @@ const SITE_UPDATES = localize([
   {
     id: 2,
     title: "تأسيس شبكة الكهرباء الذكية والتحكم الصوتي",
-    date: "٥ نوفمبر ٢٠٢٦",
+    date: "5 نوفمبر 2026",
     category: "سمارت هوم KNX",
     description: "تمديد مسارات كابلات التحكم المركزي بالمكيفات والستائر والإضاءة المعمارية المحيطية.",
     photographer: "م. طارق يوسف (MEP)",
@@ -98,7 +98,7 @@ const SITE_UPDATES = localize([
   {
     id: 3,
     title: "معاينة تجليد خشب الجوز الأمريكي لغرفة المعيشة",
-    date: "٤ نوفمبر ٢٠٢٦",
+    date: "4 نوفمبر 2026",
     category: "نجارة وديكور",
     description: "استلام شرائح قشرة خشب الجوز الطبيعي بدهانات بولي يوريثان مط ضد الخدش والأتربة.",
     photographer: "سارة عامر (كبير المعماريين)",
@@ -108,7 +108,7 @@ const SITE_UPDATES = localize([
   {
     id: 4,
     title: "تجهيز مساحات الإضاءة المخفية والأسقف الجبسية",
-    date: "٢ نوفمبر ٢٠٢٦",
+    date: "2 نوفمبر 2026",
     category: "أسقف وجبس بورد",
     description: "تشكيل بروفايلات الليد المنحنية بالريسبشن وفقاً للرسومات التنفيذية المعمارية.",
     photographer: "م. كريم مصطفى (الموقع)",
@@ -657,7 +657,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 </span>
               </div>
               <div className="text-2xl sm:text-3xl font-semibold font-ibm mt-1">
-                {PAY.next ? formatNumber(PAY.next.amount) : "٠"} <span className="text-sm font-bold opacity-80">{currencySymbol()}</span>
+                {PAY.next ? formatNumber(PAY.next.amount) : "0"} <span className="text-sm font-bold opacity-80">{currencySymbol()}</span>
               </div>
               <p className="text-[11px] mt-1">
                 {PAY.next ? `${D("تستحق في")} ${formatDateAr(PAY.next.dueIso)}` : D("لا توجد دفعات مستحقة")}
@@ -795,7 +795,7 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                 <div>
                   <span className="text-[#56635B] text-xs block">{T("cli.84")}</span>
                   <span className="text-2xl font-semibold text-[#1F2A26] font-ibm">
-                    {PAY.next ? formatNumber(PAY.next.amount) : "٠"} {currencySymbol()}
+                    {PAY.next ? formatNumber(PAY.next.amount) : "0"} {currencySymbol()}
                   </span>
                 </div>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#1F2A26] border border-[#DCE4DC] shadow-xs">

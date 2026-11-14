@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "./EmptyState";
 import { Plus, Trash2, Wallet } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
@@ -83,7 +84,7 @@ export default function LiveCash() {
         <input required type="number" min={1} placeholder={T("inv.amount")} value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} className={input + " w-32"} />
         <button type="submit" className={btn}><Plus className="w-4 h-4" />{T("cash.add")}</button>
       </form>
-      {custodies.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("cash.empty")}</p>}
+      {custodies.length === 0 && <EmptyState title={T("cash.empty")} hint={T("cash.emptyHint")} />}
       <div className="grid gap-3">
         {custodies.map((c) => <Custody key={c.id} c={c} expenses={expenses} project={projects.find((p) => p.id === c.projectId)} />)}
       </div>

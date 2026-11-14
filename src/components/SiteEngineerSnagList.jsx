@@ -25,7 +25,7 @@ const INITIAL_SNAGS = localize([
     contractor: D("مقاول الدهانات (الأسطى حسن)"),
     severity: "متوسطة", // حرجة | متوسطة | طفيفة
     status: "قيد الملاحظة", // قيد الملاحظة | تمت المعالجة
-    date: "اليوم، ١٠:٣٠ ص",
+    date: "اليوم، 10:30 ص",
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const INITIAL_SNAGS = localize([
     contractor: D("فني السباكة (الأسطى رجب)"),
     severity: "حرجة",
     status: "قيد الملاحظة",
-    date: "اليوم، ٠٩:١٥ ص",
+    date: "اليوم، 09:15 ص",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const INITIAL_SNAGS = localize([
     contractor: D("فريق الجبسوم بورد (شركة ديكور بلس)"),
     severity: "متوسطة",
     status: "تمت المعالجة",
-    date: "أمس، ٠٤:٠٠ م",
+    date: "أمس، 04:00 م",
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const INITIAL_SNAGS = localize([
     contractor: D("معلم الرخام (الأسطى فتحي)"),
     severity: "طفيفة",
     status: "تمت المعالجة",
-    date: "أمس، ١١:٢٠ ص",
+    date: "أمس، 11:20 ص",
   },
 ]);
 

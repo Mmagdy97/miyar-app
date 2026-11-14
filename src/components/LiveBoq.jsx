@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EmptyState from "./EmptyState";
 import { Plus, Trash2, ClipboardCheck, Pencil, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
@@ -85,7 +86,7 @@ export default function LiveBoq() {
           <label className="flex items-center gap-1 text-[11px] font-bold text-[#56635B]">{T("boq.margin")}<input type="number" min={0} step="any" value={f.margin} onChange={set("margin")} className={input + " w-20"} />%</label>
           <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer"><Plus className="w-4 h-4" />{T("boq.add")}</button>
         </form>
-        {rows.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("boq.empty")}</p>}
+        {rows.length === 0 && <EmptyState title={T("boq.empty")} hint={T("boq.emptyHint")} />}
         {groups.map((g) => (
           <section key={g} className="space-y-2">
             <h2 className="text-sm font-semibold text-[#1F2A26]">{g || T("boq.noCat")}</h2>

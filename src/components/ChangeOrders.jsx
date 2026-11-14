@@ -1,4 +1,5 @@
 import { valueMoment } from "../lib/nudge";
+import EmptyState from "./EmptyState";
 import { useProjectList } from "../data/projects";
 import { useState } from "react";
 import { FilePenLine, Check, X, MessageCircle } from "lucide-react";
@@ -68,7 +69,7 @@ function ChangeOrdersInner({ role = "Admin", projects, data }) {
         )}
 
         <div className="space-y-3">
-          {list.length === 0 && <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-6 text-center">{T("co.empty")}</p>}
+          {list.length === 0 && <EmptyState title={T("co.empty")} hint={T("co.emptyHint")} />}
           {list.map((o) => (
             <div key={o.id} className="bg-white rounded-lg border border-[#DCE4DC] p-4">
               <div className="flex items-center justify-between gap-2">

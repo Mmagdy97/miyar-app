@@ -1,4 +1,5 @@
 import { createPersistedStore } from "../data/persisted";
+import EmptyState from "./EmptyState";
 import { useState, useMemo } from "react";
 import { problemsStore } from "../data/stores";
 import { localize, D, DF } from "../data/dataI18n";
@@ -24,7 +25,7 @@ const INITIAL_TASKS = localize([
     title: "استلام بند السباكة وتغذية الحمامات",
     project: D("فيلا الياسمين - التجمع"),
     location: "الدور الأرضي - حمام الضيوف",
-    dueTime: D("اليوم، ١٢:٠٠ م"),
+    dueTime: D("اليوم، 12:00 م"),
     priority: "عاجل",
     completed: true,
   },
@@ -33,16 +34,16 @@ const INITIAL_TASKS = localize([
     title: "مراجعة شرب الكهرباء وتكسير مسارات العلب",
     project: D("فيلا الياسمين - التجمع"),
     location: "الدور الأول - غرف النوم",
-    dueTime: D("اليوم، ٠٢:٣٠ م"),
+    dueTime: D("اليوم، 02:30 م"),
     priority: "متوسط",
     completed: false,
   },
   {
     id: 3,
-    title: "فحص عزل الحمامات واختبار ضغط المياه (٨ بار)",
+    title: "فحص عزل الحمامات واختبار ضغط المياه (8 بار)",
     project: D("فيلا الياسمين - التجمع"),
     location: "البدروم والرووف",
-    dueTime: D("اليوم، ٠٤:٠٠ م"),
+    dueTime: D("اليوم، 04:00 م"),
     priority: "عاجل",
     completed: false,
   },
@@ -51,7 +52,7 @@ const INITIAL_TASKS = localize([
     title: "مطابقة وزنات شاسيهات الجبسوم بورد وبيت النور",
     project: D("فيلا الياسمين - التجمع"),
     location: "منطقة الاستقبال والصالون",
-    dueTime: D("غداً، ١٠:٠٠ ص"),
+    dueTime: D("غداً، 10:00 ص"),
     priority: "عادي",
     completed: false,
   },
@@ -60,7 +61,7 @@ const INITIAL_TASKS = localize([
     title: "استلام شحنة البورسلين والفرز الأول مع مسؤول التشوين",
     project: D("فيلا الياسمين - التجمع"),
     location: "المخزن الخارجي للموقع",
-    dueTime: D("غداً، ٠١:٠٠ م"),
+    dueTime: D("غداً، 01:00 م"),
     priority: "عادي",
     completed: true,
   },
@@ -84,7 +85,7 @@ function SiteEngineerTasks() {
   const [newTitle, setNewTitle] = useState("");
   const [newLocation, setNewLocation] = useState("");
   const [newPriority, setNewPriority] = useState("متوسط");
-  const [newDueTime, setNewDueTime] = useState("اليوم، ٠٣:٠٠ م");
+  const [newDueTime, setNewDueTime] = useState("اليوم، 03:00 م");
 
   // Problem reporting
   const [problems, setProblems] = problemsStore.use();
@@ -386,7 +387,7 @@ function SiteEngineerTasks() {
             <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-[#E8EFE9] border border-[#DCE4DC]">{problems.length}</span>
           </h2>
           {problems.length === 0 ? (
-            <p className="text-xs text-[#56635B] bg-white rounded-lg border border-[#DCE4DC] p-4 text-center">{T("prob.empty")}</p>
+            <EmptyState title={T("prob.empty")} hint={T("prob.emptyHint")} />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {problems.map((pr) => (

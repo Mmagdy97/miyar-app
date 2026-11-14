@@ -15,7 +15,7 @@ import { localize } from "./dataI18n";
 export const toAr = (value) =>
   String(value);
 
-/** 5400000 -> "٥,٤٠٠,٠٠٠" (ar) | "5,400,000" (en) | "5.400.000" (tr) */
+/** 5400000 -> "5,400,000" (ar) | "5,400,000" (en) | "5.400.000" (tr) */
 export const formatNumber = (n) =>
   getLocale() === "ar"
     ? toAr(Math.round(n).toLocaleString("en-US"))
@@ -30,7 +30,7 @@ const COMPACT = {
   tr: { m: "Mn", k: "B" },
 };
 
-/** 15550000 -> "15.55 M" / "١٥.٥٥ مليون", 580000 -> "580 K" / "٥٨٠ ألف" */
+/** 15550000 -> "15.55 M" / "15.55 مليون", 580000 -> "580 K" / "580 ألف" */
 export const formatCompact = (n) => {
   const w = COMPACT[getLocale()];
   if (n >= 1_000_000) {
@@ -45,10 +45,10 @@ const dateFmt = (opts) => (iso) => {
   return new Intl.DateTimeFormat(intlLocale(), { ...opts, timeZone: "UTC" }).format(Date.UTC(y, m - 1, d));
 };
 
-/** "2026-12-30" -> "٣٠ ديسمبر ٢٠٢٦" / "30 December 2026" (name kept for existing callers) */
+/** "2026-12-30" -> "30 ديسمبر 2026" / "30 December 2026" (name kept for existing callers) */
 export const formatDateAr = dateFmt({ day: "numeric", month: "long", year: "numeric" });
 
-/** "2026-12-30" -> "ديسمبر ٢٠٢٦" / "December 2026" */
+/** "2026-12-30" -> "ديسمبر 2026" / "December 2026" */
 export const formatMonthYearAr = dateFmt({ month: "long", year: "numeric" });
 
 /* ───────────── People ───────────── */
@@ -197,11 +197,11 @@ export const ENGINEER_CASH = [
 /* ───────────── Client invoices (client portal project) ───────────── */
 
 export const CLIENT_INVOICES = [
-  { id: 1, title: "الدفعة الأولى: التعاقد واعتماد المخططات 3D", milestone: "مقدم التعاقد وبدء أعمال التصميم", amount: 1_350_000, dueDate: "٢٠٢٦/٠٩/٠١", paidDate: "٢٠٢٦/٠٩/٠٣", status: "مدفوع", receiptNo: "INV-2026-001", dueIso: "2026-09-01" },
-  { id: 2, title: "الدفعة الثانية: أعمال التأسيس والمرافق (MEP)", milestone: "استلام شبكات السباكة والكهرباء والعزل", amount: 1_350_000, dueDate: "٢٠٢٦/١٠/٠١", paidDate: "٢٠٢٦/١٠/٠٥", status: "مدفوع", receiptNo: "INV-2026-002", dueIso: "2026-10-01" },
-  { id: 3, title: "الدفعة الثالثة: توريد وتركيب الرخام والجبسوم بورد", milestone: "مرحلة أعمال التشطيبات المعمارية الكبرى", amount: 1_350_000, dueDate: "٢٠٢٦/١١/١٥", paidDate: null, status: "مستحق", receiptNo: "INV-2026-003", dueIso: "2026-11-15" },
-  { id: 4, title: "الدفعة الرابعة: الدهانات النهائية والأبواب والتجهيزات", milestone: "التشطيبات الدقيقة والألوان والإنارة", amount: 810_000, dueDate: "٢٠٢٦/١٢/١٠", paidDate: null, status: "مستحق", receiptNo: "INV-2026-004", dueIso: "2026-12-10" },
-  { id: 5, title: "الدفعة الخامسة: التسليم النهائي وشهادة الضمان", milestone: "المعاينة الختامية والتسليم المفتاحي", amount: 540_000, dueDate: "٢٠٢٦/١٢/٣٠", paidDate: null, status: "مستحق", receiptNo: "INV-2026-005", dueIso: "2026-12-30" },
+  { id: 1, title: "الدفعة الأولى: التعاقد واعتماد المخططات 3D", milestone: "مقدم التعاقد وبدء أعمال التصميم", amount: 1_350_000, dueDate: "2026/09/01", paidDate: "2026/09/03", status: "مدفوع", receiptNo: "INV-2026-001", dueIso: "2026-09-01" },
+  { id: 2, title: "الدفعة الثانية: أعمال التأسيس والمرافق (MEP)", milestone: "استلام شبكات السباكة والكهرباء والعزل", amount: 1_350_000, dueDate: "2026/10/01", paidDate: "2026/10/05", status: "مدفوع", receiptNo: "INV-2026-002", dueIso: "2026-10-01" },
+  { id: 3, title: "الدفعة الثالثة: توريد وتركيب الرخام والجبسوم بورد", milestone: "مرحلة أعمال التشطيبات المعمارية الكبرى", amount: 1_350_000, dueDate: "2026/11/15", paidDate: null, status: "مستحق", receiptNo: "INV-2026-003", dueIso: "2026-11-15" },
+  { id: 4, title: "الدفعة الرابعة: الدهانات النهائية والأبواب والتجهيزات", milestone: "التشطيبات الدقيقة والألوان والإنارة", amount: 810_000, dueDate: "2026/12/10", paidDate: null, status: "مستحق", receiptNo: "INV-2026-004", dueIso: "2026-12-10" },
+  { id: 5, title: "الدفعة الخامسة: التسليم النهائي وشهادة الضمان", milestone: "المعاينة الختامية والتسليم المفتاحي", amount: 540_000, dueDate: "2026/12/30", paidDate: null, status: "مستحق", receiptNo: "INV-2026-005", dueIso: "2026-12-30" },
 ].map(localize);
 
 /* ───────────── Overdue receivables (office level) ───────────── */

@@ -20,7 +20,7 @@ const TIMELINE_STEPS = localize([
   {
     id: 1,
     phase: "المرحلة الأولى: التصميم والاعتمادات المعمارية",
-    dateRange: D("١ سبتمبر ٢٠٢٦ — ٢٥ سبتمبر ٢٠٢٦"),
+    dateRange: D("1 سبتمبر 2026 — 25 سبتمبر 2026"),
     status: "مكتملة بالكامل ✓",
     statusType: "completed", // completed | active | upcoming
     description:
@@ -34,13 +34,13 @@ const TIMELINE_STEPS = localize([
   {
     id: 2,
     phase: "المرحلة الثانية: أعمال التأسيس والمرافق (MEP)",
-    dateRange: D("٢٦ سبتمبر ٢٠٢٦ — ٢٠ أكتوبر ٢٠٢٦"),
+    dateRange: D("26 سبتمبر 2026 — 20 أكتوبر 2026"),
     status: "مكتملة ومختبرة بالكامل ✓",
     statusType: "completed",
     description:
       D("تنفيذ شبكات السباكة وتغذية المياه بولي بروبلين، تمديد مسارات خراطيم وأسلاك الكهرباء، وتأسيس شبكة صرف التكييف واختبار العزل الكيميائي."),
     deliverables: [
-      D("شهادة اختبار ضغط المياه على ٨ بار"),
+      D("شهادة اختبار ضغط المياه على 8 بار"),
       D("عزل الحمامات وخزانات المياه بالبيتومين المطاطي"),
       D("استلام شرب المناسيب ودفن علب الكهرباء"),
     ],
@@ -48,7 +48,7 @@ const TIMELINE_STEPS = localize([
   {
     id: 3,
     phase: "المرحلة الثالثة: أعمال التشطيبات والديكور الداخلي",
-    dateRange: D("٢١ أكتوبر ٢٠٢٦ — ١٥ ديسمبر ٢٠٢٦"),
+    dateRange: D("21 أكتوبر 2026 — 15 ديسمبر 2026"),
     status: DF("المرحلة النشطة حالياً (قيد التنفيذ {0}٪)", toAr(clientProject().progress)),
     statusType: "active",
     description:
@@ -62,7 +62,7 @@ const TIMELINE_STEPS = localize([
   {
     id: 4,
     phase: "المرحلة الرابعة: التسليم النهائي وضمان الجودة",
-    dateRange: D("١٦ ديسمبر ٢٠٢٦ — ٣٠ ديسمبر ٢٠٢٦"),
+    dateRange: D("16 ديسمبر 2026 — 30 ديسمبر 2026"),
     status: "المرحلة الختامية (مجدولة قريباً)",
     statusType: "upcoming",
     description:

@@ -124,7 +124,7 @@ export default function OwnerAdmin({ name, onOpenApp, onLogout }) {
       ["كل المكاتب", a.length, Building2],
       ["نشطة (مدفوعة)", a.filter((o) => o.status === "active").length, Check],
       ["جديدة هذا الأسبوع", a.filter((o) => new Date(o.created_at) > week).length, Users],
-      ["تجربة تنتهي خلال ٣ أيام", a.filter((o) => o.status === "trial" && daysLeft(o.trial_ends_at) <= 3).length, Clock],
+      ["تجربة تنتهي خلال 3 أيام", a.filter((o) => o.status === "trial" && daysLeft(o.trial_ends_at) <= 3).length, Clock],
     ];
   }, [orgs]);
   return (
