@@ -375,8 +375,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
+                    aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("plumbers", -1)}
-                    className="w-7 h-7 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
@@ -385,8 +386,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                   </span>
                   <button
                     type="button"
+                    aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("plumbers", 1)}
-                    className="w-7 h-7 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -402,8 +404,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
+                    aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("helpers", -1)}
-                    className="w-7 h-7 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
@@ -412,8 +415,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                   </span>
                   <button
                     type="button"
+                    aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("helpers", 1)}
-                    className="w-7 h-7 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -429,8 +433,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
+                    aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("tilers", -1)}
-                    className="w-7 h-7 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
@@ -439,8 +444,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                   </span>
                   <button
                     type="button"
+                    aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("tilers", 1)}
-                    className="w-7 h-7 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -456,8 +462,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
+                    aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("electricians", -1)}
-                    className="w-7 h-7 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#DCE4DC] text-[#56635B] flex items-center justify-center hover:bg-[#E8EFE9] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
@@ -466,8 +473,9 @@ function SiteEngineerDashboard({ setActionItems }) {
                   </span>
                   <button
                     type="button"
+                    aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("electricians", 1)}
-                    className="w-7 h-7 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#5F6C61] text-white flex items-center justify-center hover:bg-[#5F6C61] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>

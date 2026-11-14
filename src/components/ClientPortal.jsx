@@ -548,7 +548,8 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
                         e.stopPropagation();
                         toggleLike(photo.id);
                       }}
-                      className={`p-1.5 rounded-full backdrop-blur-sm transition-all ${
+                      aria-label={T("a11y.like")} aria-pressed={!!isLiked}
+                      className={`p-2.5 rounded-full backdrop-blur-sm transition-all ${
                         isLiked
                           ? "bg-rose-50 text-rose-600 scale-110"
                           : "bg-white/80 text-[#56635B] hover:text-rose-600"

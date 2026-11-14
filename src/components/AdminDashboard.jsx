@@ -368,7 +368,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
           <h2 className="font-display text-xl md:text-2xl font-semibold text-[#1F2A26]">{t("adm.pc.title")}</h2>
           <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="text-xs font-semibold text-[#56635B] hover:underline inline-flex items-center gap-1">{t("adm.pc.all")}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
         </div>
-        <div className="flex gap-4 overflow-x-auto snap-x pb-2 -mx-4 px-4 md:mx-0 md:px-0" style={{ scrollbarWidth: "none" }}>
+        <div role="region" tabIndex={0} aria-label={t("a11y.carousel")} className="flex gap-4 overflow-x-auto snap-x pb-2 -mx-4 px-4 md:mx-0 md:px-0 rounded-2xl" style={{ scrollbarWidth: "none" }}>
           {INITIAL_PROJECTS.map((project, pi) => {
             const isOnTrack = project.status === "جاري العمل";
             return (

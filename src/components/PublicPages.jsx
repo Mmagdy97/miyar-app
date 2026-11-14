@@ -44,7 +44,7 @@ export function PricingSection({ onStart }) {
                 p.highlight ? "bg-white border-[var(--brass)] ring-1 ring-[var(--brass)] shadow-[var(--shadow-2)] xl:-translate-y-2" : "bg-white border-[#DCE4DC]"
               }`}
             >
-              {p.highlight && <span className="absolute -top-3 start-6 text-[11px] font-bold px-2.5 py-1 rounded-md bg-[var(--brass)] text-[#1F2A26]">{t("pricing.popular")}</span>}
+              {p.highlight && <span className="absolute -top-3 start-6 text-[11px] font-bold px-2.5 py-1 rounded-md bg-[var(--brass)] text-[var(--on-peach)]">{t("pricing.popular")}</span>}
               <h3 className={`font-display text-xl font-semibold text-[#1F2A26]`}>{t(`plan.${p.key}`)}</h3>
               <p className={`text-xs mb-4 text-[#56635B]`}>{t(`plan.${p.key}.tag`)}</p>
               <p className="mb-5">
