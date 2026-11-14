@@ -330,7 +330,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           <button
             key={cat}
             onClick={() => setFilterCategory(cat)}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer active:scale-95 ${
+            className={`shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer active:scale-95 ${
               filterCategory === cat
                 ? "bg-[#5F6C61] text-white shadow-sm"
                 : "bg-white text-[#1F2A26] border border-[#DCE4DC] hover:bg-[#F2F5F1]"
