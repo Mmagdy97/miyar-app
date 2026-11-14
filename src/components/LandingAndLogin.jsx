@@ -162,13 +162,20 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="fixed inset-0 z-50 bg-[#1F2A26]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
            
-            className="bg-white rounded-xl shadow-2xl border border-[#DCE4DC] max-w-md w-full p-6 sm:p-8 text-start animate-in zoom-in-95 duration-200 relative overflow-hidden"
+            className="bg-white rounded-[32px] shadow-2xl border border-[#DCE4DC] max-w-4xl w-full max-h-[92dvh] overflow-hidden text-start animate-in zoom-in-95 duration-200 relative grid md:grid-cols-[0.8fr_1.2fr]"
           >
 
+            <div className="relative isolate hidden md:flex flex-col justify-between p-7 text-white">
+              <img src="/landing/couple.webp" alt="" className="absolute inset-0 w-full h-full object-cover -z-20" />
+              <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
+              <div className="w-11 h-11 rounded-full bg-white/25 backdrop-blur flex items-center justify-center"><LogoMark className="w-5 h-5 text-white" /></div>
+              <div><h3 className="font-display text-2xl font-semibold leading-snug">{T("lp.h1a")} {T("lp.h1b")}</h3><p className="mt-2 text-sm opacity-85">{T("ld.5")}</p></div>
+            </div>
+            <div className="p-6 sm:p-8 overflow-y-auto max-h-[92dvh]">
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-[#E8EFE9] relative z-10">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-[#5F6C61] text-white flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full lp-pill-dark flex items-center justify-center">
                   <LogoMark className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -190,17 +197,17 @@ export default function LandingAndLogin({ onLogin }) {
             {/* Real account (Supabase) */}
             {isSupabaseConfigured && (
               <form onSubmit={submitAuth} className="mt-5 relative z-10">
-                <div role="tablist" className="inline-flex gap-1 p-1 mb-3 rounded-xl bg-[#F2F5F1] border border-[#DCE4DC]">
-                  {["in", "up"].map((k) => <button key={k} type="button" role="tab" aria-selected={mode === k} onClick={() => { setMode(k); setMsg(""); }} className={`px-4 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${mode === k ? "bg-[#5F6C61] text-white" : "text-[#56635B]"}`}>{T("login.tab." + k)}</button>)}
+                <div role="tablist" className="inline-flex gap-1 p-1 mb-3 rounded-full bg-[#F2F5F1] border border-[#DCE4DC]">
+                  {["in", "up"].map((k) => <button key={k} type="button" role="tab" aria-selected={mode === k} onClick={() => { setMode(k); setMsg(""); }} className={`px-5 py-2 rounded-full text-xs font-bold cursor-pointer ${mode === k ? "lp-pill-dark" : "text-[#56635B]"}`}>{T("login.tab." + k)}</button>)}
                 </div>
                 <div className="grid gap-2">
                   {mode === "up" && <>
-                    <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#DCE4DC] text-sm bg-white" />
-                    <input value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#DCE4DC] text-sm bg-white" />
+                    <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#DCE4DC] text-sm bg-white" />
+                    <input value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#DCE4DC] text-sm bg-white" />
                   </>}
-                  <input required type="email" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#DCE4DC] text-sm bg-white" dir="ltr" />
-                  <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-11 px-3 rounded-lg border border-[#DCE4DC] text-sm bg-white" dir="ltr" />
-                  <button type="submit" disabled={isSubmitting} className="btn-press h-11 rounded-lg bg-[#5F6C61] hover:bg-[#4B574D] text-white text-sm font-semibold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
+                  <input required type="email" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#DCE4DC] text-sm bg-white" dir="ltr" />
+                  <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#DCE4DC] text-sm bg-white" dir="ltr" />
+                  <button type="submit" disabled={isSubmitting} className="btn-press h-12 rounded-full bg-[var(--peach)] text-[var(--on-peach)] text-sm font-bold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
                   {msg && <p role="alert" className="text-xs text-rose-700">{msg}</p>}
                 </div>
               </form>
@@ -217,7 +224,7 @@ export default function LandingAndLogin({ onLogin }) {
                     const RoleIcon = r.icon;
                     const on = selectedRole === r.id;
                     return (
-                      <label key={r.id} className={`relative flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-colors ${on ? "border-[#5F6C61] bg-[#5F6C61]/[0.06] ring-1 ring-[#5F6C61]" : "border-[#DCE4DC] bg-white hover:border-[#A3AE9F]"}`}>
+                      <label key={r.id} className={`relative flex items-start gap-3 p-3.5 rounded-[20px] border cursor-pointer transition-colors ${on ? "border-[#5F6C61] bg-[#5F6C61]/[0.06] ring-1 ring-[#5F6C61]" : "border-[#DCE4DC] bg-white hover:border-[#A3AE9F]"}`}>
                         <input type="radio" name="role" value={r.id} checked={on} onChange={() => setSelectedRole(r.id)} className="sr-only" />
                         <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#5F6C61] text-white" : "bg-[#E8EFE9] text-[#56635B]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
                         <span className="min-w-0">
@@ -231,12 +238,13 @@ export default function LandingAndLogin({ onLogin }) {
                 </div>
               </fieldset>
               <button type="submit" disabled={isSubmitting}
-                className="btn-press mt-5 w-full h-12 rounded-lg bg-[#5F6C61] hover:bg-[#4B574D] text-white font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
+                className="btn-press mt-5 w-full h-12 rounded-full lp-pill-dark font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60">
                 <LogIn className="w-4 h-4 ltr:-scale-x-100" aria-hidden="true" />
                 <span>{T("login.enter", { role: T("login.role." + (DEMO_ROLES.find((r) => r.id === selectedRole)?.key || "admin")) })}</span>
               </button>
               <p className="mt-3 text-xs text-center text-[#6E7B72]">{T("login.note")}</p>
             </form>
+            </div>
           </div>
         </div>
       )}
