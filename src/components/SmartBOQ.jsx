@@ -3,6 +3,7 @@ import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
 import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
+import BoqImport from "./BoqImport";
 import { officeStore, defaultVat } from "../data/office";
 import OfficeDetails from "./OfficeDetails";
 import QuoteSignature from "./QuoteSignature";
@@ -42,6 +43,8 @@ const CATEGORY_COLORS = localize({
 
 function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = false }) {
   const [boqItems, setBoqItems] = boqStore.use();
+  const [showImport, setShowImport] = useState(false);
+  const applyImport = (list, mode) => setBoqItems((prev) => (mode === "replace" ? list : [...prev, ...list]));
   const [filterCategory, setFilterCategory] = useState("الكل");
   const [saveToast, setSaveToast] = useState(false);
   const [sendSuccessModal, setSendSuccessModal] = useState(false);
@@ -264,6 +267,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
             <RefreshCw className="w-3.5 h-3.5" />
             <span>{T("sboq.8")}</span>
           </button>
+          {!restricted && (
+            <button type="button" onClick={() => setShowImport(true)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold text-[#1F2A26] bg-white border border-[#DCE4DC] hover:bg-[#F2F5F1] cursor-pointer">
+              <FileSpreadsheet className="w-4 h-4" aria-hidden="true" />
+              <span>{T("bi.open")}</span>
+            </button>
+          )}
           <button
             onClick={() => setShowAddItemModal(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white bg-[#5F6C61] hover:bg-[#5F6C61] transition-colors shadow-sm cursor-pointer"
@@ -539,6 +549,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           </span>
         </div>
       </div>
+
+      {showImport && <BoqImport items={boqItems} onApply={applyImport} onClose={() => setShowImport(false)} />}
 
       {/* Floating Summary & Action Sticky Dock */}
       <div className="mt-6 rounded-2xl md:mt-0 md:rounded-none md:fixed md:bottom-0 md:start-0 md:end-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#DCE4DC] shadow-lg px-4 md:px-8 py-4">
