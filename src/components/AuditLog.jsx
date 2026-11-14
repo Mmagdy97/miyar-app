@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { History, Plus, Minus, PenLine, Download, Search } from "lucide-react";
 import { useI18n, intlLocale } from "../i18n";
 import { auditStore } from "../data/audit";
+import DataBackup from "./DataBackup";
 
 const SCOPES = ["boq", "cash", "expenses", "invoices", "certs", "changeOrders", "selections", "subs", "pos", "workers"];
 const ICON = { add: Plus, del: Minus, upd: PenLine };
@@ -37,6 +38,8 @@ export default function AuditLog() {
         </div>
         <button type="button" onClick={exportCsv} disabled={!rows.length} className="btn-press self-start md:self-auto inline-flex items-center gap-2 h-11 px-5 rounded-full lp-pill-dark text-sm font-semibold disabled:opacity-50"><Download className="w-4 h-4" aria-hidden="true" />{t("audit.export")}</button>
       </header>
+
+      <DataBackup />
 
       <div className="bg-white rounded-[24px] border border-[#DCE4DC] p-3 md:p-4 space-y-3">
         <label className="relative block">

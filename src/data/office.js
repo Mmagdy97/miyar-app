@@ -8,6 +8,10 @@ export const officeStore = createPersistedStore("miyar:office:v1", {
   phone: "",
   vatRate: null,
   quoteDays: 14,
+  logo: "",
+  color: "#3E5A48",
+  address: "",
+  email: "",
 });
 
 export const DEFAULT_VAT = { EGP: 14, SAR: 15, AED: 5, TRY: 20, JOD: 16, KWD: 0, USD: 0 };

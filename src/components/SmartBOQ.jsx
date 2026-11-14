@@ -240,15 +240,19 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
         </div>
 
         {/* Printed quotation header (hidden on screen) */}
-        <div className="print-only w-full border-b border-black pb-3 mb-2">
+        <div className="print-only w-full pb-3 mb-2" style={{ borderBottom: `3px solid ${office.color || "#3E5A48"}` }}>
           <div className="flex justify-between items-start gap-4">
-            <div>
-              <p className="text-xl font-semibold">{office.name || T("brand")}</p>
-              {office.taxId && <p className="text-xs">{T("office.tax")}: {office.taxId}</p>}
-              {office.phone && <p className="text-xs" dir="ltr">{office.phone}</p>}
+            <div className="flex items-center gap-3">
+              {office.logo && <img src={office.logo} alt="" className="h-12 max-w-[120px] object-contain" />}
+              <div>
+                <p className="text-xl font-semibold">{office.name || T("brand")}</p>
+                {office.address && <p className="text-xs">{office.address}</p>}
+                {office.taxId && <p className="text-xs">{T("office.tax")}: {office.taxId}</p>}
+                {(office.phone || office.email) && <p className="text-xs" dir="ltr">{[office.phone, office.email].filter(Boolean).join(" · ")}</p>}
+              </div>
             </div>
             <div className="text-end text-xs space-y-0.5">
-              <p className="text-lg font-semibold">{T("quote.title")}</p>
+              <p className="text-lg font-semibold" style={{ color: office.color || "#3E5A48" }}>{T("quote.title")}</p>
               <p>{T("quote.no")}: {quoteNo}</p>
               <p>{T("quote.date")}: {new Date().toLocaleDateString(intlLocale())}</p>
               <p>{T("quote.valid", { 0: office.quoteDays })}</p>
