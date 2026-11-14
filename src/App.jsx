@@ -255,7 +255,7 @@ function App() {
       <div
         className={`fixed inset-y-0 start-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:ltr:translate-x-0 md:rtl:translate-x-0 md:block ${
           isMobileMenuOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"
-        } ${sidebarCollapsed ? "md:w-[96px]" : "md:w-72"} w-72 shrink-0 h-full app-side`}
+        } ${sidebarCollapsed ? "md:w-[104px]" : "md:w-72"} w-72 shrink-0 h-full app-side`}
       >
         <Sidebar
           currentRole={currentRole}
@@ -264,7 +264,7 @@ function App() {
             goTab(tab);
             setIsMobileMenuOpen(false);
           }}
-          collapsed={sidebarCollapsed}
+          collapsed={sidebarCollapsed && !isMobileMenuOpen}
           toggleSidebar={toggleSidebar}
           onCloseMobile={() => setIsMobileMenuOpen(false)}
           onItemClick={() => setIsMobileMenuOpen(false)}

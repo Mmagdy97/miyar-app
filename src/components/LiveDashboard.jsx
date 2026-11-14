@@ -5,6 +5,7 @@ import { projectsStore, inviteClient } from "../data/projects";
 import { invoicesRepo, invoiceTotals } from "../data/invoices";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
+import QuickActions from "./QuickActions";
 
 const PLAN_NAME = { free: "plan.free", pro: "plan.pro", office: "plan.office", enterprise: "plan.enterprise" };
 const fmtDate = (d) => (d ? new Date(d).toLocaleDateString(intlLocale(), { day: "numeric", month: "short", year: "numeric" }) : "—");
@@ -60,6 +61,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
           </div>
           {org && !isClient && <p className="text-xs font-bold text-[#56635B] bg-white border border-[#DCE4DC] rounded-lg px-3 py-1.5 w-fit">{T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") })} · {Number.isFinite(max) ? T("live.usage", { n: projects.length, max }) : T("live.unlimited", { n: projects.length })}</p>}
         </div>
+        {!isClient && <QuickActions setActiveTab={setActiveTab} />}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {stats.map(([l, v, Ic], n) => (
             <div key={l} className={`tile ${["tile-mint", "tile-peach", "tile-sky", "tile-sand"][n % 4]}`}>

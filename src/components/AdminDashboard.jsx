@@ -1,3 +1,4 @@
+import QuickActions from "./QuickActions";
 import { D } from "../data/dataI18n";
 import { currencySymbol, intlLocale, useI18n, E } from "../i18n";
 import { cashStore, cashTotals, invoicesStore } from "../data/stores";
@@ -174,7 +175,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[#DCE4DC]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 ">
         <div>
 
           <h1 className="text-2xl md:text-3xl font-bold text-[#1F2A26] text-balance">
@@ -192,6 +193,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
           </p>
         </div>
       </div>
+
+      <QuickActions setActiveTab={setActiveTab} />
 
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

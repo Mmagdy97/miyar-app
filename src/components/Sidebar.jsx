@@ -1,7 +1,7 @@
 import LogoMark from "./LogoMark";
 import { isTabAllowed } from "../lib/entitlements";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Download, Building2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, Building2, X, Menu } from "lucide-react";
 import { ROLE_CONFIG, roleTitle as roleTitleOf, navLabel } from "../config/roles";
 import { useI18n } from "../i18n";
 
@@ -55,6 +55,59 @@ function Sidebar({
   const handleMouseLeave = () => {
     setTooltip({ visible: false, text: "", top: 0 });
   };
+
+  const isActiveItem = (item) => {
+    const itemName = item.name || item.id;
+    const dash = activeTab === "لوحة التحكم" || activeTab === "Dashboard";
+    return (dash && (itemName === "لوحة التحكم" || item.id === "Dashboard")) || activeTab === itemName || activeTab === item.id || activeTab === navLabel(currentRole, item);
+  };
+
+  // Collapsed (desktop): logo disc + dark pill rail; the active item pops out as a peach circle with a notch.
+  if (collapsed) {
+    return (
+      <aside ref={sidebarRef} className="relative hidden md:flex flex-col items-center gap-3 h-full w-full select-none">
+        <div className="w-16 h-16 shrink-0 rounded-full bg-[var(--panel)] flex items-center justify-center">
+          <LogoMark className="w-7 h-7 text-[var(--peach)]" />
+        </div>
+        <div className="relative flex-1 min-h-0 w-16 rounded-full bg-[var(--panel)] flex flex-col items-center py-4">
+          <button type="button" onClick={toggleSidebar} aria-label={t("menu.expand")} title={t("menu.expand")} className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 cursor-pointer">
+            <Menu className="w-5 h-5" />
+          </button>
+          <nav className="flex-1 min-h-0 flex flex-col items-center justify-center gap-1.5 py-3">
+            {items.map((item) => {
+              const { id, name, icon: Icon } = item;
+              const label = navLabel(currentRole, item);
+              const active = isActiveItem(item);
+              return (
+                <button
+                  key={id || name}
+                  type="button"
+                  aria-label={label}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => { setActiveTab(name || id); onItemClick?.(); }}
+                  onMouseEnter={(e) => handleMouseEnter(e, label)}
+                  onMouseLeave={handleMouseLeave}
+                  className={`relative w-11 h-11 shrink-0 rounded-full flex items-center justify-center cursor-pointer transition-[transform,background-color,color] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                    active ? "rail-active bg-[var(--peach)] text-[color:var(--on-peach)] ltr:translate-x-5 rtl:-translate-x-5 z-10" : "text-white/65 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                </button>
+              );
+            })}
+          </nav>
+          {isInstallable && (
+            <button type="button" onClick={onInstallClick} aria-label={t("pwa.install")} className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-white/80 hover:bg-white/10 cursor-pointer"><Download className="w-5 h-5" /></button>
+          )}
+        </div>
+        {tooltip.visible && (
+          <div className="absolute start-[84px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[var(--panel)] rounded-full shadow-md whitespace-nowrap pointer-events-none" style={{ top: tooltip.top, transform: "translateY(-50%)" }}>
+            {tooltip.text}
+          </div>
+        )}
+      </aside>
+    );
+  }
 
   return (
     <aside
