@@ -174,27 +174,29 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
-      {/* 1. Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 ">
-        <div>
-
-          <h1 className="text-2xl md:text-3xl font-bold text-[#1F2A26] text-balance">
-            {t("adm.title")}
-          </h1>
-
-          <p className="text-xs md:text-sm text-[#56635B] mt-1 flex items-center gap-2 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#56635B]">
-              <Calendar className="w-3.5 h-3.5 text-[#56635B]" />
-              {todayArabic}
-            </span>
-            <span className="text-[#56635B]">
-              {rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}
-            </span>
-          </p>
+      {/* 1. Hero */}
+      <section className="relative isolate overflow-hidden rounded-[28px] text-white min-h-[320px] md:min-h-[380px] p-5 md:p-8 flex flex-col justify-between gap-10">
+        <img src="/landing/villa.webp" alt="" className="absolute inset-0 w-full h-full object-cover -z-20" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
+        <div className="text-start">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full bg-white/20 backdrop-blur px-3 py-1"><Calendar className="w-3.5 h-3.5" />{todayArabic}</span>
+          <h1 className="mt-3 font-display text-3xl md:text-5xl font-semibold text-balance [text-shadow:0_2px_20px_rgba(0,0,0,.35)]">{t("adm.title")}</h1>
+          <p className="mt-2 text-sm md:text-base opacity-90 max-w-xl">{rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}</p>
         </div>
-      </div>
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-stretch text-start">
+          <div className="lp-glass rounded-[22px] px-5 py-3.5 flex-1 sm:flex-none sm:min-w-[250px]">
+            <span className="text-xs font-semibold opacity-70">{t("adm.heroOver")}</span>
+            <div className="mt-1 font-display text-2xl md:text-3xl font-semibold text-[#B23A2B]">{formatCompact(TOTALS.overdueTotal)} <span className="text-sm font-medium opacity-70">{currencySymbol()}</span></div>
+          </div>
+          <button type="button" onClick={() => document.getElementById("adm-actions")?.scrollIntoView({ behavior: "smooth" })} className="lp-glass rounded-[22px] px-5 py-3.5 flex-1 sm:flex-none sm:min-w-[250px] flex items-center justify-between gap-3 text-start">
+            <span><span className="text-xs font-semibold opacity-70 block">{t("adm.heroGo")}</span><span className="font-display text-lg font-semibold">{t("adm.heroPend", { n: toAr(pendingCount) })}</span></span>
+            <span className="w-10 h-10 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center shrink-0"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
+          </button>
+          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="btn-press lp-pill-dark rounded-full px-6 h-12 sm:h-auto sm:self-center text-sm font-semibold whitespace-nowrap">{t("adm.heroProj")}</button>
+        </div>
+      </section>
 
-      <QuickActions setActiveTab={setActiveTab} />
+      <QuickActions setActiveTab={setActiveTab} compact />
 
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -360,132 +362,175 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
         </div>
       </div>
 
-      {/* 4. Split Layout (Projects Health vs Action Center) */}
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Left Column: حالة المشاريع (Projects Health) */}
-        <div className="bg-white rounded-xl border border-[#DCE4DC] shadow-[0_8px_30px_rgba(45,36,34,0.04)] overflow-hidden flex flex-col justify-between flex-1">
-          <div>
-            <div className="p-5 border-b border-[#E8EFE9] flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold text-[#1F2A26] flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-[#1F2A26]" />
-                    {t("adm.projTitle")}
-                  </h2>
+      {/* Projects carousel */}
+      <section className="space-y-3">
+        <div className="flex items-end justify-between gap-3">
+          <h2 className="font-display text-xl md:text-2xl font-semibold text-[#1F2A26]">{t("adm.pc.title")}</h2>
+          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="text-xs font-semibold text-[#56635B] hover:underline inline-flex items-center gap-1">{t("adm.pc.all")}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
+        </div>
+        <div className="flex gap-4 overflow-x-auto snap-x pb-2 -mx-4 px-4 md:mx-0 md:px-0" style={{ scrollbarWidth: "none" }}>
+          {INITIAL_PROJECTS.map((project, pi) => {
+            const isOnTrack = project.status === "جاري العمل";
+            return (
+              <article key={project.id} className="snap-start shrink-0 w-[270px] md:w-[300px] bg-white rounded-[26px] overflow-hidden shadow-[var(--shadow-1)] border border-transparent">
+                <div className="relative h-36">
+                  <img src={`/landing/${["villa", "living", "kitchen", "office"][pi % 4]}-s.webp`} alt="" loading="lazy" className="w-full h-full object-cover" />
+                  <span className={`absolute top-3 start-3 text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur ${isOnTrack ? "bg-white/85 text-[#2F4A3E]" : "bg-[#FDE8D3]/95 text-[#8A4A30]"}`}>{E(project.status)}</span>
                 </div>
-                <p className="text-xs text-[#56635B] mt-0.5">
-                  {t("adm.projSub")}
-                </p>
-              </div>
+                <div className="p-4 text-start">
+                  <h3 className="font-display text-base font-semibold text-[#1F2A26] truncate">{project.name}</h3>
+                  <p className="text-xs text-[#56635B] mt-0.5 truncate">{project.client} • {project.contractValue}</p>
+                  <div className="mt-3 flex items-center justify-between text-xs font-semibold"><span className="text-[#56635B] truncate">{E(project.phase)}</span><span className="text-[#1F2A26] font-mono">{t("adm.complete", { p: toAr(project.progress) })}</span></div>
+                  <ProgressBar value={project.progress} isWarning={!isOnTrack} />
+                  <p className="mt-2.5 text-[11px] text-[#56635B]">{t("adm.due", { d: project.dueDate })}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
 
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]">
-                {t("adm.sitesActive", { n: toAr(INITIAL_PROJECTS.length) })}
+      <div className="grid lg:grid-cols-[1.45fr_1fr] gap-6 items-start">
+      {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
+      <div className="bg-white rounded-xl border border-[#DCE4DC] shadow-sm p-5 md:p-6 min-w-0">
+        <div className="flex flex-col gap-4 pb-5 border-b border-[#E8EFE9]">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-bold text-[#1F2A26]">
+                {t("adm.cfTitle")}
+              </h2>
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#5F6C61]/15 text-[#1F2A26] border border-[#5F6C61]/30">
+                {t("adm.margin", { p: toAr(Math.round((1 - series.reduce((a, x) => a + x.expenses, 0) / series.reduce((a, x) => a + x.revenue, 0)) * 1000) / 10) })}
+              </span>
+            </div>
+            <p className="text-xs text-[#56635B] mt-0.5">
+              {t("adm.cfSub")}
+            </p>
+          </div>
+
+          {/* Controls & Legend */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-4 text-xs font-medium text-[#56635B]">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#5F6C61]" />
+                {t("adm.inflows")}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#DCE4DC]" />
+                {t("adm.siteExp")}
               </span>
             </div>
 
-            <div className="divide-y divide-[#E8EFE9]">
-              {INITIAL_PROJECTS.map((project, pi) => {
-                const isOnTrack = project.status === "جاري العمل";
-                const team = TEAM_MEMBERS[project.id] || [];
-
-                return (
-                  <div
-                    key={project.id}
-                    className="p-4 sm:p-5 hover:bg-[#F2F5F1]/70 transition-all duration-200 group flex gap-4 items-start"
-                  >
-                    <img src={`/landing/${["villa", "living", "kitchen", "office"][pi % 4]}-s.webp`} alt="" loading="lazy" className="hidden sm:block w-28 h-28 shrink-0 rounded-[22px] object-cover" />
-                    <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3 mb-2">
-                      <div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-bold text-[#1F2A26] group-hover:text-[#1F2A26] transition-colors">
-                            {project.name}
-                          </h3>
-                          <span className="text-[11px] px-2 py-0.5 rounded-md bg-[#E8EFE9] text-[#1F2A26] font-semibold border border-[#DCE4DC]">
-                            {E(project.category)}
-                          </span>
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
-                              isOnTrack
-                                ? "bg-[#5F6C61]/15 text-[#1F2A26] border-[#5F6C61]/30"
-                                : "bg-rose-50 text-rose-700 border-rose-200"
-                            }`}
-                          >
-                            {isOnTrack ? (
-                              <CheckCircle2 className="w-3 h-3 me-1 text-[#5F6C61]" />
-                            ) : (
-                              <ShieldAlert className="w-3 h-3 me-1 text-rose-600" />
-                            )}
-                            {E(project.status)}
-                          </span>
-                        </div>
-
-                        <p className="text-xs text-[#56635B] mt-1">
-                          {t("adm.client")} <span className="text-[#1F2A26] font-bold">{project.client}</span> • {t("adm.contract")} <span className="text-[#1F2A26] font-semibold">{project.contractValue}</span>
-                        </p>
-                      </div>
-
-                      {/* Overlapping Team Avatars */}
-                      <div className="hidden sm:flex items-center shrink-0">
-                        <div className="flex items-center -space-x-2 space-x-reverse">
-                          {team.map((member, i) => (
-                            <div
-                              key={i}
-                              title={`${member.name} (${member.role})`}
-                              className={`w-7 h-7 rounded-full ${member.bg} text-white font-semibold text-[10px] flex items-center justify-center border-2 border-white shadow-xs cursor-pointer hover:scale-110 hover:z-10 transition-transform`}
-                            >
-                              {member.initials}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Progress Bar with Sage Green Fill */}
-                    <div className="mt-3">
-                      <div className="flex items-center justify-between text-xs mb-1.5 font-semibold">
-                        <span className="text-[#56635B]">
-                          {t("adm.phase")} <span className="text-[#1F2A26] font-bold">{E(project.phase)}</span>
-                        </span>
-                        <span className="text-xs font-bold text-[#1F2A26] tracking-wide font-mono whitespace-nowrap shrink-0 ms-2">
-                          {t("adm.complete", { p: toAr(project.progress) })}
-                        </span>
-                      </div>
-
-                      <ProgressBar
-                        value={project.progress}
-                        isWarning={!isOnTrack}
-                      />
-                    </div>
-
-                    <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#56635B]">
-                      <span className="truncate min-w-0 flex-1 text-[#56635B]">
-                        {project.phaseDetail}
-                      </span>
-                      <span className="shrink-0 font-bold text-[#56635B] ms-2">
-                        {t("adm.due", { d: project.dueDate })}
-                      </span>
-                    </div>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="inline-flex rounded-lg border border-[#DCE4DC] p-0.5 bg-[#F2F5F1] text-xs font-bold">
+              <button
+                onClick={() => setTimeframe("6M")}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  timeframe === "6M"
+                    ? "bg-[#5F6C61] text-white shadow-xs"
+                    : "text-[#56635B] hover:text-[#1F2A26]"
+                }`}
+              >
+                {t("adm.last6")}
+              </button>
+              <button
+                onClick={() => setTimeframe("YTD")}
+                className={`px-3 py-1 rounded-lg transition-all ${
+                  timeframe === "YTD"
+                    ? "bg-[#5F6C61] text-white shadow-xs"
+                    : "text-[#56635B] hover:text-[#1F2A26]"
+                }`}
+              >
+                {t("adm.fullYear")}
+              </button>
             </div>
-          </div>
-
-          <div className="p-4 bg-[#F2F5F1]/70 border-t border-[#E8EFE9] flex items-center justify-between text-xs">
-            <span className="text-[#56635B] font-medium">
-              {t("adm.codeOk")}
-            </span>
-            <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="font-bold text-[#5F6C61] hover:underline inline-flex items-center gap-1 cursor-pointer">
-              {t("adm.register")}
-              <ChevronLeft className="ltr:-scale-x-100 w-3.5 h-3.5" />
-            </button>
           </div>
         </div>
 
+        {/* Dual-bar Chart */}
+        <div className="mt-6 pt-2">
+          <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
+            {activeHoverBar ? (
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#E8EFE9] border border-[#DCE4DC] text-[#1F2A26] animate-in fade-in">
+                <span>{activeHoverBar.month} {toAr(2026)}:</span>
+                <span className="text-[#1F2A26] font-bold">
+                  {t("adm.revenue", { amt: `${formatCompact(activeHoverBar.revenue * 1000)} ${currencySymbol()}` })}
+                </span>
+                <span className="text-[#56635B]">|</span>
+                <span className="text-[#56635B]">
+                  {t("adm.expense", { amt: `${formatCompact(activeHoverBar.expenses * 1000)} ${currencySymbol()}` })}
+                </span>
+                <span className="text-[#1F2A26]">
+                  {t("adm.net", { p: toAr(Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)) })}
+                </span>
+              </span>
+            ) : (
+              <span className="text-[#56635B] text-xs font-medium">
+                {t("adm.hover")}
+              </span>
+            )}
+          </div>
+
+          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-dashed border-[#DCE4DC] pb-3`}>
+            {series.map((item, idx) => {
+              const revPercent = Math.round((item.revenue / maxVal) * 100);
+              const expPercent = Math.round((item.expenses / maxVal) * 100);
+
+              return (
+                <div
+                  key={item.month}
+                  onMouseEnter={() => setActiveHoverBar(item)}
+                  onMouseLeave={() => setActiveHoverBar(null)}
+                  className="flex flex-col items-center h-full justify-end group cursor-pointer"
+                >
+                  <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
+                    {/* Revenue Bar (Sage Green) */}
+                    <div
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#5F6C61] group-hover:bg-[#5F6C61] transition-colors duration-200 bar-grow"
+                      style={{ height: `${revPercent}%`, animationDelay: `${idx * 60}ms` }}
+                    />
+                    {/* Expense Bar */}
+                    <div
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#DCE4DC] group-hover:bg-[#DCE4DC] transition-colors duration-200 bar-grow"
+                      style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
+                    />
+                  </div>
+                  <span className="mt-3 text-xs font-bold text-[#1F2A26] group-hover:text-[#1F2A26] transition-colors">
+                    {item.month}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom Summary Bar */}
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#56635B] pt-1">
+            <div className="flex items-center gap-6">
+              <div>
+                <span className="text-[#56635B] block text-[11px] font-semibold">{t("adm.rev6")}</span>
+                <span className="font-semibold text-[#1F2A26] text-sm">{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
+              </div>
+              <div className="h-6 w-px bg-[#DCE4DC]" />
+              <div>
+                <span className="text-[#56635B] block text-[11px] font-semibold">{t("adm.cost6")}</span>
+                <span className="font-semibold text-[#1F2A26] text-sm">{formatNumber(series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+              </div>
+              <div className="h-6 w-px bg-[#DCE4DC]" />
+              <div>
+                <span className="text-[#56635B] block text-[11px] font-semibold">{t("adm.profit6")}</span>
+                <span className="font-semibold text-[#1F2A26] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+              </div>
+            </div>
+
+            <span className="text-[11px] text-[#56635B] font-medium">
+              {t("adm.einv")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+
         {/* Right Column: Action Center (المهام والاعتمادات العاجلة) - Clickable Items & Modal */}
-        <div className="order-first lg:order-none bg-white rounded-xl border border-[#DCE4DC] shadow-sm overflow-hidden flex flex-col justify-between">
+        <div id="adm-actions" className="order-first lg:order-none bg-white rounded-xl border border-[#DCE4DC] shadow-sm overflow-hidden flex flex-col justify-between">
           <div>
             <div className="p-5 border-b border-[#E8EFE9] flex items-center justify-between">
               <div>
@@ -671,144 +716,6 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
           </div>
         </div>
       </div>
-
-      {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
-      <div className="bg-white rounded-xl border border-[#DCE4DC] shadow-sm p-6 md:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[#E8EFE9]">
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-[#1F2A26]">
-                {t("adm.cfTitle")}
-              </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#5F6C61]/15 text-[#1F2A26] border border-[#5F6C61]/30">
-                {t("adm.margin", { p: toAr(Math.round((1 - series.reduce((a, x) => a + x.expenses, 0) / series.reduce((a, x) => a + x.revenue, 0)) * 1000) / 10) })}
-              </span>
-            </div>
-            <p className="text-xs text-[#56635B] mt-0.5">
-              {t("adm.cfSub")}
-            </p>
-          </div>
-
-          {/* Controls & Legend */}
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-4 text-xs font-medium text-[#56635B]">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#5F6C61]" />
-                {t("adm.inflows")}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#DCE4DC]" />
-                {t("adm.siteExp")}
-              </span>
-            </div>
-
-            <div className="inline-flex rounded-lg border border-[#DCE4DC] p-0.5 bg-[#F2F5F1] text-xs font-bold">
-              <button
-                onClick={() => setTimeframe("6M")}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  timeframe === "6M"
-                    ? "bg-[#5F6C61] text-white shadow-xs"
-                    : "text-[#56635B] hover:text-[#1F2A26]"
-                }`}
-              >
-                {t("adm.last6")}
-              </button>
-              <button
-                onClick={() => setTimeframe("YTD")}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  timeframe === "YTD"
-                    ? "bg-[#5F6C61] text-white shadow-xs"
-                    : "text-[#56635B] hover:text-[#1F2A26]"
-                }`}
-              >
-                {t("adm.fullYear")}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Dual-bar Chart */}
-        <div className="mt-6 pt-2">
-          <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
-            {activeHoverBar ? (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#E8EFE9] border border-[#DCE4DC] text-[#1F2A26] animate-in fade-in">
-                <span>{activeHoverBar.month} {toAr(2026)}:</span>
-                <span className="text-[#1F2A26] font-bold">
-                  {t("adm.revenue", { amt: `${formatCompact(activeHoverBar.revenue * 1000)} ${currencySymbol()}` })}
-                </span>
-                <span className="text-[#56635B]">|</span>
-                <span className="text-[#56635B]">
-                  {t("adm.expense", { amt: `${formatCompact(activeHoverBar.expenses * 1000)} ${currencySymbol()}` })}
-                </span>
-                <span className="text-[#1F2A26]">
-                  {t("adm.net", { p: toAr(Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)) })}
-                </span>
-              </span>
-            ) : (
-              <span className="text-[#56635B] text-xs font-medium">
-                {t("adm.hover")}
-              </span>
-            )}
-          </div>
-
-          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-dashed border-[#DCE4DC] pb-3`}>
-            {series.map((item, idx) => {
-              const revPercent = Math.round((item.revenue / maxVal) * 100);
-              const expPercent = Math.round((item.expenses / maxVal) * 100);
-
-              return (
-                <div
-                  key={item.month}
-                  onMouseEnter={() => setActiveHoverBar(item)}
-                  onMouseLeave={() => setActiveHoverBar(null)}
-                  className="flex flex-col items-center h-full justify-end group cursor-pointer"
-                >
-                  <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
-                    {/* Revenue Bar (Sage Green) */}
-                    <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#5F6C61] group-hover:bg-[#5F6C61] transition-colors duration-200 bar-grow"
-                      style={{ height: `${revPercent}%`, animationDelay: `${idx * 60}ms` }}
-                    />
-                    {/* Expense Bar */}
-                    <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#DCE4DC] group-hover:bg-[#DCE4DC] transition-colors duration-200 bar-grow"
-                      style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
-                    />
-                  </div>
-                  <span className="mt-3 text-xs font-bold text-[#1F2A26] group-hover:text-[#1F2A26] transition-colors">
-                    {item.month}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Bottom Summary Bar */}
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#56635B] pt-1">
-            <div className="flex items-center gap-6">
-              <div>
-                <span className="text-[#56635B] block text-[11px] font-semibold">{t("adm.rev6")}</span>
-                <span className="font-semibold text-[#1F2A26] text-sm">{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
-              </div>
-              <div className="h-6 w-px bg-[#DCE4DC]" />
-              <div>
-                <span className="text-[#56635B] block text-[11px] font-semibold">{t("adm.cost6")}</span>
-                <span className="font-semibold text-[#1F2A26] text-sm">{formatNumber(series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
-              </div>
-              <div className="h-6 w-px bg-[#DCE4DC]" />
-              <div>
-                <span className="text-[#56635B] block text-[11px] font-semibold">{t("adm.profit6")}</span>
-                <span className="font-semibold text-[#1F2A26] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
-              </div>
-            </div>
-
-            <span className="text-[11px] text-[#56635B] font-medium">
-              {t("adm.einv")}
-            </span>
-          </div>
-        </div>
-      </div>
-
 
       <ReceivablesPanel />
     </main>

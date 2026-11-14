@@ -14,8 +14,17 @@ const ACTIONS = [
   ["Team", "فريق العمل", "qa.team", Users],
 ];
 
-export default function QuickActions({ setActiveTab }) {
+export default function QuickActions({ setActiveTab, compact = false }) {
   const list = ACTIONS.filter(([id]) => isTabAllowed(id));
+  if (compact) return (
+    <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1" style={{ scrollbarWidth: "none" }}>
+      {list.map(([id, tab, key, Ic]) => (
+        <button key={id} type="button" onClick={() => setActiveTab?.(tab)} className="shrink-0 inline-flex items-center gap-2 h-10 ps-3 pe-4 rounded-full bg-white border border-[#DCE4DC] text-xs font-semibold text-[#1F2A26] hover:border-[var(--peach)] transition-colors">
+          <span className="w-6 h-6 rounded-full bg-[var(--paper-2)] flex items-center justify-center"><Ic className="w-3.5 h-3.5" aria-hidden="true" /></span>{T(key)}
+        </button>
+      ))}
+    </div>
+  );
   return (
     <section aria-labelledby="qa-title" className="space-y-3">
       <div>
