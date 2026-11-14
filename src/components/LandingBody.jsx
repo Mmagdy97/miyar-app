@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { waLink } from "../lib/nudge";
-import { ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Ruler, Share2, ShieldCheck, Wallet, WifiOff } from "lucide-react";
+import { ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Clock, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Rocket, Ruler, Share2, ShieldCheck, Users, Wallet, WifiOff } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import ScrollArt from "./ScrollArt";
@@ -179,19 +179,48 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         </div>
       </section>
 
-      {/* How it works */}
+      {/* How it works: steps timeline + photo */}
       <section className="px-4 sm:px-8 pb-14 sm:pb-20 max-w-6xl mx-auto w-full">
-        <div className="rounded-[34px] bg-[var(--panel)] text-[var(--panel-ink)] px-6 sm:px-12 py-10 sm:py-14 text-start">
-          <h2 className="font-display text-3xl sm:text-4xl font-semibold max-w-xl text-balance">{T("lp.how.t")}</h2>
-          <ol className="mt-8 grid md:grid-cols-3 gap-4">
-            {[1, 2, 3].map((n) => (
-              <li key={n} className="rounded-[24px] bg-white/[.07] border border-white/10 p-6">
-                <span className="w-10 h-10 rounded-full bg-[var(--peach)] text-[var(--on-peach)] font-display font-semibold flex items-center justify-center">{n}</span>
-                <h3 className="mt-4 font-display text-lg font-semibold">{T(`lp.how${n}.t`)}</h3>
-                <p className="mt-1.5 text-sm opacity-75 leading-relaxed">{T(`lp.how${n}.d`)}</p>
-              </li>
-            ))}
-          </ol>
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-4 sm:gap-6 items-stretch">
+          <div className="reveal lp-card rounded-[34px] p-6 sm:p-10 text-start flex flex-col">
+            <p className="text-xs font-semibold tracking-[.18em] uppercase text-[#56635B]">{T("lp.how.k")}</p>
+            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold text-[#1F2A26] text-balance leading-tight">{T("lp.how.t")}</h2>
+            <p className="mt-3 text-[#56635B] max-w-md">{T("lp.how.d")}</p>
+            <ol className="mt-8 relative space-y-3">
+              <span aria-hidden="true" className="absolute top-6 bottom-6 start-[27px] w-px bg-[#DCE4DC]" />
+              {[[1, Building2], [2, Users], [3, Rocket]].map(([n, Icon]) => (
+                <li key={n} className="relative flex items-start gap-4 rounded-[22px] p-3 hover:bg-[#F2F5F1] transition-colors">
+                  <span className={`relative z-10 w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center ${n === 3 ? "bg-[var(--brand)] text-white" : "bg-white border border-[#DCE4DC] text-[#3E5A48]"}`}><Icon className="w-6 h-6" aria-hidden="true" /></span>
+                  <div className="min-w-0 flex-1 pt-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-display text-sm font-semibold text-[#A3AE9F] tabular-nums">0{n}</span>
+                      <h3 className="font-display text-lg font-semibold text-[#1F2A26]">{T(`lp.how${n}.t`)}</h3>
+                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold rounded-full bg-[var(--peach-soft,#FBE7DD)] text-[#7A4B2B] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T(`lp.how${n}.time`)}</span>
+                    </div>
+                    <p className="mt-1 text-sm text-[#56635B] leading-relaxed">{T(`lp.how${n}.d`)}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-auto pt-8">
+              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-12 ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-[15px] font-semibold">
+                {T("ld.6")}
+                <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
+              </button>
+            </div>
+          </div>
+          <div className="reveal relative isolate overflow-hidden rounded-[34px] min-h-[320px] lg:min-h-0 text-white">
+            <img src="/landing/office.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" />
+            <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
+            <div className="absolute top-5 start-5 end-5 flex justify-between items-start gap-3">
+              <span className="lp-glass rounded-full px-4 py-2 text-sm font-semibold">{T("lp.how.badge")}</span>
+            </div>
+            <div className="absolute bottom-5 start-5 end-5 lp-frost rounded-[24px] p-4 text-start">
+              <div className="flex items-center justify-between text-xs font-semibold"><span>{T("lp.how.setup")}</span><span>3/3</span></div>
+              <div className="mt-2 grid grid-cols-3 gap-1.5">{[1, 2, 3].map((n) => <span key={n} className="h-2 rounded-full bg-[var(--brand)]" />)}</div>
+              <p className="mt-2 text-xs opacity-80">{T("lp.how.ready")}</p>
+            </div>
+          </div>
         </div>
       </section>
 
