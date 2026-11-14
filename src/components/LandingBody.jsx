@@ -13,7 +13,7 @@ import { tr_ as T, useI18n } from "../i18n";
 const ROLES = [
   { id: "Admin", key: "admin", Icon: Building2, tone: "lp-t1", img: "villa" },
   { id: "Site Engineer", key: "site", Icon: HardHat, tone: "lp-t2", img: "site" },
-  { id: "Technical Office", key: "tech", Icon: FileCode, tone: "lp-t3", img: "living" },
+  { id: "Technical Office", key: "tech", Icon: FileCode, tone: "lp-t3", img: "office" },
   { id: "Client", key: "client", Icon: ShieldCheck, tone: "lp-t4", img: "couple" },
 ];
 
