@@ -1,3 +1,4 @@
+import DashHero from "./DashHero";
 import { valueMoment } from "../lib/nudge";
 import { currencySymbol, intlLocale } from "../i18n";
 import { localize, D, DF } from "../data/dataI18n";
@@ -7,13 +8,10 @@ import { ENGINEER_CASH, personById, projectById, formatNumber } from "../data/se
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import {
-  HardHat,
   Camera,
   CheckCircle2,
   Users,
   MapPin,
-  Calendar,
-  Sun,
   Plus,
   Minus,
   Send,
@@ -235,35 +233,9 @@ function SiteEngineerDashboard({ setActionItems }) {
           </div>
         )}
 
-        {/* 1. Header & Quick Actions */}
+        {/* 1. Hero */}
+        <DashHero img="site" kicker={todayArabic} title={T("se.2")} sub={T("se.4")} />
         <div className="bg-white rounded-lg border border-[#DCE4DC] p-5 shadow-xs">
-          <div className="flex items-center justify-between pb-3 border-b border-[#E8EFE9]">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-[#5F6C61] hover:bg-[#5F6C61] text-white flex items-center justify-center shadow-xs">
-                <HardHat className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-lg sm:text-xl font-semibold text-[#1F2A26] tracking-tight">
-                    {T("se.2")}
-                  </h1>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E8EFE9] text-[#1F2A26] border border-[#DCE4DC]">
-                    {T("se.3")}
-                  </span>
-                </div>
-                <p className="text-xs text-[#56635B] mt-0.5 flex items-center gap-1.5 font-medium">
-                  <Calendar className="w-3.5 h-3.5 text-[#56635B]" />
-                  <span>{todayArabic}</span>
-                </p>
-              </div>
-            </div>
-
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] text-xs text-[#56635B] font-semibold">
-              <Sun className="w-4 h-4 text-amber-500" />
-              <span>{T("se.4")}</span>
-            </div>
-          </div>
-
           {/* Two Large Primary Action Buttons Side-by-Side */}
           <div className="grid grid-cols-2 gap-3 mt-4">
             {/* Button A: Add Daily Report */}

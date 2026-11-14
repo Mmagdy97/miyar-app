@@ -6,6 +6,7 @@ import { invoicesRepo, invoiceTotals } from "../data/invoices";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
 import QuickActions from "./QuickActions";
+import DashHero from "./DashHero";
 
 const PLAN_NAME = { free: "plan.free", pro: "plan.pro", office: "plan.office", enterprise: "plan.enterprise" };
 const fmtDate = (d) => (d ? new Date(d).toLocaleDateString(intlLocale(), { day: "numeric", month: "short", year: "numeric" }) : "—");
@@ -54,14 +55,9 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-5xl mx-auto space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#1F2A26]">{T(isClient ? "live.projects" : "live.title")}</h1>
-            <p className="text-xs md:text-sm text-[#56635B] mt-1">{T("live.sub")}</p>
-          </div>
-          {org && !isClient && <p className="text-xs font-bold text-[#56635B] bg-white border border-[#DCE4DC] rounded-lg px-3 py-1.5 w-fit">{T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") })} · {Number.isFinite(max) ? T("live.usage", { n: projects.length, max }) : T("live.unlimited", { n: projects.length })}</p>}
-        </div>
-        {!isClient && <QuickActions setActiveTab={setActiveTab} />}
+        <DashHero img={isClient ? "couple" : "villa"} title={T(isClient ? "live.projects" : "live.title")} sub={T("live.sub")}
+          stats={org && !isClient ? [[T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") }), Number.isFinite(max) ? T("live.usage", { n: projects.length, max }) : T("live.unlimited", { n: projects.length })]] : []} />
+        {!isClient && <QuickActions setActiveTab={setActiveTab} compact />}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {stats.map(([l, v, Ic], n) => (
             <div key={l} className={`tile ${["tile-mint", "tile-peach", "tile-sky", "tile-sand"][n % 4]}`}>

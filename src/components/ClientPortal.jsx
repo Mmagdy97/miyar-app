@@ -181,9 +181,9 @@ function ClientPortal({ actionItems = [], setActionItems, setSelectedItem }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
       {/* 1. Premium Header (Welcome Banner) */}
-      <div className="relative rounded-2xl p-6 sm:p-8 md:p-10 bg-[#5F6C61] text-white shadow-sm border border-[#4B574D] overflow-hidden">
-        {/* Subtle Ambient Glows */}
-        
+      <div className="relative isolate rounded-[28px] p-6 sm:p-8 md:p-10 bg-[#3E5A48] text-white shadow-sm overflow-hidden">
+        <img src="/landing/couple.webp" alt="" className="absolute inset-0 w-full h-full object-cover -z-10" />
+        <div aria-hidden="true" className="absolute inset-0 -z-0 lp-shade" />
 
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           {/* Right text in RTL */}
