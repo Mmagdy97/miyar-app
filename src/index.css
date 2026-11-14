@@ -484,3 +484,5 @@ html:not(.dark) :where(a, button, input, select, textarea, [tabindex]):focus-vis
 .lp-shade { background: linear-gradient(180deg, rgba(8,18,28,.68) 0%, rgba(8,18,28,.5) 45%, rgba(8,18,28,.55) 70%, rgba(8,18,28,.75) 100%); }
 .lp-shade-card { background: linear-gradient(180deg, rgba(8,18,28,.3) 0%, rgba(8,18,28,.1) 30%, rgba(8,18,28,.85) 100%); }
 .on-photo { background: rgba(8,18,28,.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 22px; }
+
+@media (max-width: 639px) { html { font-size: 14.5px; } }

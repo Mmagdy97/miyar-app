@@ -51,7 +51,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             </nav>
             <div className="flex items-center gap-2">
               <SettingsSwitcher />
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark inline-flex items-center gap-2 h-11 ps-5 pe-1.5 rounded-full text-[13px] font-semibold">
+              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark inline-flex items-center gap-2 h-10 sm:h-11 ps-4 sm:ps-5 pe-1 sm:pe-1.5 rounded-full text-xs sm:text-[13px] whitespace-nowrap font-semibold">
                 {t("landing.login")}
                 <span className="w-8 h-8 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><LogIn className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </button>
@@ -59,18 +59,18 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           </header>
 
           {/* Headline */}
-          <div className="relative z-10 px-5 sm:px-12 pt-10 sm:pt-16 text-start max-w-3xl hero-in">
+          <div className="relative z-10 px-5 sm:px-12 pt-7 sm:pt-16 text-start max-w-3xl hero-in">
             <p className="text-[11px] sm:text-xs tracking-[.18em] uppercase font-semibold opacity-70">{T("lp.kicker")}</p>
-            <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.6rem] sm:text-6xl xl:text-7xl">
+            <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.1rem] sm:text-6xl xl:text-7xl">
               {T("lp.h1a")}<br /><span className="text-[#FFD2B5]">{T("lp.h1b")}</span>
             </h1>
-            <p className="mt-5 max-w-lg text-base sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
+            <p className="mt-4 max-w-lg text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-12 ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-[15px] font-semibold">
+              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
                 {T("ld.6")}
                 <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </button>
-              <button onClick={() => scrollToSection("features")} className="lp-glass h-12 px-6 rounded-full text-[15px] font-semibold">{T("lp.explore")}</button>
+              <button onClick={() => scrollToSection("features")} className="lp-glass h-11 sm:h-12 px-5 sm:px-6 rounded-full text-sm sm:text-[15px] font-semibold">{T("lp.explore")}</button>
             </div>
           </div>
 
@@ -181,7 +181,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <h2 className="max-w-3xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
           <p className="mt-4 max-w-xl text-base sm:text-lg opacity-80 leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-12 ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-[15px] font-semibold">
+            <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
               {T("ld.141")}
               <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
             </button>
