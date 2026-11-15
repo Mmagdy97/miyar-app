@@ -20,5 +20,6 @@ export const teamRepo = {
   use: () => live.use()[0],
   invite: (id, role) => run(supabase.rpc("invite_member", { p_email: toAuthEmail(id), p_role: role })),
   setRole: (id, role) => run(supabase.rpc("set_member_role", { p_user: id, p_role: role })),
+  resetPassword: async (id, password) => { const { error } = await supabase.rpc("admin_reset_password", { p_user: id, p_password: password }); if (error) throw error; },
   remove: (m) => run(supabase.rpc("remove_member", { p_user: m.id, p_email: m.email })),
 };

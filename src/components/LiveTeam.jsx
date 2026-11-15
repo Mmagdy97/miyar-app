@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { KeyRound } from "lucide-react";
 import { Users, UserPlus, Trash2 } from "lucide-react";
 import { tr_ as T } from "../i18n";
 import { supabase } from "../lib/supabase";
@@ -13,6 +14,13 @@ export default function LiveTeam() {
   const members = teamRepo.use();
   const [f, setF] = useState({ email: "", role: "site_engineer" });
   const [msg, setMsg] = useState("");
+  const [pw, setPw] = useState(null); // { id, value }
+  const genPw = () => { const c = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"; const a = new Uint32Array(10); crypto.getRandomValues(a); return Array.from(a, (n) => c[n % c.length]).join(""); };
+  const savePw = async (e) => {
+    e.preventDefault();
+    try { await teamRepo.resetPassword(pw.id, pw.value); setMsg(T("team.pwDone") + " " + pw.value); setPw(null); }
+    catch (err) { setMsg(T("login.err") + (err.message || "")); }
+  };
   useEffect(() => { loadTeam(); supabase.auth.getUser().then(({ data }) => setMyId(data?.user?.id || null)); }, []);
   const submit = async (e) => {
     e.preventDefault();
@@ -48,6 +56,15 @@ export default function LiveTeam() {
                   <select value={m.role} onChange={(e) => teamRepo.setRole(m.id, e.target.value)} className={input}>
                     {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
                   </select>
+                )}
+                {!me && !m.pending && <button type="button" onClick={() => setPw({ id: m.id, value: genPw() })} aria-label={T("team.pwReset")} title={T("team.pwReset")} className="p-1.5 rounded-lg text-[#666B86] hover:text-[#1E223D] hover:bg-[#EFE7D6] cursor-pointer"><KeyRound className="w-4 h-4" aria-hidden="true" /></button>}
+                {pw?.id === m.id && (
+                  <form onSubmit={savePw} className="basis-full flex flex-wrap gap-2 items-center pt-1">
+                    <input required minLength={8} dir="ltr" value={pw.value} onChange={(e) => setPw({ ...pw, value: e.target.value })} aria-label={T("team.pwNew")} className={input + " flex-1 min-w-40 font-mono"} />
+                    <button type="button" onClick={() => setPw({ ...pw, value: genPw() })} className="px-3 py-2 rounded-lg text-xs font-bold text-[#2B3052] border border-[#E0D6C2] cursor-pointer">{T("team.pwGen")}</button>
+                    <button type="submit" className="px-3 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("team.pwSave")}</button>
+                    <button type="button" onClick={() => setPw(null)} className="px-2 py-2 text-xs font-bold text-[#4F5470] cursor-pointer">{T("boq.cancel")}</button>
+                  </form>
                 )}
                 {!me && <button type="button" onClick={() => teamRepo.remove(m)} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
               </article>
