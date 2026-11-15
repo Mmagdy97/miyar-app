@@ -4,7 +4,7 @@ import { toAuthEmail, displayId } from "./identity";
 export { isSupabaseConfigured };
 
 // DB role -> app role id
-const ROLE = { admin: "Admin", site_engineer: "Site Engineer", technical_office: "Technical Office", client: "Client" };
+const ROLE = { admin: "Admin", site_engineer: "Site Engineer", technical_office: "Technical Office", client: "Client", accountant: "Accountant", secretary: "Secretary" };
 const PENDING = "miyar:pendingOrg";
 
 /** Profile + office of the signed-in user (null when signed out). */

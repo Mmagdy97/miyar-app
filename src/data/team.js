@@ -6,7 +6,7 @@ import { toAuthEmail } from "../lib/identity";
 const live = createPersistedStore("live:team", [], (x) => x, { persist: false });
 const fail = (error) => window.dispatchEvent(new CustomEvent("miyar:error", { detail: error.message || String(error) }));
 
-export const MEMBER_ROLES = ["admin", "site_engineer", "technical_office"];
+export const MEMBER_ROLES = ["admin", "site_engineer", "technical_office", "accountant", "secretary"];
 
 export async function loadTeam() {
   const { data, error } = await supabase.rpc("list_members");

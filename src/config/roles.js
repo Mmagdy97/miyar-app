@@ -60,6 +60,17 @@ export const ROLE_CONFIG = {
     { id: "Project Tracking", name: "متابعة التنفيذ", label: "متابعة التنفيذ", icon: FolderKanban },
     { id: "Settings", name: "الإعدادات والنماذج", label: "الإعدادات والنماذج", icon: Settings },
   ],
+  Accountant: [
+    { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم", icon: LayoutDashboard },
+    { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
+    { id: "Certificates", name: "المستخلصات والمحتجزات", label: "المستخلصات والمحتجزات", icon: Receipt },
+    { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
+  ],
+  Secretary: [
+    { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم", icon: LayoutDashboard },
+    { id: "Projects", name: "المشاريع الجارية", label: "المشاريع الجارية", icon: FolderKanban },
+    { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
+  ],
   Client: [
     { id: "Dashboard", name: "لوحة التحكم", label: "بوابة العميل", icon: LayoutDashboard },
     { id: "My Projects", name: "مشاريعي", label: "مشاريعي", icon: Briefcase },
@@ -77,9 +88,12 @@ export const ROLE_TITLES = {
   "Site Engineer": "مهندس موقع (Site Engineer)",
   "Technical Office": "المكتب الفني (Technical Office)",
   Client: "العميل (Client)",
+  Accountant: "محاسب (Accountant)",
+  Secretary: "سكرتارية (Secretary)",
 };
 
-export const ROLES = Object.keys(ROLE_CONFIG);
+// Demo role switcher: only the four demo roles (Accountant/Secretary exist for real offices only).
+export const ROLES = ["Admin", "Site Engineer", "Technical Office", "Client"];
 
 /** Localized display helpers (tab routing still uses the stable Arabic `name`). */
 import { tr_ } from "../i18n";
