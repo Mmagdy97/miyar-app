@@ -608,6 +608,7 @@ export default {
   "team.addGo": "Add member",
   "team.created": "Account created. Give these login details to the member:",
   "team.orInvite": "Or invite by email (they sign up themselves):",
+  "login.noorg": "This account is not linked to an office. Contact support or register a new office.",
   "inv.title": "Invoices & payments",
   "inv.sub": "Record each project's payments and track collected vs due.",
   "inv.total": "Total billed",

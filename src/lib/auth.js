@@ -25,14 +25,17 @@ async function finishOnboarding() {
   if (!pending || !pending.office) return;
   const { error } = await supabase.rpc("create_organization", { p_name: pending.office, p_country: pending.country, p_currency: pending.currency, p_locale: pending.locale });
   if (!error || /already in an organization/.test(error.message)) localStorage.removeItem(PENDING);
+  else throw error;
 }
+
+const withOrg = (acc) => { if (acc && !acc.orgId && !acc.isOwner) throw new Error("NO_ORG"); return acc; };
 
 export async function signIn(id, password) {
   const email = toAuthEmail(id);
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
   await finishOnboarding();
-  return loadAccount();
+  return withOrg(await loadAccount());
 }
 
 /** Returns the account when signed in immediately, or null when email confirmation is required. */
@@ -43,7 +46,7 @@ export async function signUp({ email: id, contactEmail, password, name, office, 
   if (error) throw error;
   if (!data.session) return null;
   await finishOnboarding();
-  return loadAccount();
+  return withOrg(await loadAccount());
 }
 
 export const signOut = () => supabase?.auth.signOut();

@@ -111,7 +111,7 @@ export default function LandingAndLogin({ onLogin }) {
       const acc = mode === "in" ? await signIn(f.email.trim(), f.password) : await signUp({ email: upId, contactEmail: f.phone.trim() ? f.email.trim() : "", password: f.password, name: f.name.trim(), office: f.office.trim(), country: { EGP: "EG", SAR: "SA", AED: "AE", TRY: "TR" }[curNow] || "EG", currency: curNow, locale: locNow });
       if (!acc) { setMsg(T("login.check")); setIsSubmitting(false); return; }
       onLogin(acc.role, "user", acc);
-    } catch (err) { setMsg(err.message === "INVALID_ID" ? T("login.badId") : T("login.err") + (err.message || "")); setIsSubmitting(false); }
+    } catch (err) { setMsg(err.message === "INVALID_ID" ? T("login.badId") : err.message === "NO_ORG" ? T("login.noorg") : T("login.err") + (err.message || "")); setIsSubmitting(false); }
   };
 
   const openModal = (roleId = "Admin") => {

@@ -608,6 +608,7 @@ export default {
   "team.addGo": "Üye ekle",
   "team.created": "Hesap oluşturuldu. Giriş bilgilerini üyeye iletin:",
   "team.orInvite": "Ya da e-posta ile davet edin (kendisi kaydolur):",
+  "login.noorg": "Bu hesap bir ofise bağlı değil. Destekle iletişime geçin veya yeni ofis kaydedin.",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",
