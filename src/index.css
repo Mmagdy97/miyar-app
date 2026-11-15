@@ -515,3 +515,15 @@ html.dark .lp-notch{color:var(--ink)}
 @media (max-width: 767px) {
   main.overflow-y-auto { padding-bottom: calc(7rem + env(safe-area-inset-bottom)); }
 }
+
+/* Engineer's scale ruler along the collapsed rail: minor tick every 10px, major tick at each item's centre (items repeat every 50px). */
+.rail-ruler {
+  position: absolute; top: 0; bottom: 0; inset-inline-end: -10px; width: 14px; pointer-events: none;
+  background-image:
+    linear-gradient(to bottom, transparent 21px, rgba(255,255,255,.6) 21px, rgba(255,255,255,.6) 22.5px, transparent 22.5px),
+    linear-gradient(to bottom, transparent 2px, rgba(255,255,255,.3) 2px, rgba(255,255,255,.3) 3px, transparent 3px);
+  background-size: 14px 50px, 7px 10px;
+  background-repeat: repeat-y;
+  background-position: right top, right top;
+}
+html[dir="rtl"] .rail-ruler { background-position: left top, left top; }

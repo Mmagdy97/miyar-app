@@ -73,7 +73,9 @@ function Sidebar({
           <button type="button" onClick={toggleSidebar} aria-label={t("menu.expand")} title={t("menu.expand")} className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 cursor-pointer">
             <Menu className="w-5 h-5" />
           </button>
-          <nav className="flex-1 min-h-0 flex flex-col items-center justify-center gap-1.5 py-3">
+          <nav className="flex-1 min-h-0 flex flex-col items-center justify-center py-3">
+            <div className="relative flex flex-col items-center gap-1.5">
+            <span aria-hidden="true" className="rail-ruler" />
             {items.map((item) => {
               const { id, name, icon: Icon } = item;
               const label = navLabel(currentRole, item);
@@ -95,6 +97,7 @@ function Sidebar({
                 </button>
               );
             })}
+            </div>
           </nav>
           {isInstallable && (
             <button type="button" onClick={onInstallClick} aria-label={t("pwa.install")} className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-white/80 hover:bg-white/10 cursor-pointer"><Download className="w-5 h-5" /></button>
