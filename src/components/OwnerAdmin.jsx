@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
-import { Building2, Users, FolderKanban, Clock, RefreshCw, LogOut, ArrowLeftRight, Check, Plus, Lock } from "lucide-react";
+import { Building2, Users, FolderKanban, Clock, RefreshCw, LogOut, ArrowLeftRight, Check, Plus, Lock, Trash2 } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { displayId } from "../lib/identity";
 import { FEATURES, PLAN_FEATURES } from "../lib/entitlements";
 
 // Platform-owner dashboard (Arabic only, owner-facing). Data via admin_orgs / admin_set_org (security definer, owner only).
@@ -106,11 +107,19 @@ export default function OwnerAdmin({ name, onOpenApp, onLogout }) {
   const [err, setErr] = useState("");
   const [q, setQ] = useState("");
   const [adding, setAdding] = useState(false);
+  const [orph, setOrph] = useState([]);
   const load = useCallback(async () => {
     setErr("");
     const { data, error } = await supabase.rpc("admin_orgs");
     if (error) setErr(error.message); else setOrgs(data);
+    const o = await supabase.rpc("admin_orphans");
+    setOrph(o.data || []);
   }, []);
+  const delUser = async (u) => {
+    if (!window.confirm(`حذف الحساب ${displayId(u.login)} نهائيًا؟`)) return;
+    const { error } = await supabase.rpc("admin_delete_user", { p_user: u.id });
+    if (error) setErr(error.message); else await load();
+  };
   useEffect(() => { load(); }, [load]);
   const save = async (id, v) => {
     const { error } = await supabase.rpc("admin_set_org", { p_org: id, p_plan: v.plan, p_status: v.status, p_billing_months: v.billing_months, p_paid_until: v.paid_until || null, p_extra: v.extra });
@@ -155,6 +164,19 @@ export default function OwnerAdmin({ name, onOpenApp, onLogout }) {
         {adding && <AddOffice setErr={setErr} onCancel={() => setAdding(false)} onDone={() => { setAdding(false); load(); }} />}
         {err && <p role="alert" className="text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-3">{err}{/not allowed|permission|function/i.test(err) ? " — تأكد إنك أضفت نفسك في platform_admins وإن schema-saas.sql اتشغّل." : ""}</p>}
         {orgs && list.length === 0 && <p className="text-xs text-[#4F5470] bg-white rounded-lg border border-[#E0D6C2] p-6 text-center">لا توجد مكاتب بعد.</p>}
+        {orph.length > 0 && (
+          <section className="bg-white rounded-xl border border-[#E0D6C2] p-4 space-y-2">
+            <h2 className="text-sm font-bold">حسابات بدون مكتب ({orph.length})</h2>
+            {orph.map((u) => (
+              <div key={u.id} className="flex items-center justify-between gap-2 text-xs border-t border-[#E0D6C2] pt-2">
+                <span dir="ltr" className="font-bold">{displayId(u.login)}</span>
+                <span className="text-[#4F5470] truncate">{u.full_name}</span>
+                <span className="text-[#666B86]">{fmt(u.created_at)}</span>
+                <button type="button" onClick={() => delUser(u)} aria-label="حذف" className="h-9 w-9 flex items-center justify-center rounded-lg bg-rose-50 text-rose-700 border border-rose-200 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
+              </div>
+            ))}
+          </section>
+        )}
         <div className="grid gap-3">{list.map((o) => <Row key={o.id + o.plan + o.status + o.billing_months + (o.paid_until || "") + (o.extra_features || []).join()} o={o} onSave={save} />)}</div>
       </main>
     </div>
