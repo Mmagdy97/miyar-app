@@ -23,7 +23,7 @@ function Features({ plan, extra, onChange }) {
           const base = inPlan.has(k); const on = base || extra.includes(k);
           return (
             <button key={k} type="button" disabled={base} aria-pressed={on} onClick={() => toggle(k)}
-              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold border ${base ? "bg-[#ECE3CE] text-[#2B3052] border-[#D9C9A8] cursor-default" : on ? "bg-[var(--brass)] text-[#1E223D] border-[var(--brass)] cursor-pointer" : "bg-white text-[#666B86] border-[#E0D6C2] cursor-pointer"}`}>
+              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold border ${base ? "bg-[#ECE3CE] text-[#2B3052] border-[#D9C9A8] cursor-default" : on ? "bg-[var(--peach)] text-[#1E223D] border-[var(--brass)] cursor-pointer" : "bg-white text-[#666B86] border-[#E0D6C2] cursor-pointer"}`}>
               {base ? <Lock className="w-3 h-3" aria-hidden="true" /> : on ? <Check className="w-3 h-3" aria-hidden="true" /> : null}{l}
             </button>
           );

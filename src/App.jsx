@@ -241,7 +241,7 @@ function App() {
       </a>
       <OfflineBanner />
       {account?.isOwner && (
-        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--brass)] text-[#1E223D] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
+        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--peach)] text-[#1E223D] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
       )}
       {/* Mobile Drawer Backdrop Overlay */}
       {isMobileMenuOpen && (

@@ -213,7 +213,7 @@ export default function LandingAndLogin({ onLogin }) {
               </form>
             )}
             <div className="flex items-center gap-3 my-5 text-xs text-[#666B86]"><span className="h-px flex-1 bg-[#E0D6C2]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E0D6C2]" /></div>
-            <h4 className="flex items-center gap-2 text-lg font-semibold text-[#1E223D]"><span className="w-8 h-8 rounded-lg bg-[var(--brass)] text-[#1E223D] flex items-center justify-center"><Users className="w-4 h-4" aria-hidden="true" /></span>{T("login.guest")}</h4>
+            <h4 className="flex items-center gap-2 text-lg font-semibold text-[#1E223D]"><span className="w-8 h-8 rounded-lg bg-[var(--peach)] text-[#1E223D] flex items-center justify-center"><Users className="w-4 h-4" aria-hidden="true" /></span>{T("login.guest")}</h4>
 
             {/* Guest entry: pick a role, enter. Sample data, no credentials. */}
             <form onSubmit={handleFormSubmit} className="mt-2.5 relative z-10">

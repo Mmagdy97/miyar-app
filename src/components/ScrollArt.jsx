@@ -37,8 +37,8 @@ export default function ScrollArt({ bare = false }) {
       <div className="absolute inset-y-16 end-1.5 w-3" style={{ background: "repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 12px) right/6px 100% no-repeat, repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 60px) right/12px 100% no-repeat" }}>
         <div ref={gauge} className="absolute -top-px end-0 will-change-transform" style={{ height: "100%", width: "100%" }}>
           <div className="absolute end-3 -translate-y-1/2 flex items-center gap-1" style={{ top: 0 }}>
-            <span className="rounded-md bg-[var(--brass)] px-1.5 py-0.5 font-display text-[10px] font-semibold text-[#1E223D] tabular-nums"><span ref={label}>0.0</span></span>
-            <span className="h-px w-3 bg-[var(--brass)]" />
+            <span className="rounded-md bg-[var(--peach)] px-1.5 py-0.5 font-display text-[10px] font-semibold text-[#1E223D] tabular-nums"><span ref={label}>0.0</span></span>
+            <span className="h-px w-3 bg-[var(--peach)]" />
           </div>
         </div>
       </div>
