@@ -105,7 +105,7 @@ function Navbar({
         <div className="relative" ref={notificationsRef}>
           <button
             onClick={() => setIsNotificationsOpen((prev) => !prev)}
-            className={`relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white shadow-[var(--shadow-1)] transition-colors cursor-pointer ${
+            className={`relative flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-[var(--shadow-1)] transition-colors cursor-pointer ${
               isNotificationsOpen
                 ? "bg-[#F2F5F1] text-[#1F2A26] border border-[#DCE4DC]"
                 : "text-[#56635B] hover:text-[#1F2A26] hover:bg-[#F2F5F1]"
@@ -315,7 +315,7 @@ function Navbar({
         {onLogout && (
           <button
             onClick={onLogout}
-            className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-[#56635B] hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
+            className="flex items-center justify-center w-10 h-10 rounded-lg text-[#56635B] hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
             title={t("logout")}
             aria-label={t("logout")}
           >
