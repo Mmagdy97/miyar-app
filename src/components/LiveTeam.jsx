@@ -3,6 +3,7 @@ import { Users, UserPlus, Trash2 } from "lucide-react";
 import { tr_ as T } from "../i18n";
 import { supabase } from "../lib/supabase";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
+import { displayId } from "../lib/identity";
 
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
 
@@ -26,7 +27,7 @@ export default function LiveTeam() {
           <p className="text-xs md:text-sm text-[#4F5470] mt-1">{T("team.sub")}</p>
         </div>
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
-          <input required type="email" dir="ltr" placeholder={T("live.invitePh")} value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} className={input + " flex-1 min-w-48"} />
+          <input required type="text" autoCapitalize="none" dir="ltr" placeholder={T("live.invitePh")} value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} className={input + " flex-1 min-w-48"} />
           <select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value })} className={input}>
             {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
           </select>
@@ -39,8 +40,8 @@ export default function LiveTeam() {
             return (
               <article key={m.id || m.email} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap items-center gap-3">
                 <div className="flex-1 min-w-48">
-                  <p className="text-sm font-semibold text-[#1E223D]">{m.name || m.email}{me && <span className="text-[11px] text-[#666B86]"> · {T("team.you")}</span>}</p>
-                  <p className="text-[11px] text-[#666B86]" dir="ltr">{m.email}</p>
+                  <p className="text-sm font-semibold text-[#1E223D]">{m.name || displayId(m.email)}{me && <span className="text-[11px] text-[#666B86]"> · {T("team.you")}</span>}</p>
+                  <p className="text-[11px] text-[#666B86]" dir="ltr">{displayId(m.email)}</p>
                 </div>
                 {m.pending && <span className="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-amber-50 text-amber-800 border-amber-200">{T("live.pending")}</span>}
                 {m.pending || me ? <span className="text-xs font-bold text-[#4F5470]">{T(`team.r.${m.role}`)}</span> : (

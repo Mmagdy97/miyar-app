@@ -45,6 +45,7 @@ const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
 
 import { projectsStore, INITIAL_PROJECTS, parseAmount } from "../data/projects";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
+import { displayId } from "../lib/identity";
 
 function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [projects, setProjects] = projectsStore.use();
@@ -75,7 +76,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const members = teamRepo.use();
   useEffect(() => { if (isLive) loadTeam(); }, [isLive]);
   const people = useMemo(() => (isLive
-    ? members.map((m) => ({ key: m.id || `p:${m.email}`, id: m.id || null, label: m.name || m.email, pending: m.pending }))
+    ? members.map((m) => ({ key: m.id || `p:${m.email}`, id: m.id || null, label: m.name || displayId(m.email), pending: m.pending }))
     : ENGINEERS_LIST.map((n) => ({ key: n, id: null, label: n }))), [isLive, members]);
   const [newEngineer, setNewEngineer] = useState(isLive ? "" : ENGINEERS_LIST[0]);
   const [addPerson, setAddPerson] = useState(false);
@@ -635,7 +636,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                         <button type="button" onClick={() => setAddPerson(true)} className="text-[11px] font-bold text-[#2B3052] underline underline-offset-2 cursor-pointer">+ {T("pm.eng.add")}</button>
                       ) : (
                         <div className="flex flex-wrap gap-1.5 items-center">
-                          <input type="email" dir="ltr" placeholder={T("pm.eng.email")} value={pf.email} onChange={(e) => setPf({ ...pf, email: e.target.value })} className="flex-1 min-w-32 px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
+                          <input type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={pf.email} onChange={(e) => setPf({ ...pf, email: e.target.value })} className="flex-1 min-w-32 px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
                           <select value={pf.role} onChange={(e) => setPf({ ...pf, role: e.target.value })} className="px-2 py-1.5 rounded-lg border border-[#E0D6C2] text-xs bg-white">
                             {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
                           </select>

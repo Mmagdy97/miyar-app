@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from "./supabase";
+import { toAuthEmail, displayId } from "./identity";
 
 export { isSupabaseConfigured };
 
@@ -15,7 +16,7 @@ export async function loadAccount() {
   let org = null;
   if (p?.org_id) ({ data: org } = await supabase.from("organizations").select("name, plan, status, trial_ends_at, currency, locale, extra_features").eq("id", p.org_id).maybeSingle());
   const { data: owner } = await supabase.rpc("is_platform_admin");
-  return { user, name: p?.full_name || user.email, role: ROLE[p?.role] || "Client", org, isOwner: owner === true, hasOrg: Boolean(p?.org_id), orgId: p?.org_id || null };
+  return { user, name: p?.full_name || displayId(user.email), role: ROLE[p?.role] || "Client", org, isOwner: owner === true, hasOrg: Boolean(p?.org_id), orgId: p?.org_id || null };
 }
 
 /** Create the office on first sign-in after signup (needs an authenticated session). */
@@ -26,7 +27,8 @@ async function finishOnboarding() {
   if (!error || /already in an organization/.test(error.message)) localStorage.removeItem(PENDING);
 }
 
-export async function signIn(email, password) {
+export async function signIn(id, password) {
+  const email = toAuthEmail(id);
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
   await finishOnboarding();
@@ -34,7 +36,8 @@ export async function signIn(email, password) {
 }
 
 /** Returns the account when signed in immediately, or null when email confirmation is required. */
-export async function signUp({ email, password, name, office, country, currency, locale }) {
+export async function signUp({ email: id, password, name, office, country, currency, locale }) {
+  const email = toAuthEmail(id);
   localStorage.setItem(PENDING, JSON.stringify({ office, country, currency, locale }));
   const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name }, emailRedirectTo: window.location.origin } });
   if (error) throw error;

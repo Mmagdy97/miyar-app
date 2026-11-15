@@ -3,6 +3,7 @@ import { createPersistedStore } from "./persisted";
 import { PROJECTS as SEED, personById, formatEGP } from "./seed";
 import { supabase } from "../lib/supabase";
 import { money } from "../i18n";
+import { toAuthEmail } from "../lib/identity";
 
 const DEFAULT_IMG = "/landing/kitchen.webp";
 
@@ -99,7 +100,7 @@ export function useProjectList() {
 
 /** Invite a client (by email) to one project. Returns "linked" or "invited". */
 export async function inviteClient(projectId, email) {
-  const { data, error } = await supabase.rpc("invite_client", { p_project: projectId, p_email: email });
+  const { data, error } = await supabase.rpc("invite_client", { p_project: projectId, p_email: toAuthEmail(email) });
   if (error) throw error;
   await reload();
   return data;

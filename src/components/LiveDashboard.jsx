@@ -30,7 +30,7 @@ function InviteClient({ p }) {
       {p.clientEmail && <p className="flex items-center gap-1.5 text-[#4F5470] mb-1.5">{p.clientLinked ? <Check className="w-3.5 h-3.5 text-[#2B3052]" aria-hidden="true" /> : <UserPlus className="w-3.5 h-3.5" aria-hidden="true" />}<bdi dir="ltr">{p.clientEmail}</bdi> · {T(p.clientLinked ? "live.linked" : "live.pending")}</p>}
       {open ? (
         <form onSubmit={go} className="flex flex-wrap gap-2">
-          <input required type="email" dir="ltr" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={T("live.invitePh")} className="h-9 px-3 rounded-lg border border-[#E0D6C2] text-xs flex-1 min-w-40" />
+          <input required type="text" autoCapitalize="none" dir="ltr" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={T("live.invitePh")} className="h-9 px-3 rounded-lg border border-[#E0D6C2] text-xs flex-1 min-w-40" />
           <button type="submit" disabled={busy} className="h-9 px-3 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] disabled:opacity-50 cursor-pointer">{T("live.inviteGo")}</button>
         </form>
       ) : (
