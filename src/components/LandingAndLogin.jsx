@@ -98,15 +98,17 @@ export default function LandingAndLogin({ onLogin }) {
   const [selectedRole, setSelectedRole] = useState("Admin");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mode, setMode] = useState("in");
-  const [f, setF] = useState({ email: "", password: "", name: "", office: "" });
+  const [f, setF] = useState({ email: "", phone: "", password: "", name: "", office: "" });
   const [msg, setMsg] = useState("");
   const { currency: curNow, locale: locNow } = useI18n();
   const submitAuth = async (e) => {
     e.preventDefault(); setMsg("");
     if (mode === "up" && f.password.length < 8) { setMsg(T("login.pass8")); return; }
+    const upId = f.phone.trim() || f.email.trim();
+    if (mode === "up" && !upId) { setMsg(T("login.badId")); return; }
     setIsSubmitting(true);
     try {
-      const acc = mode === "in" ? await signIn(f.email.trim(), f.password) : await signUp({ email: f.email.trim(), password: f.password, name: f.name.trim(), office: f.office.trim(), country: { EGP: "EG", SAR: "SA", AED: "AE", TRY: "TR" }[curNow] || "EG", currency: curNow, locale: locNow });
+      const acc = mode === "in" ? await signIn(f.email.trim(), f.password) : await signUp({ email: upId, contactEmail: f.phone.trim() ? f.email.trim() : "", password: f.password, name: f.name.trim(), office: f.office.trim(), country: { EGP: "EG", SAR: "SA", AED: "AE", TRY: "TR" }[curNow] || "EG", currency: curNow, locale: locNow });
       if (!acc) { setMsg(T("login.check")); setIsSubmitting(false); return; }
       onLogin(acc.role, "user", acc);
     } catch (err) { setMsg(err.message === "INVALID_ID" ? T("login.badId") : T("login.err") + (err.message || "")); setIsSubmitting(false); }
@@ -205,7 +207,10 @@ export default function LandingAndLogin({ onLogin }) {
                     <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
                     <input value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
                   </>}
-                  <input required type="text" inputMode="email" autoCapitalize="none" autoCorrect="off" dir="ltr" autoComplete="username" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" dir="ltr" />
+                  {mode === "up" ? <>
+                    <input type="tel" inputMode="tel" dir="ltr" autoComplete="tel" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} aria-label={T("login.phone")} placeholder={T("login.phone")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
+                    <input type="email" dir="ltr" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.emailOpt")} placeholder={T("login.emailOpt")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
+                  </> : <input required type="text" inputMode="email" autoCapitalize="none" autoCorrect="off" dir="ltr" autoComplete="username" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" dir="ltr" />}
                   <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" dir="ltr" />
                   <button type="submit" disabled={isSubmitting} className="btn-press h-12 rounded-full lp-pill-dark text-sm font-bold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
                   {msg && <p role="alert" className="text-xs text-rose-700">{msg}</p>}

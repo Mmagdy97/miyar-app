@@ -602,6 +602,8 @@ export default {
   "team.pwGen": "Generate",
   "team.pwSave": "Save",
   "team.pwDone": "Password set. Give it to the member:",
+  "login.phone": "Mobile number (used to sign in)",
+  "login.emailOpt": "Email (optional)",
   "inv.title": "Invoices & payments",
   "inv.sub": "Record each project's payments and track collected vs due.",
   "inv.total": "Total billed",

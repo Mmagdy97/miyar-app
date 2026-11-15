@@ -602,6 +602,8 @@ export default {
   "team.pwGen": "Üret",
   "team.pwSave": "Kaydet",
   "team.pwDone": "Şifre ayarlandı. Üyeye iletin:",
+  "login.phone": "Cep numarası (giriş için)",
+  "login.emailOpt": "E-posta (isteğe bağlı)",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",

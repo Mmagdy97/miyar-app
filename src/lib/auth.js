@@ -36,10 +36,10 @@ export async function signIn(id, password) {
 }
 
 /** Returns the account when signed in immediately, or null when email confirmation is required. */
-export async function signUp({ email: id, password, name, office, country, currency, locale }) {
+export async function signUp({ email: id, contactEmail, password, name, office, country, currency, locale }) {
   const email = toAuthEmail(id);
   localStorage.setItem(PENDING, JSON.stringify({ office, country, currency, locale }));
-  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name }, emailRedirectTo: window.location.origin } });
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name, ...(contactEmail ? { contact_email: contactEmail } : {}) }, emailRedirectTo: window.location.origin } });
   if (error) throw error;
   if (!data.session) return null;
   await finishOnboarding();
