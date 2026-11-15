@@ -35,7 +35,7 @@ export default function LiveTeam() {
           <p className="text-xs md:text-sm text-[#4F5470] mt-1">{T("team.sub")}</p>
         </div>
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
-          <input required type="text" autoCapitalize="none" dir="ltr" placeholder={T("live.invitePh")} value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} className={input + " flex-1 min-w-48"} />
+          <input required type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} className={input + " flex-1 min-w-48"} />
           <select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value })} className={input}>
             {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
           </select>
