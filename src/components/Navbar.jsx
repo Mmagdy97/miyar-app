@@ -18,6 +18,7 @@ import SettingsSwitcher from "./SettingsSwitcher";
 function Navbar({
   currentRole,
   onRoleChange,
+  account = null,
   actionItems = [],
   setSelectedItem,
   onLogout,
@@ -240,7 +241,7 @@ function Navbar({
         </div>
 
         {/* Role Switcher (Hidden on mobile < md as instructed) */}
-        <div className="relative hidden md:block" ref={dropdownRef}>
+        <div className={`relative ${account ? "hidden" : "hidden md:block"}`} ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
             className="flex items-center gap-2 px-3 py-1.5 md:px-3.5 md:py-2 text-xs md:text-sm font-semibold text-[#1E223D] bg-[#F6F1E7] hover:bg-white rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-[#2B3052] border border-[#E0D6C2] shadow-2xs cursor-pointer"
@@ -298,12 +299,12 @@ function Navbar({
         {/* User Avatar & Profile */}
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#F6F1E7] text-[#1E223D] font-semibold text-xs border border-[#E0D6C2] shadow-2xs shrink-0">
-            {D("م.أ")}
+            {account ? [...account.name.trim()].slice(0, 2).join("") : D("م.أ")}
           </div>
           {/* Profile Name & Role (Hidden on mobile < md as instructed) */}
           <div className="hidden md:block text-start">
             <p className="text-xs font-bold text-[#1E223D] leading-tight">
-              {D("م. محمد أحمد")}
+              {account ? account.name : D("م. محمد أحمد")}
             </p>
             <p className="text-[10px] text-[#4F5470] font-medium leading-tight mt-0.5">
               {roleShort(currentRole)}

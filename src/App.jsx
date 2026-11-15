@@ -128,7 +128,7 @@ function App() {
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {
     if (!isAuthenticated || authMode !== "user") return;
-    loadAccount().then((acc) => { if (acc) { setAccount(acc); attachProjects(acc.orgId); attachInvoices(acc.orgId); attachCash(acc.orgId); attachBoq(acc.orgId); attachAttendance(acc.orgId); attachProcurement(acc.orgId); attachChangeOrders(acc.orgId); attachCertificates(acc.orgId); attachSelections(acc.orgId); attachMood(acc.orgId); attachSite(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
+    loadAccount().then((acc) => { if (acc) { setAccount(acc); setCurrentRole(acc.role); attachProjects(acc.orgId); attachInvoices(acc.orgId); attachCash(acc.orgId); attachBoq(acc.orgId); attachAttendance(acc.orgId); attachProcurement(acc.orgId); attachChangeOrders(acc.orgId); attachCertificates(acc.orgId); attachSelections(acc.orgId); attachMood(acc.orgId); attachSite(acc.orgId); } else { setIsAuthenticated(false); setAuthMode("guest"); } }).catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -279,6 +279,7 @@ function App() {
         <Navbar
           currentRole={currentRole}
           onRoleChange={handleRoleChange}
+          account={authMode === "user" ? account : null}
           actionItems={actionItems}
           setSelectedItem={setSelectedItem}
           onLogout={doLogout}
