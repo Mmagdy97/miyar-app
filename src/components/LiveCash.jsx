@@ -5,8 +5,8 @@ import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
 import { cashRepo, custodyStats } from "../data/cash";
 
-const input = "px-3 py-2 rounded-lg border border-[#DCE4DC] text-xs font-bold text-[#1F2A26] bg-white min-w-0";
-const btn = "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer";
+const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
+const btn = "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer";
 
 function Custody({ c, expenses, project }) {
   const [f, setF] = useState({ description: "", category: "", amount: "" });
@@ -20,25 +20,25 @@ function Custody({ c, expenses, project }) {
     setF({ description: "", category: "", amount: "" });
   };
   return (
-    <article className="bg-white rounded-2xl border border-[#DCE4DC] p-4 space-y-3">
+    <article className="bg-white rounded-2xl border border-[#E0D6C2] p-4 space-y-3">
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-[#1F2A26]">{c.holder}</p>
-          <p className="text-[11px] text-[#6E7B72]">{project ? E(project.name) : "—"}</p>
+          <p className="text-sm font-semibold text-[#1E223D]">{c.holder}</p>
+          <p className="text-[11px] text-[#666B86]">{project ? E(project.name) : "—"}</p>
         </div>
-        <button type="button" onClick={() => cashRepo.removeCustody(c.id)} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#6E7B72] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
+        <button type="button" onClick={() => cashRepo.removeCustody(c.id)} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
       </div>
-      <div className="h-2 rounded-full bg-[#E9EFEA] overflow-hidden"><div className={`h-full ${left < 0 ? "bg-rose-600" : "bg-[#5F6C61]"}`} style={{ width: `${pct}%` }} /></div>
-      <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-[#56635B]">
-        <span>{T("cash.given")}<b className="block text-sm text-[#1F2A26]">{money(c.amount, { compact: true })}</b></span>
-        <span>{T("cash.spent")}<b className="block text-sm text-[#1F2A26]">{money(spent, { compact: true })}</b></span>
-        <span>{T("cash.left")}<b className={`block text-sm ${left < 0 ? "text-rose-700" : "text-[#1F2A26]"}`}>{money(left, { compact: true })}</b></span>
+      <div className="h-2 rounded-full bg-[#F1EADB] overflow-hidden"><div className={`h-full ${left < 0 ? "bg-rose-600" : "bg-[#2B3052]"}`} style={{ width: `${pct}%` }} /></div>
+      <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-[#4F5470]">
+        <span>{T("cash.given")}<b className="block text-sm text-[#1E223D]">{money(c.amount, { compact: true })}</b></span>
+        <span>{T("cash.spent")}<b className="block text-sm text-[#1E223D]">{money(spent, { compact: true })}</b></span>
+        <span>{T("cash.left")}<b className={`block text-sm ${left < 0 ? "text-rose-700" : "text-[#1E223D]"}`}>{money(left, { compact: true })}</b></span>
       </div>
       {mine.map((x) => (
-        <div key={x.id} className="flex items-center gap-2 text-xs border-t border-[#E9EFEA] pt-2">
-          <span className="flex-1 min-w-0"><span className="font-semibold text-[#1F2A26]">{x.description}</span>{x.category && <span className="text-[#6E7B72]"> · {x.category}</span>}</span>
+        <div key={x.id} className="flex items-center gap-2 text-xs border-t border-[#F1EADB] pt-2">
+          <span className="flex-1 min-w-0"><span className="font-semibold text-[#1E223D]">{x.description}</span>{x.category && <span className="text-[#666B86]"> · {x.category}</span>}</span>
           <span className="tabular-nums font-semibold">{money(x.amount)}</span>
-          <button type="button" onClick={() => cashRepo.removeExpense(x.id)} aria-label={T("cash.delete")} className="p-1 rounded text-[#6E7B72] hover:text-rose-700 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
+          <button type="button" onClick={() => cashRepo.removeExpense(x.id)} aria-label={T("cash.delete")} className="p-1 rounded text-[#666B86] hover:text-rose-700 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
         </div>
       ))}
       <form onSubmit={add} className="flex flex-wrap gap-2 pt-1">
@@ -66,16 +66,16 @@ export default function LiveCash() {
   const totalSpent = expenses.filter((x) => custodies.some((c) => c.id === x.custodyId)).reduce((s, x) => s + x.amount, 0);
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-[#1F2A26] flex items-center gap-2"><Wallet className="w-6 h-6" /><span>{T("cash.title")}</span></h2>
+      <h2 className="text-xl font-semibold text-[#1E223D] flex items-center gap-2"><Wallet className="w-6 h-6" /><span>{T("cash.title")}</span></h2>
       <div className="grid grid-cols-3 gap-3">
         {[["cash.given", totalGiven], ["cash.spent", totalSpent], ["cash.left", totalGiven - totalSpent]].map(([k, v]) => (
-          <div key={k} className="bg-white rounded-lg p-4 border border-[#DCE4DC] text-center">
-            <span className="text-[11px] font-bold text-[#56635B] block mb-1">{T(k)}</span>
-            <span className="text-lg md:text-xl font-semibold text-[#1F2A26]">{money(v, { compact: true })}</span>
+          <div key={k} className="bg-white rounded-lg p-4 border border-[#E0D6C2] text-center">
+            <span className="text-[11px] font-bold text-[#4F5470] block mb-1">{T(k)}</span>
+            <span className="text-lg md:text-xl font-semibold text-[#1E223D]">{money(v, { compact: true })}</span>
           </div>
         ))}
       </div>
-      <form onSubmit={add} className="bg-white rounded-2xl border border-[#DCE4DC] p-4 flex flex-wrap gap-2 items-end">
+      <form onSubmit={add} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
         <input required placeholder={T("cash.holderPh")} value={f.holder} onChange={(e) => setF({ ...f, holder: e.target.value })} className={input + " flex-1 min-w-40"} />
         <select value={f.projectId} onChange={(e) => setF({ ...f, projectId: e.target.value })} className={input + " w-44"}>
           <option value="">{T("cash.noProject")}</option>

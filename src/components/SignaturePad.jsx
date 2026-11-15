@@ -23,7 +23,7 @@ export default function SignaturePad({ onChange, label, clearLabel }) {
     const c = ref.current.getContext("2d");
     c.lineWidth = 3;
     c.lineCap = "round";
-    c.strokeStyle = "#1F2A26";
+    c.strokeStyle = "#1E223D";
     const { x, y } = pos(e);
     c.lineTo(x, y);
     c.stroke();
@@ -42,11 +42,11 @@ export default function SignaturePad({ onChange, label, clearLabel }) {
 
   return (
     <div>
-      <div className="relative rounded-lg border border-[#DCE4DC]" style={{ background: "#fff" }}>
+      <div className="relative rounded-lg border border-[#E0D6C2]" style={{ background: "#fff" }}>
         <canvas ref={ref} width={600} height={220} aria-label={label} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={up} className="w-full h-40 touch-none cursor-crosshair rounded-lg" />
         {empty && <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-xs font-bold" style={{ color: "#8A93A8" }}>{label}</span>}
       </div>
-      <button type="button" onClick={clear} className="mt-2 text-[11px] font-bold text-[#56635B] hover:text-[#1F2A26] cursor-pointer">{clearLabel}</button>
+      <button type="button" onClick={clear} className="mt-2 text-[11px] font-bold text-[#4F5470] hover:text-[#1E223D] cursor-pointer">{clearLabel}</button>
     </div>
   );
 }

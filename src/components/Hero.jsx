@@ -37,8 +37,8 @@ export function BoqLive() {
   const summary = T("hero.summary", { item: name, qty: formatNumber(Number(f.qty) || 0), unit, price: money(r.unitPrice), total: money(r.total) });
   const copy = async () => { try { await navigator.clipboard.writeText(summary); setCopied(true); setTimeout(() => setCopied(false), 1800); } catch { /* ignore */ } };
 
-  const field = "w-full h-10 px-3 rounded-lg border border-[#DCE4DC] bg-white text-sm text-[#1F2A26] tabular-nums focus:outline-none focus:ring-2 focus:ring-[#5F6C61]/30 focus:border-[#5F6C61]";
-  const lab = "block text-xs font-medium text-[#56635B] mb-1";
+  const field = "w-full h-10 px-3 rounded-lg border border-[#E0D6C2] bg-white text-sm text-[#1E223D] tabular-nums focus:outline-none focus:ring-2 focus:ring-[#2B3052]/30 focus:border-[#2B3052]";
+  const lab = "block text-xs font-medium text-[#4F5470] mb-1";
   const num = (k, label, extra = {}) => (
     <div>
       <label htmlFor={"q-" + k} className={lab}>{label}</label>
@@ -47,10 +47,10 @@ export function BoqLive() {
   );
 
   return (
-    <div className="rounded-xl border border-[#DCE4DC] bg-white overflow-hidden">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-[#DCE4DC] text-xs text-[#56635B]">
-        <span className="font-semibold text-[#1F2A26]">{T("hero.calc")}</span>
-        <button type="button" onClick={() => setF(DEFAULTS)} className="text-[#5F6C61] font-semibold hover:underline cursor-pointer">{T("hero.reset")}</button>
+    <div className="rounded-xl border border-[#E0D6C2] bg-white overflow-hidden">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-[#E0D6C2] text-xs text-[#4F5470]">
+        <span className="font-semibold text-[#1E223D]">{T("hero.calc")}</span>
+        <button type="button" onClick={() => setF(DEFAULTS)} className="text-[#2B3052] font-semibold hover:underline cursor-pointer">{T("hero.reset")}</button>
       </div>
 
       <div className="p-5 space-y-4">
@@ -77,33 +77,33 @@ export function BoqLive() {
         </fieldset>
         <div>
           <div className="flex items-center justify-between gap-3 mb-1.5">
-            <label htmlFor="q-markup" className="text-xs font-medium text-[#56635B]">{T("hero.margin")}</label>
+            <label htmlFor="q-markup" className="text-xs font-medium text-[#4F5470]">{T("hero.margin")}</label>
             <div className="flex items-center gap-1.5">
-              <input aria-label={T("hero.margin")} type="number" min="0" max="300" value={f.markup} onChange={set("markup")} className="w-16 h-8 px-2 rounded-md border border-[#DCE4DC] text-sm font-bold text-[#5F6C61] text-center tabular-nums" />
-              <span className="text-sm text-[#56635B]">%</span>
+              <input aria-label={T("hero.margin")} type="number" min="0" max="300" value={f.markup} onChange={set("markup")} className="w-16 h-8 px-2 rounded-md border border-[#E0D6C2] text-sm font-bold text-[#2B3052] text-center tabular-nums" />
+              <span className="text-sm text-[#4F5470]">%</span>
             </div>
           </div>
-          <input id="q-markup" type="range" min="0" max="100" value={Math.min(100, Number(f.markup) || 0)} onChange={set("markup")} className="w-full h-1.5 accent-[#5F6C61] cursor-pointer" />
+          <input id="q-markup" type="range" min="0" max="100" value={Math.min(100, Number(f.markup) || 0)} onChange={set("markup")} className="w-full h-1.5 accent-[#2B3052] cursor-pointer" />
         </div>
         {num("vat", T("hero.vat"), { max: 30 })}
 
-        <dl className="text-sm divide-y divide-[#E8EFE9]">
-          <div className="flex justify-between py-2"><dt className="text-[#56635B]">{T("hero.unitCost")}</dt><dd className="tabular-nums text-[#1F2A26]">{money(r.unitCost)}</dd></div>
-          <div className="flex justify-between py-2"><dt className="text-[#56635B]">{T("hero.unitPrice")}</dt><dd className="tabular-nums font-semibold text-[#1F2A26]">{money(priceT)}</dd></div>
-          <div className="flex justify-between py-2"><dt className="text-[#56635B]">{T("hero.profit")}</dt><dd className="tabular-nums text-emerald-700">{money(profitT)} <span className="text-xs text-[#6E7B72]">({T("hero.ofSale", { p: r.margin })})</span></dd></div>
-          {Number(f.vat) > 0 && <div className="flex justify-between py-2"><dt className="text-[#56635B]">{T("hero.tax")}</dt><dd className="tabular-nums text-[#1F2A26]">{money(r.tax)}</dd></div>}
+        <dl className="text-sm divide-y divide-[#EFE7D6]">
+          <div className="flex justify-between py-2"><dt className="text-[#4F5470]">{T("hero.unitCost")}</dt><dd className="tabular-nums text-[#1E223D]">{money(r.unitCost)}</dd></div>
+          <div className="flex justify-between py-2"><dt className="text-[#4F5470]">{T("hero.unitPrice")}</dt><dd className="tabular-nums font-semibold text-[#1E223D]">{money(priceT)}</dd></div>
+          <div className="flex justify-between py-2"><dt className="text-[#4F5470]">{T("hero.profit")}</dt><dd className="tabular-nums text-emerald-700">{money(profitT)} <span className="text-xs text-[#666B86]">({T("hero.ofSale", { p: r.margin })})</span></dd></div>
+          {Number(f.vat) > 0 && <div className="flex justify-between py-2"><dt className="text-[#4F5470]">{T("hero.tax")}</dt><dd className="tabular-nums text-[#1E223D]">{money(r.tax)}</dd></div>}
         </dl>
 
-        <div className="flex items-end justify-between rounded-lg bg-[#F2F5F1] border border-[#DCE4DC] px-4 py-3">
-          <span className="text-xs text-[#56635B]">{T("hero.total")}</span>
-          <output className="text-2xl font-bold text-[#1F2A26] tabular-nums">{money(totalT)}</output>
+        <div className="flex items-end justify-between rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] px-4 py-3">
+          <span className="text-xs text-[#4F5470]">{T("hero.total")}</span>
+          <output className="text-2xl font-bold text-[#1E223D] tabular-nums">{money(totalT)}</output>
         </div>
 
         <div className="flex gap-2">
-          <a href={"https://wa.me/?text=" + encodeURIComponent(summary)} target="_blank" rel="noopener noreferrer" className="btn-press flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-[#5F6C61] hover:bg-[#4B574D] text-white text-sm font-semibold py-2.5">
+          <a href={"https://wa.me/?text=" + encodeURIComponent(summary)} target="_blank" rel="noopener noreferrer" className="btn-press flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-[#2B3052] hover:bg-[#3A4070] text-white text-sm font-semibold py-2.5">
             <Send className="w-4 h-4" aria-hidden="true" />{T("hero.share")}
           </a>
-          <button type="button" onClick={copy} className="btn-press flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[#DCE4DC] text-[#1F2A26] hover:bg-[#E8EFE9] text-sm font-semibold py-2.5 cursor-pointer">
+          <button type="button" onClick={copy} className="btn-press flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[#E0D6C2] text-[#1E223D] hover:bg-[#EFE7D6] text-sm font-semibold py-2.5 cursor-pointer">
             {copied ? <Check className="w-4 h-4 text-emerald-600" aria-hidden="true" /> : <Copy className="w-4 h-4" aria-hidden="true" />}
             <span aria-live="polite">{copied ? T("hero.copied") : T("hero.copy")}</span>
           </button>
@@ -118,23 +118,23 @@ export default function Hero({ onStart, onWhy }) {
     <section className="relative pt-28 sm:pt-32 pb-0 px-4 sm:px-8 max-w-7xl mx-auto w-full">
       <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center min-h-[calc(100dvh-7rem)] pb-16">
         <div className="text-start hero-in">
-          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold text-[#1F2A26] leading-[1.2] text-balance">{T("ld.4")}</h1>
-          <p className="mt-6 text-lg sm:text-xl text-[#56635B] leading-relaxed max-w-xl">{T("ld.5")}</p>
+          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-bold text-[#1E223D] leading-[1.2] text-balance">{T("ld.4")}</h1>
+          <p className="mt-6 text-lg sm:text-xl text-[#4F5470] leading-relaxed max-w-xl">{T("ld.5")}</p>
 
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
-            <button onClick={onStart} className="btn-press inline-flex items-center justify-center gap-3 rounded-lg bg-[#5F6C61] hover:bg-[#4B574D] text-white font-semibold px-7 py-3.5">
+            <button onClick={onStart} className="btn-press inline-flex items-center justify-center gap-3 rounded-lg bg-[#2B3052] hover:bg-[#3A4070] text-white font-semibold px-7 py-3.5">
               <span>{T("ld.6")}</span>
               <ArrowLeft className="w-4 h-4 ltr:-scale-x-100" aria-hidden="true" />
             </button>
-            <button onClick={onWhy} className="btn-press inline-flex items-center justify-center gap-2 rounded-lg border border-[#C6D0C6] text-[#1F2A26] hover:bg-[#E8EFE9] font-semibold px-6 py-3.5">
+            <button onClick={onWhy} className="btn-press inline-flex items-center justify-center gap-2 rounded-lg border border-[#D3C7AE] text-[#1E223D] hover:bg-[#EFE7D6] font-semibold px-6 py-3.5">
               <span>{T("ld.7")}</span>
-              <ArrowDown className="w-4 h-4 text-[#56635B]" aria-hidden="true" />
+              <ArrowDown className="w-4 h-4 text-[#4F5470]" aria-hidden="true" />
             </button>
           </div>
 
-          <ul className="mt-10 grid gap-2.5 text-sm text-[#56635B]">
+          <ul className="mt-10 grid gap-2.5 text-sm text-[#4F5470]">
             {["ld.8", "ld.9", "ld.10"].map((k) => (
-              <li key={k} className="flex items-center gap-2.5"><span className="w-1 h-1 rounded-full bg-[#5F6C61]" />{T(k)}</li>
+              <li key={k} className="flex items-center gap-2.5"><span className="w-1 h-1 rounded-full bg-[#2B3052]" />{T(k)}</li>
             ))}
           </ul>
         </div>

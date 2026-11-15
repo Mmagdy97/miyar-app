@@ -27,16 +27,16 @@ function InviteClient({ p }) {
   };
   return (
     <div className="pt-1 text-xs">
-      {p.clientEmail && <p className="flex items-center gap-1.5 text-[#56635B] mb-1.5">{p.clientLinked ? <Check className="w-3.5 h-3.5 text-[#5F6C61]" aria-hidden="true" /> : <UserPlus className="w-3.5 h-3.5" aria-hidden="true" />}<bdi dir="ltr">{p.clientEmail}</bdi> · {T(p.clientLinked ? "live.linked" : "live.pending")}</p>}
+      {p.clientEmail && <p className="flex items-center gap-1.5 text-[#4F5470] mb-1.5">{p.clientLinked ? <Check className="w-3.5 h-3.5 text-[#2B3052]" aria-hidden="true" /> : <UserPlus className="w-3.5 h-3.5" aria-hidden="true" />}<bdi dir="ltr">{p.clientEmail}</bdi> · {T(p.clientLinked ? "live.linked" : "live.pending")}</p>}
       {open ? (
         <form onSubmit={go} className="flex flex-wrap gap-2">
-          <input required type="email" dir="ltr" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={T("live.invitePh")} className="h-9 px-3 rounded-lg border border-[#DCE4DC] text-xs flex-1 min-w-40" />
-          <button type="submit" disabled={busy} className="h-9 px-3 rounded-lg text-xs font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] disabled:opacity-50 cursor-pointer">{T("live.inviteGo")}</button>
+          <input required type="email" dir="ltr" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={T("live.invitePh")} className="h-9 px-3 rounded-lg border border-[#E0D6C2] text-xs flex-1 min-w-40" />
+          <button type="submit" disabled={busy} className="h-9 px-3 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] disabled:opacity-50 cursor-pointer">{T("live.inviteGo")}</button>
         </form>
       ) : (
-        <button type="button" onClick={() => setOpen(true)} className="inline-flex items-center gap-1.5 font-bold text-[#5F6C61] cursor-pointer"><UserPlus className="w-3.5 h-3.5" aria-hidden="true" />{T("live.invite")}</button>
+        <button type="button" onClick={() => setOpen(true)} className="inline-flex items-center gap-1.5 font-bold text-[#2B3052] cursor-pointer"><UserPlus className="w-3.5 h-3.5" aria-hidden="true" />{T("live.invite")}</button>
       )}
-      {msg && <p role="status" className="mt-1.5 text-[#56635B]">{msg}</p>}
+      {msg && <p role="status" className="mt-1.5 text-[#4F5470]">{msg}</p>}
     </div>
   );
 }
@@ -62,27 +62,27 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
           {stats.map(([l, v, Ic], n) => (
             <div key={l} className={`tile ${["tile-mint", "tile-peach", "tile-sky", "tile-sand"][n % 4]}`}>
               <span className="chip-ic"><Ic className="w-[18px] h-[18px]" aria-hidden="true" /></span>
-              <p className="mt-3 text-xs font-bold text-[#56635B]">{l}</p>
-              <p className="mt-0.5 font-display text-2xl md:text-3xl font-semibold tabular-nums text-[#1F2A26]">{v}</p>
+              <p className="mt-3 text-xs font-bold text-[#4F5470]">{l}</p>
+              <p className="mt-0.5 font-display text-2xl md:text-3xl font-semibold tabular-nums text-[#1E223D]">{v}</p>
             </div>
           ))}
         </div>
-        {projects.length === 0 && isClient ? <p className="text-sm text-[#56635B] bg-white rounded-2xl border border-[#DCE4DC] p-10 text-center">{T("proj.none")}</p> : projects.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-[#DCE4DC] p-10 text-center space-y-4">
-            <p className="text-sm text-[#56635B]">{T("live.empty")}</p>
-            <button type="button" onClick={() => setActiveTab("المشاريع الجارية")} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-bold text-white bg-[#5F6C61] hover:bg-[#4B574D] cursor-pointer"><Plus className="w-4 h-4" aria-hidden="true" />{T("live.add")}</button>
+        {projects.length === 0 && isClient ? <p className="text-sm text-[#4F5470] bg-white rounded-2xl border border-[#E0D6C2] p-10 text-center">{T("proj.none")}</p> : projects.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-[#E0D6C2] p-10 text-center space-y-4">
+            <p className="text-sm text-[#4F5470]">{T("live.empty")}</p>
+            <button type="button" onClick={() => setActiveTab("المشاريع الجارية")} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><Plus className="w-4 h-4" aria-hidden="true" />{T("live.add")}</button>
           </div>
         ) : (
           <div className="grid gap-3">
             {projects.map((p) => (
-              <article key={p.id} className="bg-white rounded-2xl border border-[#DCE4DC] p-4 space-y-2">
+              <article key={p.id} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 space-y-2">
                 <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0"><p className="text-base font-semibold text-[#1F2A26] truncate">{E(p.name)}</p><p className="text-xs text-[#56635B]">{p.client}{p.phase ? ` · ${E(p.phase)}` : ""}</p></div>
-                  <span className={`text-xs font-bold tabular-nums shrink-0 ${needsAttention(p) ? "text-rose-700" : "text-[#56635B]"}`}>{T("live.deadline", { d: fmtDate(p.deadline) })}</span>
+                  <div className="min-w-0"><p className="text-base font-semibold text-[#1E223D] truncate">{E(p.name)}</p><p className="text-xs text-[#4F5470]">{p.client}{p.phase ? ` · ${E(p.phase)}` : ""}</p></div>
+                  <span className={`text-xs font-bold tabular-nums shrink-0 ${needsAttention(p) ? "text-rose-700" : "text-[#4F5470]"}`}>{T("live.deadline", { d: fmtDate(p.deadline) })}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex-1 h-2 rounded-full bg-[#E8EFE9] overflow-hidden"><div className="h-full rounded-full bg-[#5F6C61]" style={{ width: `${Math.min(100, p.progress || 0)}%` }} /></div>
-                  <span className="text-xs font-bold tabular-nums text-[#1F2A26] w-10 text-end">{p.progress || 0}%</span>
+                  <div className="flex-1 h-2 rounded-full bg-[#EFE7D6] overflow-hidden"><div className="h-full rounded-full bg-[#2B3052]" style={{ width: `${Math.min(100, p.progress || 0)}%` }} /></div>
+                  <span className="text-xs font-bold tabular-nums text-[#1E223D] w-10 text-end">{p.progress || 0}%</span>
                 </div>
                 {!isClient && <InviteClient p={p} />}
               </article>

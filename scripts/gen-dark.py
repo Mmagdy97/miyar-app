@@ -31,10 +31,10 @@ def fromhsl(H,S,L):
 
 ACCENT='#e0714f'
 # explicit neutral map (light-theme brand colours -> dark theme)
-BG={'#faf7f0':'#10172a','#ffffff':'#151d33','#fff':'#151d33','#f3efe6':'#0c1120','#faf7f0':'#10172a','#ecf0f1':'#1b2540','#e9e3d5':'#1b2540','#dad3c2':'#273250',
+BG={'#f6f1e7':'#12152a','#efe7d6':'#181c36','#e6d5b7':'#262b4d','#ece3ce':'#262b4d','#f1eadb':'#181c36','#d9c9a8':'#2c3254','#1e223d':'#3a4180','#2b3052':'#3a4180','#2a2f52':'#2c3254','#ffffff':'#1e223d','#fff':'#1e223d','#faf7f0':'#10172a','#ffffff':'#1e223d','#fff':'#1e223d','#f3efe6':'#0c1120','#faf7f0':'#10172a','#ecf0f1':'#1b2540','#e9e3d5':'#1b2540','#dad3c2':'#273250',
     '#24304d':ACCENT,'#1a2236':'#9a3822','#b5452b':ACCENT}
-TEXT={'#1a2236':'#e9e3d5','#24304d':'#e9e3d5','#535e78':'#a1a9bd','#65708a':'#8a93a8','#ffffff':'#ffffff','#fff':'#ffffff','#b5452b':'#f0987a'}
-BORDER={'#dad3c2':'#273250','#e9e3d5':'#1d2744','#c6beaa':'#33405F','#ffffff':'#273250','#24304d':'#3e4b6c','#b5452b':ACCENT}
+TEXT={'#1e223d':'#f2ede2','#2b3052':'#e6d5b7','#4f5470':'#b9bbd0','#666b86':'#9a9db8','#6a6f8a':'#9a9db8','#a8a9be':'#9a9db8','#1a2236':'#e9e3d5','#24304d':'#e9e3d5','#535e78':'#a1a9bd','#65708a':'#8a93a8','#ffffff':'#ffffff','#fff':'#ffffff','#b5452b':'#f0987a'}
+BORDER={'#e0d6c2':'#2c3254','#d3c7ae':'#383f66','#efe7d6':'#262b4d','#3a4070':'#4a5290','#1e223d':'#4a5290','#2b3052':'#4a5290','#ece3ce':'#2c3254','#dad3c2':'#273250','#e9e3d5':'#1d2744','#c6beaa':'#33405F','#ffffff':'#273250','#24304d':'#3e4b6c','#b5452b':ACCENT}
 
 def dark(prop,hexv,alpha_=False):
     h=hexv.lower()

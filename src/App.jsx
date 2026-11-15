@@ -234,14 +234,14 @@ function App() {
 
   return (
     <div
-      className="app-shell w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm text-[#1F2A26] selection:bg-[#5F6C61] selection:text-white"
+      className="app-shell w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm text-[#1E223D] selection:bg-[#2B3052] selection:text-white"
     >
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#5F6C61] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#2B3052] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         {D("تخطي إلى المحتوى")}
       </a>
       <OfflineBanner />
       {account?.isOwner && (
-        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--brass)] text-[#1F2A26] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
+        <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-4 start-4 z-[60] h-10 px-4 rounded-full bg-[var(--brass)] text-[#1E223D] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
       )}
       {/* Mobile Drawer Backdrop Overlay */}
       {isMobileMenuOpen && (
