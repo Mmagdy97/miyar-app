@@ -63,6 +63,8 @@ html.dark .bg-white\/15{background-color:rgb(21 29 51 / 0.15)}
 html.dark .bg-white\/20{background-color:rgb(21 29 51 / 0.2)}
 html.dark .bg-white\/25{background-color:rgb(21 29 51 / 0.25)}
 html.dark .bg-white\/5{background-color:rgb(21 29 51 / 0.05)}
+html.dark .bg-white\/60{background-color:rgb(21 29 51 / 0.6)}
+html.dark .bg-white\/70{background-color:rgb(21 29 51 / 0.7)}
 html.dark .bg-white\/80{background-color:rgb(21 29 51 / 0.8)}
 html.dark .bg-white\/85{background-color:rgb(21 29 51 / 0.85)}
 html.dark .bg-white\/90{background-color:rgb(21 29 51 / 0.9)}
@@ -99,6 +101,7 @@ html.dark .border-white{border-color:#273250}
 html.dark .border-white\/10{border-color:rgb(39 50 80 / 0.1)}
 html.dark .border-white\/15{border-color:rgb(39 50 80 / 0.15)}
 html.dark .border-white\/20{border-color:rgb(39 50 80 / 0.2)}
+html.dark .border-white\/70{border-color:rgb(39 50 80 / 0.7)}
 html.dark .divide-\[\#DCE4DC\]\/60{border-color:rgb(58 75 58 / 0.6)}
 html.dark .divide-\[\#E6ECE6\]{border-color:#394b39}
 html.dark .divide-\[\#E8EFE9\]{border-color:#364e3a}
@@ -173,6 +176,7 @@ html.dark .text-\[\#56635B\]\/40{color:rgb(165 178 170 / 0.4)}
 html.dark .text-\[\#5F6C61\]{color:#9cab9f}
 html.dark .text-\[\#6E7B72\]{color:#8e9f93}
 html.dark .text-\[\#7A4B0C\]{color:#f0b76a}
+html.dark .text-\[\#7A4B2B\]{color:#d4a686}
 html.dark .text-\[\#8A4A30\]{color:#d59d86}
 html.dark .text-\[\#9A2E20\]{color:#e38478}
 html.dark .text-\[\#9A4F35\]{color:#d59a86}

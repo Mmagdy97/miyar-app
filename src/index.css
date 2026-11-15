@@ -39,13 +39,13 @@
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 html.dark {
-  --paper: #0E1F2F; --paper-2: #12263A; --surface: #162B40; --line: #233950; --line-2: #2E4862;
-  --ink: #E8EEF5; --ink-2: #AFBDCC; --ink-3: #8A9CB0;
-  --brand: #87A7D0; --brand-hover: #9DB8DC; --brand-soft: #1B3150;
-  --brass: #E0A98A; --brass-soft: #3B2E2C;
-  --panel: #0B1826; --panel-2: #10213A; --panel-line: #1F3550; --panel-ink: #E8EEF5;
-  --sand: #0B1826; --sand-2: #10213A; --sand-line: #1F3550; --sand-ink: #E8EEF5;
-  --sky: #87A7D0; --sky-soft: #172F4A; --peach: #E3A27F; --peach-soft: #3B2E2C; --mint: #173A44; --sage: #22394F; --sage-deep: #87A7D0;
+  --paper: #0F1A14; --paper-2: #14221A; --surface: #1A2A21; --line: #2A3D32; --line-2: #35493D;
+  --ink: #E6EEE8; --ink-2: #A9B8AE; --ink-3: #8A9B90;
+  --brand: #7FB08F; --brand-hover: #98C3A6; --brand-soft: #1E3A2B;
+  --brass: #E3A68B; --brass-soft: #3A2C26;
+  --panel: #0B140F; --panel-2: #13241A; --panel-line: #26392D; --panel-ink: #E6EEE8;
+  --sand: #0B140F; --sand-2: #13241A; --sand-line: #26392D; --sand-ink: #E6EEE8;
+  --sky: #8CC4CF; --sky-soft: #17303A; --peach: #E3A27F; --peach-soft: #3A2C26; --mint: #173A2C; --sage: #26382C; --sage-deep: #7FB08F;
   --shadow-1: none; --shadow-2: 0 18px 40px -20px rgba(0, 0, 0, .55);
 }
 
@@ -376,7 +376,7 @@ header button > span.rounded-full { animation: badgePop 380ms var(--ease-out); }
 html.dark .bg-white\/5, html.dark .bg-white\/10, html.dark .bg-white\/15 { background-color: rgb(255 255 255 / .05); }
 html.dark .bg-white\/70, html.dark .bg-white\/80, html.dark .bg-white\/90, html.dark .bg-white\/95 { background-color: color-mix(in srgb, var(--surface) 88%, transparent); }
 html.dark .bg-\[\#DAEBE3\] { background-color: var(--brand-soft); }
-html.dark .hover\:bg-\[\#CDE3D8\]:hover { background-color: #1F3550; }
+html.dark .hover\:bg-\[\#CDE3D8\]:hover { background-color: #26392D; }
 html.dark .bg-\[\#FDE8D3\] { background-color: var(--brass-soft); }
 html.dark .border-\[\#F3C3B2\] { border-color: #4A3E22; }
 html.dark .text-\[\#9A4F35\] { color: var(--brass); }
