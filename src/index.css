@@ -510,3 +510,8 @@ html.dark .lp-notch{color:var(--ink)}
   button.h-6.w-11 { position: relative; }
   button.h-6.w-11::before { content: ""; position: absolute; inset: -10px -4px; }
 }
+
+/* Keep last content clear of the fixed bottom nav on mobile */
+@media (max-width: 767px) {
+  main.overflow-y-auto { padding-bottom: calc(7rem + env(safe-area-inset-bottom)); }
+}
