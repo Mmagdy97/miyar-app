@@ -45,7 +45,7 @@ const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
 
 import { projectsStore, INITIAL_PROJECTS, parseAmount } from "../data/projects";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
-import { displayId } from "../lib/identity";
+import { displayId, genPassword, toAuthEmail } from "../lib/identity";
 
 function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [projects, setProjects] = projectsStore.use();
@@ -80,13 +80,19 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
     : ENGINEERS_LIST.map((n) => ({ key: n, id: null, label: n }))), [isLive, members]);
   const [newEngineer, setNewEngineer] = useState(isLive ? "" : ENGINEERS_LIST[0]);
   const [addPerson, setAddPerson] = useState(false);
-  const [pf, setPf] = useState({ email: "", role: "site_engineer" });
+  const [pf, setPf] = useState({ name: "", login: "", role: "site_engineer" });
+  const [made, setMade] = useState("");
   const invitePerson = async () => {
-    const email = pf.email.trim();
-    if (!email) return;
-    const r = await teamRepo.invite(email, pf.role);
-    if (r) { setNewEngineer(`p:${email.toLowerCase()}`); setPf({ ...pf, email: "" }); setAddPerson(false); }
+    if (!pf.name.trim() || !pf.login.trim()) return;
+    const password = genPassword();
+    try {
+      const id = await teamRepo.create({ ...pf, password });
+      setNewEngineer(id);
+      setMade(`${displayId(toAuthEmail(pf.login))} / ${password}`);
+      setPf({ ...pf, name: "", login: "" }); setAddPerson(false);
+    } catch (err) { window.dispatchEvent(new CustomEvent("miyar:error", { detail: err.message === "INVALID_ID" ? T("login.badId") : err.message })); }
   };
+
   const [newBudget, setNewBudget] = useState("");
   const [newLocation, setNewLocation] = useState("");
 
@@ -629,18 +635,22 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                       <option key={x.key} value={x.key}>{x.label}{x.pending ? ` (${T("live.pending")})` : ""}</option>
                     ))}
                   </select>
+                  {made && <p role="status" className="text-[11px] font-bold text-[#1E223D] mt-1.5 break-all">{T("team.created")} <span dir="ltr">{made}</span></p>}
                   {isLive && people.length === 0 && <p className="text-[11px] text-[#666B86] mt-1.5">{T("pm.eng.none")}</p>}
                   {isLive && (
                     <div className="mt-2">
                       {!addPerson ? (
                         <button type="button" onClick={() => setAddPerson(true)} className="text-[11px] font-bold text-[#2B3052] underline underline-offset-2 cursor-pointer">+ {T("pm.eng.add")}</button>
                       ) : (
-                        <div className="flex flex-wrap gap-1.5 items-center">
-                          <input type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={pf.email} onChange={(e) => setPf({ ...pf, email: e.target.value })} className="flex-1 min-w-32 px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
-                          <select value={pf.role} onChange={(e) => setPf({ ...pf, role: e.target.value })} className="px-2 py-1.5 rounded-lg border border-[#E0D6C2] text-xs bg-white">
-                            {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
-                          </select>
-                          <button type="button" onClick={invitePerson} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("pm.eng.send")}</button>
+                        <div className="grid gap-1.5">
+                          <input value={pf.name} onChange={(e) => setPf({ ...pf, name: e.target.value })} placeholder={T("login.name")} className="px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
+                          <input type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={pf.login} onChange={(e) => setPf({ ...pf, login: e.target.value })} className="px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
+                          <div className="flex gap-1.5">
+                            <select value={pf.role} onChange={(e) => setPf({ ...pf, role: e.target.value })} className="flex-1 px-2 py-1.5 rounded-lg border border-[#E0D6C2] text-xs bg-white">
+                              {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
+                            </select>
+                            <button type="button" onClick={invitePerson} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("pm.eng.send")}</button>
+                          </div>
                         </div>
                       )}
                     </div>

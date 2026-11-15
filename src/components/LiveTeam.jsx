@@ -4,7 +4,7 @@ import { Users, UserPlus, Trash2 } from "lucide-react";
 import { tr_ as T } from "../i18n";
 import { supabase } from "../lib/supabase";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
-import { displayId } from "../lib/identity";
+import { displayId, genPassword, toAuthEmail } from "../lib/identity";
 
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
 
@@ -13,9 +13,18 @@ export default function LiveTeam() {
   const [myId, setMyId] = useState(null);
   const members = teamRepo.use();
   const [f, setF] = useState({ email: "", role: "site_engineer" });
+  const [nm, setNm] = useState({ name: "", login: "", password: genPassword(), role: "site_engineer" });
+  const addMember = async (e) => {
+    e.preventDefault(); setMsg("");
+    try {
+      await teamRepo.create(nm);
+      setMsg(T("team.created") + " " + displayId(toAuthEmail(nm.login)) + " / " + nm.password);
+      setNm({ name: "", login: "", password: genPassword(), role: nm.role });
+    } catch (err) { setMsg(err.message === "INVALID_ID" ? T("login.badId") : T("login.err") + (err.message || "")); }
+  };
   const [msg, setMsg] = useState("");
   const [pw, setPw] = useState(null); // { id, value }
-  const genPw = () => { const c = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"; const a = new Uint32Array(10); crypto.getRandomValues(a); return Array.from(a, (n) => c[n % c.length]).join(""); };
+  const genPw = genPassword;
   const savePw = async (e) => {
     e.preventDefault();
     try { await teamRepo.resetPassword(pw.id, pw.value); setMsg(T("team.pwDone") + " " + pw.value); setPw(null); }
@@ -34,6 +43,20 @@ export default function LiveTeam() {
           <h1 className="text-2xl md:text-3xl font-semibold text-[#1E223D] flex items-center gap-2.5"><Users className="w-7 h-7" /><span>{T("team.title")}</span></h1>
           <p className="text-xs md:text-sm text-[#4F5470] mt-1">{T("team.sub")}</p>
         </div>
+        <form onSubmit={addMember} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 grid gap-2 sm:grid-cols-2">
+          <h2 className="sm:col-span-2 text-sm font-semibold text-[#1E223D]">{T("team.addDirect")}</h2>
+          <input required minLength={2} value={nm.name} onChange={(e) => setNm({ ...nm, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className={input} />
+          <input required dir="ltr" autoCapitalize="none" value={nm.login} onChange={(e) => setNm({ ...nm, login: e.target.value })} aria-label={T("pm.eng.email")} placeholder={T("pm.eng.email")} className={input} />
+          <div className="flex gap-2">
+            <input required minLength={8} dir="ltr" value={nm.password} onChange={(e) => setNm({ ...nm, password: e.target.value })} aria-label={T("login.password")} className={input + " flex-1 font-mono"} />
+            <button type="button" onClick={() => setNm({ ...nm, password: genPassword() })} className="px-3 py-2 rounded-lg text-xs font-bold text-[#2B3052] border border-[#E0D6C2] cursor-pointer">{T("team.pwGen")}</button>
+          </div>
+          <select value={nm.role} onChange={(e) => setNm({ ...nm, role: e.target.value })} className={input}>
+            {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
+          </select>
+          <button type="submit" className="sm:col-span-2 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><UserPlus className="w-4 h-4" aria-hidden="true" />{T("team.addGo")}</button>
+        </form>
+        <p className="text-[11px] text-[#666B86]">{T("team.orInvite")}</p>
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
           <input required type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} className={input + " flex-1 min-w-48"} />
           <select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value })} className={input}>

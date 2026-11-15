@@ -31,3 +31,10 @@ export function toAuthEmail(input) {
 
 /** What to show a person: "+201001234567" for phone ids, the email otherwise. */
 export const displayId = (email) => (isPhoneEmail(email) ? "+" + String(email).split("@")[0] : email || "");
+
+/** Random 10-char password without look-alike characters. */
+export function genPassword() {
+  const c = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const a = new Uint32Array(10); crypto.getRandomValues(a);
+  return Array.from(a, (n) => c[n % c.length]).join("");
+}
