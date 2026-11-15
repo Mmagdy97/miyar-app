@@ -194,7 +194,7 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                   <div className="flex flex-wrap items-center gap-2 mt-auto">
                     {isClient && i.status === "proposed" && (
                       <>
-                        <button type="button" onClick={() => setStatus(i.id, "approved")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 cursor-pointer"><Check className="w-4 h-4" />{T("sel.approve")}</button>
+                        <button type="button" onClick={() => setStatus(i.id, "approved")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-white bg-emerald-700 hover:bg-emerald-800 cursor-pointer"><Check className="w-4 h-4" />{T("sel.approve")}</button>
                         <button type="button" onClick={() => setStatus(i.id, "rejected")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 cursor-pointer"><X className="w-4 h-4" />{T("sel.reject")}</button>
                       </>
                     )}

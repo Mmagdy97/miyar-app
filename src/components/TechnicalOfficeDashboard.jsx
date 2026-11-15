@@ -275,7 +275,7 @@ function TechnicalOfficeDashboard({ actionItems, setActionItems, setSelectedItem
               {T("to.13")}
             </span>
           </div>
-          <p className="text-xs text-amber-800/80 mt-2 font-medium">
+          <p className="text-xs text-amber-900 mt-2 font-medium">
             {T("to.14")}
           </p>
         </div>

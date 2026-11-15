@@ -280,7 +280,7 @@ function SiteEngineerTasks() {
                 onClick={() => handleToggleTask(task.id)}
                 className={`p-4 md:p-5 rounded-lg border transition-all duration-200 cursor-pointer select-none group flex flex-col justify-between ${
                   task.completed
-                    ? "bg-[#F2F5F1] border-[#DCE4DC]/80 rounded-lg opacity-75"
+                    ? "bg-[#F2F5F1] border-[#DCE4DC]/80 rounded-lg"
                     : "bg-white border-[#DCE4DC] rounded-lg shadow-xs hover:border-[#5F6C61]"
                 }`}
               >

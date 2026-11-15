@@ -112,12 +112,12 @@ function ClientInvoices() {
         {/* Financial KPI Summary Cards */}
         <div className="grid stat-grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white rounded-xl p-6 border border-[#DCE4DC] shadow-sm">
-            <span className="text-xs font-bold text-[#E8EFE9]/80 block mb-1">{T("cli.5")}</span>
+            <span className="text-xs font-bold text-[#56635B] block mb-1">{T("cli.5")}</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-semibold text-[#1F2A26] tracking-tight">
                 {totalContract.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#E8EFE9]/80">{currencySymbol()}</span>
+              <span className="text-xs font-bold text-[#56635B]">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] text-[#56635B] mt-2 block">
               {T("cli.6")}
@@ -125,12 +125,12 @@ function ClientInvoices() {
           </div>
 
           <div className="bg-white rounded-xl p-6 border border-[#DCE4DC] shadow-sm">
-            <span className="text-xs font-bold text-[#E8EFE9]/80 block mb-1">{T("cli.74")}</span>
+            <span className="text-xs font-bold text-[#56635B] block mb-1">{T("cli.74")}</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-semibold text-emerald-600 tracking-tight">
+              <span className="text-2xl font-semibold text-emerald-700 tracking-tight">
                 {totalPaid.toLocaleString(intlLocale())}
               </span>
-              <span className="text-xs font-bold text-[#E8EFE9]/80">{currencySymbol()}</span>
+              <span className="text-xs font-bold text-[#56635B]">{currencySymbol()}</span>
             </div>
             <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-2">
               {T("cli.8", { v0: Math.round((totalPaid / totalContract) * 100) })}
