@@ -21,14 +21,14 @@ const live = createPersistedStore("live:projects", [], (x) => x, { persist: fals
 let orgId = null;
 
 const fromRow = (r) => ({
-  id: r.id, code: r.code || `P-${r.id}`, name: r.name, client: r.client_name || "", engineer: r.engineer_name || "",
+  id: r.id, code: r.code || `P-${r.id}`, name: r.name, client: r.client_name || "", engineer: r.engineer_name || "", engineerId: r.engineer_id || null,
   progress: r.progress ?? 0, status: r.status || "جاري العمل", phase: r.phase || "تصميم",
   startDate: r.start_date || "", deadline: r.deadline || "", contractValue: Number(r.contract_value) || 0,
   budget: money(Number(r.contract_value) || 0), location: r.location || "", image: r.image || DEFAULT_IMG,
   clientEmail: r.client_email || "", clientLinked: Boolean(r.client_id),
 });
 const toRow = (p) => ({
-  code: p.code || null, name: p.name, client_name: p.client || null, engineer_name: p.engineer || null,
+  code: p.code || null, name: p.name, client_name: p.client || null, engineer_name: p.engineer || null, engineer_id: p.engineerId || null,
   progress: Number(p.progress) || 0, status: p.status, phase: p.phase, start_date: p.startDate || null,
   deadline: p.deadline || null, location: p.location || null, image: p.image || null,
   contract_value: p.contractValue ?? parseAmount(p.budget),

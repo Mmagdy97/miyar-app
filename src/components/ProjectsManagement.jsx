@@ -44,6 +44,7 @@ const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
 );
 
 import { projectsStore, INITIAL_PROJECTS, parseAmount } from "../data/projects";
+import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
 
 function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [projects, setProjects] = projectsStore.use();
@@ -70,7 +71,21 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [newProjectName, setNewProjectName] = useState("");
   const [newClientName, setNewClientName] = useState("");
   const [newDeadline, setNewDeadline] = useState("");
-  const [newEngineer, setNewEngineer] = useState(ENGINEERS_LIST[0]);
+  const isLive = projectsStore.isLive;
+  const members = teamRepo.use();
+  useEffect(() => { if (isLive) loadTeam(); }, [isLive]);
+  const people = useMemo(() => (isLive
+    ? members.map((m) => ({ key: m.id || `p:${m.email}`, id: m.id || null, label: m.name || m.email, pending: m.pending }))
+    : ENGINEERS_LIST.map((n) => ({ key: n, id: null, label: n }))), [isLive, members]);
+  const [newEngineer, setNewEngineer] = useState(isLive ? "" : ENGINEERS_LIST[0]);
+  const [addPerson, setAddPerson] = useState(false);
+  const [pf, setPf] = useState({ email: "", role: "site_engineer" });
+  const invitePerson = async () => {
+    const email = pf.email.trim();
+    if (!email) return;
+    const r = await teamRepo.invite(email, pf.role);
+    if (r) { setNewEngineer(`p:${email.toLowerCase()}`); setPf({ ...pf, email: "" }); setAddPerson(false); }
+  };
   const [newBudget, setNewBudget] = useState("");
   const [newLocation, setNewLocation] = useState("");
 
@@ -106,11 +121,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
     const todayStr = new Date().toISOString().split("T")[0];
 
+    const who = people.find((x) => x.key === newEngineer);
+    if (isLive && !who) return;
     const newProject = {
       id: Date.now(),
       name: newProjectName.trim(),
       client: newClientName.trim(),
-      engineer: newEngineer,
+      engineer: isLive ? who.label : newEngineer,
+      engineerId: isLive ? who.id : null,
       progress: 0,
       status: "جاري العمل",
       phase: "تصميم",
@@ -130,7 +148,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
     setNewProjectName("");
     setNewClientName("");
     setNewDeadline("");
-    setNewEngineer(ENGINEERS_LIST[0]);
+    setNewEngineer(isLive ? "" : ENGINEERS_LIST[0]);
     setNewBudget("");
     setNewLocation("");
 
@@ -600,16 +618,32 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                     إسناد إلى مهندس <span className="text-rose-600">*</span>
                   </label>
                   <select
+                    required
                     value={newEngineer}
                     onChange={(e) => setNewEngineer(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all cursor-pointer"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white focus:outline-none focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052]"
                   >
-                    {ENGINEERS_LIST.map((eng) => (
-                      <option key={eng} value={eng}>
-                        {eng}
-                      </option>
+                    {isLive && <option value="">{T("pm.eng.pick")}</option>}
+                    {people.map((x) => (
+                      <option key={x.key} value={x.key}>{x.label}{x.pending ? ` (${T("live.pending")})` : ""}</option>
                     ))}
                   </select>
+                  {isLive && people.length === 0 && <p className="text-[11px] text-[#666B86] mt-1.5">{T("pm.eng.none")}</p>}
+                  {isLive && (
+                    <div className="mt-2">
+                      {!addPerson ? (
+                        <button type="button" onClick={() => setAddPerson(true)} className="text-[11px] font-bold text-[#2B3052] underline underline-offset-2 cursor-pointer">+ {T("pm.eng.add")}</button>
+                      ) : (
+                        <div className="flex flex-wrap gap-1.5 items-center">
+                          <input type="email" dir="ltr" placeholder={T("pm.eng.email")} value={pf.email} onChange={(e) => setPf({ ...pf, email: e.target.value })} className="flex-1 min-w-32 px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
+                          <select value={pf.role} onChange={(e) => setPf({ ...pf, role: e.target.value })} className="px-2 py-1.5 rounded-lg border border-[#E0D6C2] text-xs bg-white">
+                            {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
+                          </select>
+                          <button type="button" onClick={invitePerson} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("pm.eng.send")}</button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div>
