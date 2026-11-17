@@ -12,6 +12,8 @@ const ROLES = [
   { id: "Admin", key: "admin", Icon: Building2, tone: "lp-t1", img: "villa" },
   { id: "Site Engineer", key: "site", Icon: HardHat, tone: "lp-t2", img: "site" },
   { id: "Technical Office", key: "tech", Icon: FileCode, tone: "lp-t3", img: "office" },
+  { id: "Accountant", key: "accountant", Icon: Calculator, tone: "lp-t2", img: "kitchen" },
+  { id: "Secretary", key: "secretary", Icon: ClipboardList, tone: "lp-t3", img: "living" },
   { id: "Client", key: "client", Icon: ShieldCheck, tone: "lp-t4", img: "couple" },
 ];
 
@@ -36,7 +38,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
   const [role, setRole] = useState("Admin");
   const [shot, setShot] = useState(1);
   const cur = SHOWCASE.find((x) => x.n === shot);
-  const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["4", "lp.st4"]];
+  const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["6", "lp.st4"]];
   return (
     <>
       <ScrollArt bare />
@@ -156,7 +158,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#111827] text-balance">{T("lp.roles.t")}</h2>
           <p className="mt-3 text-base sm:text-lg text-[#4B5563]">{T("lp.roles.d")}</p>
         </div>
-        <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {ROLES.map((r, i) => (
             <button key={r.id} onClick={() => openModal(r.id)} style={{ transitionDelay: `${i * 70}ms` }} className="reveal group relative isolate overflow-hidden rounded-[24px] sm:rounded-[28px] min-h-[250px] sm:min-h-[380px] p-3.5 sm:p-5 text-start text-white flex flex-col justify-between">
               <img src={`/landing/${r.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20 transition-transform duration-700 group-hover:scale-105" />

@@ -1,3 +1,4 @@
+import { waLink } from "../lib/nudge";
 import { useState } from "react";
 import { localize } from "../data/dataI18n";
 import { Check, ArrowRight } from "lucide-react";
@@ -66,7 +67,7 @@ export function PricingSection({ onStart }) {
                 ))}
               </ul>
               <button
-                onClick={onStart}
+                onClick={p.custom ? () => window.open(waLink(t("nudge.msgEnterprise")), "_blank", "noopener") : onStart}
                 className={`w-full py-3 rounded-xl font-semibold text-sm cursor-pointer transition-colors ${
                   "bg-[#3F5BD8] text-white hover:bg-[#3249B8]"
                 }`}

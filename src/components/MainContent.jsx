@@ -110,6 +110,14 @@ function MainContent({
         );
       }
 
+      if (currentRole === "Accountant") {
+        return <FinancialsDashboard actionItems={actionItems} setActionItems={setActionItems} setSelectedItem={setSelectedItem} />;
+      }
+
+      if (currentRole === "Secretary") {
+        return <ProjectsManagement actionItems={actionItems} setActionItems={setActionItems} setSelectedItem={setSelectedItem} />;
+      }
+
       if (currentRole === "Site Engineer") {
         return (
           <SiteEngineerDashboard

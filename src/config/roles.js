@@ -93,8 +93,8 @@ export const ROLE_TITLES = {
   Secretary: "سكرتارية (Secretary)",
 };
 
-// Demo role switcher: only the four demo roles (Accountant/Secretary exist for real offices only).
-export const ROLES = ["Admin", "Site Engineer", "Technical Office", "Client"];
+// Demo role switcher.
+export const ROLES = ["Admin", "Site Engineer", "Technical Office", "Accountant", "Secretary", "Client"];
 
 /** Localized display helpers (tab routing still uses the stable Arabic `name`). */
 import { tr_ } from "../i18n";

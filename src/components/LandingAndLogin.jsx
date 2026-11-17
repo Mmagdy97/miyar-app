@@ -76,6 +76,8 @@ const DEMO_ROLES = [
     icon: FileCode,
     badge: "هندسي",
   },
+  { id: "Accountant", key: "accountant", title: "محاسب", subtitle: "Accountant", desc: "", icon: Calculator, badge: "مالي" },
+  { id: "Secretary", key: "secretary", title: "سكرتارية", subtitle: "Secretary", desc: "", icon: Users, badge: "إداري" },
   {
     id: "Client",
     key: "client",
