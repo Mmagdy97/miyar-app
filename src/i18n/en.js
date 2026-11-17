@@ -644,6 +644,7 @@ export default {
   "spec.saved": "Project data saved",
   "prices.title": "Office price list (per finish level)",
   "prices.hint": "Enter the unit price per level. Picking a library item fills its cost from the project finish level.",
+  "boq.picked": "Item filled below: enter the quantity (and cost if empty), then press Add",
   "inv.title": "Invoices & payments",
   "inv.sub": "Record each project's payments and track collected vs due.",
   "inv.total": "Total billed",

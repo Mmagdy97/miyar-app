@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import EmptyState from "./EmptyState";
 import { Plus, Trash2, ClipboardCheck, Pencil, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
@@ -54,6 +54,8 @@ export default function LiveBoq() {
   const prices = pricesRepo.use();
   const [spec, setSpec] = useState(null);
   const [specMsg, setSpecMsg] = useState("");
+  const qtyRef = useRef(null);
+  const [picked, setPicked] = useState(false);
   const project = projects.find((p) => p.id === pid) || projects[0];
   useEffect(() => { setSpec(project ? { ...project.spec } : null); setSpecMsg(""); }, [project?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!project) return <main className="flex-1 flex items-center justify-center p-8 font-ibm"><p className="text-sm text-[#4F5470] bg-white rounded-xl border border-[#E0D6C2] p-8 text-center max-w-sm">{T("proj.none")}</p></main>;
@@ -72,6 +74,8 @@ export default function LiveBoq() {
     if (Number.isNaN(ci)) return;
     const g = BOQ_LIBRARY[ci]; const [name, unit] = g.items[ii];
     setF({ ...f, category: g.cat, name, unit, unitCost: String(priceFor(prices, name, project.spec?.finish || "mid") || "") });
+    setPicked(true);
+    setTimeout(() => qtyRef.current?.focus(), 0);
   };
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -106,11 +110,12 @@ export default function LiveBoq() {
           <option value="">{T("boq.lib")}</option>
           {BOQ_LIBRARY.map((g, ci) => <optgroup key={g.cat} label={g.cat}>{g.items.map(([n, u], ii) => <option key={n} value={ci + "|" + ii}>{n} ({u})</option>)}</optgroup>)}
         </select>
+        {picked && <p role="status" className="text-xs font-bold text-[#C03A12]">{T("boq.picked")}</p>}
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
           <input placeholder={T("boq.cat")} value={f.category} onChange={set("category")} className={input + " w-40"} />
           <input required placeholder={T("boq.name")} value={f.name} onChange={set("name")} className={input + " flex-1 min-w-48"} />
           <input placeholder={T("boq.unit")} value={f.unit} onChange={set("unit")} className={input + " w-24"} />
-          <input required type="number" min={0} step="any" placeholder={T("boq.qty")} value={f.quantity} onChange={set("quantity")} className={input + " w-24"} />
+          <input ref={qtyRef} required type="number" min={0} step="any" placeholder={T("boq.qty")} value={f.quantity} onChange={(e) => { setPicked(false); set("quantity")(e); }} className={input + " w-24 " + (picked ? "ring-2 ring-[#E8532A]" : "")} />
           <input required type="number" min={0} step="any" placeholder={T("boq.unitCost")} value={f.unitCost} onChange={set("unitCost")} className={input + " w-28"} />
           <label className="flex items-center gap-1 text-[11px] font-bold text-[#4F5470]">{T("boq.margin")}<input type="number" min={0} step="any" value={f.margin} onChange={set("margin")} className={input + " w-20"} />%</label>
           <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><Plus className="w-4 h-4" />{T("boq.add")}</button>

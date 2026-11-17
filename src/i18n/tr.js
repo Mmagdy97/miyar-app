@@ -644,6 +644,7 @@ export default {
   "spec.saved": "Proje verileri kaydedildi",
   "prices.title": "Ofis fiyat listesi (kalite seviyesine göre)",
   "prices.hint": "Her seviye için birim fiyat girin. Kütüphaneden kalem seçince maliyet otomatik dolar.",
+  "boq.picked": "Kalem aşağıya dolduruldu: miktarı (boşsa maliyeti) girip Ekle’ye basın",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",
