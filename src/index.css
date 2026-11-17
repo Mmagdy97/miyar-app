@@ -545,3 +545,5 @@ html.dark .lp-grad{background:linear-gradient(90deg,#8EA2FF,#B197FC 60%,#FBBF24)
 @media (max-width:639px){.lp-window{border-radius:12px}}
 .lp-phone-static{max-width:260px;border-radius:34px;overflow:hidden;border:7px solid #111827;background:#111827;box-shadow:0 30px 60px -24px rgba(17,24,39,.5)}
 .lp-final{border-radius:32px;color:#fff;background:radial-gradient(60% 80% at 20% 0%,#3F5BD8 0%,transparent 70%),radial-gradient(50% 70% at 90% 100%,#7C5CE6 0%,transparent 70%),#1E223D}
+.lp-hero-flat{background:#1E223D}
+.lp-panel{background:radial-gradient(70% 90% at 15% 0%,rgba(63,91,216,.55),transparent 70%),radial-gradient(60% 80% at 100% 100%,rgba(124,92,230,.35),transparent 70%),#1E223D}

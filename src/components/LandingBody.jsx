@@ -3,6 +3,7 @@ import { waLink } from "../lib/nudge";
 import { ChevronDown, Lock, Smartphone, Globe, BadgeCheck, ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Clock, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Rocket, Ruler, Share2, ShieldCheck, Users, Wallet, WifiOff } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
+import LandingWhy from "./LandingWhy";
 import ScrollArt from "./ScrollArt";
 import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
@@ -28,7 +29,7 @@ const SHOWCASE = [
   { n: 2, img: "shot-fin", bg: "villa" },
   { n: 3, img: "shot-rep", phone: true, bg: "site" },
 ];
-const TRUST = [{ n: 1, Icon: Lock, img: "office" }, { n: 2, Icon: Smartphone }, { n: 3, Icon: Globe }, { n: 4, Icon: BadgeCheck, img: "couple" }];
+const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: Globe }, { n: 4, Icon: BadgeCheck }];
 
 export default function LandingBody({ openModal, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
@@ -239,9 +240,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         </div>
         <div className="mt-10 sm:mt-14 space-y-4 sm:space-y-6">
           {SHOWCASE.map((x) => (
-            <div key={x.n} className="reveal lp-hero !min-h-0 !grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-10 items-center p-5 sm:p-10 lg:p-14 text-start">
-              <img src={`/landing/${x.bg}.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" />
-              <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
+            <div key={x.n} className="reveal lp-hero lp-hero-flat !min-h-0 !grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-10 items-center p-5 sm:p-10 lg:p-14 text-start">
+              <div aria-hidden="true" className="absolute inset-0 -z-10 lp-panel" />
               <div>
                 <span className="inline-flex text-[11px] font-bold px-3 py-1 rounded-full bg-white/80 text-[#111827]">{T(`lp.sh${x.n}.k`)}</span>
                 <h3 className="mt-4 font-display text-2xl sm:text-4xl font-semibold leading-tight text-balance">{T(`lp.sh${x.n}.t`)}</h3>
@@ -256,6 +256,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           ))}
         </div>
       </section>
+
+      <LandingWhy />
 
       {/* Trust */}
       <section className="px-5 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
@@ -280,8 +282,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       <section id="faq" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-stretch">
           <div className="reveal relative isolate overflow-hidden rounded-[28px] sm:rounded-[34px] min-h-[260px] lg:min-h-[420px] p-6 sm:p-10 flex items-end text-white text-start">
-            <img src="/landing/living-s.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" />
-            <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" />
+            <div aria-hidden="true" className="absolute inset-0 -z-10 lp-panel" />
             <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("lp.faq.t")}</h2>
           </div>
           <div className="reveal divide-y divide-[var(--line)] border-y border-[var(--line)] text-start self-center">
