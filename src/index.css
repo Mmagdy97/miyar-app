@@ -546,7 +546,7 @@ html.dark .lp-grad{background:linear-gradient(90deg,#7FB3B8,#B197FC 60%,#FBBF24)
 .lp-phone-static{max-width:260px;border-radius:34px;overflow:hidden;border:7px solid #0E1A1B;background:#0E1A1B;box-shadow:0 30px 60px -24px rgba(17,24,39,.5)}
 .lp-final{border-radius:32px;color:#fff;background:radial-gradient(60% 80% at 20% 0%,#2E6F73 0%,transparent 70%),radial-gradient(50% 70% at 90% 100%,#C6601F 0%,transparent 70%),#0F3D3E}
 .lp-hero-flat{background:#0F3D3E}
-.lp-panel{background:radial-gradient(70% 90% at 15% 0%,rgba(46,111,115,.55),transparent 70%),radial-gradient(60% 80% at 100% 100%,rgba(124,92,230,.35),transparent 70%),#0F3D3E}
+.lp-panel{background:radial-gradient(70% 90% at 15% 0%,rgba(46,111,115,.55),transparent 70%),radial-gradient(60% 80% at 100% 100%,rgba(198,96,31,.35),transparent 70%),#0F3D3E}
 
 /* Sidebar active item: merges into the content area with concave corners */
 .side-notch::before,.side-notch::after{content:"";position:absolute;inset-inline-end:0;width:20px;height:20px;pointer-events:none}
