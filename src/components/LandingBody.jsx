@@ -25,15 +25,17 @@ const FEATURES = [
 ];
 
 const SHOWCASE = [
-  { n: 1, img: "shot-boq", bg: "office" },
-  { n: 2, img: "shot-fin", bg: "villa" },
-  { n: 3, img: "shot-rep", phone: true, bg: "site" },
+  { n: 1, img: "shot-boq", role: "Technical Office" },
+  { n: 2, img: "shot-fin", role: "Admin" },
+  { n: 3, img: "shot-rep", phone: true, role: "Site Engineer" },
 ];
 const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: Globe }, { n: 4, Icon: BadgeCheck }];
 
 export default function LandingBody({ openModal, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
   const [role, setRole] = useState("Admin");
+  const [shot, setShot] = useState(1);
+  const cur = SHOWCASE.find((x) => x.n === shot);
   const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["4", "lp.st4"]];
   return (
     <>
@@ -238,22 +240,29 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <p className="text-[12px] tracking-[.16em] uppercase font-semibold text-[#3F5BD8]">{T("lp.sh.kick")}</p>
           <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("lp.sh.t")}</h2>
         </div>
-        <div className="mt-10 sm:mt-14 space-y-4 sm:space-y-6">
+        <div role="tablist" className="mt-8 flex flex-wrap gap-2">
           {SHOWCASE.map((x) => (
-            <div key={x.n} className="reveal lp-hero lp-hero-flat !min-h-0 !grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-10 items-center p-5 sm:p-10 lg:p-14 text-start">
-              <div aria-hidden="true" className="absolute inset-0 -z-10 lp-panel" />
-              <div>
-                <span className="inline-flex text-[11px] font-bold px-3 py-1 rounded-full bg-white/80 text-[#111827]">{T(`lp.sh${x.n}.k`)}</span>
-                <h3 className="mt-4 font-display text-2xl sm:text-4xl font-semibold leading-tight text-balance">{T(`lp.sh${x.n}.t`)}</h3>
-                <p className="mt-3 text-sm sm:text-lg leading-relaxed opacity-85 max-w-md">{T(`lp.sh${x.n}.d`)}</p>
-              </div>
-              <div>
-                {x.phone
-                  ? <div className="lp-phone-static mx-auto"><img src={`/landing/${x.img}.webp`} alt="" loading="lazy" width="390" height="844" className="block w-full h-auto" /></div>
-                  : <div className="lp-window"><div className="lp-window-bar"><i /><i /><i /></div><img src={`/landing/${x.img}.webp`} alt="" loading="lazy" width="1600" height="1000" className="block w-full h-auto" /></div>}
-              </div>
-            </div>
+            <button key={x.n} role="tab" aria-selected={shot === x.n} onClick={() => setShot(x.n)}
+              className={`h-10 px-5 rounded-full text-[13px] sm:text-sm font-semibold transition-colors ${shot === x.n ? "lp-pill-dark" : "bg-[var(--surface)] border border-[var(--line)] text-[var(--ink-2)] hover:bg-[var(--paper-2)]"}`}>
+              {T(`lp.sh${x.n}.k`)}
+            </button>
           ))}
+        </div>
+        <div className="mt-4 rounded-[28px] sm:rounded-[36px] bg-[var(--paper-2)] border border-[var(--line)] overflow-hidden grid md:grid-cols-[0.8fr_1.2fr] items-center text-start">
+          <div key={cur.n} className="p-6 sm:p-10 lg:p-14 hero-in">
+            <h3 className="font-display text-2xl sm:text-4xl font-semibold leading-tight text-balance">{T(`lp.sh${cur.n}.t`)}</h3>
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-[var(--ink-2)]">{T(`lp.sh${cur.n}.d`)}</p>
+            <button onClick={() => openModal(cur.role)} className="mt-6 inline-flex items-center gap-1 text-[15px] font-semibold text-[#3F5BD8] hover:underline underline-offset-4">{T("lp.go")}<span aria-hidden="true" className="rtl:-scale-x-100">›</span></button>
+          </div>
+          <div key={`i${cur.n}`} className="relative hero-in aspect-[4/3] md:aspect-auto md:h-[460px] overflow-hidden px-6 pt-6 md:pt-10 md:pe-0 md:ps-4">
+            {cur.phone ? (
+              <div className="lp-phone-static mx-auto !max-w-[250px] !rounded-b-none !border-b-0 translate-y-0"><img src={`/landing/${cur.img}.webp`} alt="" loading="lazy" width="390" height="844" className="block w-full h-auto" /></div>
+            ) : (
+              <div className="lp-window !max-w-none !rounded-b-none !border-b-0 relative overflow-hidden" dir="ltr"><div className="lp-window-bar"><i /><i /><i /></div>
+                <div className="overflow-hidden"><img src={`/landing/${cur.img}.webp`} alt="" loading="lazy" width="1600" height="1000" className="block max-w-none w-[138%] -translate-x-[18.6%]" /></div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
