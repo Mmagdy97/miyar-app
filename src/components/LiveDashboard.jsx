@@ -11,6 +11,7 @@ import { projectsStore, inviteClient, removeClient, approveQuote } from "../data
 import { invoicesRepo, invoiceTotals, isOverdue } from "../data/invoices";
 import { boqRepo } from "../data/boq";
 import { siteRepo } from "../data/site";
+import { demoProjects, demoInv, DEMO_LATE, DEMO_BUDGET, DEMO_SITE } from "../data/dashDemo";
 import { projectVariance } from "../lib/variance";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
@@ -62,11 +63,14 @@ function InviteClient({ p }) {
   );
 }
 
-/** Dashboard for a real office: numbers come only from its own projects (no demo data). */
+/** Office dashboard for every role (live data; guest mode shows a sample). */
 export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
   const isClient = role === "Client";
-  const [projects] = projectsStore.use();
-  const inv = invoiceTotals(invoicesRepo.use());
+  const demo = !projectsStore.isLive;
+  const [rawProjects] = projectsStore.use();
+  const projects = demo ? demoProjects(rawProjects) : rawProjects;
+  const liveInv = invoiceTotals(invoicesRepo.use());
+  const inv = demo ? demoInv() : liveInv;
   const org = getActiveOrg();
   const total = projects.reduce((s, p) => s + (Number(p.contractValue) || 0), 0);
   const avg = projects.length ? Math.round(projects.reduce((s, p) => s + (Number(p.progress) || 0), 0) / projects.length) : 0;
@@ -76,18 +80,20 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
   const actuals = boqRepo.actuals();
   const [openId, setOpenId] = useState(null);
   const invs = invoicesRepo.use();
-  const late = invs.filter((i) => isOverdue(i));
+  const late = demo ? DEMO_LATE.map((x) => ({ ...x, title: T(x.title) })) : invs.filter((i) => isOverdue(i));
   const lateSum = late.reduce((s, i) => s + i.amount, 0);
   const soon = projects.filter((p) => needsAttention(p));
   const waiting = projects.filter((p) => p.quoteStatus === "sent");
-  const overBudget = isClient ? [] : projects.flatMap((p) => projectVariance(boqItems.filter((b) => b.projectId === p.id), actuals).rows.filter((r) => r.level === "over" || r.level === "warn").map((r) => ({ p, r })));
+  const overBudget = isClient ? [] : demo ? DEMO_BUDGET.map((b) => ({ p: projects.find((x) => x.id === b.pid) || projects[0], r: { item: { id: b.id, name: T(b.name) }, level: b.level } })).filter((x) => x.p) : projects.flatMap((p) => projectVariance(boqItems.filter((b) => b.projectId === p.id), actuals).rows.filter((r) => r.level === "over" || r.level === "warn").map((r) => ({ p, r })));
   const today = new Date().toLocaleDateString(intlLocale(), { weekday: "long", day: "numeric", month: "long" });
-  const site = siteRepo.use();
+  const liveSite = siteRepo.use();
+  const site = demo ? { tasks: DEMO_SITE.tasks.map((t) => ({ ...t, title: T(t.title) })), snags: DEMO_SITE.snags.map((t) => ({ ...t, title: T(t.title) })), requests: DEMO_SITE.requests.map((t) => ({ ...t, material: T(t.material) })) } : liveSite;
   const openTasks = site.tasks.filter((t) => !t.done);
   const openSnags = site.snags.filter((x) => !x.resolved);
   const pendingReq = site.requests.filter((x) => x.status !== "delivered");
   const todayIso = new Date().toISOString().slice(0, 10);
-  const reportsToday = reportsRepo.use().filter((r) => r.day === todayIso).length;
+  const liveReports = reportsRepo.use();
+  const reportsToday = demo ? 1 : liveReports.filter((r) => r.day === todayIso).length;
   const boqTab = role === "Technical Office" ? "إدارة المقايسات" : "المقايسات والاعتمادات";
   const K = {
     projects: ["live.projects", projects.length, `${T("live.avg")} ${avg}%`, FolderKanban],
@@ -180,7 +186,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
                   const open = openId === p.id || isClient;
                   return (
                     <li key={p.id} className="border-b last:border-b-0 border-[#F1EADB]">
-                      <button type="button" onClick={() => canAdd && setOpenId(open ? null : p.id)} aria-expanded={open} className={`w-full px-5 py-3.5 grid grid-cols-[1fr_auto] sm:grid-cols-[minmax(0,1fr)_9rem_6.5rem] items-center gap-x-4 gap-y-1.5 text-start ${canAdd ? "hover:bg-[#FAF7F0] cursor-pointer" : "cursor-default"}`}>
+                      <button type="button" onClick={() => canAdd && !demo && setOpenId(open ? null : p.id)} aria-expanded={open} className={`w-full px-5 py-3.5 grid grid-cols-[1fr_auto] sm:grid-cols-[minmax(0,1fr)_9rem_6.5rem] items-center gap-x-4 gap-y-1.5 text-start ${canAdd && !demo ? "hover:bg-[#FAF7F0] cursor-pointer" : "cursor-default"}`}>
                         <span className="min-w-0">
                           <span className="block text-sm font-semibold text-[#1E223D] truncate">{E(p.name)}</span>
                           <span className="block text-[11px] text-[#666B86] truncate">{p.client || "—"}{p.quoteStatus && p.quoteStatus !== "none" ? ` · ${T("quote.st." + p.quoteStatus)}` : ""}</span>
@@ -212,7 +218,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
           </section>
 
           <aside className="space-y-6">
-            {role === "Admin" && <StartChecklist go={setActiveTab} />}
+            {role === "Admin" && !demo && <StartChecklist go={setActiveTab} />}
             {!isClient && (
               <section className="bg-white rounded-2xl border border-[#E6DCC8]">
                 <h2 className="px-5 pt-4 pb-3 text-sm font-semibold text-[#1E223D] border-b border-[#F1EADB]">{T("dash.decide")} {decisions.length > 0 && <span className="ms-1 inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full text-[11px] font-bold text-white bg-[#C03A12] tabular-nums">{decisions.length}</span>}</h2>
@@ -223,7 +229,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
                     ))}
                   </ul>
                 )}
-                {lateSum > 0 && <p className="px-5 py-3 text-[11px] font-bold text-[#C03A12] border-t border-[#F1EADB]">{T("dash.lateSum", { 0: money(lateSum) })}</p>}
+                {lateSum > 0 && (role === "Admin" || role === "Accountant") && <p className="px-5 py-3 text-[11px] font-bold text-[#C03A12] border-t border-[#F1EADB]">{T("dash.lateSum", { 0: money(lateSum) })}</p>}
               </section>
             )}
           </aside>
