@@ -3,6 +3,7 @@ import EmptyState from "./EmptyState";
 import { Plus, Printer, Check, Trash2, Receipt } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
 import { useProjectList } from "../data/projects";
+import { dueWa } from "../lib/notify";
 import { invoicesRepo, invoiceTotals, isOverdue } from "../data/invoices";
 import { printReceipt } from "../lib/receipt";
 
@@ -62,6 +63,7 @@ export default function LiveInvoices({ readOnly = false }) {
                 <span className="text-sm font-semibold tabular-nums text-[#1E223D]">{money(i.amount)}</span>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${i.paid ? "bg-emerald-50 text-emerald-700 border-emerald-200" : late ? "bg-rose-50 text-rose-700 border-rose-200" : "bg-amber-50 text-amber-800 border-amber-200"}`}>{T(i.paid ? "inv.s.paid" : late ? "inv.s.late" : "inv.s.due")}</span>
                 <div className="flex items-center gap-2">
+                  {!readOnly && !i.paid && <a href={dueWa(project, i)} target="_blank" rel="noreferrer" className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#1F8F4E]">{T(late ? "wa.remind" : "wa.btn")}</a>}
                   {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.markPaid(i.id)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><Check className="w-4 h-4" />{T("inv.markPaid")}</button>}
                   {i.paid && <button type="button" onClick={() => printReceipt({ ...i, paidDate: i.paidDate }, project.name)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-[#1E223D] bg-white border border-[#E0D6C2] cursor-pointer"><Printer className="w-4 h-4" />{T("inv.receipt")}</button>}
                   {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.remove(i.id)} aria-label={T("inv.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}

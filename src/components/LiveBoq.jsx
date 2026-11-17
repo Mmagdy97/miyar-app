@@ -10,6 +10,7 @@ import { useLibrary, useLibraryItems } from "../data/library";
 import LibraryEditor from "./LibraryEditor";
 import BoqVsActual from "./BoqVsActual";
 import { buildQuote, printQuote } from "../lib/quote";
+import { quoteWa } from "../lib/notify";
 import { sendQuote } from "../data/projects";
 import { askConfirm } from "../lib/confirm";
 import { generateBoq } from "../lib/autoBoq";
@@ -131,6 +132,7 @@ export default function LiveBoq({ role = "Admin" }) {
             {project.quoteStatus !== "approved" && project.clientLinked && (
               <button type="button" onClick={async () => { if (!(await askConfirm(T("quote.sendConfirm"), { danger: false, yes: T("quote.send") }))) return; try { await sendQuote(project.id, buildQuote(rows)); setSpecMsg(T("quote.sent")); } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-3 h-9 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("quote.send")}</button>
             )}
+            {project.quoteStatus === "sent" && <a href={quoteWa(project, project.quoteTotal)} target="_blank" rel="noreferrer" className="px-3 h-9 inline-flex items-center rounded-lg text-xs font-bold text-white bg-[#1F8F4E] cursor-pointer">{T("wa.btn")}</a>}
             <p className="basis-full text-[11px] text-[#666B86]">{T("quote.note")}</p>
             {project.quoteStatus !== "approved" && !project.clientLinked && <span className="text-[11px] text-[#666B86]">{T("quote.needClient")}</span>}
           </section>

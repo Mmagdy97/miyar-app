@@ -6,6 +6,7 @@ import { askConfirm } from "../lib/confirm";
 import { useProjectList } from "../data/projects";
 import { reportsRepo, MAX_PHOTOS } from "../data/reports";
 import ReportCard from "./ReportCard";
+import { reportWa } from "../lib/notify";
 
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
 
@@ -49,7 +50,7 @@ export default function LiveReports() {
           </div>
         </form>
         {mine.length === 0 && <EmptyState title={T("rep.empty")} hint={T("rep.emptyHint")} />}
-        <div className="grid gap-3">{mine.map((r) => <ReportCard key={r.id} r={r} onRemove={async () => { if (await askConfirm(T("rep.rmConfirm"))) reportsRepo.remove(r); }} />)}</div>
+        <div className="grid gap-3">{mine.map((r) => <ReportCard key={r.id} r={r} waHref={reportWa(project, r)} onRemove={async () => { if (await askConfirm(T("rep.rmConfirm"))) reportsRepo.remove(r); }} />)}</div>
       </div>
     </main>
   );

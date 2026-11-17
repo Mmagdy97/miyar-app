@@ -4,7 +4,7 @@ import { tr_ as T } from "../i18n";
 import { photoUrls } from "../data/reports";
 
 /** One daily report: date, author, note, progress and its photos (signed URLs, opened full size on click). */
-export default function ReportCard({ r, onRemove }) {
+export default function ReportCard({ r, onRemove, waHref }) {
   const [urls, setUrls] = useState({});
   useEffect(() => { let on = true; photoUrls(r.photos).then((u) => { if (on) setUrls(u); }); return () => { on = false; }; }, [r.photos]);
   return (
@@ -13,7 +13,8 @@ export default function ReportCard({ r, onRemove }) {
         <span className="font-bold text-[#1E223D] tabular-nums">{r.day}</span>
         {r.author && <span className="text-[#666B86]">· {r.author}</span>}
         {r.progress != null && <span className="ms-auto font-bold text-[#2B3052] tabular-nums">{r.progress}%</span>}
-        {onRemove && <button type="button" onClick={onRemove} aria-label={T("cash.delete")} className={`p-1 rounded text-[#666B86] hover:text-rose-700 cursor-pointer ${r.progress != null ? "" : "ms-auto"}`}><Trash2 className="w-3.5 h-3.5" /></button>}
+        {waHref && <a href={waHref} target="_blank" rel="noreferrer" className="ms-auto px-2.5 h-7 inline-flex items-center rounded-md text-[11px] font-bold text-white bg-[#1F8F4E]">{T("wa.btn")}</a>}
+        {onRemove && <button type="button" onClick={onRemove} aria-label={T("cash.delete")} className={`p-1 rounded text-[#666B86] hover:text-rose-700 cursor-pointer ${r.progress != null || waHref ? "" : "ms-auto"}`}><Trash2 className="w-3.5 h-3.5" /></button>}
       </div>
       {r.note && <p className="text-[#1E223D] whitespace-pre-wrap leading-relaxed">{r.note}</p>}
       {r.photos.length > 0 && (
