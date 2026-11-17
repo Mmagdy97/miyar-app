@@ -3,6 +3,7 @@ import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus, UserPlus, Check, Tras
 import { tr_ as T, E, money, intlLocale } from "../i18n";
 import { reportsRepo } from "../data/reports";
 import ReportCard from "./ReportCard";
+import StartChecklist from "./StartChecklist";
 import { printQuote } from "../lib/quote";
 import { askConfirm } from "../lib/confirm";
 import { displayId } from "../lib/identity";
@@ -74,6 +75,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-5xl mx-auto space-y-6">
+        {role === "Admin" && <StartChecklist go={setActiveTab} />}
         <DashHero img={isClient ? "couple" : "villa"} title={T(isClient ? "live.projects" : "live.title")} sub={T("live.sub")}
           stats={org && !isClient ? [[T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") }), Number.isFinite(max) ? T("live.usage", { n: projects.length, max }) : T("live.unlimited", { n: projects.length })]] : []} />
         {!isClient && <QuickActions setActiveTab={setActiveTab} compact />}

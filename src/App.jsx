@@ -19,6 +19,7 @@ import { noticesRepo } from "./data/notices";
 import { attachPrices } from "./data/prices";
 import { attachLibrary } from "./data/library";
 import { attachReports } from "./data/reports";
+import Tour from "./components/Tour";
 import OwnerAdmin from "./components/OwnerAdmin";
 import { setActiveOrg } from "./lib/entitlements";
 import { attachProjects } from "./data/projects";
@@ -293,6 +294,7 @@ function App() {
           isInstallable={isInstallable}
           onInstallClick={handleInstallClick}
         />
+        {authMode === "user" && account && <Tour role={currentRole} userId={account.user?.id || "u"} />}
         <MainContent
           currentRole={currentRole}
           activeTab={activeTab}

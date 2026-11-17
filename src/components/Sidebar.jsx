@@ -83,6 +83,7 @@ function Sidebar({
               return (
                 <button
                   key={id || name}
+                  data-tour={id}
                   type="button"
                   aria-label={label}
                   aria-current={active ? "page" : undefined}
@@ -201,6 +202,7 @@ function Sidebar({
           return (
             <button
               key={id || itemName}
+              data-tour={id}
               ref={isActive ? activeRef : null}
               onClick={() => {
                 setActiveTab(itemName);
