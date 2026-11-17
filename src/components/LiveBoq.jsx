@@ -130,6 +130,7 @@ export default function LiveBoq() {
             {project.quoteStatus !== "approved" && project.clientLinked && (
               <button type="button" onClick={async () => { if (!(await askConfirm(T("quote.sendConfirm"), { danger: false, yes: T("quote.send") }))) return; try { await sendQuote(project.id, buildQuote(rows)); setSpecMsg(T("quote.sent")); } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-3 h-9 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("quote.send")}</button>
             )}
+            <p className="basis-full text-[11px] text-[#666B86]">{T("quote.note")}</p>
             {project.quoteStatus !== "approved" && !project.clientLinked && <span className="text-[11px] text-[#666B86]">{T("quote.needClient")}</span>}
           </section>
         )}

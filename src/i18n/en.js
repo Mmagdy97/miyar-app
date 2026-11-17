@@ -687,6 +687,7 @@ export default {
   "quote.st.none": "Not sent",
   "quote.st.sent": "Awaiting client approval",
   "quote.st.approved": "Approved",
+  "quote.note": "Note: edits to the BOQ after sending do not change the client’s copy. Send again to update it.",
   "inv.title": "Invoices & payments",
   "inv.sub": "Record each project's payments and track collected vs due.",
   "inv.total": "Total billed",

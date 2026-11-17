@@ -687,6 +687,7 @@ export default {
   "quote.st.none": "Gönderilmedi",
   "quote.st.sent": "Müşteri onayı bekleniyor",
   "quote.st.approved": "Onaylandı",
+  "quote.note": "Not: Gönderimden sonra metrajda yapılan değişiklikler müşterideki kopyayı etkilemez. Güncellemek için tekrar gönderin.",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",
