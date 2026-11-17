@@ -100,8 +100,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           </div>
 
           {/* Bottom: frosted project card (start) + paper "notch" card cut into the hero corner (end) */}
-          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-end justify-between gap-3 text-start">
-            <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:ms-12 lg:me-0 w-auto lg:w-[400px] rounded-[30px] p-5">
+          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 flex flex-col lg:flex-row-reverse lg:items-end justify-between gap-3 text-start">
+            <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:me-12 lg:ms-0 w-auto lg:w-[400px] rounded-[30px] p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[#111827]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>

@@ -491,13 +491,13 @@ html.dark .lp-frost{background:rgba(20,32,44,.6);border-color:rgba(255,255,255,.
 html.dark .lp-notch{color:var(--ink)}
 @media (min-width:1024px){
   .lp-notch::before,.lp-notch::after{content:"";position:absolute;width:30px;height:30px;pointer-events:none;
-    background:radial-gradient(circle at 0 0,transparent 29.5px,var(--paper) 30px)}
-  .lp-notch::before{bottom:100%;inset-inline-end:0}
-  .lp-notch::after{bottom:0;inset-inline-end:100%}
-  [dir=rtl] .lp-notch::before,[dir=rtl] .lp-notch::after{background:radial-gradient(circle at 100% 0,transparent 29.5px,var(--paper) 30px)}
+    background:radial-gradient(circle at 100% 0,transparent 29.5px,var(--paper) 30px)}
+  .lp-notch::before{bottom:100%;inset-inline-start:0}
+  .lp-notch::after{bottom:0;inset-inline-start:100%}
+  [dir=rtl] .lp-notch::before,[dir=rtl] .lp-notch::after{background:radial-gradient(circle at 0 0,transparent 29.5px,var(--paper) 30px)}
 }
 .lp-notch{border-radius:30px 30px 0 0}
-@media (min-width:1024px){.lp-notch{border-radius:0;border-start-start-radius:30px}}
+@media (min-width:1024px){.lp-notch{border-radius:0;border-start-end-radius:30px}}
 
 /* Touch targets on coarse pointers (WCAG 2.5.8) */
 @media (pointer: coarse) {
