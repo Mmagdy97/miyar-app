@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { DatabaseBackup, Download, Upload } from "lucide-react";
 import { useI18n, intlLocale } from "../i18n";
 import { collectBackup, validateBackup, restoreBackup } from "../lib/backup";
+import { askConfirm } from "../lib/confirm";
 
 /** Download / restore all office data kept on this device. */
 export default function DataBackup() {
@@ -23,7 +24,7 @@ export default function DataBackup() {
     const v = validateBackup(obj);
     if (!v.ok) { setMsg(t("bk.bad")); return; }
     const d = v.at ? new Date(v.at).toLocaleString(intlLocale()) : "—";
-    if (!window.confirm(t("bk.confirm", { d, n: v.keys.length }))) return;
+    if (!(await askConfirm(t("bk.confirm", { d, n: v.keys.length }), { danger: false, yes: "OK" }))) return;
     restoreBackup(localStorage, obj);
     setMsg(t("bk.done"));
     setTimeout(() => window.location.reload(), 600);

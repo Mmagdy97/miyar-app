@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { KeyRound } from "lucide-react";
 import { Users, UserPlus, Trash2 } from "lucide-react";
 import { tr_ as T } from "../i18n";
+import { askConfirm } from "../lib/confirm";
 import { supabase } from "../lib/supabase";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
 import { displayId, genPassword, toAuthEmail } from "../lib/identity";
@@ -92,7 +93,7 @@ export default function LiveTeam({ secretary = false }) {
                     <button type="button" onClick={() => setPw(null)} className="px-2 py-2 text-xs font-bold text-[#4F5470] cursor-pointer">{T("boq.cancel")}</button>
                   </form>
                 )}
-                {!me && !(secretary && (m.role === "admin" || m.role === "secretary")) && <button type="button" onClick={() => { if (window.confirm(T("team.rmConfirm"))) teamRepo.remove(m).catch((e) => setMsg(e.message || String(e))); }} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                {!me && !(secretary && (m.role === "admin" || m.role === "secretary")) && <button type="button" onClick={async () => { if (await askConfirm(T("team.rmConfirm"))) teamRepo.remove(m); }} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
               </article>
             );
           })}

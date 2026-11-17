@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { Building2, Users, FolderKanban, Clock, RefreshCw, LogOut, ArrowLeftRight, Check, Plus, Lock, Trash2 } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { askConfirm } from "../lib/confirm";
 import { displayId } from "../lib/identity";
 import { FEATURES, PLAN_FEATURES } from "../lib/entitlements";
 
@@ -116,7 +117,7 @@ export default function OwnerAdmin({ name, onOpenApp, onLogout }) {
     setOrph(o.data || []);
   }, []);
   const delUser = async (u) => {
-    if (!window.confirm(`حذف الحساب ${displayId(u.login)} نهائيًا؟`)) return;
+    if (!(await askConfirm(`حذف الحساب ${displayId(u.login)} نهائيًا؟`))) return;
     const { error } = await supabase.rpc("admin_delete_user", { p_user: u.id });
     if (error) setErr(error.message); else await load();
   };

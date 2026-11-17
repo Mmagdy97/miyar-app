@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus, UserPlus, Check, Trash2 } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
+import { askConfirm } from "../lib/confirm";
 import { displayId } from "../lib/identity";
 import { projectsStore, inviteClient, removeClient } from "../data/projects";
 import { invoicesRepo, invoiceTotals } from "../data/invoices";
@@ -29,7 +30,7 @@ function InviteClient({ p }) {
   return (
     <div className="pt-1 text-xs">
       {p.clientEmail && <p className="flex items-center gap-1.5 text-[#4F5470] mb-1.5">{p.clientLinked ? <Check className="w-3.5 h-3.5 text-[#2B3052]" aria-hidden="true" /> : <UserPlus className="w-3.5 h-3.5" aria-hidden="true" />}<bdi dir="ltr">{displayId(p.clientEmail)}</bdi> · {T(p.clientLinked ? "live.linked" : "live.pending")}
-        <button type="button" onClick={async () => { if (window.confirm(T("live.rmClientConfirm"))) { try { await removeClient(p.id); } catch (err) { setMsg(err.message || String(err)); } } }} aria-label={T("cash.delete")} className="p-1 rounded-md text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button></p>}
+        <button type="button" onClick={async () => { if (await askConfirm(T("live.rmClientConfirm"))) { try { await removeClient(p.id); } catch (err) { setMsg(err.message || String(err)); } } }} aria-label={T("cash.delete")} className="p-1 rounded-md text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button></p>}
       {open ? (
         <form onSubmit={go} className="flex flex-wrap gap-2">
           <input required type="text" autoCapitalize="none" dir="ltr" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={T("live.invitePh")} className="h-9 px-3 rounded-lg border border-[#E0D6C2] text-xs flex-1 min-w-40" />

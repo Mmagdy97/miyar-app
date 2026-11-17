@@ -6,6 +6,7 @@ import './index.css'
 import App from './App.jsx'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 import CookieBanner from './components/CookieBanner.jsx'
+import ConfirmHost from './components/ConfirmHost.jsx'
 import SharedView from './components/SharedView.jsx'
 
 // Public client link: /?share=<snapshot> renders a read-only page, no login and no app shell.
@@ -36,6 +37,7 @@ createRoot(document.getElementById('root')).render(
       <ErrorBoundary>
         {sharePayload ? <SharedView payload={sharePayload} /> : <App />}
         <CookieBanner />
+        <ConfirmHost />
       </ErrorBoundary>
     </I18nProvider>
   </StrictMode>,
