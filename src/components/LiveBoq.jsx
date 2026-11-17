@@ -3,6 +3,7 @@ import EmptyState from "./EmptyState";
 import { Plus, Trash2, ClipboardCheck, Pencil, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
+import { BOQ_LIBRARY } from "../data/boqLibrary";
 import { boqRepo, boqTotals, itemPrice } from "../data/boq";
 
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
@@ -59,6 +60,12 @@ export default function LiveBoq() {
     setF({ ...empty, category: f.category, margin: f.margin });
   };
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
+  const pick = (e) => {
+    const [ci, ii] = e.target.value.split("|").map(Number);
+    if (Number.isNaN(ci)) return;
+    const g = BOQ_LIBRARY[ci]; const [name, unit] = g.items[ii];
+    setF({ ...f, category: g.cat, name, unit });
+  };
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-5xl mx-auto space-y-6">
@@ -77,6 +84,10 @@ export default function LiveBoq() {
             </div>
           ))}
         </div>
+        <select value="" onChange={pick} aria-label={T("boq.lib")} className={input + " max-w-md w-full"}>
+          <option value="">{T("boq.lib")}</option>
+          {BOQ_LIBRARY.map((g, ci) => <optgroup key={g.cat} label={g.cat}>{g.items.map(([n, u], ii) => <option key={n} value={ci + "|" + ii}>{n} ({u})</option>)}</optgroup>)}
+        </select>
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
           <input placeholder={T("boq.cat")} value={f.category} onChange={set("category")} className={input + " w-40"} />
           <input required placeholder={T("boq.name")} value={f.name} onChange={set("name")} className={input + " flex-1 min-w-48"} />

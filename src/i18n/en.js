@@ -626,6 +626,7 @@ export default {
   "live.rmClientConfirm": "Remove the client from this project?",
   "team.rmConfirm": "Remove this member? The admin will be notified.",
   "nav.Secretary.Team": "Team",
+  "boq.lib": "Pick an item from the library (architecture / finishes)",
   "inv.title": "Invoices & payments",
   "inv.sub": "Record each project's payments and track collected vs due.",
   "inv.total": "Total billed",

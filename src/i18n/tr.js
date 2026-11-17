@@ -626,6 +626,7 @@ export default {
   "live.rmClientConfirm": "Müşteri projeden kaldırılsın mı?",
   "team.rmConfirm": "Üye kaldırılsın mı? Yönetici bilgilendirilecek.",
   "nav.Secretary.Team": "Ekip",
+  "boq.lib": "Kütüphaneden kalem seçin (mimari / işçilik)",
   "inv.title": "Faturalar ve ödemeler",
   "inv.sub": "Her projenin ödemelerini kaydedin; tahsil edilen ve bekleyeni izleyin.",
   "inv.total": "Toplam tutar",
