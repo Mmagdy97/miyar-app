@@ -391,12 +391,12 @@ html.dark .bg-\[\#F6F3EC\]\/90, html.dark .bg-\[\#F6F3EC\]\/80, html.dark .bg-\[
    Soft v4 — sage / peach / sky (light), navy (dark).
    Floating rounded shell, borderless soft cards, pastel tiles.
    ============================================================ */
-.app-shell { background: var(--sand-2); }
+.app-shell { background: var(--paper); }
 .app-main { background: var(--paper); }
 :root { --on-peach: #FFFFFF; } html.dark { --on-peach: #FFFFFF; }
 @media (min-width: 768px) {
-  .app-main { margin: 12px; margin-inline-start: 0; border-radius: var(--r-xl); background: var(--paper); overflow: hidden; box-shadow: var(--shadow-2); }
-  .app-side { padding: 12px; }
+  .app-main { background: var(--paper); overflow: hidden; }
+  .app-side { padding: 0; }
 }
 /* Cards inside the app: no hard border, generous radius, soft lift */
 .app-main :is(div, section, article, form).bg-white:is([class*="rounded-lg"], [class*="rounded-xl"], [class*="rounded-2xl"]):is([class*="border-[#E0D6C2]"], [class*="border-[#EFE7D6]"]) {
@@ -547,3 +547,10 @@ html.dark .lp-grad{background:linear-gradient(90deg,#7FB3B8,#B197FC 60%,#FBBF24)
 .lp-final{border-radius:32px;color:#fff;background:radial-gradient(60% 80% at 20% 0%,#2E6F73 0%,transparent 70%),radial-gradient(50% 70% at 90% 100%,#C6601F 0%,transparent 70%),#0F3D3E}
 .lp-hero-flat{background:#0F3D3E}
 .lp-panel{background:radial-gradient(70% 90% at 15% 0%,rgba(46,111,115,.55),transparent 70%),radial-gradient(60% 80% at 100% 100%,rgba(124,92,230,.35),transparent 70%),#0F3D3E}
+
+/* Sidebar active item: merges into the content area with concave corners */
+.side-notch::before,.side-notch::after{content:"";position:absolute;inset-inline-end:0;width:20px;height:20px;pointer-events:none}
+.side-notch::before{bottom:100%;background:radial-gradient(circle at 0 0,transparent 19.5px,var(--paper) 20px)}
+.side-notch::after{top:100%;background:radial-gradient(circle at 0 100%,transparent 19.5px,var(--paper) 20px)}
+[dir=rtl] .side-notch::before{background:radial-gradient(circle at 100% 0,transparent 19.5px,var(--paper) 20px)}
+[dir=rtl] .side-notch::after{background:radial-gradient(circle at 100% 100%,transparent 19.5px,var(--paper) 20px)}

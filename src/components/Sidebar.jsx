@@ -65,11 +65,11 @@ function Sidebar({
   // Collapsed (desktop): logo disc + dark pill rail; the active item pops out as a peach circle with a notch.
   if (collapsed) {
     return (
-      <aside ref={sidebarRef} className="relative hidden md:flex flex-col items-center gap-3 h-full w-full select-none">
-        <div className="w-16 h-16 shrink-0 rounded-full bg-[var(--panel)] flex items-center justify-center">
+      <aside ref={sidebarRef} className="relative hidden md:flex flex-col items-center h-full w-full select-none bg-[var(--panel)] pt-4">
+        <div className="w-12 h-12 shrink-0 flex items-center justify-center">
           <LogoMark className="w-7 h-7 text-[var(--peach)]" />
         </div>
-        <div className="relative flex-1 min-h-0 w-16 rounded-full bg-[var(--panel)] flex flex-col items-center py-4">
+        <div className="relative flex-1 min-h-0 w-full flex flex-col items-center pt-3 pb-4">
           <button type="button" onClick={toggleSidebar} aria-label={t("menu.expand")} title={t("menu.expand")} className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 cursor-pointer">
             <Menu className="w-5 h-5" />
           </button>
@@ -91,7 +91,7 @@ function Sidebar({
                   onMouseEnter={(e) => handleMouseEnter(e, label)}
                   onMouseLeave={handleMouseLeave}
                   className={`relative w-11 h-11 shrink-0 rounded-full flex items-center justify-center cursor-pointer transition-[transform,background-color,color] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                    active ? "rail-active bg-[var(--peach)] text-[color:var(--on-peach)] ltr:translate-x-5 rtl:-translate-x-5 z-10" : "text-white/65 hover:text-white hover:bg-white/10"
+                    active ? "bg-[var(--peach)] text-[color:var(--on-peach)] z-10" : "text-white/65 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -105,7 +105,7 @@ function Sidebar({
           )}
         </div>
         {tooltip.visible && (
-          <div className="absolute start-[84px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[var(--panel)] rounded-full shadow-md whitespace-nowrap pointer-events-none" style={{ top: tooltip.top, transform: "translateY(-50%)" }}>
+          <div className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[var(--panel)] rounded-full shadow-md whitespace-nowrap pointer-events-none" style={{ top: tooltip.top, transform: "translateY(-50%)" }}>
             {tooltip.text}
           </div>
         )}
@@ -116,9 +116,9 @@ function Sidebar({
   return (
     <aside
       ref={sidebarRef}
-      className={`relative flex flex-col h-full bg-[var(--panel)] text-white md:rounded-[28px] overflow-hidden transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0 select-none ${
+      className={`relative flex flex-col h-full bg-[var(--panel)] text-white overflow-hidden transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0 select-none ${
         hideHeader ? "w-full border-none" : ""
-      } ${!hideHeader && (collapsed ? "md:w-[72px]" : "w-full md:w-64")}`}
+      } ${!hideHeader && "w-full"}`}
     >
       {/* Sidebar Header */}
       {!hideHeader && (
@@ -180,8 +180,8 @@ function Sidebar({
       )}
 
       {/* Nav Items */}
-      <nav ref={navRef} className="relative flex-1 px-2.5 mt-2 space-y-1 overflow-y-auto">
-        <span aria-hidden="true" className="absolute inset-x-2.5 rounded-2xl bg-[var(--peach)] pointer-events-none transition-[transform,height,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]" style={{ transform: `translateY(${ind.y}px)`, height: ind.h, opacity: ind.h ? 1 : 0 }} />
+      <nav ref={navRef} className="relative flex-1 ps-3 pe-0 mt-2 space-y-1 overflow-y-auto">
+        <span aria-hidden="true" className="absolute start-3 end-0 rounded-s-2xl side-notch bg-[var(--paper)] pointer-events-none transition-[transform,height,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]" style={{ transform: `translateY(${ind.y}px)`, height: ind.h, opacity: ind.h ? 1 : 0 }} />
         {items.map((item) => {
           const { id, name, icon: Icon } = item;
           const label = navLabel(currentRole, item);
@@ -214,7 +214,7 @@ function Sidebar({
                 collapsed ? "justify-center px-2 py-3" : "px-3 py-2.5 gap-3"
               } ${
                 isActive
-                  ? "text-[color:var(--on-peach)] font-semibold"
+                  ? "text-[color:var(--ink)] font-semibold rounded-e-none"
                   : "text-white/75 hover:bg-white/10 hover:text-white"
               }`}
             >
@@ -223,7 +223,7 @@ function Sidebar({
                   collapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
                 } ${
                   isActive
-                    ? "text-[color:var(--on-peach)]"
+                    ? "text-[color:var(--brand)]"
                     : "text-white/60 group-hover:text-white"
                 }`}
               />

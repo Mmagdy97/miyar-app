@@ -262,7 +262,7 @@ function App() {
       <div
         className={`fixed inset-y-0 start-0 z-50 transform transition-transform duration-300 ease-in-out md:relative md:ltr:translate-x-0 md:rtl:translate-x-0 md:block ${
           isMobileMenuOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"
-        } ${sidebarCollapsed ? "md:w-[104px]" : "md:w-72"} w-72 shrink-0 h-full app-side`}
+        } ${sidebarCollapsed ? "md:w-[76px]" : "md:w-64"} w-72 shrink-0 h-full app-side`}
       >
         <Sidebar
           currentRole={currentRole}
