@@ -30,13 +30,13 @@ def fromhsl(H,S,L):
     r,g,b=colorsys.hls_to_rgb(H,max(0,min(1,L)),max(0,min(1,S))); return rgb2hex(r*255,g*255,b*255)
 
 ACCENT='#f59e0b'
-# explicit neutral map: light-theme (cool grey / navy / indigo) -> dark theme
-BG={'#f7f8fa':'#12152a','#f1f3f6':'#181c36','#eef0f4':'#262b4d','#e5e7eb':'#2c3254','#d1d5db':'#383f66','#ffffff':'#1e223d','#fff':'#1e223d','#f9fafb':'#10172a','#f3f4f6':'#181c36',
-    '#1e223d':'#3f5bd8','#111827':'#3f5bd8','#3f5bd8':'#3f5bd8','#3249b8':'#4a63e0','#4f6bed':'#4f6bed','#e4e9fc':'#242b57',
+# explicit map: light theme (sand + deep teal + orange) -> dark theme
+BG={'#f6f3ec':'#0a0f14','#efe9dc':'#0f171c','#ece5d6':'#16222a','#e4ddce':'#1d2b33','#d6ccb8':'#27363f','#ffffff':'#101a20','#fff':'#101a20','#f8f6f0':'#0c1318',
+    '#0f3d3e':'#2e6f73','#0e1a1b':'#2e6f73','#2e6f73':'#2e6f73','#245a5e':'#3a8286','#1a5254':'#16303a','#c6601f':'#d9712a','#b5541a':'#d9712a','#f8e6d6':'#3a2514','#dcebec':'#16262b',
     '#fef3c7':'#3a2f12','#fde68a':'#4a3a12','#d97706':ACCENT,'#b45309':'#d97706','#92400e':'#b45309'}
-TEXT={'#111827':'#f3f4f6','#1e223d':'#f3f4f6','#3f5bd8':'#8ea2ff','#3249b8':'#8ea2ff','#4b5563':'#b6bccb','#6b7280':'#9aa3b5','#9ca3af':'#9aa3b5','#a8a9be':'#9aa3b5',
-    '#b45309':'#fbbf24','#d97706':'#f59e0b','#92400e':'#fcd34d','#ffffff':'#ffffff','#fff':'#ffffff','#9a2e20':'#f0987a','#b23a2b':'#f0987a','#1f6b49':'#6ee7b7','#2e7d5b':'#6ee7b7','#efe7d6':'#e5e7eb'}
-BORDER={'#e5e7eb':'#2c3254','#d1d5db':'#383f66','#eef0f4':'#262b4d','#f1f3f6':'#262b4d','#3f5bd8':'#4f6bed','#3249b8':'#4f6bed','#1e223d':'#4f6bed','#ffffff':'#273250','#fcd34d':'#6b5a1e','#d97706':ACCENT,'#b45309':ACCENT}
+TEXT={'#0e1a1b':'#efe9dc','#0f3d3e':'#efe9dc','#2e6f73':'#7fb3b8','#245a5e':'#7fb3b8','#4a5757':'#b3c0c0','#64706f':'#93a2a2','#9aa8a8':'#93a2a2','#7fb3b8':'#7fb3b8',
+    '#b45309':'#fbbf24','#d97706':'#f59e0b','#92400e':'#fcd34d','#ffffff':'#ffffff','#fff':'#ffffff','#9a2e20':'#f0987a','#b23a2b':'#f0987a','#1f6b49':'#6ee7b7','#2e7d5b':'#6ee7b7','#efe7d6':'#e5e7eb','#c6601f':'#f0a070','#b5541a':'#f0a070'}
+BORDER={'#e4ddce':'#1d2b33','#d6ccb8':'#27363f','#ece5d6':'#16222a','#efe9dc':'#16222a','#2e6f73':'#3a8286','#245a5e':'#3a8286','#0f3d3e':'#3a8286','#ffffff':'#1d2b33','#fcd34d':'#6b5a1e','#d97706':ACCENT,'#b45309':ACCENT,'#c6601f':'#d9712a','#b5541a':'#d9712a'}
 
 def dark(prop,hexv,alpha_=False):
     h=hexv.lower()
@@ -45,7 +45,7 @@ def dark(prop,hexv,alpha_=False):
         if alpha_ and S<0.2 and L<0.3: return '#000000'
         if h in BG: return BG[h]
         if S<0.12:   # neutral
-            return fromhsl(0.62,0.12,0.06+ (1-L)*0.16) if L>0.5 else h
+            return fromhsl(0.52,0.12,0.06+ (1-L)*0.16) if L>0.5 else h
         if L>0.8: return fromhsl(H,min(S,0.45),0.13)
         if L>0.55: return fromhsl(H,min(S,0.5),0.2)
         return h
@@ -57,7 +57,7 @@ def dark(prop,hexv,alpha_=False):
     # border / ring / divide / outline / shadow
     if h in BORDER: return BORDER[h]
     H,S,L=hsl(h)
-    if S<0.12: return fromhsl(0.62,0.1,0.09+(1-L)*0.14) if L>0.5 else h
+    if S<0.12: return fromhsl(0.52,0.1,0.09+(1-L)*0.14) if L>0.5 else h
     if L>0.7: return fromhsl(H,min(S,0.4),0.26)
     return h
 

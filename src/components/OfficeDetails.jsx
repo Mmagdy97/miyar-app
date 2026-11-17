@@ -3,7 +3,7 @@ import { tr_ as T, getCurrency } from "../i18n";
 import { officeStore, defaultVat } from "../data/office";
 import { fileToDataUrl } from "../lib/image";
 
-const field = "w-full rounded-xl border border-[#E5E7EB] bg-white px-3 py-2 text-sm";
+const field = "w-full rounded-xl border border-[#E4DDCE] bg-white px-3 py-2 text-sm";
 
 /** Collapsible office profile: used on printed quotes, share links and accountant exports. */
 export default function OfficeDetails({ className = "" }) {
@@ -11,25 +11,25 @@ export default function OfficeDetails({ className = "" }) {
   const set = (k) => (e) => setO((p) => ({ ...p, [k]: e.target.value }));
   const vat = o.vatRate ?? defaultVat(getCurrency());
   return (
-    <details className={`no-print rounded-2xl border border-[#E5E7EB] bg-white ${className}`}>
+    <details className={`no-print rounded-2xl border border-[#E4DDCE] bg-white ${className}`}>
       <summary className="flex items-center gap-2 px-4 py-3 text-sm font-bold cursor-pointer list-none">
-        <Building2 className="w-4 h-4 text-[#4B5563]" />
+        <Building2 className="w-4 h-4 text-[#4A5757]" />
         {T("office.title")}
       </summary>
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 px-4 pb-4">
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.name")}
           <input value={o.name} onChange={set("name")} className={field} maxLength={80} />
         </label>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.tax")}
           <input value={o.taxId} onChange={set("taxId")} className={field} maxLength={30} inputMode="numeric" dir="ltr" />
         </label>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.phone")}
           <input value={o.phone} onChange={set("phone")} className={field} maxLength={30} inputMode="tel" dir="ltr" />
         </label>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.vat")}
           <input
             type="number" min="0" max="30" step="0.5" value={vat} dir="ltr"
@@ -37,7 +37,7 @@ export default function OfficeDetails({ className = "" }) {
             className={field}
           />
         </label>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.days")}
           <input
             type="number" min="1" max="365" value={o.quoteDays} dir="ltr"
@@ -46,32 +46,32 @@ export default function OfficeDetails({ className = "" }) {
           />
         </label>
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 px-4 pb-4 border-t border-[#EEF0F4] pt-4">
-        <div className="text-xs font-bold text-[#4B5563] space-y-1">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 px-4 pb-4 border-t border-[#ECE5D6] pt-4">
+        <div className="text-xs font-bold text-[#4A5757] space-y-1">
           <span className="block">{T("office.logo")}</span>
           <div className="flex items-center gap-2">
-            <span className="w-12 h-12 rounded-xl border border-[#E5E7EB] bg-[#F7F8FA] flex items-center justify-center overflow-hidden shrink-0">
-              {o.logo ? <img src={o.logo} alt={T("office.logo")} className="w-full h-full object-contain" /> : <Building2 className="w-5 h-5 text-[#9CA3AF]" aria-hidden="true" />}
+            <span className="w-12 h-12 rounded-xl border border-[#E4DDCE] bg-[#F6F3EC] flex items-center justify-center overflow-hidden shrink-0">
+              {o.logo ? <img src={o.logo} alt={T("office.logo")} className="w-full h-full object-contain" /> : <Building2 className="w-5 h-5 text-[#9AA8A8]" aria-hidden="true" />}
             </span>
-            <label className="cursor-pointer rounded-full border border-[#E5E7EB] px-3 py-2 hover:bg-[#F7F8FA]">
+            <label className="cursor-pointer rounded-full border border-[#E4DDCE] px-3 py-2 hover:bg-[#F6F3EC]">
               {o.logo ? T("office.logoChange") : T("office.logoUp")}
               <input type="file" accept="image/*" className="sr-only" onChange={async (e) => { const f = e.target.files?.[0]; if (!f) return; try { const url = await fileToDataUrl(f, 320, 0.85); setO((p) => ({ ...p, logo: url })); } catch { /* not an image */ } }} />
             </label>
             {o.logo && <button type="button" onClick={() => setO((p) => ({ ...p, logo: "" }))} className="text-[#9A2E20] px-1">{T("office.logoDel")}</button>}
           </div>
         </div>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.color")}
           <span className="flex items-center gap-2">
-            <input type="color" value={o.color || "#1E223D"} onChange={set("color")} className="w-11 h-10 rounded-lg border border-[#E5E7EB] bg-white p-1 cursor-pointer" />
-            <span className="text-[#6B7280] font-normal" dir="ltr">{o.color || "#1E223D"}</span>
+            <input type="color" value={o.color || "#0F3D3E"} onChange={set("color")} className="w-11 h-10 rounded-lg border border-[#E4DDCE] bg-white p-1 cursor-pointer" />
+            <span className="text-[#64706F] font-normal" dir="ltr">{o.color || "#0F3D3E"}</span>
           </span>
         </label>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.address")}
           <input value={o.address || ""} onChange={set("address")} className={field} maxLength={120} />
         </label>
-        <label className="text-xs font-bold text-[#4B5563] space-y-1">
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.email")}
           <input type="email" value={o.email || ""} onChange={set("email")} className={field} maxLength={80} dir="ltr" />
         </label>

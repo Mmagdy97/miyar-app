@@ -6,7 +6,7 @@ import DataBackup from "./DataBackup";
 
 const SCOPES = ["boq", "cash", "expenses", "invoices", "certs", "changeOrders", "selections", "subs", "pos", "workers"];
 const ICON = { add: Plus, del: Minus, upd: PenLine };
-const TONE = { add: "bg-[#EEF0F4] text-[#1F6B49]", del: "bg-[#FBE4DF] text-[#9A2E20]", upd: "bg-[#E3ECF7] text-[#2B4A72]" };
+const TONE = { add: "bg-[#ECE5D6] text-[#1F6B49]", del: "bg-[#FBE4DF] text-[#9A2E20]", upd: "bg-[#E3ECF7] text-[#2B4A72]" };
 
 /** Who changed what, when: every add / delete / field edit on money and approval lists. */
 export default function AuditLog() {
@@ -33,23 +33,23 @@ export default function AuditLog() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-5 max-w-6xl mx-auto w-full">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-3">
         <div>
-          <h1 className="flex items-center gap-2 font-display text-2xl md:text-3xl font-semibold text-[#111827]"><History className="w-6 h-6" aria-hidden="true" />{t("audit.title")}</h1>
-          <p className="text-sm text-[#4B5563] mt-1">{t("audit.sub")}</p>
+          <h1 className="flex items-center gap-2 font-display text-2xl md:text-3xl font-semibold text-[#0E1A1B]"><History className="w-6 h-6" aria-hidden="true" />{t("audit.title")}</h1>
+          <p className="text-sm text-[#4A5757] mt-1">{t("audit.sub")}</p>
         </div>
         <button type="button" onClick={exportCsv} disabled={!rows.length} className="btn-press self-start md:self-auto inline-flex items-center gap-2 h-11 px-5 rounded-full lp-pill-dark text-sm font-semibold disabled:opacity-50"><Download className="w-4 h-4" aria-hidden="true" />{t("audit.export")}</button>
       </header>
 
       <DataBackup />
 
-      <div className="bg-white rounded-[24px] border border-[#E5E7EB] p-3 md:p-4 space-y-3">
+      <div className="bg-white rounded-[24px] border border-[#E4DDCE] p-3 md:p-4 space-y-3">
         <label className="relative block">
-          <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 start-4 text-[#6B7280]" aria-hidden="true" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("audit.search")} aria-label={t("audit.search")} className="w-full h-11 ps-11 pe-4 rounded-full border border-[#E5E7EB] text-sm" />
+          <Search className="w-4 h-4 absolute top-1/2 -translate-y-1/2 start-4 text-[#64706F]" aria-hidden="true" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("audit.search")} aria-label={t("audit.search")} className="w-full h-11 ps-11 pe-4 rounded-full border border-[#E4DDCE] text-sm" />
         </label>
         <div className="flex gap-1.5 overflow-x-auto scrollbar-none">
           {["all", ...SCOPES].map((s) => (
             <button key={s} type="button" onClick={() => setScope(s)} aria-pressed={scope === s}
-              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold border ${scope === s ? "lp-pill-dark border-transparent" : "bg-white text-[#111827] border-[#E5E7EB]"}`}>
+              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold border ${scope === s ? "lp-pill-dark border-transparent" : "bg-white text-[#0E1A1B] border-[#E4DDCE]"}`}>
               {s === "all" ? t("audit.all") : t("audit.s." + s)}
             </button>
           ))}
@@ -57,32 +57,32 @@ export default function AuditLog() {
       </div>
 
       {!rows.length ? (
-        <div className="bg-white rounded-[24px] border border-dashed border-[#D1D5DB] p-8 text-center">
-          <History className="w-8 h-8 mx-auto text-[#9CA3AF]" aria-hidden="true" />
-          <p className="mt-3 font-semibold text-[#111827]">{t("audit.empty")}</p>
-          <p className="mt-1 text-sm text-[#4B5563]">{t("audit.emptyHint")}</p>
+        <div className="bg-white rounded-[24px] border border-dashed border-[#D6CCB8] p-8 text-center">
+          <History className="w-8 h-8 mx-auto text-[#9AA8A8]" aria-hidden="true" />
+          <p className="mt-3 font-semibold text-[#0E1A1B]">{t("audit.empty")}</p>
+          <p className="mt-1 text-sm text-[#4A5757]">{t("audit.emptyHint")}</p>
         </div>
       ) : (
         <ol className="space-y-2.5">
           {rows.map((e) => {
             const Icon = ICON[e.action] || PenLine;
             return (
-              <li key={e.id} className="bg-white rounded-2xl border border-[#E5E7EB] p-3.5 md:p-4 flex gap-3">
+              <li key={e.id} className="bg-white rounded-2xl border border-[#E4DDCE] p-3.5 md:p-4 flex gap-3">
                 <span className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center ${TONE[e.action]}`}><Icon className="w-4 h-4" aria-hidden="true" /></span>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="font-semibold text-[#111827]">{t("audit.a." + e.action)}</span>
-                    <span className="text-[#111827] truncate max-w-full">{e.label}</span>
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#F7F8FA] text-[#4B5563]">{t("audit.s." + e.scope)}</span>
+                    <span className="font-semibold text-[#0E1A1B]">{t("audit.a." + e.action)}</span>
+                    <span className="text-[#0E1A1B] truncate max-w-full">{e.label}</span>
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#F6F3EC] text-[#4A5757]">{t("audit.s." + e.scope)}</span>
                   </div>
                   {e.changes?.length > 0 && (
-                    <ul className="mt-1.5 space-y-0.5 text-xs text-[#4B5563]">
+                    <ul className="mt-1.5 space-y-0.5 text-xs text-[#4A5757]">
                       {e.changes.map((c) => (
-                        <li key={c.f}><span className="font-semibold">{fl(c.f)}:</span> <bdi className="line-through opacity-70">{c.from}</bdi> ← <bdi className="font-semibold text-[#111827]">{c.to}</bdi></li>
+                        <li key={c.f}><span className="font-semibold">{fl(c.f)}:</span> <bdi className="line-through opacity-70">{c.from}</bdi> ← <bdi className="font-semibold text-[#0E1A1B]">{c.to}</bdi></li>
                       ))}
                     </ul>
                   )}
-                  <div className="mt-1.5 text-[11px] text-[#6B7280]">{t("audit.role." + e.role)}{e.mode === "guest" ? ` · ${t("audit.guest")}` : ""} · <time dateTime={e.at}>{fmt.format(new Date(e.at))}</time></div>
+                  <div className="mt-1.5 text-[11px] text-[#64706F]">{t("audit.role." + e.role)}{e.mode === "guest" ? ` · ${t("audit.guest")}` : ""} · <time dateTime={e.at}>{fmt.format(new Date(e.at))}</time></div>
                 </div>
               </li>
             );

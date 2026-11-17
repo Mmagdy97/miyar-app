@@ -16,9 +16,9 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
       <div className="flex items-center justify-center min-h-[calc(100vh-8.5rem)]">
         <div className="w-full max-w-2xl">
           {/* Architectural Luxury Card */}
-          <div className="bg-white rounded-lg border border-[#E5E7EB] shadow-sm p-6 sm:p-10 text-center">
+          <div className="bg-white rounded-lg border border-[#E4DDCE] shadow-sm p-6 sm:p-10 text-center">
             {/* Icon Header */}
-            <div className="relative inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-[#F1F3F6] border border-[#E5E7EB] text-[#111827] shadow-xs">
+            <div className="relative inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-[#EFE9DC] border border-[#E4DDCE] text-[#0E1A1B] shadow-xs">
               <Construction className="w-8 h-8" />
               <span className="absolute -bottom-1 -start-1 flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -32,42 +32,42 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                 {T("ld.180", { v0: roleDisplay })}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#F1F3F6] text-[#4B5563] border border-[#E5E7EB]">
-                <Clock className="w-3.5 h-3.5 text-[#4B5563]" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#EFE9DC] text-[#4A5757] border border-[#E4DDCE]">
+                <Clock className="w-3.5 h-3.5 text-[#4A5757]" />
                 {T("ld.181", { v0: activeTab })}
               </span>
             </div>
 
             {/* Primary Heading */}
-            <h2 className="text-2xl sm:text-3xl font-semibold text-[#111827] tracking-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#0E1A1B] tracking-tight mb-3">
               {T("ld.182", { v0: activeTab })}
             </h2>
 
             {/* Subtitle */}
-            <p className="text-[#4B5563] text-sm sm:text-base leading-relaxed max-w-lg mx-auto mb-8 font-medium">
+            <p className="text-[#4A5757] text-sm sm:text-base leading-relaxed max-w-lg mx-auto mb-8 font-medium">
               {T("ld.183")}
             </p>
 
             {/* Feature Preview Box */}
-            <div className="bg-[#F7F8FA] rounded-lg border border-[#E5E7EB] p-5 mb-8 text-start">
-              <div className="flex items-center gap-2 mb-3 text-xs font-bold text-[#111827]">
+            <div className="bg-[#F6F3EC] rounded-lg border border-[#E4DDCE] p-5 mb-8 text-start">
+              <div className="flex items-center gap-2 mb-3 text-xs font-bold text-[#0E1A1B]">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
                 <span>{T("ld.184")}</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#4B5563]">
-                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E5E7EB]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-[#4A5757]">
+                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E4DDCE]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <span>{T("ld.185")}</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E5E7EB]">
+                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E4DDCE]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <span>{T("ld.186")}</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E5E7EB]">
+                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E4DDCE]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <span>{T("ld.187")}</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E5E7EB]">
+                <div className="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-[#E4DDCE]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <span>{T("ld.188")}</span>
                 </div>
@@ -78,7 +78,7 @@ function ModulePlaceholder({ activeTab, currentRole, setActiveTab }) {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={() => setActiveTab("لوحة التحكم")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#3F5BD8] text-white hover:bg-[#3F5BD8] transition-colors shadow-sm rounded-lg font-bold text-sm cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#2E6F73] text-white hover:bg-[#2E6F73] transition-colors shadow-sm rounded-lg font-bold text-sm cursor-pointer"
               >
                 <LayoutDashboard className="w-4 h-4" />
                 <span>{T("ld.189")}</span>

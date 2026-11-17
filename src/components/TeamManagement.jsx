@@ -81,8 +81,8 @@ const ROLE_BADGES = localize({
   },
   "مهندس موقع": {
     label: "مهندس موقع",
-    badgeClass: "bg-[#F1F3F6] text-[#111827] border-[#E5E7EB]",
-    dotClass: "bg-[#3F5BD8]",
+    badgeClass: "bg-[#EFE9DC] text-[#0E1A1B] border-[#E4DDCE]",
+    dotClass: "bg-[#2E6F73]",
   },
   "مكتب فني": {
     label: "مكتب فني",
@@ -92,11 +92,11 @@ const ROLE_BADGES = localize({
 });
 
 const AVATAR_COLORS = [
-  "bg-[#3F5BD8]",
-  "bg-[#3F5BD8]",
-  "bg-[#3F5BD8]",
-  "bg-[#666B86]",
-  "bg-[#3F5BD8]",
+  "bg-[#2E6F73]",
+  "bg-[#2E6F73]",
+  "bg-[#2E6F73]",
+  "bg-[#64706F]",
+  "bg-[#2E6F73]",
 ];
 
 const teamStore = createPersistedStore("miyar:team:v1", INITIAL_TEAM_MEMBERS);
@@ -284,7 +284,7 @@ function TeamManagement() {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#3F5BD8] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2E6F73] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -296,17 +296,17 @@ function TeamManagement() {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#111827] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#F1F3F6] border border-[#E5E7EB] flex items-center justify-center text-[#111827]">
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#EFE9DC] border border-[#E4DDCE] flex items-center justify-center text-[#0E1A1B]">
                 <Users className="w-5 h-5" />
               </div>
               <span>{T("team.1")}</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F1F3F6] text-[#111827] border border-[#E5E7EB]/80">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EFE9DC] text-[#0E1A1B] border border-[#E4DDCE]/80">
               {T("team.2", { v0: teamMembers.length })}
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#4B5563]">
+          <p className="text-xs md:text-sm text-[#4A5757]">
             {T("team.3")}
           </p>
         </div>
@@ -315,7 +315,7 @@ function TeamManagement() {
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleResetTeam}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#4B5563] bg-white border border-[#E5E7EB] hover:bg-[#F7F8FA] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#4A5757] bg-white border border-[#E4DDCE] hover:bg-[#F6F3EC] transition-colors shadow-2xs cursor-pointer"
             title={T("team.4")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -325,7 +325,7 @@ function TeamManagement() {
           {/* Primary Button D("+ إضافة عضو جديد") */}
           <button
             onClick={handleOpenAddModal}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] transition-colors shadow-sm cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
             <span>{T("team.6")}</span>
@@ -335,18 +335,18 @@ function TeamManagement() {
 
       {/* KPI Stats Bar */}
       <div className="grid stat-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <div className="bg-white rounded-lg p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("team.7")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("team.7")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#111827]">{stats.total}</span>
-            <span className="text-[11px] font-bold text-[#4B5563] bg-[#F1F3F6] border border-[#E5E7EB] px-2 py-0.5 rounded-md">
+            <span className="text-xl md:text-2xl font-semibold text-[#0E1A1B]">{stats.total}</span>
+            <span className="text-[11px] font-bold text-[#4A5757] bg-[#EFE9DC] border border-[#E4DDCE] px-2 py-0.5 rounded-md">
               {T("team.8")}
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("team.9")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("team.9")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-emerald-600">{stats.siteEng}</span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
@@ -355,8 +355,8 @@ function TeamManagement() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("team.11")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("team.11")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-amber-800">{stats.techOffice}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
@@ -365,11 +365,11 @@ function TeamManagement() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("team.13")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("team.13")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#111827]">{stats.managers}</span>
-            <span className="text-[11px] font-bold text-[#111827] bg-[#F1F3F6] border border-[#E5E7EB] px-2 py-0.5 rounded-md">
+            <span className="text-xl md:text-2xl font-semibold text-[#0E1A1B]">{stats.managers}</span>
+            <span className="text-[11px] font-bold text-[#0E1A1B] bg-[#EFE9DC] border border-[#E4DDCE] px-2 py-0.5 rounded-md">
               {T("team.14")}
             </span>
           </div>
@@ -377,16 +377,16 @@ function TeamManagement() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white rounded-lg border border-[#E5E7EB] p-3.5 mb-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="bg-white rounded-lg border border-[#E4DDCE] p-3.5 mb-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-[#4B5563] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#4A5757] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder={T("team.15")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E5E7EB] bg-[#F7F8FA] text-xs md:text-sm font-semibold text-[#111827] placeholder-[#4B5563]/50 focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
+            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E4DDCE] bg-[#F6F3EC] text-xs md:text-sm font-semibold text-[#0E1A1B] placeholder-[#4A5757]/50 focus:outline-none focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all"
           />
         </div>
 
@@ -398,8 +398,8 @@ function TeamManagement() {
               onClick={() => setRoleFilter(role)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 roleFilter === role
-                  ? "bg-[#3F5BD8] text-white shadow-sm"
-                  : "bg-[#F1F3F6] text-[#4B5563] hover:bg-[#E5E7EB]"
+                  ? "bg-[#2E6F73] text-white shadow-sm"
+                  : "bg-[#EFE9DC] text-[#4A5757] hover:bg-[#E4DDCE]"
               }`}
             >
               {E(role)}
@@ -409,11 +409,11 @@ function TeamManagement() {
       </div>
 
       {/* Main Team Table in a Glassmorphic Card */}
-      <div className="bg-white rounded-lg border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
+      <div className="bg-white rounded-lg border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-start border-collapse">
             <thead>
-              <tr className="bg-[#F7F8FA] text-[#4B5563] text-xs font-bold border-b border-[#E5E7EB]">
+              <tr className="bg-[#F6F3EC] text-[#4A5757] text-xs font-bold border-b border-[#E4DDCE]">
                 <th className="py-4 px-5 min-w-[240px]">{T("team.16")}</th>
                 <th className="py-4 px-4 w-40 text-center">{T("team.17")}</th>
                 <th className="py-4 px-4 w-36 text-center">{T("team.18")}</th>
@@ -421,12 +421,12 @@ function TeamManagement() {
                 <th className="py-4 px-5 w-32 text-center">{T("team.20")}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#EEF0F4] text-xs md:text-sm">
+            <tbody className="divide-y divide-[#ECE5D6] text-xs md:text-sm">
               {filteredMembers.map((member) => {
                 const roleConfig = ROLE_BADGES[member.role] || {
                   label: member.role,
-                  badgeClass: "bg-[#F1F3F6] text-[#4B5563] border-[#E5E7EB]",
-                  dotClass: "bg-[#4F5470]",
+                  badgeClass: "bg-[#EFE9DC] text-[#4A5757] border-[#E4DDCE]",
+                  dotClass: "bg-[#4A5757]",
                 };
 
                 const isStatusActive = member.status === "نشط";
@@ -435,14 +435,14 @@ function TeamManagement() {
                 return (
                   <tr
                     key={member.id}
-                    className="hover:bg-[#F7F8FA] transition-colors duration-150 group"
+                    className="hover:bg-[#F6F3EC] transition-colors duration-150 group"
                   >
                     {/* Name & Contact (Clickable for editing) */}
                     <td className="py-4 px-5">
                       <div className="flex items-center gap-3">
                         <button
                           onClick={() => handleOpenEditModal(member)}
-                          className={`w-10 h-10 rounded-2xl ${member.color} text-white font-semibold text-sm flex items-center justify-center shrink-0 shadow-xs hover:ring-2 hover:ring-[#3F5BD8]/30 transition-all cursor-pointer`}
+                          className={`w-10 h-10 rounded-2xl ${member.color} text-white font-semibold text-sm flex items-center justify-center shrink-0 shadow-xs hover:ring-2 hover:ring-[#2E6F73]/30 transition-all cursor-pointer`}
                           title={T("team.21")}
                         >
                           {member.avatar}
@@ -454,20 +454,20 @@ function TeamManagement() {
                             className="text-start group-hover:text-amber-800 transition-colors cursor-pointer block"
                             title={T("team.22")}
                           >
-                            <h4 className="font-semibold text-[#111827] group-hover:text-amber-800 transition-colors leading-snug flex items-center gap-1.5">
+                            <h4 className="font-semibold text-[#0E1A1B] group-hover:text-amber-800 transition-colors leading-snug flex items-center gap-1.5">
                               <span>{member.name}</span>
                               <Edit3 className="w-3 h-3 opacity-0 group-hover:opacity-100 text-amber-700 transition-opacity" />
                             </h4>
                           </button>
-                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#4B5563]">
+                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-[#4A5757]">
                             <span className="flex items-center gap-1">
-                              <Mail className="w-3 h-3 text-[#4B5563]" />
+                              <Mail className="w-3 h-3 text-[#4A5757]" />
                               <span>{member.email}</span>
                             </span>
                             {member.phone && (
                               <>
                                 <span className="flex items-center gap-1 font-mono">
-                                  <Phone className="w-3 h-3 text-[#4B5563]" />
+                                  <Phone className="w-3 h-3 text-[#4A5757]" />
                                   <span>{member.phone}</span>
                                 </span>
                               </>
@@ -489,8 +489,8 @@ function TeamManagement() {
 
                     {/* Active Projects Count */}
                     <td className="py-4 px-4 text-center">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#F1F3F6] text-[#111827] font-semibold text-xs">
-                        <Building2 className="w-3.5 h-3.5 text-[#4B5563]" />
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#EFE9DC] text-[#0E1A1B] font-semibold text-xs">
+                        <Building2 className="w-3.5 h-3.5 text-[#4A5757]" />
                         <span>{T("team.23", { v0: member.projectsCount })}</span>
                       </span>
                     </td>
@@ -505,7 +505,7 @@ function TeamManagement() {
                             ? "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100"
                             : isStatusLeave
                             ? "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100"
-                            : "bg-[#F1F3F6] text-[#4B5563] border-[#E5E7EB] hover:bg-[#E5E7EB]"
+                            : "bg-[#EFE9DC] text-[#4A5757] border-[#E4DDCE] hover:bg-[#E4DDCE]"
                         }`}
                       >
                         <span
@@ -514,7 +514,7 @@ function TeamManagement() {
                               ? "bg-emerald-500 animate-pulse"
                               : isStatusLeave
                               ? "bg-amber-500"
-                              : "bg-[#4F5470]"
+                              : "bg-[#4A5757]"
                           }`}
                         />
                         <span>{E(member.status)}</span>
@@ -527,7 +527,7 @@ function TeamManagement() {
                         {/* Edit Action Icon */}
                         <button
                           onClick={() => handleOpenEditModal(member)}
-                          className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#4A5757] hover:text-[#0E1A1B] hover:bg-[#EFE9DC] transition-colors cursor-pointer"
                           title={T("team.21")}
                         >
                           <Edit3 className="w-4 h-4" />
@@ -536,7 +536,7 @@ function TeamManagement() {
                         {/* Power Toggle Action Icon */}
                         <button
                           onClick={() => handleToggleStatus(member.id)}
-                          className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#4A5757] hover:text-[#0E1A1B] hover:bg-[#EFE9DC] transition-colors cursor-pointer"
                           title={T("team.25")}
                         >
                           <Power className="w-4 h-4" />
@@ -545,7 +545,7 @@ function TeamManagement() {
                         {/* Delete Action Icon */}
                         <button
                           onClick={() => handleDeleteMember(member.id, member.name)}
-                          className="p-1.5 rounded-lg text-[#4B5563] hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-[#4A5757] hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                           title={T("team.26")}
                         >
                           <Trash2 className="w-4 h-4" />
@@ -558,10 +558,10 @@ function TeamManagement() {
 
               {filteredMembers.length === 0 && (
                 <tr>
-                  <td colSpan="5" className="py-12 text-center text-[#4B5563]">
-                    <Users className="w-8 h-8 mx-auto mb-2 text-[#6B7280]" />
-                    <p className="font-bold text-[#4B5563]">{T("team.27")}</p>
-                    <p className="text-xs text-[#4B5563] mt-1">
+                  <td colSpan="5" className="py-12 text-center text-[#4A5757]">
+                    <Users className="w-8 h-8 mx-auto mb-2 text-[#64706F]" />
+                    <p className="font-bold text-[#4A5757]">{T("team.27")}</p>
+                    <p className="text-xs text-[#4A5757] mt-1">
                       جرّب تعديل كلمة البحث أو الضغط على "{D("+ إضافة عضو جديد")}"
                     </p>
                   </td>
@@ -572,12 +572,12 @@ function TeamManagement() {
         </div>
 
         {/* Table Footer */}
-        <div className="p-4 bg-[#F7F8FA] border-t border-[#E5E7EB]/60 flex items-center justify-between text-xs text-[#4B5563]">
+        <div className="p-4 bg-[#F6F3EC] border-t border-[#E4DDCE]/60 flex items-center justify-between text-xs text-[#4A5757]">
           <span>
-            {D("عرض")} <strong className="text-[#111827]">{filteredMembers.length}</strong> {D("من أصل")}{" "}
-            <strong className="text-[#111827]">{teamMembers.length}</strong> {D("عضو")}
+            {D("عرض")} <strong className="text-[#0E1A1B]">{filteredMembers.length}</strong> {D("من أصل")}{" "}
+            <strong className="text-[#0E1A1B]">{teamMembers.length}</strong> {D("عضو")}
           </span>
-          <span className="text-[11px] text-[#4B5563]">
+          <span className="text-[11px] text-[#4A5757]">
             {D("* اضغط على اسم الموظف أو أيقونة التعديل لضبط الصلاحيات المخصصة له.")}
           </span>
         </div>
@@ -585,26 +585,26 @@ function TeamManagement() {
 
       {/* Add / Edit Glassmorphic Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#1E223D]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 bg-[#0F3D3E]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E4DDCE] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
             {/* Dynamic Modal Header (Requirement 1) */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#EEF0F4]">
-              <h3 className="text-lg font-semibold text-[#111827] flex items-center gap-2">
+            <div className="flex items-center justify-between pb-4 border-b border-[#ECE5D6]">
+              <h3 className="text-lg font-semibold text-[#0E1A1B] flex items-center gap-2">
                 {editingMember ? (
                   <>
-                    <Edit3 className="w-5 h-5 text-[#111827]" />
+                    <Edit3 className="w-5 h-5 text-[#0E1A1B]" />
                     <span>{T("team.28", { v0: editingMember.name })}</span>
                   </>
                 ) : (
                   <>
-                    <UserPlus className="w-5 h-5 text-[#111827]" />
+                    <UserPlus className="w-5 h-5 text-[#0E1A1B]" />
                     <span>{T("team.29")}</span>
                   </>
                 )}
               </h3>
               <button
                 onClick={handleCloseModal}
-                className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#4A5757] hover:text-[#0E1A1B] hover:bg-[#EFE9DC] cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -614,7 +614,7 @@ function TeamManagement() {
             <form onSubmit={handleFormSubmit} className="space-y-4 mt-4">
               {/* Field 1: Name */}
               <div>
-                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
+                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
                   اسم الموظف / المهندس <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -623,51 +623,51 @@ function TeamManagement() {
                   placeholder={T("team.30")}
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E5E7EB] text-xs md:text-sm font-semibold text-[#111827] placeholder-[#4B5563]/50 focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E4DDCE] text-xs md:text-sm font-semibold text-[#0E1A1B] placeholder-[#4A5757]/50 focus:outline-none focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all"
                 />
               </div>
 
               {/* Field 2: Role Select with Smart Defaults */}
               <div>
-                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
+                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
                   الصلاحية ونطاق الدور <span className="text-rose-500">*</span>
                 </label>
                 <select
                   value={newRole}
                   onChange={(e) => handleRoleChange(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E5E7EB] text-xs md:text-sm font-bold text-[#111827] bg-white focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all cursor-pointer"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E4DDCE] text-xs md:text-sm font-bold text-[#0E1A1B] bg-white focus:outline-none focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all cursor-pointer"
                 >
                   <option value="مهندس موقع">{T("team.31")}</option>
                   <option value="مكتب فني">{T("team.32")}</option>
                   <option value="مدير">{T("team.33")}</option>
                 </select>
-                <p className="text-[11px] text-[#4B5563] mt-1">
+                <p className="text-[11px] text-[#4A5757] mt-1">
                   {T("team.34")}
                 </p>
               </div>
 
               {/* Requirement 2: Permissions Assignment Matrix (توزيع الصلاحيات التفصيلية) */}
-              <div className="bg-[#F7F8FA] rounded-lg border border-[#E5E7EB] p-4 space-y-3">
+              <div className="bg-[#F6F3EC] rounded-lg border border-[#E4DDCE] p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
-                    <Shield className="w-4 h-4 text-[#111827]" />
-                    <span className="text-xs font-bold text-[#111827]">
+                    <Shield className="w-4 h-4 text-[#0E1A1B]" />
+                    <span className="text-xs font-bold text-[#0E1A1B]">
                       {T("team.35")}
                     </span>
                   </div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#F1F3F6] text-[#111827] border border-[#E5E7EB]">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EFE9DC] text-[#0E1A1B] border border-[#E4DDCE]">
                     {T("team.36")}
                   </span>
                 </div>
 
                 <div className="space-y-2 pt-1">
                   {/* Permission A: View Costs & Profits */}
-                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E5E7EB] shadow-2xs">
+                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E4DDCE] shadow-2xs">
                     <div>
-                      <p className="text-xs font-bold text-[#111827]">
+                      <p className="text-xs font-bold text-[#0E1A1B]">
                         {T("team.37")}
                       </p>
-                      <p className="text-[10px] text-[#4B5563]">
+                      <p className="text-[10px] text-[#4A5757]">
                         {T("team.38")}
                       </p>
                     </div>
@@ -679,7 +679,7 @@ function TeamManagement() {
                       aria-checked={permissions.viewFinances}
                       onClick={() => handleTogglePermission("viewFinances")}
                       className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                        permissions.viewFinances ? "bg-[#3F5BD8]" : "bg-[#E5E7EB]"
+                        permissions.viewFinances ? "bg-[#2E6F73]" : "bg-[#E4DDCE]"
                       }`}
                     >
                       <span
@@ -691,12 +691,12 @@ function TeamManagement() {
                   </div>
 
                   {/* Permission B: Edit BOQs */}
-                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E5E7EB] shadow-2xs">
+                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E4DDCE] shadow-2xs">
                     <div>
-                      <p className="text-xs font-bold text-[#111827]">
+                      <p className="text-xs font-bold text-[#0E1A1B]">
                         {T("team.39")}
                       </p>
-                      <p className="text-[10px] text-[#4B5563]">
+                      <p className="text-[10px] text-[#4A5757]">
                         {T("team.40")}
                       </p>
                     </div>
@@ -707,7 +707,7 @@ function TeamManagement() {
                       aria-checked={permissions.editBOQ}
                       onClick={() => handleTogglePermission("editBOQ")}
                       className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                        permissions.editBOQ ? "bg-[#3F5BD8]" : "bg-[#E5E7EB]"
+                        permissions.editBOQ ? "bg-[#2E6F73]" : "bg-[#E4DDCE]"
                       }`}
                     >
                       <span
@@ -719,12 +719,12 @@ function TeamManagement() {
                   </div>
 
                   {/* Permission C: Approve Site Reports */}
-                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E5E7EB] shadow-2xs">
+                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E4DDCE] shadow-2xs">
                     <div>
-                      <p className="text-xs font-bold text-[#111827]">
+                      <p className="text-xs font-bold text-[#0E1A1B]">
                         {T("team.41")}
                       </p>
-                      <p className="text-[10px] text-[#4B5563]">
+                      <p className="text-[10px] text-[#4A5757]">
                         {T("team.42")}
                       </p>
                     </div>
@@ -735,7 +735,7 @@ function TeamManagement() {
                       aria-checked={permissions.approveReports}
                       onClick={() => handleTogglePermission("approveReports")}
                       className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                        permissions.approveReports ? "bg-[#3F5BD8]" : "bg-[#E5E7EB]"
+                        permissions.approveReports ? "bg-[#2E6F73]" : "bg-[#E4DDCE]"
                       }`}
                     >
                       <span
@@ -747,12 +747,12 @@ function TeamManagement() {
                   </div>
 
                   {/* Permission D: Request Petty Cash */}
-                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E5E7EB] shadow-2xs">
+                  <div className="flex items-center justify-between p-2.5 bg-white rounded-lg border border-[#E4DDCE] shadow-2xs">
                     <div>
-                      <p className="text-xs font-bold text-[#111827]">
+                      <p className="text-xs font-bold text-[#0E1A1B]">
                         {T("team.43")}
                       </p>
-                      <p className="text-[10px] text-[#4B5563]">
+                      <p className="text-[10px] text-[#4A5757]">
                         {T("team.44")}
                       </p>
                     </div>
@@ -763,7 +763,7 @@ function TeamManagement() {
                       aria-checked={permissions.pettyCash}
                       onClick={() => handleTogglePermission("pettyCash")}
                       className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                        permissions.pettyCash ? "bg-[#3F5BD8]" : "bg-[#E5E7EB]"
+                        permissions.pettyCash ? "bg-[#2E6F73]" : "bg-[#E4DDCE]"
                       }`}
                     >
                       <span
@@ -779,7 +779,7 @@ function TeamManagement() {
               {/* Field 3: Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
+                  <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
                     {T("team.45")}
                   </label>
                   <input
@@ -787,12 +787,12 @@ function TeamManagement() {
                     placeholder="name@miyar.eg"
                     value={newEmail}
                     onChange={(e) => setNewEmail(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#111827] focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E4DDCE] text-xs font-semibold text-[#0E1A1B] focus:outline-none focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
+                  <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
                     {T("team.46")}
                   </label>
                   <input
@@ -800,14 +800,14 @@ function TeamManagement() {
                     placeholder="+20 100 123 4567"
                     value={newPhone}
                     onChange={(e) => setNewPhone(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#111827] focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E4DDCE] text-xs font-semibold text-[#0E1A1B] focus:outline-none focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all"
                   />
                 </div>
               </div>
 
               {/* Field 4: Projects Count */}
               <div>
-                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
+                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
                   {T("team.47")}
                 </label>
                 <input
@@ -816,12 +816,12 @@ function TeamManagement() {
                   max="20"
                   value={newProjectsCount}
                   onChange={(e) => setNewProjectsCount(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs md:text-sm font-bold text-[#111827] focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
+                  className="w-full px-3.5 py-2 rounded-lg border border-[#E4DDCE] text-xs md:text-sm font-bold text-[#0E1A1B] focus:outline-none focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all"
                 />
               </div>
 
               {/* Modal Footer: Action Buttons (Requirement 3: Delete User button ONLY when in Edit mode) */}
-              <div className="flex items-center justify-between pt-4 border-t border-[#EEF0F4]">
+              <div className="flex items-center justify-between pt-4 border-t border-[#ECE5D6]">
                 {/* Delete User Button at bottom left (in RTL, left is visually start/end opposite side) */}
                 {editingMember ? (
                   <button
@@ -840,13 +840,13 @@ function TeamManagement() {
                   <button
                     type="button"
                     onClick={handleCloseModal}
-                    className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#4B5563] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
+                    className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#4A5757] hover:bg-[#EFE9DC] transition-colors cursor-pointer"
                   >
                     {T("team.49")}
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#3F5BD8] hover:bg-[#3F5BD8] text-white hover:bg-[#3F5BD8] transition-colors font-bold text-xs md:text-sm shadow-sm transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#2E6F73] hover:bg-[#2E6F73] text-white hover:bg-[#2E6F73] transition-colors font-bold text-xs md:text-sm shadow-sm transition-colors cursor-pointer"
                   >
                     {editingMember ? (
                       <>

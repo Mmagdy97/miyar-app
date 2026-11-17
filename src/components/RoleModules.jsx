@@ -14,14 +14,14 @@ export default function RoleModules({ openModal }) {
   return (
     <section id="modules" className="py-14 sm:py-32 px-5 max-w-6xl mx-auto w-full">
       <div className="text-start mb-8 sm:mb-10">
-        <p className="text-sm sm:text-base font-semibold text-[#3F5BD8]">{T("mods.kicker")}</p>
-        <h2 className="mt-3 text-3xl sm:text-4xl font-semibold text-[#111827] leading-[1.2] text-balance">{T("mods.title")}</h2>
-        <p className="mx-auto mt-5 max-w-2xl text-lg sm:text-xl text-[#4B5563] leading-relaxed">{T("mods.sub")}</p>
+        <p className="text-sm sm:text-base font-semibold text-[#2E6F73]">{T("mods.kicker")}</p>
+        <h2 className="mt-3 text-3xl sm:text-4xl font-semibold text-[#0E1A1B] leading-[1.2] text-balance">{T("mods.title")}</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-lg sm:text-xl text-[#4A5757] leading-relaxed">{T("mods.sub")}</p>
       </div>
 
       <div role="tablist" className="flex flex-wrap justify-center gap-2 mb-8">
         {ROLES.map((r) => (
-          <button key={r} role="tab" aria-selected={role === r} onClick={() => setRole(r)} className={`h-10 px-5 rounded-lg text-sm font-semibold cursor-pointer transition-colors ${role === r ? "bg-[#3F5BD8] text-white" : "bg-white border border-[#E5E7EB] text-[#4B5563] hover:text-[#111827]"}`}>
+          <button key={r} role="tab" aria-selected={role === r} onClick={() => setRole(r)} className={`h-10 px-5 rounded-lg text-sm font-semibold cursor-pointer transition-colors ${role === r ? "bg-[#2E6F73] text-white" : "bg-white border border-[#E4DDCE] text-[#4A5757] hover:text-[#0E1A1B]"}`}>
             {T(`mods.role.${r}`)}
           </button>
         ))}
@@ -29,15 +29,15 @@ export default function RoleModules({ openModal }) {
 
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {items.map(({ id, icon: Icon }) => (
-          <li key={id} className="rounded-xl border border-[#E5E7EB] bg-white p-5 sm:p-6 text-start">
-            <Icon className="w-5 h-5 text-[#3F5BD8]" aria-hidden="true" />
-            <h3 className="mt-3 text-base font-bold text-[#111827]">{T(`md.${role}.${id}.t`)}</h3>
-            <p className="mt-1.5 text-sm text-[#4B5563] leading-relaxed">{T(`md.${role}.${id}.d`)}</p>
+          <li key={id} className="rounded-xl border border-[#E4DDCE] bg-white p-5 sm:p-6 text-start">
+            <Icon className="w-5 h-5 text-[#2E6F73]" aria-hidden="true" />
+            <h3 className="mt-3 text-base font-bold text-[#0E1A1B]">{T(`md.${role}.${id}.t`)}</h3>
+            <p className="mt-1.5 text-sm text-[#4A5757] leading-relaxed">{T(`md.${role}.${id}.d`)}</p>
           </li>
         ))}
       </ul>
       <div className="mt-8 text-start">
-        <button onClick={() => openModal(role)} className="group inline-flex items-center gap-1 text-base sm:text-lg font-medium text-[#3F5BD8] hover:underline underline-offset-4 cursor-pointer">
+        <button onClick={() => openModal(role)} className="group inline-flex items-center gap-1 text-base sm:text-lg font-medium text-[#2E6F73] hover:underline underline-offset-4 cursor-pointer">
           {T("mods.try")}
           <ChevronRight className="w-5 h-5 rtl:-scale-x-100" aria-hidden="true" />
         </button>

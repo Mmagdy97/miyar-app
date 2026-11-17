@@ -31,14 +31,14 @@ function Calculator() {
       <div className="mt-6 grid sm:grid-cols-2 gap-5">
         {[[T("calc.team"), team, setTeam, 1, 30], [T("calc.proj"), proj, setProj, 1, 15]].map(([l, v, set, mn, mx]) => (
           <label key={l} className="block">
-            <span className="flex justify-between text-sm font-semibold"><span>{l}</span><span className="text-[#3F5BD8]">{v}{v === 15 ? "+" : ""}</span></span>
-            <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#3F5BD8]" />
+            <span className="flex justify-between text-sm font-semibold"><span>{l}</span><span className="text-[#2E6F73]">{v}{v === 15 ? "+" : ""}</span></span>
+            <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#2E6F73]" />
           </label>
         ))}
       </div>
       <div className="mt-7 grid sm:grid-cols-3 gap-3">
         {rows.map(([k, d, price, me]) => (
-          <div key={k} className={`rounded-[22px] p-5 ${me ? "bg-[#1E223D] text-white" : "bg-[var(--paper-2)]"}`}>
+          <div key={k} className={`rounded-[22px] p-5 ${me ? "bg-[#0F3D3E] text-white" : "bg-[var(--paper-2)]"}`}>
             <p className="text-sm font-semibold opacity-90">{T(k)}</p>
             <p className="mt-2 font-display text-4xl font-semibold tabular-nums">{price}<span className="text-sm font-medium opacity-70 ms-1">{miyar === 0 && me ? "" : T("calc.per")}</span></p>
             <p className="mt-2 text-xs leading-relaxed opacity-75">{T(d)}</p>
@@ -55,7 +55,7 @@ export default function LandingWhy() {
   return (
     <section id="why" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
       <div className="text-start reveal">
-        <p className="text-[12px] tracking-[.16em] uppercase font-semibold text-[#3F5BD8]">{T("why.kick")}</p>
+        <p className="text-[12px] tracking-[.16em] uppercase font-semibold text-[#2E6F73]">{T("why.kick")}</p>
         <h2 className="mt-3 max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("why.t")}</h2>
       </div>
 
@@ -64,8 +64,8 @@ export default function LandingWhy() {
           <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--ink-3)]">{T("why.before")}</h3>
           <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px] text-[var(--ink-2)]"><XCircle className="w-5 h-5 shrink-0 text-[#DC2626]" aria-hidden="true" />{T(`why.b${n}`)}</li>)}</ul>
         </div>
-        <div className="rounded-[28px] p-5 sm:p-7 bg-[#1E223D] text-white">
-          <h3 className="text-sm font-bold uppercase tracking-wide text-[#8EA2FF]">{T("why.after")}</h3>
+        <div className="rounded-[28px] p-5 sm:p-7 bg-[#0F3D3E] text-white">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-[#7FB3B8]">{T("why.after")}</h3>
           <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px]"><CheckCircle2 className="w-5 h-5 shrink-0 text-[#4ADE80]" aria-hidden="true" />{T(`why.a${n}`)}</li>)}</ul>
         </div>
       </div>
@@ -78,12 +78,12 @@ export default function LandingWhy() {
           <table className="w-full table-fixed text-xs sm:text-sm">
             <thead><tr className="text-[var(--ink-2)]">
               <th className="text-start font-medium pb-3 w-[34%] sm:w-[36%]" />
-              {[1, 2, 3, 4].map((n) => <th key={n} className={`pb-3 px-0.5 sm:px-2 align-bottom text-[10px] sm:text-sm leading-tight font-semibold text-center ${n === 4 ? "text-[#3F5BD8]" : ""}`}>{T(`cmp.c${n}`)}</th>)}
+              {[1, 2, 3, 4].map((n) => <th key={n} className={`pb-3 px-0.5 sm:px-2 align-bottom text-[10px] sm:text-sm leading-tight font-semibold text-center ${n === 4 ? "text-[#2E6F73]" : ""}`}>{T(`cmp.c${n}`)}</th>)}
             </tr></thead>
             <tbody>{ROWS.map((r, i) => (
               <tr key={i} className="border-t border-[var(--line)]">
                 <th scope="row" className="text-start font-medium py-3 pe-2 leading-snug">{T(`cmp.r${i + 1}`)}</th>
-                {r.map((v, j) => <td key={j} className={`py-3 px-2 text-center ${j === 3 ? "bg-[#3F5BD8]/[.07]" : ""}`}><Cell v={v} /></td>)}
+                {r.map((v, j) => <td key={j} className={`py-3 px-2 text-center ${j === 3 ? "bg-[#2E6F73]/[.07]" : ""}`}><Cell v={v} /></td>)}
               </tr>))}
             </tbody>
           </table>
