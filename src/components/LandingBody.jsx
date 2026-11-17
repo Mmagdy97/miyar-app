@@ -238,22 +238,18 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
       {/* CTA */}
       <section id="cta" className="px-4 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
-        <div className="lp-hero !min-h-0 px-6 sm:px-14 py-12 sm:py-16 text-start">
-          <img src="/landing/living.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
-          <h2 className="max-w-3xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
-          <p className="mt-4 max-w-xl text-base sm:text-lg opacity-80 leading-relaxed">{T("ld.140")}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
-              {T("ld.141")}
-              <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-            </button>
-            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="lp-glass inline-flex items-center gap-2 h-12 px-5 rounded-full text-sm font-semibold"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
+        <div className="lp-final text-center px-6 sm:px-14 py-14 sm:py-24">
+          <h2 className="mx-auto max-w-3xl font-display text-3xl sm:text-5xl font-semibold tracking-tight leading-tight text-balance">{T("ld.139")}</h2>
+          <p className="mt-5 mx-auto max-w-xl text-base sm:text-lg leading-relaxed opacity-80">{T("ld.140")}</p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-5">
+            <button onClick={() => openModal("Admin")} className="btn-press h-12 px-7 rounded-full text-[15px] font-semibold bg-white text-[#1E223D] hover:bg-[#EEF0F4]">{T("ld.141")}</button>
+            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 h-12 px-4 text-[15px] font-semibold text-white/90 hover:text-white"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-10 px-5 mt-auto">
+      <footer className="py-10 px-5 mt-auto border-t border-[var(--line)]">
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-5 text-center">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full lp-pill-dark flex items-center justify-center"><LogoMark className="w-4 h-4 text-white" /></div>
