@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus, UserPlus, Check, Trash2 } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
+import { reportsRepo } from "../data/reports";
+import ReportCard from "./ReportCard";
 import { printQuote } from "../lib/quote";
 import { askConfirm } from "../lib/confirm";
 import { displayId } from "../lib/identity";
@@ -17,6 +19,19 @@ const fmtDate = (d) => (d ? new Date(d).toLocaleDateString(intlLocale(), { day: 
 const needsAttention = (p, now = Date.now()) => p.progress < 100 && p.deadline && new Date(p.deadline).getTime() - now < 14 * 86400000;
 
 /** Admin: invite the project's client by email (they sign up with it and see only this project). */
+/** Client portal: the project's daily reports with photos (latest first, expandable). */
+function ClientReports({ p }) {
+  const [open, setOpen] = useState(false);
+  const list = reportsRepo.use().filter((r) => r.projectId === p.id);
+  if (!list.length) return null;
+  return (
+    <div className="pt-1 text-xs border-t border-[#E0D6C2]/60 space-y-2">
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="font-bold text-[#2B3052] cursor-pointer">{T("rep.clientTitle", { 0: list.length })}</button>
+      {open && <div className="grid gap-2">{list.slice(0, 10).map((r) => <ReportCard key={r.id} r={r} />)}</div>}
+    </div>
+  );
+}
+
 function InviteClient({ p }) {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -95,6 +110,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
                     {p.quoteStatus === "sent" && <button type="button" onClick={async () => { if (await askConfirm(T("quote.approveConfirm"), { danger: false, yes: T("quote.approve") })) { try { await approveQuote(p.id); } catch (err) { window.dispatchEvent(new CustomEvent("miyar:error", { detail: err.message })); } } }} className="px-4 h-9 rounded-lg font-bold text-white bg-[#2B3052] cursor-pointer">{T("quote.approve")}</button>}
                   </div>
                 )}
+                {isClient && <ClientReports p={p} />}
                 {!isClient && <InviteClient p={p} />}
               </article>
             ))}
