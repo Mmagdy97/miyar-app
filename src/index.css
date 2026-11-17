@@ -538,7 +538,7 @@ html:not(.dark) .text-emerald-700 { color: #006045; }
 .lp-hero2>div{z-index:1}
 .lp-grad{background:linear-gradient(90deg,#3F5BD8,#7C5CE6 60%,#D97706);-webkit-background-clip:text;background-clip:text;color:transparent}
 html.dark .lp-grad{background:linear-gradient(90deg,#8EA2FF,#B197FC 60%,#FBBF24);-webkit-background-clip:text;background-clip:text}
-.lp-window{max-width:1040px;border-radius:18px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(17,24,39,.35),0 12px 24px -12px rgba(17,24,39,.15)}
+.lp-window{max-width:760px;margin-inline:auto;border-radius:18px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(17,24,39,.35),0 12px 24px -12px rgba(17,24,39,.15)}
 .lp-window-bar{display:flex;gap:6px;padding:10px 14px;background:var(--paper-2);border-bottom:1px solid var(--line)}
 .lp-window-bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
 .lp-phone{position:absolute;bottom:-28px;inset-inline-end:2%;width:clamp(120px,17vw,190px);border-radius:28px;overflow:hidden;border:6px solid #111827;background:#111827;box-shadow:0 30px 60px -20px rgba(17,24,39,.5)}

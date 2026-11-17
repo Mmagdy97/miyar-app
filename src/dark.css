@@ -65,6 +65,8 @@ html.dark .bg-white\/15{background-color:rgb(30 34 61 / 0.15)}
 html.dark .bg-white\/20{background-color:rgb(30 34 61 / 0.2)}
 html.dark .bg-white\/25{background-color:rgb(30 34 61 / 0.25)}
 html.dark .bg-white\/5{background-color:rgb(30 34 61 / 0.05)}
+html.dark .bg-white\/60{background-color:rgb(30 34 61 / 0.6)}
+html.dark .bg-white\/70{background-color:rgb(30 34 61 / 0.7)}
 html.dark .bg-white\/80{background-color:rgb(30 34 61 / 0.8)}
 html.dark .bg-white\/85{background-color:rgb(30 34 61 / 0.85)}
 html.dark .bg-white\/90{background-color:rgb(30 34 61 / 0.9)}
@@ -97,6 +99,7 @@ html.dark .border-white{border-color:#273250}
 html.dark .border-white\/10{border-color:rgb(39 50 80 / 0.1)}
 html.dark .border-white\/15{border-color:rgb(39 50 80 / 0.15)}
 html.dark .border-white\/20{border-color:rgb(39 50 80 / 0.2)}
+html.dark .border-white\/70{border-color:rgb(39 50 80 / 0.7)}
 html.dark .divide-\[\#E5E7EB\]\/60{border-color:rgb(44 50 84 / 0.6)}
 html.dark .divide-\[\#EEF0F4\]{border-color:#262b4d}
 html.dark .fill-rose-500{fill:#ff2056}
@@ -184,6 +187,7 @@ html.dark .text-\[\#D98E73\]{color:#d98e73}
 html.dark .text-\[\#EFE7D6\]{color:#e5e7eb}
 html.dark .text-\[\#EFE7D6\]\/80{color:rgb(229 231 235 / 0.8)}
 html.dark .text-\[\#FDBA74\]{color:#fdba74}
+html.dark .text-\[\#FFD2B5\]{color:#ffd2b5}
 html.dark .text-amber-300{color:#ffd230}
 html.dark .text-amber-400{color:#ffb900}
 html.dark .text-amber-500{color:#ffbf5c}
