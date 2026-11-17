@@ -8,6 +8,9 @@ import SpecFields from "./SpecFields";
 import PriceList from "./PriceList";
 import { useLibrary, useLibraryItems } from "../data/library";
 import LibraryEditor from "./LibraryEditor";
+import { buildQuote, printQuote } from "../lib/quote";
+import { sendQuote } from "../data/projects";
+import { askConfirm } from "../lib/confirm";
 import { generateBoq } from "../lib/autoBoq";
 import { boqRepo, boqTotals, itemPrice, applyAutoBoq } from "../data/boq";
 
@@ -118,6 +121,16 @@ export default function LiveBoq() {
               }} className="px-4 py-2 rounded-lg text-xs font-bold text-[#1E223D] bg-[#F4A27E] hover:bg-[#E8532A] hover:text-white disabled:opacity-40 cursor-pointer">{T("boq.generate")}</button>
               {specMsg && <span role="status" className="text-xs text-[#4F5470]">{specMsg}</span>}
             </div>
+          </section>
+        )}
+        {rows.length > 0 && (
+          <section className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap items-center gap-2">
+            <h2 className="text-sm font-semibold text-[#1E223D] me-auto">{T("quote.title")} <span className="text-[11px] font-bold text-[#4F5470]">· {T("quote.st." + project.quoteStatus)}</span></h2>
+            <button type="button" onClick={() => printQuote(project, buildQuote(rows))} className="px-3 h-9 rounded-lg text-xs font-bold border border-[#E0D6C2] cursor-pointer">{T("quote.pdf")}</button>
+            {project.quoteStatus !== "approved" && project.clientLinked && (
+              <button type="button" onClick={async () => { if (!(await askConfirm(T("quote.sendConfirm"), { danger: false, yes: T("quote.send") }))) return; try { await sendQuote(project.id, buildQuote(rows)); setSpecMsg(T("quote.sent")); } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-3 h-9 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("quote.send")}</button>
+            )}
+            {project.quoteStatus !== "approved" && !project.clientLinked && <span className="text-[11px] text-[#666B86]">{T("quote.needClient")}</span>}
           </section>
         )}
         <PriceList />

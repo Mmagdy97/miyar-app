@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus, UserPlus, Check, Trash2 } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
+import { printQuote } from "../lib/quote";
 import { askConfirm } from "../lib/confirm";
 import { displayId } from "../lib/identity";
-import { projectsStore, inviteClient, removeClient } from "../data/projects";
+import { projectsStore, inviteClient, removeClient, approveQuote } from "../data/projects";
 import { invoicesRepo, invoiceTotals } from "../data/invoices";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
@@ -87,6 +88,13 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
                   <div className="flex-1 h-2 rounded-full bg-[#EFE7D6] overflow-hidden"><div className="h-full rounded-full bg-[#2B3052]" style={{ width: `${Math.min(100, p.progress || 0)}%` }} /></div>
                   <span className="text-xs font-bold tabular-nums text-[#1E223D] w-10 text-end">{p.progress || 0}%</span>
                 </div>
+                {isClient && p.quote && p.quoteStatus !== "none" && (
+                  <div className="flex flex-wrap items-center gap-2 pt-1 text-xs border-t border-[#E0D6C2]/60">
+                    <span className="font-bold text-[#1E223D] me-auto">{T("quote.title")}: {money(p.quoteTotal)} · {T("quote.st." + p.quoteStatus)}</span>
+                    <button type="button" onClick={() => printQuote(p, p.quote)} className="px-3 h-9 rounded-lg font-bold border border-[#E0D6C2] cursor-pointer">{T("quote.pdf")}</button>
+                    {p.quoteStatus === "sent" && <button type="button" onClick={async () => { if (await askConfirm(T("quote.approveConfirm"), { danger: false, yes: T("quote.approve") })) { try { await approveQuote(p.id); } catch (err) { window.dispatchEvent(new CustomEvent("miyar:error", { detail: err.message })); } } }} className="px-4 h-9 rounded-lg font-bold text-white bg-[#2B3052] cursor-pointer">{T("quote.approve")}</button>}
+                  </div>
+                )}
                 {!isClient && <InviteClient p={p} />}
               </article>
             ))}

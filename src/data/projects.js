@@ -30,6 +30,7 @@ const fromRow = (r) => ({
   startDate: r.start_date || "", deadline: r.deadline || "", contractValue: Number(r.contract_value) || 0,
   budget: money(Number(r.contract_value) || 0), location: r.location || "", image: r.image || DEFAULT_IMG,
   clientEmail: r.client_email || "", clientLinked: Boolean(r.client_id),
+  quote: r.quote || null, quoteStatus: r.quote_status || "none", quoteTotal: Number(r.quote_total) || 0,
   spec: { area: r.area ?? "", rooms: r.rooms ?? "", baths: r.bathrooms ?? "", height: r.ceiling_height ?? 2.8, type: r.project_type || "", finish: r.finish_level || "mid" },
 });
 const toRow = (p) => ({
@@ -105,6 +106,17 @@ export function useProjectList() {
 
 export async function updateProjectSpec(projectId, spec) {
   const { error } = await supabase.from("projects").update(specRow(spec)).eq("id", projectId);
+  if (error) throw error;
+  await reload();
+}
+
+export async function sendQuote(projectId, quote) {
+  const { error } = await supabase.rpc("send_quote", { p_project: projectId, p_quote: quote, p_total: quote.total });
+  if (error) throw error;
+  await reload();
+}
+export async function approveQuote(projectId) {
+  const { error } = await supabase.rpc("approve_quote", { p_project: projectId });
   if (error) throw error;
   await reload();
 }
