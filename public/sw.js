@@ -1,4 +1,5 @@
-const CACHE_NAME = 'miyar-v5';
+importScripts('/push-sw.js');
+const CACHE_NAME = 'miyar-v6';
 
 // Core static assets to pre-cache on install
 const PRECACHE_ASSETS = [

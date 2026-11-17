@@ -14,6 +14,7 @@ import {
 import { ROLES, roleTitle, roleShort } from "../config/roles";
 import { useI18n } from "../i18n";
 import { noticesRepo } from "../data/notices";
+import PushToggle from "./PushToggle";
 import SettingsSwitcher from "./SettingsSwitcher";
 
 function Navbar({
@@ -231,6 +232,7 @@ function Navbar({
                 )}
               </div>
 
+              {account && <PushToggle />}
               {/* Dropdown Footer */}
               <div className="px-4 pt-2.5 mt-1 border-t border-[#E0D6C2] flex items-center justify-between text-[11px] text-[#4F5470]">
                 <span>{t("notif.live")}</span>
