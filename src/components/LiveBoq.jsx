@@ -7,7 +7,8 @@ import { pricesRepo, priceFor } from "../data/prices";
 import SpecFields from "./SpecFields";
 import PriceList from "./PriceList";
 import { BOQ_LIBRARY } from "../data/boqLibrary";
-import { boqRepo, boqTotals, itemPrice } from "../data/boq";
+import { generateBoq } from "../lib/autoBoq";
+import { boqRepo, boqTotals, itemPrice, applyAutoBoq } from "../data/boq";
 
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
 const empty = { category: "", name: "", unit: "", quantity: "", unitCost: "", margin: "20" };
@@ -35,7 +36,7 @@ function Row({ i }) {
   );
   return (
     <article className="bg-white rounded-xl border border-[#E0D6C2] p-3 flex flex-wrap items-center gap-3 text-xs">
-      <span className="flex-1 min-w-48 font-semibold text-[#1E223D]">{i.name}</span>
+      <span className="flex-1 min-w-48 font-semibold text-[#1E223D]">{i.name}{i.note === "auto" && <span className="ms-2 text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-[#F6F1E7] text-[#4F5470] border border-[#E0D6C2]">{T("boq.auto")}</span>}</span>
       <span className="text-[#4F5470] tabular-nums">{i.quantity} {i.unit} × {money(i.unitCost)}</span>
       <span className="text-[#666B86]">+{i.margin}%</span>
       <span className="font-semibold tabular-nums text-[#1E223D]">{money(itemPrice(i))}</span>
@@ -100,7 +101,18 @@ export default function LiveBoq() {
             <h2 className="text-sm font-semibold text-[#1E223D]">{T("spec.title")}</h2>
             <SpecFields spec={spec} onChange={setSpec} />
             <div className="flex items-center gap-3">
-              <button type="button" onClick={async () => { try { await updateProjectSpec(project.id, spec); setSpecMsg(T("spec.saved")); } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer">{T("boq.save")}</button>
+              <button type="button" onClick={async () => { try {
+                  await updateProjectSpec(project.id, spec);
+                  const n = await applyAutoBoq(project.id, generateBoq(spec), (nm) => priceFor(prices, nm, spec.finish || "mid"), { create: false });
+                  setSpecMsg(T("spec.saved") + (n ? " · " + T("boq.synced", { 0: n }) : ""));
+                } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer">{T("boq.save")}</button>
+              <button type="button" disabled={!Number(spec.area)} onClick={async () => {
+                try {
+                  await updateProjectSpec(project.id, spec);
+                  const n = await applyAutoBoq(project.id, generateBoq(spec), (nm) => priceFor(prices, nm, spec.finish || "mid"));
+                  setSpecMsg(T("boq.generated", { 0: n }));
+                } catch (err) { setSpecMsg(err.message || String(err)); }
+              }} className="px-4 py-2 rounded-lg text-xs font-bold text-[#1E223D] bg-[#F4A27E] hover:bg-[#E8532A] hover:text-white disabled:opacity-40 cursor-pointer">{T("boq.generate")}</button>
               {specMsg && <span role="status" className="text-xs text-[#4F5470]">{specMsg}</span>}
             </div>
           </section>
