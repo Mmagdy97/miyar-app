@@ -288,22 +288,17 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       <PricingSection onStart={() => openModal("Admin")} />
 
       {/* FAQ */}
-      <section id="faq" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-stretch">
-          <div className="reveal relative isolate overflow-hidden rounded-[28px] sm:rounded-[34px] min-h-[260px] lg:min-h-[420px] p-6 sm:p-10 flex items-end text-white text-start">
-            <div aria-hidden="true" className="absolute inset-0 -z-10 lp-panel" />
-            <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("lp.faq.t")}</h2>
-          </div>
-          <div className="reveal divide-y divide-[var(--line)] border-y border-[var(--line)] text-start self-center">
-            {[1, 2, 3, 4, 5].map((n) => (
-              <details key={n} className="group py-1">
-                <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer list-none font-semibold text-base sm:text-lg">
-                  {T(`lp.q${n}`)}<ChevronDown className="w-5 h-5 shrink-0 text-[var(--ink-3)] transition-transform group-open:rotate-180" aria-hidden="true" />
-                </summary>
-                <p className="pb-5 text-[15px] leading-relaxed text-[var(--ink-2)]">{T(`lp.a${n}`)}</p>
-              </details>
-            ))}
-          </div>
+      <section id="faq" className="px-5 sm:px-8 py-14 sm:py-20 max-w-3xl mx-auto w-full">
+        <h2 className="reveal text-center font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("lp.faq.t")}</h2>
+        <div className="reveal mt-10 space-y-3 text-start">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <details key={n} open={n === 1} className="group lp-card !rounded-[22px] px-5 sm:px-6">
+              <summary className="flex items-center justify-between gap-4 py-4 sm:py-5 cursor-pointer list-none font-semibold text-base sm:text-lg">
+                {T(`lp.q${n}`)}<span className="w-8 h-8 shrink-0 rounded-full bg-[var(--paper-2)] flex items-center justify-center"><ChevronDown className="w-4 h-4 text-[var(--ink-2)] transition-transform group-open:rotate-180" aria-hidden="true" /></span>
+              </summary>
+              <p className="pb-5 text-[15px] sm:text-base leading-relaxed text-[var(--ink-2)]">{T(`lp.a${n}`)}</p>
+            </details>
+          ))}
         </div>
       </section>
 
