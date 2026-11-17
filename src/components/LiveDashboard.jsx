@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus, ListTodo, PackageSearch, Camera, FileText, UserPlus, Check, Trash2 } from "lucide-react";
+import { FolderKanban, Wallet, Gauge, AlertTriangle, Plus, UserPlus, Check, Trash2 } from "lucide-react";
 import { tr_ as T, E, money, intlLocale } from "../i18n";
 import { reportsRepo } from "../data/reports";
 import ReportCard from "./ReportCard";
@@ -10,7 +10,6 @@ import { displayId } from "../lib/identity";
 import { projectsStore, inviteClient, removeClient, approveQuote } from "../data/projects";
 import { invoicesRepo, invoiceTotals, isOverdue } from "../data/invoices";
 import { boqRepo } from "../data/boq";
-import { siteRepo } from "../data/site";
 import { projectVariance } from "../lib/variance";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
@@ -82,58 +81,15 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
   const waiting = projects.filter((p) => p.quoteStatus === "sent");
   const overBudget = isClient ? [] : projects.flatMap((p) => projectVariance(boqItems.filter((b) => b.projectId === p.id), actuals).rows.filter((r) => r.level === "over" || r.level === "warn").map((r) => ({ p, r })));
   const today = new Date().toLocaleDateString(intlLocale(), { weekday: "long", day: "numeric", month: "long" });
-  const site = siteRepo.use();
-  const openTasks = site.tasks.filter((t) => !t.done);
-  const openSnags = site.snags.filter((x) => !x.resolved);
-  const pendingReq = site.requests.filter((x) => x.status !== "delivered");
-  const todayIso = new Date().toISOString().slice(0, 10);
-  const reportsToday = reportsRepo.use().filter((r) => r.day === todayIso).length;
-  const boqTab = role === "Technical Office" ? "إدارة المقايسات" : "المقايسات والاعتمادات";
-  const K = {
-    projects: ["live.projects", projects.length, `${T("live.avg")} ${avg}%`, FolderKanban],
-    contracts: ["live.contracts", money(total, { compact: true }), null, Wallet],
-    paid: ["inv.paidTotal", money(inv.paid, { compact: true }), `${T("inv.dueTotal")} ${money(inv.due, { compact: true })}`, Gauge],
-    due: ["inv.dueTotal", money(inv.due, { compact: true }), null, Wallet],
-    late: ["dash.k.late", money(late.reduce((s, x) => s + x.amount, 0), { compact: true }), T("dash.k.count", { 0: late.length }), AlertTriangle, late.length > 0],
-    budget: ["dash.k.budget", overBudget.length, null, AlertTriangle, overBudget.length > 0],
-    waiting: ["dash.k.waiting", waiting.length, null, FileText],
-    tasks: ["dash.k.tasks", openTasks.length, null, ListTodo],
-    snags: ["dash.k.snags", openSnags.length, null, AlertTriangle, openSnags.some((x) => x.severity === "high")],
-    requests: ["dash.k.requests", pendingReq.length, null, PackageSearch],
-    reports: ["dash.k.reports", reportsToday, null, Camera],
-    attn: ["live.attn", attn + late.length + overBudget.length, null, AlertTriangle, attn + late.length + overBudget.length > 0],
-    soon: ["dash.k.soon", soon.length, null, AlertTriangle, soon.length > 0],
-  };
-  const KPI_BY_ROLE = {
-    Admin: ["projects", "contracts", "paid", "attn"],
-    Accountant: ["paid", "late", "budget", "contracts"],
-    "Technical Office": ["projects", "waiting", "budget", "soon"],
-    "Site Engineer": ["reports", "tasks", "snags", "requests"],
-    Secretary: ["projects", "soon", "waiting", "tasks"],
-    Client: ["projects", "paid", "due"],
-  };
-  const kpis = (KPI_BY_ROLE[role] || KPI_BY_ROLE.Admin).map((k) => K[k]);
-  const D = {
-    late: late.map((i) => ({ k: "i" + i.id, tone: "rose", text: T("dash.lateInv", { 0: i.title, 1: money(i.amount) }), tab: "الحسابات والعهد" })),
-    budget: overBudget.map(({ p, r }) => ({ k: "b" + r.item.id, tone: r.level === "over" ? "rose" : "amber", text: T(r.level === "over" ? "dash.over" : "dash.warn", { 0: r.item.name, 1: E(p.name) }), tab: role === "Accountant" ? "الحسابات والعهد" : boqTab })),
-    soon: soon.map((p) => ({ k: "p" + p.id, tone: "amber", text: T("dash.soon", { 0: E(p.name), 1: fmtDate(p.deadline) }), tab: "المشاريع الجارية" })),
-    waiting: waiting.map((p) => ({ k: "q" + p.id, tone: "navy", text: T("dash.waiting", { 0: E(p.name) }), tab: boqTab })),
-    tasks: openTasks.filter((t) => t.priority === "high" || (t.due && t.due <= todayIso)).map((t) => ({ k: "t" + t.id, tone: t.due && t.due < todayIso ? "rose" : "amber", text: T("dash.task", { 0: t.title }), tab: "مهامي الميدانية" })),
-    snags: openSnags.filter((x) => x.severity === "high").map((x) => ({ k: "s" + x.id, tone: "rose", text: T("dash.snag", { 0: x.title }), tab: "قائمة الملاحظات" })),
-    requests: pendingReq.map((x) => ({ k: "r" + x.id, tone: "navy", text: T("dash.req", { 0: x.material, 1: T("site.st." + x.status) }), tab: "طلبات تشوين المواد" })),
-    report: reportsToday === 0 ? [{ k: "rep", tone: "amber", text: T("dash.noReport"), tab: "التقارير اليومية" }] : [],
-  };
-  const DEC_BY_ROLE = {
-    Admin: ["late", "budget", "soon", "waiting"],
-    Accountant: ["late", "budget"],
-    "Technical Office": ["budget", "waiting", "soon"],
-    "Site Engineer": ["report", "tasks", "snags", "requests"],
-    Secretary: ["soon", "waiting"],
-  };
-  const decisions = (DEC_BY_ROLE[role] || []).flatMap((k) => D[k]);
-  const canAdd = role === "Admin" || role === "Secretary" || role === "Technical Office";
-  const PRIMARY = { "Site Engineer": ["التقارير اليومية", "dash.newReport", Camera], Accountant: ["الحسابات والعهد", "dash.openFinance", Wallet] };
-  const primary = PRIMARY[role] || (canAdd ? ["المشاريع الجارية", "live.add", Plus] : null);
+  const kpis = isClient
+    ? [["live.projects", projects.length, `${T("live.avg")} ${avg}%`, FolderKanban], ["inv.paidTotal", money(inv.paid, { compact: true }), null, Wallet], ["inv.dueTotal", money(inv.due, { compact: true }), null, Wallet]]
+    : [["live.projects", projects.length, `${T("live.avg")} ${avg}%`, FolderKanban], ["live.contracts", money(total, { compact: true }), null, Wallet], ["inv.paidTotal", money(inv.paid, { compact: true }), `${T("inv.dueTotal")} ${money(inv.due, { compact: true })}`, Gauge], ["live.attn", attn + late.length + overBudget.length, null, AlertTriangle]];
+  const decisions = [
+    ...late.map((i) => ({ k: "i" + i.id, tone: "rose", text: T("dash.lateInv", { 0: i.title, 1: money(i.amount) }), tab: "الحسابات والعهد" })),
+    ...overBudget.map(({ p, r }) => ({ k: "b" + r.item.id, tone: r.level === "over" ? "rose" : "amber", text: T(r.level === "over" ? "dash.over" : "dash.warn", { 0: r.item.name, 1: E(p.name) }), tab: "المقايسات والاعتمادات" })),
+    ...soon.map((p) => ({ k: "p" + p.id, tone: "amber", text: T("dash.soon", { 0: E(p.name), 1: fmtDate(p.deadline) }), tab: "المشاريع الجارية" })),
+    ...waiting.map((p) => ({ k: "q" + p.id, tone: "navy", text: T("dash.waiting", { 0: E(p.name) }), tab: "المقايسات والاعتمادات" })),
+  ];
   const TONE = { rose: "bg-rose-600", amber: "bg-amber-500", navy: "bg-[#2B3052]" };
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -142,19 +98,19 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
           <div className="me-auto min-w-0">
             <p className="text-xs font-semibold text-[#666B86]">{today}</p>
             <h1 className="mt-1 font-display text-2xl md:text-3xl font-semibold text-[#1E223D] truncate">{isClient ? T("live.projects") : org?.name || T("live.title")}</h1>
-            {!isClient && role !== "Admin" && <p className="text-xs text-[#666B86] mt-0.5">{T("role." + role)}</p>}
           </div>
-          {org && role === "Admin" && (
+          {org && !isClient && (
             <div className="text-xs text-[#4F5470] min-w-44">
               <div className="flex justify-between font-semibold"><span>{T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") })}</span><span className="tabular-nums">{Number.isFinite(max) ? `${projects.length}/${max}` : projects.length}</span></div>
               {Number.isFinite(max) && <div className="mt-1.5 h-1.5 rounded-full bg-[#E9DFCB] overflow-hidden"><div className="h-full bg-[#2B3052]" style={{ width: `${Math.min(100, (projects.length / max) * 100)}%` }} /></div>}
             </div>
           )}
-          {primary && (() => { const [tab, key, Ic] = primary; return <button type="button" onClick={() => setActiveTab(tab)} className="inline-flex items-center gap-1.5 h-11 px-5 rounded-xl text-sm font-bold text-white bg-[#1E223D] hover:bg-[#2B3052] cursor-pointer"><Ic className="w-4 h-4" aria-hidden="true" />{T(key)}</button>; })()}
+          {!isClient && <button type="button" onClick={() => setActiveTab("المشاريع الجارية")} className="inline-flex items-center gap-1.5 h-11 px-5 rounded-xl text-sm font-bold text-white bg-[#1E223D] hover:bg-[#2B3052] cursor-pointer"><Plus className="w-4 h-4" aria-hidden="true" />{T("live.add")}</button>}
         </header>
 
-        <div className={`grid grid-cols-2 ${kpis.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4"} gap-3`}>
-          {kpis.map(([k, v, sub, Ic, alert]) => {
+        <div className={`grid grid-cols-2 ${isClient ? "md:grid-cols-3" : "md:grid-cols-4"} gap-3`}>
+          {kpis.map(([k, v, sub, Ic]) => {
+            const alert = k === "live.attn" && v > 0;
             return (
               <div key={k} className={`rounded-2xl p-4 border ${alert ? "bg-[#FBEDE6] border-[#F4C7B3]" : "bg-white border-[#E6DCC8]"}`}>
                 <div className="flex items-center gap-2 text-xs font-semibold text-[#4F5470]"><Ic className={`w-4 h-4 ${alert ? "text-[#C03A12]" : "text-[#8A8FA8]"}`} aria-hidden="true" />{T(k)}</div>
@@ -171,7 +127,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
             {projects.length === 0 ? (
               <div className="p-10 text-center space-y-4">
                 <p className="text-sm text-[#4F5470]">{T(isClient ? "proj.none" : "live.empty")}</p>
-                {canAdd && <button type="button" onClick={() => setActiveTab("المشاريع الجارية")} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-bold text-white bg-[#2B3052] cursor-pointer"><Plus className="w-4 h-4" aria-hidden="true" />{T("live.add")}</button>}
+                {!isClient && <button type="button" onClick={() => setActiveTab("المشاريع الجارية")} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-bold text-white bg-[#2B3052] cursor-pointer"><Plus className="w-4 h-4" aria-hidden="true" />{T("live.add")}</button>}
               </div>
             ) : (
               <ul>
@@ -180,7 +136,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
                   const open = openId === p.id || isClient;
                   return (
                     <li key={p.id} className="border-b last:border-b-0 border-[#F1EADB]">
-                      <button type="button" onClick={() => canAdd && setOpenId(open ? null : p.id)} aria-expanded={open} className={`w-full px-5 py-3.5 grid grid-cols-[1fr_auto] sm:grid-cols-[minmax(0,1fr)_9rem_6.5rem] items-center gap-x-4 gap-y-1.5 text-start ${canAdd ? "hover:bg-[#FAF7F0] cursor-pointer" : "cursor-default"}`}>
+                      <button type="button" onClick={() => !isClient && setOpenId(open ? null : p.id)} aria-expanded={open} className={`w-full px-5 py-3.5 grid grid-cols-[1fr_auto] sm:grid-cols-[minmax(0,1fr)_9rem_6.5rem] items-center gap-x-4 gap-y-1.5 text-start ${isClient ? "cursor-default" : "hover:bg-[#FAF7F0] cursor-pointer"}`}>
                         <span className="min-w-0">
                           <span className="block text-sm font-semibold text-[#1E223D] truncate">{E(p.name)}</span>
                           <span className="block text-[11px] text-[#666B86] truncate">{p.client || "—"}{p.quoteStatus && p.quoteStatus !== "none" ? ` · ${T("quote.st." + p.quoteStatus)}` : ""}</span>
@@ -201,7 +157,7 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
                             </div>
                           )}
                           {isClient && <ClientReports p={p} />}
-                          {(role === "Admin" || role === "Secretary" || role === "Technical Office") && <InviteClient p={p} />}
+                          {!isClient && <InviteClient p={p} />}
                         </div>
                       )}
                     </li>
