@@ -98,6 +98,12 @@ export function useProjectList() {
   })), [rows]);
 }
 
+export async function removeClient(projectId) {
+  const { error } = await supabase.rpc("remove_client", { p_project: projectId });
+  if (error) throw error;
+  await reload();
+}
+
 /** Invite a client (by email) to one project. Returns "linked" or "invited". */
 export async function inviteClient(projectId, email) {
   const { data, error } = await supabase.rpc("invite_client", { p_project: projectId, p_email: toAuthEmail(email) });

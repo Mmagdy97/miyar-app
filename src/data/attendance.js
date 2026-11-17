@@ -31,6 +31,7 @@ const run = async (q) => { const { error } = await q; if (error) fail(error); aw
 export const attendanceRepo = {
   use: () => live.use()[0],
   addWorker: ({ name, trade, rate }) => run(supabase.from("workers").insert({ org_id: orgId, name, trade: trade || null, rate })),
+  removeWorker: (id) => run(supabase.from("workers").delete().eq("id", id)),
   mark: (workerId, day, entry) =>
     run(supabase.from("attendance").upsert({ org_id: orgId, worker_id: workerId, day, status: entry.s, ot: Math.min(8, Math.max(0, Number(entry.ot) || 0)), rate: entry.r }, { onConflict: "worker_id,day" })),
   setRate: async (workerId, rate, day, hasEntry) => {

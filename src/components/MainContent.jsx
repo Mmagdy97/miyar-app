@@ -80,7 +80,7 @@ function MainContent({
         if (["My Projects", "Progress Overview", "Schedule"].includes(id)) return <LiveDashboard setActiveTab={setActiveTab} role="Client" />;
       }
       if (id === "Financials & Petty Cash") return <LiveFinance />;
-      if (id === "Team" && currentRole === "Admin") return <LiveTeam />;
+      if (id === "Team" && (currentRole === "Admin" || currentRole === "Secretary")) return <LiveTeam secretary={currentRole === "Secretary"} />;
       const SITE = { "My Tasks": "tasks", "Snag List": "snags", "Material Requests": "requests" };
       if (SITE[id] && currentRole !== "Client") return <LiveSite kind={SITE[id]} />;
       if ((id === "BOQ & Approvals" || id === "BOQ Management") && currentRole !== "Client") return <LiveBoq />;

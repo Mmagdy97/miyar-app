@@ -15,6 +15,7 @@ import LandingAndLogin from "./components/LandingAndLogin";
 import { ROLE_CONFIG, ROLE_TITLES } from "./config/roles";
 import { Menu, X, Building2, Download } from "lucide-react";
 import { loadAccount, signOut } from "./lib/auth";
+import { noticesRepo } from "./data/notices";
 import OwnerAdmin from "./components/OwnerAdmin";
 import { setActiveOrg } from "./lib/entitlements";
 import { attachProjects } from "./data/projects";
@@ -125,6 +126,8 @@ function App() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   useEffect(() => watchTableLabels(), []);
+  const liveOrg = isAuthenticated && authMode === "user" ? account?.orgId : null;
+  useEffect(() => { noticesRepo.attach(Boolean(liveOrg)); return () => noticesRepo.attach(false); }, [liveOrg]);
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {
     if (!isAuthenticated || authMode !== "user") return;

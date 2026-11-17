@@ -70,6 +70,7 @@ export const ROLE_CONFIG = {
     { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم", icon: LayoutDashboard },
     { id: "Projects", name: "المشاريع الجارية", label: "المشاريع الجارية", icon: FolderKanban },
     { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
+    { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
   ],
   Client: [
     { id: "Dashboard", name: "لوحة التحكم", label: "بوابة العميل", icon: LayoutDashboard },

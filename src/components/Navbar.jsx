@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { ROLES, roleTitle, roleShort } from "../config/roles";
 import { useI18n } from "../i18n";
+import { noticesRepo } from "../data/notices";
 import SettingsSwitcher from "./SettingsSwitcher";
 
 function Navbar({
@@ -36,7 +37,8 @@ function Navbar({
   const notificationsRef = useRef(null);
 
   // Dynamic Filtering based on currentRole
-  const roleNotifications = actionItems.filter(
+  const liveNotices = noticesRepo.use();
+  const roleNotifications = account ? liveNotices : actionItems.filter(
     (item) => item.targetRole === currentRole
   );
   const pendingCount = roleNotifications.filter(
@@ -105,7 +107,7 @@ function Navbar({
         {/* Interactive Notification Bell with Dropdown */}
         <div className="relative" ref={notificationsRef}>
           <button
-            onClick={() => setIsNotificationsOpen((prev) => !prev)}
+            onClick={() => { if (account && !isNotificationsOpen && roleNotifications.some((n) => n.unread)) noticesRepo.markRead(); setIsNotificationsOpen((prev) => !prev); }}
             className={`relative flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-[var(--shadow-1)] transition-colors cursor-pointer ${
               isNotificationsOpen
                 ? "bg-[#F6F1E7] text-[#1E223D] border border-[#E0D6C2]"
@@ -115,9 +117,9 @@ function Navbar({
             aria-label={t("notif.title")}
           >
             <Bell className="w-4 h-4" />
-            {roleNotifications.length > 0 && (
+            {(account ? roleNotifications.filter((n) => n.unread).length : roleNotifications.length) > 0 && (
               <span className="absolute -top-1 -start-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#2B3052] text-white font-semibold text-[10px] flex items-center justify-center ring-2 ring-white shadow-xs">
-                {roleNotifications.length}
+                {account ? roleNotifications.filter((n) => n.unread).length : roleNotifications.length}
               </span>
             )}
           </button>
@@ -174,7 +176,7 @@ function Navbar({
                       <div
                         key={item.id}
                         onClick={() => {
-                          if (setSelectedItem) setSelectedItem(item);
+                          if (setSelectedItem && !item.live) setSelectedItem(item);
                           setIsNotificationsOpen(false);
                         }}
                         className={`p-3 rounded-lg transition-colors hover:bg-[#F6F1E7] flex items-start gap-3 my-1 cursor-pointer ${
@@ -198,22 +200,22 @@ function Navbar({
                           </div>
 
                           <h4 className="text-xs font-bold text-[#1E223D] mt-0.5 leading-snug">
-                            {D(item.title)}
+                            {item.live ? item.title : D(item.title)}
                           </h4>
 
                           {item.subtitle && (
-                            <p className="text-[11px] text-[#4F5470] mt-0.5 line-clamp-1">
+                            <p className="text-[11px] text-[#4F5470] mt-0.5 line-clamp-2">
                               {item.subtitle}
                             </p>
                           )}
 
                           <div className="flex items-center justify-between gap-2 mt-2">
-                            <span className="text-[10px] text-[#4F5470]">
+                            {!item.live && <span className="text-[10px] text-[#4F5470]">
                               {t("notif.project")}{" "}
                               <strong className="text-[#1E223D]">
                                 {item.project || D("الموقع")}
                               </strong>
-                            </span>
+                            </span>}
 
                             {isNew && (
                               <span className="inline-flex items-center gap-1 text-[9px] font-bold text-[#1E223D] bg-[#2B3052]/15 px-1.5 py-0.5 rounded-full border border-[#2B3052]/30">

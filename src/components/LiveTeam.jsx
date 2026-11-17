@@ -9,7 +9,8 @@ import { displayId, genPassword, toAuthEmail } from "../lib/identity";
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
 
 /** Admin of a real office: invite staff by email and manage roles. */
-export default function LiveTeam() {
+export default function LiveTeam({ secretary = false }) {
+  const ROLES_ALLOWED = secretary ? MEMBER_ROLES.filter((r) => r !== "admin" && r !== "secretary") : MEMBER_ROLES;
   const [myId, setMyId] = useState(null);
   const members = teamRepo.use();
   const [f, setF] = useState({ email: "", role: "site_engineer" });
@@ -52,18 +53,20 @@ export default function LiveTeam() {
             <button type="button" onClick={() => setNm({ ...nm, password: genPassword() })} className="px-3 py-2 rounded-lg text-xs font-bold text-[#2B3052] border border-[#E0D6C2] cursor-pointer">{T("team.pwGen")}</button>
           </div>
           <select value={nm.role} onChange={(e) => setNm({ ...nm, role: e.target.value })} className={input}>
-            {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
+            {ROLES_ALLOWED.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
           </select>
           <button type="submit" className="sm:col-span-2 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><UserPlus className="w-4 h-4" aria-hidden="true" />{T("team.addGo")}</button>
         </form>
+        {!secretary && <>
         <p className="text-[11px] text-[#666B86]">{T("team.orInvite")}</p>
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">
           <input required type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} className={input + " flex-1 min-w-48"} />
           <select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value })} className={input}>
-            {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
+            {ROLES_ALLOWED.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
           </select>
           <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><UserPlus className="w-4 h-4" />{T("team.invite")}</button>
         </form>
+        </>}
         {msg && <p role="status" className="text-xs text-[#4F5470]">{msg}</p>}
         <div className="grid gap-2">
           {members.map((m) => {
@@ -75,12 +78,12 @@ export default function LiveTeam() {
                   <p className="text-[11px] text-[#666B86]" dir="ltr">{displayId(m.email)}</p>
                 </div>
                 {m.pending && <span className="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-amber-50 text-amber-800 border-amber-200">{T("live.pending")}</span>}
-                {m.pending || me ? <span className="text-xs font-bold text-[#4F5470]">{T(`team.r.${m.role}`)}</span> : (
+                {m.pending || me || secretary ? <span className="text-xs font-bold text-[#4F5470]">{T(`team.r.${m.role}`)}</span> : (
                   <select value={m.role} onChange={(e) => teamRepo.setRole(m.id, e.target.value)} className={input}>
-                    {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
+                    {ROLES_ALLOWED.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
                   </select>
                 )}
-                {!me && !m.pending && <button type="button" onClick={() => setPw({ id: m.id, value: genPw() })} aria-label={T("team.pwReset")} title={T("team.pwReset")} className="p-1.5 rounded-lg text-[#666B86] hover:text-[#1E223D] hover:bg-[#EFE7D6] cursor-pointer"><KeyRound className="w-4 h-4" aria-hidden="true" /></button>}
+                {!secretary && !me && !m.pending && <button type="button" onClick={() => setPw({ id: m.id, value: genPw() })} aria-label={T("team.pwReset")} title={T("team.pwReset")} className="p-1.5 rounded-lg text-[#666B86] hover:text-[#1E223D] hover:bg-[#EFE7D6] cursor-pointer"><KeyRound className="w-4 h-4" aria-hidden="true" /></button>}
                 {pw?.id === m.id && (
                   <form onSubmit={savePw} className="basis-full flex flex-wrap gap-2 items-center pt-1">
                     <input required minLength={8} dir="ltr" value={pw.value} onChange={(e) => setPw({ ...pw, value: e.target.value })} aria-label={T("team.pwNew")} className={input + " flex-1 min-w-40 font-mono"} />
@@ -89,7 +92,7 @@ export default function LiveTeam() {
                     <button type="button" onClick={() => setPw(null)} className="px-2 py-2 text-xs font-bold text-[#4F5470] cursor-pointer">{T("boq.cancel")}</button>
                   </form>
                 )}
-                {!me && <button type="button" onClick={() => teamRepo.remove(m)} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                {!me && !(secretary && (m.role === "admin" || m.role === "secretary")) && <button type="button" onClick={() => { if (window.confirm(T("team.rmConfirm"))) teamRepo.remove(m).catch((e) => setMsg(e.message || String(e))); }} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
               </article>
             );
           })}

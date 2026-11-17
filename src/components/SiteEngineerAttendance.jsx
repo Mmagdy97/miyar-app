@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UsersRound, Plus, Download, Pencil, Check, X } from "lucide-react";
+import { UsersRound, Plus, Download, Pencil, Check, X, Trash2 } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { workersStore, attendanceStore } from "../data/stores";
 import { dayWage, monthSummary, entryRate, setRate } from "../lib/puantaj";
@@ -29,6 +29,7 @@ function useLiveData() {
     mark: (id, date, entry) => attendanceRepo.mark(id, date, entry),
     addWorker: (w) => attendanceRepo.addWorker(w),
     changeRate: (id, v, date) => attendanceRepo.setRate(id, v, date, Boolean(records[date]?.[id])),
+    removeWorker: (id) => attendanceRepo.removeWorker(id),
   };
 }
 
@@ -98,7 +99,9 @@ function AttendanceView({ data }) {
             return (
               <div key={w.id} className="bg-white rounded-lg border border-[#E0D6C2] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#1E223D]">{E(w.name)}</p>
+                  <p className="text-sm font-semibold text-[#1E223D] flex items-center gap-2">{E(w.name)}
+                    {data.removeWorker && <button type="button" onClick={() => { if (window.confirm(T("att.rmConfirm", { 0: w.name }))) data.removeWorker(w.id); }} aria-label={T("cash.delete")} className="p-1 rounded-md text-[#666B86] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>}
+                  </p>
                   {edit && edit.id === w.id ? (
                     <form onSubmit={(ev) => { ev.preventDefault(); saveRate(); }} className="mt-1.5 flex flex-wrap items-center gap-2">
                       <input type="number" min={1} autoFocus value={edit.v} onChange={(ev) => setEdit({ ...edit, v: ev.target.value })} aria-label={T("att.rate")} className={input + " w-28"} />
