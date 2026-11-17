@@ -209,7 +209,7 @@ header.fixed.glass { position: fixed; }
   .stat-grid > * { min-width: 0; padding: 0.875rem; }
   .stat-grid > :last-child:nth-child(odd) { grid-column: span 2; }
   .stat-grid .text-3xl, .stat-grid .text-4xl, .stat-grid .text-2xl { font-size: 1.35rem; line-height: 1.2; }
-  .stat-grid .text-sm { font-size: 0.75rem; }
+  .stat-grid .text-sm { font-size: 12px; }
   .stat-grid svg.sparkline, .stat-grid [class*="h-14"], .stat-grid [class*="h-16"] { max-height: 2.5rem; }
 }
 
@@ -554,3 +554,10 @@ html.dark .lp-grad{background:linear-gradient(90deg,#7FB3B8,#B197FC 60%,#FBBF24)
 .side-notch::after{top:100%;background:radial-gradient(circle at 0 100%,transparent 19.5px,var(--paper) 20px)}
 [dir=rtl] .side-notch::before{background:radial-gradient(circle at 100% 0,transparent 19.5px,var(--paper) 20px)}
 [dir=rtl] .side-notch::after{background:radial-gradient(circle at 100% 100%,transparent 19.5px,var(--paper) 20px)}
+
+/* Mobile type floor: html is 14.5px on phones, so rem-based text-xs/sm landed at 10.9px/12.6px outside <main> */
+@media (max-width: 639px) {
+  .text-xs { font-size: 12.5px; line-height: 1.5; }
+  .text-sm { font-size: 14px; line-height: 1.55; }
+  .text-base { font-size: 15px; line-height: 1.6; }
+}
