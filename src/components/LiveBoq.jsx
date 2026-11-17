@@ -6,7 +6,8 @@ import { useProjectList, updateProjectSpec } from "../data/projects";
 import { pricesRepo, priceFor } from "../data/prices";
 import SpecFields from "./SpecFields";
 import PriceList from "./PriceList";
-import { BOQ_LIBRARY } from "../data/boqLibrary";
+import { useLibrary, useLibraryItems } from "../data/library";
+import LibraryEditor from "./LibraryEditor";
 import { generateBoq } from "../lib/autoBoq";
 import { boqRepo, boqTotals, itemPrice, applyAutoBoq } from "../data/boq";
 
@@ -53,6 +54,8 @@ export default function LiveBoq() {
   const [pid, setPid] = useState(null);
   const [f, setF] = useState(empty);
   const prices = pricesRepo.use();
+  const library = useLibrary();
+  const libItems = useLibraryItems();
   const [spec, setSpec] = useState(null);
   const [specMsg, setSpecMsg] = useState("");
   const qtyRef = useRef(null);
@@ -73,7 +76,7 @@ export default function LiveBoq() {
   const pick = (e) => {
     const [ci, ii] = e.target.value.split("|").map(Number);
     if (Number.isNaN(ci)) return;
-    const g = BOQ_LIBRARY[ci]; const [name, unit] = g.items[ii];
+    const g = library[ci]; const { name, unit } = g.items[ii];
     setF({ ...f, category: g.cat, name, unit, unitCost: String(priceFor(prices, name, project.spec?.finish || "mid") || "") });
     setPicked(true);
     setTimeout(() => qtyRef.current?.focus(), 0);
@@ -103,13 +106,13 @@ export default function LiveBoq() {
             <div className="flex items-center gap-3">
               <button type="button" onClick={async () => { try {
                   await updateProjectSpec(project.id, spec);
-                  const n = await applyAutoBoq(project.id, generateBoq(spec), (nm) => priceFor(prices, nm, spec.finish || "mid"), { create: false });
+                  const n = await applyAutoBoq(project.id, generateBoq(spec, libItems), (nm) => priceFor(prices, nm, spec.finish || "mid"), { create: false });
                   setSpecMsg(T("spec.saved") + (n ? " · " + T("boq.synced", { 0: n }) : ""));
                 } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer">{T("boq.save")}</button>
               <button type="button" disabled={!Number(spec.area)} onClick={async () => {
                 try {
                   await updateProjectSpec(project.id, spec);
-                  const n = await applyAutoBoq(project.id, generateBoq(spec), (nm) => priceFor(prices, nm, spec.finish || "mid"));
+                  const n = await applyAutoBoq(project.id, generateBoq(spec, libItems), (nm) => priceFor(prices, nm, spec.finish || "mid"));
                   setSpecMsg(T("boq.generated", { 0: n }));
                 } catch (err) { setSpecMsg(err.message || String(err)); }
               }} className="px-4 py-2 rounded-lg text-xs font-bold text-[#1E223D] bg-[#F4A27E] hover:bg-[#E8532A] hover:text-white disabled:opacity-40 cursor-pointer">{T("boq.generate")}</button>
@@ -118,9 +121,10 @@ export default function LiveBoq() {
           </section>
         )}
         <PriceList />
+        <LibraryEditor />
         <select value="" onChange={pick} aria-label={T("boq.lib")} className={input + " max-w-md w-full"}>
           <option value="">{T("boq.lib")}</option>
-          {BOQ_LIBRARY.map((g, ci) => <optgroup key={g.cat} label={g.cat}>{g.items.map(([n, u], ii) => <option key={n} value={ci + "|" + ii}>{n} ({u})</option>)}</optgroup>)}
+          {library.map((g, ci) => <optgroup key={g.cat} label={g.cat}>{g.items.map(({ name: n, unit: u }, ii) => <option key={n} value={ci + "|" + ii}>{n} ({u})</option>)}</optgroup>)}
         </select>
         {picked && <p role="status" className="text-xs font-bold text-[#C03A12]">{T("boq.picked")}</p>}
         <form onSubmit={submit} className="bg-white rounded-2xl border border-[#E0D6C2] p-4 flex flex-wrap gap-2 items-end">

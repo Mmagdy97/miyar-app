@@ -17,6 +17,7 @@ import { Menu, X, Building2, Download } from "lucide-react";
 import { loadAccount, signOut } from "./lib/auth";
 import { noticesRepo } from "./data/notices";
 import { attachPrices } from "./data/prices";
+import { attachLibrary } from "./data/library";
 import OwnerAdmin from "./components/OwnerAdmin";
 import { setActiveOrg } from "./lib/entitlements";
 import { attachProjects } from "./data/projects";
@@ -128,7 +129,7 @@ function App() {
 
   useEffect(() => watchTableLabels(), []);
   const liveOrg = isAuthenticated && authMode === "user" ? account?.orgId : null;
-  useEffect(() => { noticesRepo.attach(Boolean(liveOrg)); attachPrices(liveOrg); return () => { noticesRepo.attach(false); attachPrices(null); }; }, [liveOrg]);
+  useEffect(() => { noticesRepo.attach(Boolean(liveOrg)); attachPrices(liveOrg); attachLibrary(liveOrg); return () => { noticesRepo.attach(false); attachPrices(null); attachLibrary(null); }; }, [liveOrg]);
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {
     if (!isAuthenticated || authMode !== "user") return;
