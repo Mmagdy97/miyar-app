@@ -29,12 +29,14 @@ def hsl(h):
 def fromhsl(H,S,L):
     r,g,b=colorsys.hls_to_rgb(H,max(0,min(1,L)),max(0,min(1,S))); return rgb2hex(r*255,g*255,b*255)
 
-ACCENT='#e0714f'
-# explicit neutral map (light-theme brand colours -> dark theme)
-BG={'#f6f1e7':'#12152a','#efe7d6':'#181c36','#e6d5b7':'#262b4d','#ece3ce':'#262b4d','#f1eadb':'#181c36','#d9c9a8':'#2c3254','#1e223d':'#3a4180','#2b3052':'#3a4180','#2a2f52':'#2c3254','#ffffff':'#1e223d','#fff':'#1e223d','#faf7f0':'#10172a','#ffffff':'#1e223d','#fff':'#1e223d','#f3efe6':'#0c1120','#faf7f0':'#10172a','#ecf0f1':'#1b2540','#e9e3d5':'#1b2540','#dad3c2':'#273250',
-    '#24304d':ACCENT,'#1a2236':'#9a3822','#b5452b':ACCENT}
-TEXT={'#1e223d':'#f2ede2','#2b3052':'#e6d5b7','#4f5470':'#b9bbd0','#666b86':'#9a9db8','#6a6f8a':'#9a9db8','#a8a9be':'#9a9db8','#1a2236':'#e9e3d5','#24304d':'#e9e3d5','#535e78':'#a1a9bd','#65708a':'#8a93a8','#ffffff':'#ffffff','#fff':'#ffffff','#b5452b':'#f0987a'}
-BORDER={'#e0d6c2':'#2c3254','#d3c7ae':'#383f66','#efe7d6':'#262b4d','#3a4070':'#4a5290','#1e223d':'#4a5290','#2b3052':'#4a5290','#ece3ce':'#2c3254','#dad3c2':'#273250','#e9e3d5':'#1d2744','#c6beaa':'#33405F','#ffffff':'#273250','#24304d':'#3e4b6c','#b5452b':ACCENT}
+ACCENT='#f59e0b'
+# explicit neutral map: light-theme (cool grey / navy / indigo) -> dark theme
+BG={'#f7f8fa':'#12152a','#f1f3f6':'#181c36','#eef0f4':'#262b4d','#e5e7eb':'#2c3254','#d1d5db':'#383f66','#ffffff':'#1e223d','#fff':'#1e223d','#f9fafb':'#10172a','#f3f4f6':'#181c36',
+    '#1e223d':'#3f5bd8','#111827':'#3f5bd8','#3f5bd8':'#3f5bd8','#3249b8':'#4a63e0','#4f6bed':'#4f6bed','#e4e9fc':'#242b57',
+    '#fef3c7':'#3a2f12','#fde68a':'#4a3a12','#d97706':ACCENT,'#b45309':'#d97706','#92400e':'#b45309'}
+TEXT={'#111827':'#f3f4f6','#1e223d':'#f3f4f6','#3f5bd8':'#8ea2ff','#3249b8':'#8ea2ff','#4b5563':'#b6bccb','#6b7280':'#9aa3b5','#9ca3af':'#9aa3b5','#a8a9be':'#9aa3b5',
+    '#b45309':'#fbbf24','#d97706':'#f59e0b','#92400e':'#fcd34d','#ffffff':'#ffffff','#fff':'#ffffff','#9a2e20':'#f0987a','#b23a2b':'#f0987a','#1f6b49':'#6ee7b7','#2e7d5b':'#6ee7b7','#efe7d6':'#e5e7eb'}
+BORDER={'#e5e7eb':'#2c3254','#d1d5db':'#383f66','#eef0f4':'#262b4d','#f1f3f6':'#262b4d','#3f5bd8':'#4f6bed','#3249b8':'#4f6bed','#1e223d':'#4f6bed','#ffffff':'#273250','#fcd34d':'#6b5a1e','#d97706':ACCENT,'#b45309':ACCENT}
 
 def dark(prop,hexv,alpha_=False):
     h=hexv.lower()

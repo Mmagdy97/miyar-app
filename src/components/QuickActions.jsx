@@ -19,7 +19,7 @@ export default function QuickActions({ setActiveTab, compact = false }) {
   if (compact) return (
     <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1" style={{ scrollbarWidth: "none" }}>
       {list.map(([id, tab, key, Ic]) => (
-        <button key={id} type="button" onClick={() => setActiveTab?.(tab)} className="shrink-0 inline-flex items-center gap-2 h-10 ps-3 pe-4 rounded-full bg-white border border-[#E0D6C2] text-xs font-semibold text-[#1E223D] hover:border-[var(--peach)] transition-colors">
+        <button key={id} type="button" onClick={() => setActiveTab?.(tab)} className="shrink-0 inline-flex items-center gap-2 h-10 ps-3 pe-4 rounded-full bg-white border border-[#E5E7EB] text-xs font-semibold text-[#111827] hover:border-[var(--peach)] transition-colors">
           <span className="w-6 h-6 rounded-full bg-[var(--paper-2)] flex items-center justify-center"><Ic className="w-3.5 h-3.5" aria-hidden="true" /></span>{T(key)}
         </button>
       ))}
@@ -28,14 +28,14 @@ export default function QuickActions({ setActiveTab, compact = false }) {
   return (
     <section aria-labelledby="qa-title" className="space-y-3">
       <div>
-        <h2 id="qa-title" className="font-display text-xl md:text-2xl font-semibold text-[#1E223D]">{T("qa.title")}</h2>
-        <p className="text-xs md:text-sm text-[#666B86]">{T("qa.sub")}</p>
+        <h2 id="qa-title" className="font-display text-xl md:text-2xl font-semibold text-[#111827]">{T("qa.title")}</h2>
+        <p className="text-xs md:text-sm text-[#6B7280]">{T("qa.sub")}</p>
       </div>
       <div className="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 md:gap-3">
         {list.map(([id, tab, key, Ic], n) => (
           <button key={id} type="button" onClick={() => setActiveTab?.(tab)} className={`qa-tile group ${n === 0 ? "qa-main" : ""}`}>
             <span className="qa-ic"><Ic className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" /></span>
-            <span className="text-[11px] md:text-xs font-semibold text-[#1E223D] text-center leading-tight">{T(key)}</span>
+            <span className="text-[11px] md:text-xs font-semibold text-[#111827] text-center leading-tight">{T(key)}</span>
           </button>
         ))}
       </div>

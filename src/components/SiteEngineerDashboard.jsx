@@ -235,13 +235,13 @@ function SiteEngineerDashboard({ setActionItems }) {
 
         {/* 1. Hero */}
         <DashHero img="site" kicker={todayArabic} title={T("se.2")} sub={T("se.4")} />
-        <div className="bg-white rounded-lg border border-[#E0D6C2] p-5 shadow-xs">
+        <div className="bg-white rounded-lg border border-[#E5E7EB] p-5 shadow-xs">
           {/* Two Large Primary Action Buttons Side-by-Side */}
           <div className="grid grid-cols-2 gap-3 mt-4">
             {/* Button A: Add Daily Report */}
             <a
               href="#daily-form"
-              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#2B3052] hover:bg-[#2B3052] transition-colors shadow-sm active:scale-[0.98] transition-all text-center"
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] transition-colors shadow-sm active:scale-[0.98] transition-all text-center"
             >
               <Plus className="w-4 h-4 shrink-0" />
               <span>{T("se.5")}</span>
@@ -250,7 +250,7 @@ function SiteEngineerDashboard({ setActionItems }) {
             {/* Button B: Settle Petty Cash */}
             <button
               onClick={() => setPettyCashModalOpen(true)}
-              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4F5470] bg-white border border-[#E0D6C2] hover:bg-[#F6F1E7] hover:border-[#2B3052] shadow-xs active:scale-[0.98] transition-all text-center"
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-lg text-xs sm:text-sm font-semibold text-[#4B5563] bg-white border border-[#E5E7EB] hover:bg-[#F7F8FA] hover:border-[#3F5BD8] shadow-xs active:scale-[0.98] transition-all text-center"
             >
               <DollarSign className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{T("se.6")}</span>
@@ -261,10 +261,10 @@ function SiteEngineerDashboard({ setActionItems }) {
         <div className="lg:grid lg:grid-cols-12 lg:gap-6 lg:items-start space-y-5 lg:space-y-0">
         <div className="lg:col-span-5 lg:sticky lg:top-24">
         {/* 2. Active Sites (مواقع العمل الحالية) */}
-        <div className="bg-white rounded-lg border border-[#E0D6C2] p-5 shadow-xs space-y-3">
+        <div className="bg-white rounded-lg border border-[#E5E7EB] p-5 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#4F5470] uppercase tracking-wider flex items-center gap-1.5">
-              <Building className="w-4 h-4 text-[#4F5470]" />
+            <span className="text-xs font-bold text-[#4B5563] uppercase tracking-wider flex items-center gap-1.5">
+              <Building className="w-4 h-4 text-[#4B5563]" />
               {T("se.7")}
             </span>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 inline-flex items-center gap-1">
@@ -274,29 +274,29 @@ function SiteEngineerDashboard({ setActionItems }) {
           </div>
 
           {/* Project Card */}
-          <div className="p-4 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2]">
+          <div className="p-4 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB]">
             <div className="flex flex-col-reverse sm:flex-row items-start sm:justify-between gap-2 sm:gap-3">
               <div className="min-w-0">
-                <h2 className="text-base sm:text-lg font-semibold text-[#1E223D] leading-snug">
+                <h2 className="text-base sm:text-lg font-semibold text-[#111827] leading-snug">
                   {T("se.9")}
                 </h2>
-                <p className="text-xs text-[#4F5470] mt-1 flex items-center gap-1">
+                <p className="text-xs text-[#4B5563] mt-1 flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
                   <span>{T("se.10")}</span>
                 </p>
               </div>
 
               <div className="text-end shrink-0">
-                <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#EFE7D6] text-[#1E223D] border border-[#E0D6C2] inline-block">
+                <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#F1F3F6] text-[#111827] border border-[#E5E7EB] inline-block">
                   {T("se.11")}
                 </span>
               </div>
             </div>
 
             {/* Quick Metrics */}
-            <div className="mt-4 pt-3 border-t border-[#E0D6C2] flex items-center justify-between text-xs text-[#4F5470] font-medium">
-              <span>{T("se.12")} <strong className="text-xs font-bold text-[#1E223D] tracking-wide font-mono">{D("78٪")}</strong></span>
-              <span className="text-[#4F5470]">{T("se.14")} <strong className="text-[#1E223D]">{T("se.15")}</strong></span>
+            <div className="mt-4 pt-3 border-t border-[#E5E7EB] flex items-center justify-between text-xs text-[#4B5563] font-medium">
+              <span>{T("se.12")} <strong className="text-xs font-bold text-[#111827] tracking-wide font-mono">{D("78٪")}</strong></span>
+              <span className="text-[#4B5563]">{T("se.14")} <strong className="text-[#111827]">{T("se.15")}</strong></span>
             </div>
 
             {/* Progress bar */}
@@ -310,23 +310,23 @@ function SiteEngineerDashboard({ setActionItems }) {
         <form
           id="daily-form"
           onSubmit={handleSubmitReport}
-          className="bg-white rounded-lg border border-[#E0D6C2] p-5 sm:p-6 shadow-xs space-y-6"
+          className="bg-white rounded-lg border border-[#E5E7EB] p-5 sm:p-6 shadow-xs space-y-6"
         >
-          <div className="border-b border-[#EFE7D6] pb-3">
+          <div className="border-b border-[#EEF0F4] pb-3">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#2B3052]" />
-              <h2 className="text-base sm:text-lg font-semibold text-[#1E223D]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#3F5BD8]" />
+              <h2 className="text-base sm:text-lg font-semibold text-[#111827]">
                 {T("se.16")}
               </h2>
             </div>
-            <p className="text-xs text-[#4F5470] mt-0.5">
+            <p className="text-xs text-[#4B5563] mt-0.5">
               {T("se.17")}
             </p>
           </div>
 
           {/* Section A: حالة الطقس والعوائق */}
           <div className="space-y-2.5">
-            <label className="block text-xs font-bold text-[#4F5470] uppercase tracking-wider">
+            <label className="block text-xs font-bold text-[#4B5563] uppercase tracking-wider">
               {T("se.18")}
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -339,13 +339,13 @@ function SiteEngineerDashboard({ setActionItems }) {
                     onClick={() => setWeatherSelected(opt.id)}
                     className={`px-3 py-2.5 rounded-lg text-xs font-bold border transition-all text-start flex items-center justify-between ${
                       isSelected
-                        ? "bg-[#EFE7D6] border-[#2B3052] text-[#1E223D] shadow-xs"
-                        : "bg-white border-[#E0D6C2] text-[#4F5470] hover:bg-[#F6F1E7]"
+                        ? "bg-[#F1F3F6] border-[#3F5BD8] text-[#111827] shadow-xs"
+                        : "bg-white border-[#E5E7EB] text-[#4B5563] hover:bg-[#F7F8FA]"
                     }`}
                   >
                     <span>{opt.label}</span>
                     {isSelected && (
-                      <Check className="w-3.5 h-3.5 text-[#1E223D] shrink-0" />
+                      <Check className="w-3.5 h-3.5 text-[#111827] shrink-0" />
                     )}
                   </button>
                 );
@@ -356,39 +356,39 @@ function SiteEngineerDashboard({ setActionItems }) {
           {/* Section B: العمالة اليوم (Labor Counters) */}
           <div className="space-y-2.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-[#4F5470] uppercase tracking-wider flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-[#4F5470]" />
+              <label className="text-xs font-bold text-[#4B5563] uppercase tracking-wider flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-[#4B5563]" />
                 {T("se.19")}
               </label>
-              <span className="text-xs font-semibold text-[#1E223D] bg-[#EFE7D6] px-2.5 py-0.5 rounded-lg border border-[#E0D6C2]">
+              <span className="text-xs font-semibold text-[#111827] bg-[#F1F3F6] px-2.5 py-0.5 rounded-lg border border-[#E5E7EB]">
                 {T("se.20", { v0: totalWorkers })}
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-2.5">
               {/* Plumbers */}
-              <div className="p-3 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="p-3 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E223D] block">{T("se.21")}</span>
-                  <span className="text-[11px] text-[#4F5470]">{T("se.22")}</span>
+                  <span className="text-xs font-bold text-[#111827] block">{T("se.21")}</span>
+                  <span className="text-[11px] text-[#4B5563]">{T("se.22")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("plumbers", -1)}
-                    className="w-9 h-9 rounded-lg bg-white border border-[#E0D6C2] text-[#4F5470] flex items-center justify-center hover:bg-[#EFE7D6] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#E5E7EB] text-[#4B5563] flex items-center justify-center hover:bg-[#F1F3F6] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
-                  <span className="w-6 text-center font-semibold text-[#1E223D] text-sm">
+                  <span className="w-6 text-center font-semibold text-[#111827] text-sm">
                     {labor.plumbers}
                   </span>
                   <button
                     type="button"
                     aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("plumbers", 1)}
-                    className="w-9 h-9 rounded-lg bg-[#2B3052] text-white flex items-center justify-center hover:bg-[#2B3052] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#3F5BD8] text-white flex items-center justify-center hover:bg-[#3F5BD8] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -396,28 +396,28 @@ function SiteEngineerDashboard({ setActionItems }) {
               </div>
 
               {/* Helpers / Cleaning */}
-              <div className="p-3 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="p-3 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E223D] block">{T("se.23")}</span>
-                  <span className="text-[11px] text-[#4F5470]">{T("se.24")}</span>
+                  <span className="text-xs font-bold text-[#111827] block">{T("se.23")}</span>
+                  <span className="text-[11px] text-[#4B5563]">{T("se.24")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("helpers", -1)}
-                    className="w-9 h-9 rounded-lg bg-white border border-[#E0D6C2] text-[#4F5470] flex items-center justify-center hover:bg-[#EFE7D6] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#E5E7EB] text-[#4B5563] flex items-center justify-center hover:bg-[#F1F3F6] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
-                  <span className="w-6 text-center font-semibold text-[#1E223D] text-sm">
+                  <span className="w-6 text-center font-semibold text-[#111827] text-sm">
                     {labor.helpers}
                   </span>
                   <button
                     type="button"
                     aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("helpers", 1)}
-                    className="w-9 h-9 rounded-lg bg-[#2B3052] text-white flex items-center justify-center hover:bg-[#2B3052] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#3F5BD8] text-white flex items-center justify-center hover:bg-[#3F5BD8] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -425,28 +425,28 @@ function SiteEngineerDashboard({ setActionItems }) {
               </div>
 
               {/* Tilers */}
-              <div className="p-3 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="p-3 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E223D] block">{T("se.25")}</span>
-                  <span className="text-[11px] text-[#4F5470]">{T("se.26")}</span>
+                  <span className="text-xs font-bold text-[#111827] block">{T("se.25")}</span>
+                  <span className="text-[11px] text-[#4B5563]">{T("se.26")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("tilers", -1)}
-                    className="w-9 h-9 rounded-lg bg-white border border-[#E0D6C2] text-[#4F5470] flex items-center justify-center hover:bg-[#EFE7D6] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#E5E7EB] text-[#4B5563] flex items-center justify-center hover:bg-[#F1F3F6] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
-                  <span className="w-6 text-center font-semibold text-[#1E223D] text-sm">
+                  <span className="w-6 text-center font-semibold text-[#111827] text-sm">
                     {labor.tilers}
                   </span>
                   <button
                     type="button"
                     aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("tilers", 1)}
-                    className="w-9 h-9 rounded-lg bg-[#2B3052] text-white flex items-center justify-center hover:bg-[#2B3052] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#3F5BD8] text-white flex items-center justify-center hover:bg-[#3F5BD8] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -454,28 +454,28 @@ function SiteEngineerDashboard({ setActionItems }) {
               </div>
 
               {/* Electricians */}
-              <div className="p-3 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="p-3 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#1E223D] block">{T("se.27")}</span>
-                  <span className="text-[11px] text-[#4F5470]">{T("se.28")}</span>
+                  <span className="text-xs font-bold text-[#111827] block">{T("se.27")}</span>
+                  <span className="text-[11px] text-[#4B5563]">{T("se.28")}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     aria-label={T("a11y.dec")}
                     onClick={() => handleLaborChange("electricians", -1)}
-                    className="w-9 h-9 rounded-lg bg-white border border-[#E0D6C2] text-[#4F5470] flex items-center justify-center hover:bg-[#EFE7D6] active:scale-95 text-xs font-bold"
+                    className="w-9 h-9 rounded-lg bg-white border border-[#E5E7EB] text-[#4B5563] flex items-center justify-center hover:bg-[#F1F3F6] active:scale-95 text-xs font-bold"
                   >
                     <Minus className="w-3 h-3" />
                   </button>
-                  <span className="w-6 text-center font-semibold text-[#1E223D] text-sm">
+                  <span className="w-6 text-center font-semibold text-[#111827] text-sm">
                     {labor.electricians}
                   </span>
                   <button
                     type="button"
                     aria-label={T("a11y.inc")}
                     onClick={() => handleLaborChange("electricians", 1)}
-                    className="w-9 h-9 rounded-lg bg-[#2B3052] text-white flex items-center justify-center hover:bg-[#2B3052] active:scale-95 text-xs font-bold shadow-xs"
+                    className="w-9 h-9 rounded-lg bg-[#3F5BD8] text-white flex items-center justify-center hover:bg-[#3F5BD8] active:scale-95 text-xs font-bold shadow-xs"
                   >
                     <Plus className="w-3 h-3" />
                   </button>
@@ -486,7 +486,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
           {/* Section C: الأعمال المنجزة (Completed Works Checklist & Notes) */}
           <div className="space-y-3">
-            <label className="block text-xs font-bold text-[#4F5470] uppercase tracking-wider">
+            <label className="block text-xs font-bold text-[#4B5563] uppercase tracking-wider">
               {T("se.29")}
             </label>
 
@@ -498,15 +498,15 @@ function SiteEngineerDashboard({ setActionItems }) {
                   onClick={() => toggleChecklist(item.id)}
                   className={`p-3 rounded-lg border flex items-center gap-3 cursor-pointer select-none transition-all ${
                     item.done
-                      ? "bg-[#EFE7D6] border-[#D3C7AE] text-[#1E223D] font-semibold"
-                      : "bg-white border-[#E0D6C2] text-[#4F5470] hover:bg-[#F6F1E7]"
+                      ? "bg-[#F1F3F6] border-[#D1D5DB] text-[#111827] font-semibold"
+                      : "bg-white border-[#E5E7EB] text-[#4B5563] hover:bg-[#F7F8FA]"
                   }`}
                 >
                   <div
                     className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors ${
                       item.done
-                        ? "bg-[#2B3052] text-white"
-                        : "border border-[#D3C7AE] bg-white"
+                        ? "bg-[#3F5BD8] text-white"
+                        : "border border-[#D1D5DB] bg-white"
                     }`}
                   >
                     {item.done && <Check className="w-3.5 h-3.5" />}
@@ -520,7 +520,7 @@ function SiteEngineerDashboard({ setActionItems }) {
 
             {/* Textarea for additional notes */}
             <div className="pt-2">
-              <label className="block text-xs font-bold text-[#4F5470] mb-1">
+              <label className="block text-xs font-bold text-[#4B5563] mb-1">
                 {T("se.30")}
               </label>
               <textarea
@@ -528,7 +528,7 @@ function SiteEngineerDashboard({ setActionItems }) {
                 value={customNotes}
                 onChange={(e) => setCustomNotes(e.target.value)}
                 placeholder={T("se.31")}
-                className="w-full p-3 rounded-lg border border-[#E0D6C2] focus:outline-none focus:ring-2 focus:ring-[#2B3052]/10 focus:border-[#2B3052] text-xs sm:text-sm text-[#1E223D] leading-relaxed placeholder:text-[#4F5470]"
+                className="w-full p-3 rounded-lg border border-[#E5E7EB] focus:outline-none focus:ring-2 focus:ring-[#3F5BD8]/10 focus:border-[#3F5BD8] text-xs sm:text-sm text-[#111827] leading-relaxed placeholder:text-[#4B5563]"
               />
             </div>
           </div>
@@ -536,11 +536,11 @@ function SiteEngineerDashboard({ setActionItems }) {
           {/* Section D: التوثيق البصري (Visual Documentation) */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-[#4F5470] uppercase tracking-wider flex items-center gap-1.5">
-                <Camera className="w-4 h-4 text-[#4F5470]" />
+              <label className="text-xs font-bold text-[#4B5563] uppercase tracking-wider flex items-center gap-1.5">
+                <Camera className="w-4 h-4 text-[#4B5563]" />
                 {T("se.32")}
               </label>
-              <span className="text-xs text-[#4F5470] font-medium">
+              <span className="text-xs text-[#4B5563] font-medium">
                 {T("se.33", { v0: photos.length })}
               </span>
             </div>
@@ -548,15 +548,15 @@ function SiteEngineerDashboard({ setActionItems }) {
             {/* Tap/Drop Upload Zone */}
             <div
               onClick={handleMockAddPhoto}
-              className="border-2 border-dashed border-[#D3C7AE] hover:border-[#2B3052] bg-[#F6F1E7] hover:bg-[#EFE7D6] rounded-lg p-5 text-center cursor-pointer transition-all active:scale-[0.99] group"
+              className="border-2 border-dashed border-[#D1D5DB] hover:border-[#3F5BD8] bg-[#F7F8FA] hover:bg-[#F1F3F6] rounded-lg p-5 text-center cursor-pointer transition-all active:scale-[0.99] group"
             >
-              <div className="w-12 h-12 rounded-lg bg-[#EFE7D6] group-hover:bg-[#E0D6C2] text-[#1E223D] flex items-center justify-center mx-auto mb-2 transition-colors">
+              <div className="w-12 h-12 rounded-lg bg-[#F1F3F6] group-hover:bg-[#E5E7EB] text-[#111827] flex items-center justify-center mx-auto mb-2 transition-colors">
                 <Camera className="w-6 h-6" />
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-[#1E223D]">
+              <p className="text-xs sm:text-sm font-semibold text-[#111827]">
                 {T("se.34")}
               </p>
-              <p className="text-[11px] text-[#4F5470] mt-1">
+              <p className="text-[11px] text-[#4B5563] mt-1">
                 {T("se.35")}
               </p>
             </div>
@@ -567,17 +567,17 @@ function SiteEngineerDashboard({ setActionItems }) {
                 {photos.map((photo) => (
                   <div
                     key={photo.id}
-                    className="flex items-center justify-between p-2.5 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] text-xs"
+                    className="flex items-center justify-between p-2.5 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] text-xs"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-lg bg-[#E0D6C2] text-[#4F5470] flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#E5E7EB] text-[#4B5563] flex items-center justify-center shrink-0">
                         <ImageIcon className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-bold text-[#1E223D] truncate">
+                        <p className="font-bold text-[#111827] truncate">
                           {D(photo.name)}
                         </p>
-                        <p className="text-[10px] text-[#4F5470]">
+                        <p className="text-[10px] text-[#4B5563]">
                           {D(photo.time)} • {D(photo.size)}
                         </p>
                       </div>
@@ -586,7 +586,7 @@ function SiteEngineerDashboard({ setActionItems }) {
                     <button
                       type="button"
                       onClick={() => handleRemovePhoto(photo.id)}
-                      className="text-[#4F5470] hover:text-rose-600 p-1.5 transition-colors"
+                      className="text-[#4B5563] hover:text-rose-600 p-1.5 transition-colors"
                       title={T("se.36")}
                     >
                       <Trash2 className="w-4 h-4" />
@@ -601,12 +601,12 @@ function SiteEngineerDashboard({ setActionItems }) {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 p-4 rounded-xl text-sm font-semibold text-white bg-[#2B3052] hover:bg-[#2B3052] shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 p-4 rounded-xl text-sm font-semibold text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] shadow-sm active:scale-[0.98] transition-all cursor-pointer"
             >
               <Send className="w-4 h-4 shrink-0" />
               <span>{T("se.37")}</span>
             </button>
-            <p className="text-center text-[11px] text-[#4F5470] mt-2 font-medium">
+            <p className="text-center text-[11px] text-[#4B5563] mt-2 font-medium">
               {T("se.38")}
             </p>
           </div>
@@ -618,19 +618,19 @@ function SiteEngineerDashboard({ setActionItems }) {
       {/* Petty Cash Settlement Modal */}
       {pettyCashModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1E223D]/40 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E0D6C2] max-w-md w-full p-6 md:p-8 text-start space-y-4 animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-3 border-b border-[#EFE7D6]">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-md w-full p-6 md:p-8 text-start space-y-4 animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EEF0F4]">
               <div className="flex items-center gap-2">
-                <span className="w-8 h-8 rounded-lg bg-[#EFE7D6] text-[#1E223D] flex items-center justify-center font-bold">
+                <span className="w-8 h-8 rounded-lg bg-[#F1F3F6] text-[#111827] flex items-center justify-center font-bold">
                   <Wallet className="w-4 h-4" aria-hidden="true" />
                 </span>
-                <h3 className="text-base font-semibold text-[#1E223D]">
+                <h3 className="text-base font-semibold text-[#111827]">
                   {T("se.39")}
                 </h3>
               </div>
               <button
                 onClick={() => setPettyCashModalOpen(false)}
-                className="text-[#4F5470] hover:text-[#1E223D] text-sm font-bold"
+                className="text-[#4B5563] hover:text-[#111827] text-sm font-bold"
               >
                 ✕
               </button>
@@ -649,7 +649,7 @@ function SiteEngineerDashboard({ setActionItems }) {
             ) : (
               <form onSubmit={handlePettyCashSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1">
                     {T("se.41", { v0: currencySymbol() })}
                   </label>
                   <input
@@ -657,18 +657,18 @@ function SiteEngineerDashboard({ setActionItems }) {
                     value={cashAmount}
                     onChange={(e) => setCashAmount(e.target.value)}
                     required
-                    className="w-full p-3 rounded-lg border border-[#E0D6C2] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] text-sm font-bold text-[#1E223D]"
+                    className="w-full p-3 rounded-lg border border-[#E5E7EB] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] text-sm font-bold text-[#111827]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1">
                     {T("se.42")}
                   </label>
                   <select
                     value={cashCategory}
                     onChange={(e) => setCashCategory(e.target.value)}
-                    className="w-full p-3 rounded-lg border border-[#E0D6C2] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] text-sm font-bold text-[#1E223D] bg-white"
+                    className="w-full p-3 rounded-lg border border-[#E5E7EB] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] text-sm font-bold text-[#111827] bg-white"
                   >
                     <option value="نقل وتشوين خامات">{T("se.43")}</option>
                     <option value="شراء عدد وأدوات طارئة">{T("se.44")}</option>
@@ -678,28 +678,28 @@ function SiteEngineerDashboard({ setActionItems }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1">
                     {T("se.47")}
                   </label>
                   <textarea
                     rows={2}
                     value={cashNotes}
                     onChange={(e) => setCashNotes(e.target.value)}
-                    className="w-full p-3 rounded-lg border border-[#E0D6C2] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] text-xs text-[#1E223D]"
+                    className="w-full p-3 rounded-lg border border-[#E5E7EB] focus:outline-none focus:ring-2 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] text-xs text-[#111827]"
                   />
                 </div>
 
                 <div className="flex items-center gap-2 pt-2">
                   <button
                     type="submit"
-                    className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#2B3052] hover:bg-[#2B3052] active:scale-95 transition-all shadow-sm"
+                    className="flex-1 py-3 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] active:scale-95 transition-all shadow-sm"
                   >
                     {T("se.48")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setPettyCashModalOpen(false)}
-                    className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#4F5470] bg-[#EFE7D6] hover:bg-[#E0D6C2] text-[#4F5470]"
+                    className="px-4 py-3 rounded-lg text-xs sm:text-sm font-bold text-[#4B5563] bg-[#F1F3F6] hover:bg-[#E5E7EB] text-[#4B5563]"
                   >
                     {T("se.124")}
                   </button>

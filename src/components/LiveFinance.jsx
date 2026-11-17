@@ -10,7 +10,7 @@ export default function LiveFinance() {
     <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
       <div role="tablist" className="flex gap-2 px-4 md:px-8 pt-4 font-ibm">
         {[["inv", "fin.tabInv"], ["cash", "fin.tabCash"]].map(([k, l]) => (
-          <button key={k} role="tab" aria-selected={tab === k} type="button" onClick={() => setTab(k)} className={`px-4 py-2 rounded-lg text-xs font-bold cursor-pointer border ${tab === k ? "bg-[#2B3052] text-white border-[#2B3052]" : "bg-white text-[#1E223D] border-[#E0D6C2]"}`}>{T(l)}</button>
+          <button key={k} role="tab" aria-selected={tab === k} type="button" onClick={() => setTab(k)} className={`px-4 py-2 rounded-lg text-xs font-bold cursor-pointer border ${tab === k ? "bg-[#3F5BD8] text-white border-[#3F5BD8]" : "bg-white text-[#111827] border-[#E5E7EB]"}`}>{T(l)}</button>
         ))}
       </div>
       {tab === "inv" ? <LiveInvoices /> : (

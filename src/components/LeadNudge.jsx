@@ -37,18 +37,18 @@ export default function LeadNudge({ currentRole, activeTab }) {
 
   return (
     <aside role="complementary" aria-label={T("nudge.title")}
-      className="nudge-in fixed z-40 end-3 bottom-[5.5rem] md:bottom-6 md:end-6 w-[calc(100%-1.5rem)] max-w-sm rounded-xl border border-[#E0D6C2] bg-white shadow-lg p-4">
-      <button type="button" onClick={close} aria-label={T("nudge.close")} className="absolute top-2 end-2 p-2 rounded-lg text-[#666B86] hover:bg-[#EFE7D6] cursor-pointer"><X className="w-4 h-4" /></button>
-      <p className="pe-8 text-[15px] font-bold text-[#1E223D]">{T("nudge.title")}</p>
-      <p className="mt-1 text-sm leading-relaxed text-[#4F5470]">{T("nudge.body." + rk)}</p>
+      className="nudge-in fixed z-40 end-3 bottom-[5.5rem] md:bottom-6 md:end-6 w-[calc(100%-1.5rem)] max-w-sm rounded-xl border border-[#E5E7EB] bg-white shadow-lg p-4">
+      <button type="button" onClick={close} aria-label={T("nudge.close")} className="absolute top-2 end-2 p-2 rounded-lg text-[#6B7280] hover:bg-[#F1F3F6] cursor-pointer"><X className="w-4 h-4" /></button>
+      <p className="pe-8 text-[15px] font-bold text-[#111827]">{T("nudge.title")}</p>
+      <p className="mt-1 text-sm leading-relaxed text-[#4B5563]">{T("nudge.body." + rk)}</p>
       <div className="mt-3 flex items-center gap-2">
         <a href={waLink(text)} target="_blank" rel="noopener noreferrer" onClick={() => { markDone(); setOpen(false); }}
-          className="btn-press inline-flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-[#2B3052] hover:bg-[#3A4070] text-white text-sm font-bold">
+          className="btn-press inline-flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-[#3F5BD8] hover:bg-[#3249B8] text-white text-sm font-bold">
           <MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}
         </a>
-        <button type="button" onClick={close} className="h-10 px-3 rounded-lg text-sm font-semibold text-[#4F5470] hover:bg-[#EFE7D6] cursor-pointer">{T("nudge.later")}</button>
+        <button type="button" onClick={close} className="h-10 px-3 rounded-lg text-sm font-semibold text-[#4B5563] hover:bg-[#F1F3F6] cursor-pointer">{T("nudge.later")}</button>
       </div>
-      <p className="mt-2 text-[11px] text-[#666B86]">{T("nudge.note")}</p>
+      <p className="mt-2 text-[11px] text-[#6B7280]">{T("nudge.note")}</p>
     </aside>
   );
 }

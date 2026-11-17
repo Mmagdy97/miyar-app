@@ -214,7 +214,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3052] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#3F5BD8] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -223,7 +223,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       )}
 
       {notifyClient && (
-        <div className="no-print fixed bottom-24 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-white text-[#1E223D] rounded-xl shadow-xl border border-[#E0D6C2]">
+        <div className="no-print fixed bottom-24 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-white text-[#111827] rounded-xl shadow-xl border border-[#E5E7EB]">
           <p className="text-xs font-bold">{T("notify.title")}</p>
           <a
             href={whatsappLink(notifyClient.text)}
@@ -241,17 +241,17 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#1E223D] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#EFE7D6] border border-[#E0D6C2] flex items-center justify-center text-[#1E223D]">
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#111827] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#F1F3F6] border border-[#E5E7EB] flex items-center justify-center text-[#111827]">
                 <FolderKanban className="w-5 h-5" />
               </div>
               <span>{T("proj.1")}</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EFE7D6] text-[#1E223D] border border-[#E0D6C2]">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F1F3F6] text-[#111827] border border-[#E5E7EB]">
               {T("proj.2", { v0: projects.length })}
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#4F5470]">
+          <p className="text-xs md:text-sm text-[#4B5563]">
             {T("proj.3")}
           </p>
         </div>
@@ -260,7 +260,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
         <div className="flex items-center gap-2.5 flex-wrap">
           {!projectsStore.isLive && <button
             onClick={handleResetProjects}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#4F5470] bg-white border border-[#E0D6C2] hover:bg-[#F6F1E7] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#4B5563] bg-white border border-[#E5E7EB] hover:bg-[#F7F8FA] transition-colors shadow-2xs cursor-pointer"
             title={T("proj.4")}
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -270,7 +270,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           {/* Requirement 2: Primary Button "+ إضافة مشروع جديد" */}
           <button
             onClick={() => setIsAddProjectOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2B3052] hover:bg-[#2B3052] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{T("proj.6")}</span>
@@ -280,18 +280,18 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
       {/* KPI Stats Bar */}
       <div className="stat-grid grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4F5470] block mb-1">{T("proj.7")}</span>
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("proj.7")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#1E223D]">{stats.total}</span>
-            <span className="text-[11px] font-bold text-[#4F5470] bg-[#EFE7D6] px-2 py-0.5 rounded-md border border-[#E0D6C2]">
+            <span className="text-xl md:text-2xl font-semibold text-[#111827]">{stats.total}</span>
+            <span className="text-[11px] font-bold text-[#4B5563] bg-[#F1F3F6] px-2 py-0.5 rounded-md border border-[#E5E7EB]">
               {T("proj.8")}
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4F5470] block mb-1">{T("proj.9")}</span>
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("proj.9")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-emerald-700">{stats.onTrack}</span>
             <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
@@ -300,8 +300,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4F5470] block mb-1">{T("proj.11")}</span>
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("proj.11")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-rose-700">{stats.delayed}</span>
             <span className="text-[11px] font-bold text-rose-800 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
@@ -310,10 +310,10 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4F5470] block mb-1">{T("proj.13")}</span>
+        <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#4B5563] block mb-1">{T("proj.13")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#1E223D]">{pct(stats.avgProgress)}</span>
+            <span className="text-xl md:text-2xl font-semibold text-[#111827]">{pct(stats.avgProgress)}</span>
             <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
               {T("proj.14")}
             </span>
@@ -322,16 +322,16 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white rounded-lg border border-[#E0D6C2] p-3.5 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="bg-white rounded-lg border border-[#E5E7EB] p-3.5 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-[#4F5470] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 h-4 text-[#4B5563] absolute start-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder={T("proj.15")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E0D6C2] bg-[#F6F1E7] text-xs md:text-sm font-semibold text-[#1E223D] placeholder-[#4F5470]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all"
+            className="w-full ps-10 pe-4 py-2 rounded-lg border border-[#E5E7EB] bg-[#F7F8FA] text-xs md:text-sm font-semibold text-[#111827] placeholder-[#4B5563]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
           />
         </div>
 
@@ -343,8 +343,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               onClick={() => setStatusFilter(status)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer active:scale-95 ${
                 statusFilter === status
-                  ? "bg-[#2B3052] text-white shadow-sm"
-                  : "bg-[#EFE7D6] text-[#1E223D] hover:bg-[#E0D6C2]"
+                  ? "bg-[#3F5BD8] text-white shadow-sm"
+                  : "bg-[#F1F3F6] text-[#111827] hover:bg-[#E5E7EB]"
               }`}
             >
               {E(status)}
@@ -376,23 +376,23 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
           return (
             <div
               key={project.id}
-              className="bg-white rounded-[28px] border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+              className="bg-white rounded-[28px] border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
             >
               <img src={`/landing/${["villa", "living", "kitchen", "office", "site"][pi % 5]}-s.webp`} alt="" loading="lazy" className="w-full h-36 sm:h-44 object-cover" />
               {/* Card Header: Project Name & Client Name + Status Badge */}
-              <div className="p-5 md:p-6 pb-4 border-b border-[#EFE7D6] flex items-start justify-between gap-3">
+              <div className="p-5 md:p-6 pb-4 border-b border-[#EEF0F4] flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold text-[#4F5470] bg-[#EFE7D6] px-2 py-0.5 rounded-md border border-[#E0D6C2]">
+                    <span className="text-xs font-bold text-[#4B5563] bg-[#F1F3F6] px-2 py-0.5 rounded-md border border-[#E5E7EB]">
                       {T("proj.16")}
                     </span>
                   </div>
-                  <h3 className="text-base md:text-lg font-semibold text-[#1E223D] truncate tracking-tight group-hover:text-amber-800 transition-colors">
+                  <h3 className="text-base md:text-lg font-semibold text-[#111827] truncate tracking-tight group-hover:text-amber-800 transition-colors">
                     {project.name}
                   </h3>
-                  <p className="text-xs text-[#4F5470] mt-0.5 flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5 text-[#4F5470]" />
-                    <span>{T("proj.17")} <strong className="text-[#4F5470] font-bold">{project.client}</strong></span>
+                  <p className="text-xs text-[#4B5563] mt-0.5 flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5 text-[#4B5563]" />
+                    <span>{T("proj.17")} <strong className="text-[#4B5563] font-bold">{project.client}</strong></span>
                   </p>
                 </div>
 
@@ -413,11 +413,11 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 {/* 1. Progress Bar */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-[#1E223D] flex items-center gap-1">
-                      <TrendingUp className="w-3.5 h-3.5 text-[#1E223D]" />
+                    <span className="font-bold text-[#111827] flex items-center gap-1">
+                      <TrendingUp className="w-3.5 h-3.5 text-[#111827]" />
                       <span>{T("proj.18")}</span>
                     </span>
-                    <span className="text-xs font-bold text-[#1E223D] tracking-wide font-mono">
+                    <span className="text-xs font-bold text-[#111827] tracking-wide font-mono">
                       {pct(project.progress)}
                     </span>
                   </div>
@@ -429,14 +429,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 </div>
 
                 {/* 2. Mini Timeline Tracker showing 4 phases: [تصميم -> تأسيس -> تشطيب -> تسليم] */}
-                <div className="bg-[#F6F1E7] rounded-xl p-3.5 border border-[#E0D6C2]">
-                  <span className="text-[11px] font-bold text-[#4F5470] block mb-2.5">
+                <div className="bg-[#F7F8FA] rounded-xl p-3.5 border border-[#E5E7EB]">
+                  <span className="text-[11px] font-bold text-[#4B5563] block mb-2.5">
                     {T("proj.19")}
                   </span>
 
                   <div className="flex items-center justify-between relative">
                     {/* Connecting line */}
-                    <div className="absolute top-1/2 start-4 end-4 -translate-y-1/2 h-0.5 bg-[#E0D6C2] z-0" />
+                    <div className="absolute top-1/2 start-4 end-4 -translate-y-1/2 h-0.5 bg-[#E5E7EB] z-0" />
 
                     {PHASES.map((phase, idx) => {
                       const isCompleted = idx < currentPhaseIndex;
@@ -450,10 +450,10 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                           <div
                             className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-semibold transition-all ${
                               isCompleted
-                                ? "bg-[#2B3052] text-white shadow-xs"
+                                ? "bg-[#3F5BD8] text-white shadow-xs"
                                 : isCurrent
-                                ? "bg-[#2B3052] text-white ring-4 ring-[#2B3052]/10 shadow-xs"
-                                : "bg-white border-2 border-[#E0D6C2] text-[#4F5470]"
+                                ? "bg-[#3F5BD8] text-white ring-4 ring-[#3F5BD8]/10 shadow-xs"
+                                : "bg-white border-2 border-[#E5E7EB] text-[#4B5563]"
                             }`}
                           >
                             {isCompleted ? (
@@ -465,10 +465,10 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                           <span
                             className={`text-[10px] font-bold ${
                               isCurrent
-                                ? "text-[#1E223D] font-semibold scale-105"
+                                ? "text-[#111827] font-semibold scale-105"
                                 : isCompleted
-                                ? "text-[#1E223D]"
-                                : "text-[#4F5470]"
+                                ? "text-[#111827]"
+                                : "text-[#4B5563]"
                             }`}
                           >
                             {D(phase)}
@@ -480,26 +480,26 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 </div>
 
                 {/* 3. Details Row: Assigned Engineer, Start Date, and Deadline with clock icon */}
-                <div className="grid grid-cols-2 gap-2.5 pt-1 text-xs text-[#4F5470]">
-                  <div className="flex items-center gap-2 p-2 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2]/60">
-                    <div className="w-7 h-7 rounded-lg bg-[#EFE7D6] text-[#4F5470] flex items-center justify-center shrink-0 border border-[#E0D6C2]">
+                <div className="grid grid-cols-2 gap-2.5 pt-1 text-xs text-[#4B5563]">
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB]/60">
+                    <div className="w-7 h-7 rounded-lg bg-[#F1F3F6] text-[#4B5563] flex items-center justify-center shrink-0 border border-[#E5E7EB]">
                       <User className="w-3.5 h-3.5" />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] text-[#4F5470] block leading-none">{T("proj.20")}</span>
-                      <span className="font-bold text-[#1E223D] text-[11px] truncate block mt-0.5">
+                      <span className="text-[10px] text-[#4B5563] block leading-none">{T("proj.20")}</span>
+                      <span className="font-bold text-[#111827] text-[11px] truncate block mt-0.5">
                         {project.engineer}
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 p-2 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2]/60">
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB]/60">
                     <div className="w-7 h-7 rounded-lg bg-amber-50 text-amber-800 flex items-center justify-center shrink-0 border border-amber-200">
                       <Clock className="w-3.5 h-3.5" />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] text-[#4F5470] block leading-none">{T("proj.21")}</span>
-                      <span className="font-bold text-[#1E223D] text-[11px] truncate block mt-0.5 font-mono">
+                      <span className="text-[10px] text-[#4B5563] block leading-none">{T("proj.21")}</span>
+                      <span className="font-bold text-[#111827] text-[11px] truncate block mt-0.5 font-mono">
                         {project.deadline}
                       </span>
                     </div>
@@ -508,22 +508,22 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               {/* Card Footer (Actions): Two outline buttons */}
-              <div className="p-4 md:px-6 bg-[#F6F1E7] border-t border-[#EFE7D6] flex items-center gap-2.5">
+              <div className="p-4 md:px-6 bg-[#F7F8FA] border-t border-[#EEF0F4] flex items-center gap-2.5">
                 {/* Button 1: تفاصيل المشروع */}
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#E0D6C2] bg-white hover:bg-[#F6F1E7] text-[#4F5470] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#F7F8FA] text-[#4B5563] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Building2 className="w-3.5 h-3.5 text-[#4F5470]" />
+                  <Building2 className="w-3.5 h-3.5 text-[#4B5563]" />
                   <span>{T("proj.22")}</span>
                 </button>
 
                 {/* Button 2: تعديل الجدول الزمني */}
                 <button
                   onClick={() => handleOpenTimelineModal(project)}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#D3C7AE] bg-[#EFE7D6] hover:bg-[#E0D6C2] text-[#1E223D] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg border border-[#D1D5DB] bg-[#F1F3F6] hover:bg-[#E5E7EB] text-[#111827] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Sliders className="w-3.5 h-3.5 text-[#1E223D]" />
+                  <Sliders className="w-3.5 h-3.5 text-[#111827]" />
                   <span>{T("proj.23")}</span>
                 </button>
               </div>
@@ -532,10 +532,10 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
         })}
 
         {filteredProjects.length === 0 && (
-          <div className="col-span-full py-16 text-center bg-white rounded-lg border border-[#E0D6C2] p-8">
-            <FolderKanban className="w-10 h-10 mx-auto mb-2 text-[#666B86]" />
-            <h4 className="text-base font-bold text-[#4F5470]">{T("proj.24")}</h4>
-            <p className="text-xs text-[#4F5470] mt-1 max-w-sm mx-auto">
+          <div className="col-span-full py-16 text-center bg-white rounded-lg border border-[#E5E7EB] p-8">
+            <FolderKanban className="w-10 h-10 mx-auto mb-2 text-[#6B7280]" />
+            <h4 className="text-base font-bold text-[#4B5563]">{T("proj.24")}</h4>
+            <p className="text-xs text-[#4B5563] mt-1 max-w-sm mx-auto">
               {T("proj.25")}
             </p>
           </div>
@@ -545,16 +545,16 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       {/* Requirement 4: "Create New Project" Modal */}
       {isAddProjectOpen && (
         <div className="fixed inset-0 z-50 bg-[#1E223D]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E0D6C2] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
             {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFE7D6]">
-              <h3 className="text-lg font-semibold text-[#1E223D] flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#1E223D]" />
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEF0F4]">
+              <h3 className="text-lg font-semibold text-[#111827] flex items-center gap-2">
+                <Plus className="w-5 h-5 text-[#111827]" />
                 <span>{T("proj.26")}</span>
               </h3>
               <button
                 onClick={() => setIsAddProjectOpen(false)}
-                className="p-1.5 rounded-lg text-[#4F5470] hover:text-[#1E223D] hover:bg-[#EFE7D6] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -564,7 +564,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             <form onSubmit={handleCreateProjectSubmit} className="space-y-4 mt-4">
               {/* Field 1: Project Name */}
               <div>
-                <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                   اسم المشروع <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -573,13 +573,13 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   placeholder={T("proj.27")}
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E0D6C2] text-xs md:text-sm font-semibold text-[#1E223D] placeholder-[#4F5470]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E5E7EB] text-xs md:text-sm font-semibold text-[#111827] placeholder-[#4B5563]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
                 />
               </div>
 
               {/* Field 2: Client Name */}
               <div>
-                <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                   اسم العميل <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -588,14 +588,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   placeholder={T("proj.28")}
                   value={newClientName}
                   onChange={(e) => setNewClientName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E0D6C2] text-xs md:text-sm font-semibold text-[#1E223D] placeholder-[#4F5470]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E5E7EB] text-xs md:text-sm font-semibold text-[#111827] placeholder-[#4B5563]/50 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
                 />
               </div>
 
               {/* Field 3: Expected Deadline & Location */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                     تاريخ التسليم المتوقع <span className="text-rose-600">*</span>
                   </label>
                   <input
@@ -603,12 +603,12 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                     required
                     value={newDeadline}
                     onChange={(e) => setNewDeadline(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E0D6C2] text-xs font-semibold text-[#1E223D] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#111827] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                     {T("proj.29")}
                   </label>
                   <input
@@ -616,14 +616,14 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                     placeholder={T("proj.30")}
                     value={newLocation}
                     onChange={(e) => setNewLocation(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E0D6C2] text-xs font-semibold text-[#1E223D] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#111827] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
                   />
                 </div>
               </div>
 
               {isLive && (
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1.5">{T("spec.title")}</label>
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">{T("spec.title")}</label>
                   <SpecFields spec={spec} onChange={setSpec} />
                 </div>
               )}
@@ -631,35 +631,35 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               {/* Field 4: Assign Engineer & Estimated Budget */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                     إسناد إلى مهندس <span className="text-rose-600">*</span>
                   </label>
                   <select
                     required
                     value={newEngineer}
                     onChange={(e) => setNewEngineer(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white focus:outline-none focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052]"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs font-bold text-[#111827] bg-white focus:outline-none focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8]"
                   >
                     {isLive && <option value="">{T("pm.eng.pick")}</option>}
                     {people.map((x) => (
                       <option key={x.key} value={x.key}>{x.label}{x.pending ? ` (${T("live.pending")})` : ""}</option>
                     ))}
                   </select>
-                  {made && <p role="status" className="text-[11px] font-bold text-[#1E223D] mt-1.5 break-all">{T("team.created")} <span dir="ltr">{made}</span></p>}
-                  {isLive && people.length === 0 && <p className="text-[11px] text-[#666B86] mt-1.5">{T("pm.eng.none")}</p>}
+                  {made && <p role="status" className="text-[11px] font-bold text-[#111827] mt-1.5 break-all">{T("team.created")} <span dir="ltr">{made}</span></p>}
+                  {isLive && people.length === 0 && <p className="text-[11px] text-[#6B7280] mt-1.5">{T("pm.eng.none")}</p>}
                   {isLive && (
                     <div className="mt-2">
                       {!addPerson ? (
-                        <button type="button" onClick={() => setAddPerson(true)} className="text-[11px] font-bold text-[#2B3052] underline underline-offset-2 cursor-pointer">+ {T("pm.eng.add")}</button>
+                        <button type="button" onClick={() => setAddPerson(true)} className="text-[11px] font-bold text-[#3F5BD8] underline underline-offset-2 cursor-pointer">+ {T("pm.eng.add")}</button>
                       ) : (
                         <div className="grid gap-1.5">
-                          <input value={pf.name} onChange={(e) => setPf({ ...pf, name: e.target.value })} placeholder={T("login.name")} className="px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
-                          <input type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={pf.login} onChange={(e) => setPf({ ...pf, login: e.target.value })} className="px-2.5 py-1.5 rounded-lg border border-[#E0D6C2] text-xs" />
+                          <input value={pf.name} onChange={(e) => setPf({ ...pf, name: e.target.value })} placeholder={T("login.name")} className="px-2.5 py-1.5 rounded-lg border border-[#E5E7EB] text-xs" />
+                          <input type="text" autoCapitalize="none" dir="ltr" placeholder={T("pm.eng.email")} value={pf.login} onChange={(e) => setPf({ ...pf, login: e.target.value })} className="px-2.5 py-1.5 rounded-lg border border-[#E5E7EB] text-xs" />
                           <div className="flex gap-1.5">
-                            <select value={pf.role} onChange={(e) => setPf({ ...pf, role: e.target.value })} className="flex-1 px-2 py-1.5 rounded-lg border border-[#E0D6C2] text-xs bg-white">
+                            <select value={pf.role} onChange={(e) => setPf({ ...pf, role: e.target.value })} className="flex-1 px-2 py-1.5 rounded-lg border border-[#E5E7EB] text-xs bg-white">
                               {MEMBER_ROLES.map((r) => <option key={r} value={r}>{T(`team.r.${r}`)}</option>)}
                             </select>
-                            <button type="button" onClick={invitePerson} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B3052] cursor-pointer">{T("pm.eng.send")}</button>
+                            <button type="button" onClick={invitePerson} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#3F5BD8] cursor-pointer">{T("pm.eng.send")}</button>
                           </div>
                         </div>
                       )}
@@ -668,7 +668,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                  <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                     {T("proj.31", { v0: currencySymbol() })}
                   </label>
                   <input
@@ -676,7 +676,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                     placeholder={T("proj.32")}
                     value={newBudget}
                     onChange={(e) => setNewBudget(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-[#E0D6C2] text-xs font-semibold text-[#1E223D] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2B3052] focus:border-[#2B3052] transition-all"
+                    className="w-full px-3.5 py-2 rounded-lg border border-[#E5E7EB] text-xs font-semibold text-[#111827] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#3F5BD8] focus:border-[#3F5BD8] transition-all"
                   />
                 </div>
               </div>
@@ -688,17 +688,17 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               {/* Actions */}
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EFE7D6]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EEF0F4]">
                 <button
                   type="button"
                   onClick={() => setIsAddProjectOpen(false)}
-                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#4F5470] hover:bg-[#EFE7D6] transition-colors cursor-pointer"
+                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-[#4B5563] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
                 >
                   {T("proj.34")}
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#2B3052] hover:bg-[#2B3052] hover:bg-[#2B3052] text-white font-bold text-xs md:text-sm transition-colors cursor-pointer shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-[#3F5BD8] hover:bg-[#3F5BD8] hover:bg-[#3F5BD8] text-white font-bold text-xs md:text-sm transition-colors cursor-pointer shadow-sm"
                 >
                   <Plus className="w-4 h-4" />
                   <span>{T("proj.35")}</span>
@@ -712,15 +712,15 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       {/* Edit Timeline Modal */}
       {editingTimelineProject && (
         <div className="fixed inset-0 z-50 bg-[#1E223D]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E0D6C2] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFE7D6]">
-              <h3 className="text-base font-semibold text-[#1E223D] flex items-center gap-2">
-                <Sliders className="w-5 h-5 text-[#1E223D]" />
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEF0F4]">
+              <h3 className="text-base font-semibold text-[#111827] flex items-center gap-2">
+                <Sliders className="w-5 h-5 text-[#111827]" />
                 <span>{T("proj.36", { v0: editingTimelineProject.name })}</span>
               </h3>
               <button
                 onClick={() => setEditingTimelineProject(null)}
-                className="p-1.5 rounded-lg text-[#4F5470] hover:text-[#1E223D] hover:bg-[#EFE7D6] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -728,7 +728,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
             <form onSubmit={handleSaveTimeline} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                   {T("proj.37")}
                 </label>
                 <div className="grid grid-cols-4 gap-1.5">
@@ -739,8 +739,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                       onClick={() => setTimelinePhase(p)}
                       className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         timelinePhase === p
-                          ? "bg-[#2B3052] text-white shadow-sm"
-                          : "bg-[#EFE7D6] text-[#1E223D] hover:bg-[#E0D6C2]"
+                          ? "bg-[#3F5BD8] text-white shadow-sm"
+                          : "bg-[#F1F3F6] text-[#111827] hover:bg-[#E5E7EB]"
                       }`}
                     >
                       {D(p)}
@@ -751,8 +751,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="text-xs font-bold text-[#4F5470]">{T("proj.18")}</label>
-                  <span className="text-xs font-semibold text-[#1E223D]">{pct(timelineProgress)}</span>
+                  <label className="text-xs font-bold text-[#4B5563]">{T("proj.18")}</label>
+                  <span className="text-xs font-semibold text-[#111827]">{pct(timelineProgress)}</span>
                 </div>
                 <input
                   type="range"
@@ -765,11 +765,11 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#4F5470] mb-1.5">{T("proj.38")}</label>
+                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">{T("proj.38")}</label>
                 <select
                   value={timelineStatus}
                   onChange={(e) => setTimelineStatus(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white"
+                  className="w-full px-3 py-2 rounded-lg border border-[#E5E7EB] text-xs font-bold text-[#111827] bg-white"
                 >
                   <option value="جاري العمل">{T("proj.39")}</option>
                   <option value="متقدم عن الجدول">{T("proj.40")}</option>
@@ -777,17 +777,17 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EFE7D6]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#EEF0F4]">
                 <button
                   type="button"
                   onClick={() => setEditingTimelineProject(null)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#4F5470] hover:bg-[#EFE7D6]"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#4B5563] hover:bg-[#F1F3F6]"
                 >
                   {T("proj.34")}
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#2B3052] hover:bg-[#2B3052] hover:bg-[#2B3052] text-white font-bold text-xs shadow-sm"
+                  className="px-5 py-2 rounded-lg bg-[#3F5BD8] hover:bg-[#3F5BD8] hover:bg-[#3F5BD8] text-white font-bold text-xs shadow-sm"
                 >
                   {T("proj.42")}
                 </button>
@@ -800,15 +800,15 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       {/* Project Details Modal */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 bg-[#1E223D]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E0D6C2] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFE7D6]">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEF0F4]">
               <div>
-                <h3 className="text-lg font-semibold text-[#1E223D]">{selectedProject.name}</h3>
-                <p className="text-xs text-[#4F5470] mt-0.5">{selectedProject.location}</p>
+                <h3 className="text-lg font-semibold text-[#111827]">{selectedProject.name}</h3>
+                <p className="text-xs text-[#4B5563] mt-0.5">{selectedProject.location}</p>
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-1.5 rounded-lg text-[#4F5470] hover:text-[#1E223D] hover:bg-[#EFE7D6] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -824,24 +824,24 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="flex justify-between py-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{T("proj.17")}</span>
-                <span className="font-bold text-[#1E223D]">{selectedProject.client}</span>
+              <div className="flex justify-between py-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{T("proj.17")}</span>
+                <span className="font-bold text-[#111827]">{selectedProject.client}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{T("proj.44")}</span>
-                <span className="font-bold text-[#1E223D]">{selectedProject.engineer}</span>
+              <div className="flex justify-between py-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{T("proj.44")}</span>
+                <span className="font-bold text-[#111827]">{selectedProject.engineer}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{T("proj.45")}</span>
-                <span className="font-semibold text-[#1E223D]">{selectedProject.budget}</span>
+              <div className="flex justify-between py-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{T("proj.45")}</span>
+                <span className="font-semibold text-[#111827]">{selectedProject.budget}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{T("proj.46")}</span>
-                <span className="font-mono text-[#4F5470]">{selectedProject.startDate}</span>
+              <div className="flex justify-between py-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{T("proj.46")}</span>
+                <span className="font-mono text-[#4B5563]">{selectedProject.startDate}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{T("proj.47")}</span>
+              <div className="flex justify-between py-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{T("proj.47")}</span>
                 <span className="font-mono text-rose-700 font-bold">{selectedProject.deadline}</span>
               </div>
             </div>
@@ -849,7 +849,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setSelectedProject(null)}
-                className="w-full py-2.5 rounded-lg bg-[#2B3052] hover:bg-[#2B3052] text-white text-xs font-bold hover:bg-[#2B3052] transition-colors shadow-sm"
+                className="w-full py-2.5 rounded-lg bg-[#3F5BD8] hover:bg-[#3F5BD8] text-white text-xs font-bold hover:bg-[#3F5BD8] transition-colors shadow-sm"
               >
                 {T("proj.48")}
               </button>

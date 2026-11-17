@@ -25,19 +25,19 @@ export default function StartChecklist({ go }) {
   if (hidden || done === steps.length) return null;
   const hide = () => { try { localStorage.setItem(key(), "1"); } catch { /* ignore */ } setHidden(true); };
   return (
-    <section className="bg-white rounded-2xl border border-[#E0D6C2] p-4 space-y-3">
+    <section className="bg-white rounded-2xl border border-[#E5E7EB] p-4 space-y-3">
       <div className="flex items-center gap-2">
-        <h2 className="text-sm font-semibold text-[#1E223D]">{T("start.title")}</h2>
-        <span className="text-[11px] font-bold text-[#4F5470] tabular-nums">{done}/{steps.length}</span>
-        <button type="button" onClick={hide} className="ms-auto text-[11px] font-bold text-[#666B86] cursor-pointer">{T("start.hide")}</button>
+        <h2 className="text-sm font-semibold text-[#111827]">{T("start.title")}</h2>
+        <span className="text-[11px] font-bold text-[#4B5563] tabular-nums">{done}/{steps.length}</span>
+        <button type="button" onClick={hide} className="ms-auto text-[11px] font-bold text-[#6B7280] cursor-pointer">{T("start.hide")}</button>
       </div>
-      <div className="h-1.5 rounded-full bg-[#F1EADB] overflow-hidden"><div className="h-full bg-[#E8532A]" style={{ width: `${(done / steps.length) * 100}%` }} /></div>
+      <div className="h-1.5 rounded-full bg-[#F1F3F6] overflow-hidden"><div className="h-full bg-[#D97706]" style={{ width: `${(done / steps.length) * 100}%` }} /></div>
       <ul className="grid gap-1.5">
         {steps.map(([k, ok, tab]) => (
           <li key={k} className="flex items-center gap-2 text-xs">
             {ok ? <Check className="w-4 h-4 text-emerald-700 shrink-0" aria-hidden="true" /> : <Circle className="w-4 h-4 text-[#B8AE98] shrink-0" aria-hidden="true" />}
-            <span className={ok ? "text-[#666B86] line-through" : "font-semibold text-[#1E223D]"}>{T("start." + k)}</span>
-            {!ok && <button type="button" onClick={() => go(tab)} className="ms-auto px-3 h-8 rounded-lg text-[11px] font-bold border border-[#E0D6C2] cursor-pointer">{T("start.go")}</button>}
+            <span className={ok ? "text-[#6B7280] line-through" : "font-semibold text-[#111827]"}>{T("start." + k)}</span>
+            {!ok && <button type="button" onClick={() => go(tab)} className="ms-auto px-3 h-8 rounded-lg text-[11px] font-bold border border-[#E5E7EB] cursor-pointer">{T("start.go")}</button>}
           </li>
         ))}
       </ul>

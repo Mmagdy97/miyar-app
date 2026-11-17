@@ -5,7 +5,7 @@ import { CURRENCIES } from "../lib/currency";
 import { LOCALES } from "../config/locale";
 import { getTheme, setTheme } from "../theme";
 
-const SECTION = "text-[11px] font-semibold uppercase tracking-wide text-[#666B86] mb-2";
+const SECTION = "text-[11px] font-semibold uppercase tracking-wide text-[#6B7280] mb-2";
 
 /** One compact control: language, currency and theme, as a popover on desktop and a bottom sheet on phones. */
 export default function SettingsSwitcher() {
@@ -35,7 +35,7 @@ export default function SettingsSwitcher() {
   };
   const row = (active) =>
     `w-full flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-start btn-press ${
-      active ? "bg-[#2B3052]/10 text-[#2B3052] font-semibold" : "text-[#1E223D] hover:bg-[#EFE7D6]"
+      active ? "bg-[#3F5BD8]/10 text-[#3F5BD8] font-semibold" : "text-[#111827] hover:bg-[#F1F3F6]"
     }`;
 
   return (
@@ -47,11 +47,11 @@ export default function SettingsSwitcher() {
         aria-expanded={open}
         aria-label={t("settings.title")}
         title={t("settings.title")}
-        className="btn-press inline-flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg border border-[#E0D6C2] bg-white px-2.5 h-9 text-xs font-semibold text-[#1E223D] hover:bg-[#EFE7D6]"
+        className="btn-press inline-flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg border border-[#E5E7EB] bg-white px-2.5 h-9 text-xs font-semibold text-[#111827] hover:bg-[#F1F3F6]"
       >
         <Globe className="w-4 h-4" aria-hidden="true" />
         <span className="tabular-nums whitespace-nowrap" dir="ltr">{locale.toUpperCase()} · {currency}</span>
-        {theme === "dark" ? <Moon className="w-3.5 h-3.5 text-[#666B86]" aria-hidden="true" /> : <Sun className="w-3.5 h-3.5 text-[#D98E73]" aria-hidden="true" />}
+        {theme === "dark" ? <Moon className="w-3.5 h-3.5 text-[#6B7280]" aria-hidden="true" /> : <Sun className="w-3.5 h-3.5 text-[#D98E73]" aria-hidden="true" />}
       </button>
 
       {open && (
@@ -60,11 +60,11 @@ export default function SettingsSwitcher() {
           <div
             role="dialog"
             aria-label={t("settings.title")}
-            className="fixed z-[70] inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t border-[#E0D6C2] bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:mt-2 sm:end-0 sm:w-80 sm:max-h-[70vh] sm:rounded-xl sm:border sm:shadow-lg sm:p-3"
+            className="fixed z-[70] inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t border-[#E5E7EB] bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:absolute sm:inset-x-auto sm:bottom-auto sm:top-full sm:mt-2 sm:end-0 sm:w-80 sm:max-h-[70vh] sm:rounded-xl sm:border sm:shadow-lg sm:p-3"
           >
             <div className="flex items-center justify-between mb-3 sm:hidden">
-              <h2 className="text-base font-bold text-[#1E223D]">{t("settings.title")}</h2>
-              <button type="button" onClick={() => setOpen(false)} aria-label={t("settings.close")} className="btn-press p-2 -m-2 rounded-lg text-[#4F5470]">
+              <h2 className="text-base font-bold text-[#111827]">{t("settings.title")}</h2>
+              <button type="button" onClick={() => setOpen(false)} aria-label={t("settings.close")} className="btn-press p-2 -m-2 rounded-lg text-[#4B5563]">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -93,7 +93,7 @@ export default function SettingsSwitcher() {
             </div>
 
             <p className={SECTION}>{t("settings.theme")}</p>
-            <div className="grid grid-cols-2 gap-1.5 rounded-lg bg-[#EFE7D6] p-1" role="group">
+            <div className="grid grid-cols-2 gap-1.5 rounded-lg bg-[#F1F3F6] p-1" role="group">
               {[["light", Sun, t("settings.light")], ["dark", Moon, t("settings.dark")]].map(([k, Icon, label]) => (
                 <button
                   key={k}
@@ -101,7 +101,7 @@ export default function SettingsSwitcher() {
                   onClick={() => pickTheme(k)}
                   aria-pressed={theme === k}
                   className={`btn-press inline-flex items-center justify-center gap-2 rounded-md py-2 text-sm font-semibold ${
-                    theme === k ? "bg-white text-[#1E223D] shadow-sm" : "text-[#4F5470]"
+                    theme === k ? "bg-white text-[#111827] shadow-sm" : "text-[#4B5563]"
                   }`}
                 >
                   <Icon className="w-4 h-4" aria-hidden="true" />{label}

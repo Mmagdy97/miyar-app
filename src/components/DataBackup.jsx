@@ -31,16 +31,16 @@ export default function DataBackup() {
   };
 
   return (
-    <section aria-labelledby="bk-title" className="bg-white rounded-[24px] border border-[#E0D6C2] p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4">
-      <span className="w-11 h-11 shrink-0 rounded-2xl bg-[#EFE7D6] text-[#1E223D] flex items-center justify-center"><DatabaseBackup className="w-5 h-5" aria-hidden="true" /></span>
+    <section aria-labelledby="bk-title" className="bg-white rounded-[24px] border border-[#E5E7EB] p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4">
+      <span className="w-11 h-11 shrink-0 rounded-2xl bg-[#F1F3F6] text-[#111827] flex items-center justify-center"><DatabaseBackup className="w-5 h-5" aria-hidden="true" /></span>
       <div className="flex-1 min-w-0">
-        <h2 id="bk-title" className="font-semibold text-[#1E223D]">{t("bk.title")}</h2>
-        <p className="text-sm text-[#4F5470] mt-0.5">{t("bk.sub")}</p>
-        {msg && <p role="status" className="text-sm font-semibold text-[#1E223D] mt-1">{msg}</p>}
+        <h2 id="bk-title" className="font-semibold text-[#111827]">{t("bk.title")}</h2>
+        <p className="text-sm text-[#4B5563] mt-0.5">{t("bk.sub")}</p>
+        {msg && <p role="status" className="text-sm font-semibold text-[#111827] mt-1">{msg}</p>}
       </div>
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={download} className="btn-press inline-flex items-center gap-2 h-11 px-5 rounded-full lp-pill-dark text-sm font-semibold"><Download className="w-4 h-4" aria-hidden="true" />{t("bk.down")}</button>
-        <label className="inline-flex items-center gap-2 h-11 px-5 rounded-full border border-[#E0D6C2] text-sm font-semibold text-[#1E223D] cursor-pointer hover:bg-[#F6F1E7]">
+        <label className="inline-flex items-center gap-2 h-11 px-5 rounded-full border border-[#E5E7EB] text-sm font-semibold text-[#111827] cursor-pointer hover:bg-[#F7F8FA]">
           <Upload className="w-4 h-4" aria-hidden="true" />{t("bk.up")}
           <input ref={fileRef} type="file" accept="application/json,.json" className="sr-only" onChange={(e) => restore(e.target.files?.[0])} />
         </label>

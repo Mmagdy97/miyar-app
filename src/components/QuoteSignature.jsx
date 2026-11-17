@@ -26,23 +26,23 @@ export default function QuoteSignature({ quoteNo, total, defaultName = "" }) {
         <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
           <CheckCircle2 className="w-4 h-4" />
           <span>{T("sign.done", { 0: sig.name, 1: new Date(sig.at).toLocaleDateString() })}</span>
-          <button type="button" onClick={() => setSigs((s) => { const n = { ...s }; delete n[quoteNo]; return n; })} className="ms-auto text-[#4F5470] hover:text-[#1E223D] cursor-pointer"><X className="w-3.5 h-3.5" /></button>
+          <button type="button" onClick={() => setSigs((s) => { const n = { ...s }; delete n[quoteNo]; return n; })} className="ms-auto text-[#4B5563] hover:text-[#111827] cursor-pointer"><X className="w-3.5 h-3.5" /></button>
         </div>
       ) : (
-        <button type="button" onClick={() => { setName(defaultName); setImg(null); setOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#2B3052] hover:bg-[#2B3052] cursor-pointer">
+        <button type="button" onClick={() => { setName(defaultName); setImg(null); setOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] cursor-pointer">
           <PenLine className="w-4 h-4" />{T(sig ? "sign.resign" : "sign.btn")}
         </button>
       )}
       {open && createPortal(
         <div className="no-print fixed inset-0 z-[70] bg-[#1E223D]/50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-5 space-y-4 text-start">
-            <h3 className="text-base font-semibold text-[#1E223D]">{T("sign.title")} · {quoteNo}</h3>
-            <p className="text-xs text-[#4F5470] leading-relaxed">{T("sign.terms")}</p>
-            <input value={name} onChange={(e) => setName(e.target.value)} maxLength={80} placeholder={T("sign.name")} className="w-full px-3 py-2 rounded-lg border border-[#E0D6C2] text-sm font-bold" />
+            <h3 className="text-base font-semibold text-[#111827]">{T("sign.title")} · {quoteNo}</h3>
+            <p className="text-xs text-[#4B5563] leading-relaxed">{T("sign.terms")}</p>
+            <input value={name} onChange={(e) => setName(e.target.value)} maxLength={80} placeholder={T("sign.name")} className="w-full px-3 py-2 rounded-lg border border-[#E5E7EB] text-sm font-bold" />
             <SignaturePad onChange={setImg} label={T("sign.pad")} clearLabel={T("sign.clear")} />
             <div className="flex justify-end gap-2">
-              <button type="button" onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg text-xs font-bold text-[#4F5470] hover:bg-[#EFE7D6] cursor-pointer">{T("se.124")}</button>
-              <button type="button" disabled={!name.trim() || !img} onClick={save} className="px-5 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] disabled:opacity-40 cursor-pointer">{T("sign.confirm")}</button>
+              <button type="button" onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg text-xs font-bold text-[#4B5563] hover:bg-[#F1F3F6] cursor-pointer">{T("se.124")}</button>
+              <button type="button" disabled={!name.trim() || !img} onClick={save} className="px-5 py-2 rounded-lg text-xs font-bold text-white bg-[#3F5BD8] disabled:opacity-40 cursor-pointer">{T("sign.confirm")}</button>
             </div>
           </div>
         </div>,

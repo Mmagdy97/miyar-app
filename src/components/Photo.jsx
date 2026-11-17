@@ -6,7 +6,7 @@ export default function Photo({ src, alt = "", className = "", fallbackClass = "
   const [failed, setFailed] = useState(!src);
   if (failed) {
     return (
-      <div role="img" aria-label={alt} className={`w-full h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#E0D6C2] via-[#EFE7D6] to-[#F6F1E7] text-[#666B86] ${fallbackClass}`}>
+      <div role="img" aria-label={alt} className={`w-full h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#E5E7EB] via-[#F1F3F6] to-[#F7F8FA] text-[#6B7280] ${fallbackClass}`}>
         <ImageOff className="w-6 h-6" aria-hidden="true" />
         {label && <span className="text-xs font-semibold px-3 text-center">{label}</span>}
       </div>

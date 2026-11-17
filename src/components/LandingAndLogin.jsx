@@ -154,7 +154,7 @@ export default function LandingAndLogin({ onLogin }) {
   return (
     <div
      
-      className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F6F1E7] text-[#1E223D] selection:bg-[#2B3052] selection:text-white overflow-x-hidden"
+      className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F7F8FA] text-[#111827] selection:bg-[#3F5BD8] selection:text-white overflow-x-hidden"
     >
 
       <LandingBody openModal={openModal} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />
@@ -164,7 +164,7 @@ export default function LandingAndLogin({ onLogin }) {
         <div className="fixed inset-0 z-50 bg-[#1E223D]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div
            
-            className="bg-white rounded-[32px] shadow-2xl border border-[#E0D6C2] max-w-4xl w-full max-h-[92dvh] overflow-hidden text-start animate-in zoom-in-95 duration-200 relative grid md:grid-cols-[0.8fr_1.2fr]"
+            className="bg-white rounded-[32px] shadow-2xl border border-[#E5E7EB] max-w-4xl w-full max-h-[92dvh] overflow-hidden text-start animate-in zoom-in-95 duration-200 relative grid md:grid-cols-[0.8fr_1.2fr]"
           >
 
             <div className="relative isolate hidden md:flex flex-col justify-between p-7 text-white">
@@ -175,21 +175,21 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
             <div className="p-6 sm:p-8 overflow-y-auto max-h-[92dvh]">
             {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFE7D6] relative z-10">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEF0F4] relative z-10">
               <div className="flex items-center gap-2.5">
                 <div className="w-10 h-10 rounded-full lp-pill-dark flex items-center justify-center">
                   <LogoMark className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-semibold text-[#1E223D]">
+                  <h3 className="text-base sm:text-lg font-semibold text-[#111827]">
                     {T("login.title")}
                   </h3>
-                  <p className="text-xs text-[#4F5470]">{T("login.sub")}</p>
+                  <p className="text-xs text-[#4B5563]">{T("login.sub")}</p>
                 </div>
               </div>
               <button
                 onClick={closeModal}
-                className="p-1.5 rounded-lg text-[#4F5470] hover:text-[#1E223D] hover:bg-[#EFE7D6] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
                 aria-label={T("ld.155")}
               >
                 <X className="w-5 h-5" />
@@ -199,26 +199,26 @@ export default function LandingAndLogin({ onLogin }) {
             {/* Real account (Supabase) */}
             {isSupabaseConfigured && (
               <form onSubmit={submitAuth} className="mt-5 relative z-10">
-                <div role="tablist" className="inline-flex gap-1 p-1 mb-3 rounded-full bg-[#F6F1E7] border border-[#E0D6C2]">
-                  {["in", "up"].map((k) => <button key={k} type="button" role="tab" aria-selected={mode === k} onClick={() => { setMode(k); setMsg(""); }} className={`px-5 py-2 rounded-full text-xs font-bold cursor-pointer ${mode === k ? "lp-pill-dark" : "text-[#4F5470]"}`}>{T("login.tab." + k)}</button>)}
+                <div role="tablist" className="inline-flex gap-1 p-1 mb-3 rounded-full bg-[#F7F8FA] border border-[#E5E7EB]">
+                  {["in", "up"].map((k) => <button key={k} type="button" role="tab" aria-selected={mode === k} onClick={() => { setMode(k); setMsg(""); }} className={`px-5 py-2 rounded-full text-xs font-bold cursor-pointer ${mode === k ? "lp-pill-dark" : "text-[#4B5563]"}`}>{T("login.tab." + k)}</button>)}
                 </div>
                 <div className="grid gap-2">
                   {mode === "up" && <>
-                    <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
-                    <input value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
+                    <input required value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} aria-label={T("login.name")} placeholder={T("login.name")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E5E7EB] text-sm bg-white" />
+                    <input value={f.office} onChange={(e) => setF({ ...f, office: e.target.value })} aria-label={T("login.office")} placeholder={T("login.office")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E5E7EB] text-sm bg-white" />
                   </>}
                   {mode === "up" ? <>
-                    <input type="tel" inputMode="tel" dir="ltr" autoComplete="tel" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} aria-label={T("login.phone")} placeholder={T("login.phone")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
-                    <input type="text" inputMode="email" dir="ltr" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.emailOpt")} placeholder={T("login.emailOpt")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" />
-                  </> : <input required type="text" inputMode="email" autoCapitalize="none" autoCorrect="off" dir="ltr" autoComplete="username" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" dir="ltr" />}
-                  <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E0D6C2] text-sm bg-white" dir="ltr" />
+                    <input type="tel" inputMode="tel" dir="ltr" autoComplete="tel" value={f.phone} onChange={(e) => setF({ ...f, phone: e.target.value })} aria-label={T("login.phone")} placeholder={T("login.phone")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E5E7EB] text-sm bg-white" />
+                    <input type="text" inputMode="email" dir="ltr" autoComplete="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.emailOpt")} placeholder={T("login.emailOpt")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E5E7EB] text-sm bg-white" />
+                  </> : <input required type="text" inputMode="email" autoCapitalize="none" autoCorrect="off" dir="ltr" autoComplete="username" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-label={T("login.email")} placeholder={T("login.email")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E5E7EB] text-sm bg-white" dir="ltr" />}
+                  <input required type="password" autoComplete={mode === "in" ? "current-password" : "new-password"} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} aria-label={T("login.password")} placeholder={T("login.password")} className="w-full min-w-0 h-12 px-5 rounded-full border border-[#E5E7EB] text-sm bg-white" dir="ltr" />
                   <button type="submit" disabled={isSubmitting} className="btn-press h-12 rounded-full lp-pill-dark text-sm font-bold cursor-pointer disabled:opacity-60">{T("login.go." + mode)}</button>
                   {msg && <p role="alert" className="text-xs text-rose-700">{msg}</p>}
                 </div>
               </form>
             )}
-            <div className="flex items-center gap-3 my-5 text-xs text-[#666B86]"><span className="h-px flex-1 bg-[#E0D6C2]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E0D6C2]" /></div>
-            <h4 className="flex items-center gap-2 text-lg font-semibold text-[#1E223D]"><span className="w-8 h-8 rounded-lg bg-[var(--peach)] text-[#1E223D] flex items-center justify-center"><Users className="w-4 h-4" aria-hidden="true" /></span>{T("login.guest")}</h4>
+            <div className="flex items-center gap-3 my-5 text-xs text-[#6B7280]"><span className="h-px flex-1 bg-[#E5E7EB]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E5E7EB]" /></div>
+            <h4 className="flex items-center gap-2 text-lg font-semibold text-[#111827]"><span className="w-8 h-8 rounded-lg bg-[var(--peach)] text-[#111827] flex items-center justify-center"><Users className="w-4 h-4" aria-hidden="true" /></span>{T("login.guest")}</h4>
 
             {/* Guest entry: pick a role, enter. Sample data, no credentials. */}
             <form onSubmit={handleFormSubmit} className="mt-2.5 relative z-10">
@@ -229,14 +229,14 @@ export default function LandingAndLogin({ onLogin }) {
                     const RoleIcon = r.icon;
                     const on = selectedRole === r.id;
                     return (
-                      <label key={r.id} className={`relative flex flex-col sm:flex-row items-start gap-2 sm:gap-3 p-3 sm:p-3.5 rounded-[20px] border cursor-pointer transition-colors ${on ? "border-[#2B3052] bg-[#2B3052]/[0.06] ring-1 ring-[#2B3052]" : "border-[#E0D6C2] bg-white hover:border-[#A8A9BE]"}`}>
+                      <label key={r.id} className={`relative flex flex-col sm:flex-row items-start gap-2 sm:gap-3 p-3 sm:p-3.5 rounded-[20px] border cursor-pointer transition-colors ${on ? "border-[#3F5BD8] bg-[#3F5BD8]/[0.06] ring-1 ring-[#3F5BD8]" : "border-[#E5E7EB] bg-white hover:border-[#A8A9BE]"}`}>
                         <input type="radio" name="role" value={r.id} checked={on} onChange={() => setSelectedRole(r.id)} className="sr-only" />
-                        <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#2B3052] text-white" : "bg-[#EFE7D6] text-[#4F5470]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
+                        <span className={`mt-0.5 w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${on ? "bg-[#3F5BD8] text-white" : "bg-[#F1F3F6] text-[#4B5563]"}`}><RoleIcon className="w-[18px] h-[18px]" aria-hidden="true" /></span>
                         <span className="min-w-0">
-                          <span className="block text-sm font-semibold text-[#1E223D]">{T("login.role." + r.key)}</span>
-                          <span className="hidden sm:block mt-0.5 text-xs leading-relaxed text-[#666B86]">{T("login.desc." + r.key)}</span>
+                          <span className="block text-sm font-semibold text-[#111827]">{T("login.role." + r.key)}</span>
+                          <span className="hidden sm:block mt-0.5 text-xs leading-relaxed text-[#6B7280]">{T("login.desc." + r.key)}</span>
                         </span>
-                        {on && <CheckCircle2 className="absolute top-3 end-3 w-4 h-4 text-[#2B3052]" aria-hidden="true" />}
+                        {on && <CheckCircle2 className="absolute top-3 end-3 w-4 h-4 text-[#3F5BD8]" aria-hidden="true" />}
                       </label>
                     );
                   })}
@@ -249,7 +249,7 @@ export default function LandingAndLogin({ onLogin }) {
                 <span>{T("login.enter", { role: T("login.role." + (DEMO_ROLES.find((r) => r.id === selectedRole)?.key || "admin")) })}</span>
               </button>
               </div>
-              <p className="mt-1 text-xs text-center text-[#666B86]">{T("login.note")}</p>
+              <p className="mt-1 text-xs text-center text-[#6B7280]">{T("login.note")}</p>
             </form>
             </div>
           </div>

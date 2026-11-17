@@ -129,7 +129,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-20 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2B3052] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-8 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#3F5BD8] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           </div>
@@ -141,17 +141,17 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1">
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#1E223D] tracking-tight flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#EFE7D6] border border-[#E0D6C2] flex items-center justify-center text-[#1E223D]">
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#111827] tracking-tight flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-lg bg-[#F1F3F6] border border-[#E5E7EB] flex items-center justify-center text-[#111827]">
                 <Banknote className="w-5 h-5" />
               </div>
               <span>{t("fin.title")}</span>
             </h1>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#EFE7D6] text-[#1E223D] border border-[#E0D6C2]/80">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#F1F3F6] text-[#111827] border border-[#E5E7EB]/80">
               {t("fin.badge")}
             </span>
           </div>
-          <p className="text-xs md:text-sm text-[#4F5470]">
+          <p className="text-xs md:text-sm text-[#4B5563]">
             {t("fin.intro")}
           </p>
         </div>
@@ -160,7 +160,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleResetData}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#1E223D] bg-white border border-[#E0D6C2] hover:bg-[#F6F1E7] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#111827] bg-white border border-[#E5E7EB] hover:bg-[#F7F8FA] transition-colors shadow-2xs cursor-pointer"
             title={t("fin.resetTip")}
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -168,7 +168,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
           </button>
           <button
             onClick={() => setTopUpModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-white bg-[#2B3052] hover:bg-[#2B3052] hover:bg-[#2B3052] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs md:text-sm font-medium text-white bg-[#3F5BD8] hover:bg-[#3F5BD8] hover:bg-[#3F5BD8] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{t("fin.topUpBtn")}</span>
@@ -179,21 +179,21 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       {/* Requirement 2: 3 Glassmorphic KPI Cards */}
       <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {/* Card 1: Total Given (إجمالي العهد المفتوحة) */}
-        <div className="relative bg-white rounded-lg p-6 border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-white rounded-lg p-6 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#4F5470]">{t("fin.openTotal")}</span>
-            <div className="w-10 h-10 rounded-lg bg-[#EFE7D6] text-[#1E223D] flex items-center justify-center border border-[#E0D6C2]">
+            <span className="text-xs font-bold text-[#4B5563]">{t("fin.openTotal")}</span>
+            <div className="w-10 h-10 rounded-lg bg-[#F1F3F6] text-[#111827] flex items-center justify-center border border-[#E5E7EB]">
               <Wallet className="w-5 h-5" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl md:text-3xl font-semibold text-[#1E223D] tracking-tight transition-all duration-300">
+            <span className="text-2xl md:text-3xl font-semibold text-[#111827] tracking-tight transition-all duration-300">
               {totalGiven.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#4F5470]">{currencyName()}</span>
+            <span className="text-xs font-bold text-[#4B5563]">{currencyName()}</span>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#4F5470]">
-            <span className="font-bold text-[#1E223D] bg-[#EFE7D6] px-2 py-0.5 rounded-md border border-[#E0D6C2]">
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#4B5563]">
+            <span className="font-bold text-[#111827] bg-[#F1F3F6] px-2 py-0.5 rounded-md border border-[#E5E7EB]">
               {t("fin.engineers", { n: toAr(engineersCash.length) })}
             </span>
             <span>{t("fin.onSites")}</span>
@@ -201,20 +201,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         </div>
 
         {/* Card 2: Total Spent (إجمالي المنصرف المعتمد) */}
-        <div className="relative bg-white rounded-lg p-6 border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-white rounded-lg p-6 border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-[#4F5470]">{t("fin.spentTotal")}</span>
-            <div className="w-10 h-10 rounded-lg bg-[#EFE7D6] text-[#1E223D] flex items-center justify-center border border-[#E0D6C2]">
+            <span className="text-xs font-bold text-[#4B5563]">{t("fin.spentTotal")}</span>
+            <div className="w-10 h-10 rounded-lg bg-[#F1F3F6] text-[#111827] flex items-center justify-center border border-[#E5E7EB]">
               <CheckCircle2 className="w-5 h-5" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl md:text-3xl font-semibold text-[#1E223D] tracking-tight transition-all duration-300">
+            <span className="text-2xl md:text-3xl font-semibold text-[#111827] tracking-tight transition-all duration-300">
               {totalSpent.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#4F5470]">{currencyName()}</span>
+            <span className="text-xs font-bold text-[#4B5563]">{currencyName()}</span>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#4F5470]">
+          <div className="mt-3 flex items-center gap-2 text-[11px] text-[#4B5563]">
             <span className="font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
               {t("fin.spentRatio", { p: `${toAr(overallSpentRatio)}${t("sym.pct")}` })}
             </span>
@@ -223,7 +223,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
         </div>
 
         {/* Card 3: Remaining in Field (الرصيد المتبقي بالمواقع) */}
-        <div className="relative bg-[#2B3052] text-white rounded-xl p-6 border border-[#3A4070] shadow-sm overflow-hidden group hover:shadow-md transition-all">
+        <div className="relative bg-[#3F5BD8] text-white rounded-xl p-6 border border-[#3249B8] shadow-sm overflow-hidden group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold text-[#EFE7D6]">{t("fin.remaining")}</span>
             <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center border border-white/20">
@@ -249,18 +249,18 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Right Column in RTL (7 cols): أرصدة المهندسين (Engineers Balances) */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-white rounded-lg border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
-            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#EFE7D6]">
+          <div className="bg-white rounded-lg border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#EEF0F4]">
               <div>
-                <h2 className="text-base md:text-lg font-semibold text-[#1E223D] flex items-center gap-2">
-                  <Wallet className="w-5 h-5 text-[#1E223D]" />
+                <h2 className="text-base md:text-lg font-semibold text-[#111827] flex items-center gap-2">
+                  <Wallet className="w-5 h-5 text-[#111827]" />
                   <span>{t("fin.balancesTitle")}</span>
                 </h2>
-                <p className="text-xs text-[#4F5470] mt-0.5">
+                <p className="text-xs text-[#4B5563] mt-0.5">
                   {t("fin.balancesSub")}
                 </p>
               </div>
-              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#EFE7D6] text-[#4F5470] border border-[#E0D6C2]">
+              <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#F1F3F6] text-[#4B5563] border border-[#E5E7EB]">
                 {t("fin.engineers", { n: toAr(engineersCash.length) })}
               </span>
             </div>
@@ -273,8 +273,8 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                   eng.totalGiven > 0 ? Math.min(100, Math.round((eng.spent / eng.totalGiven) * 100)) : 0;
 
                 // Color code progress bar
-                let progressColor = "bg-[#2B3052]";
-                let badgeColor = "bg-[#EFE7D6] text-[#1E223D] border-[#E0D6C2]";
+                let progressColor = "bg-[#3F5BD8]";
+                let badgeColor = "bg-[#F1F3F6] text-[#111827] border-[#E5E7EB]";
                 if (ratio >= 85) {
                   progressColor = "bg-rose-600";
                   badgeColor = "bg-rose-50 text-rose-800 border-rose-200";
@@ -286,7 +286,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 return (
                   <div
                     key={eng.id}
-                    className="p-4 rounded-lg border border-[#E0D6C2] bg-white hover:bg-[#F6F1E7]/50 transition-all shadow-2xs"
+                    className="p-4 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#F7F8FA]/50 transition-all shadow-2xs"
                   >
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div className="flex items-center gap-3">
@@ -296,11 +296,11 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                           {eng.avatar}
                         </div>
                         <div>
-                          <h3 className="text-sm font-semibold text-[#1E223D] leading-tight">
+                          <h3 className="text-sm font-semibold text-[#111827] leading-tight">
                             {eng.name}
                           </h3>
-                          <p className="text-xs text-[#4F5470] mt-0.5 flex items-center gap-1">
-                            <Building2 className="w-3 h-3 text-[#4F5470]" />
+                          <p className="text-xs text-[#4B5563] mt-0.5 flex items-center gap-1">
+                            <Building2 className="w-3 h-3 text-[#4B5563]" />
                             <span>{eng.site}</span>
                           </p>
                         </div>
@@ -308,12 +308,12 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
                       {/* Available Balance Tag */}
                       <div className="text-end">
-                        <span className="text-[10px] font-bold text-[#4F5470] block">
+                        <span className="text-[10px] font-bold text-[#4B5563] block">
                           {t("fin.available")}
                         </span>
-                        <span className="text-sm md:text-base font-semibold text-[#1E223D] tracking-tight">
+                        <span className="text-sm md:text-base font-semibold text-[#111827] tracking-tight">
                           {available.toLocaleString(intlLocale())}{" "}
-                          <span className="text-[11px] font-normal text-[#4F5470]">{currencySymbol()}</span>
+                          <span className="text-[11px] font-normal text-[#4B5563]">{currencySymbol()}</span>
                         </span>
                       </div>
                     </div>
@@ -321,14 +321,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     {/* Progress Bar Container */}
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[11px] text-[#4F5470]">
+                        <span className="text-[11px] text-[#4B5563]">
                           {t("fin.spentLabel")}{" "}
-                          <strong className="text-[#1E223D] font-bold">
+                          <strong className="text-[#111827] font-bold">
                             {eng.spent.toLocaleString(intlLocale())} {currencySymbol()}
                           </strong>{" "}
                           {t("fin.outOf", { amt: `${eng.totalGiven.toLocaleString(intlLocale())} ${currencySymbol()}` })}
                         </span>
-                        <span className="text-xs font-bold text-[#1E223D] tracking-wide">
+                        <span className="text-xs font-bold text-[#111827] tracking-wide">
                           {t("fin.consumed", { p: `${toAr(ratio)}${t("sym.pct")}` })}
                         </span>
                       </div>
@@ -351,7 +351,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             {/* Note */}
-            <div className="mt-5 p-3 rounded-lg bg-[#F6F1E7] border border-[#E0D6C2] flex items-center gap-2.5 text-xs text-[#4F5470]">
+            <div className="mt-5 p-3 rounded-lg bg-[#F7F8FA] border border-[#E5E7EB] flex items-center gap-2.5 text-xs text-[#4B5563]">
               <Sparkles className="w-4 h-4 text-amber-700 shrink-0" />
               <span>
                 {t("fin.liveNote")}
@@ -362,14 +362,14 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
         {/* Left Column in RTL (5 cols): فواتير بانتظار الاعتماد (Pending Expenses) */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white rounded-lg border border-[#E0D6C2] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
-            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#EFE7D6]">
+          <div className="bg-white rounded-lg border border-[#E5E7EB] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6 md:p-8">
+            <div className="flex items-center justify-between mb-5 pb-3 border-b border-[#EEF0F4]">
               <div>
-                <h2 className="text-base md:text-lg font-semibold text-[#1E223D] flex items-center gap-2">
+                <h2 className="text-base md:text-lg font-semibold text-[#111827] flex items-center gap-2">
                   <Receipt className="w-5 h-5 text-amber-700" />
                   <span>{t("fin.pendingTitle")}</span>
                 </h2>
-                <p className="text-xs text-[#4F5470] mt-0.5">
+                <p className="text-xs text-[#4B5563] mt-0.5">
                   {t("fin.pendingSub")}
                 </p>
               </div>
@@ -383,19 +383,19 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               {pendingExpenses.map((expense) => (
                 <div
                   key={expense.id}
-                  className="p-4 rounded-lg border border-[#E0D6C2] hover:border-[#2B3052] bg-white shadow-2xs transition-all duration-200"
+                  className="p-4 rounded-lg border border-[#E5E7EB] hover:border-[#3F5BD8] bg-white shadow-2xs transition-all duration-200"
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
-                      <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#EFE7D6] text-[#4F5470] border border-[#E0D6C2] mb-1.5">
+                      <span className="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#F1F3F6] text-[#4B5563] border border-[#E5E7EB] mb-1.5">
                         {E(expense.category)}
                       </span>
-                      <h4 className="text-xs md:text-sm font-semibold text-[#1E223D] leading-snug">
+                      <h4 className="text-xs md:text-sm font-semibold text-[#111827] leading-snug">
                         {expense.description}
                       </h4>
-                      <p className="text-[11px] text-[#4F5470] mt-1 flex items-center gap-1.5">
-                        <span className="font-semibold text-[#1E223D]">{expense.engName}</span>
-                        <span className="text-[#4F5470]">{expense.date}</span>
+                      <p className="text-[11px] text-[#4B5563] mt-1 flex items-center gap-1.5">
+                        <span className="font-semibold text-[#111827]">{expense.engName}</span>
+                        <span className="text-[#4B5563]">{expense.date}</span>
                       </p>
                     </div>
 
@@ -404,16 +404,16 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       <span className="text-sm md:text-base font-semibold text-rose-700 block">
                         {expense.amount.toLocaleString(intlLocale())}
                       </span>
-                      <span className="text-[10px] font-bold text-[#4F5470]">{currencyName()}</span>
+                      <span className="text-[10px] font-bold text-[#4B5563]">{currencyName()}</span>
                     </div>
                   </div>
 
                   {/* Actions Bar */}
-                  <div className="flex items-center justify-between pt-3 border-t border-[#EFE7D6] mt-3">
+                  <div className="flex items-center justify-between pt-3 border-t border-[#EEF0F4] mt-3">
                     {/* View Receipt Button */}
                     <button
                       onClick={() => setSelectedReceipt(expense)}
-                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#4F5470] hover:text-[#1E223D] hover:bg-[#EFE7D6] transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-[#4B5563] hover:text-[#111827] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
                       title={t("fin.previewTip")}
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -424,7 +424,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleRejectExpense(expense.id)}
-                        className="p-1.5 rounded-lg text-[#4F5470] hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-[#4B5563] hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
                         title={t("fin.rejectTip")}
                       >
                         <X className="w-4 h-4" />
@@ -433,7 +433,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                       {/* The "اعتماد" (Approve) Button */}
                       <button
                         onClick={() => handleApproveExpense(expense)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2B3052] hover:bg-[#2B3052] text-white hover:bg-[#2B3052] transition-colors font-bold text-xs shadow-sm transition-all cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#3F5BD8] hover:bg-[#3F5BD8] text-white hover:bg-[#3F5BD8] transition-colors font-bold text-xs shadow-sm transition-all cursor-pointer"
                       >
                         <Check className="w-3.5 h-3.5" />
                         <span>{t("fin.approveBtn")}</span>
@@ -445,19 +445,19 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
               {/* Empty state when all expenses approved */}
               {pendingExpenses.length === 0 && (
-                <div className="py-12 px-4 text-center rounded-lg bg-[#F6F1E7] border border-[#E0D6C2]">
-                  <div className="w-12 h-12 rounded-lg bg-[#EFE7D6] text-[#1E223D] flex items-center justify-center mx-auto mb-3 border border-[#E0D6C2]">
+                <div className="py-12 px-4 text-center rounded-lg bg-[#F7F8FA] border border-[#E5E7EB]">
+                  <div className="w-12 h-12 rounded-lg bg-[#F1F3F6] text-[#111827] flex items-center justify-center mx-auto mb-3 border border-[#E5E7EB]">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
-                  <h4 className="text-sm font-semibold text-[#1E223D] mb-1">
+                  <h4 className="text-sm font-semibold text-[#111827] mb-1">
                     {t("fin.allDone")}
                   </h4>
-                  <p className="text-xs text-[#4F5470] max-w-xs mx-auto mb-4">
+                  <p className="text-xs text-[#4B5563] max-w-xs mx-auto mb-4">
                     {t("fin.allDoneSub")}
                   </p>
                   <button
                     onClick={handleResetData}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white border border-[#E0D6C2] text-xs font-bold text-[#1E223D] hover:bg-[#F6F1E7] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white border border-[#E5E7EB] text-xs font-bold text-[#111827] hover:bg-[#F7F8FA] transition-colors cursor-pointer"
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>{t("fin.retry")}</span>
@@ -472,30 +472,30 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       {/* View Receipt Modal */}
       {selectedReceipt && (
         <div className="fixed inset-0 z-50 bg-[#1E223D]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E0D6C2] max-w-md w-full overflow-hidden text-start animate-in zoom-in-95 duration-200">
-            <div className="p-4 border-b border-[#EFE7D6] flex items-center justify-between">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-md w-full overflow-hidden text-start animate-in zoom-in-95 duration-200">
+            <div className="p-4 border-b border-[#EEF0F4] flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-semibold text-[#1E223D]">
+                <h3 className="text-sm font-semibold text-[#111827]">
                   {t("fin.receiptTitle", { no: selectedReceipt.receiptNumber })}
                 </h3>
-                <p className="text-[11px] text-[#4F5470]">{selectedReceipt.engName}</p>
+                <p className="text-[11px] text-[#4B5563]">{selectedReceipt.engName}</p>
               </div>
               <button
                 onClick={() => setSelectedReceipt(null)}
-                className="p-1.5 rounded-lg text-[#4F5470] hover:text-[#4F5470] hover:bg-[#EFE7D6] cursor-pointer"
+                className="p-1.5 rounded-lg text-[#4B5563] hover:text-[#4B5563] hover:bg-[#F1F3F6] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Receipt Image Mock */}
-            <div className="relative bg-[#EFE7D6] h-56 overflow-hidden flex items-center justify-center">
+            <div className="relative bg-[#F1F3F6] h-56 overflow-hidden flex items-center justify-center">
               {selectedReceipt.invoiceImg ? (
                 <Photo src={selectedReceipt.invoiceImg} alt={t("fin.receiptAlt")} className="w-full h-full object-cover" />
               ) : (
-                <Receipt className="w-12 h-12 text-[#4F5470]/40" />
+                <Receipt className="w-12 h-12 text-[#4B5563]/40" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2B3052]/70 via-transparent to-transparent flex items-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#3F5BD8]/70 via-transparent to-transparent flex items-end p-4">
                 <span className="text-white text-xs font-bold flex items-center gap-1.5 bg-[#1E223D]/50 backdrop-blur-xs px-2.5 py-1 rounded-lg">
                   <Receipt className="w-3.5 h-3.5 text-emerald-400" />
                   <span>{t("fin.einvoice")}</span>
@@ -505,20 +505,20 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
             {/* Details Body */}
             <div className="p-5 space-y-3">
-              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{t("fin.desc")}</span>
-                <span className="font-bold text-[#1E223D]">{selectedReceipt.description}</span>
+              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{t("fin.desc")}</span>
+                <span className="font-bold text-[#111827]">{selectedReceipt.description}</span>
               </div>
-              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{t("fin.category")}</span>
-                <span className="font-bold text-[#1E223D]">{E(selectedReceipt.category)}</span>
+              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{t("fin.category")}</span>
+                <span className="font-bold text-[#111827]">{E(selectedReceipt.category)}</span>
               </div>
-              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EFE7D6]">
-                <span className="text-[#4F5470]">{t("fin.date")}</span>
-                <span className="font-bold text-[#1E223D]">{selectedReceipt.date}</span>
+              <div className="flex justify-between items-center text-xs pb-2 border-b border-[#EEF0F4]">
+                <span className="text-[#4B5563]">{t("fin.date")}</span>
+                <span className="font-bold text-[#111827]">{selectedReceipt.date}</span>
               </div>
               <div className="flex justify-between items-center text-sm pt-1">
-                <span className="font-bold text-[#4F5470]">{t("fin.totalAmt")}</span>
+                <span className="font-bold text-[#4B5563]">{t("fin.totalAmt")}</span>
                 <span className="text-lg font-semibold text-rose-700">
                   {selectedReceipt.amount.toLocaleString(intlLocale())} {currencySymbol()}
                 </span>
@@ -526,16 +526,16 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             </div>
 
             {/* Modal Actions */}
-            <div className="p-4 bg-[#F6F1E7] border-t border-[#EFE7D6] flex items-center gap-2">
+            <div className="p-4 bg-[#F7F8FA] border-t border-[#EEF0F4] flex items-center gap-2">
               <button
                 onClick={() => setSelectedReceipt(null)}
-                className="w-1/3 py-2.5 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#4F5470] hover:bg-[#EFE7D6] transition-colors cursor-pointer"
+                className="w-1/3 py-2.5 rounded-lg border border-[#E5E7EB] text-xs font-bold text-[#4B5563] hover:bg-[#F1F3F6] transition-colors cursor-pointer"
               >
                 {t("fin.close")}
               </button>
               <button
                 onClick={() => handleApproveExpense(selectedReceipt)}
-                className="w-2/3 py-2.5 rounded-lg bg-[#2B3052] hover:bg-[#2B3052] text-white hover:bg-[#2B3052] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                className="w-2/3 py-2.5 rounded-lg bg-[#3F5BD8] hover:bg-[#3F5BD8] text-white hover:bg-[#3F5BD8] transition-colors text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-1.5"
               >
                 <Check className="w-4 h-4" />
                 <span>{t("fin.approveNow")}</span>
@@ -548,15 +548,15 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
       {/* Top-Up Petty Cash Modal */}
       {topUpModalOpen && (
         <div className="fixed inset-0 z-50 bg-[#1E223D]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E0D6C2] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#EFE7D6]">
-              <h3 className="text-base font-semibold text-[#1E223D] flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#1E223D]" />
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E5E7EB] max-w-md w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EEF0F4]">
+              <h3 className="text-base font-semibold text-[#111827] flex items-center gap-2">
+                <Plus className="w-5 h-5 text-[#111827]" />
                 <span>{t("fin.topUpTitle")}</span>
               </h3>
               <button
                 onClick={() => setTopUpModalOpen(false)}
-                className="p-1 rounded-lg text-[#4F5470] hover:text-[#4F5470] hover:bg-[#EFE7D6]"
+                className="p-1 rounded-lg text-[#4B5563] hover:text-[#4B5563] hover:bg-[#F1F3F6]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -564,13 +564,13 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
             <form onSubmit={handleTopUpSubmit} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                   {t("fin.pickEng")}
                 </label>
                 <select
                   value={topUpEngId}
                   onChange={(e) => setTopUpEngId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] focus:outline-none focus:ring-2 border-[#D3C7AE] focus:border-[#2B3052] focus:ring-1 focus:ring-[#2B3052]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#E5E7EB] text-xs font-bold text-[#111827] focus:outline-none focus:ring-2 border-[#D1D5DB] focus:border-[#3F5BD8] focus:ring-1 focus:ring-[#3F5BD8]"
                 >
                   {engineersCash.map((eng) => (
                     <option key={eng.id} value={eng.id}>
@@ -581,7 +581,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#4F5470] mb-1.5">
+                <label className="block text-xs font-bold text-[#4B5563] mb-1.5">
                   {t("fin.topUpAmt", { cur: currencySymbol() })}
                 </label>
                 <input
@@ -591,7 +591,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                   required
                   value={topUpAmount}
                   onChange={(e) => setTopUpAmount(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E0D6C2] text-sm font-semibold text-[#1E223D] focus:outline-none focus:ring-2 border-[#D3C7AE] focus:border-[#2B3052] focus:ring-1 focus:ring-[#2B3052]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#E5E7EB] text-sm font-semibold text-[#111827] focus:outline-none focus:ring-2 border-[#D1D5DB] focus:border-[#3F5BD8] focus:ring-1 focus:ring-[#3F5BD8]"
                 />
               </div>
 
@@ -605,18 +605,18 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                 </div>
               )}
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EFE7D6]">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EEF0F4]">
                 <button
                   type="button"
                   onClick={() => setTopUpModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#4F5470] hover:bg-[#EFE7D6] cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#4B5563] hover:bg-[#F1F3F6] cursor-pointer"
                 >
                   {t("fin.cancel")}
                 </button>
                 <button
                   type="submit"
                   disabled={unsettled > 0}
-                  className="px-5 py-2 rounded-lg bg-[#2B3052] hover:bg-[#3A4070] text-white transition-colors text-xs font-bold shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-5 py-2 rounded-lg bg-[#3F5BD8] hover:bg-[#3249B8] text-white transition-colors text-xs font-bold shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {t("fin.confirmTopUp")}
                 </button>

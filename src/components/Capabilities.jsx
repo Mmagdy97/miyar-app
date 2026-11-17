@@ -14,21 +14,21 @@ export default function Capabilities() {
   return (
     <section id="capabilities" className="py-14 sm:py-16 sm:py-32 px-5 max-w-5xl mx-auto w-full">
       <div className="text-start mb-8 sm:mb-10">
-        <h2 className="text-3xl sm:text-4xl font-semibold text-[#1E223D] leading-[1.2] text-balance">{t("cap.title")}</h2>
-        <p className="mx-auto mt-5 max-w-2xl text-lg sm:text-xl text-[#4F5470] leading-relaxed">{t("cap.sub")}</p>
+        <h2 className="text-3xl sm:text-4xl font-semibold text-[#111827] leading-[1.2] text-balance">{t("cap.title")}</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-lg sm:text-xl text-[#4B5563] leading-relaxed">{t("cap.sub")}</p>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4">
         {ITEMS.map(([Icon, live, n]) => (
-          <div key={n} className="rounded-xl border border-[#E0D6C2] bg-white p-4 sm:p-7 text-start">
+          <div key={n} className="rounded-xl border border-[#E5E7EB] bg-white p-4 sm:p-7 text-start">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <Icon className="w-5 h-5 text-[#2B3052]" aria-hidden="true" />
-              <span className={`inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md border ${live ? "text-emerald-700 border-emerald-200 bg-emerald-50" : "text-[#4F5470] border-[#E0D6C2] bg-[#F6F1E7]"}`}>
+              <Icon className="w-5 h-5 text-[#3F5BD8]" aria-hidden="true" />
+              <span className={`inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md border ${live ? "text-emerald-700 border-emerald-200 bg-emerald-50" : "text-[#4B5563] border-[#E5E7EB] bg-[#F7F8FA]"}`}>
                 {live ? <Check className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
                 {live ? t("cap.now") : t("cap.soon")}
               </span>
             </div>
-            <h3 className="text-sm font-bold text-[#1E223D]">{t(`cap.${n}.t`)}</h3>
-            <p className="mt-1.5 hidden sm:block text-xs text-[#4F5470] leading-relaxed">{t(`cap.${n}.d`)}</p>
+            <h3 className="text-sm font-bold text-[#111827]">{t(`cap.${n}.t`)}</h3>
+            <p className="mt-1.5 hidden sm:block text-xs text-[#4B5563] leading-relaxed">{t(`cap.${n}.d`)}</p>
           </div>
         ))}
       </div>

@@ -92,11 +92,11 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:ms-12 lg:me-0 w-auto lg:w-[400px] rounded-[30px] p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[#1E223D]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[#111827]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
                   <h3 className="mt-2.5 font-display text-xl font-semibold">{T("lp.fp.name")}</h3>
                   <p className="mt-0.5 flex items-center gap-1 text-xs opacity-75"><MapPin className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.meta")}</p>
                 </div>
-                <button type="button" onClick={() => openModal("Admin")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#1E223D] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                <button type="button" onClick={() => openModal("Admin")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#111827] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
               </div>
               <p className="mt-3 text-xs sm:text-sm leading-relaxed opacity-85">{T("lp.fp.d")}</p>
               <div className="mt-4 flex items-end justify-between gap-3">
@@ -121,20 +121,20 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
             <div className="lp-notch w-full lg:w-[460px] px-5 pt-5 pb-5 sm:px-7 sm:pt-7 sm:pb-8">
               <h3 className="font-display text-lg sm:text-xl font-semibold">{T("lp.n.t")}</h3>
-              <p className="mt-1.5 text-sm text-[#4F5470] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
+              <p className="mt-1.5 text-sm text-[#4B5563] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
               <div className="mt-5 flex items-center justify-between gap-3">
                 <div>
                   <div className="font-display text-4xl sm:text-5xl font-semibold leading-none">16+</div>
-                  <div className="mt-1 text-xs text-[#4F5470]">{T("lp.st1")}</div>
+                  <div className="mt-1 text-xs text-[#4B5563]">{T("lp.st1")}</div>
                 </div>
                 <div className="flex items-center">
                   <span className="flex -space-x-3 rtl:space-x-reverse">
                     {["site", "office", "couple"].map((im) => <img key={im} src={`/landing/${im}-s.webp`} alt="" loading="lazy" className="w-11 h-11 rounded-full object-cover border-[3px] border-[var(--paper)]" />)}
                   </span>
-                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[#E0D6C2] bg-white text-[#1E223D] flex items-center justify-center hover:bg-[#F6F1E7]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[#E5E7EB] bg-white text-[#111827] flex items-center justify-center hover:bg-[#F7F8FA]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
                 </div>
               </div>
-              <p className="mt-4 text-xs text-[#4F5470]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
+              <p className="mt-4 text-xs text-[#4B5563]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
             </div>
           </div>
         </section>
@@ -143,8 +143,8 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       {/* Roles */}
       <section id="roles" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
         <div className="text-start max-w-2xl reveal">
-          <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#1E223D] text-balance">{T("lp.roles.t")}</h2>
-          <p className="mt-3 text-base sm:text-lg text-[#4F5470]">{T("lp.roles.d")}</p>
+          <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#111827] text-balance">{T("lp.roles.t")}</h2>
+          <p className="mt-3 text-base sm:text-lg text-[#4B5563]">{T("lp.roles.d")}</p>
         </div>
         <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {ROLES.map((r, i) => (
@@ -166,14 +166,14 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
 
       {/* Features bento */}
       <section id="features" className="px-5 sm:px-8 pb-14 sm:pb-20 max-w-6xl mx-auto w-full">
-        <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#1E223D] text-balance">{T("lp.f.t")}</h2>
+        <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#111827] text-balance">{T("lp.f.t")}</h2>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {FEATURES.map((f, i) => (
             <div key={f.k} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start ${f.wide ? "col-span-2 min-h-[220px] sm:min-h-[260px]" : ""} ${f.img ? "rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 text-white flex flex-col justify-end" : "lp-card p-4 sm:p-7"}`}>
               {f.img && <><img src={`/landing/${f.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" /></>}
               <span className={f.img ? "lp-ic bg-white/25 backdrop-blur text-white" : `lp-ic ${f.tone}`}><f.Icon className="w-5 h-5" aria-hidden="true" /></span>
-              <h3 className={`mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold ${f.img ? "" : "text-[#1E223D]"}`}>{T(`lp.${f.k}.t`)}</h3>
-              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[#4F5470]"}`}>{T(`lp.${f.k}.d`)}</p>
+              <h3 className={`mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold ${f.img ? "" : "text-[#111827]"}`}>{T(`lp.${f.k}.t`)}</h3>
+              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[#4B5563]"}`}>{T(`lp.${f.k}.d`)}</p>
             </div>
           ))}
         </div>
@@ -183,21 +183,21 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
       <section className="px-4 sm:px-8 pb-14 sm:pb-20 max-w-6xl mx-auto w-full">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-4 sm:gap-6 items-stretch">
           <div className="reveal lp-card rounded-[34px] p-6 sm:p-10 text-start flex flex-col">
-            <p className="text-xs font-semibold tracking-[.18em] uppercase text-[#4F5470]">{T("lp.how.k")}</p>
-            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold text-[#1E223D] text-balance leading-tight">{T("lp.how.t")}</h2>
-            <p className="mt-3 text-[#4F5470] max-w-md">{T("lp.how.d")}</p>
+            <p className="text-xs font-semibold tracking-[.18em] uppercase text-[#4B5563]">{T("lp.how.k")}</p>
+            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold text-[#111827] text-balance leading-tight">{T("lp.how.t")}</h2>
+            <p className="mt-3 text-[#4B5563] max-w-md">{T("lp.how.d")}</p>
             <ol className="mt-8 relative space-y-3">
-              <span aria-hidden="true" className="absolute top-6 bottom-6 start-[27px] w-px bg-[#E0D6C2]" />
+              <span aria-hidden="true" className="absolute top-6 bottom-6 start-[27px] w-px bg-[#E5E7EB]" />
               {[[1, Building2], [2, Users], [3, Rocket]].map(([n, Icon]) => (
-                <li key={n} className="relative flex items-start gap-4 rounded-[22px] p-3 hover:bg-[#F6F1E7] transition-colors">
-                  <span className={`relative z-10 w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center ${n === 3 ? "bg-[var(--brand)] text-white" : "bg-white border border-[#E0D6C2] text-[#1E223D]"}`}><Icon className="w-6 h-6" aria-hidden="true" /></span>
+                <li key={n} className="relative flex items-start gap-4 rounded-[22px] p-3 hover:bg-[#F7F8FA] transition-colors">
+                  <span className={`relative z-10 w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center ${n === 3 ? "bg-[var(--brand)] text-white" : "bg-white border border-[#E5E7EB] text-[#111827]"}`}><Icon className="w-6 h-6" aria-hidden="true" /></span>
                   <div className="min-w-0 flex-1 pt-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-display text-sm font-semibold text-[#A8A9BE] tabular-nums">0{n}</span>
-                      <h3 className="font-display text-lg font-semibold text-[#1E223D]">{T(`lp.how${n}.t`)}</h3>
+                      <span className="font-display text-sm font-semibold text-[#9CA3AF] tabular-nums">0{n}</span>
+                      <h3 className="font-display text-lg font-semibold text-[#111827]">{T(`lp.how${n}.t`)}</h3>
                       <span className="inline-flex items-center gap-1 text-[11px] font-semibold rounded-full bg-[var(--peach-soft,#FBE7DD)] text-[#7A4B2B] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T(`lp.how${n}.time`)}</span>
                     </div>
-                    <p className="mt-1 text-sm text-[#4F5470] leading-relaxed">{T(`lp.how${n}.d`)}</p>
+                    <p className="mt-1 text-sm text-[#4B5563] leading-relaxed">{T(`lp.how${n}.d`)}</p>
                   </div>
                 </li>
               ))}
@@ -247,16 +247,16 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-5 text-center">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full lp-pill-dark flex items-center justify-center"><LogoMark className="w-4 h-4 text-white" /></div>
-            <span className="font-display font-semibold text-[#1E223D]">{T("ld.1")}</span>
+            <span className="font-display font-semibold text-[#111827]">{T("ld.1")}</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#4F5470]">
-            <button onClick={() => scrollToSection("features")} className="hover:text-[#1E223D] cursor-pointer">{t("landing.footerFeatures")}</button>
-            <button onClick={() => scrollToSection("pricing")} className="hover:text-[#1E223D] cursor-pointer">{t("landing.pricing")}</button>
-            <button onClick={() => openModal("Client")} className="hover:text-[#1E223D] cursor-pointer">{t("landing.clientPortal")}</button>
-            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#1E223D] cursor-pointer">{t("landing.privacy")}</button>
-            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#1E223D] cursor-pointer">{t("landing.terms")}</button>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#4B5563]">
+            <button onClick={() => scrollToSection("features")} className="hover:text-[#111827] cursor-pointer">{t("landing.footerFeatures")}</button>
+            <button onClick={() => scrollToSection("pricing")} className="hover:text-[#111827] cursor-pointer">{t("landing.pricing")}</button>
+            <button onClick={() => openModal("Client")} className="hover:text-[#111827] cursor-pointer">{t("landing.clientPortal")}</button>
+            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#111827] cursor-pointer">{t("landing.privacy")}</button>
+            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#111827] cursor-pointer">{t("landing.terms")}</button>
           </div>
-          <p className="text-xs text-[#666B86]">{T("ld.143")}</p>
+          <p className="text-xs text-[#6B7280]">{T("ld.143")}</p>
         </div>
       </footer>
     </>

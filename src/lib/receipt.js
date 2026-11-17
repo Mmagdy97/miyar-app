@@ -9,8 +9,8 @@ export function receiptHtml(inv, project) {
   const row = (k, v) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`;
   return `<!doctype html><html lang="${intlLocale()}" dir="${rtl ? "rtl" : "ltr"}"><head><meta charset="utf-8"><title>${esc(inv.receiptNo)}</title>
 <style>body{font-family:'IBM Plex Sans Arabic',Inter,system-ui,sans-serif;color:#1E223D;margin:40px}h1{font-size:22px;margin:0 0 4px}
-p{color:#4F5470;margin:0 0 24px}table{width:100%;border-collapse:collapse}th,td{padding:10px 0;border-bottom:1px solid #E0D6C2;text-align:start;font-size:14px}
-th{color:#4F5470;font-weight:500;width:40%}.amt{font-size:20px;font-weight:700}.ok{color:#2B3052;font-weight:700}</style></head><body>
+p{color:#4B5563;margin:0 0 24px}table{width:100%;border-collapse:collapse}th,td{padding:10px 0;border-bottom:1px solid #E5E7EB;text-align:start;font-size:14px}
+th{color:#4B5563;font-weight:500;width:40%}.amt{font-size:20px;font-weight:700}.ok{color:#3F5BD8;font-weight:700}</style></head><body>
 <h1>${esc(T("rcpt.title"))}</h1><p>${esc(T("rcpt.brand"))}</p><table>
 ${row(T("rcpt.no"), inv.receiptNo)}${row(T("rcpt.project"), E(project))}${row(T("rcpt.for"), E(inv.title))}
 ${row(T("rcpt.date"), E(inv.paidDate || "—"))}<tr><th>${esc(T("rcpt.amount"))}</th><td class="amt">${esc(money(inv.amount))}</td></tr>

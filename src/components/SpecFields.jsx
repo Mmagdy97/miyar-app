@@ -2,7 +2,7 @@ import { tr_ as T } from "../i18n";
 
 export const TYPES = ["apartment", "villa", "office", "shop"];
 export const FINISH = ["eco", "mid", "lux"];
-const input = "w-full px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
+const input = "w-full px-3 py-2 rounded-lg border border-[#E5E7EB] text-xs font-bold text-[#111827] bg-white min-w-0";
 
 /** Project data that drives automatic BOQ quantities. */
 export default function SpecFields({ spec, onChange }) {
