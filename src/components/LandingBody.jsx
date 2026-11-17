@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { waLink } from "../lib/nudge";
-import { ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Clock, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Rocket, Ruler, Share2, ShieldCheck, Users, Wallet, WifiOff } from "lucide-react";
+import { ChevronDown, Lock, Smartphone, Globe, BadgeCheck, ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Clock, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Rocket, Ruler, Share2, ShieldCheck, Users, Wallet, WifiOff } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import ScrollArt from "./ScrollArt";
@@ -22,6 +22,13 @@ const FEATURES = [
   { k: "f5", Icon: ClipboardList, tone: "lp-t1" },
   { k: "f6", Icon: WifiOff, tone: "lp-t2", wide: true, img: "site" },
 ];
+
+const SHOWCASE = [
+  { n: 1, img: "shot-boq" },
+  { n: 2, img: "shot-fin" },
+  { n: 3, img: "shot-rep", phone: true },
+];
+const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: Globe }, { n: 4, Icon: BadgeCheck }];
 
 export default function LandingBody({ openModal, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
@@ -174,7 +181,60 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         </div>
       </section>
 
+      {/* Product showcase */}
+      <section id="showcase" className="px-5 sm:px-8 py-16 sm:py-24 max-w-6xl mx-auto w-full">
+        <div className="text-center reveal">
+          <p className="text-[12px] tracking-[.16em] uppercase font-semibold text-[#3F5BD8]">{T("lp.sh.kick")}</p>
+          <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold tracking-tight text-balance">{T("lp.sh.t")}</h2>
+        </div>
+        <div className="mt-12 sm:mt-20 space-y-16 sm:space-y-28">
+          {SHOWCASE.map((x, i) => (
+            <div key={x.n} className={`reveal grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-14 items-center ${i % 2 ? "lg:[direction:rtl]" : ""}`}>
+              <div className="text-start lg:[direction:initial]">
+                <p className="text-xs font-semibold tracking-wide uppercase text-[#3F5BD8]">{T(`lp.sh${x.n}.k`)}</p>
+                <h3 className="mt-3 font-display text-2xl sm:text-4xl font-semibold tracking-tight text-balance">{T(`lp.sh${x.n}.t`)}</h3>
+                <p className="mt-4 text-base sm:text-lg leading-relaxed text-[var(--ink-2)]">{T(`lp.sh${x.n}.d`)}</p>
+              </div>
+              <div className="lg:[direction:initial]">
+                {x.phone
+                  ? <div className="lp-phone-static mx-auto"><img src={`/landing/${x.img}.webp`} alt="" loading="lazy" width="390" height="844" className="block w-full h-auto" /></div>
+                  : <div className="lp-window"><div className="lp-window-bar"><i /><i /><i /></div><img src={`/landing/${x.img}.webp`} alt="" loading="lazy" width="1600" height="1000" className="block w-full h-auto" /></div>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust */}
+      <section className="px-5 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
+        <h2 className="reveal text-center font-display text-2xl sm:text-4xl font-semibold tracking-tight">{T("lp.tr.t")}</h2>
+        <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {TRUST.map(({ n, Icon }) => (
+            <div key={n} className="reveal lp-card p-5 sm:p-6 text-start">
+              <span className="lp-ic lp-t1"><Icon className="w-5 h-5" aria-hidden="true" /></span>
+              <h3 className="mt-4 font-display text-base sm:text-lg font-semibold">{T(`lp.tr${n}.t`)}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-[var(--ink-2)]">{T(`lp.tr${n}.d`)}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <PricingSection onStart={() => openModal("Admin")} />
+
+      {/* FAQ */}
+      <section id="faq" className="px-5 sm:px-8 py-16 sm:py-24 max-w-3xl mx-auto w-full">
+        <h2 className="reveal text-center font-display text-3xl sm:text-5xl font-semibold tracking-tight">{T("lp.faq.t")}</h2>
+        <div className="mt-10 divide-y divide-[var(--line)] border-y border-[var(--line)] text-start">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <details key={n} className="group py-1">
+              <summary className="flex items-center justify-between gap-4 py-4 cursor-pointer list-none font-semibold text-base sm:text-lg">
+                {T(`lp.q${n}`)}<ChevronDown className="w-5 h-5 shrink-0 text-[var(--ink-3)] transition-transform group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <p className="pb-5 text-[15px] leading-relaxed text-[var(--ink-2)]">{T(`lp.a${n}`)}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
       {/* CTA */}
       <section id="cta" className="px-4 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">

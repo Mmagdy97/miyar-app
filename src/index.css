@@ -543,3 +543,4 @@ html.dark .lp-grad{background:linear-gradient(90deg,#8EA2FF,#B197FC 60%,#FBBF24)
 .lp-window-bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
 .lp-phone{position:absolute;bottom:-28px;inset-inline-end:2%;width:clamp(120px,17vw,190px);border-radius:28px;overflow:hidden;border:6px solid #111827;background:#111827;box-shadow:0 30px 60px -20px rgba(17,24,39,.5)}
 @media (max-width:639px){.lp-window{border-radius:12px}}
+.lp-phone-static{max-width:260px;border-radius:34px;overflow:hidden;border:7px solid #111827;background:#111827;box-shadow:0 30px 60px -24px rgba(17,24,39,.5)}
