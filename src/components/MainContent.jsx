@@ -73,8 +73,8 @@ function MainContent({
       activeTab === "لوحة التحكم الهندسية" ||
       activeTab === "بوابة العميل";
 
-    if (isDashboard) return <LiveDashboard setActiveTab={setActiveTab} role={currentRole} />;
     if (projectsStore.isLive) {
+      if (isDashboard) return <LiveDashboard setActiveTab={setActiveTab} role={currentRole} />;
       const id = (ROLE_CONFIG[currentRole] || []).find((i) => [i.id, i.name, i.label].includes(activeTab))?.id;
       if (currentRole === "Client") {
         if (id === "Invoices & Payments") return <LiveInvoices readOnly />;
