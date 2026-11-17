@@ -8,6 +8,7 @@ import SpecFields from "./SpecFields";
 import PriceList from "./PriceList";
 import { useLibrary, useLibraryItems } from "../data/library";
 import LibraryEditor from "./LibraryEditor";
+import BoqVsActual from "./BoqVsActual";
 import { buildQuote, printQuote } from "../lib/quote";
 import { sendQuote } from "../data/projects";
 import { askConfirm } from "../lib/confirm";
@@ -51,7 +52,7 @@ function Row({ i }) {
 }
 
 /** Staff of a real office: bill of quantities per project. */
-export default function LiveBoq() {
+export default function LiveBoq({ role = "Admin" }) {
   const projects = useProjectList();
   const all = boqRepo.use();
   const [pid, setPid] = useState(null);
@@ -151,6 +152,7 @@ export default function LiveBoq() {
           <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer"><Plus className="w-4 h-4" />{T("boq.add")}</button>
         </form>
         {rows.length === 0 && <EmptyState title={T("boq.empty")} hint={T("boq.emptyHint")} />}
+        {rows.length > 0 && ["Admin", "Technical Office"].includes(role) && <BoqVsActual items={rows} />}
         {groups.map((g) => (
           <section key={g} className="space-y-2">
             <h2 className="text-sm font-semibold text-[#1E223D]">{g || T("boq.noCat")}</h2>

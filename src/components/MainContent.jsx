@@ -83,7 +83,7 @@ function MainContent({
       if (id === "Team" && (currentRole === "Admin" || currentRole === "Secretary")) return <LiveTeam secretary={currentRole === "Secretary"} />;
       const SITE = { "My Tasks": "tasks", "Snag List": "snags", "Material Requests": "requests" };
       if (SITE[id] && currentRole !== "Client") return <LiveSite kind={SITE[id]} />;
-      if ((id === "BOQ & Approvals" || id === "BOQ Management") && currentRole !== "Client") return <LiveBoq />;
+      if ((id === "BOQ & Approvals" || id === "BOQ Management") && currentRole !== "Client") return <LiveBoq role={currentRole} />;
       if (!LIVE_READY.has(id)) {
         return (
           <main className="flex-1 flex items-center justify-center p-6 font-ibm">

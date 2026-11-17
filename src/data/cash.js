@@ -30,8 +30,8 @@ export const cashRepo = {
   use: () => live.use()[0],
   addCustody: ({ projectId, holder, amount }) => run(supabase.from("cash_custodies").insert({ org_id: orgId, project_id: projectId, holder, amount })),
   removeCustody: (id) => run(supabase.from("cash_custodies").delete().eq("id", id)),
-  addExpense: ({ custodyId, description, category, amount }) =>
-    run(supabase.from("cash_expenses").insert({ org_id: orgId, custody_id: custodyId, description, category: category || null, amount })),
+  addExpense: ({ custodyId, description, category, amount, boqItemId }) =>
+    run(supabase.from("cash_expenses").insert({ org_id: orgId, custody_id: custodyId, description, category: category || null, amount, boq_item_id: boqItemId || null })),
   removeExpense: (id) => run(supabase.from("cash_expenses").delete().eq("id", id)),
 };
 

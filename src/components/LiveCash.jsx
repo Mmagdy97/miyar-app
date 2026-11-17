@@ -3,21 +3,23 @@ import EmptyState from "./EmptyState";
 import { Plus, Trash2, Wallet } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
+import { boqRepo, refreshBoq } from "../data/boq";
 import { cashRepo, custodyStats } from "../data/cash";
 
 const input = "px-3 py-2 rounded-lg border border-[#E0D6C2] text-xs font-bold text-[#1E223D] bg-white min-w-0";
 const btn = "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer";
 
 function Custody({ c, expenses, project }) {
-  const [f, setF] = useState({ description: "", category: "", amount: "" });
+  const [f, setF] = useState({ description: "", category: "", amount: "", boqItemId: "" });
+  const boqItems = boqRepo.use().filter((i) => i.projectId === c.projectId);
   const { spent, left } = custodyStats(c, expenses);
   const mine = expenses.filter((x) => x.custodyId === c.id);
   const pct = Math.min(100, Math.round((spent / c.amount) * 100));
   const add = (e) => {
     e.preventDefault();
     if (!f.description.trim() || !Number(f.amount)) return;
-    cashRepo.addExpense({ custodyId: c.id, description: f.description.trim(), category: f.category.trim(), amount: Number(f.amount) });
-    setF({ description: "", category: "", amount: "" });
+    cashRepo.addExpense({ custodyId: c.id, description: f.description.trim(), category: f.category.trim(), amount: Number(f.amount), boqItemId: f.boqItemId ? Number(f.boqItemId) : null }).then(() => { if (f.boqItemId) refreshBoq(); });
+    setF({ description: "", category: "", amount: "", boqItemId: "" });
   };
   return (
     <article className="bg-white rounded-2xl border border-[#E0D6C2] p-4 space-y-3">
@@ -44,6 +46,7 @@ function Custody({ c, expenses, project }) {
       <form onSubmit={add} className="flex flex-wrap gap-2 pt-1">
         <input required placeholder={T("cash.expPh")} value={f.description} onChange={(e) => setF({ ...f, description: e.target.value })} className={input + " flex-1 min-w-36"} />
         <input placeholder={T("cash.cat")} value={f.category} onChange={(e) => setF({ ...f, category: e.target.value })} className={input + " w-28"} />
+        {boqItems.length > 0 && <select value={f.boqItemId} onChange={(e) => setF({ ...f, boqItemId: e.target.value })} aria-label={T("act.link")} className={input + " w-40"}><option value="">{T("act.link")}</option>{boqItems.map((i) => <option key={i.id} value={i.id}>{i.name}</option>)}</select>}
         <input required type="number" min={1} placeholder={T("inv.amount")} value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} className={input + " w-28"} />
         <button type="submit" className={btn}><Plus className="w-4 h-4" />{T("cash.addExp")}</button>
       </form>
