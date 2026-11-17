@@ -527,3 +527,19 @@ html[dir="rtl"] .rail-ruler { background-position: left top, left top; }
 
 /* emerald-700 text needs more weight on beige surfaces (AA) */
 html:not(.dark) .text-emerald-700 { color: #006045; }
+
+/* ---- Landing v6 (Apple/Microsoft-style hero) ---- */
+.lp-topnav{background:color-mix(in srgb,var(--paper) 78%,transparent);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid var(--line)}
+.lp-cta{background:#3F5BD8;color:#fff;display:inline-flex;align-items:center;justify-content:center;transition:background .2s}
+.lp-cta:hover{background:#3249B8}
+.lp-hero2{background:var(--paper);color:var(--ink)}
+.lp-aurora{position:absolute;inset:-10% -10% auto -10%;height:70%;z-index:0;pointer-events:none;
+  background:radial-gradient(40% 50% at 30% 20%,rgba(63,91,216,.16),transparent 70%),radial-gradient(35% 45% at 72% 10%,rgba(245,158,11,.12),transparent 70%)}
+.lp-hero2>div{z-index:1}
+.lp-grad{background:linear-gradient(90deg,#3F5BD8,#7C5CE6 60%,#D97706);-webkit-background-clip:text;background-clip:text;color:transparent}
+html.dark .lp-grad{background:linear-gradient(90deg,#8EA2FF,#B197FC 60%,#FBBF24);-webkit-background-clip:text;background-clip:text}
+.lp-window{max-width:1040px;border-radius:18px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(17,24,39,.35),0 12px 24px -12px rgba(17,24,39,.15)}
+.lp-window-bar{display:flex;gap:6px;padding:10px 14px;background:var(--paper-2);border-bottom:1px solid var(--line)}
+.lp-window-bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.lp-phone{position:absolute;bottom:-28px;inset-inline-end:2%;width:clamp(120px,17vw,190px);border-radius:28px;overflow:hidden;border:6px solid #111827;background:#111827;box-shadow:0 30px 60px -20px rgba(17,24,39,.5)}
+@media (max-width:639px){.lp-window{border-radius:12px}}

@@ -30,115 +30,65 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
   return (
     <>
       <ScrollArt bare />
-      <div className="p-3 sm:p-4 w-full">
-        <section className="lp-hero">
-          <img src="/landing/villa.webp" alt="" fetchpriority="high" className="absolute inset-0 w-full h-full object-cover object-[64%_50%] sm:object-center -z-20" />
-          <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
+      {/* Sticky translucent nav */}
+      <header className="lp-topnav sticky top-0 z-[95]">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3 px-4 sm:px-8 h-14">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-[10px] lp-pill-dark flex items-center justify-center"><LogoMark className="w-4 h-4 text-white" /></div>
+            <span className="font-display text-[17px] font-semibold">{T("ld.1")}</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-7 text-[13px] font-medium text-[var(--ink-2)]">
+            <button onClick={() => scrollToSection("roles")} className="hover:text-[var(--ink)]">{T("lp.st4")}</button>
+            <button onClick={() => scrollToSection("features")} className="hover:text-[var(--ink)]">{t("landing.features")}</button>
+            <button onClick={() => scrollToSection("pricing")} className="hover:text-[var(--ink)]">{t("landing.pricing")}</button>
+          </nav>
+          <div className="flex items-center gap-2">
+            <SettingsSwitcher />
+            <button onClick={() => openModal("Admin")} className="btn-press lp-cta h-9 px-4 rounded-full text-[13px] font-semibold whitespace-nowrap">{t("landing.login")}</button>
+          </div>
+        </div>
+      </header>
 
-          {/* Floating pill nav */}
-          <header className="lp-nav relative z-[95] flex items-center justify-between gap-3 px-4 sm:px-8 pt-4 sm:pt-6">
-            <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-full lp-pill-dark flex items-center justify-center"><LogoMark className="w-5 h-5 text-white" /></div>
-              <span className="font-display text-lg font-semibold">{T("ld.1")}</span>
-            </div>
-            <nav className="lp-glass hidden md:flex items-center gap-1 rounded-full p-1.5 text-[13px] font-medium">
-              <button onClick={() => scrollToSection("roles")} className="px-4 py-2 rounded-full lp-pill-dark">{T("lp.st4")}</button>
-              <button onClick={() => scrollToSection("features")} className="px-4 py-2 rounded-full">{t("landing.features")}</button>
-              <button onClick={() => scrollToSection("pricing")} className="px-4 py-2 rounded-full">{t("landing.pricing")}</button>
-            </nav>
-            <div className="flex items-center gap-2">
-              <SettingsSwitcher />
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark inline-flex items-center gap-2 h-10 sm:h-11 ps-4 sm:ps-5 pe-1 sm:pe-1.5 rounded-full text-xs sm:text-[13px] whitespace-nowrap font-semibold">
-                {t("landing.login")}
-                <span className="w-8 h-8 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><LogIn className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
+      <section className="lp-hero2 relative overflow-hidden">
+        <div aria-hidden="true" className="lp-aurora" />
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 pt-14 sm:pt-24 text-center hero-in">
+          <p className="text-[12px] sm:text-[13px] tracking-[.16em] uppercase font-semibold text-[var(--brand-link,#3F5BD8)]">{T("lp.kicker")}</p>
+          <h1 className="mt-5 font-display font-semibold tracking-tight leading-[1.05] text-[2.6rem] sm:text-7xl xl:text-[5.5rem] text-balance">
+            {T("lp.h1a")}<br /><span className="lp-grad">{T("lp.h1b")}</span>
+          </h1>
+          <p className="mt-6 mx-auto max-w-2xl text-base sm:text-xl leading-relaxed text-[var(--ink-2)] text-balance">{T("ld.5")}</p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-5">
+            <button onClick={() => openModal("Admin")} className="btn-press lp-cta h-12 px-7 rounded-full text-[15px] font-semibold">{T("ld.6")}</button>
+            <button onClick={() => scrollToSection("features")} className="inline-flex items-center gap-1 h-12 px-3 text-[15px] font-semibold text-[#3F5BD8] hover:underline underline-offset-4">{T("lp.explore")}<span aria-hidden="true" className="rtl:-scale-x-100">›</span></button>
+          </div>
+        </div>
+
+        {/* Product shot: desktop window + phone */}
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-8 mt-12 sm:mt-16">
+          <div className="lp-window mx-auto">
+            <div className="lp-window-bar"><i /><i /><i /></div>
+            <img src="/landing/shot-d.webp" alt="" fetchpriority="high" width="1600" height="1000" className="block w-full h-auto" />
+          </div>
+          <div className="lp-phone hidden sm:block" aria-hidden="true">
+            <img src="/landing/shot-m.webp" alt="" loading="lazy" width="390" height="844" className="block w-full h-auto" />
+          </div>
+        </div>
+
+        {/* Role picker: segmented control */}
+        <div className="relative max-w-3xl mx-auto px-4 mt-12 sm:mt-16 pb-14 sm:pb-20 text-center">
+          <p className="text-xs font-semibold text-[var(--ink-3)]">{T("lp.enter")}</p>
+          <div role="radiogroup" className="mt-3 inline-flex flex-wrap justify-center gap-1 p-1 rounded-[22px] sm:rounded-full bg-[var(--surface)] border border-[var(--line)] shadow-sm">
+            {ROLES.map((r) => (
+              <button key={r.id} role="radio" aria-checked={role === r.id} onClick={() => setRole(r.id)}
+                className={`h-10 px-4 rounded-full text-[13px] font-semibold inline-flex items-center gap-2 transition-colors ${role === r.id ? "lp-pill-dark" : "text-[var(--ink-2)] hover:bg-[var(--paper-2)]"}`}>
+                <r.Icon className="w-4 h-4" aria-hidden="true" />{T("login.role." + r.key)}
               </button>
-            </div>
-          </header>
-
-          {/* Headline */}
-          <div className="relative z-10 px-5 sm:px-12 pt-7 sm:pt-16 text-start max-w-3xl hero-in">
-            <p className="text-[11px] sm:text-xs tracking-[.18em] uppercase font-semibold opacity-70">{T("lp.kicker")}</p>
-            <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.1rem] sm:text-6xl xl:text-7xl">
-              {T("lp.h1a")}<br /><span className="text-[#FFD2B5]">{T("lp.h1b")}</span>
-            </h1>
-            <p className="mt-4 max-w-lg text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
-                {T("ld.6")}
-                <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-              </button>
-              <button onClick={() => scrollToSection("features")} className="lp-glass h-11 sm:h-12 px-5 sm:px-6 rounded-full text-sm sm:text-[15px] font-semibold">{T("lp.explore")}</button>
-            </div>
+            ))}
           </div>
-
-          {/* Role strip (glass search-bar style) */}
-          <div className="relative z-10 mt-8 sm:mt-10 px-4 sm:px-12">
-            <div className="lp-glass rounded-[28px] sm:rounded-full p-2.5 flex flex-col sm:flex-row sm:items-center gap-2 max-w-4xl">
-              <span className="px-4 text-xs font-semibold opacity-70 shrink-0">{T("lp.enter")}</span>
-              <div role="radiogroup" className="flex flex-wrap gap-1.5 flex-1">
-                {ROLES.map((r) => (
-                  <button key={r.id} role="radio" aria-checked={role === r.id} onClick={() => setRole(r.id)}
-                    className={`h-10 px-4 rounded-full text-[13px] font-semibold inline-flex items-center gap-2 transition-colors ${role === r.id ? "lp-pill-dark" : "hover:bg-black/5"}`}>
-                    <r.Icon className="w-4 h-4" aria-hidden="true" />{T("login.role." + r.key)}
-                  </button>
-                ))}
-              </div>
-              <button onClick={() => openModal(role)} className="btn-press lp-pill-dark h-11 px-6 rounded-full text-[14px] font-bold shrink-0">{T("lp.go")}</button>
-            </div>
-          </div>
-
-          {/* Bottom: frosted project card (start) + paper "notch" card cut into the hero corner (end) */}
-          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-end justify-between gap-3 text-start">
-            <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:ms-12 lg:me-0 w-auto lg:w-[400px] rounded-[30px] p-5">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[#111827]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
-                  <h3 className="mt-2.5 font-display text-xl font-semibold">{T("lp.fp.name")}</h3>
-                  <p className="mt-0.5 flex items-center gap-1 text-xs opacity-75"><MapPin className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.meta")}</p>
-                </div>
-                <button type="button" onClick={() => openModal("Admin")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#111827] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
-              </div>
-              <p className="mt-3 text-xs sm:text-sm leading-relaxed opacity-85">{T("lp.fp.d")}</p>
-              <div className="mt-4 flex items-end justify-between gap-3">
-                <ul className="text-xs space-y-1.5 opacity-90">
-                  <li className="flex items-center gap-1.5"><Ruler className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.area")}</li>
-                  <li className="flex items-center gap-1.5"><Hammer className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.phase")}</li>
-                </ul>
-                <div className="flex gap-2">
-                  {[[ClipboardCheck, "lp.fp.a1", "12"], [Heart, "lp.fp.a2", "8"], [Share2, "lp.fp.a3", ""]].map(([Icon, k, n]) => (
-                    <span key={k} className="flex flex-col items-center gap-1" title={T(k)}>
-                      <span className="w-10 h-10 rounded-full bg-white/60 border border-white/70 flex items-center justify-center"><Icon className="w-4 h-4" aria-hidden="true" /></span>
-                      <span className="text-[10px] font-semibold opacity-80 h-3">{n}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-3 flex items-center gap-2">
-                <div className="flex-1 h-2 rounded-full bg-black/10 overflow-hidden"><div className="h-full w-[65%] rounded-full bg-[var(--brand)]" /></div>
-                <span className="text-xs font-bold">65%</span>
-              </div>
-            </article>
-
-            <div className="lp-notch w-full lg:w-[460px] px-5 pt-5 pb-5 sm:px-7 sm:pt-7 sm:pb-8">
-              <h3 className="font-display text-lg sm:text-xl font-semibold">{T("lp.n.t")}</h3>
-              <p className="mt-1.5 text-sm text-[#4B5563] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
-              <div className="mt-5 flex items-center justify-between gap-3">
-                <div>
-                  <div className="font-display text-4xl sm:text-5xl font-semibold leading-none">16+</div>
-                  <div className="mt-1 text-xs text-[#4B5563]">{T("lp.st1")}</div>
-                </div>
-                <div className="flex items-center">
-                  <span className="flex -space-x-3 rtl:space-x-reverse">
-                    {["site", "office", "couple"].map((im) => <img key={im} src={`/landing/${im}-s.webp`} alt="" loading="lazy" className="w-11 h-11 rounded-full object-cover border-[3px] border-[var(--paper)]" />)}
-                  </span>
-                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[#E5E7EB] bg-white text-[#111827] flex items-center justify-center hover:bg-[#F7F8FA]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
-                </div>
-              </div>
-              <p className="mt-4 text-xs text-[#4B5563]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
-            </div>
-          </div>
-        </section>
-      </div>
+          <div className="mt-4"><button onClick={() => openModal(role)} className="btn-press lp-cta h-11 px-7 rounded-full text-[14px] font-bold">{T("lp.go")}</button></div>
+          <p className="mt-8 text-sm text-[var(--ink-3)]">{stats.map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
+        </div>
+      </section>
 
       {/* Roles */}
       <section id="roles" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
