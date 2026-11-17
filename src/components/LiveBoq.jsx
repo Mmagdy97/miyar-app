@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EmptyState from "./EmptyState";
 import { Plus, Trash2, ClipboardCheck, Pencil, Check, X } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
-import { useProjectList } from "../data/projects";
+import { useProjectList, updateProjectSpec } from "../data/projects";
+import { pricesRepo, priceFor } from "../data/prices";
+import SpecFields from "./SpecFields";
+import PriceList from "./PriceList";
 import { BOQ_LIBRARY } from "../data/boqLibrary";
 import { boqRepo, boqTotals, itemPrice } from "../data/boq";
 
@@ -48,7 +51,11 @@ export default function LiveBoq() {
   const all = boqRepo.use();
   const [pid, setPid] = useState(null);
   const [f, setF] = useState(empty);
+  const prices = pricesRepo.use();
+  const [spec, setSpec] = useState(null);
+  const [specMsg, setSpecMsg] = useState("");
   const project = projects.find((p) => p.id === pid) || projects[0];
+  useEffect(() => { setSpec(project ? { ...project.spec } : null); setSpecMsg(""); }, [project?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!project) return <main className="flex-1 flex items-center justify-center p-8 font-ibm"><p className="text-sm text-[#4F5470] bg-white rounded-xl border border-[#E0D6C2] p-8 text-center max-w-sm">{T("proj.none")}</p></main>;
   const rows = all.filter((i) => i.projectId === project.id);
   const t = boqTotals(rows);
@@ -64,7 +71,7 @@ export default function LiveBoq() {
     const [ci, ii] = e.target.value.split("|").map(Number);
     if (Number.isNaN(ci)) return;
     const g = BOQ_LIBRARY[ci]; const [name, unit] = g.items[ii];
-    setF({ ...f, category: g.cat, name, unit });
+    setF({ ...f, category: g.cat, name, unit, unitCost: String(priceFor(prices, name, project.spec?.finish || "mid") || "") });
   };
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 font-ibm w-full max-w-full overflow-x-hidden">
@@ -84,6 +91,17 @@ export default function LiveBoq() {
             </div>
           ))}
         </div>
+        {spec && (
+          <section className="bg-white rounded-2xl border border-[#E0D6C2] p-4 space-y-3">
+            <h2 className="text-sm font-semibold text-[#1E223D]">{T("spec.title")}</h2>
+            <SpecFields spec={spec} onChange={setSpec} />
+            <div className="flex items-center gap-3">
+              <button type="button" onClick={async () => { try { await updateProjectSpec(project.id, spec); setSpecMsg(T("spec.saved")); } catch (err) { setSpecMsg(err.message || String(err)); } }} className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2B3052] hover:bg-[#3A4070] cursor-pointer">{T("boq.save")}</button>
+              {specMsg && <span role="status" className="text-xs text-[#4F5470]">{specMsg}</span>}
+            </div>
+          </section>
+        )}
+        <PriceList />
         <select value="" onChange={pick} aria-label={T("boq.lib")} className={input + " max-w-md w-full"}>
           <option value="">{T("boq.lib")}</option>
           {BOQ_LIBRARY.map((g, ci) => <optgroup key={g.cat} label={g.cat}>{g.items.map(([n, u], ii) => <option key={n} value={ci + "|" + ii}>{n} ({u})</option>)}</optgroup>)}

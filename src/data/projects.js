@@ -21,17 +21,22 @@ const guest = createPersistedStore("miyar:projects:v1", INITIAL_PROJECTS);
 const live = createPersistedStore("live:projects", [], (x) => x, { persist: false }); // real office: Supabase only, never localStorage
 let orgId = null;
 
+const num = (v) => (v === "" || v == null ? null : Number(v));
+const specRow = (s) => ({ area: num(s.area), rooms: num(s.rooms), bathrooms: num(s.baths), ceiling_height: num(s.height) ?? 2.8, project_type: s.type || null, finish_level: s.finish || "mid" });
+
 const fromRow = (r) => ({
   id: r.id, code: r.code || `P-${r.id}`, name: r.name, client: r.client_name || "", engineer: r.engineer_name || "", engineerId: r.engineer_id || null,
   progress: r.progress ?? 0, status: r.status || "جاري العمل", phase: r.phase || "تصميم",
   startDate: r.start_date || "", deadline: r.deadline || "", contractValue: Number(r.contract_value) || 0,
   budget: money(Number(r.contract_value) || 0), location: r.location || "", image: r.image || DEFAULT_IMG,
   clientEmail: r.client_email || "", clientLinked: Boolean(r.client_id),
+  spec: { area: r.area ?? "", rooms: r.rooms ?? "", baths: r.bathrooms ?? "", height: r.ceiling_height ?? 2.8, type: r.project_type || "", finish: r.finish_level || "mid" },
 });
 const toRow = (p) => ({
   code: p.code || null, name: p.name, client_name: p.client || null, engineer_name: p.engineer || null, engineer_id: p.engineerId || null,
   progress: Number(p.progress) || 0, status: p.status, phase: p.phase, start_date: p.startDate || null,
   deadline: p.deadline || null, location: p.location || null, image: p.image || null,
+  ...(p.spec ? specRow(p.spec) : {}),
   contract_value: p.contractValue ?? parseAmount(p.budget),
 });
 const fail = (error) => window.dispatchEvent(new CustomEvent("miyar:error", { detail: error.message || String(error) }));
@@ -96,6 +101,12 @@ export function useProjectList() {
     id: p.id, name: p.name, code: p.code || `P-${p.id}`,
     contractValue: p.contractValue ?? SEED.find((s) => s.id === p.id)?.contractValue ?? parseAmount(p.budget),
   })), [rows]);
+}
+
+export async function updateProjectSpec(projectId, spec) {
+  const { error } = await supabase.from("projects").update(specRow(spec)).eq("id", projectId);
+  if (error) throw error;
+  await reload();
 }
 
 export async function removeClient(projectId) {

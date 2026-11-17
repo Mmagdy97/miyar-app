@@ -44,6 +44,7 @@ const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
 );
 
 import { projectsStore, INITIAL_PROJECTS, parseAmount } from "../data/projects";
+import SpecFields from "./SpecFields";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
 import { displayId, genPassword, toAuthEmail } from "../lib/identity";
 
@@ -78,6 +79,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const people = useMemo(() => (isLive
     ? members.map((m) => ({ key: m.id || `p:${m.email}`, id: m.id || null, label: m.name || displayId(m.email), pending: m.pending }))
     : ENGINEERS_LIST.map((n) => ({ key: n, id: null, label: n }))), [isLive, members]);
+  const [spec, setSpec] = useState({ area: "", rooms: "", baths: "", height: "2.8", type: "", finish: "mid" });
   const [newEngineer, setNewEngineer] = useState(isLive ? "" : ENGINEERS_LIST[0]);
   const [addPerson, setAddPerson] = useState(false);
   const [pf, setPf] = useState({ name: "", login: "", role: "site_engineer" });
@@ -144,6 +146,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
       budget: newBudget.trim() ? `${newBudget.trim()} ${currencySymbol()}` : `${formatEGP(3500000)}`,
       contractValue: newBudget.trim() ? parseAmount(newBudget) : 3500000,
       location: newLocation.trim() || D("القاهرة الجديدة"),
+      spec: isLive ? spec : undefined,
       image:
         "/landing/kitchen.webp",
     };
@@ -617,6 +620,13 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                   />
                 </div>
               </div>
+
+              {isLive && (
+                <div>
+                  <label className="block text-xs font-bold text-[#4F5470] mb-1.5">{T("spec.title")}</label>
+                  <SpecFields spec={spec} onChange={setSpec} />
+                </div>
+              )}
 
               {/* Field 4: Assign Engineer & Estimated Budget */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
