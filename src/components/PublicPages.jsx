@@ -10,7 +10,7 @@ import { PRICES, PLANS, CYCLES, planPrice } from "../lib/pricing";
 export function PricingSection({ onStart }) {
   const { t, currency } = useI18n();
   const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
-  const [months, setMonths] = useState(12);
+  const [months, setMonths] = useState(1);
   const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#3F5BD8] text-white" : "text-[#4B5563] hover:bg-[#F1F3F6]"}`;
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
