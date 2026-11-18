@@ -25,6 +25,7 @@ import Tour from "./components/Tour";
 import OwnerAdmin from "./components/OwnerAdmin";
 import { setActiveOrg } from "./lib/entitlements";
 import { applyPalette } from "./palettes";
+import { waLink } from "./lib/nudge";
 import { attachProjects } from "./data/projects";
 import { attachInvoices } from "./data/invoices";
 import { attachCash } from "./data/cash";
