@@ -9,6 +9,7 @@ import { moodStore } from "../data/stores";
 import { cleanTile } from "../lib/moodboard";
 import { moodRepo } from "../data/moodboard";
 import { projectsStore } from "../data/projects";
+import FinishCalculator from "./FinishCalculator";
 
 const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white min-w-0";
 
@@ -80,6 +81,7 @@ function MoodboardInner({ role = "Admin", projects, data }) {
             </figure>
           ))}
         </div>
+        <FinishCalculator key={project.id} isClient={isClient} area={project.spec?.area || ""} />
       </div>
     </main>
   );
