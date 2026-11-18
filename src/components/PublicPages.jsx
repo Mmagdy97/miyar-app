@@ -82,6 +82,19 @@ export function PricingSection({ onStart }) {
         <p className="text-sm font-bold text-[#0E1A1B]">{t("pricing.founding")}</p>
         <p className="text-xs text-[#4A5757] mt-1">{t("pricing.trial")}</p>
       </div>
+      <div className="mt-6 rounded-[28px] border border-[#E4DDCE] bg-white p-5 sm:p-7 text-start">
+        <h3 className="font-display text-xl sm:text-2xl font-semibold">{t("addons.t")}</h3>
+        <p className="mt-1 text-sm text-[#4A5757]">{t("addons.d")}</p>
+        <ul className="mt-4 grid sm:grid-cols-2 gap-3">
+          {["theme", "app", "project", "struct"].map((k) => (
+            <li key={k} className="rounded-2xl bg-[#F6F3EC] p-4">
+              <p className="text-sm font-semibold">{t(`addons.${k}.t`)}</p>
+              <p className="mt-1 text-xs leading-relaxed text-[#4A5757]">{t(`addons.${k}.d`)}</p>
+            </li>
+          ))}
+        </ul>
+        <button onClick={() => window.open(waLink(t("addons.msg")), "_blank", "noopener")} className="btn-press mt-5 h-11 px-6 rounded-full lp-pill-dark text-sm font-semibold">{t("addons.cta")}</button>
+      </div>
       <p className="text-center text-xs text-[#4A5757] mt-4">{t("pricing.note")}</p>
     </section>
   );

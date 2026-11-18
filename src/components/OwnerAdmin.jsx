@@ -36,9 +36,9 @@ function Features({ plan, extra, onChange }) {
 }
 
 function Row({ o, onSave }) {
-  const [v, setV] = useState({ plan: o.plan, status: o.status, billing_months: o.billing_months, paid_until: o.paid_until || "", extra: o.extra_features || [] });
+  const [v, setV] = useState({ plan: o.plan, status: o.status, billing_months: o.billing_months, paid_until: o.paid_until || "", extra: o.extra_features || [], extraProjects: o.extra_projects || 0 });
   const [busy, setBusy] = useState(false);
-  const dirty = v.plan !== o.plan || v.status !== o.status || v.billing_months !== o.billing_months || (v.paid_until || "") !== (o.paid_until || "") || [...v.extra].sort().join() !== [...(o.extra_features || [])].sort().join();
+  const dirty = v.extraProjects !== (o.extra_projects || 0) || v.plan !== o.plan || v.status !== o.status || v.billing_months !== o.billing_months || (v.paid_until || "") !== (o.paid_until || "") || [...v.extra].sort().join() !== [...(o.extra_features || [])].sort().join();
   const save = async () => { setBusy(true); await onSave(o.id, v); setBusy(false); };
   return (
     <article className="bg-white rounded-2xl border border-[#E4DDCE] p-4 space-y-3">
@@ -60,6 +60,7 @@ function Row({ o, onSave }) {
         <select aria-label="الباقة" value={v.plan} onChange={(e) => setV({ ...v, plan: e.target.value })} className={sel}>{Object.entries(PLANS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select>
         <select aria-label="الحالة" value={v.status} onChange={(e) => setV({ ...v, status: e.target.value })} className={sel}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select>
         <select aria-label="دورة الدفع" value={v.billing_months} onChange={(e) => setV({ ...v, billing_months: Number(e.target.value) })} className={sel}>{[1, 3, 6, 12].map((m) => <option key={m} value={m}>{m} شهر</option>)}</select>
+        <label className="flex items-center gap-1.5 text-[11px] font-bold text-[#4A5757]">مشاريع إضافية<input type="number" min="0" max="500" value={v.extraProjects} onChange={(e) => setV({ ...v, extraProjects: Math.max(0, Number(e.target.value) || 0) })} className={sel + " w-20"} /></label>
         <label className="flex items-center gap-1.5 text-[11px] font-bold text-[#4A5757]">مدفوع حتى<input type="date" value={v.paid_until} onChange={(e) => setV({ ...v, paid_until: e.target.value })} className={sel} /></label>
         <button type="button" disabled={!dirty || busy} onClick={save} className="ms-auto inline-flex items-center gap-1.5 px-3 h-9 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] disabled:opacity-40 cursor-pointer"><Check className="w-4 h-4" aria-hidden="true" />حفظ</button>
       </div>
@@ -124,7 +125,8 @@ export default function OwnerAdmin({ name, onOpenApp, onLogout }) {
   useEffect(() => { load(); }, [load]);
   const save = async (id, v) => {
     const { error } = await supabase.rpc("admin_set_org", { p_org: id, p_plan: v.plan, p_status: v.status, p_billing_months: v.billing_months, p_paid_until: v.paid_until || null, p_extra: v.extra });
-    if (error) setErr(error.message); else await load();
+    const r2 = error ? null : await supabase.rpc("admin_set_extra_projects", { p_org: id, p_n: v.extraProjects });
+    if (error || r2?.error) setErr((error || r2.error).message); else await load();
   };
   const list = useMemo(() => (orgs || []).filter((o) => o.name.toLowerCase().includes(q.trim().toLowerCase())), [orgs, q]);
   const stats = useMemo(() => {
