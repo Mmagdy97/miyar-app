@@ -16,6 +16,7 @@ import SmartBOQ from "./SmartBOQ";
 import Certificates from "./Certificates";
 import Procurement from "./Procurement";
 import ChangeOrders from "./ChangeOrders";
+import PurchaseInvoices from "./PurchaseInvoices";
 import Selections from "./Selections";
 import Moodboard from "./Moodboard";
 import AuditLog from "./AuditLog";
@@ -35,7 +36,7 @@ import LiveInvoices from "./LiveInvoices";
 import { projectsStore } from "../data/projects";
 
 // Real (signed-in) offices: only connected sections show data. Others are held back so no demo data leaks in.
-const LIVE_READY = new Set(["Projects", "Financials & Petty Cash", "Attendance", "Procurement", "Change Orders", "Certificates", "Selections", "Moodboard"]);
+const LIVE_READY = new Set(["Projects", "Financials & Petty Cash", "Attendance", "Procurement", "Change Orders", "Certificates", "Selections", "Moodboard", "Purchase Invoices"]);
 
 const DASHBOARD_TAB = "لوحة التحكم";
 
@@ -150,6 +151,7 @@ function MainContent({
     if ((activeTab === "سجل المراجعة" || activeTab === "Audit Log") && currentRole === "Admin") return <AuditLog />;
     if (activeTab === "الموودبورد" || activeTab === "Moodboard") return <Moodboard role={currentRole === "Client" ? "Client" : "Admin"} />;
     if (activeTab === "الاختيارات وFF&E" || activeTab === "اختياراتي" || activeTab === "Selections") return <Selections role={currentRole === "Client" ? "Client" : "Admin"} restricted={currentRole === "Technical Office"} />;
+    if (activeTab === "فواتير الشراء" || activeTab === "Purchase Invoices") return <PurchaseInvoices role={currentRole === "Client" ? "Client" : "Admin"} />;
     if (activeTab === "أوامر التغيير" || activeTab === "Change Orders") return <ChangeOrders role={currentRole === "Client" ? "Client" : "Admin"} />;
 
     // Client Dedicated Role Navigation Routing

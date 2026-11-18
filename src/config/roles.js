@@ -20,6 +20,7 @@ import {
   Eye,
   CreditCard,
   CalendarDays,
+  ShoppingCart,
 } from "lucide-react";
 
 /**
@@ -33,6 +34,7 @@ export const ROLE_CONFIG = {
     { id: "Projects", name: "المشاريع الجارية", label: "المشاريع الجارية", icon: FolderKanban },
     { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
     { id: "BOQ & Approvals", name: "المقايسات والاعتمادات", label: "المقايسات والاعتمادات", icon: ClipboardCheck },
+    { id: "Purchase Invoices", name: "فواتير الشراء", label: "فواتير الشراء", icon: ShoppingCart },
     { id: "Certificates", name: "المستخلصات والمحتجزات", label: "المستخلصات والمحتجزات", icon: Receipt },
     { id: "Moodboard", name: "الموودبورد", label: "الموودبورد", icon: Palette },
     { id: "Selections", name: "الاختيارات وFF&E", label: "الاختيارات وFF&E", icon: Armchair },
@@ -63,6 +65,7 @@ export const ROLE_CONFIG = {
   Accountant: [
     { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم", icon: LayoutDashboard },
     { id: "Financials & Petty Cash", name: "الحسابات والعهد", label: "الحسابات والعهد", icon: DollarSign },
+    { id: "Purchase Invoices", name: "فواتير الشراء", label: "فواتير الشراء", icon: ShoppingCart },
     { id: "Certificates", name: "المستخلصات والمحتجزات", label: "المستخلصات والمحتجزات", icon: Receipt },
     { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
   ],
@@ -77,6 +80,7 @@ export const ROLE_CONFIG = {
     { id: "My Projects", name: "مشاريعي", label: "مشاريعي", icon: Briefcase },
     { id: "Progress Overview", name: "نسب الإنجاز", label: "نسب الإنجاز", icon: Eye },
     { id: "Invoices & Payments", name: "الفواتير والدفعات", label: "الفواتير والدفعات", icon: CreditCard },
+    { id: "Purchase Invoices", name: "فواتير الشراء", label: "فواتير الشراء", icon: ShoppingCart },
     { id: "Moodboard", name: "الموودبورد", label: "الموودبورد", icon: Palette },
     { id: "Selections", name: "اختياراتي", label: "اختياراتي", icon: Armchair },
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },

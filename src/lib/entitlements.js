@@ -47,7 +47,7 @@ export const hasFeature = (org, f) => !org || orgFeatures(org).has(f);
 /** Sidebar tab id -> feature key (tabs not listed are always available). */
 export const TAB_FEATURE = {
   Moodboard: "moodboard", Selections: "selections", "Change Orders": "change_orders",
-  Certificates: "certificates", Procurement: "procurement", Attendance: "attendance",
+  "Purchase Invoices": "purchase_invoices", Certificates: "certificates", Procurement: "procurement", Attendance: "attendance",
 };
 
 export const orgFeatures = (org) => new Set([...(PLAN_FEATURES[org?.plan] || []), ...(org?.extra_features || [])]);
