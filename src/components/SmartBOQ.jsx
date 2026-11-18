@@ -557,7 +557,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
       {showImport && <BoqImport items={boqItems} onApply={applyImport} onClose={() => setShowImport(false)} />}
 
       {/* Floating Summary & Action Sticky Dock */}
-      <div className="mt-6 rounded-2xl md:mt-0 md:rounded-none md:fixed md:bottom-0 md:start-0 md:end-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E4DDCE] shadow-lg px-4 md:px-8 py-4">
+      <div className="mt-6 rounded-2xl md:mt-0 md:rounded-none md:sticky md:bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E4DDCE] shadow-lg px-4 md:px-8 py-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Summary Figures */}
           <div className="flex items-center gap-5 sm:gap-8 flex-wrap">
