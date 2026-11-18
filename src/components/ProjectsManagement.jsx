@@ -45,6 +45,7 @@ const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
 
 import { projectsStore, INITIAL_PROJECTS, parseAmount } from "../data/projects";
 import SpecFields from "./SpecFields";
+import { checkLimit } from "../lib/upgrade";
 import { teamRepo, loadTeam, MEMBER_ROLES } from "../data/team";
 import { displayId, genPassword, toAuthEmail } from "../lib/identity";
 
@@ -269,7 +270,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
           {/* Requirement 2: Primary Button "+ إضافة مشروع جديد" */}
           <button
-            onClick={() => setIsAddProjectOpen(true)}
+            onClick={async () => { if (await checkLimit("projects", projects.filter((x) => x.status !== "completed").length)) setIsAddProjectOpen(true); }}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
