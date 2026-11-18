@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { createPersistedStore } from "./persisted";
 import { supabase } from "../lib/supabase";
 
@@ -8,7 +9,7 @@ let orgId = null;
 
 const fromRow = (r) => ({
   id: r.id, projectId: r.project_id, title: r.title, amount: Number(r.amount) || 0, dueDate: r.due_date || "",
-  paid: Boolean(r.paid), paidDate: r.paid_at ? String(r.paid_at).slice(0, 10) : "", receiptNo: `RC-${String(r.id).padStart(5, "0")}`,
+  paid: Boolean(r.paid), archivedAt: r.archived_at || null, paidDate: r.paid_at ? String(r.paid_at).slice(0, 10) : "", receiptNo: `RC-${String(r.id).padStart(5, "0")}`,
 });
 
 async function reload() {
@@ -19,17 +20,19 @@ async function reload() {
 export async function attachInvoices(org) {
   orgId = org || null;
   live.set([]);
-  if (orgId) await reload();
+  if (orgId) { await supabase.rpc("purge_archived"); await reload(); }
 }
 
 const run = async (q) => { const { error } = await q; if (error) fail(error); await reload(); };
 
 export const invoicesRepo = {
-  use: () => live.use()[0],
+  use: () => { const r = live.use()[0]; return useMemo(() => r.filter((i) => !i.archivedAt), [r]); },
+  useArchived: () => { const r = live.use()[0]; return useMemo(() => r.filter((i) => i.archivedAt), [r]); },
   add: ({ projectId, title, amount, dueDate }) =>
     run(supabase.from("invoices").insert({ org_id: orgId, project_id: projectId, title, amount, due_date: dueDate || null })),
   markPaid: (id) => run(supabase.from("invoices").update({ paid: true, paid_at: new Date().toISOString() }).eq("id", id)),
-  remove: (id) => run(supabase.from("invoices").delete().eq("id", id)),
+  remove: (id) => run(supabase.from("invoices").update({ archived_at: new Date().toISOString() }).eq("id", id)),
+  restore: (id) => run(supabase.from("invoices").update({ archived_at: null }).eq("id", id)),
 };
 
 export const invoiceTotals = (rows) => {

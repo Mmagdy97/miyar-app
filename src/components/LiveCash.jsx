@@ -28,7 +28,7 @@ function Custody({ c, expenses, project }) {
           <p className="text-sm font-semibold text-[#0E1A1B]">{c.holder}</p>
           <p className="text-[11px] text-[#64706F]">{project ? E(project.name) : "—"}</p>
         </div>
-        <button type="button" onClick={() => cashRepo.removeCustody(c.id)} aria-label={T("cash.delete")} className="p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
+        <button type="button" onClick={() => cashRepo.removeCustody(c.id)} aria-label={T("arch.do")} title={T("arch.do")} className="p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>
       </div>
       <div className="h-2 rounded-full bg-[#EFE9DC] overflow-hidden"><div className={`h-full ${left < 0 ? "bg-rose-600" : "bg-[#2E6F73]"}`} style={{ width: `${pct}%` }} /></div>
       <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-[#4A5757]">
@@ -40,7 +40,7 @@ function Custody({ c, expenses, project }) {
         <div key={x.id} className="flex items-center gap-2 text-xs border-t border-[#ECE5D6] pt-2">
           <span className="flex-1 min-w-0"><span className="font-semibold text-[#0E1A1B]">{x.description}</span>{x.category && <span className="text-[#64706F]"> · {x.category}</span>}</span>
           <span className="tabular-nums font-semibold">{money(x.amount)}</span>
-          <button type="button" onClick={() => cashRepo.removeExpense(x.id)} aria-label={T("cash.delete")} className="p-1 rounded text-[#64706F] hover:text-rose-700 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
+          <button type="button" onClick={() => cashRepo.removeExpense(x.id)} aria-label={T("arch.do")} title={T("arch.do")} className="p-1 rounded text-[#64706F] hover:text-rose-700 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
         </div>
       ))}
       <form onSubmit={add} className="flex flex-wrap gap-2 pt-1">
@@ -58,6 +58,7 @@ function Custody({ c, expenses, project }) {
 export default function LiveCash() {
   const projects = useProjectList();
   const { custodies, expenses } = cashRepo.use();
+  const arch = cashRepo.useArchived();
   const [f, setF] = useState({ holder: "", amount: "", projectId: "" });
   const add = (e) => {
     e.preventDefault();
@@ -91,6 +92,27 @@ export default function LiveCash() {
       <div className="grid gap-3">
         {custodies.map((c) => <Custody key={c.id} c={c} expenses={expenses} project={projects.find((p) => p.id === c.projectId)} />)}
       </div>
+      {(arch.custodies.length > 0 || arch.expenses.length > 0) && (
+        <details className="bg-white rounded-2xl border border-[#E4DDCE] p-4 text-xs">
+          <summary className="font-bold text-[#4A5757] cursor-pointer">{T("arch.title")} ({arch.custodies.length + arch.expenses.length})</summary>
+          <div className="mt-3 space-y-2">
+            {arch.custodies.map((c) => (
+              <div key={"c" + c.id} className="flex items-center gap-2">
+                <span className="flex-1 min-w-0 font-semibold text-[#0E1A1B]">{c.holder}</span>
+                <span className="tabular-nums">{money(c.amount)}</span>
+                <button type="button" onClick={() => cashRepo.restoreCustody(c.id)} className="px-3 py-1.5 rounded-lg font-bold border border-[#E4DDCE] cursor-pointer">{T("arch.restore")}</button>
+              </div>
+            ))}
+            {arch.expenses.map((x) => (
+              <div key={"e" + x.id} className="flex items-center gap-2">
+                <span className="flex-1 min-w-0">{x.description}</span>
+                <span className="tabular-nums">{money(x.amount)}</span>
+                <button type="button" onClick={() => cashRepo.restoreExpense(x.id)} className="px-3 py-1.5 rounded-lg font-bold border border-[#E4DDCE] cursor-pointer">{T("arch.restore")}</button>
+              </div>
+            ))}
+          </div>
+        </details>
+      )}
     </div>
   );
 }

@@ -14,6 +14,7 @@ const fmt = (d) => (d ? new Date(d).toLocaleDateString(intlLocale(), { day: "num
 export default function LiveInvoices({ readOnly = false }) {
   const projects = useProjectList();
   const all = invoicesRepo.use();
+  const archived = invoicesRepo.useArchived();
   const [pid, setPid] = useState(null);
   const [f, setF] = useState({ title: "", amount: "", dueDate: "" });
   const project = projects.find((p) => p.id === pid) || projects[0];
@@ -66,12 +67,26 @@ export default function LiveInvoices({ readOnly = false }) {
                   {!readOnly && !i.paid && <a href={dueWa(project, i)} target="_blank" rel="noreferrer" className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#1F8F4E]">{T(late ? "wa.remind" : "wa.btn")}</a>}
                   {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.markPaid(i.id)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer"><Check className="w-4 h-4" />{T("inv.markPaid")}</button>}
                   {i.paid && <button type="button" onClick={() => printReceipt({ ...i, paidDate: i.paidDate }, project.name)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-[#0E1A1B] bg-white border border-[#E4DDCE] cursor-pointer"><Printer className="w-4 h-4" />{T("inv.receipt")}</button>}
-                  {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.remove(i.id)} aria-label={T("inv.delete")} className="p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                  {!readOnly && !i.paid && <button type="button" onClick={() => invoicesRepo.remove(i.id)} aria-label={T("arch.do")} title={T("arch.do")} className="p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
                 </div>
               </article>
             );
           })}
         </div>
+        {!readOnly && archived.filter((i) => i.projectId === project.id).length > 0 && (
+          <details className="bg-white rounded-2xl border border-[#E4DDCE] p-4 text-xs">
+            <summary className="font-bold text-[#4A5757] cursor-pointer">{T("arch.title")} ({archived.filter((i) => i.projectId === project.id).length})</summary>
+            <div className="mt-3 space-y-2">
+              {archived.filter((i) => i.projectId === project.id).map((i) => (
+                <div key={i.id} className="flex items-center gap-2">
+                  <span className="flex-1 min-w-0 font-semibold text-[#0E1A1B]">{i.title}</span>
+                  <span className="tabular-nums">{money(i.amount)}</span>
+                  <button type="button" onClick={() => invoicesRepo.restore(i.id)} className="px-3 py-1.5 rounded-lg font-bold border border-[#E4DDCE] cursor-pointer">{T("arch.restore")}</button>
+                </div>
+              ))}
+            </div>
+          </details>
+        )}
       </div>
     </main>
   );
