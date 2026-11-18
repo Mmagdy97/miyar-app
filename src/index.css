@@ -561,3 +561,18 @@ html.dark .lp-grad{background:linear-gradient(90deg,#7FB3B8,#B197FC 60%,#FBBF24)
   .text-sm { font-size: 14px; line-height: 1.55; }
   .text-base { font-size: 15px; line-height: 1.6; }
 }
+
+/* Office palettes: vars come from palettes.js (light mode only). */
+html[data-palette]:not(.dark) {
+  --brand: var(--p0); --brand-hover: var(--p1); --brand-soft: var(--p4);
+  --panel: var(--p0); --panel-2: var(--p3); --panel-line: var(--p2);
+  --color-miyar-primary: var(--p1); --color-miyar-secondary: var(--p0);
+}
+html[data-palette]:not(.dark) .bg-\[\#0F3D3E\] { background-color: var(--p0); }
+html[data-palette]:not(.dark) .hover\:bg-\[\#245A5E\]:hover, html[data-palette]:not(.dark) .hover\:bg-\[\#2E6F73\]:hover { background-color: var(--p1); }
+html[data-palette]:not(.dark) :is(.border-\[\#2E6F73\], .hover\:border-\[\#2E6F73\]:hover, .focus\:border-\[\#2E6F73\]:focus, .group:hover .group-hover\:border-\[\#2E6F73\]) { border-color: var(--p1); }
+html[data-palette]:not(.dark) .border-\[\#245A5E\] { border-color: var(--p2); }
+html[data-palette]:not(.dark) :is(.ring-\[\#2E6F73\], .focus\:ring-\[\#2E6F73\]:focus, .hover\:ring-\[\#2E6F73\]:hover) { --tw-ring-color: var(--p1); }
+html[data-palette]:not(.dark) .from-\[\#2E6F73\] { --tw-gradient-from: var(--p1); }
+html[data-palette]:not(.dark) .to-\[\#2E6F73\] { --tw-gradient-to: var(--p1); }
+html[data-palette]:not(.dark) .to-\[\#245A5E\] { --tw-gradient-to: var(--p2); }

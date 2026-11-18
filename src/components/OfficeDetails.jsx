@@ -1,12 +1,60 @@
-import { Building2 } from "lucide-react";
+import { Building2, Lock, Check } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "../lib/supabase";
+import { projectsStore } from "../data/projects";
+import { PALETTES, applyPalette, isValidColor } from "../palettes";
+import { checkLimit, checkFeature } from "../lib/upgrade";
 import { tr_ as T, getCurrency } from "../i18n";
 import { officeStore, defaultVat } from "../data/office";
 import { fileToDataUrl } from "../lib/image";
-import { getActiveOrg, hasFeature } from "../lib/entitlements";
+import { getActiveOrg, hasFeature, orgLimit } from "../lib/entitlements";
 
 const field = "w-full rounded-xl border border-[#E4DDCE] bg-white px-3 py-2 text-sm";
 
 /** Collapsible office profile: used on printed quotes, share links and accountant exports. */
+function ThemePicker() {
+  const org = getActiveOrg();
+  const [cur, setCur] = useState(org?.palette || document.documentElement.getAttribute("data-palette") || "teal");
+  const [custom, setCustom] = useState(org?.palette_color || "#1F6F8B");
+  const [bad, setBad] = useState(false);
+  const limit = orgLimit(org, "themes");
+  const save = (id, color = "") => {
+    setCur(id); applyPalette(id, color);
+    if (org) { org.palette = id; org.palette_color = color || null; }
+    if (projectsStore.isLive && supabase) supabase.rpc("set_org_palette", { p_palette: id, p_color: color || null });
+  };
+  const pick = async (id, i) => {
+    if (i >= limit && !(await checkLimit("themes", 999))) return;
+    save(id);
+  };
+  const pickCustom = async () => {
+    if (!hasFeature(org, "custom_theme") || !org) { if (org && !(await checkFeature("custom_theme"))) return; }
+    if (!isValidColor(custom)) return setBad(true);
+    setBad(false); save("custom", custom);
+  };
+  const locked = (i) => org && i >= limit;
+  return (
+    <div className="px-4 pb-4 space-y-2 border-t border-[#ECE5D6] pt-3">
+      <p className="text-xs font-bold text-[#4A5757]">{T("theme.title")}</p>
+      <div className="flex flex-wrap gap-2">
+        {PALETTES.map((p, i) => (
+          <button key={p.id} type="button" onClick={() => pick(p.id, i)} aria-pressed={cur === p.id} title={T("pal." + p.id)} className={`relative inline-flex items-center gap-2 rounded-lg border px-2.5 py-1.5 text-xs font-bold cursor-pointer ${cur === p.id ? "border-[#2E6F73] bg-[#2E6F73]/10" : "border-[#E4DDCE] bg-white"}`}>
+            <span className="w-4 h-4 rounded-full" style={{ background: p.color }} />{T("pal." + p.id)}
+            {cur === p.id ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : locked(i) && <Lock className="w-3.5 h-3.5 text-[#64706F]" aria-hidden="true" />}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <input type="color" value={custom} onChange={(e) => setCustom(e.target.value)} aria-label={T("pal.custom")} className="h-8 w-12 rounded-lg border border-[#E4DDCE] cursor-pointer" />
+        <button type="button" onClick={pickCustom} aria-pressed={cur === "custom"} className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-bold cursor-pointer ${cur === "custom" ? "border-[#2E6F73] bg-[#2E6F73]/10" : "border-[#E4DDCE] bg-white"}`}>
+          {T("pal.custom")}{org && !hasFeature(org, "custom_theme") && <Lock className="w-3.5 h-3.5 text-[#64706F]" aria-hidden="true" />}
+        </button>
+        {bad && <span className="text-[11px] font-bold text-rose-700">{T("pal.bad")}</span>}
+      </div>
+    </div>
+  );
+}
+
 export default function OfficeDetails({ className = "" }) {
   const [o, setO] = officeStore.use();
   const set = (k) => (e) => setO((p) => ({ ...p, [k]: e.target.value }));
@@ -86,6 +134,7 @@ export default function OfficeDetails({ className = "" }) {
           <input type="email" value={o.email || ""} onChange={set("email")} className={field} maxLength={80} dir="ltr" />
         </label>
       </div>
+      <ThemePicker />
     </details>
   );
 }

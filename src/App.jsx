@@ -24,6 +24,7 @@ import { attachReports } from "./data/reports";
 import Tour from "./components/Tour";
 import OwnerAdmin from "./components/OwnerAdmin";
 import { setActiveOrg } from "./lib/entitlements";
+import { applyPalette } from "./palettes";
 import { attachProjects } from "./data/projects";
 import { attachInvoices } from "./data/invoices";
 import { attachCash } from "./data/cash";
@@ -134,6 +135,7 @@ function App() {
   const [ownerView, setOwnerView] = useState(true);
   const [authMode, setAuthMode] = useState(saved.mode || "guest");
   setActiveOrg(authMode === "user" ? account?.org : null); // sidebar/nav read it during this render
+  useEffect(() => { const o = authMode === "user" ? account?.org : null; applyPalette(o?.palette || "teal", o?.palette_color || ""); }, [authMode, account]);
   const [currentRole, setCurrentRole] = useState(saved.role || "");
   const [activeTab, setActiveTab] = useState(saved.tab || "لوحة التحكم");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

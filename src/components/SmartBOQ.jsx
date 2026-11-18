@@ -204,7 +204,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
       )}
 
       {/* Top Header & Breadcrumb */}
-      <div className="mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="mb-6 flex flex-col lg:flex-row lg:flex-wrap lg:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1.5">
             <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] tracking-tight flex items-center gap-2">
@@ -224,7 +224,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           </p>
         </div>
 
-        <div className="no-print w-full grid gap-3 md:grid-cols-[1fr_16rem] items-start">
+        <div className="no-print w-full basis-full grid gap-3 md:grid-cols-[1fr_16rem] items-start">
           <OfficeDetails />
           <label className="text-xs font-bold text-[#4A5757] space-y-1">
             {T("quote.client")}
