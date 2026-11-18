@@ -12,6 +12,7 @@ export const officeStore = createPersistedStore("miyar:office:v1", {
   color: "#0F3D3E",
   address: "",
   email: "",
+  type: "architectural",
 });
 
 export const DEFAULT_VAT = { EGP: 14, SAR: 15, AED: 5, TRY: 20, JOD: 16, KWD: 0, USD: 0 };

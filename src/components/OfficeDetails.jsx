@@ -2,6 +2,7 @@ import { Building2 } from "lucide-react";
 import { tr_ as T, getCurrency } from "../i18n";
 import { officeStore, defaultVat } from "../data/office";
 import { fileToDataUrl } from "../lib/image";
+import { getActiveOrg, hasFeature } from "../lib/entitlements";
 
 const field = "w-full rounded-xl border border-[#E4DDCE] bg-white px-3 py-2 text-sm";
 
@@ -70,6 +71,15 @@ export default function OfficeDetails({ className = "" }) {
         <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.address")}
           <input value={o.address || ""} onChange={set("address")} className={field} maxLength={120} />
+        </label>
+        <label className="text-xs font-bold text-[#4A5757] space-y-1">
+          {T("office.type")}
+          <select value={o.type || "architectural"} onChange={set("type")} className={field}>
+            <option value="architectural">{T("office.type.arch")}</option>
+            <option value="structural" disabled={!hasFeature(getActiveOrg(), "structural")}>{T("office.type.struct")}</option>
+            <option value="both" disabled={!hasFeature(getActiveOrg(), "structural")}>{T("office.type.both")}</option>
+          </select>
+          {!hasFeature(getActiveOrg(), "structural") && <span className="block font-normal text-[#64706F]">{T("office.type.note")}</span>}
         </label>
         <label className="text-xs font-bold text-[#4A5757] space-y-1">
           {T("office.email")}

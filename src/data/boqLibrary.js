@@ -1,6 +1,6 @@
 // Default architectural / finishing items. `terms` = quantity formula: sum of coef x basis (see src/lib/autoBoq.js BASES).
 // Offices can edit all of this (Supabase boq_library); these are the fallback/seed.
-export const DEFAULT_ITEMS = [
+const ARCH_ITEMS = [
   { cat: "أعمال الهدم والتجهيز", name: "هدم حوائط طوب", unit: "م²", terms: [], finishes: ["eco", "mid", "lux"] },
   { cat: "أعمال الهدم والتجهيز", name: "فك أرضيات قديمة", unit: "م²", terms: [], finishes: ["eco", "mid", "lux"] },
   { cat: "أعمال الهدم والتجهيز", name: "فك أسقف / كرانيش", unit: "م²", terms: [], finishes: ["eco", "mid", "lux"] },
@@ -63,6 +63,37 @@ export const DEFAULT_ITEMS = [
   { cat: "التنظيف والتسليم", name: "معاينة وقوائم ملاحظات التسليم", unit: "مقطوعية", terms: [["fixed", 1]], finishes: ["eco", "mid", "lux"] },
   { cat: "التنظيف والتسليم", name: "أعمال صيانة خلال فترة الضمان", unit: "مقطوعية", terms: [], finishes: ["eco", "mid", "lux"] },
 ]
+
+const ALL = ["eco", "mid", "lux"];
+const S = (cat, name, unit) => ({ cat, name, unit, terms: [], finishes: ALL, structural: true });
+// Structural works (add-on / Office plan). Quantities are entered manually from the drawings.
+export const STRUCTURAL_ITEMS = [
+  S("أعمال الحفر والردم", "حفر أساسات", "م³"),
+  S("أعمال الحفر والردم", "ردم ودمك بالرمل", "م³"),
+  S("أعمال الحفر والردم", "نقل ناتج الحفر", "م³"),
+  S("الخرسانة العادية", "خرسانة عادية تحت الأساسات", "م³"),
+  S("الخرسانة المسلحة", "خرسانة مسلحة للقواعد", "م³"),
+  S("الخرسانة المسلحة", "خرسانة مسلحة للأعمدة", "م³"),
+  S("الخرسانة المسلحة", "خرسانة مسلحة للكمرات", "م³"),
+  S("الخرسانة المسلحة", "خرسانة مسلحة للأسقف", "م³"),
+  S("الخرسانة المسلحة", "خرسانة مسلحة للسلالم", "م³"),
+  S("حديد التسليح", "حديد تسليح (توريد وتشكيل وتركيب)", "طن"),
+  S("النجارة المسلحة (الشدات)", "شدات خشبية للقواعد والأعمدة", "م²"),
+  S("النجارة المسلحة (الشدات)", "شدات خشبية للكمرات والأسقف", "م²"),
+  S("العزل الإنشائي", "عزل أساسات (بيتومين)", "م²"),
+  S("العزل الإنشائي", "عزل أسطح", "م²"),
+  S("الفحص والاختبار", "اختبار مكعبات خرسانة", "عدد"),
+  S("الفحص والاختبار", "تقرير تربة", "مقطوعية"),
+];
+export const DEFAULT_ITEMS = [...ARCH_ITEMS, ...STRUCTURAL_ITEMS];
+const STRUCT_CATS = new Set(STRUCTURAL_ITEMS.map((i) => i.cat));
+export const isStructuralItem = (i) => !!i.structural || STRUCT_CATS.has(i.cat);
+
+/** Office type: "architectural" | "structural" | "both". Structural items need the structural feature. */
+export const itemsForType = (items, type, allowStructural) => {
+  const t = allowStructural ? type : "architectural";
+  return items.filter((i) => (isStructuralItem(i) ? t !== "architectural" : t !== "structural"));
+};
 
 /** Flat items -> [{ cat, items }] keeping first-seen category order. */
 export const groupItems = (items) => {

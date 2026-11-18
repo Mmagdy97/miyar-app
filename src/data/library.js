@@ -1,7 +1,9 @@
 import { useMemo } from "react";
 import { createPersistedStore } from "./persisted";
 import { supabase } from "../lib/supabase";
-import { DEFAULT_ITEMS, groupItems } from "./boqLibrary";
+import { DEFAULT_ITEMS, groupItems, itemsForType } from "./boqLibrary";
+import { officeStore } from "./office";
+import { getActiveOrg, hasFeature } from "../lib/entitlements";
 
 // Office item library (Supabase). Until the office edits it, the built-in defaults are used.
 const live = createPersistedStore("live:library", { rows: [], loaded: false }, (x) => x, { persist: false });
@@ -18,7 +20,10 @@ export async function attachLibrary(org) { orgId = org || null; live.set({ rows:
 /** Items in use: the office's own list once it has one, otherwise the defaults. */
 export const useLibraryItems = () => {
   const [s] = live.use();
-  return useMemo(() => (s.rows.length ? s.rows : DEFAULT_ITEMS), [s]);
+  const [o] = officeStore.use();
+  const org = getActiveOrg();
+  const allow = hasFeature(org, "structural");
+  return useMemo(() => itemsForType(s.rows.length ? s.rows : DEFAULT_ITEMS, o.type, allow), [s, o.type, allow]);
 };
 export const useLibrary = () => { const items = useLibraryItems(); return useMemo(() => groupItems(items), [items]); };
 export const libraryIsCustom = () => live.get().rows.length > 0;
