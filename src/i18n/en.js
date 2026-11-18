@@ -635,6 +635,7 @@ export default {
   "office.color": "Brand colour",
   "office.address": "Address",
   "office.email": "Email",
+  "cash.dashHint": "Open custodies: {n} — tap for details",
   "arch.do": "Archive",
   "arch.title": "Archive",
   "arch.restore": "Restore",

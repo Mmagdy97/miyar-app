@@ -635,6 +635,7 @@ export default {
   "office.color": "Kurumsal renk",
   "office.address": "Adres",
   "office.email": "E-posta",
+  "cash.dashHint": "Açık avanslar: {n} — ayrıntı için dokunun",
   "arch.do": "Arşivle",
   "arch.title": "Arşiv",
   "arch.restore": "Geri yükle",

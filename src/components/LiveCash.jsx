@@ -5,6 +5,7 @@ import { tr_ as T, E, money } from "../i18n";
 import { useProjectList } from "../data/projects";
 import { boqRepo, refreshBoq } from "../data/boq";
 import { cashRepo, custodyStats } from "../data/cash";
+import { checkLimit } from "../lib/upgrade";
 
 const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white min-w-0";
 const btn = "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer";
@@ -60,9 +61,11 @@ export default function LiveCash() {
   const { custodies, expenses } = cashRepo.use();
   const arch = cashRepo.useArchived();
   const [f, setF] = useState({ holder: "", amount: "", projectId: "" });
-  const add = (e) => {
+  const add = async (e) => {
     e.preventDefault();
     if (!f.holder.trim() || !Number(f.amount)) return;
+    const holders = new Set(custodies.map((c) => c.holder.trim().toLowerCase()));
+    if (!holders.has(f.holder.trim().toLowerCase()) && !(await checkLimit("cashEngineers", holders.size))) return;
     cashRepo.addCustody({ holder: f.holder.trim(), amount: Number(f.amount), projectId: f.projectId ? Number(f.projectId) : null });
     setF({ holder: "", amount: "", projectId: "" });
   };

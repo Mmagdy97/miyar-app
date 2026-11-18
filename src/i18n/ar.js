@@ -635,6 +635,7 @@ export default {
   "office.color": "لون الهوية",
   "office.address": "العنوان",
   "office.email": "البريد الإلكتروني",
+  "cash.dashHint": "عهدة مفتوحة: {n} — اضغط للتفاصيل",
   "arch.do": "أرشفة",
   "arch.title": "الأرشيف",
   "arch.restore": "استرجاع",

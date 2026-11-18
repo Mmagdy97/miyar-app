@@ -9,6 +9,7 @@ import { askConfirm } from "../lib/confirm";
 import { displayId } from "../lib/identity";
 import { projectsStore, inviteClient, removeClient, approveQuote } from "../data/projects";
 import { invoicesRepo, invoiceTotals } from "../data/invoices";
+import { cashRepo } from "../data/cash";
 import { getActiveOrg } from "../lib/entitlements";
 import { projectLimit } from "../lib/pricing";
 import QuickActions from "./QuickActions";
@@ -66,6 +67,9 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
   const isClient = role === "Client";
   const [projects] = projectsStore.use();
   const inv = invoiceTotals(invoicesRepo.use());
+  const cash = cashRepo.use();
+  const given = cash.custodies.reduce((a, c) => a + c.amount, 0);
+  const spent = cash.expenses.reduce((a, x) => a + x.amount, 0);
   const org = getActiveOrg();
   const total = projects.reduce((s, p) => s + (Number(p.contractValue) || 0), 0);
   const avg = projects.length ? Math.round(projects.reduce((s, p) => s + (Number(p.progress) || 0), 0) / projects.length) : 0;
@@ -79,6 +83,15 @@ export default function LiveDashboard({ setActiveTab, role = "Admin" }) {
         <DashHero img={isClient ? "couple" : "villa"} title={T(isClient ? "live.projects" : "live.title")} sub={T("live.sub")}
           stats={org && !isClient ? [[T("live.plan", { plan: T(PLAN_NAME[org.plan] || "plan.free") }), Number.isFinite(max) ? T("live.usage", { n: projects.length, max }) : T("live.unlimited", { n: projects.length })]] : []} />
         {!isClient && <QuickActions setActiveTab={setActiveTab} compact />}
+        {role === "Admin" && (
+          <button type="button" onClick={() => setActiveTab("الحسابات والعهد")} className="w-full text-start bg-white rounded-2xl border border-[#E4DDCE] p-4 flex flex-wrap items-center gap-4 hover:border-[#2E6F73] cursor-pointer">
+            <span className="chip-ic"><Wallet className="w-[18px] h-[18px]" aria-hidden="true" /></span>
+            <span className="flex-1 min-w-32"><b className="block text-sm text-[#0E1A1B]">{T("cash.title")}</b><span className="text-[11px] text-[#64706F]">{T("cash.dashHint", { n: cash.custodies.length })}</span></span>
+            {[["cash.given", given], ["cash.spent", spent], ["cash.left", given - spent]].map(([k, v]) => (
+              <span key={k} className="text-[11px] font-bold text-[#4A5757] text-center">{T(k)}<b className={`block text-sm tabular-nums ${k === "cash.left" && v < 0 ? "text-rose-700" : "text-[#0E1A1B]"}`}>{money(v, { compact: true })}</b></span>
+            ))}
+          </button>
+        )}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {stats.map(([l, v, Ic], n) => (
             <div key={l} className={`tile ${["tile-mint", "tile-peach", "tile-sky", "tile-sand"][n % 4]}`}>
