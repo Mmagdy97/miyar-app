@@ -635,6 +635,8 @@ export default {
   "office.color": "لون الهوية",
   "office.address": "العنوان",
   "office.email": "البريد الإلكتروني",
+  "demo.wa": "أو كلمنا واتساب",
+  "demo.waMsg": "أهلًا، جربت ديمو معيار وحابب أبدأ بحساب حقيقي.",
   "theme.title": "ألوان المكتب",
   "pal.teal": "فيروزي",
   "pal.indigo": "نيلي",

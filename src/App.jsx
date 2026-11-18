@@ -267,6 +267,7 @@ function App() {
         <div className="fixed top-0 inset-x-0 z-[70] h-8 flex items-center justify-center gap-3 bg-[var(--peach)] text-white text-xs font-semibold px-3">
           <span className="truncate">{T("demo.banner")}</span>
           <button type="button" onClick={() => goApp("up")} className="shrink-0 underline underline-offset-2 cursor-pointer">{T("demo.cta")}</button>
+          <a href={waLink(T("demo.waMsg"))} target="_blank" rel="noopener noreferrer" className="shrink-0 underline underline-offset-2">{T("demo.wa")}</a>
         </div>
       )}
       {account?.isOwner && (

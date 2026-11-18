@@ -635,6 +635,8 @@ export default {
   "office.color": "Kurumsal renk",
   "office.address": "Adres",
   "office.email": "E-posta",
+  "demo.wa": "veya WhatsApp",
+  "demo.waMsg": "Merhaba, Miyar demosunu denedim ve gerçek hesapla başlamak istiyorum.",
   "theme.title": "Ofis renkleri",
   "pal.teal": "Turkuaz",
   "pal.indigo": "Çivit",

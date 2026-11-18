@@ -635,6 +635,8 @@ export default {
   "office.color": "Brand colour",
   "office.address": "Address",
   "office.email": "Email",
+  "demo.wa": "or chat on WhatsApp",
+  "demo.waMsg": "Hi, I tried the Miyar demo and I'd like to start with a real account.",
   "theme.title": "Office colours",
   "pal.teal": "Teal",
   "pal.indigo": "Indigo",
