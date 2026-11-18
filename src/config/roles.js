@@ -21,6 +21,7 @@ import {
   CreditCard,
   CalendarDays,
   ShoppingCart,
+  ShieldCheck,
 } from "lucide-react";
 
 /**
@@ -41,6 +42,7 @@ export const ROLE_CONFIG = {
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
     { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
     { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
+    { id: "Warranty", name: "الضمان والصيانة", label: "الضمان والصيانة", icon: ShieldCheck },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
     { id: "Audit Log", name: "سجل المراجعة", label: "سجل المراجعة", icon: History },
   ],
@@ -84,6 +86,7 @@ export const ROLE_CONFIG = {
     { id: "Moodboard", name: "الموودبورد", label: "الموودبورد", icon: Palette },
     { id: "Selections", name: "اختياراتي", label: "اختياراتي", icon: Armchair },
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
+    { id: "Warranty", name: "الضمان والصيانة", label: "الضمان والصيانة", icon: ShieldCheck },
     { id: "Schedule", name: "الجدول الزمني", label: "الجدول الزمني", icon: CalendarDays },
   ],
 };
