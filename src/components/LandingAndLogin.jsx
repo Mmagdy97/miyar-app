@@ -90,16 +90,17 @@ const DEMO_ROLES = [
 ];
 
 import { signIn, signUp, isSupabaseConfigured } from "../lib/auth";
+import { SITE, goApp, goDemo, goLanding } from "../lib/site";
 
 export default function LandingAndLogin({ onLogin }) {
   const { t } = useI18n();
   const [legalPage, setLegalPage] = useState(null);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(SITE !== "landing");
   const [email, setEmail] = useState("architect@miyar.eg");
   const [password, setPassword] = useState("••••••••");
   const [selectedRole, setSelectedRole] = useState("Admin");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [mode, setMode] = useState("in");
+  const [mode, setMode] = useState(() => (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("signup") ? "up" : "in"));
   const [f, setF] = useState({ email: "", phone: "", password: "", name: "", office: "" });
   const [msg, setMsg] = useState("");
   const { currency: curNow, locale: locNow } = useI18n();
@@ -116,15 +117,21 @@ export default function LandingAndLogin({ onLogin }) {
     } catch (err) { setMsg(err.message === "INVALID_ID" ? T("login.badId") : err.message === "NO_ORG" ? T("login.noorg") : T("login.err") + (err.message || "")); setIsSubmitting(false); }
   };
 
+  // Landing never logs anyone in: demo buttons go to the demo site, account buttons to the app site.
   const openModal = (roleId = "Admin") => {
+    if (SITE === "landing") { goDemo(roleId); return; }
     setSelectedRole(roleId);
     setIsLoginModalOpen(true);
   };
+  const openApp = (m = "in") => goApp(m);
 
   const closeModal = () => {
+    if (SITE !== "landing") { goLanding(); return; }
     setIsLoginModalOpen(false);
     setIsSubmitting(false);
   };
+  const showReal = SITE !== "demo" && isSupabaseConfigured;
+  const showDemo = SITE !== "app";
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -159,11 +166,11 @@ export default function LandingAndLogin({ onLogin }) {
       className="min-h-screen w-full relative isolate flex flex-col font-ibm bg-[#F6F3EC] text-[#0E1A1B] selection:bg-[#2E6F73] selection:text-white overflow-x-hidden"
     >
 
-      <LandingBody openModal={openModal} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />
+      {SITE === "landing" && <LandingBody openModal={openModal} openApp={openApp} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />}
 
       {/* 6. The Login & MVP Demo Modal */}
       {isLoginModalOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0F3D3E]/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+        <div className={`fixed inset-0 z-50 ${SITE === "landing" ? "bg-[#0F3D3E]/50 backdrop-blur-md" : "bg-[#F6F3EC]"} flex items-center justify-center p-4 animate-in fade-in duration-200`}>
           <div
            
             className="bg-white rounded-[32px] shadow-2xl border border-[#E4DDCE] max-w-4xl w-full max-h-[92dvh] overflow-hidden text-start animate-in zoom-in-95 duration-200 relative grid md:grid-cols-[0.8fr_1.2fr]"
@@ -186,7 +193,7 @@ export default function LandingAndLogin({ onLogin }) {
                   <h3 className="text-base sm:text-lg font-semibold text-[#0E1A1B]">
                     {T("login.title")}
                   </h3>
-                  <p className="text-xs text-[#4A5757]">{T("login.sub")}</p>
+                  <p className="text-xs text-[#4A5757]">{T(SITE === "app" ? "login.subApp" : SITE === "demo" ? "login.subDemo" : "login.sub")}</p>
                 </div>
               </div>
               <button
@@ -199,7 +206,7 @@ export default function LandingAndLogin({ onLogin }) {
             </div>
 
             {/* Real account (Supabase) */}
-            {isSupabaseConfigured && (
+            {showReal && (
               <form onSubmit={submitAuth} className="mt-5 relative z-10">
                 <div role="tablist" className="inline-flex gap-1 p-1 mb-3 rounded-full bg-[#F6F3EC] border border-[#E4DDCE]">
                   {["in", "up"].map((k) => <button key={k} type="button" role="tab" aria-selected={mode === k} onClick={() => { setMode(k); setMsg(""); }} className={`px-5 py-2 rounded-full text-xs font-bold cursor-pointer ${mode === k ? "lp-pill-dark" : "text-[#4A5757]"}`}>{T("login.tab." + k)}</button>)}
@@ -219,7 +226,8 @@ export default function LandingAndLogin({ onLogin }) {
                 </div>
               </form>
             )}
-            <div className="flex items-center gap-3 my-5 text-xs text-[#64706F]"><span className="h-px flex-1 bg-[#E4DDCE]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E4DDCE]" /></div>
+            {showDemo && <>
+            {showReal && <div className="flex items-center gap-3 my-5 text-xs text-[#64706F]"><span className="h-px flex-1 bg-[#E4DDCE]" /><span>{T("login.or")}</span><span className="h-px flex-1 bg-[#E4DDCE]" /></div>}
             <h4 className="flex items-center gap-2 text-lg font-semibold text-[#0E1A1B]"><span className="w-8 h-8 rounded-lg bg-[var(--peach)] text-[#0E1A1B] flex items-center justify-center"><Users className="w-4 h-4" aria-hidden="true" /></span>{T("login.guest")}</h4>
 
             {/* Guest entry: pick a role, enter. Sample data, no credentials. */}
@@ -253,6 +261,7 @@ export default function LandingAndLogin({ onLogin }) {
               </div>
               <p className="mt-1 text-xs text-center text-[#64706F]">{T("login.note")}</p>
             </form>
+            </>}
             </div>
           </div>
         </div>

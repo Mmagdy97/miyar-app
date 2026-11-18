@@ -1,3 +1,5 @@
+import { SESSION_KEY, SITE, goApp } from "./lib/site";
+import { tr_ as T } from "./i18n";
 import { flushSync } from "react-dom";
 import { initMotion, withTransition } from "./lib/motion";
 import { createPersistedStore } from "./data/persisted";
@@ -112,7 +114,16 @@ const actionItemsStore = createPersistedStore("miyar:actions:v1", INITIAL_ACTION
 
 function App() {
   const saved = (() => {
-    try { return JSON.parse(sessionStorage.getItem("miyar:session")) || {}; } catch { return {}; }
+    let v = {};
+    try { v = JSON.parse(sessionStorage.getItem(SESSION_KEY)) || {}; } catch { v = {}; }
+    // app site: real accounts only; demo site: sample data only.
+    if (SITE === "app" && v.mode !== "user") v = {};
+    if (SITE === "demo") {
+      if (v.mode === "user") v = {};
+      const qr = new URLSearchParams(window.location.search).get("role");
+      if (qr && !v.auth) v = { auth: true, role: qr, mode: "guest" };
+    }
+    return v;
   })();
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(saved.auth));
   // "guest" = demo on local sample data; real accounts (Supabase) will add "user".
@@ -199,7 +210,7 @@ function App() {
 
   useEffect(() => {
     try {
-      sessionStorage.setItem("miyar:session", JSON.stringify({ auth: isAuthenticated, role: currentRole, tab: activeTab, mode: authMode }));
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ auth: isAuthenticated, role: currentRole, tab: activeTab, mode: authMode }));
     } catch { /* ignore */ }
   }, [isAuthenticated, currentRole, activeTab, authMode]);
 
@@ -241,12 +252,18 @@ function App() {
 
   return (
     <div
-      className="app-shell w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden font-ibm text-[#0E1A1B] selection:bg-[#2E6F73] selection:text-white"
+      className={`app-shell w-full relative isolate flex flex-col md:flex-row h-dvh overflow-hidden ${SITE === "demo" ? "pt-8" : ""} font-ibm text-[#0E1A1B] selection:bg-[#2E6F73] selection:text-white`}
     >
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-[100] focus:bg-[#2E6F73] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         {D("تخطي إلى المحتوى")}
       </a>
       <OfflineBanner />
+      {SITE === "demo" && (
+        <div className="fixed top-0 inset-x-0 z-[70] h-8 flex items-center justify-center gap-3 bg-[var(--peach)] text-white text-xs font-semibold px-3">
+          <span className="truncate">{T("demo.banner")}</span>
+          <button type="button" onClick={() => goApp("up")} className="shrink-0 underline underline-offset-2 cursor-pointer">{T("demo.cta")}</button>
+        </div>
+      )}
       {account?.isOwner && (
         <button type="button" onClick={() => setOwnerView(true)} className="fixed bottom-24 end-4 md:bottom-4 z-[60] h-10 px-4 rounded-full bg-[var(--peach)] text-[#0E1A1B] text-xs font-bold shadow-lg cursor-pointer">لوحة المالك</button>
       )}

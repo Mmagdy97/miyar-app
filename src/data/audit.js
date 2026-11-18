@@ -1,3 +1,4 @@
+import { SESSION_KEY } from "../lib/site";
 import { createPersistedStore } from "./persisted";
 import { diffEvents } from "../lib/audit";
 
@@ -7,7 +8,7 @@ export const auditStore = createPersistedStore("miyar:audit:v1", [], (x) => x);
 
 const actor = () => {
   try {
-    const s = JSON.parse(sessionStorage.getItem("miyar:session")) || {};
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY)) || {};
     return { role: s.role || "—", mode: s.mode || "" };
   } catch { return { role: "—", mode: "" }; }
 };

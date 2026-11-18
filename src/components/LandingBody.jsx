@@ -28,7 +28,7 @@ const FEATURES = [
 
 const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: Globe }, { n: 4, Icon: BadgeCheck }];
 
-export default function LandingBody({ openModal, setLegalPage, scrollToSection }) {
+export default function LandingBody({ openModal, openApp, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
   const [role, setRole] = useState("Admin");
   const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["6", "lp.st4"]];
@@ -53,7 +53,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             </nav>
             <div className="flex items-center gap-2">
               <SettingsSwitcher />
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark inline-flex items-center gap-2 h-10 sm:h-11 ps-4 sm:ps-5 pe-1 sm:pe-1.5 rounded-full text-xs sm:text-[13px] whitespace-nowrap font-semibold">
+              <button onClick={() => openApp("in")} className="btn-press lp-pill-dark inline-flex items-center gap-2 h-10 sm:h-11 ps-4 sm:ps-5 pe-1 sm:pe-1.5 rounded-full text-xs sm:text-[13px] whitespace-nowrap font-semibold">
                 {t("landing.login")}
                 <span className="w-8 h-8 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><LogIn className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </button>
@@ -68,7 +68,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
             </h1>
             <p className="mt-4 max-w-lg text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
+              <button onClick={() => openApp("up")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
                 {T("ld.6")}
                 <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </button>
@@ -101,7 +101,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
                   <h3 className="mt-2.5 font-display text-xl font-semibold">{T("lp.fp.name")}</h3>
                   <p className="mt-0.5 flex items-center gap-1 text-xs opacity-75"><MapPin className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.meta")}</p>
                 </div>
-                <button type="button" onClick={() => openModal("Admin")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#0E1A1B] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                <button type="button" onClick={() => openApp("up")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#0E1A1B] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
               </div>
               <p className="mt-3 text-xs sm:text-sm leading-relaxed opacity-85">{T("lp.fp.d")}</p>
               <div className="mt-4 flex items-end justify-between gap-3">
@@ -208,7 +208,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
               ))}
             </ol>
             <div className="mt-auto pt-8">
-              <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-12 ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-[15px] font-semibold">
+              <button onClick={() => openApp("up")} className="btn-press lp-pill-dark h-12 ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-[15px] font-semibold">
                 {T("ld.6")}
                 <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
               </button>
@@ -254,7 +254,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
         </div>
       </section>
 
-      <PricingSection onStart={() => openModal("Admin")} />
+      <PricingSection onStart={() => openApp("up")} />
 
       {/* FAQ */}
       <section id="faq" className="px-5 sm:px-8 py-14 sm:py-20 max-w-3xl mx-auto w-full">
@@ -278,7 +278,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <h2 className="max-w-3xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
           <p className="mt-4 max-w-xl text-base sm:text-lg opacity-80 leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button onClick={() => openModal("Admin")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
+            <button onClick={() => openApp("up")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
               {T("ld.141")}
               <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
             </button>
@@ -297,7 +297,7 @@ export default function LandingBody({ openModal, setLegalPage, scrollToSection }
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#4A5757]">
             <button onClick={() => scrollToSection("features")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.footerFeatures")}</button>
             <button onClick={() => scrollToSection("pricing")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.pricing")}</button>
-            <button onClick={() => openModal("Client")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.clientPortal")}</button>
+            <button onClick={() => openApp("in")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.clientPortal")}</button>
             <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.privacy")}</button>
             <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.terms")}</button>
           </div>
