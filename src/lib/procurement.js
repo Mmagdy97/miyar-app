@@ -57,7 +57,7 @@ export function committedCost(budget, subs, pos) {
 export function forecastCost({ budget, committed, spent, progress }) {
   const b = Number(budget) || 0, pr = Number(progress);
   if (!(b > 0) || !Number.isFinite(pr)) return null;
-  const run = pr > 0 ? (spent / pr) * 100 : 0;
+  const run = pr > 0 ? (spent / pr) * 100 : b; // no progress yet: assume the budget
   let eac = Math.max(run, committed, spent);
   if (eac === 0) eac = b; // nothing recorded yet: assume the budget
   return { eac, toGo: eac - spent, variance: b - eac, over: eac > b, pct: Math.round((eac / b) * 100) };
