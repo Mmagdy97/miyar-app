@@ -33,12 +33,16 @@ const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: G
 export default function LandingBody({ openModal, openApp, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
   const [role, setRole] = useState("Admin");
+  const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["6", "lp.st4"]];
   return (
     <>
       <LandingIntro />
       <ScrollArt bare />
       <div className="p-3 sm:p-4 w-full">
-        <section className="lp-hero lp-sky">
+        <section className="lp-hero">
+          <img src="/landing/villa.webp" alt="" fetchpriority="high" className="absolute inset-0 w-full h-full object-cover object-[64%_50%] sm:object-center -z-20" />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
+
           {/* Floating pill nav */}
           <header className="lp-nav relative z-[95] flex items-center justify-between gap-3 px-4 sm:px-8 pt-4 sm:pt-6">
             <div className="flex items-center gap-2.5">
@@ -56,24 +60,38 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
             </div>
           </header>
 
-          {/* Headline, centred over the sky */}
-          <div className="relative z-10 px-5 sm:px-12 pt-10 sm:pt-16 text-center max-w-5xl mx-auto hero-in">
+          {/* Headline */}
+          <div className="relative z-10 px-5 sm:px-12 pt-7 sm:pt-16 text-start max-w-3xl hero-in">
             <p className="text-[11px] sm:text-xs tracking-[.18em] uppercase font-semibold opacity-70">{T("lp.kicker")}</p>
-            <h1 className="mt-4 font-display font-bold leading-[1.05] tracking-tight text-[2.4rem] sm:text-6xl xl:text-7xl text-balance">
-              {T("lp.h1a")} <span className="text-[var(--md-tertiary)]">{T("lp.h1b")}</span>
+            <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.1rem] sm:text-6xl xl:text-7xl">
+              {T("lp.h1a")}<br /><span className="text-[#FFB27F]">{T("lp.h1b")}</span>
             </h1>
-            <p className="mt-5 mx-auto max-w-xl text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <p className="mt-4 max-w-lg text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <button onClick={() => openApp("up")} className="m3-btn m3-filled">{T("ld.6")}<ArrowUpRight className="w-[18px] h-[18px] rtl:-scale-x-100" aria-hidden="true" /></button>
               <button onClick={() => scrollToSection("features")} className="m3-btn m3-tonal">{T("lp.explore")}</button>
             </div>
           </div>
 
-          {/* Villa rising out of the clouds, with the live project card floating on it */}
-          <div className="hero-stage" aria-hidden="false">
-            <img src="/landing/villa-cut.webp" alt="" fetchpriority="high" className="hero-villa" />
-            <div className="hero-clouds" aria-hidden="true">{[0, 1, 2, 3, 4, 5, 6].map((i) => <span key={i} />)}</div>
-            <article className="lp-frost hero-card w-[min(92%,380px)] rounded-[30px] p-5">
+          {/* Role strip (glass search-bar style) */}
+          <div className="relative z-10 mt-8 sm:mt-10 px-4 sm:px-12">
+            <div className="lp-glass rounded-[28px] sm:rounded-full p-2.5 flex flex-col sm:flex-row sm:items-center gap-2 max-w-4xl">
+              <span className="px-4 text-xs font-semibold opacity-70 shrink-0">{T("lp.enter")}</span>
+              <div role="radiogroup" className="flex flex-wrap gap-1.5 flex-1">
+                {ROLES.map((r) => (
+                  <button key={r.id} role="radio" aria-checked={role === r.id} onClick={() => setRole(r.id)}
+                    className="m3-chip">
+                    {role === r.id ? <CheckCheck className="w-4 h-4" aria-hidden="true" /> : <r.Icon className="w-4 h-4" aria-hidden="true" />}{T("login.role." + r.key)}
+                  </button>
+                ))}
+              </div>
+              <button onClick={() => openModal(role)} className="m3-btn m3-filled shrink-0">{T("lp.go")}</button>
+            </div>
+          </div>
+
+          {/* Bottom: frosted project card (start) + paper "notch" card cut into the hero corner (end) */}
+          <div className="lp-bottom relative z-10 mt-8 sm:mt-10 flex flex-col lg:flex-row-reverse lg:items-end justify-between gap-3 text-start">
+            <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:me-12 lg:ms-0 w-auto lg:w-[400px] rounded-[30px] p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[var(--md-on-surface)]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
@@ -102,24 +120,26 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
                 <span className="text-xs font-bold">65%</span>
               </div>
             </article>
+
+            <div className="lp-notch w-full lg:w-[460px] px-5 pt-5 pb-5 sm:px-7 sm:pt-7 sm:pb-8">
+              <h3 className="font-display text-lg sm:text-xl font-semibold">{T("lp.n.t")}</h3>
+              <p className="mt-1.5 text-sm text-[var(--md-on-surface-variant)] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
+              <div className="mt-5 flex items-center justify-between gap-3">
+                <div>
+                  <div className="font-display text-4xl sm:text-5xl font-semibold leading-none">16+</div>
+                  <div className="mt-1 text-xs text-[var(--md-on-surface-variant)]">{T("lp.st1")}</div>
+                </div>
+                <div className="flex items-center">
+                  <span className="flex -space-x-3 rtl:space-x-reverse">
+                    {["site", "office", "couple"].map((im) => <img key={im} src={`/landing/${im}-s.webp`} alt="" loading="lazy" className="w-11 h-11 rounded-full object-cover border-[3px] border-[var(--paper)]" />)}
+                  </span>
+                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[var(--md-outline-variant)] bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] flex items-center justify-center hover:bg-[var(--md-surface)]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                </div>
+              </div>
+              <p className="mt-4 text-xs text-[var(--md-on-surface-variant)]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
+            </div>
           </div>
         </section>
-        {/* Role strip (glass search-bar style) */}
-        <div className="relative z-10 -mt-9 sm:-mt-10 px-4 sm:px-12 flex justify-center">
-          <div className="lp-glass rounded-[28px] sm:rounded-full p-2.5 flex flex-col sm:flex-row sm:items-center gap-2 max-w-4xl">
-            <span className="px-4 text-xs font-semibold opacity-70 shrink-0">{T("lp.enter")}</span>
-            <div role="radiogroup" className="flex flex-wrap gap-1.5 flex-1">
-              {ROLES.map((r) => (
-                <button key={r.id} role="radio" aria-checked={role === r.id} onClick={() => setRole(r.id)}
-                  className="m3-chip">
-                  {role === r.id ? <CheckCheck className="w-4 h-4" aria-hidden="true" /> : <r.Icon className="w-4 h-4" aria-hidden="true" />}{T("login.role." + r.key)}
-                </button>
-              ))}
-            </div>
-            <button onClick={() => openModal(role)} className="m3-btn m3-filled shrink-0">{T("lp.go")}</button>
-          </div>
-        </div>
-
       </div>
 
       <LandingProof />

@@ -711,31 +711,3 @@ html[dir="rtl"] .intro-skip { transform: translateX(-50%); }
 @keyframes introDraw { to { stroke-dashoffset: 0; } }
 @keyframes introFadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes introIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
-/* ===== Hero: sky, centred headline, villa rising out of drifting clouds ===== */
-.m3 .lp-hero.lp-sky { background: linear-gradient(180deg, #4F8FCB 0%, #8EBFE6 30%, #CFE4F3 55%, #F4D8C2 82%, #F7C9A6 100%); color: #0E2A47; min-height: 0; padding-bottom: 3.5rem; }
-html.dark .m3 .lp-hero.lp-sky { background: linear-gradient(180deg, #0B1826 0%, #13304C 40%, #2C4A68 62%, #6A5A6E 85%, #9A6A5A 100%); color: #E8EEF5; }
-.hero-stage { position: relative; margin-top: -1rem; height: clamp(300px, 40vw, 520px); }
-.hero-villa { position: absolute; left: 50%; bottom: 0; width: min(84vw, 860px); transform: translateX(-50%); filter: drop-shadow(0 30px 40px rgba(14,42,71,.25)); animation: heroRise 2.2s cubic-bezier(.16,.84,.24,1) .2s both; }
-.hero-clouds { position: absolute; inset: 0; pointer-events: none; }
-.hero-clouds span { position: absolute; aspect-ratio: 3 / 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.97), rgba(255,255,255,.8) 45%, rgba(255,255,255,0)); filter: blur(14px); animation: heroDrift 14s ease-in-out infinite alternate; }
-.hero-clouds span:nth-child(odd) { background: radial-gradient(closest-side, rgba(255,246,238,.97), rgba(255,236,222,.78) 45%, rgba(255,236,222,0)); }
-.hero-clouds span:nth-child(1) { left: -12%; bottom: -14%; width: 70%; --dx: 4vw; }
-.hero-clouds span:nth-child(2) { left: 42%; bottom: -16%; width: 72%; --dx: -4vw; animation-duration: 17s; }
-.hero-clouds span:nth-child(3) { left: 8%; bottom: -2%; width: 50%; --dx: -3vw; animation-duration: 12s; }
-.hero-clouds span:nth-child(4) { left: 58%; bottom: -4%; width: 48%; --dx: 3vw; animation-duration: 15s; }
-.hero-clouds span:nth-child(5) { left: -8%; bottom: 10%; width: 34%; --dx: 5vw; animation-duration: 19s; opacity: .8; }
-.hero-clouds span:nth-child(6) { left: 74%; bottom: 8%; width: 36%; --dx: -5vw; animation-duration: 16s; opacity: .8; }
-.hero-clouds span:nth-child(7) { left: 25%; bottom: -24%; width: 60%; --dx: 2vw; animation-duration: 21s; }
-html.dark .hero-clouds span { opacity: .35; }
-.hero-card { position: absolute; z-index: 3; bottom: 6%; inset-inline-end: clamp(1rem, 5vw, 4rem); animation: heroCard .9s ease 1.2s both; }
-@keyframes heroRise { from { opacity: 0; transform: translate(-50%, 30%) scale(.92); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
-@keyframes heroDrift { from { transform: translateX(0); } to { transform: translateX(var(--dx)); } }
-@keyframes heroCard { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-@media (max-width: 639px) {
-  .m3 .lp-hero.lp-sky { min-height: 0; }
-  .hero-stage { height: auto; padding-top: 52vw; padding-bottom: 1rem; }
-  .hero-villa { width: 128vw; top: 0; bottom: auto; }
-  .hero-clouds { bottom: auto; height: 70vw; }
-  .hero-card { position: relative; inset: auto; margin: 0 auto; }
-}
-@media (prefers-reduced-motion: reduce) { .hero-villa, .hero-clouds span, .hero-card { animation: none; } }
