@@ -33,11 +33,14 @@ describe("launch offer", () => {
     expect(regularPrice("SAR", 1, 12)).toBe(2980);
   });
   it("launch price is half the regular monthly price, no cycle discount", () => {
-    expect(launchPrice("SAR", 1, 1)).toBe(149);
+    expect(launchPrice("SAR", 1, 3)).toBe(149 * 3);
     expect(launchPrice("SAR", 1, 12)).toBe(149 * 12);
     expect(launchPrice("USD", 3)).toBeNull();
   });
-  it("launch always beats the regular price", () => {
-    for (const m of [1, 3, 6, 12]) expect(launchPrice("EGP", 2, m)).toBeLessThan(regularPrice("EGP", 2, m));
+  it("monthly billing has no launch offer", () => {
+    expect(launchPrice("SAR", 1, 1)).toBe(298);
+  });
+  it("launch beats the regular price on 3, 6 and 12 months", () => {
+    for (const m of [3, 6, 12]) expect(launchPrice("EGP", 2, m)).toBeLessThan(regularPrice("EGP", 2, m));
   });
 });

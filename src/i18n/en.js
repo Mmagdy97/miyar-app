@@ -2355,7 +2355,7 @@ export default {
   "pricing.billing": "Billing cycle",
   "pricing.custom": "Custom",
   "pricing.contact": "Contact us",
-  "pricing.founding": "Launch offer: prices shown are 50% off for the first 30 offices on their first subscription, whether it is 1, 3, 6 or 12 months. After the first 30 offices the regular price applies (double the price shown). Not combined with the cycle discount.",
+  "pricing.founding": "Launch offer: 50% off for the first 30 offices on their first 3, 6 or 12-month subscription (monthly billing not included). After the first 30 offices the regular price applies. Not combined with the cycle discount.",
   "pricing.extra": "Extra project: {p} / month",
   "pricing.trial": "14-day trial, no card, no setup fee · full refund within 14 days of your first payment",
 };

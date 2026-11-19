@@ -7,7 +7,7 @@ import { useI18n, intlLocale } from "../i18n";
 import { Bidi, N } from "./Bidi";
 import { useViewCurrency, setViewCurrency } from "../lib/viewCurrency";
 
-import { PRICES, PLANS, CYCLES, launchPrice, regularPrice, EXTRA_PROJECT } from "../lib/pricing";
+import { PRICES, PLANS, CYCLES, launchPrice, regularPrice, launchApplies, EXTRA_PROJECT } from "../lib/pricing";
 
 export function PricingSection({ onStart }) {
   // Same currency as the navbar switcher and the savings calculator.
@@ -63,7 +63,7 @@ export function PricingSection({ onStart }) {
                   <span className={`font-display text-3xl font-semibold text-[var(--md-on-surface)]`}>{t("pricing.custom")}</span>
                 ) : (
                   <>
-                    {price > 0 && <span className="block text-xs font-semibold text-[var(--md-tertiary)] mb-1">{t("pricing.launchTag")} · <del className="text-[var(--md-outline)] font-medium"><N>{formatMoney(regular, cur, intlLocale(), { compact: true })}</N></del></span>}
+                    {price > 0 && launchApplies(months) && <span className="block text-xs font-semibold text-[var(--md-tertiary)] mb-1">{t("pricing.launchTag")} · <del className="text-[var(--md-outline)] font-medium"><N>{formatMoney(regular, cur, intlLocale(), { compact: true })}</N></del></span>}
                     <span className={`font-display text-3xl font-semibold tabular-nums text-[var(--md-on-surface)]`}><N>{formatMoney(price, cur, intlLocale(), { compact: true })}</N></span>{" "}
                     {price > 0 && <span className={`text-sm font-semibold text-[var(--md-on-surface-variant)]`}>{t(`pricing.per.${months}`)}</span>}
                     {months > 1 && price > 0 && <span className="block mt-1 text-xs text-[var(--md-outline)] tabular-nums">{t("pricing.eq", { p: formatMoney(Math.round(price / months), cur, intlLocale(), { compact: true }) })}</span>}

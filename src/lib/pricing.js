@@ -49,9 +49,13 @@ export function regularPrice(currency, index, months = 1) {
   return p == null ? null : p * LAUNCH_FACTOR;
 }
 
-/** Launch-offer total for one billing cycle: 50% off the regular monthly price, not combined with the cycle discount. */
+/** The launch offer covers 3, 6 and 12-month subscriptions only, not monthly. */
+export const launchApplies = (months) => months >= 3;
+
+/** Launch-offer total for one billing cycle: 50% off the regular monthly price, not combined with the cycle discount.
+ *  Monthly billing has no launch offer, so it returns the regular price. */
 export function launchPrice(currency, index, months = 1) {
   const list = PRICES[currency];
   if (!list || PLANS[index]?.custom) return null;
-  return list[index] * months;
+  return launchApplies(months) ? list[index] * months : regularPrice(currency, index, months);
 }
