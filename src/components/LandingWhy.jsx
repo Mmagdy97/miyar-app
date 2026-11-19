@@ -10,7 +10,7 @@ const ROWS = [
 ];
 
 function Cell({ v }) {
-  const [Icon, cls, label] = v === 1 ? [Check, "text-emerald-600", "cmp.yes"] : v === 0.5 ? [Minus, "text-amber-600", "cmp.part"] : [X, "text-[var(--ink-3)]", "cmp.no"];
+  const [Icon, cls, label] = v === 1 ? [Check, "text-[var(--md-primary)]", "cmp.yes"] : v === 0.5 ? [Minus, "text-amber-600", "cmp.part"] : [X, "text-[var(--ink-3)]", "cmp.no"];
   return <span className={`inline-flex ${cls}`}><Icon className="w-5 h-5" aria-hidden="true" /><span className="sr-only">{T(label)}</span></span>;
 }
 
@@ -31,7 +31,7 @@ function Calculator() {
       <div className="mt-6 grid sm:grid-cols-2 gap-5">
         {[[T("calc.team"), team, setTeam, 1, 30], [T("calc.proj"), proj, setProj, 1, 15]].map(([l, v, set, mn, mx]) => (
           <label key={l} className="block">
-            <span className="flex justify-between text-sm font-semibold"><span>{l}</span><span className="text-[#2E6F73]">{v}{v === 15 ? "+" : ""}</span></span>
+            <span className="flex justify-between text-sm font-semibold"><span>{l}</span><span className="text-[var(--md-primary)]">{v}{v === 15 ? "+" : ""}</span></span>
             <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#2E6F73]" />
           </label>
         ))}
@@ -45,7 +45,7 @@ function Calculator() {
           </div>
         ))}
       </div>
-      {save > 0 && <p className="mt-5 text-base sm:text-lg font-semibold">{T("calc.save1")} <span className="text-emerald-600 tabular-nums">${save.toLocaleString()}</span> {T("calc.save2")}</p>}
+      {save > 0 && <p className="mt-5 text-base sm:text-lg font-semibold">{T("calc.save1")} <span className="text-[var(--md-primary)] tabular-nums">${save.toLocaleString()}</span> {T("calc.save2")}</p>}
       <p className="mt-3 text-xs text-[var(--ink-3)]">{T("calc.note")}</p>
     </div>
   );
@@ -55,7 +55,7 @@ export default function LandingWhy() {
   return (
     <section id="why" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
       <div className="text-start reveal">
-        <p className="text-[12px] tracking-[.16em] uppercase font-semibold text-[#2E6F73]">{T("why.kick")}</p>
+        <p className="text-[12px] tracking-[.16em] uppercase font-semibold text-[var(--md-primary)]">{T("why.kick")}</p>
         <h2 className="mt-3 max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("why.t")}</h2>
       </div>
 
@@ -78,12 +78,12 @@ export default function LandingWhy() {
           <table className="w-full table-fixed text-xs sm:text-sm">
             <thead><tr className="text-[var(--ink-2)]">
               <th className="text-start font-medium pb-3 w-[34%] sm:w-[36%]" />
-              {[1, 2, 3, 4].map((n) => <th key={n} className={`pb-3 px-0.5 sm:px-2 align-bottom text-[10px] sm:text-sm leading-tight font-semibold text-center ${n === 4 ? "text-[#2E6F73]" : ""}`}>{T(`cmp.c${n}`)}</th>)}
+              {[1, 2, 3, 4].map((n) => <th key={n} className={`pb-3 px-0.5 sm:px-2 align-bottom text-[10px] sm:text-sm leading-tight font-semibold text-center ${n === 4 ? "text-[var(--md-primary)]" : ""}`}>{T(`cmp.c${n}`)}</th>)}
             </tr></thead>
             <tbody>{ROWS.map((r, i) => (
               <tr key={i} className="border-t border-[var(--line)]">
                 <th scope="row" className="text-start font-medium py-3 pe-2 leading-snug">{T(`cmp.r${i + 1}`)}</th>
-                {r.map((v, j) => <td key={j} className={`py-3 px-2 text-center ${j === 3 ? "bg-[#2E6F73]/[.07]" : ""}`}><Cell v={v} /></td>)}
+                {r.map((v, j) => <td key={j} className={`py-3 px-2 text-center ${j === 3 ? "bg-[var(--md-primary)]/[.07]" : ""}`}><Cell v={v} /></td>)}
               </tr>))}
             </tbody>
           </table>

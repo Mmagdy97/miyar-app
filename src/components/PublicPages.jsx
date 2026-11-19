@@ -11,25 +11,25 @@ export function PricingSection({ onStart }) {
   const { t, currency } = useI18n();
   const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
   const [months, setMonths] = useState(1);
-  const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[#2E6F73] text-white" : "text-[#4A5757] hover:bg-[#EFE9DC]"}`;
+  const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[var(--md-primary)] text-white" : "text-[var(--md-on-surface-variant)] hover:bg-[var(--md-surface-container-high)]"}`;
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full">
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <h2 className="font-display text-3xl sm:text-[2.4rem] font-semibold text-[#0E1A1B] mb-3">{t("pricing.title")}</h2>
-        <p className="text-[#4A5757] mb-6">{t("pricing.sub")}</p>
+        <h2 className="font-display text-3xl sm:text-[2.4rem] font-semibold text-[var(--md-on-surface)] mb-3">{t("pricing.title")}</h2>
+        <p className="text-[var(--md-on-surface-variant)] mb-6">{t("pricing.sub")}</p>
         <div className="flex flex-wrap justify-center gap-3">
-          <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#E4DDCE]">
+          <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)]">
             {Object.keys(PRICES).map((k) => (
               <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
                 <span className="sm:hidden">{k}</span><span className="hidden sm:inline">{(() => { try { return new Intl.DisplayNames(intlLocale(), { type: "currency" }).of(k); } catch { return k; } })()}</span>
               </button>
             ))}
           </div>
-          <div role="group" aria-label={t("pricing.billing")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-white border border-[#E4DDCE]">
+          <div role="group" aria-label={t("pricing.billing")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)]">
             {CYCLES.map((c) => (
               <button key={c.months} onClick={() => setMonths(c.months)} aria-pressed={months === c.months} className={pill(months === c.months)}>
                 {t(`pricing.cycle.${c.months}`)}
-                {c.save > 0 && <span className={`ms-1.5 ${months === c.months ? "text-[#FDBA74]" : "text-[#2E6F73]"}`}>· {c.months === 12 ? t("pricing.save12") : t("pricing.save", { n: c.save })}</span>}
+                {c.save > 0 && <span className={`ms-1.5 ${months === c.months ? "text-[#FDBA74]" : "text-[var(--md-primary)]"}`}>· {c.months === 12 ? t("pricing.save12") : t("pricing.save", { n: c.save })}</span>}
               </button>
             ))}
           </div>
@@ -42,35 +42,33 @@ export function PricingSection({ onStart }) {
             <div
               key={p.key}
               className={`relative rounded-2xl p-6 flex flex-col border ${
-                p.highlight ? "bg-white border-[var(--brass)] ring-1 ring-[var(--brass)] shadow-[var(--shadow-2)] xl:-translate-y-2" : "bg-white border-[#E4DDCE]"
+                p.highlight ? "bg-[var(--md-surface-container-lowest)] border-[var(--brass)] ring-1 ring-[var(--brass)] shadow-[var(--shadow-2)] xl:-translate-y-2" : "bg-[var(--md-surface-container-lowest)] border-[var(--md-outline-variant)]"
               }`}
             >
               {p.highlight && <span className="absolute -top-3 start-6 text-[11px] font-bold px-2.5 py-1 rounded-md bg-[var(--peach)] text-[var(--on-peach)]">{t("pricing.popular")}</span>}
-              <h3 className={`font-display text-xl font-semibold text-[#0E1A1B]`}>{t(`plan.${p.key}`)}</h3>
-              <p className={`text-xs mb-4 text-[#4A5757]`}>{t(`plan.${p.key}.tag`)}</p>
+              <h3 className={`font-display text-xl font-semibold text-[var(--md-on-surface)]`}>{t(`plan.${p.key}`)}</h3>
+              <p className={`text-xs mb-4 text-[var(--md-on-surface-variant)]`}>{t(`plan.${p.key}.tag`)}</p>
               <p className="mb-5">
                 {p.custom ? (
-                  <span className={`font-display text-3xl font-semibold text-[#0E1A1B]`}>{t("pricing.custom")}</span>
+                  <span className={`font-display text-3xl font-semibold text-[var(--md-on-surface)]`}>{t("pricing.custom")}</span>
                 ) : (
                   <>
-                    <span className={`font-display text-3xl font-semibold tabular-nums text-[#0E1A1B]`}>{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
-                    {price > 0 && <span className={`text-sm font-semibold text-[#4A5757]`}>{t(`pricing.per.${months}`)}</span>}
-                    {months > 1 && price > 0 && <span className="block mt-1 text-xs text-[#64706F] tabular-nums">{t("pricing.eq", { p: formatMoney(Math.round(price / months), cur, intlLocale(), { compact: true }) })}</span>}
+                    <span className={`font-display text-3xl font-semibold tabular-nums text-[var(--md-on-surface)]`}>{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
+                    {price > 0 && <span className={`text-sm font-semibold text-[var(--md-on-surface-variant)]`}>{t(`pricing.per.${months}`)}</span>}
+                    {months > 1 && price > 0 && <span className="block mt-1 text-xs text-[var(--md-outline)] tabular-nums">{t("pricing.eq", { p: formatMoney(Math.round(price / months), cur, intlLocale(), { compact: true }) })}</span>}
                   </>
                 )}
               </p>
               <ul className="space-y-2.5 mb-6 flex-1">
                 {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
-                  <li key={f} className={`flex items-start gap-2 text-sm text-[#0E1A1B]`}>
-                    <Check className={`w-4 h-4 mt-0.5 shrink-0 text-[#2E6F73]`} /> {f}
+                  <li key={f} className={`flex items-start gap-2 text-sm text-[var(--md-on-surface)]`}>
+                    <Check className={`w-4 h-4 mt-0.5 shrink-0 text-[var(--md-primary)]`} /> {f}
                   </li>
                 ))}
               </ul>
               <button
                 onClick={p.custom ? () => window.open(waLink(t("nudge.msgEnterprise")), "_blank", "noopener") : onStart}
-                className={`w-full py-3 rounded-xl font-semibold text-sm cursor-pointer transition-colors ${
-                  "bg-[#2E6F73] text-white hover:bg-[#245A5E]"
-                }`}
+                className={`m3-btn w-full ${p.highlight ? "m3-filled" : i === 0 ? "m3-outlined" : "m3-tonal"}`}
               >
                 {i === 0 ? t("pricing.startFree") : p.custom ? t("pricing.contact") : t("pricing.try")}
               </button>
@@ -78,25 +76,25 @@ export function PricingSection({ onStart }) {
           );
         })}
       </div>
-      <div className="mt-6 rounded-2xl border border-[#2E6F73]/30 bg-[#2E6F73]/5 p-4 text-center">
-        <p className="text-sm font-bold text-[#0E1A1B]">{t("pricing.founding")}</p>
-        <p className="text-xs text-[#4A5757] mt-1">{t("pricing.trial")}</p>
+      <div className="mt-6 rounded-2xl border border-[var(--md-primary)]/30 bg-[var(--md-primary)]/5 p-4 text-center">
+        <p className="text-sm font-bold text-[var(--md-on-surface)]">{t("pricing.founding")}</p>
+        <p className="text-xs text-[var(--md-on-surface-variant)] mt-1">{t("pricing.trial")}</p>
       </div>
-      <div className="mt-6 rounded-[28px] border border-[#E4DDCE] bg-white p-5 sm:p-7 text-start">
+      <div className="mt-6 rounded-[28px] border border-[var(--md-outline-variant)] bg-[var(--md-surface-container-lowest)] p-5 sm:p-7 text-start">
         <h3 className="font-display text-xl sm:text-2xl font-semibold">{t("addons.t")}</h3>
-        <p className="mt-1 text-sm text-[#4A5757]">{t("addons.d")}</p>
+        <p className="mt-1 text-sm text-[var(--md-on-surface-variant)]">{t("addons.d")}</p>
         <ul className="mt-4 grid sm:grid-cols-2 gap-3">
           {["theme", "app", "project", "struct"].map((k) => (
-            <li key={k} className="rounded-2xl bg-[#F6F3EC] p-4">
+            <li key={k} className="rounded-2xl bg-[var(--md-surface)] p-4">
               <p className="text-sm font-semibold">{t(`addons.${k}.t`)}</p>
-              <p className="mt-1 text-xs leading-relaxed text-[#4A5757]">{t(`addons.${k}.d`)}</p>
-              {k === "project" && <p className="mt-1 text-xs font-bold text-[#0E1A1B]">{t("pricing.extra", { p: formatMoney(EXTRA_PROJECT[cur], cur, intlLocale(), { compact: true }) })}</p>}
+              <p className="mt-1 text-xs leading-relaxed text-[var(--md-on-surface-variant)]">{t(`addons.${k}.d`)}</p>
+              {k === "project" && <p className="mt-1 text-xs font-bold text-[var(--md-on-surface)]">{t("pricing.extra", { p: formatMoney(EXTRA_PROJECT[cur], cur, intlLocale(), { compact: true }) })}</p>}
             </li>
           ))}
         </ul>
         <button onClick={() => window.open(waLink(t("addons.msg")), "_blank", "noopener")} className="btn-press mt-5 h-11 px-6 rounded-full lp-pill-dark text-sm font-semibold">{t("addons.cta")}</button>
       </div>
-      <p className="text-center text-xs text-[#4A5757] mt-4">{t("pricing.note")}</p>
+      <p className="text-center text-xs text-[var(--md-on-surface-variant)] mt-4">{t("pricing.note")}</p>
     </section>
   );
 }
@@ -131,18 +129,18 @@ const LEGAL = localize({
 export function LegalPage({ kind, onBack }) {
   const doc = LEGAL[kind];
   return (
-    <main className="min-h-screen bg-[#F6F3EC] py-12 px-4 sm:px-6">
-      <article className="max-w-3xl mx-auto bg-white border border-[#E4DDCE] rounded-2xl p-6 sm:p-10">
-        <button onClick={onBack} className="flex items-center gap-2 text-sm font-bold text-[#4A5757] hover:text-[#0E1A1B] mb-6 cursor-pointer">
+    <main className="min-h-screen bg-[var(--md-surface)] py-12 px-4 sm:px-6">
+      <article className="max-w-3xl mx-auto bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)] rounded-2xl p-6 sm:p-10">
+        <button onClick={onBack} className="flex items-center gap-2 text-sm font-bold text-[var(--md-on-surface-variant)] hover:text-[var(--md-on-surface)] mb-6 cursor-pointer">
           <ArrowRight className="w-4 h-4 ltr:-scale-x-100 rtl:scale-x-100" /> العودة للصفحة الرئيسية
         </button>
-        <h1 className="text-3xl font-semibold text-[#0E1A1B] mb-2">{doc.title}</h1>
-        <p className="text-xs text-[#4A5757] mb-8">آخر تحديث: نوفمبر 2026 — مسودة تُراجع قانونياً قبل الإطلاق</p>
+        <h1 className="text-3xl font-semibold text-[var(--md-on-surface)] mb-2">{doc.title}</h1>
+        <p className="text-xs text-[var(--md-on-surface-variant)] mb-8">آخر تحديث: نوفمبر 2026 — مسودة تُراجع قانونياً قبل الإطلاق</p>
         <div className="space-y-6">
           {doc.sections.map(([h, t], i) => (
             <section key={h}>
-              <h2 className="text-lg font-semibold text-[#0E1A1B] mb-1">{`${(i + 1).toLocaleString("ar-EG-u-nu-latn")}. ${h}`}</h2>
-              <p className="text-sm leading-7 text-[#4A5757]">{t}</p>
+              <h2 className="text-lg font-semibold text-[var(--md-on-surface)] mb-1">{`${(i + 1).toLocaleString("ar-EG-u-nu-latn")}. ${h}`}</h2>
+              <p className="text-sm leading-7 text-[var(--md-on-surface-variant)]">{t}</p>
             </section>
           ))}
         </div>

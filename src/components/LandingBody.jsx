@@ -47,16 +47,13 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
               <span className="font-display text-lg font-semibold">{T("ld.1")}</span>
             </div>
             <nav className="lp-glass hidden md:flex items-center gap-1 rounded-full p-1.5 text-[13px] font-medium">
-              <button onClick={() => scrollToSection("roles")} className="px-4 py-2 rounded-full lp-pill-dark">{T("lp.st4")}</button>
-              <button onClick={() => scrollToSection("features")} className="px-4 py-2 rounded-full">{t("landing.features")}</button>
-              <button onClick={() => scrollToSection("pricing")} className="px-4 py-2 rounded-full">{t("landing.pricing")}</button>
+              <button onClick={() => scrollToSection("roles")} aria-current="true" className="m3-tab">{T("lp.st4")}</button>
+              <button onClick={() => scrollToSection("features")} className="m3-tab">{t("landing.features")}</button>
+              <button onClick={() => scrollToSection("pricing")} className="m3-tab">{t("landing.pricing")}</button>
             </nav>
             <div className="flex items-center gap-2">
               <SettingsSwitcher />
-              <button onClick={() => openApp("in")} className="btn-press lp-pill-dark inline-flex items-center gap-2 h-10 sm:h-11 ps-4 sm:ps-5 pe-1 sm:pe-1.5 rounded-full text-xs sm:text-[13px] whitespace-nowrap font-semibold">
-                {t("landing.login")}
-                <span className="w-8 h-8 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><LogIn className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-              </button>
+              <button onClick={() => openApp("in")} className="m3-btn m3-filled m3-sm whitespace-nowrap">{t("landing.login")}<LogIn className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
             </div>
           </header>
 
@@ -64,15 +61,12 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
           <div className="relative z-10 px-5 sm:px-12 pt-7 sm:pt-16 text-start max-w-3xl hero-in">
             <p className="text-[11px] sm:text-xs tracking-[.18em] uppercase font-semibold opacity-70">{T("lp.kicker")}</p>
             <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.1rem] sm:text-6xl xl:text-7xl">
-              {T("lp.h1a")}<br /><span className="text-[#FFD2B5]">{T("lp.h1b")}</span>
+              {T("lp.h1a")}<br /><span className="text-[var(--md-inverse-primary)]">{T("lp.h1b")}</span>
             </h1>
             <p className="mt-4 max-w-lg text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <button onClick={() => openApp("up")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
-                {T("ld.6")}
-                <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-              </button>
-              <button onClick={() => scrollToSection("features")} className="lp-glass h-11 sm:h-12 px-5 sm:px-6 rounded-full text-sm sm:text-[15px] font-semibold">{T("lp.explore")}</button>
+              <button onClick={() => openApp("up")} className="m3-btn m3-filled">{T("ld.6")}<ArrowUpRight className="w-[18px] h-[18px] rtl:-scale-x-100" aria-hidden="true" /></button>
+              <button onClick={() => scrollToSection("features")} className="m3-btn m3-tonal">{T("lp.explore")}</button>
             </div>
           </div>
 
@@ -83,12 +77,12 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
               <div role="radiogroup" className="flex flex-wrap gap-1.5 flex-1">
                 {ROLES.map((r) => (
                   <button key={r.id} role="radio" aria-checked={role === r.id} onClick={() => setRole(r.id)}
-                    className={`h-10 px-4 rounded-full text-[13px] font-semibold inline-flex items-center gap-2 transition-colors ${role === r.id ? "lp-pill-dark" : "hover:bg-black/5"}`}>
-                    <r.Icon className="w-4 h-4" aria-hidden="true" />{T("login.role." + r.key)}
+                    className="m3-chip">
+                    {role === r.id ? <CheckCheck className="w-4 h-4" aria-hidden="true" /> : <r.Icon className="w-4 h-4" aria-hidden="true" />}{T("login.role." + r.key)}
                   </button>
                 ))}
               </div>
-              <button onClick={() => openModal(role)} className="btn-press lp-pill-dark h-11 px-6 rounded-full text-[14px] font-bold shrink-0">{T("lp.go")}</button>
+              <button onClick={() => openModal(role)} className="m3-btn m3-filled shrink-0">{T("lp.go")}</button>
             </div>
           </div>
 
@@ -97,11 +91,11 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
             <article className="lp-frost mx-4 sm:mx-12 lg:mb-10 lg:me-12 lg:ms-0 w-auto lg:w-[400px] rounded-[30px] p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[#0E1A1B]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/70 text-[var(--md-on-surface)]"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />{T("lp.fp.tag")}</span>
                   <h3 className="mt-2.5 font-display text-xl font-semibold">{T("lp.fp.name")}</h3>
                   <p className="mt-0.5 flex items-center gap-1 text-xs opacity-75"><MapPin className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.meta")}</p>
                 </div>
-                <button type="button" onClick={() => openApp("up")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-white text-[#0E1A1B] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                <button type="button" onClick={() => openApp("up")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
               </div>
               <p className="mt-3 text-xs sm:text-sm leading-relaxed opacity-85">{T("lp.fp.d")}</p>
               <div className="mt-4 flex items-end justify-between gap-3">
@@ -126,20 +120,20 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
 
             <div className="lp-notch w-full lg:w-[460px] px-5 pt-5 pb-5 sm:px-7 sm:pt-7 sm:pb-8">
               <h3 className="font-display text-lg sm:text-xl font-semibold">{T("lp.n.t")}</h3>
-              <p className="mt-1.5 text-sm text-[#4A5757] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
+              <p className="mt-1.5 text-sm text-[var(--md-on-surface-variant)] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
               <div className="mt-5 flex items-center justify-between gap-3">
                 <div>
                   <div className="font-display text-4xl sm:text-5xl font-semibold leading-none">16+</div>
-                  <div className="mt-1 text-xs text-[#4A5757]">{T("lp.st1")}</div>
+                  <div className="mt-1 text-xs text-[var(--md-on-surface-variant)]">{T("lp.st1")}</div>
                 </div>
                 <div className="flex items-center">
                   <span className="flex -space-x-3 rtl:space-x-reverse">
                     {["site", "office", "couple"].map((im) => <img key={im} src={`/landing/${im}-s.webp`} alt="" loading="lazy" className="w-11 h-11 rounded-full object-cover border-[3px] border-[var(--paper)]" />)}
                   </span>
-                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[#E4DDCE] bg-white text-[#0E1A1B] flex items-center justify-center hover:bg-[#F6F3EC]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
+                  <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[var(--md-outline-variant)] bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] flex items-center justify-center hover:bg-[var(--md-surface)]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
                 </div>
               </div>
-              <p className="mt-4 text-xs text-[#4A5757]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
+              <p className="mt-4 text-xs text-[var(--md-on-surface-variant)]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
             </div>
           </div>
         </section>
@@ -148,8 +142,8 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
       {/* Roles */}
       <section id="roles" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">
         <div className="text-start max-w-2xl reveal">
-          <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#0E1A1B] text-balance">{T("lp.roles.t")}</h2>
-          <p className="mt-3 text-base sm:text-lg text-[#4A5757]">{T("lp.roles.d")}</p>
+          <h2 className="font-display text-3xl sm:text-5xl font-semibold leading-tight text-[var(--md-on-surface)] text-balance">{T("lp.roles.t")}</h2>
+          <p className="mt-3 text-base sm:text-lg text-[var(--md-on-surface-variant)]">{T("lp.roles.d")}</p>
         </div>
         <div className="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {ROLES.map((r, i) => (
@@ -171,14 +165,14 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
 
       {/* Features bento */}
       <section id="features" className="px-5 sm:px-8 pb-14 sm:pb-20 max-w-6xl mx-auto w-full">
-        <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#0E1A1B] text-balance">{T("lp.f.t")}</h2>
+        <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[var(--md-on-surface)] text-balance">{T("lp.f.t")}</h2>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {FEATURES.map((f, i) => (
             <div key={f.k} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start ${f.wide ? "col-span-2 min-h-[220px] sm:min-h-[260px]" : ""} ${f.img ? "rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 text-white flex flex-col justify-end" : "lp-card p-4 sm:p-7"}`}>
               {f.img && <><img src={`/landing/${f.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" /></>}
               <span className={f.img ? "lp-ic bg-white/25 backdrop-blur text-white" : `lp-ic ${f.tone}`}><f.Icon className="w-5 h-5" aria-hidden="true" /></span>
-              <h3 className={`mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold ${f.img ? "" : "text-[#0E1A1B]"}`}>{T(`lp.${f.k}.t`)}</h3>
-              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[#4A5757]"}`}>{T(`lp.${f.k}.d`)}</p>
+              <h3 className={`mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold ${f.img ? "" : "text-[var(--md-on-surface)]"}`}>{T(`lp.${f.k}.t`)}</h3>
+              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[var(--md-on-surface-variant)]"}`}>{T(`lp.${f.k}.d`)}</p>
             </div>
           ))}
         </div>
@@ -188,48 +182,45 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
       <section className="px-4 sm:px-8 pb-14 sm:pb-20 max-w-6xl mx-auto w-full">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-4 sm:gap-6 items-stretch">
           <div className="reveal lp-card rounded-[34px] p-6 sm:p-10 text-start flex flex-col">
-            <p className="text-xs font-semibold tracking-[.18em] uppercase text-[#4A5757]">{T("lp.how.k")}</p>
-            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold text-[#0E1A1B] text-balance leading-tight">{T("lp.how.t")}</h2>
-            <p className="mt-3 text-[#4A5757] max-w-md">{T("lp.how.d")}</p>
+            <p className="text-xs font-semibold tracking-[.18em] uppercase text-[var(--md-on-surface-variant)]">{T("lp.how.k")}</p>
+            <h2 className="mt-3 font-display text-3xl sm:text-5xl font-semibold text-[var(--md-on-surface)] text-balance leading-tight">{T("lp.how.t")}</h2>
+            <p className="mt-3 text-[var(--md-on-surface-variant)] max-w-md">{T("lp.how.d")}</p>
             <ol className="mt-8 relative space-y-3">
-              <span aria-hidden="true" className="absolute top-6 bottom-6 start-[27px] w-px bg-[#E4DDCE]" />
+              <span aria-hidden="true" className="absolute top-6 bottom-6 start-[27px] w-px bg-[var(--md-surface-container-high)]" />
               {[[1, Building2], [2, Users], [3, Rocket]].map(([n, Icon]) => (
-                <li key={n} className="relative flex items-start gap-4 rounded-[22px] p-3 hover:bg-[#F6F3EC] transition-colors">
-                  <span className={`relative z-10 w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center ${n === 3 ? "bg-[var(--brand)] text-white" : "bg-white border border-[#E4DDCE] text-[#0E1A1B]"}`}><Icon className="w-6 h-6" aria-hidden="true" /></span>
+                <li key={n} className="relative flex items-start gap-4 rounded-[22px] p-3 hover:bg-[var(--md-surface)] transition-colors">
+                  <span className={`relative z-10 w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center ${n === 3 ? "bg-[var(--brand)] text-white" : "bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)] text-[var(--md-on-surface)]"}`}><Icon className="w-6 h-6" aria-hidden="true" /></span>
                   <div className="min-w-0 flex-1 pt-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-display text-sm font-semibold text-[#9AA8A8] tabular-nums">0{n}</span>
-                      <h3 className="font-display text-lg font-semibold text-[#0E1A1B]">{T(`lp.how${n}.t`)}</h3>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold rounded-full bg-[var(--peach-soft,#FBE7DD)] text-[#7A4B2B] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T(`lp.how${n}.time`)}</span>
+                      <span className="font-display text-sm font-semibold text-[var(--md-outline)] tabular-nums">0{n}</span>
+                      <h3 className="font-display text-lg font-semibold text-[var(--md-on-surface)]">{T(`lp.how${n}.t`)}</h3>
+                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold rounded-full bg-[var(--peach-soft,#FBE7DD)] text-[var(--md-on-secondary-container)] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T(`lp.how${n}.time`)}</span>
                     </div>
-                    <p className="mt-1 text-sm text-[#4A5757] leading-relaxed">{T(`lp.how${n}.d`)}</p>
+                    <p className="mt-1 text-sm text-[var(--md-on-surface-variant)] leading-relaxed">{T(`lp.how${n}.d`)}</p>
                   </div>
                 </li>
               ))}
             </ol>
             <div className="mt-auto pt-8">
-              <button onClick={() => openApp("up")} className="btn-press lp-pill-dark h-12 ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-[15px] font-semibold">
-                {T("ld.6")}
-                <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-              </button>
+              <button onClick={() => openApp("up")} className="m3-btn m3-filled">{T("ld.6")}<ArrowUpRight className="w-[18px] h-[18px] rtl:-scale-x-100" aria-hidden="true" /></button>
             </div>
           </div>
           <div className="reveal relative isolate overflow-hidden rounded-[34px] min-h-[320px] lg:min-h-0 text-white p-5 sm:p-8 flex flex-col justify-between text-start">
             <div aria-hidden="true" className="absolute inset-0 -z-10 lp-panel" />
             <span className="self-start lp-glass rounded-full px-4 py-2 text-sm font-semibold">{T("lp.how.badge")}</span>
-            <div className="mt-8 rounded-[26px] bg-white text-[#0E1A1B] p-5 sm:p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,.6)]">
-              <div className="flex items-center justify-between text-sm font-semibold"><span>{T("lp.how.setup")}</span><span className="text-[#2E6F73] tabular-nums">3/3</span></div>
+            <div className="mt-8 rounded-[26px] bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] p-5 sm:p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,.6)]">
+              <div className="flex items-center justify-between text-sm font-semibold"><span>{T("lp.how.setup")}</span><span className="text-[var(--md-primary)] tabular-nums">3/3</span></div>
               <ul className="mt-4 space-y-3">
                 {[[1, Building2], [2, Users], [3, Rocket]].map(([n, Icon]) => (
                   <li key={n} className="flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-xl bg-[#ECE5D6] flex items-center justify-center shrink-0"><Icon className="w-5 h-5 text-[#2E6F73]" aria-hidden="true" /></span>
+                    <span className="w-10 h-10 rounded-xl bg-[var(--md-surface-container-high)] flex items-center justify-center shrink-0"><Icon className="w-5 h-5 text-[var(--md-primary)]" aria-hidden="true" /></span>
                     <span className="flex-1 min-w-0 text-sm font-medium truncate">{T(`lp.how${n}.t`)}</span>
-                    <CheckCheck className="w-5 h-5 text-emerald-600 shrink-0" aria-hidden="true" />
+                    <CheckCheck className="w-5 h-5 text-[var(--md-primary)] shrink-0" aria-hidden="true" />
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 h-2 rounded-full bg-[#ECE5D6] overflow-hidden"><div className="h-full w-full rounded-full bg-[#2E6F73]" /></div>
-              <p className="mt-3 text-xs text-[#4A5757]">{T("lp.how.ready")}</p>
+              <div className="mt-5 h-2 rounded-full bg-[var(--md-surface-container-high)] overflow-hidden"><div className="h-full w-full rounded-full bg-[var(--md-primary)]" /></div>
+              <p className="mt-3 text-xs text-[var(--md-on-surface-variant)]">{T("lp.how.ready")}</p>
             </div>
           </div>
         </div>
@@ -239,7 +230,7 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
 
       {/* Trust */}
       <section className="px-5 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
-        <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[#0E1A1B] text-balance">{T("lp.tr.t")}</h2>
+        <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[var(--md-on-surface)] text-balance">{T("lp.tr.t")}</h2>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {TRUST.map(({ n, Icon, img }, i) => (
             <div key={n} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 min-h-[200px] sm:min-h-[240px] flex flex-col justify-between ${img ? "text-white" : "lp-card"}`}>
@@ -278,11 +269,8 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
           <h2 className="max-w-3xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
           <p className="mt-4 max-w-xl text-base sm:text-lg opacity-80 leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button onClick={() => openApp("up")} className="btn-press lp-pill-dark h-11 sm:h-12 ps-5 sm:ps-6 pe-1.5 rounded-full inline-flex items-center gap-3 text-sm sm:text-[15px] font-semibold">
-              {T("ld.141")}
-              <span className="w-9 h-9 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-            </button>
-            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="lp-glass inline-flex items-center gap-2 h-12 px-5 rounded-full text-sm font-semibold"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
+            <button onClick={() => openApp("up")} className="m3-btn m3-filled">{T("ld.141")}<ArrowUpRight className="w-[18px] h-[18px] rtl:-scale-x-100" aria-hidden="true" /></button>
+            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="m3-btn m3-tonal"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
           </div>
         </div>
       </section>
@@ -292,16 +280,16 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-5 text-center">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-full lp-pill-dark flex items-center justify-center"><LogoMark className="w-4 h-4 text-white" /></div>
-            <span className="font-display font-semibold text-[#0E1A1B]">{T("ld.1")}</span>
+            <span className="font-display font-semibold text-[var(--md-on-surface)]">{T("ld.1")}</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#4A5757]">
-            <button onClick={() => scrollToSection("features")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.footerFeatures")}</button>
-            <button onClick={() => scrollToSection("pricing")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.pricing")}</button>
-            <button onClick={() => openApp("in")} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.clientPortal")}</button>
-            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.privacy")}</button>
-            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[#0E1A1B] cursor-pointer">{t("landing.terms")}</button>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[var(--md-on-surface-variant)]">
+            <button onClick={() => scrollToSection("features")} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.footerFeatures")}</button>
+            <button onClick={() => scrollToSection("pricing")} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.pricing")}</button>
+            <button onClick={() => openApp("in")} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.clientPortal")}</button>
+            <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.privacy")}</button>
+            <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.terms")}</button>
           </div>
-          <p className="text-xs text-[#64706F]">{T("ld.143")}</p>
+          <p className="text-xs text-[var(--md-outline)]">{T("ld.143")}</p>
         </div>
       </footer>
     </>
