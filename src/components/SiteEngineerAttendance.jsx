@@ -73,23 +73,23 @@ function AttendanceView({ data }) {
   const exportCsv = () =>
     download(`puantaj-${month}.csv`, toCsv([T("att.worker"), T("att.trade"), T("att.days"), T("att.ot"), T("att.wage")], workers.map((w, i) => [w.name, w.trade, sums[i].days, sums[i].ot, sums[i].wage])), "text/csv");
 
-  const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white";
+  const input = "px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] bg-white";
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] flex items-center gap-2.5"><UsersRound className="w-7 h-7" /><span>{T("att.title")}</span></h1>
-            <p className="text-xs md:text-sm text-[#4A5757] mt-1">{T("att.sub")}</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E2A47] flex items-center gap-2.5"><UsersRound className="w-7 h-7" /><span>{T("att.title")}</span></h1>
+            <p className="text-xs md:text-sm text-[#475569] mt-1">{T("att.sub")}</p>
           </div>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value || today())} className={input} />
         </div>
 
         <div className="grid stat-grid grid-cols-3 gap-3">
           {[["att.k.present", `${present}/${workers.length}`], ["att.k.day", money(dayTotal, { compact: true })], ["att.k.month", money(monthTotal, { compact: true })]].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#E4DDCE] text-center">
-              <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-semibold text-[#0E1A1B]">{v}</span>
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E2E8F0] text-center">
+              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-semibold text-[#0E2A47]">{v}</span>
             </div>
           ))}
         </div>
@@ -98,31 +98,31 @@ function AttendanceView({ data }) {
           {workers.map((w, i) => {
             const rec = day[w.id]; const e = rec || { s: "absent", ot: 0 };
             return (
-              <div key={w.id} className="bg-white rounded-lg border border-[#E4DDCE] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
+              <div key={w.id} className="bg-white rounded-lg border border-[#E2E8F0] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#0E1A1B] flex items-center gap-2">{E(w.name)}
-                    {data.removeWorker && <button type="button" onClick={async () => { if (await askConfirm(T("att.rmConfirm", { 0: w.name }))) data.removeWorker(w.id); }} aria-label={T("cash.delete")} className="p-1 rounded-md text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>}
+                  <p className="text-sm font-semibold text-[#0E2A47] flex items-center gap-2">{E(w.name)}
+                    {data.removeWorker && <button type="button" onClick={async () => { if (await askConfirm(T("att.rmConfirm", { 0: w.name }))) data.removeWorker(w.id); }} aria-label={T("cash.delete")} className="p-1 rounded-md text-[#64748B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>}
                   </p>
                   {edit && edit.id === w.id ? (
                     <form onSubmit={(ev) => { ev.preventDefault(); saveRate(); }} className="mt-1.5 flex flex-wrap items-center gap-2">
                       <input type="number" min={1} autoFocus value={edit.v} onChange={(ev) => setEdit({ ...edit, v: ev.target.value })} aria-label={T("att.rate")} className={input + " w-28"} />
-                      <button type="submit" aria-label={T("att.save")} className="p-2 rounded-lg bg-[#2E6F73] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
-                      <button type="button" onClick={() => setEdit(null)} aria-label={T("att.cancel")} className="p-2 rounded-lg border border-[#E4DDCE] cursor-pointer"><X className="w-4 h-4" /></button>
-                      <span className="w-full text-[11px] text-[#64706F]">{T("att.rateNote", { 0: date })}</span>
+                      <button type="submit" aria-label={T("att.save")} className="p-2 rounded-lg bg-[#0B7C79] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
+                      <button type="button" onClick={() => setEdit(null)} aria-label={T("att.cancel")} className="p-2 rounded-lg border border-[#E2E8F0] cursor-pointer"><X className="w-4 h-4" /></button>
+                      <span className="w-full text-[11px] text-[#64748B]">{T("att.rateNote", { 0: date })}</span>
                     </form>
                   ) : (
-                    <p className="text-[11px] text-[#4A5757] font-bold flex flex-wrap items-center gap-x-1">
+                    <p className="text-[11px] text-[#475569] font-bold flex flex-wrap items-center gap-x-1">
                       <span>{E(w.trade)} ·</span>
-                      <button type="button" onClick={() => setEdit({ id: w.id, v: w.rate })} className="inline-flex items-center gap-1 text-[#2E6F73] underline-offset-2 hover:underline cursor-pointer">{money(w.rate)} / {T("att.perday")}<Pencil className="w-3 h-3" aria-hidden="true" /></button>
+                      <button type="button" onClick={() => setEdit({ id: w.id, v: w.rate })} className="inline-flex items-center gap-1 text-[#0B7C79] underline-offset-2 hover:underline cursor-pointer">{money(w.rate)} / {T("att.perday")}<Pencil className="w-3 h-3" aria-hidden="true" /></button>
                       <span>· {T("att.days")}: {sums[i].days}</span>
                     </p>
                   )}
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {STATES.map((s) => (
-                    <button key={s} type="button" onClick={() => mark(w.id, { s })} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border cursor-pointer ${rec && e.s === s ? (s === "absent" ? "bg-rose-600 text-white border-rose-600" : "bg-[#2E6F73] text-white border-[#2E6F73]") : "bg-white text-[#4A5757] border-[#E4DDCE]"}`}>{T("att.s." + s)}</button>
+                    <button key={s} type="button" onClick={() => mark(w.id, { s })} className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border cursor-pointer ${rec && e.s === s ? (s === "absent" ? "bg-rose-600 text-white border-rose-600" : "bg-[#0B7C79] text-white border-[#0B7C79]") : "bg-white text-[#475569] border-[#E2E8F0]"}`}>{T("att.s." + s)}</button>
                   ))}
-                  <label className="flex items-center gap-1 text-[11px] font-bold text-[#4A5757]">
+                  <label className="flex items-center gap-1 text-[11px] font-bold text-[#475569]">
                     {T("att.ot")}
                     <input type="number" min={0} max={8} value={e.ot} disabled={e.s === "absent"} onChange={(ev) => mark(w.id, { ot: ev.target.value })} className={input + " w-16 !py-1"} />
                   </label>
@@ -137,9 +137,9 @@ function AttendanceView({ data }) {
             <input required placeholder={T("att.worker")} value={name} onChange={(e) => setName(e.target.value)} className={input} />
             <input placeholder={T("att.trade")} value={trade} onChange={(e) => setTrade(e.target.value)} className={input + " w-28"} />
             <input required type="number" min={1} placeholder={T("att.rate")} value={rate} onChange={(e) => setRateIn(e.target.value)} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] cursor-pointer"><Plus className="w-4 h-4" />{T("att.add")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#0B7C79] cursor-pointer"><Plus className="w-4 h-4" />{T("att.add")}</button>
           </form>
-          <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0E1A1B] bg-white border border-[#E4DDCE] hover:bg-[#F6F3EC] cursor-pointer"><Download className="w-4 h-4" />{T("att.export")}</button>
+          <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0E2A47] bg-white border border-[#E2E8F0] hover:bg-[#F4F5F7] cursor-pointer"><Download className="w-4 h-4" />{T("att.export")}</button>
         </div>
       </div>
     </main>

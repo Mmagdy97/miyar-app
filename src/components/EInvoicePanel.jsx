@@ -32,14 +32,14 @@ export default function EInvoicePanel() {
   };
 
   if (!rd.market) {
-    return <p className="no-print text-xs text-[#4A5757] bg-white border border-[#E4DDCE] rounded-xl p-4">{T("ei.nomarket")}</p>;
+    return <p className="no-print text-xs text-[#475569] bg-white border border-[#E2E8F0] rounded-xl p-4">{T("ei.nomarket")}</p>;
   }
-  const btn = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E4DDCE] bg-white hover:bg-[#F6F3EC] text-[11px] font-bold cursor-pointer";
+  const btn = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] text-[11px] font-bold cursor-pointer";
   return (
-    <section className="no-print bg-white border border-[#E4DDCE] rounded-xl p-5 space-y-4">
+    <section className="no-print bg-white border border-[#E2E8F0] rounded-xl p-5 space-y-4">
       <div>
         <h2 className="text-base font-semibold">{T("ei.title")} · {T("ei.m." + rd.market)}</h2>
-        <p className="text-xs text-[#4A5757] mt-1 leading-relaxed">{T("ei.note." + rd.market)}</p>
+        <p className="text-xs text-[#475569] mt-1 leading-relaxed">{T("ei.note." + rd.market)}</p>
       </div>
       <ul className="grid sm:grid-cols-3 gap-2">
         {rd.checks.map((c) => (
@@ -49,7 +49,7 @@ export default function EInvoicePanel() {
           </li>
         ))}
       </ul>
-      <ul className="divide-y divide-[#ECE5D6]">
+      <ul className="divide-y divide-[#E0F2F1]">
         {rows.map((r, i) => (
           <li key={r.no} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
             <span className="text-sm font-bold">{r.no}</span>
@@ -61,9 +61,9 @@ export default function EInvoicePanel() {
         ))}
       </ul>
       {qr && createPortal(
-        <div className="no-print fixed inset-0 z-[70] bg-[#0F3D3E]/50 flex items-center justify-center p-4" onClick={() => setQr(null)}>
+        <div className="no-print fixed inset-0 z-[70] bg-[#0E2A47]/50 flex items-center justify-center p-4" onClick={() => setQr(null)}>
           <div className="bg-white rounded-xl p-5 text-center space-y-2" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between gap-6"><b className="text-sm text-[#0E1A1B]">{qr.no}</b><button type="button" onClick={() => setQr(null)} aria-label="close" className="cursor-pointer text-[#0E1A1B]"><X className="w-4 h-4" /></button></div>
+            <div className="flex items-center justify-between gap-6"><b className="text-sm text-[#0E2A47]">{qr.no}</b><button type="button" onClick={() => setQr(null)} aria-label="close" className="cursor-pointer text-[#0E2A47]"><X className="w-4 h-4" /></button></div>
             <img src={qr.img} alt="QR" className="mx-auto" width={240} height={240} />
           </div>
         </div>,

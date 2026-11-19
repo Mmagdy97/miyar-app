@@ -130,7 +130,7 @@ function Sidebar({
           {/* Mobile Header: Logo + Close Drawer Button */}
           <div className="flex md:hidden items-center justify-between w-full">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#2E6F73] text-white">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#0B7C79] text-white">
                 <LogoMark className="w-4 h-4 text-white" />
               </div>
               <span className="font-display text-base font-semibold text-white">{t("brand")}</span>
@@ -238,11 +238,11 @@ function Sidebar({
       {/* Tooltip for collapsed state (popping to the LEFT in RTL) */}
       {collapsed && tooltip.visible && (
         <div
-          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-[#0E1A1B] bg-white border border-[#E4DDCE] rounded-lg shadow-md whitespace-nowrap pointer-events-none"
+          className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-[#0E2A47] bg-white border border-[#E2E8F0] rounded-lg shadow-md whitespace-nowrap pointer-events-none"
           style={{ top: tooltip.top, transform: "translateY(-50%)" }}
         >
           {tooltip.text}
-          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-t border-e border-[#E4DDCE] rotate-45" />
+          <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-t border-e border-[#E2E8F0] rotate-45" />
         </div>
       )}
 

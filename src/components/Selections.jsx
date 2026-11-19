@@ -13,19 +13,19 @@ import { toCsv, download } from "../lib/accountant";
 import { selectionsRepo } from "../data/selections";
 import { projectsStore } from "../data/projects";
 
-const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white min-w-0";
+const input = "px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] bg-white min-w-0";
 const badge = { proposed: "bg-amber-50 text-amber-800 border-amber-200", approved: "bg-emerald-50 text-emerald-700 border-emerald-200", rejected: "bg-rose-50 text-rose-700 border-rose-200", ordered: "bg-sky-50 text-sky-700 border-sky-200", delivered: "bg-teal-50 text-teal-800 border-teal-200", installed: "bg-emerald-100 text-emerald-800 border-emerald-300" };
 const empty = { room: "", name: "", supplier: "", qty: "1", cost: "", price: "", image: "", phone: "", dims: "", material: "", code: "", leadDays: "", color: "#C8A27A" };
 
 /** Photo tile; without a photo it shows the finish colour as a swatch. */
 function Thumb({ i, size = "w-full md:w-28 h-44 md:h-28", onZoom }) {
   const swatch = (
-    <div className="w-full h-full flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${i.color || "#E4DDCE"}, color-mix(in srgb, ${i.color || "#E4DDCE"} 55%, white))` }}>
+    <div className="w-full h-full flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${i.color || "#E2E8F0"}, color-mix(in srgb, ${i.color || "#E2E8F0"} 55%, white))` }}>
       <Armchair className="w-8 h-8 text-white/80" aria-hidden="true" />
     </div>
   );
   return (
-    <button type="button" disabled={!i.image} onClick={onZoom} aria-label={T("sel.zoom")} className={`${size} shrink-0 overflow-hidden rounded-xl border border-[#E4DDCE] bg-[#EFE9DC] ${i.image ? "cursor-zoom-in" : "cursor-default"}`}>
+    <button type="button" disabled={!i.image} onClick={onZoom} aria-label={T("sel.zoom")} className={`${size} shrink-0 overflow-hidden rounded-xl border border-[#E2E8F0] bg-[#EEF1F5] ${i.image ? "cursor-zoom-in" : "cursor-default"}`}>
       {i.image ? <Photo src={i.image} alt={i.name} className="w-full h-full object-cover" fallbackClass="" /> : swatch}
     </button>
   );
@@ -69,10 +69,10 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] flex items-center gap-2.5"><Armchair className="w-7 h-7" /><span>{T(isClient ? "sel.title.client" : "sel.title")}</span></h1>
-            <p className="text-xs md:text-sm text-[#4A5757] mt-1">{T(isClient ? "sel.sub.client" : "sel.sub")}</p>
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E2A47] flex items-center gap-2.5"><Armchair className="w-7 h-7" /><span>{T(isClient ? "sel.title.client" : "sel.title")}</span></h1>
+            <p className="text-xs md:text-sm text-[#475569] mt-1">{T(isClient ? "sel.sub.client" : "sel.sub")}</p>
           </div>
-          {!isClient && <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0E1A1B] bg-white border border-[#E4DDCE] hover:bg-[#F6F3EC] cursor-pointer w-fit"><Download className="w-4 h-4" />{T("sel.export")}</button>}
+          {!isClient && <button type="button" onClick={exportCsv} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#0E2A47] bg-white border border-[#E2E8F0] hover:bg-[#F4F5F7] cursor-pointer w-fit"><Download className="w-4 h-4" />{T("sel.export")}</button>}
         </div>
 
         {!isClient && (
@@ -83,16 +83,16 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
           {[["sel.k.approved", t.price], ["sel.k.pending", t.pending], ...(isClient || restricted ? [] : [["sel.k.cost", t.cost], ["sel.k.margin", t.margin]])].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#E4DDCE] text-center">
-              <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-semibold text-[#0E1A1B]">{money(v, { compact: true })}</span>
-              {k === "sel.k.margin" && <span className="block text-[10px] font-bold text-[#4A5757]">{t.marginPct}%</span>}
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E2E8F0] text-center">
+              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-semibold text-[#0E2A47]">{money(v, { compact: true })}</span>
+              {k === "sel.k.margin" && <span className="block text-[10px] font-bold text-[#475569]">{t.marginPct}%</span>}
             </div>
           ))}
         </div>
 
         {!isClient && (
-          <form onSubmit={add} className="bg-white rounded-2xl border border-[#E4DDCE] p-4 space-y-3">
+          <form onSubmit={add} className="bg-white rounded-2xl border border-[#E2E8F0] p-4 space-y-3">
             <div className="flex flex-wrap gap-2 items-end">
               <input placeholder={T("sel.room")} value={f.room} onChange={(e) => setF({ ...f, room: e.target.value })} className={input + " w-32"} />
               <input required placeholder={T("sel.item")} value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} className={input + " flex-1 min-w-36"} />
@@ -101,15 +101,15 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
               {!restricted && <input type="number" min={0} placeholder={T("sel.cost")} value={f.cost} onChange={(e) => setF({ ...f, cost: e.target.value })} className={input + " w-28"} />}
               <input required type="number" min={1} placeholder={T("sel.price")} value={f.price} onChange={(e) => setF({ ...f, price: e.target.value })} className={input + " w-28"} />
             </div>
-            <button type="button" onClick={() => setMore((v) => !v)} aria-expanded={more} className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#2E6F73] cursor-pointer">
+            <button type="button" onClick={() => setMore((v) => !v)} aria-expanded={more} className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0B7C79] cursor-pointer">
               <ChevronDown className={`w-4 h-4 transition-transform ${more ? "rotate-180" : ""}`} aria-hidden="true" />{T("sel.details")}
             </button>
             {more && (
               <div className="grid md:grid-cols-[11rem_1fr] gap-4 animate-in">
                 <div>
-                  <p className="text-[11px] font-bold text-[#4A5757] mb-1.5">{T("sel.photo")}</p>
-                  <div className="h-36 rounded-xl overflow-hidden border border-dashed border-[#D6CCB8] bg-[#F6F3EC]">
-                    {f.image ? <Photo src={f.image} alt="" className="w-full h-full object-cover" /> : <label className="h-full flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#4A5757] cursor-pointer"><ImagePlus className="w-6 h-6" aria-hidden="true" />{T("sel.photo.add")}<input type="file" accept="image/*" onChange={pick} className="sr-only" /></label>}
+                  <p className="text-[11px] font-bold text-[#475569] mb-1.5">{T("sel.photo")}</p>
+                  <div className="h-36 rounded-xl overflow-hidden border border-dashed border-[#CBD5E1] bg-[#F4F5F7]">
+                    {f.image ? <Photo src={f.image} alt="" className="w-full h-full object-cover" /> : <label className="h-full flex flex-col items-center justify-center gap-1.5 text-xs font-semibold text-[#475569] cursor-pointer"><ImagePlus className="w-6 h-6" aria-hidden="true" />{T("sel.photo.add")}<input type="file" accept="image/*" onChange={pick} className="sr-only" /></label>}
                   </div>
                   {f.image
                     ? <button type="button" onClick={() => setF({ ...f, image: "" })} className="mt-1.5 text-[11px] font-semibold text-rose-700 cursor-pointer">{T("sel.photo.remove")}</button>
@@ -122,29 +122,29 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                   <input placeholder={T("sel.dims")} value={f.dims} onChange={(e) => setF({ ...f, dims: e.target.value })} className={input} />
                   <input placeholder={T("sel.code")} value={f.code} onChange={(e) => setF({ ...f, code: e.target.value })} className={input} />
                   <input placeholder={T("sel.material")} value={f.material} onChange={(e) => setF({ ...f, material: e.target.value })} className={input + " sm:col-span-2"} />
-                  <label className="flex items-center gap-2 text-[11px] font-bold text-[#4A5757]">{T("sel.color")}<input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} className="h-8 w-10 rounded-md border border-[#E4DDCE] bg-white p-0.5" /></label>
+                  <label className="flex items-center gap-2 text-[11px] font-bold text-[#475569]">{T("sel.color")}<input type="color" value={f.color} onChange={(e) => setF({ ...f, color: e.target.value })} className="h-8 w-10 rounded-md border border-[#E2E8F0] bg-white p-0.5" /></label>
                 </div>
               </div>
             )}
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer"><Plus className="w-4 h-4" />{T("sel.add")}</button>
           </form>
         )}
 
         {!isClient && pos.length > 0 && (
           <section className="space-y-2">
-            <div><h2 className="text-sm font-semibold text-[#0E1A1B]">{T("sel.orders")}</h2><p className="text-[11px] text-[#4A5757]">{T("sel.ordersSub")}</p></div>
+            <div><h2 className="text-sm font-semibold text-[#0E2A47]">{T("sel.orders")}</h2><p className="text-[11px] text-[#475569]">{T("sel.ordersSub")}</p></div>
             <div className="grid md:grid-cols-2 gap-3">
               {pos.map((po) => (
-                <div key={po.supplier} className="bg-white rounded-2xl border border-[#E4DDCE] p-4 space-y-2">
+                <div key={po.supplier} className="bg-white rounded-2xl border border-[#E2E8F0] p-4 space-y-2">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm font-semibold text-[#0E1A1B]">{po.supplier || T("sel.noSupplier")}</p>
-                    {!restricted && <span className="text-sm font-semibold tabular-nums text-[#0E1A1B] shrink-0">{money(po.total)}</span>}
+                    <p className="text-sm font-semibold text-[#0E2A47]">{po.supplier || T("sel.noSupplier")}</p>
+                    {!restricted && <span className="text-sm font-semibold tabular-nums text-[#0E2A47] shrink-0">{money(po.total)}</span>}
                   </div>
-                  <p className="text-[11px] text-[#4A5757]">{po.list.map((i) => `${i.qty}× ${i.name}`).join(" · ")}</p>
+                  <p className="text-[11px] text-[#475569]">{po.list.map((i) => `${i.qty}× ${i.name}`).join(" · ")}</p>
                   <div className="flex flex-wrap gap-2">
-                    {po.list.some((i) => i.status === "approved") && <button type="button" onClick={() => orderAll(po.list)} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer">{T("sel.poAll")}</button>}
-                    <button type="button" onClick={() => printPO(po, project, today())} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#0E1A1B] bg-white border border-[#E4DDCE] hover:bg-[#F6F3EC] cursor-pointer"><Printer className="w-4 h-4" aria-hidden="true" />{T("sel.po")}</button>
-                    {po.phone && <a href={poWa(po)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#2E6F73] bg-[#ECE5D6] hover:bg-[#E4DDCE]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.poWa")}</a>}
+                    {po.list.some((i) => i.status === "approved") && <button type="button" onClick={() => orderAll(po.list)} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer">{T("sel.poAll")}</button>}
+                    <button type="button" onClick={() => printPO(po, project, today())} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#0E2A47] bg-white border border-[#E2E8F0] hover:bg-[#F4F5F7] cursor-pointer"><Printer className="w-4 h-4" aria-hidden="true" />{T("sel.po")}</button>
+                    {po.phone && <a href={poWa(po)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#0B7C79] bg-[#E0F2F1] hover:bg-[#E2E8F0]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.poWa")}</a>}
                   </div>
                 </div>
               ))}
@@ -155,32 +155,32 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
         {mine.length === 0 && <EmptyState title={T("sel.empty")} hint={T("sel.emptyHint")} />}
         {Object.entries(groups).map(([room, list]) => (
           <section key={room} className="space-y-2">
-            <h2 className="text-sm font-semibold text-[#0E1A1B]">{room || T("sel.general")}</h2>
+            <h2 className="text-sm font-semibold text-[#0E2A47]">{room || T("sel.general")}</h2>
             {list.map((i) => (
-              <article key={i.id} className="bg-white rounded-2xl border border-[#E4DDCE] p-3 md:p-4 flex flex-col md:flex-row gap-3 md:gap-4">
+              <article key={i.id} className="bg-white rounded-2xl border border-[#E2E8F0] p-3 md:p-4 flex flex-col md:flex-row gap-3 md:gap-4">
                 <Thumb i={i} onZoom={() => i.image && setZoom(i)} />
                 <div className="flex-1 min-w-0 flex flex-col gap-2">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <p className="text-base font-semibold text-[#0E1A1B] leading-snug">{i.name}</p>
-                      {i.supplier && <p className="text-xs text-[#4A5757] mt-0.5">{i.supplier}</p>}
+                      <p className="text-base font-semibold text-[#0E2A47] leading-snug">{i.name}</p>
+                      {i.supplier && <p className="text-xs text-[#475569] mt-0.5">{i.supplier}</p>}
                     </div>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit shrink-0 ${badge[i.status]}`}>{T("sel.s." + i.status)}</span>
                   </div>
                   {(i.dims || i.material || i.code || i.leadDays > 0) && (
-                    <ul className="flex flex-wrap gap-1.5 text-[11px] text-[#4A5757]">
-                      {i.dims && <li className="inline-flex items-center gap-1 rounded-md bg-[#F6F3EC] border border-[#E4DDCE] px-2 py-0.5"><Ruler className="w-3 h-3" aria-hidden="true" />{i.dims}</li>}
-                      {i.material && <li className="inline-flex items-center gap-1.5 rounded-md bg-[#F6F3EC] border border-[#E4DDCE] px-2 py-0.5"><span className="w-2.5 h-2.5 rounded-full border border-black/10" style={{ background: i.color }} aria-hidden="true" />{i.material}</li>}
-                      {i.code && <li className="rounded-md bg-[#F6F3EC] border border-[#E4DDCE] px-2 py-0.5 tabular-nums">{i.code}</li>}
+                    <ul className="flex flex-wrap gap-1.5 text-[11px] text-[#475569]">
+                      {i.dims && <li className="inline-flex items-center gap-1 rounded-md bg-[#F4F5F7] border border-[#E2E8F0] px-2 py-0.5"><Ruler className="w-3 h-3" aria-hidden="true" />{i.dims}</li>}
+                      {i.material && <li className="inline-flex items-center gap-1.5 rounded-md bg-[#F4F5F7] border border-[#E2E8F0] px-2 py-0.5"><span className="w-2.5 h-2.5 rounded-full border border-black/10" style={{ background: i.color }} aria-hidden="true" />{i.material}</li>}
+                      {i.code && <li className="rounded-md bg-[#F4F5F7] border border-[#E2E8F0] px-2 py-0.5 tabular-nums">{i.code}</li>}
                       {i.leadDays > 0 && <li className="inline-flex items-center gap-1 rounded-md bg-[#FEF3C7] border border-[#F3C3B2] text-[#92400E] px-2 py-0.5"><Clock className="w-3 h-3" aria-hidden="true" />{T("sel.leadTag", { d: i.leadDays })}</li>}
                     </ul>
                   )}
                   {stepIndex(i) >= 0 && (
-                    <ol className="flex items-center gap-1 text-[10px] font-semibold text-[#64706F]" aria-label={T("sel.track")}>
+                    <ol className="flex items-center gap-1 text-[10px] font-semibold text-[#64748B]" aria-label={T("sel.track")}>
                       {STEPS.map((k, n) => (
-                        <li key={k} className={`flex items-center gap-1 ${n <= stepIndex(i) ? "text-[#2E6F73]" : ""}`}>
-                          <span className={`w-2.5 h-2.5 rounded-full border ${n <= stepIndex(i) ? "bg-[#2E6F73] border-[#2E6F73]" : "border-[#D6CCB8] bg-white"}`} aria-hidden="true" />{T("sel.step." + k)}
-                          {n < STEPS.length - 1 && <span className={`w-4 sm:w-6 h-px ${n < stepIndex(i) ? "bg-[#2E6F73]" : "bg-[#D6CCB8]"}`} aria-hidden="true" />}
+                        <li key={k} className={`flex items-center gap-1 ${n <= stepIndex(i) ? "text-[#0B7C79]" : ""}`}>
+                          <span className={`w-2.5 h-2.5 rounded-full border ${n <= stepIndex(i) ? "bg-[#0B7C79] border-[#0B7C79]" : "border-[#CBD5E1] bg-white"}`} aria-hidden="true" />{T("sel.step." + k)}
+                          {n < STEPS.length - 1 && <span className={`w-4 sm:w-6 h-px ${n < stepIndex(i) ? "bg-[#0B7C79]" : "bg-[#CBD5E1]"}`} aria-hidden="true" />}
                         </li>
                       ))}
                     </ol>
@@ -190,7 +190,7 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                       <Truck className="w-3 h-3" aria-hidden="true" />{T("sel.eta", { d: new Date(etaOf(i)).toLocaleDateString(intlLocale(), { day: "numeric", month: "short" }) })}{isLate(i) && ` · ${T("sel.late", { n: Math.max(1, Math.round((new Date(today()) - new Date(etaOf(i))) / 86400000)) })}`}
                     </p>
                   )}
-                  <p className="text-sm font-semibold text-[#0E1A1B] tabular-nums">{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && <span className="text-xs font-medium text-[#64706F]">{` · ${T("sel.cost")}: ${money(lineCost(i))}`}</span>}</p>
+                  <p className="text-sm font-semibold text-[#0E2A47] tabular-nums">{i.qty} × {money(i.price)} = {money(linePrice(i))}{!isClient && !restricted && <span className="text-xs font-medium text-[#64748B]">{` · ${T("sel.cost")}: ${money(lineCost(i))}`}</span>}</p>
                   <div className="flex flex-wrap items-center gap-2 mt-auto">
                     {isClient && i.status === "proposed" && (
                       <>
@@ -198,12 +198,12 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
                         <button type="button" onClick={() => setStatus(i.id, "rejected")} className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 cursor-pointer"><X className="w-4 h-4" />{T("sel.reject")}</button>
                       </>
                     )}
-                    {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer">{T("sel.order")}</button>}
-                    {!isClient && i.status === "ordered" && <button type="button" onClick={() => setStatus(i.id, "delivered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer">{T("sel.deliver")}</button>}
-                    {!isClient && i.status === "delivered" && <button type="button" onClick={() => setStatus(i.id, "installed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer">{T("sel.install")}</button>}
-                    {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#0E1A1B] bg-white border border-[#E4DDCE] cursor-pointer">{T("sel.repropose")}</button>}
-                    {!isClient && i.phone && <a href={supplierWa(i.phone, T("sel.waMsg", { item: i.name, code: i.code || "-", project: E(project.name) }))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#2E6F73] bg-[#ECE5D6] hover:bg-[#E4DDCE]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.waBtn")}</a>}
-                    {!isClient && (i.status === "proposed" || i.status === "approved" || i.status === "rejected") && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                    {!isClient && i.status === "approved" && <button type="button" onClick={() => setStatus(i.id, "ordered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer">{T("sel.order")}</button>}
+                    {!isClient && i.status === "ordered" && <button type="button" onClick={() => setStatus(i.id, "delivered")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer">{T("sel.deliver")}</button>}
+                    {!isClient && i.status === "delivered" && <button type="button" onClick={() => setStatus(i.id, "installed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer">{T("sel.install")}</button>}
+                    {!isClient && i.status === "rejected" && <button type="button" onClick={() => setStatus(i.id, "proposed")} className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#0E2A47] bg-white border border-[#E2E8F0] cursor-pointer">{T("sel.repropose")}</button>}
+                    {!isClient && i.phone && <a href={supplierWa(i.phone, T("sel.waMsg", { item: i.name, code: i.code || "-", project: E(project.name) }))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#0B7C79] bg-[#E0F2F1] hover:bg-[#E2E8F0]"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("sel.waBtn")}</a>}
+                    {!isClient && (i.status === "proposed" || i.status === "approved" || i.status === "rejected") && <button type="button" onClick={() => remove(i.id)} aria-label={T("sel.photo.remove")} className="ms-auto p-1.5 rounded-lg text-[#64748B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
                   </div>
                 </div>
               </article>
@@ -212,8 +212,8 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
         ))}
       </div>
       {zoom && (
-        <div role="dialog" aria-modal="true" aria-label={zoom.name} onClick={() => setZoom(null)} className="fixed inset-0 z-50 bg-[#0F3D3E]/80 flex flex-col items-center justify-center p-4 animate-in fade-in">
-          <button type="button" onClick={() => setZoom(null)} aria-label={T("sel.close")} className="absolute top-4 end-4 p-2 rounded-full bg-white/90 text-[#0E1A1B] cursor-pointer"><X className="w-5 h-5" /></button>
+        <div role="dialog" aria-modal="true" aria-label={zoom.name} onClick={() => setZoom(null)} className="fixed inset-0 z-50 bg-[#0E2A47]/80 flex flex-col items-center justify-center p-4 animate-in fade-in">
+          <button type="button" onClick={() => setZoom(null)} aria-label={T("sel.close")} className="absolute top-4 end-4 p-2 rounded-full bg-white/90 text-[#0E2A47] cursor-pointer"><X className="w-5 h-5" /></button>
           <Photo src={zoom.image} alt={zoom.name} className="max-h-[78vh] max-w-full rounded-2xl object-contain" />
           <p className="mt-3 text-sm font-semibold text-white">{zoom.name}</p>
         </div>
@@ -225,7 +225,7 @@ function SelectionsInner({ role = "Admin", restricted = false, projects, data })
 function NoProjects() {
   return (
     <main className="flex-1 flex items-center justify-center p-8 font-ibm">
-      <p className="text-sm text-[#4A5757] bg-white rounded-xl border border-[#E4DDCE] p-8 text-center max-w-sm">{T("proj.none")}</p>
+      <p className="text-sm text-[#475569] bg-white rounded-xl border border-[#E2E8F0] p-8 text-center max-w-sm">{T("proj.none")}</p>
     </main>
   );
 }

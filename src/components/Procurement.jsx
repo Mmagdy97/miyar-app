@@ -10,7 +10,7 @@ import { procurementRepo } from "../data/procurement";
 import { projectsStore, useProjectList } from "../data/projects";
 
 const PO_NEXT = { draft: "sent", sent: "received" };
-const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white min-w-0";
+const input = "px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] bg-white min-w-0";
 
 function useDemoData() {
   const [subs, setSubs] = subsStore.use();
@@ -113,8 +113,8 @@ function ProcurementView({ data }) {
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-5xl mx-auto space-y-8">
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] flex items-center gap-2.5"><HardHat className="w-7 h-7" /><span>{T("proc.title")}</span></h1>
-          <p className="text-xs md:text-sm text-[#4A5757] mt-1">{T("proc.sub")}</p>
+          <h1 className="text-2xl md:text-3xl font-semibold text-[#0E2A47] flex items-center gap-2.5"><HardHat className="w-7 h-7" /><span>{T("proc.title")}</span></h1>
+          <p className="text-xs md:text-sm text-[#475569] mt-1">{T("proc.sub")}</p>
         </div>
 
         {projects.length > 0 && (
@@ -124,69 +124,69 @@ function ProcurementView({ data }) {
           </select>
         )}
 
-        <section className="bg-white rounded-2xl border border-[#E4DDCE] p-4 space-y-3">
-          <h2 className="text-sm font-semibold text-[#0E1A1B]">{T("cc.title")}</h2>
+        <section className="bg-white rounded-2xl border border-[#E2E8F0] p-4 space-y-3">
+          <h2 className="text-sm font-semibold text-[#0E2A47]">{T("cc.title")}</h2>
           <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
             {[["cc.budget", cc.budget], ["cc.committed", cc.committed], ["cc.spent", cc.spent], ["cc.left", cc.uncommitted]].map(([k, v]) => (
-              <div key={k} className="rounded-lg p-3 bg-[#F6F3EC] text-center">
-                <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span>
-                <span className={`text-base md:text-lg font-semibold tabular-nums ${k === "cc.left" && v < 0 ? "text-rose-700" : "text-[#0E1A1B]"}`}>{money(v, { compact: true })}</span>
+              <div key={k} className="rounded-lg p-3 bg-[#F4F5F7] text-center">
+                <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+                <span className={`text-base md:text-lg font-semibold tabular-nums ${k === "cc.left" && v < 0 ? "text-rose-700" : "text-[#0E2A47]"}`}>{money(v, { compact: true })}</span>
               </div>
             ))}
           </div>
-          {cc.budget > 0 && <div className="h-2 rounded-full bg-[#EFE9DC] overflow-hidden"><div className={`h-full ${cc.over ? "bg-rose-600" : "bg-[#2E6F73]"}`} style={{ width: Math.min(100, cc.pct) + "%" }} /></div>}
-          <p className={`text-[11px] font-bold flex items-center gap-1.5 ${cc.over ? "text-rose-700" : "text-[#64706F]"}`}>{cc.over && <AlertTriangle className="w-4 h-4" aria-hidden="true" />}{cc.budget > 0 ? T(cc.over ? "cc.over" : "cc.pct", { n: cc.pct }) : T("cc.noBudget")}</p>
+          {cc.budget > 0 && <div className="h-2 rounded-full bg-[#EEF1F5] overflow-hidden"><div className={`h-full ${cc.over ? "bg-rose-600" : "bg-[#0B7C79]"}`} style={{ width: Math.min(100, cc.pct) + "%" }} /></div>}
+          <p className={`text-[11px] font-bold flex items-center gap-1.5 ${cc.over ? "text-rose-700" : "text-[#64748B]"}`}>{cc.over && <AlertTriangle className="w-4 h-4" aria-hidden="true" />}{cc.budget > 0 ? T(cc.over ? "cc.over" : "cc.pct", { n: cc.pct }) : T("cc.noBudget")}</p>
           {fc && (
-            <div className="border-t border-[#ECE5D6] pt-3 space-y-1">
+            <div className="border-t border-[#E0F2F1] pt-3 space-y-1">
               <div className="grid grid-cols-3 gap-3 text-center">
                 {[["fc.eac", fc.eac], ["fc.toGo", fc.toGo], ["fc.var", fc.variance]].map(([k, v]) => (
-                  <div key={k}><span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span><span className={`text-base font-semibold tabular-nums ${k === "fc.var" && v < 0 ? "text-rose-700" : "text-[#0E1A1B]"}`}>{money(v, { compact: true })}</span></div>
+                  <div key={k}><span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span><span className={`text-base font-semibold tabular-nums ${k === "fc.var" && v < 0 ? "text-rose-700" : "text-[#0E2A47]"}`}>{money(v, { compact: true })}</span></div>
                 ))}
               </div>
-              <p className={`text-[11px] font-bold ${fc.over ? "text-rose-700" : "text-[#64706F]"}`}>{T(fc.over ? "fc.over" : "fc.ok", { n: fc.pct })}</p>
+              <p className={`text-[11px] font-bold ${fc.over ? "text-rose-700" : "text-[#64748B]"}`}>{T(fc.over ? "fc.over" : "fc.ok", { n: fc.pct })}</p>
             </div>
           )}
         </section>
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
           {[["proc.k.subs", t.subContracts], ["proc.k.subout", t.subOutstanding], ["proc.k.poopen", t.poOpen], ["proc.k.poall", t.poAll]].map(([k, v]) => (
-            <div key={k} className="bg-white rounded-lg p-4 border border-[#E4DDCE] text-center">
-              <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span>
-              <span className="text-lg md:text-xl font-semibold text-[#0E1A1B]">{money(v, { compact: true })}</span>
+            <div key={k} className="bg-white rounded-lg p-4 border border-[#E2E8F0] text-center">
+              <span className="text-[11px] font-bold text-[#475569] block mb-1">{T(k)}</span>
+              <span className="text-lg md:text-xl font-semibold text-[#0E2A47]">{money(v, { compact: true })}</span>
             </div>
           ))}
         </div>
 
         <section className="space-y-3">
-          <h2 className="text-base font-semibold text-[#0E1A1B] flex items-center gap-2"><HardHat className="w-5 h-5" />{T("proc.subs")}</h2>
+          <h2 className="text-base font-semibold text-[#0E2A47] flex items-center gap-2"><HardHat className="w-5 h-5" />{T("proc.subs")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {subs.map((s) => {
               const pctPaid = s.contract ? Math.round((s.paid / s.contract) * 100) : 0;
               return (
-                <div key={s.id} className="bg-white rounded-lg border border-[#E4DDCE] p-4">
-                  <div className="flex justify-between gap-2"><p className="text-sm font-semibold text-[#0E1A1B]">{E(s.name)}</p><span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EFE9DC] border border-[#E4DDCE] h-fit">{E(s.trade)}</span></div>
-                  <div className="h-2 rounded-full bg-[#EFE9DC] mt-3 overflow-hidden"><div className="h-full bg-[#2E6F73]" style={{ width: pctPaid + "%" }} /></div>
-                  <div className="flex justify-between text-[11px] font-bold text-[#4A5757] mt-2">
+                <div key={s.id} className="bg-white rounded-lg border border-[#E2E8F0] p-4">
+                  <div className="flex justify-between gap-2"><p className="text-sm font-semibold text-[#0E2A47]">{E(s.name)}</p><span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#EEF1F5] border border-[#E2E8F0] h-fit">{E(s.trade)}</span></div>
+                  <div className="h-2 rounded-full bg-[#EEF1F5] mt-3 overflow-hidden"><div className="h-full bg-[#0B7C79]" style={{ width: pctPaid + "%" }} /></div>
+                  <div className="flex justify-between text-[11px] font-bold text-[#475569] mt-2">
                     <span>{T("proc.paid")}: {money(s.paid, { compact: true })} / {money(s.contract, { compact: true })}</span>
                     <span>{T("proc.balance")}: {money(subBalance(s), { compact: true })}</span>
                   </div>
-                  <div className="mt-3 border-t border-[#E4DDCE] pt-3 space-y-2">
-                    <p className="text-[11px] font-bold text-[#4A5757]">{T("proc.payHist")}</p>
-                    {subPayments(s).length === 0 && <p className="text-[11px] text-[#64706F]">{T("proc.noPay")}</p>}
+                  <div className="mt-3 border-t border-[#E2E8F0] pt-3 space-y-2">
+                    <p className="text-[11px] font-bold text-[#475569]">{T("proc.payHist")}</p>
+                    {subPayments(s).length === 0 && <p className="text-[11px] text-[#64748B]">{T("proc.noPay")}</p>}
                     {subPayments(s).map((p) => (
                       <div key={p.id} className="flex items-center gap-2 text-xs">
-                        <span className="text-[#64706F] tabular-nums w-20 shrink-0">{p.date || T("proc.opening")}</span>
+                        <span className="text-[#64748B] tabular-nums w-20 shrink-0">{p.date || T("proc.opening")}</span>
                         {editing && editing.sid === s.id && editing.pid === p.id ? (
                           <>
                             <input type="number" min={1} value={editing.v} autoFocus onChange={(e) => setEditing({ ...editing, v: e.target.value })} className={input + " w-28"} />
-                            <button type="button" onClick={savePay} aria-label={T("proc.save")} className="p-2 rounded-lg bg-[#2E6F73] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
-                            <button type="button" onClick={() => setEditing(null)} aria-label={T("proc.cancel")} className="p-2 rounded-lg border border-[#E4DDCE] cursor-pointer"><X className="w-4 h-4" /></button>
+                            <button type="button" onClick={savePay} aria-label={T("proc.save")} className="p-2 rounded-lg bg-[#0B7C79] text-white cursor-pointer"><Check className="w-4 h-4" /></button>
+                            <button type="button" onClick={() => setEditing(null)} aria-label={T("proc.cancel")} className="p-2 rounded-lg border border-[#E2E8F0] cursor-pointer"><X className="w-4 h-4" /></button>
                           </>
                         ) : (
                           <>
-                            <span className="flex-1 font-bold text-[#0E1A1B] tabular-nums">{money(p.amount)}</span>
-                            <button type="button" onClick={() => setEditing({ sid: s.id, pid: p.id, v: p.amount })} aria-label={T("proc.edit")} className="p-2 rounded-lg text-[#4A5757] hover:bg-[#EFE9DC] cursor-pointer"><Pencil className="w-4 h-4" /></button>
-                            <button type="button" onClick={() => delPay(s.id, p.id)} aria-label={T("proc.del")} className="p-2 rounded-lg text-[#B23A2B] hover:bg-[#EFE9DC] cursor-pointer"><Trash2 className="w-4 h-4" /></button>
+                            <span className="flex-1 font-bold text-[#0E2A47] tabular-nums">{money(p.amount)}</span>
+                            <button type="button" onClick={() => setEditing({ sid: s.id, pid: p.id, v: p.amount })} aria-label={T("proc.edit")} className="p-2 rounded-lg text-[#475569] hover:bg-[#EEF1F5] cursor-pointer"><Pencil className="w-4 h-4" /></button>
+                            <button type="button" onClick={() => delPay(s.id, p.id)} aria-label={T("proc.del")} className="p-2 rounded-lg text-[#B23A2B] hover:bg-[#EEF1F5] cursor-pointer"><Trash2 className="w-4 h-4" /></button>
                           </>
                         )}
                       </div>
@@ -194,8 +194,8 @@ function ProcurementView({ data }) {
                     {subBalance(s) > 0 && (
                       <form onSubmit={(e) => { e.preventDefault(); paySub(s.id, payIn[s.id]); setPayIn({ ...payIn, [s.id]: "" }); }} className="flex flex-wrap gap-2 pt-1">
                         <input type="number" min={1} max={subBalance(s)} placeholder={T("proc.payAmt")} value={payIn[s.id] || ""} onChange={(e) => setPayIn({ ...payIn, [s.id]: e.target.value })} className={input + " flex-1 w-32"} />
-                        <button type="submit" className="px-3 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] cursor-pointer">{T("proc.record")}</button>
-                        <button type="button" onClick={() => paySub(s.id, Math.round(s.contract * 0.1))} className="px-3 py-2 rounded-lg text-xs font-bold border border-[#E4DDCE] text-[#0E1A1B] cursor-pointer">10%</button>
+                        <button type="submit" className="px-3 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] cursor-pointer">{T("proc.record")}</button>
+                        <button type="button" onClick={() => paySub(s.id, Math.round(s.contract * 0.1))} className="px-3 py-2 rounded-lg text-xs font-bold border border-[#E2E8F0] text-[#0E2A47] cursor-pointer">10%</button>
                       </form>
                     )}
                   </div>
@@ -207,36 +207,36 @@ function ProcurementView({ data }) {
             <input required placeholder={T("proc.name")} value={sf.name} onChange={(e) => setSf({ ...sf, name: e.target.value })} className={input} />
             <input placeholder={T("proc.trade")} value={sf.trade} onChange={(e) => setSf({ ...sf, trade: e.target.value })} className={input + " w-28"} />
             <input required type="number" min={1} placeholder={T("proc.contract")} value={sf.contract} onChange={(e) => setSf({ ...sf, contract: e.target.value })} className={input + " w-36"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addsub")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#0B7C79] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addsub")}</button>
           </form>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-base font-semibold text-[#0E1A1B] flex items-center gap-2"><Scale className="w-5 h-5" />{T("rfq.title")}</h2>
-          <p className="text-[11px] text-[#64706F]">{T("rfq.hint")}</p>
+          <h2 className="text-base font-semibold text-[#0E2A47] flex items-center gap-2"><Scale className="w-5 h-5" />{T("rfq.title")}</h2>
+          <p className="text-[11px] text-[#64748B]">{T("rfq.hint")}</p>
           <form onSubmit={addQuote} className="flex flex-wrap gap-2 items-end">
             <input required placeholder={T("proc.item")} value={qf.item} onChange={(e) => setQf({ ...qf, item: e.target.value })} className={input + " flex-1 min-w-40"} />
             <input required type="number" min={0} step="any" placeholder={T("proc.qty")} value={qf.qty} onChange={(e) => setQf({ ...qf, qty: e.target.value })} className={input + " w-24"} />
             <input required placeholder={T("proc.supplier")} value={qf.supplier} onChange={(e) => setQf({ ...qf, supplier: e.target.value })} className={input + " w-40"} />
             <input required type="number" min={0} step="any" placeholder={T("proc.price")} value={qf.price} onChange={(e) => setQf({ ...qf, price: e.target.value })} className={input + " w-28"} />
             <input type="number" min={0} placeholder={T("rfq.lead")} value={qf.leadDays} onChange={(e) => setQf({ ...qf, leadDays: e.target.value })} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer"><Plus className="w-4 h-4" />{T("rfq.add")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer"><Plus className="w-4 h-4" />{T("rfq.add")}</button>
           </form>
-          {groups.length === 0 && <p className="text-xs text-[#64706F]">{T("rfq.none")}</p>}
+          {groups.length === 0 && <p className="text-xs text-[#64748B]">{T("rfq.none")}</p>}
           {groups.map((g) => (
-            <div key={g.key} className="bg-white rounded-lg border border-[#E4DDCE] p-4 space-y-2">
+            <div key={g.key} className="bg-white rounded-lg border border-[#E2E8F0] p-4 space-y-2">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="text-sm font-semibold text-[#0E1A1B] flex-1">{E(g.item)} <span className="text-[11px] font-bold text-[#64706F]">· {T("rfq.count", { n: g.quotes.length })}</span></p>
+                <p className="text-sm font-semibold text-[#0E2A47] flex-1">{E(g.item)} <span className="text-[11px] font-bold text-[#64748B]">· {T("rfq.count", { n: g.quotes.length })}</span></p>
                 {g.awarded && <span className="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-emerald-50 text-emerald-700 border-emerald-200">{T("rfq.awardedTo", { s: E(g.awarded.supplier) })}</span>}
               </div>
               {g.quotes.map((q) => (
-                <div key={q.id} className={`flex flex-wrap items-center gap-2 text-xs rounded-lg p-2 ${q.status === "awarded" ? "bg-emerald-50" : q.status === "rejected" ? "opacity-60" : q.best ? "bg-[#F6F3EC]" : ""}`}>
-                  <span className="flex-1 min-w-32 font-semibold text-[#0E1A1B]">{E(q.supplier)}{q.leadDays != null && <span className="text-[11px] font-normal text-[#64706F]"> · {T("rfq.days", { n: q.leadDays })}</span>}</span>
-                  <span className="text-[#4A5757] tabular-nums">{q.qty} × {money(q.price)}</span>
+                <div key={q.id} className={`flex flex-wrap items-center gap-2 text-xs rounded-lg p-2 ${q.status === "awarded" ? "bg-emerald-50" : q.status === "rejected" ? "opacity-60" : q.best ? "bg-[#F4F5F7]" : ""}`}>
+                  <span className="flex-1 min-w-32 font-semibold text-[#0E2A47]">{E(q.supplier)}{q.leadDays != null && <span className="text-[11px] font-normal text-[#64748B]"> · {T("rfq.days", { n: q.leadDays })}</span>}</span>
+                  <span className="text-[#475569] tabular-nums">{q.qty} × {money(q.price)}</span>
                   <span className="font-semibold tabular-nums w-24 text-end">{money(q.total)}</span>
-                  <span className={`w-40 text-end text-[11px] font-bold ${q.best ? "text-emerald-700" : "text-[#4A5757]"}`}>{[q.best ? T("rfq.best") : "+" + money(q.diff), q.status === "awarded" && T("rfq.awarded"), q.status === "rejected" && T("rfq.rejected")].filter(Boolean).join(" · ")}</span>
-                  {!g.awarded && q.status === "open" && <button type="button" onClick={() => award(q, g)} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#2E6F73] cursor-pointer"><Award className="w-3.5 h-3.5" aria-hidden="true" />{T("rfq.award")}</button>}
-                  {!g.awarded && <button type="button" onClick={() => data.delQuote(q.id)} aria-label={T("proc.del")} className="p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                  <span className={`w-40 text-end text-[11px] font-bold ${q.best ? "text-emerald-700" : "text-[#475569]"}`}>{[q.best ? T("rfq.best") : "+" + money(q.diff), q.status === "awarded" && T("rfq.awarded"), q.status === "rejected" && T("rfq.rejected")].filter(Boolean).join(" · ")}</span>
+                  {!g.awarded && q.status === "open" && <button type="button" onClick={() => award(q, g)} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0B7C79] cursor-pointer"><Award className="w-3.5 h-3.5" aria-hidden="true" />{T("rfq.award")}</button>}
+                  {!g.awarded && <button type="button" onClick={() => data.delQuote(q.id)} aria-label={T("proc.del")} className="p-1.5 rounded-lg text-[#64748B] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
                 </div>
               ))}
             </div>
@@ -244,25 +244,25 @@ function ProcurementView({ data }) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-base font-semibold text-[#0E1A1B] flex items-center gap-2"><ShoppingCart className="w-5 h-5" />{T("proc.pos")}</h2>
+          <h2 className="text-base font-semibold text-[#0E2A47] flex items-center gap-2"><ShoppingCart className="w-5 h-5" />{T("proc.pos")}</h2>
           <form onSubmit={addPo} className="flex flex-wrap gap-2 items-end">
             <input required placeholder={T("proc.supplier")} value={pf.supplier} onChange={(e) => setPf({ ...pf, supplier: e.target.value })} className={input} />
             <input required placeholder={T("proc.item")} value={pf.item} onChange={(e) => setPf({ ...pf, item: e.target.value })} className={input} />
             <input required type="number" min={1} placeholder={T("proc.qty")} value={pf.qty} onChange={(e) => setPf({ ...pf, qty: e.target.value })} className={input + " w-24"} />
             <input required type="number" min={1} placeholder={T("proc.price")} value={pf.price} onChange={(e) => setPf({ ...pf, price: e.target.value })} className={input + " w-28"} />
-            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addpo")}</button>
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#0B7C79] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addpo")}</button>
           </form>
           <div className="space-y-2">
             {pos.map((p) => (
-              <div key={p.id} className="bg-white rounded-lg border border-[#E4DDCE] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
+              <div key={p.id} className="bg-white rounded-lg border border-[#E2E8F0] p-3 md:p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#0E1A1B]">{p.no} · {E(p.item)}</p>
-                  <p className="text-[11px] font-bold text-[#4A5757]">{E(p.supplier)} · {p.qty} × {money(p.price)} = {money(poTotal(p))}</p>
+                  <p className="text-sm font-semibold text-[#0E2A47]">{p.no} · {E(p.item)}</p>
+                  <p className="text-[11px] font-bold text-[#475569]">{E(p.supplier)} · {p.qty} × {money(p.price)} = {money(poTotal(p))}</p>
                 </div>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${p.status === "received" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : p.status === "sent" ? "bg-amber-50 text-amber-800 border-amber-200" : "bg-[#EFE9DC] text-[#4A5757] border-[#E4DDCE]"}`}>{T("proc.s." + p.status)}</span>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border w-fit ${p.status === "received" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : p.status === "sent" ? "bg-amber-50 text-amber-800 border-amber-200" : "bg-[#EEF1F5] text-[#475569] border-[#E2E8F0]"}`}>{T("proc.s." + p.status)}</span>
                 <div className="flex gap-2">
                   <a href={whatsappLink(poText(p))} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100"><MessageCircle className="w-3.5 h-3.5" />{T("proc.wa")}</a>
-                  {PO_NEXT[p.status] && <button type="button" onClick={() => poNext(p.id)} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] cursor-pointer">{T("proc.to." + PO_NEXT[p.status])}</button>}
+                  {PO_NEXT[p.status] && <button type="button" onClick={() => poNext(p.id)} className="px-3 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#0B7C79] hover:bg-[#0B7C79] cursor-pointer">{T("proc.to." + PO_NEXT[p.status])}</button>}
                 </div>
               </div>
             ))}
@@ -270,7 +270,7 @@ function ProcurementView({ data }) {
         </section>
       </div>
       {undo && (
-        <div role="status" className="fixed z-40 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 bottom-20 md:bottom-6 flex items-center gap-3 rounded-lg bg-[#2E6F73] text-white text-xs font-semibold ps-4 pe-2 py-2 shadow-lg">
+        <div role="status" className="fixed z-40 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 bottom-20 md:bottom-6 flex items-center gap-3 rounded-lg bg-[#0B7C79] text-white text-xs font-semibold ps-4 pe-2 py-2 shadow-lg">
           <span>{T("proc.undoMsg")}</span>
           <button type="button" onClick={() => { data.restore(undo); setUndo(null); }} className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/15 hover:bg-white/25 cursor-pointer"><Undo2 className="w-4 h-4" />{T("proc.undo")}</button>
           <button type="button" onClick={() => setUndo(null)} aria-label={T("proc.cancel")} className="p-1.5 cursor-pointer"><X className="w-4 h-4" /></button>

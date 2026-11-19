@@ -8,7 +8,7 @@ import { portfolio } from "../lib/insights";
 const TONE = {
   risk: "bg-[#FBE4DF] text-[#9A2E20]",
   watch: "bg-[#FBEFD9] text-[#7A4B0C]",
-  ok: "bg-[#ECE5D6] text-[#1F6B49]",
+  ok: "bg-[#E0F2F1] text-[#1F6B49]",
 };
 
 /** "What needs a decision": per-project forecast margin, overrun and schedule slip. */
@@ -49,12 +49,12 @@ export default function DecisionPanel({ projects, onOpen }) {
   };
 
   return (
-    <section aria-labelledby="dp-title" className="bg-white rounded-[28px] border border-[#E4DDCE] p-5 md:p-7">
+    <section aria-labelledby="dp-title" className="bg-white rounded-[28px] border border-[#E2E8F0] p-5 md:p-7">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
         <div>
-          <h2 id="dp-title" className="font-display text-xl md:text-2xl font-semibold text-[#0E1A1B]">{t("dp.title")}</h2>
-          <p className="text-sm text-[#4A5757] mt-1">{t("dp.sub")}</p>
-          <button type="button" onClick={printReport} className="btn-press mt-3 inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[#E4DDCE] text-sm font-semibold text-[#0E1A1B] hover:bg-[#F6F3EC]"><FileDown className="w-4 h-4" aria-hidden="true" />{t("dp.pdf")}</button>
+          <h2 id="dp-title" className="font-display text-xl md:text-2xl font-semibold text-[#0E2A47]">{t("dp.title")}</h2>
+          <p className="text-sm text-[#475569] mt-1">{t("dp.sub")}</p>
+          <button type="button" onClick={printReport} className="btn-press mt-3 inline-flex items-center gap-2 h-10 px-4 rounded-full border border-[#E2E8F0] text-sm font-semibold text-[#0E2A47] hover:bg-[#F4F5F7]"><FileDown className="w-4 h-4" aria-hidden="true" />{t("dp.pdf")}</button>
         </div>
         <div className="grid grid-cols-3 gap-2 text-start">
           {[
@@ -62,8 +62,8 @@ export default function DecisionPanel({ projects, onOpen }) {
             [t("dp.drop"), `${marginDrop > 0 ? "-" : "+"}${formatCompact(Math.abs(marginDrop))} ${cur}`, marginDrop > 0 ? "text-[#9A2E20]" : "text-[#1F6B49]"],
             [t("dp.risk"), String(pf.atRisk), pf.atRisk ? "text-[#9A2E20]" : "text-[#1F6B49]"],
           ].map(([k, v, c]) => (
-            <div key={k} className="rounded-2xl bg-[#F6F3EC] px-3 py-2.5 min-w-0">
-              <div className="text-[11px] text-[#4A5757] font-semibold truncate">{k}</div>
+            <div key={k} className="rounded-2xl bg-[#F4F5F7] px-3 py-2.5 min-w-0">
+              <div className="text-[11px] text-[#475569] font-semibold truncate">{k}</div>
               <div className={`font-display text-base md:text-lg font-semibold whitespace-nowrap ${c}`}>{v}</div>
             </div>
           ))}
@@ -76,13 +76,13 @@ export default function DecisionPanel({ projects, onOpen }) {
           const reasons = reasonsOf(i);
           return (
             <li key={p.id}>
-              <button type="button" onClick={() => onOpen?.(p)} className="w-full text-start rounded-2xl border border-[#E4DDCE] hover:border-[#9AA8A8] p-3.5 md:p-4 grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:items-center cursor-pointer">
+              <button type="button" onClick={() => onOpen?.(p)} className="w-full text-start rounded-2xl border border-[#E2E8F0] hover:border-[#9AA8A8] p-3.5 md:p-4 grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:items-center cursor-pointer">
                 <div className="flex items-start gap-3 min-w-0">
                   <span className={`w-9 h-9 shrink-0 rounded-xl flex items-center justify-center ${TONE[i.level]}`}><Icon className="w-4 h-4" aria-hidden="true" /></span>
                   <span className="min-w-0">
-                    <span className="block font-semibold text-[#0E1A1B] truncate">{E(p.name)}</span>
+                    <span className="block font-semibold text-[#0E2A47] truncate">{E(p.name)}</span>
                     <span className={`inline-block mt-1 text-[11px] font-bold px-2 py-0.5 rounded-full ${TONE[i.level]}`}>{t("dp.l." + i.level)}</span>
-                    <span className="block mt-1 text-xs text-[#4A5757]">{reasons.join(" · ")}</span>
+                    <span className="block mt-1 text-xs text-[#475569]">{reasons.join(" · ")}</span>
                   </span>
                 </div>
                 <Metric label={t("dp.c.budget")} value={`${formatCompact(i.spent)} / ${formatCompact(i.budget)}`} sub={t("dp.c.prog", { n: Math.round(p.progress) })} />
@@ -101,9 +101,9 @@ export default function DecisionPanel({ projects, onOpen }) {
 function Metric({ label, value, sub, tone = "", icon: Icon }) {
   return (
     <div className="min-w-0 grid grid-cols-[auto_1fr] md:block gap-x-3 items-baseline">
-      <div className="text-[11px] font-semibold text-[#4A5757]">{label}</div>
+      <div className="text-[11px] font-semibold text-[#475569]">{label}</div>
       <div className={`font-semibold whitespace-nowrap flex items-center gap-1 ${tone}`}>{Icon && <Icon className="w-3.5 h-3.5" aria-hidden="true" />}{value}</div>
-      {sub && <div className="col-span-2 text-[11px] text-[#64706F]">{sub}</div>}
+      {sub && <div className="col-span-2 text-[11px] text-[#64748B]">{sub}</div>}
     </div>
   );
 }

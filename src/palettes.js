@@ -1,6 +1,6 @@
 // Office colour palettes. A palette is one main colour; the rest of the shades are derived from it.
 export const PALETTES = [
-  { id: "teal", color: "#2E6F73" },
+  { id: "teal", color: "#0B7C79" },
   { id: "indigo", color: "#3F4FB0" },
   { id: "forest", color: "#2F7A44" },
   { id: "burgundy", color: "#9B2C4A" },

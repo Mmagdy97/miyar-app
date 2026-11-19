@@ -9,7 +9,7 @@ export const officeStore = createPersistedStore("miyar:office:v1", {
   vatRate: null,
   quoteDays: 14,
   logo: "",
-  color: "#0F3D3E",
+  color: "#0E2A47",
   address: "",
   email: "",
   type: "architectural",

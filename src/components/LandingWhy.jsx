@@ -45,7 +45,7 @@ function Calculator() {
         {[[T("calc.team"), team, setTeam, 1, 30], [T("calc.proj"), proj, setProj, 1, 15]].map(([l, v, set, mn, mx]) => (
           <label key={l} className="block">
             <span className="flex justify-between text-sm font-semibold"><span>{l}</span><N className="text-[var(--md-primary)]">{v}{v === 15 ? "+" : ""}</N></span>
-            <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#0E8F8C]" />
+            <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#0B7C79]" />
           </label>
         ))}
       </div>

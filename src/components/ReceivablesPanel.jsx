@@ -29,10 +29,10 @@ export default function ReceivablesPanel() {
     );
   };
 
-  const btn = "inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#E4DDCE] bg-white hover:bg-[#F6F3EC] text-xs font-bold cursor-pointer";
+  const btn = "inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] text-xs font-bold cursor-pointer";
 
   return (
-    <section className="no-print bg-white border border-[#E4DDCE] rounded-xl p-5 space-y-4">
+    <section className="no-print bg-white border border-[#E2E8F0] rounded-xl p-5 space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-base font-semibold">{T("recv.title")}</h2>
         <div className="flex items-center gap-2">
@@ -40,14 +40,14 @@ export default function ReceivablesPanel() {
           <button type="button" onClick={exportJson} className={btn}><FileJson className="w-3.5 h-3.5" />{T("exp.json")}</button>
         </div>
       </div>
-      <ul className="divide-y divide-[#ECE5D6]">
+      <ul className="divide-y divide-[#E0F2F1]">
         {OVERDUE.map((o) => {
           const p = projectById(o.projectId);
           return (
             <li key={o.projectId} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
               <div className="min-w-0">
                 <p className="text-sm font-bold truncate">{E(p.name)}</p>
-                <p className="text-xs text-[#4A5757]">{E(p.client)} · {money(o.amount, { compact: true })}</p>
+                <p className="text-xs text-[#475569]">{E(p.client)} · {money(o.amount, { compact: true })}</p>
               </div>
               <a href={reminder(o)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 text-white text-xs font-bold px-3 py-1.5">
                 <MessageCircle className="w-3.5 h-3.5" />{T("share.whatsapp")}

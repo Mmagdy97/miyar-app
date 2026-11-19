@@ -35,14 +35,14 @@ export default function Tour({ role, userId }) {
     <div className="fixed inset-0 z-[400]" role="dialog" aria-modal="true" aria-label={T(k + ".t")}>
       {rect
         ? <div className="absolute rounded-2xl pointer-events-none transition-all duration-300" style={{ top: rect.top - pad, left: rect.left - pad, width: rect.width + pad * 2, height: rect.height + pad * 2, boxShadow: "0 0 0 9999px rgba(15,61,62,0.62), 0 0 0 3px #D97706" }} />
-        : <div className="absolute inset-0 bg-[#0F3D3E]/60" />}
-      <div className="absolute w-[min(22rem,calc(100vw-2rem))] bg-white rounded-2xl border border-[#E4DDCE] shadow-xl p-5 font-ibm" style={style}>
-        <p className="text-[11px] font-bold text-[#64706F] tabular-nums">{i + 1} / {steps.length}</p>
-        <h2 className="text-base font-semibold text-[#0E1A1B] mt-1">{T(k + ".t")}</h2>
-        <p className="text-sm text-[#4A5757] leading-relaxed mt-1.5">{T(k + ".b")}</p>
+        : <div className="absolute inset-0 bg-[#0E2A47]/60" />}
+      <div className="absolute w-[min(22rem,calc(100vw-2rem))] bg-white rounded-2xl border border-[#E2E8F0] shadow-xl p-5 font-ibm" style={style}>
+        <p className="text-[11px] font-bold text-[#64748B] tabular-nums">{i + 1} / {steps.length}</p>
+        <h2 className="text-base font-semibold text-[#0E2A47] mt-1">{T(k + ".t")}</h2>
+        <p className="text-sm text-[#475569] leading-relaxed mt-1.5">{T(k + ".b")}</p>
         <div className="mt-4 flex items-center gap-2">
-          {!last && <button type="button" onClick={close} className="text-xs font-bold text-[#64706F] cursor-pointer">{T("tour.skip")}</button>}
-          <button type="button" onClick={() => (last ? close() : setI(i + 1))} className="ms-auto h-10 px-5 rounded-xl text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer">{T(last ? "tour.done" : "tour.next")}</button>
+          {!last && <button type="button" onClick={close} className="text-xs font-bold text-[#64748B] cursor-pointer">{T("tour.skip")}</button>}
+          <button type="button" onClick={() => (last ? close() : setI(i + 1))} className="ms-auto h-10 px-5 rounded-xl text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer">{T(last ? "tour.done" : "tour.next")}</button>
         </div>
       </div>
     </div>

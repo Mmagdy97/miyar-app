@@ -95,7 +95,7 @@ const MONTHLY_FINANCIALS = [
 
 const rich = (str) =>
   str.split(/<\/?b>/).map((part, i) =>
-    i % 2 ? <strong key={i} className="text-[#0E1A1B]">{part}</strong> : part
+    i % 2 ? <strong key={i} className="text-[#0E2A47]">{part}</strong> : part
   );
 
 function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, setActiveTab }) {
@@ -152,7 +152,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
     if (item.type === "report") {
       return {
         icon: ClipboardCheck,
-        iconBg: "bg-[#EFE9DC] text-[#4A5757] border border-[#E4DDCE]",
+        iconBg: "bg-[#EEF1F5] text-[#475569] border border-[#E2E8F0]",
       };
     }
     if (item.type === "expense") {
@@ -164,12 +164,12 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
     if (item.type === "material") {
       return {
         icon: Package,
-        iconBg: "bg-[#EFE9DC] text-[#0E1A1B] border border-[#E4DDCE]",
+        iconBg: "bg-[#EEF1F5] text-[#0E2A47] border border-[#E2E8F0]",
       };
     }
     return {
       icon: FileText,
-      iconBg: "bg-[#EFE9DC] text-[#0E1A1B] border border-[#E4DDCE]",
+      iconBg: "bg-[#EEF1F5] text-[#0E2A47] border border-[#E2E8F0]",
     };
   };
 
@@ -204,11 +204,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI 1: الإيرادات المتوقعة */}
-        <div className="bg-white border border-[#E4DDCE] rounded-xl p-5 flex flex-col justify-between">
+        <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#4A5757] text-sm font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E6F73]" />
+              <span className="text-[#475569] text-sm font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0B7C79]" />
                 {t("adm.k1")}
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#2E7D5B]/10 text-[#2E7D5B]">
@@ -218,18 +218,18 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="mt-4">
-              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#0E1A1B] font-ibm">
-                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#4A5757]">{currencySymbol()}</span>
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#0E2A47] font-ibm">
+                {formatCompact(TOTALS.contractTotal)} <span className="text-base font-medium text-[#475569]">{currencySymbol()}</span>
               </span>
             </div>
-            <p className="text-xs text-[#4A5757] mt-1">
+            <p className="text-xs text-[#475569] mt-1">
               {t("adm.k1d", { n: toAr(TOTALS.projectCount) })}
             </p>
           </div>
 
           {/* Sparkline */}
-          <div className="mt-5 pt-3 border-t border-[#ECE5D6]">
-            <div className="flex items-center justify-between text-xs text-[#4A5757] mb-1">
+          <div className="mt-5 pt-3 border-t border-[#E0F2F1]">
+            <div className="flex items-center justify-between text-xs text-[#475569] mb-1">
               <span>{t("adm.trend")}</span>
               <span className="text-[#2E7D5B] font-bold">+{formatCompact(670000)} {currencySymbol()}</span>
             </div>
@@ -237,8 +237,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
                 <defs>
                   <linearGradient id="revGradAr" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#0F3D3E" stopOpacity="0.15" />
-                    <stop offset="100%" stopColor="#0F3D3E" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#0E2A47" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#0E2A47" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <path d="M0,26 Q20,24 35,18 T70,12 T100,4 L100,30 L0,30 Z" fill="url(#revGradAr)" />
@@ -250,11 +250,11 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
         </div>
 
         {/* KPI 2: إجمالي المحصل */}
-        <div className="bg-white border border-[#E4DDCE] rounded-xl p-5 flex flex-col justify-between">
+        <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#4A5757] text-sm font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E6F73]" />
+              <span className="text-[#475569] text-sm font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0B7C79]" />
                 {t("adm.k2")}
               </span>
               <span className="inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#2E7D5B]/10 text-[#2E7D5B]">
@@ -263,26 +263,26 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
-              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#0E1A1B] font-ibm">
-                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#4A5757]">{currencySymbol()}</span>
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#0E2A47] font-ibm">
+                {formatCompact(TOTALS.collectedTotal)} <span className="text-base font-medium text-[#475569]">{currencySymbol()}</span>
               </span>
             </div>
-            <p className="text-xs text-[#4A5757] mt-1">
+            <p className="text-xs text-[#475569] mt-1">
               {t("adm.k2d")}
             </p>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#ECE5D6]">
-            <div className="flex items-center justify-between text-xs text-[#4A5757] mb-1">
+          <div className="mt-5 pt-3 border-t border-[#E0F2F1]">
+            <div className="flex items-center justify-between text-xs text-[#475569] mb-1">
               <span>{t("adm.velocity")}</span>
-              <span className="text-[#0E1A1B] font-bold">{formatCompact(420000)} {currencySymbol()}/{t("unit.month")}</span>
+              <span className="text-[#0E2A47] font-bold">{formatCompact(420000)} {currencySymbol()}/{t("unit.month")}</span>
             </div>
             <div className="h-10 w-full relative">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
                 <defs>
                   <linearGradient id="collGradAr" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#0F3D3E" stopOpacity="0.15" />
-                    <stop offset="100%" stopColor="#0F3D3E" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#0E2A47" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#0E2A47" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <path d="M0,28 Q25,26 45,19 T80,10 T100,6 L100,30 L0,30 Z" fill="url(#collGradAr)" />
@@ -294,10 +294,10 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
         </div>
 
         {/* KPI 3: مستحقات متأخرة */}
-        <div className="bg-white border border-[#E4DDCE] rounded-xl p-5 flex flex-col justify-between">
+        <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#4A5757] text-sm font-medium flex items-center gap-1.5">
+              <span className="text-[#475569] text-sm font-medium flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#B23A2B]" />
                 {t("adm.k3")}
               </span>
@@ -308,56 +308,56 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
 
             <div className="mt-4">
               <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#B23A2B] font-ibm">
-                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#4A5757]">{currencySymbol()}</span>
+                {formatCompact(TOTALS.overdueTotal)} <span className="text-base font-medium text-[#475569]">{currencySymbol()}</span>
               </span>
             </div>
-            <p className="text-xs text-[#4A5757] mt-1">
+            <p className="text-xs text-[#475569] mt-1">
               {t("adm.k3d", { n: toAr(TOTALS.overdueCount) })}
             </p>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#ECE5D6] space-y-2">
-            <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-xs text-[#4A5757] font-medium">
+          <div className="mt-5 pt-3 border-t border-[#E0F2F1] space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-xs text-[#475569] font-medium">
               <span className="min-w-0">{t("adm.claim", { name: TOTALS.topOverdue.projectName })}</span>
               <span className="shrink-0 text-xs font-bold text-[#B23A2B]">{formatCompact(TOTALS.topOverdue.amount)} {currencySymbol()} ({toAr(TOTALS.topOverdue.pctOfOverdue)}{t("sym.pct")})</span>
             </div>
             <ProgressBar value={TOTALS.topOverdue.pctOfOverdue} customFillClass="bg-[#B23A2B]" />
-            <p className="text-xs text-[#4A5757] font-medium">
+            <p className="text-xs text-[#475569] font-medium">
               {t("adm.avgDelay", { n: toAr(TOTALS.overdueAvgDays) })}
             </p>
           </div>
         </div>
 
         {/* KPI 4: عهد مهندسين نشطة */}
-        <div className="bg-white border border-[#E4DDCE] rounded-xl p-5 flex flex-col justify-between">
+        <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-[#4A5757] text-sm font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E6F73]" />
+              <span className="text-[#475569] text-sm font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0B7C79]" />
                 {t("adm.k4")}
               </span>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#64706F]/15 text-[#B45309]">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#64748B]/15 text-[#E8692A]">
                 {t("adm.onSite", { p: toAr(TOTALS.cashUsedPct) })}
               </span>
             </div>
 
             <div className="mt-4 flex items-baseline gap-2">
-              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#0E1A1B] font-ibm">
-                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#4A5757]">{currencySymbol()}</span>
+              <span className="whitespace-nowrap text-2xl xl:text-3xl font-bold tracking-tight text-[#0E2A47] font-ibm">
+                {formatNumber(TOTALS.cashRemaining)} <span className="text-base font-medium text-[#475569]">{currencySymbol()}</span>
               </span>
             </div>
-            <p className="text-xs text-[#4A5757] mt-1">
+            <p className="text-xs text-[#475569] mt-1">
               {t("adm.k4d", { n: toAr(TOTALS.cashEngineerCount) })}
             </p>
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#ECE5D6] space-y-2.5">
-            <div className="flex items-center justify-between text-xs text-[#4A5757] font-medium">
+          <div className="mt-5 pt-3 border-t border-[#E0F2F1] space-y-2.5">
+            <div className="flex items-center justify-between text-xs text-[#475569] font-medium">
               <span>{t("adm.ceiling")}</span>
-              <span className="text-xs font-bold text-[#0E1A1B] font-mono">{toAr(TOTALS.cashUsedPct)}{t("sym.pct")}</span>
+              <span className="text-xs font-bold text-[#0E2A47] font-mono">{toAr(TOTALS.cashUsedPct)}{t("sym.pct")}</span>
             </div>
-            <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#2E6F73]" />
-            <div className="flex items-center justify-between text-xs text-[#4A5757] font-medium">
+            <ProgressBar value={TOTALS.cashUsedPct} customFillClass="bg-[#0B7C79]" />
+            <div className="flex items-center justify-between text-xs text-[#475569] font-medium">
               <span>{t("adm.given", { amt: `${formatNumber(TOTALS.cashGiven)} ${currencySymbol()}` })}</span>
               <span className="text-[#2E7D5B] font-bold">{t("adm.liquidity")}</span>
             </div>
@@ -368,8 +368,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
       {/* Projects carousel */}
       <section className="space-y-3">
         <div className="flex items-end justify-between gap-3">
-          <h2 className="font-display text-xl md:text-2xl font-semibold text-[#0E1A1B]">{t("adm.pc.title")}</h2>
-          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="text-xs font-semibold text-[#4A5757] hover:underline inline-flex items-center gap-1">{t("adm.pc.all")}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
+          <h2 className="font-display text-xl md:text-2xl font-semibold text-[#0E2A47]">{t("adm.pc.title")}</h2>
+          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="text-xs font-semibold text-[#475569] hover:underline inline-flex items-center gap-1">{t("adm.pc.all")}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
         </div>
         <div role="region" tabIndex={0} aria-label={t("a11y.carousel")} className="flex gap-4 overflow-x-auto snap-x pb-2 -mx-4 px-4 md:mx-0 md:px-0 rounded-2xl" style={{ scrollbarWidth: "none" }}>
           {INITIAL_PROJECTS.map((project, pi) => {
@@ -378,14 +378,14 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
               <article key={project.id} className="snap-start shrink-0 w-[270px] md:w-[300px] bg-white rounded-[26px] overflow-hidden shadow-[var(--shadow-1)] border border-transparent">
                 <div className="relative h-36">
                   <img src={`/landing/${["villa", "living", "kitchen", "office"][pi % 4]}-s.webp`} alt="" loading="lazy" className="w-full h-full object-cover" />
-                  <span className={`absolute top-3 start-3 text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur ${isOnTrack ? "bg-white/85 text-[#0E1A1B]" : "bg-[#FEF3C7]/95 text-[#8A4A30]"}`}>{E(project.status)}</span>
+                  <span className={`absolute top-3 start-3 text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur ${isOnTrack ? "bg-white/85 text-[#0E2A47]" : "bg-[#FEF3C7]/95 text-[#8A4A30]"}`}>{E(project.status)}</span>
                 </div>
                 <div className="p-4 text-start">
-                  <h3 className="font-display text-base font-semibold text-[#0E1A1B] truncate">{project.name}</h3>
-                  <p className="text-xs text-[#4A5757] mt-0.5 truncate">{project.client} • {project.contractValue}</p>
-                  <div className="mt-3 flex items-center justify-between text-xs font-semibold"><span className="text-[#4A5757] truncate">{E(project.phase)}</span><span className="text-[#0E1A1B] font-mono">{t("adm.complete", { p: toAr(project.progress) })}</span></div>
+                  <h3 className="font-display text-base font-semibold text-[#0E2A47] truncate">{project.name}</h3>
+                  <p className="text-xs text-[#475569] mt-0.5 truncate">{project.client} • {project.contractValue}</p>
+                  <div className="mt-3 flex items-center justify-between text-xs font-semibold"><span className="text-[#475569] truncate">{E(project.phase)}</span><span className="text-[#0E2A47] font-mono">{t("adm.complete", { p: toAr(project.progress) })}</span></div>
                   <ProgressBar value={project.progress} isWarning={!isOnTrack} />
-                  <p className="mt-2.5 text-[11px] text-[#4A5757]">{t("adm.due", { d: project.dueDate })}</p>
+                  <p className="mt-2.5 text-[11px] text-[#475569]">{t("adm.due", { d: project.dueDate })}</p>
                 </div>
               </article>
             );
@@ -395,42 +395,42 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
 
       <div className="grid lg:grid-cols-[1.45fr_1fr] gap-6 items-start">
       {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
-      <div className="bg-white rounded-xl border border-[#E4DDCE] shadow-sm p-5 md:p-6 min-w-0">
-        <div className="flex flex-col gap-4 pb-5 border-b border-[#ECE5D6]">
+      <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-5 md:p-6 min-w-0">
+        <div className="flex flex-col gap-4 pb-5 border-b border-[#E0F2F1]">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-[#0E1A1B]">
+              <h2 className="text-base font-bold text-[#0E2A47]">
                 {t("adm.cfTitle")}
               </h2>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#2E6F73]/15 text-[#0E1A1B] border border-[#2E6F73]/30">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#0B7C79]/15 text-[#0E2A47] border border-[#0B7C79]/30">
                 {t("adm.margin", { p: toAr(Math.round((1 - series.reduce((a, x) => a + x.expenses, 0) / series.reduce((a, x) => a + x.revenue, 0)) * 1000) / 10) })}
               </span>
             </div>
-            <p className="text-xs text-[#4A5757] mt-0.5">
+            <p className="text-xs text-[#475569] mt-0.5">
               {t("adm.cfSub")}
             </p>
           </div>
 
           {/* Controls & Legend */}
           <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-4 text-xs font-medium text-[#4A5757]">
+            <div className="flex items-center gap-4 text-xs font-medium text-[#475569]">
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#2E6F73]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#0B7C79]" />
                 {t("adm.inflows")}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#E4DDCE]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-[#E2E8F0]" />
                 {t("adm.siteExp")}
               </span>
             </div>
 
-            <div className="inline-flex rounded-lg border border-[#E4DDCE] p-0.5 bg-[#F6F3EC] text-xs font-bold">
+            <div className="inline-flex rounded-lg border border-[#E2E8F0] p-0.5 bg-[#F4F5F7] text-xs font-bold">
               <button
                 onClick={() => setTimeframe("6M")}
                 className={`px-3 py-1 rounded-lg transition-all ${
                   timeframe === "6M"
-                    ? "bg-[#2E6F73] text-white shadow-xs"
-                    : "text-[#4A5757] hover:text-[#0E1A1B]"
+                    ? "bg-[#0B7C79] text-white shadow-xs"
+                    : "text-[#475569] hover:text-[#0E2A47]"
                 }`}
               >
                 {t("adm.last6")}
@@ -439,8 +439,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                 onClick={() => setTimeframe("YTD")}
                 className={`px-3 py-1 rounded-lg transition-all ${
                   timeframe === "YTD"
-                    ? "bg-[#2E6F73] text-white shadow-xs"
-                    : "text-[#4A5757] hover:text-[#0E1A1B]"
+                    ? "bg-[#0B7C79] text-white shadow-xs"
+                    : "text-[#475569] hover:text-[#0E2A47]"
                 }`}
               >
                 {t("adm.fullYear")}
@@ -453,27 +453,27 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
         <div className="mt-6 pt-2">
           <div className="h-6 mb-2 flex items-center justify-start text-xs font-semibold">
             {activeHoverBar ? (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EFE9DC] border border-[#E4DDCE] text-[#0E1A1B] animate-in fade-in">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EEF1F5] border border-[#E2E8F0] text-[#0E2A47] animate-in fade-in">
                 <span>{activeHoverBar.month} {toAr(2026)}:</span>
-                <span className="text-[#0E1A1B] font-bold">
+                <span className="text-[#0E2A47] font-bold">
                   {t("adm.revenue", { amt: `${formatCompact(activeHoverBar.revenue * 1000)} ${currencySymbol()}` })}
                 </span>
-                <span className="text-[#4A5757]">|</span>
-                <span className="text-[#4A5757]">
+                <span className="text-[#475569]">|</span>
+                <span className="text-[#475569]">
                   {t("adm.expense", { amt: `${formatCompact(activeHoverBar.expenses * 1000)} ${currencySymbol()}` })}
                 </span>
-                <span className="text-[#0E1A1B]">
+                <span className="text-[#0E2A47]">
                   {t("adm.net", { p: toAr(Math.round(((activeHoverBar.revenue - activeHoverBar.expenses) / activeHoverBar.revenue) * 100)) })}
                 </span>
               </span>
             ) : (
-              <span className="text-[#4A5757] text-xs font-medium">
+              <span className="text-[#475569] text-xs font-medium">
                 {t("adm.hover")}
               </span>
             )}
           </div>
 
-          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-dashed border-[#E4DDCE] pb-3`}>
+          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-dashed border-[#E2E8F0] pb-3`}>
             {series.map((item, idx) => {
               const revPercent = Math.round((item.revenue / maxVal) * 100);
               const expPercent = Math.round((item.expenses / maxVal) * 100);
@@ -488,16 +488,16 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                   <div className="w-full flex items-end justify-center gap-1.5 sm:gap-2.5 h-full">
                     {/* Revenue Bar (Sage Green) */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#2E6F73] group-hover:bg-[#2E6F73] transition-colors duration-200 bar-grow"
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#0B7C79] group-hover:bg-[#0B7C79] transition-colors duration-200 bar-grow"
                       style={{ height: `${revPercent}%`, animationDelay: `${idx * 60}ms` }}
                     />
                     {/* Expense Bar */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E4DDCE] group-hover:bg-[#E4DDCE] transition-colors duration-200 bar-grow"
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E2E8F0] group-hover:bg-[#E2E8F0] transition-colors duration-200 bar-grow"
                       style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
                     />
                   </div>
-                  <span className="mt-3 text-xs font-bold text-[#0E1A1B] group-hover:text-[#0E1A1B] transition-colors">
+                  <span className="mt-3 text-xs font-bold text-[#0E2A47] group-hover:text-[#0E2A47] transition-colors">
                     {item.month}
                   </span>
                 </div>
@@ -506,25 +506,25 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
           </div>
 
           {/* Bottom Summary Bar */}
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#4A5757] pt-1">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-[#475569] pt-1">
             <div className="flex items-center gap-6">
               <div>
-                <span className="text-[#4A5757] block text-[11px] font-semibold">{t("adm.rev6")}</span>
-                <span className="font-semibold text-[#0E1A1B] text-sm">{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
+                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.rev6")}</span>
+                <span className="font-semibold text-[#0E2A47] text-sm">{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000)} {currencySymbol()}</span>
               </div>
-              <div className="h-6 w-px bg-[#E4DDCE]" />
+              <div className="h-6 w-px bg-[#E2E8F0]" />
               <div>
-                <span className="text-[#4A5757] block text-[11px] font-semibold">{t("adm.cost6")}</span>
-                <span className="font-semibold text-[#0E1A1B] text-sm">{formatNumber(series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.cost6")}</span>
+                <span className="font-semibold text-[#0E2A47] text-sm">{formatNumber(series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
-              <div className="h-6 w-px bg-[#E4DDCE]" />
+              <div className="h-6 w-px bg-[#E2E8F0]" />
               <div>
-                <span className="text-[#4A5757] block text-[11px] font-semibold">{t("adm.profit6")}</span>
-                <span className="font-semibold text-[#0E1A1B] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+                <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.profit6")}</span>
+                <span className="font-semibold text-[#0E2A47] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
             </div>
 
-            <span className="text-[11px] text-[#4A5757] font-medium">
+            <span className="text-[11px] text-[#475569] font-medium">
               {t("adm.einv")}
             </span>
           </div>
@@ -533,15 +533,15 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
 
 
         {/* Right Column: Action Center (المهام والاعتمادات العاجلة) - Clickable Items & Modal */}
-        <div id="adm-actions" className="order-first lg:order-none bg-white rounded-xl border border-[#E4DDCE] shadow-sm overflow-hidden flex flex-col justify-between">
+        <div id="adm-actions" className="order-first lg:order-none bg-white rounded-xl border border-[#E2E8F0] shadow-sm overflow-hidden flex flex-col justify-between">
           <div>
-            <div className="p-5 border-b border-[#ECE5D6] flex items-center justify-between">
+            <div className="p-5 border-b border-[#E0F2F1] flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-[#0E1A1B] flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-[#0E1A1B]" />
+                <h2 className="text-base font-bold text-[#0E2A47] flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-[#0E2A47]" />
                   {t("adm.tasksTitle")}
                 </h2>
-                <p className="text-xs text-[#4A5757] mt-0.5">
+                <p className="text-xs text-[#475569] mt-0.5">
                   {t("adm.tasksSub")}
                 </p>
               </div>
@@ -549,8 +549,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
               <span
                 className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
                   pendingCount > 0
-                    ? "bg-[#EFE9DC] text-[#0E1A1B] border-[#E4DDCE]"
-                    : "bg-[#EFE9DC] text-[#4A5757] border-[#E4DDCE]"
+                    ? "bg-[#EEF1F5] text-[#0E2A47] border-[#E2E8F0]"
+                    : "bg-[#EEF1F5] text-[#475569] border-[#E2E8F0]"
                 }`}
               >
                 {t("adm.pending", { n: toAr(pendingCount) })}
@@ -560,7 +560,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             {/* Dynamic Map over actionItems Prop with Clickable Rows */}
             <div className="p-4 space-y-3.5 max-h-[580px] overflow-y-auto">
               {adminActionItems.length === 0 ? (
-                <div className="text-center py-12 text-[#4A5757]">
+                <div className="text-center py-12 text-[#475569]">
                   <ClipboardCheck className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p className="text-xs font-bold">{t("adm.noTasks")}</p>
                 </div>
@@ -576,12 +576,12 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                     <div
                       key={item.id}
                       onClick={() => setSelectedItem(item)}
-                      className={`rounded-xl p-4 border transition-all duration-200 relative cursor-pointer hover:bg-[#F6F3EC] ${
+                      className={`rounded-xl p-4 border transition-all duration-200 relative cursor-pointer hover:bg-[#F4F5F7] ${
                         isJustNow && isPending
-                          ? "bg-[#F6F3EC] border-[#D6CCB8] ring-1 ring-[#2E6F73]/10 shadow-xs"
+                          ? "bg-[#F4F5F7] border-[#CBD5E1] ring-1 ring-[#0B7C79]/10 shadow-xs"
                           : isPending
-                          ? "bg-white border-[#E4DDCE] hover:border-[#2E6F73] hover:shadow-xs hover:-translate-y-0.5"
-                          : "bg-[#F6F3EC]/60 border-[#E4DDCE] opacity-90"
+                          ? "bg-white border-[#E2E8F0] hover:border-[#0B7C79] hover:shadow-xs hover:-translate-y-0.5"
+                          : "bg-[#F4F5F7]/60 border-[#E2E8F0] opacity-90"
                       }`}
                     >
                       <div className="flex items-start gap-3.5">
@@ -594,53 +594,53 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex items-center gap-2 min-w-0">
-                              <span className="text-[11px] font-semibold text-[#4A5757] truncate">
+                              <span className="text-[11px] font-semibold text-[#475569] truncate">
                                 {item.category ? D(item.category) : t("adm.notice")} • {item.project ? D(item.project) : t("adm.theSite")}
                               </span>
 
                               {/* Subtle badge if timestamp is "الآن" */}
                               {isJustNow && isPending && (
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#2E6F73]/15 text-[#0E1A1B] border border-[#2E6F73]/30">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#2E6F73]" />
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#0B7C79]/15 text-[#0E2A47] border border-[#0B7C79]/30">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#0B7C79]" />
                                   {t("adm.newNow")}
                                 </span>
                               )}
                             </div>
 
-                            <span className="text-[11px] font-bold text-[#4A5757] shrink-0">
+                            <span className="text-[11px] font-bold text-[#475569] shrink-0">
                               {D(item.timestamp || item.time)}
                             </span>
                           </div>
 
                           <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-2 mt-1">
-                            <h4 className="text-sm font-bold text-[#0E1A1B] leading-snug">
+                            <h4 className="text-sm font-bold text-[#0E2A47] leading-snug">
                               {D(item.title)}
                             </h4>
                             {item.amount && (
-                              <span className="text-xs font-bold text-[#0E1A1B] shrink-0 bg-[#EFE9DC] px-2.5 py-0.5 rounded-lg border border-[#E4DDCE] font-mono">
+                              <span className="text-xs font-bold text-[#0E2A47] shrink-0 bg-[#EEF1F5] px-2.5 py-0.5 rounded-lg border border-[#E2E8F0] font-mono">
                                 {D(item.amount)}
                               </span>
                             )}
                           </div>
 
                           {item.subtitle && (
-                            <p className="text-xs text-[#4A5757] mt-1 leading-relaxed">
+                            <p className="text-xs text-[#475569] mt-1 leading-relaxed">
                               {D(item.subtitle)}
                             </p>
                           )}
 
-                          <div className="mt-2 text-[11px] text-[#4A5757] font-medium">
+                          <div className="mt-2 text-[11px] text-[#475569] font-medium">
                             {t("adm.source")}{" "}
-                            <span className="text-[#0E1A1B] font-bold">
+                            <span className="text-[#0E2A47] font-bold">
                               {D(item.user || item.submitter)}
                             </span>
-                            <span className="text-[#0E1A1B] ms-2 font-bold hover:underline">
+                            <span className="text-[#0E2A47] ms-2 font-bold hover:underline">
                               {t("adm.clickDetails")}
                             </span>
                           </div>
 
                           {/* Interactive Action Buttons */}
-                          <div className="mt-3.5 pt-3 border-t border-[#ECE5D6] flex items-center justify-between">
+                          <div className="mt-3.5 pt-3 border-t border-[#E0F2F1] flex items-center justify-between">
                             {isPending ? (
                               <div className="flex items-center gap-2">
                                 <button
@@ -648,7 +648,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                                     e.stopPropagation();
                                     handleAction(item.id, "approved");
                                   }}
-                                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-[#2E6F73] hover:bg-[#2E6F73] hover:bg-[#2E6F73] transition-colors shadow-sm cursor-pointer"
+                                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-white bg-[#0B7C79] hover:bg-[#0B7C79] hover:bg-[#0B7C79] transition-colors shadow-sm cursor-pointer"
                                 >
                                   <Check className="w-3.5 h-3.5" />
                                   {t("adm.approve")}
@@ -658,7 +658,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                                     e.stopPropagation();
                                     handleAction(item.id, "rejected");
                                   }}
-                                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-[#4A5757] bg-white border border-[#E4DDCE] hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 active:scale-95 transition-all"
+                                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-[#475569] bg-white border border-[#E2E8F0] hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 active:scale-95 transition-all"
                                 >
                                   <X className="w-3.5 h-3.5" />
                                   {t("adm.reject")}
@@ -669,13 +669,13 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                                 <span
                                   className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
                                     item.status === "approved"
-                                      ? "text-[#0E1A1B] bg-[#2E6F73]/15 border border-[#2E6F73]/30"
+                                      ? "text-[#0E2A47] bg-[#0B7C79]/15 border border-[#0B7C79]/30"
                                       : "text-rose-800 bg-rose-50 border border-rose-200"
                                   }`}
                                 >
                                   {item.status === "approved" ? (
                                     <>
-                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#2E6F73]" />
+                                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0B7C79]" />
                                       {t("adm.approvedMsg")}
                                     </>
                                   ) : (
@@ -691,7 +691,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                                     e.stopPropagation();
                                     handleAction(item.id, "pending");
                                   }}
-                                  className="text-[11px] font-bold text-[#4A5757] hover:text-[#4A5757] underline"
+                                  className="text-[11px] font-bold text-[#475569] hover:text-[#475569] underline"
                                 >
                                   {t("adm.undo")}
                                 </button>
@@ -699,7 +699,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                             )}
 
                             {isPending && (
-                              <span className="text-[11px] text-[#4A5757] hidden sm:inline font-medium">
+                              <span className="text-[11px] text-[#475569] hidden sm:inline font-medium">
                                 {t("adm.partner")}
                               </span>
                             )}
@@ -713,9 +713,9 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             </div>
           </div>
 
-          <div className="p-4 bg-[#F6F3EC]/70 border-t border-[#ECE5D6] flex items-center justify-between text-xs text-[#4A5757] font-medium">
+          <div className="p-4 bg-[#F4F5F7]/70 border-t border-[#E0F2F1] flex items-center justify-between text-xs text-[#475569] font-medium">
             <span>{t("adm.audit")}</span>
-            <span className="font-bold text-[#4A5757]">{t("adm.updated")}</span>
+            <span className="font-bold text-[#475569]">{t("adm.updated")}</span>
           </div>
         </div>
       </div>

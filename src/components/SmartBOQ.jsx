@@ -35,11 +35,11 @@ import {
 
 const CATEGORY_COLORS = localize({
   "أعمال الكهرباء": "bg-amber-50 text-amber-800 border-amber-200",
-  "أعمال السباكة والصحي": "bg-[#EFE9DC] text-[#0E1A1B] border-[#E4DDCE]",
-  "أعمال المحارة والتشطيبات": "bg-[#EFE9DC] text-[#4A5757] border-[#E4DDCE]",
-  "الأسقف المعلقة والجبسوم بورد": "bg-[#EFE9DC] text-[#0E1A1B] border-[#D6CCB8] font-semibold",
+  "أعمال السباكة والصحي": "bg-[#EEF1F5] text-[#0E2A47] border-[#E2E8F0]",
+  "أعمال المحارة والتشطيبات": "bg-[#EEF1F5] text-[#475569] border-[#E2E8F0]",
+  "الأسقف المعلقة والجبسوم بورد": "bg-[#EEF1F5] text-[#0E2A47] border-[#CBD5E1] font-semibold",
   "الأرضيات والرخام": "bg-amber-50 text-amber-900 border-amber-200",
-  "أخرى": "bg-[#EFE9DC] text-[#4A5757] border-[#E4DDCE]",
+  "أخرى": "bg-[#EEF1F5] text-[#475569] border-[#E2E8F0]",
 });
 
 function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = false }) {
@@ -200,7 +200,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {saveToast && (
-        <div className="fixed bottom-28 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#2E6F73] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-28 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#0B7C79] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
             <CheckCircle2 className="w-5 h-5" />
           </div>
@@ -215,40 +215,40 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
       <div className="mb-6 flex flex-col lg:flex-row lg:flex-wrap lg:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap mb-1.5">
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] tracking-tight flex items-center gap-2">
-              <FileSpreadsheet className="w-7 h-7 text-[#0E1A1B]" />
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#0E2A47] tracking-tight flex items-center gap-2">
+              <FileSpreadsheet className="w-7 h-7 text-[#0E2A47]" />
               <span>{T("sboq.3")}</span>
             </h1>
             <span className="no-print inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
               <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
               {T("sboq.4")}
             </span>
-            <span className="no-print text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EFE9DC] text-[#4A5757] border border-[#E4DDCE]">
+            <span className="no-print text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EEF1F5] text-[#475569] border border-[#E2E8F0]">
               {T("sboq.5")}
             </span>
           </div>
-          <p className="no-print text-xs md:text-sm text-[#4A5757]">
+          <p className="no-print text-xs md:text-sm text-[#475569]">
             {T(restricted ? "sboq.r6" : "sboq.6")}
           </p>
         </div>
 
         <div className="no-print w-full basis-full grid gap-3 md:grid-cols-[1fr_16rem] items-start">
           <OfficeDetails />
-          <label className="text-xs font-bold text-[#4A5757] space-y-1">
+          <label className="text-xs font-bold text-[#475569] space-y-1">
             {T("quote.client")}
             <input
               value={quoteClient}
               onChange={(e) => setQuoteClient(e.target.value)}
               maxLength={80}
               placeholder={T("quote.clientPh")}
-              className="w-full rounded-xl border border-[#E4DDCE] bg-white px-3 py-2 text-sm"
+              className="w-full rounded-xl border border-[#E2E8F0] bg-white px-3 py-2 text-sm"
             />
           </label>
           {!restricted && <QuoteSignature quoteNo={quoteNo} total={Math.round(totalPrice * (1 + vatRate / 100))} defaultName={quoteClient} />}
         </div>
 
         {/* Printed quotation header (hidden on screen) */}
-        <div className="print-only w-full pb-3 mb-2" style={{ borderBottom: `3px solid ${office.color || "#0F3D3E"}` }}>
+        <div className="print-only w-full pb-3 mb-2" style={{ borderBottom: `3px solid ${office.color || "#0E2A47"}` }}>
           <div className="flex justify-between items-start gap-4">
             <div className="flex items-center gap-3">
               {office.logo && <img src={office.logo} alt="" className="h-12 max-w-[120px] object-contain" />}
@@ -260,7 +260,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
               </div>
             </div>
             <div className="text-end text-xs space-y-0.5">
-              <p className="text-lg font-semibold" style={{ color: office.color || "#0F3D3E" }}>{T("quote.title")}</p>
+              <p className="text-lg font-semibold" style={{ color: office.color || "#0E2A47" }}>{T("quote.title")}</p>
               <p>{T("quote.no")}: {quoteNo}</p>
               <p>{T("quote.date")}: {new Date().toLocaleDateString(intlLocale())}</p>
               <p>{T("quote.valid", { 0: office.quoteDays })}</p>
@@ -273,7 +273,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
         <div className="no-print flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleResetDefaults}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#4A5757] bg-white border border-[#E4DDCE] hover:bg-[#F6F3EC] transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#475569] bg-white border border-[#E2E8F0] hover:bg-[#F4F5F7] transition-colors shadow-2xs cursor-pointer"
             title={T("sboq.7")}
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -281,14 +281,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           </button>
           {!restricted && (
             <button type="button" onClick={() => setShowImport(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold text-[#0E1A1B] bg-white border border-[#E4DDCE] hover:bg-[#F6F3EC] cursor-pointer">
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold text-[#0E2A47] bg-white border border-[#E2E8F0] hover:bg-[#F4F5F7] cursor-pointer">
               <FileSpreadsheet className="w-4 h-4" aria-hidden="true" />
               <span>{T("bi.open")}</span>
             </button>
           )}
           <button
             onClick={() => setShowAddItemModal(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white bg-[#0B7C79] hover:bg-[#0B7C79] transition-colors shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>{T("sboq.9")}</span>
@@ -298,11 +298,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
       {/* Mini KPI Highlights */}
       <div className="no-print grid stat-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("sboq.10")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#475569] block mb-1">{T("sboq.10")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#0E1A1B]">{boqItems.length}</span>
-            <span className="text-[11px] font-bold text-[#4A5757] bg-[#EFE9DC] px-2 py-0.5 rounded-md border border-[#E4DDCE]">
+            <span className="text-xl md:text-2xl font-semibold text-[#0E2A47]">{boqItems.length}</span>
+            <span className="text-[11px] font-bold text-[#475569] bg-[#EEF1F5] px-2 py-0.5 rounded-md border border-[#E2E8F0]">
               {T("sboq.11")}
             </span>
           </div>
@@ -310,18 +310,18 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
         {!restricted && (
           <>
-        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("sboq.12")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#475569] block mb-1">{T("sboq.12")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#0E1A1B]">
+            <span className="text-xl md:text-2xl font-semibold text-[#0E2A47]">
               {Math.round(totalCost).toLocaleString(intlLocale())}
             </span>
-            <span className="text-[11px] font-bold text-[#4A5757]">{currencySymbol()}</span>
+            <span className="text-[11px] font-bold text-[#475569]">{currencySymbol()}</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-5 border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-          <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T("sboq.13")}</span>
+        <div className="bg-white rounded-lg p-5 border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+          <span className="text-[11px] font-bold text-[#475569] block mb-1">{T("sboq.13")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-emerald-700">
               +{Math.round(totalProfit).toLocaleString(intlLocale())}
@@ -336,7 +336,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
         )}
 
         {/* 4. Client Quotation Card - Sage Green Hero Card */}
-        <div className="bg-[#2E6F73] rounded-xl p-5 border border-[#245A5E] text-white shadow-sm">
+        <div className="bg-[#0B7C79] rounded-xl p-5 border border-[#086663] text-white shadow-sm">
           <span className="text-[11px] font-bold text-[#EFE7D6] block mb-1">{T("sboq.14")}</span>
           <div className="flex items-baseline justify-between">
             <span className="text-xl md:text-2xl font-semibold text-white">
@@ -357,8 +357,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
             onClick={() => setFilterCategory(cat)}
             className={`shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer active:scale-95 ${
               filterCategory === cat
-                ? "bg-[#2E6F73] text-white shadow-sm"
-                : "bg-white text-[#0E1A1B] border border-[#E4DDCE] hover:bg-[#F6F3EC]"
+                ? "bg-[#0B7C79] text-white shadow-sm"
+                : "bg-white text-[#0E2A47] border border-[#E2E8F0] hover:bg-[#F4F5F7]"
             }`}
           >
             {E(cat)} {cat === "الكل" ? `(${boqItems.length})` : ""}
@@ -367,18 +367,18 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
       </div>
 
       {/* Main Glassmorphic Interactive Table Card */}
-      <div className="no-print bg-white rounded-lg border border-[#E4DDCE] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
-        <div className="p-4 md:p-5 border-b border-[#ECE5D6] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F6F3EC]">
+      <div className="no-print bg-white rounded-lg border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
+        <div className="p-4 md:p-5 border-b border-[#E0F2F1] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#F4F5F7]">
           <div>
-            <h2 className="text-base font-semibold text-[#0E1A1B] flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#0E1A1B]" />
+            <h2 className="text-base font-semibold text-[#0E2A47] flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#0E2A47]" />
               <span>{T("sboq.15")}</span>
             </h2>
-            <p className="text-xs text-[#4A5757] mt-0.5">
+            <p className="text-xs text-[#475569] mt-0.5">
               {T(restricted ? "sboq.r16" : "sboq.16")}
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs text-[#4A5757]">
+          <div className="flex items-center gap-2 text-xs text-[#475569]">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-600"></span>
             <span>{T("sboq.17")}</span>
           </div>
@@ -388,7 +388,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
         <div className="overflow-x-auto">
           <table className="w-full text-start border-collapse">
             <thead>
-              <tr className="bg-[#F6F3EC] text-[#4A5757] text-xs font-bold border-b border-[#E4DDCE]">
+              <tr className="bg-[#F4F5F7] text-[#475569] text-xs font-bold border-b border-[#E2E8F0]">
                 <th className="py-3.5 px-4 w-12 text-center">#</th>
                 <th className="py-3.5 px-4 min-w-[240px]">{T("sboq.18")}</th>
                 <th className="py-3.5 px-3 w-28 text-center">{T("sboq.19")}</th>
@@ -399,7 +399,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                 <th className="py-3.5 px-3 w-14 text-center">{T("sboq.24")}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#ECE5D6] text-xs md:text-sm">
+            <tbody className="divide-y divide-[#E0F2F1] text-xs md:text-sm">
               {filteredItems.map((item, index) => {
                 const qty = parseFloat(item.quantity) || 0;
                 const cost = parseFloat(item.unitCost) || 0;
@@ -413,10 +413,10 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                 return (
                   <tr
                     key={item.id}
-                    className="hover:bg-[#F6F3EC] transition-colors duration-100 group"
+                    className="hover:bg-[#F4F5F7] transition-colors duration-100 group"
                   >
                     {/* Index */}
-                    <td className="py-3.5 px-4 text-center text-xs font-bold text-[#4A5757]">
+                    <td className="py-3.5 px-4 text-center text-xs font-bold text-[#475569]">
                       {index + 1}
                     </td>
 
@@ -430,11 +430,11 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                             {E(item.category)}
                           </span>
                         </div>
-                        <span className="font-semibold text-[#0E1A1B] leading-snug">
+                        <span className="font-semibold text-[#0E2A47] leading-snug">
                           {item.name}
                         </span>
                         {item.note && (
-                          <span className="text-[11px] text-[#4A5757] mt-0.5 leading-normal">
+                          <span className="text-[11px] text-[#475569] mt-0.5 leading-normal">
                             {item.note}
                           </span>
                         )}
@@ -443,7 +443,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
                     {/* Unit */}
                     <td className="py-3.5 px-3 text-center">
-                      <span className="inline-block px-2.5 py-1 rounded-lg bg-[#EFE9DC] text-[#0E1A1B] font-bold text-xs border border-[#E4DDCE]">
+                      <span className="inline-block px-2.5 py-1 rounded-lg bg-[#EEF1F5] text-[#0E2A47] font-bold text-xs border border-[#E2E8F0]">
                         {E(item.unit)}
                       </span>
                     </td>
@@ -457,7 +457,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                           step="any"
                           value={item.quantity}
                           onChange={(e) => handleUpdateItem(item.id, "quantity", e.target.value)}
-                          className="w-full text-center px-2 py-1.5 rounded-lg border border-[#E4DDCE] bg-white font-bold text-[#0E1A1B] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all shadow-2xs hover:border-[#2E6F73]"
+                          className="w-full text-center px-2 py-1.5 rounded-lg border border-[#E2E8F0] bg-white font-bold text-[#0E2A47] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79] transition-all shadow-2xs hover:border-[#0B7C79]"
                         />
                       </div>
                     </td>
@@ -473,9 +473,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                           step="any"
                           value={item.unitCost}
                           onChange={(e) => handleUpdateItem(item.id, "unitCost", e.target.value)}
-                          className="w-full text-center pe-7 ps-2 py-1.5 rounded-lg border border-[#E4DDCE] bg-white font-bold text-[#0E1A1B] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all shadow-2xs hover:border-[#2E6F73]"
+                          className="w-full text-center pe-7 ps-2 py-1.5 rounded-lg border border-[#E2E8F0] bg-white font-bold text-[#0E2A47] text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79] transition-all shadow-2xs hover:border-[#0B7C79]"
                         />
-                        <span className="absolute end-2.5 text-[10px] font-bold text-[#4A5757] pointer-events-none">
+                        <span className="absolute end-2.5 text-[10px] font-bold text-[#475569] pointer-events-none">
                           {currencySymbol()}
                         </span>
                       </div>
@@ -491,7 +491,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                           step="1"
                           value={item.margin}
                           onChange={(e) => handleUpdateItem(item.id, "margin", e.target.value)}
-                          className="w-full text-center pe-6 ps-2 py-1.5 rounded-lg border border-[#E4DDCE] bg-white font-bold text-amber-800 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73] transition-all shadow-2xs hover:border-[#2E6F73]"
+                          className="w-full text-center pe-6 ps-2 py-1.5 rounded-lg border border-[#E2E8F0] bg-white font-bold text-amber-800 text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79] transition-all shadow-2xs hover:border-[#0B7C79]"
                         />
                         <span className="absolute end-2 text-[11px] font-semibold text-amber-700 pointer-events-none">
                           %
@@ -505,9 +505,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                     {/* Auto-Calculated Total Price for Client */}
                     <td className="py-3.5 px-4 text-end">
                       <div className="flex flex-col items-end">
-                        <span className="font-semibold text-[#0E1A1B] text-sm md:text-base tracking-tight">
+                        <span className="font-semibold text-[#0E2A47] text-sm md:text-base tracking-tight">
                           {Math.round(rowTotal).toLocaleString(intlLocale())}{" "}
-                          <span className="text-xs font-bold text-[#4A5757]">{currencySymbol()}</span>
+                          <span className="text-xs font-bold text-[#475569]">{currencySymbol()}</span>
                         </span>
                         {!restricted && (<span className="text-[10px] font-semibold text-emerald-700">
                           {T("sboq.25", { v0: Math.round(rowProfit).toLocaleString(intlLocale()), v1: currencySymbol() })}
@@ -519,7 +519,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                     <td className="py-3.5 px-3 text-center">
                       <button
                         onClick={() => handleDeleteItem(item.id)}
-                        className="p-1.5 rounded-lg text-[#4A5757] hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                        className="p-1.5 rounded-lg text-[#475569] hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                         title={T("sboq.26")}
                       >
                         <Trash2 className="w-4 h-4" />
@@ -531,10 +531,10 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
               {filteredItems.length === 0 && (
                 <tr>
-                  <td colSpan={restricted ? 6 : 8} className="py-12 text-center text-[#4A5757]">
-                    <AlertCircle className="w-8 h-8 mx-auto mb-2 text-[#64706F]" />
-                    <p className="font-bold text-[#4A5757]">{T("sboq.27")}</p>
-                    <p className="text-xs text-[#4A5757] mt-1">
+                  <td colSpan={restricted ? 6 : 8} className="py-12 text-center text-[#475569]">
+                    <AlertCircle className="w-8 h-8 mx-auto mb-2 text-[#64748B]" />
+                    <p className="font-bold text-[#475569]">{T("sboq.27")}</p>
+                    <p className="text-xs text-[#475569] mt-1">
                       يمكنك اختيار تصنيف آخر أو الضغط على "{D("+ إضافة بند جديد")}"
                     </p>
                   </td>
@@ -545,20 +545,20 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
         </div>
 
         {/* Table Bottom Meta Bar */}
-        <div className="p-4 bg-[#F6F3EC] border-t border-[#E4DDCE] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#4A5757]">
+        <div className="p-4 bg-[#F4F5F7] border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#475569]">
           <div className="flex items-center gap-3">
             <span>
-              {D("إجمالي البنود:")} <strong className="text-[#0E1A1B]">{boqItems.length}</strong>
+              {D("إجمالي البنود:")} <strong className="text-[#0E2A47]">{boqItems.length}</strong>
             </span>
             {!restricted && (
               <>
             <span>
-              {D("متوسط هامش الربح:")} <strong className="text-[#0E1A1B] font-bold">{pct(averageMargin)}</strong>
+              {D("متوسط هامش الربح:")} <strong className="text-[#0E2A47] font-bold">{pct(averageMargin)}</strong>
             </span>
               </>
             )}
           </div>
-          <span className="text-[11px] text-[#4A5757]">
+          <span className="text-[11px] text-[#475569]">
             {D("* السعر الإجمالي يشمل التوريد والتركيب والتشوين ومصاريف الإشراف الهندسي.")}
           </span>
         </div>
@@ -567,7 +567,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
       {showImport && <BoqImport items={boqItems} onApply={applyImport} onClose={() => setShowImport(false)} />}
 
       {/* Floating Summary & Action Sticky Dock */}
-      <div className="mt-6 rounded-2xl md:mt-0 md:rounded-none md:sticky md:bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E4DDCE] shadow-lg px-4 md:px-8 py-4">
+      <div className="mt-6 rounded-2xl md:mt-0 md:rounded-none md:sticky md:bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E2E8F0] shadow-lg px-4 md:px-8 py-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Summary Figures */}
           <div className="flex items-center gap-5 sm:gap-8 flex-wrap">
@@ -575,22 +575,22 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
               <>
             {/* Total Cost */}
             <div className="flex flex-col">
-              <span className="text-[11px] font-bold text-[#4A5757]">{T("sboq.28")}</span>
-              <span className="text-sm md:text-base font-semibold text-[#4A5757]">
+              <span className="text-[11px] font-bold text-[#475569]">{T("sboq.28")}</span>
+              <span className="text-sm md:text-base font-semibold text-[#475569]">
                 {Math.round(totalCost).toLocaleString(intlLocale())}{" "}
-                <span className="text-xs font-normal text-[#4A5757]">{currencySymbol()}</span>
+                <span className="text-xs font-normal text-[#475569]">{currencySymbol()}</span>
               </span>
             </div>
 
             {/* Total Expected Profit */}
             <div className="flex flex-col">
-              <span className="text-[11px] font-bold text-[#4A5757] flex items-center gap-1">
+              <span className="text-[11px] font-bold text-[#475569] flex items-center gap-1">
                 <TrendingUp className="w-3 h-3 text-emerald-600" />
                 <span>{T("sboq.29")}</span>
               </span>
               <span className="text-sm md:text-base font-semibold text-emerald-700">
                 +{Math.round(totalProfit).toLocaleString(intlLocale())}{" "}
-                <span className="text-xs font-normal text-[#4A5757]">{currencySymbol()}</span>
+                <span className="text-xs font-normal text-[#475569]">{currencySymbol()}</span>
               </span>
             </div>
 
@@ -598,16 +598,16 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
             )}
 
             {/* Divider */}
-            <div className="hidden sm:block h-8 w-px bg-[#E4DDCE]" />
+            <div className="hidden sm:block h-8 w-px bg-[#E2E8F0]" />
 
             {/* Final Quotation Price (Highlighted in large, bold font) */}
             <div className="flex flex-col">
-              <span className="text-[11px] font-semibold text-[#0E1A1B] uppercase tracking-wider flex items-center gap-1">
+              <span className="text-[11px] font-semibold text-[#0E2A47] uppercase tracking-wider flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-amber-700" />
                 <span>{T("sboq.30")}</span>
               </span>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] tracking-tight">
+                <span className="text-2xl md:text-3xl font-semibold text-[#0E2A47] tracking-tight">
                   {Math.round(totalPrice).toLocaleString(intlLocale())}
                 </span>
                 <span className="text-xs font-bold text-amber-800">{currencyName()}</span>
@@ -619,14 +619,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={handleExportCsv}
-              className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E4DDCE] bg-white hover:bg-[#F6F3EC] text-[#4A5757] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
+              className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] text-[#475569] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
             >
               <Download className="w-4 h-4" />
               <span>{T("boq.csv")}</span>
             </button>
             <button
               onClick={() => { valueMoment("quote"); window.print(); }}
-              className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E4DDCE] bg-white hover:bg-[#F6F3EC] text-[#4A5757] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
+              className="no-print hidden sm:inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] text-[#475569] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
             >
               <Printer className="w-4 h-4" />
               <span>{T("boq.print")}</span>
@@ -634,16 +634,16 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
             {/* Save Draft */}
             <button
               onClick={handleSaveDraft}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#E4DDCE] bg-white hover:bg-[#F6F3EC] text-[#4A5757] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] text-[#475569] text-xs md:text-sm font-bold shadow-2xs transition-all cursor-pointer"
             >
-              <Save className="w-4 h-4 text-[#4A5757]" />
+              <Save className="w-4 h-4 text-[#475569]" />
               <span>{T("sboq.32")}</span>
             </button>
 
             {/* Send to Client for Approval */}
             <button
               onClick={handleSendToClient}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#2E6F73] hover:bg-[#2E6F73] text-white hover:bg-[#2E6F73] transition-colors text-xs md:text-sm font-semibold shadow-sm transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#0B7C79] hover:bg-[#0B7C79] text-white hover:bg-[#0B7C79] transition-colors text-xs md:text-sm font-semibold shadow-sm transition-all cursor-pointer"
             >
               <Send className="w-4 h-4" />
               <span>{T("sboq.33")}</span>
@@ -654,16 +654,16 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
       {/* Add New Item Modal */}
       {showAddItemModal && (
-        <div className="fixed inset-0 z-50 bg-[#0F3D3E]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E4DDCE] max-w-lg w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[#ECE5D6]">
-              <h3 className="text-lg font-semibold text-[#0E1A1B] flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#0E1A1B]" />
+        <div className="fixed inset-0 z-50 bg-[#0E2A47]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E2E8F0] max-w-lg w-full p-6 md:p-8 text-start animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E0F2F1]">
+              <h3 className="text-lg font-semibold text-[#0E2A47] flex items-center gap-2">
+                <Plus className="w-5 h-5 text-[#0E2A47]" />
                 <span>{T("sboq.34")}</span>
               </h3>
               <button
                 onClick={() => setShowAddItemModal(false)}
-                className="p-1 rounded-lg text-[#4A5757] hover:text-[#0E1A1B] hover:bg-[#EFE9DC]"
+                className="p-1 rounded-lg text-[#475569] hover:text-[#0E2A47] hover:bg-[#EEF1F5]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -671,13 +671,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
             <form onSubmit={handleAddItemSubmit} className="space-y-4 mt-4">
               <div>
-                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
+                <label className="block text-xs font-bold text-[#475569] mb-1.5">
                   {T("sboq.35")}
                 </label>
                 <select
                   value={newItemCategory}
                   onChange={(e) => setNewItemCategory(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79]"
                 >
                   <option value="أعمال الكهرباء">{T("sboq.36")}</option>
                   <option value="أعمال السباكة والصحي">{T("sboq.37")}</option>
@@ -691,7 +691,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
+                <label className="block text-xs font-bold text-[#475569] mb-1.5">
                   {T("sboq.44")}
                 </label>
                 <input
@@ -700,17 +700,17 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                   placeholder={T("sboq.45")}
                   value={newItemName}
                   onChange={(e) => setNewItemName(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs md:text-sm font-semibold text-[#0E1A1B] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs md:text-sm font-semibold text-[#0E2A47] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79]"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#4A5757] mb-1.5">{T("sboq.19")}</label>
+                  <label className="block text-xs font-bold text-[#475569] mb-1.5">{T("sboq.19")}</label>
                   <select
                     value={newItemUnit}
                     onChange={(e) => setNewItemUnit(e.target.value)}
-                    className="w-full px-2.5 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73]"
+                    className="w-full px-2.5 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] bg-white focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79]"
                   >
                     <option value="متر مربع">{T("sboq.46")}</option>
                     <option value="متر طولي">{T("sboq.47")}</option>
@@ -721,7 +721,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#4A5757] mb-1.5">{T("sboq.51")}</label>
+                  <label className="block text-xs font-bold text-[#475569] mb-1.5">{T("sboq.51")}</label>
                   <input
                     type="number"
                     min="1"
@@ -729,13 +729,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                     required
                     value={newItemQty}
                     onChange={(e) => setNewItemQty(e.target.value)}
-                    className="w-full px-2.5 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73]"
+                    className="w-full px-2.5 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79]"
                   />
                 </div>
 
                 {!restricted && (
                 <div>
-                  <label className="block text-xs font-bold text-[#4A5757] mb-1.5">{T("sboq.52")}</label>
+                  <label className="block text-xs font-bold text-[#475569] mb-1.5">{T("sboq.52")}</label>
                   <input
                     type="number"
                     min="0"
@@ -743,14 +743,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                     required
                     value={newItemCost}
                     onChange={(e) => setNewItemCost(e.target.value)}
-                    className="w-full px-2.5 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73]"
+                    className="w-full px-2.5 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79]"
                   />
                 </div>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
+                <label className="block text-xs font-bold text-[#475569] mb-1.5">
                   {T("sboq.53")}
                 </label>
                 <div className="flex items-center gap-3">
@@ -762,14 +762,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                     onChange={(e) => setNewItemMargin(e.target.value)}
                     className="flex-1 accent-zinc-900 cursor-pointer"
                   />
-                  <span className="w-14 text-center px-2 py-1 bg-[#EFE9DC] text-[#0E1A1B] border border-[#E4DDCE] rounded-lg text-xs font-bold">
+                  <span className="w-14 text-center px-2 py-1 bg-[#EEF1F5] text-[#0E2A47] border border-[#E2E8F0] rounded-lg text-xs font-bold">
                     {pct(newItemMargin)}
                   </span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#4A5757] mb-1.5">
+                <label className="block text-xs font-bold text-[#475569] mb-1.5">
                   {T("sboq.54")}
                 </label>
                 <input
@@ -777,14 +777,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                   placeholder={T("sboq.55")}
                   value={newItemNote}
                   onChange={(e) => setNewItemNote(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs text-[#4A5757] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#2E6F73] focus:border-[#2E6F73]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs text-[#475569] focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#0B7C79] focus:border-[#0B7C79]"
                 />
               </div>
 
               {/* Preview calculation */}
-              <div className="p-3 bg-[#F6F3EC] rounded-lg border border-[#E4DDCE] flex items-center justify-between text-xs">
-                <span className="text-[#4A5757]">{T("sboq.56")}</span>
-                <span className="font-bold text-[#0E1A1B] text-sm">
+              <div className="p-3 bg-[#F4F5F7] rounded-lg border border-[#E2E8F0] flex items-center justify-between text-xs">
+                <span className="text-[#475569]">{T("sboq.56")}</span>
+                <span className="font-bold text-[#0E2A47] text-sm">
                   {Math.round(
                     (parseFloat(newItemQty) || 0) *
                       (parseFloat(newItemCost) || 0) *
@@ -794,17 +794,17 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                 </span>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#ECE5D6]">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E0F2F1]">
                 <button
                   type="button"
                   onClick={() => setShowAddItemModal(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#4A5757] hover:bg-[#EFE9DC] cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-[#475569] hover:bg-[#EEF1F5] cursor-pointer"
                 >
                   {T("sboq.57")}
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-lg bg-[#2E6F73] hover:bg-[#2E6F73] text-white hover:bg-[#2E6F73] transition-colors text-xs font-bold shadow-sm cursor-pointer"
+                  className="px-5 py-2 rounded-lg bg-[#0B7C79] hover:bg-[#0B7C79] text-white hover:bg-[#0B7C79] transition-colors text-xs font-bold shadow-sm cursor-pointer"
                 >
                   {T("sboq.58")}
                 </button>
@@ -816,38 +816,38 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
       {/* Send Success Confirmation Modal */}
       {sendSuccessModal && (
-        <div className="fixed inset-0 z-50 bg-[#0F3D3E]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-lg shadow-2xl border border-[#E4DDCE] max-w-md w-full p-6 md:p-8 text-center animate-in zoom-in-95 duration-200">
-            <div className="w-16 h-16 rounded-lg bg-[#EFE9DC] text-[#0E1A1B] border border-[#E4DDCE] flex items-center justify-center mx-auto mb-4">
+        <div className="fixed inset-0 z-50 bg-[#0E2A47]/40 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-lg shadow-2xl border border-[#E2E8F0] max-w-md w-full p-6 md:p-8 text-center animate-in zoom-in-95 duration-200">
+            <div className="w-16 h-16 rounded-lg bg-[#EEF1F5] text-[#0E2A47] border border-[#E2E8F0] flex items-center justify-center mx-auto mb-4">
               <FileCheck className="w-8 h-8" />
             </div>
 
-            <h3 className="text-lg font-semibold text-[#0E1A1B] mb-2">
+            <h3 className="text-lg font-semibold text-[#0E2A47] mb-2">
               {T("sboq.59")}
             </h3>
 
-            <p className="text-xs text-[#4A5757] leading-relaxed mb-5">
+            <p className="text-xs text-[#475569] leading-relaxed mb-5">
               تم إشعار العميل (أ. محمد) بمقايسة مشروع 
-              <strong className="text-[#0E1A1B]">فيلا الياسمين</strong> بإجمالي{" "}
-              <strong className="text-[#0E1A1B]">
+              <strong className="text-[#0E2A47]">فيلا الياسمين</strong> بإجمالي{" "}
+              <strong className="text-[#0E2A47]">
                 {Math.round(totalPrice).toLocaleString(intlLocale())} {currencySymbol()}
               </strong>
               ، مع إتاحة خيار الاعتماد الإلكتروني المباشر من حسابه.
             </p>
 
-            <div className="bg-[#F6F3EC] rounded-lg p-3 border border-[#E4DDCE] text-xs text-[#4A5757] text-start space-y-1 mb-5">
+            <div className="bg-[#F4F5F7] rounded-lg p-3 border border-[#E2E8F0] text-xs text-[#475569] text-start space-y-1 mb-5">
               <div className="flex justify-between">
-                <span className="text-[#4A5757]">{T("sboq.63")}</span>
+                <span className="text-[#475569]">{T("sboq.63")}</span>
                 <span className="font-bold">{T("sboq.64", { v0: boqItems.length })}</span>
               </div>
               {!restricted && (
                 <>
               <div className="flex justify-between">
-                <span className="text-[#4A5757]">{T("sboq.65")}</span>
+                <span className="text-[#475569]">{T("sboq.65")}</span>
                 <span className="font-bold">{Math.round(totalCost).toLocaleString(intlLocale())} {currencySymbol()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#4A5757]">{T("sboq.66")}</span>
+                <span className="text-[#475569]">{T("sboq.66")}</span>
                 <span className="font-bold text-emerald-700">{pct(averageMargin)}</span>
               </div>
                 </>
@@ -856,7 +856,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
 
             <button
               onClick={() => setSendSuccessModal(false)}
-              className="w-full py-2.5 rounded-lg bg-[#2E6F73] hover:bg-[#2E6F73] text-white hover:bg-[#2E6F73] transition-colors font-bold text-xs md:text-sm shadow-sm transition-colors cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-[#0B7C79] hover:bg-[#0B7C79] text-white hover:bg-[#0B7C79] transition-colors font-bold text-xs md:text-sm shadow-sm transition-colors cursor-pointer"
             >
               {T("sboq.67")}
             </button>
