@@ -19,6 +19,7 @@ import ChangeOrders from "./ChangeOrders";
 import PurchaseInvoices from "./PurchaseInvoices";
 import Warranty from "./Warranty";
 import Rfi from "./Rfi";
+import Drawings from "./Drawings";
 import Selections from "./Selections";
 import Moodboard from "./Moodboard";
 import AuditLog from "./AuditLog";
@@ -85,6 +86,7 @@ function MainContent({
       }
       if (id === "Financials & Petty Cash") return <LiveFinance />;
       if (id === "Team" && (currentRole === "Admin" || currentRole === "Secretary")) return <LiveTeam secretary={currentRole === "Secretary"} />;
+      if (id === "Drawings & Docs" && currentRole !== "Client") return <Drawings role={currentRole} />;
       if (id === "Daily Reports" && currentRole !== "Client") return <LiveReports />;
       const SITE = { "My Tasks": "tasks", "Snag List": "snags", "Material Requests": "requests" };
       if (SITE[id] && currentRole !== "Client") return <LiveSite kind={SITE[id]} />;

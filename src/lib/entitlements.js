@@ -10,12 +10,13 @@ export const FEATURES = {
   client_calculator: "حاسبة العميل في الموودبورد",
   warranty: "الضمان وطلبات الصيانة",
   rfi: "الاستفسارات الفنية (RFI)",
+  drawings: "المخططات ونسخها",
   structural: "القسم الإنشائي",
   mobile_app: "تطبيق موبايل باسم المكتب",
   custom_theme: "ثيم خاص بهوية المكتب",
 };
 const PRO = ["moodboard", "selections", "change_orders", "purchase_invoices", "client_calculator"];
-const OFFICE = [...PRO, "certificates", "procurement", "attendance", "warranty", "rfi", "structural"];
+const OFFICE = [...PRO, "certificates", "procurement", "attendance", "warranty", "rfi", "drawings", "structural"];
 // Enterprise also gets the custom theme free (paid add-on on the other plans).
 const ENTERPRISE = [...OFFICE, "custom_theme"];
 export const PLAN_FEATURES = { free: [], pro: PRO, office: OFFICE, enterprise: ENTERPRISE };
@@ -48,7 +49,7 @@ export const hasFeature = (org, f) => !org || orgFeatures(org).has(f);
 /** Sidebar tab id -> feature key (tabs not listed are always available). */
 export const TAB_FEATURE = {
   Moodboard: "moodboard", Selections: "selections", "Change Orders": "change_orders",
-  "Purchase Invoices": "purchase_invoices", Warranty: "warranty", RFI: "rfi", Certificates: "certificates", Procurement: "procurement", Attendance: "attendance",
+  "Purchase Invoices": "purchase_invoices", Warranty: "warranty", RFI: "rfi", "Drawings & Docs": "drawings", Certificates: "certificates", Procurement: "procurement", Attendance: "attendance",
 };
 
 export const orgFeatures = (org) => new Set([...(PLAN_FEATURES[org?.plan] || []), ...(org?.extra_features || [])]);
