@@ -2043,6 +2043,8 @@ export default {
   "co.s.rejected": "Rejected",
   "co.day": "days",
   "co.nodelay": "No delay",
+  "co.k.deadline": "New deadline",
+  "co.pending": "Awaiting client: +{0} days, delivery would move to {1}",
   "co.send": "Send to client",
   "co.wa": "WhatsApp",
   "co.approve": "Approve",

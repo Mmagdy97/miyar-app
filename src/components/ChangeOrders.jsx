@@ -6,7 +6,7 @@ import { FilePenLine, Check, X, MessageCircle } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { CLIENT_PROJECT_ID } from "../data/seed";
 import { changeOrdersStore } from "../data/stores";
-import { applyChangeOrders, canDecide } from "../lib/changeorders";
+import { applyChangeOrders, canDecide, shiftDeadline } from "../lib/changeorders";
 import { whatsappLink } from "../lib/share";
 import { changeOrdersRepo } from "../data/changeorders";
 import { projectsStore } from "../data/projects";
@@ -23,6 +23,8 @@ function ChangeOrdersInner({ role = "Admin", projects, data }) {
   const project = (projects.find((p) => p.id === Number(projectId)) || projects[0]);
   const list = orders.filter((o) => o.projectId === project.id && (!isClient || o.status !== "draft"));
   const adj = applyChangeOrders(project.contractValue, orders.filter((o) => o.projectId === project.id));
+
+  const newDeadline = shiftDeadline(project.deadline, adj.days);
 
   const add = (e) => {
     e.preventDefault();
@@ -47,14 +49,16 @@ function ChangeOrdersInner({ role = "Admin", projects, data }) {
           </select>
         )}
 
-        <div className="grid stat-grid grid-cols-3 gap-3">
-          {[["co.k.base", money(project.contractValue, { compact: true })], ["co.k.new", money(adj.value, { compact: true })], ["co.k.days", `+${adj.days}`]].map(([k, v]) => (
+        <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[["co.k.base", money(project.contractValue, { compact: true })], ["co.k.new", money(adj.value, { compact: true })], ["co.k.days", `+${adj.days}`], ["co.k.deadline", newDeadline || "—"]].map(([k, v]) => (
             <div key={k} className="bg-white rounded-lg p-4 border border-[#E4DDCE] text-center">
               <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span>
               <span className="text-lg md:text-xl font-semibold text-[#0E1A1B]">{v}</span>
             </div>
           ))}
         </div>
+
+        {adj.pendingDays > 0 && <p className="text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">{T("co.pending", { 0: `${adj.pendingDays}`, 1: shiftDeadline(project.deadline, adj.days + adj.pendingDays) || "—" })}</p>}
 
         {!isClient && (
           <form onSubmit={add} className="bg-white rounded-lg border border-[#E4DDCE] p-4 space-y-3">

@@ -2043,6 +2043,8 @@ export default {
   "co.s.rejected": "Reddedildi",
   "co.day": "gün",
   "co.nodelay": "Gecikme yok",
+  "co.k.deadline": "Yeni teslim tarihi",
+  "co.pending": "Müşteri onayı bekliyor: +{0} gün, teslim {1} olur",
   "co.send": "Müşteriye gönder",
   "co.wa": "WhatsApp",
   "co.approve": "Onayla",
