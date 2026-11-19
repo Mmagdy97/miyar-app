@@ -30,13 +30,19 @@ export const workersStore = createPersistedStore("miyar:workers:v1", WORKERS, lo
 export const attendanceStore = createPersistedStore("miyar:attendance:v1", {}, (x) => x);
 
 // Subcontractors and purchase orders (Admin). Amounts in base currency units.
-export const subsStore = createPersistedStore("miyar:subs:v1", [
-  { id: 1, name: "شركة النور للكهرباء", trade: "كهرباء", contract: 420000, paid: 210000 },
-  { id: 2, name: "مؤسسة الأمل للسباكة", trade: "سباكة", contract: 310000, paid: 93000 },
+export const subsStore = createPersistedStore("miyar:subs:v2", [
+  { id: 1, name: "شركة النور للكهرباء", trade: "كهرباء", contract: 48000, paid: 24000 },
+  { id: 2, name: "مؤسسة الأمل للسباكة", trade: "سباكة", contract: 36000, paid: 10800 },
 ], (x) => x, { onChange: audit("subs") });
-export const posStore = createPersistedStore("miyar:pos:v1", [
-  { id: 1, no: "PO-001", supplier: "الصفا للرخام", item: "رخام كرارة", qty: 120, price: 1850, status: "sent" },
+export const posStore = createPersistedStore("miyar:pos:v2", [
+  { id: 1, no: "PO-001", supplier: "الصفا للرخام", item: "رخام كرارة", qty: 40, price: 650, status: "sent" },
 ], (x) => x, { onChange: audit("pos") });
+
+export const quotesStore = createPersistedStore("miyar:quotes:v1", [
+  { id: 1, item: "سيراميك أرضيات 60×60", qty: 180, supplier: "الجوهرة للسيراميك", price: 420, leadDays: 7, status: "open" },
+  { id: 2, item: "سيراميك أرضيات 60×60", qty: 180, supplier: "كليوباترا - موزع معتمد", price: 395, leadDays: 14, status: "open" },
+  { id: 3, item: "سيراميك أرضيات 60×60", qty: 180, supplier: "النساجون الشرقيون", price: 448, leadDays: 5, status: "open" },
+], (x) => x);
 
 // Change orders (أوامر التغيير): draft -> sent -> approved/rejected by the client.
 export const changeOrdersStore = createPersistedStore("miyar:changeorders:v1", [], (x) => x, { onChange: audit("changeOrders") });

@@ -28,3 +28,27 @@ export const editPayment = (s, pid, amount) => {
 };
 
 export const removePayment = (s, pid) => withPayments(s, subPayments(s).filter((p) => p.id !== pid));
+
+const norm = (s) => String(s || "").trim().toLowerCase();
+/** Supplier quotes grouped by item (and project), each group cheapest first with the gap to the cheapest. */
+export function compareQuotes(quotes) {
+  const groups = new Map();
+  for (const q of quotes) {
+    const k = (q.projectId ?? "") + "|" + norm(q.item);
+    if (!groups.has(k)) groups.set(k, { key: k, item: q.item, projectId: q.projectId ?? null, quotes: [] });
+    groups.get(k).quotes.push({ ...q, total: Math.round((Number(q.qty) || 0) * (Number(q.price) || 0)) });
+  }
+  return [...groups.values()].map((g) => {
+    const list = g.quotes.sort((a, b) => a.total - b.total || (a.leadDays ?? 1e9) - (b.leadDays ?? 1e9));
+    const best = list[0]?.total ?? 0;
+    return { ...g, quotes: list.map((q, i) => ({ ...q, diff: q.total - best, best: i === 0 })), awarded: list.find((q) => q.status === "awarded") || null };
+  });
+}
+
+/** Cost already committed against a budget: purchase orders + subcontract values; spent = received POs + sub payments. */
+export function committedCost(budget, subs, pos) {
+  const committed = subs.reduce((a, s) => a + (Number(s.contract) || 0), 0) + pos.reduce((a, p) => a + poTotal(p), 0);
+  const spent = subs.reduce((a, s) => a + (Number(s.paid) || 0), 0) + pos.filter((p) => p.status === "received").reduce((a, p) => a + poTotal(p), 0);
+  const b = Number(budget) || 0;
+  return { budget: b, committed, spent, uncommitted: b - committed, pct: b ? Math.round((committed / b) * 100) : 0, over: b > 0 && committed > b };
+}

@@ -584,7 +584,11 @@
   "قماش كتان وخشب زان": "Linen fabric, beech wood",
   "كتان مع بطانة عازلة": "Linen with blackout lining",
   "كوارتز أبيض وجوانب خشب جوز": "White quartz, walnut sides",
-  "كريستال وإطار نحاسي": "Crystal with brass frame"
+  "كريستال وإطار نحاسي": "Crystal with brass frame",
+  "سيراميك أرضيات 60×60": "Floor ceramic 60×60",
+  "الجوهرة للسيراميك": "Al-Gawhara Ceramics",
+  "كليوباترا - موزع معتمد": "Cleopatra – authorised dealer",
+  "النساجون الشرقيون": "Oriental Weavers"
  },
  "tr": {
   "سارة عامر": "Sara Amer",
@@ -1170,6 +1174,10 @@
   "قماش كتان وخشب زان": "Keten kumaş, kayın ağacı",
   "كتان مع بطانة عازلة": "Blackout astarlı keten",
   "كوارتز أبيض وجوانب خشب جوز": "Beyaz kuvars, ceviz yanlar",
-  "كريستال وإطار نحاسي": "Kristal, pirinç çerçeve"
+  "كريستال وإطار نحاسي": "Kristal, pirinç çerçeve",
+  "سيراميك أرضيات 60×60": "Zemin seramiği 60×60",
+  "الجوهرة للسيراميك": "Al-Gawhara Seramik",
+  "كليوباترا - موزع معتمد": "Cleopatra – yetkili bayi",
+  "النساجون الشرقيون": "Oriental Weavers"
  }
 }

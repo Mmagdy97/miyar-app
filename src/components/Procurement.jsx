@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { HardHat, ShoppingCart, MessageCircle, Plus, Pencil, Trash2, Undo2, Check, X } from "lucide-react";
+import { HardHat, ShoppingCart, MessageCircle, Plus, Pencil, Trash2, Undo2, Check, X, Scale, Award, AlertTriangle } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
-import { subsStore, posStore } from "../data/stores";
-import { poTotal, subBalance, procurementTotals, subPayments, addPayment, editPayment, removePayment } from "../lib/procurement";
+import { subsStore, posStore, quotesStore, boqStore } from "../data/stores";
+import { poTotal, subBalance, procurementTotals, subPayments, addPayment, editPayment, removePayment, compareQuotes, committedCost } from "../lib/procurement";
+import { boqRepo, boqTotals } from "../data/boq";
+import { askConfirm } from "../lib/confirm";
 import { whatsappLink } from "../lib/share";
 import { procurementRepo } from "../data/procurement";
-import { projectsStore } from "../data/projects";
+import { projectsStore, useProjectList } from "../data/projects";
 
 const PO_NEXT = { draft: "sent", sent: "received" };
 const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold text-[#0E1A1B] bg-white min-w-0";
@@ -13,22 +15,38 @@ const input = "px-3 py-2 rounded-lg border border-[#E4DDCE] text-xs font-bold te
 function useDemoData() {
   const [subs, setSubs] = subsStore.use();
   const [pos, setPos] = posStore.use();
+  const [quotes, setQuotes] = quotesStore.use();
+  const [boq] = boqStore.use();
+  const newPo = (a, po) => [{ id: Date.now(), no: "PO-" + String(a.length + 1).padStart(3, "0"), ...po, status: "draft" }, ...a];
   return {
-    subs, pos, canUndo: true, restore: setSubs,
+    subs, pos, quotes, canUndo: true, restore: setSubs,
+    budget: () => boqTotals(boq).cost,
+    addQuote: (q) => setQuotes((a) => [...a, { id: Date.now(), ...q, status: "open" }]),
+    delQuote: (id) => setQuotes((a) => a.filter((x) => x.id !== id)),
+    award: (q, group) => {
+      const ids = new Set(group.map((x) => x.id));
+      setQuotes((a) => a.map((x) => (x.id === q.id ? { ...x, status: "awarded" } : ids.has(x.id) && x.status === "open" ? { ...x, status: "rejected" } : x)));
+      setPos((a) => newPo(a, { projectId: q.projectId ?? null, supplier: q.supplier, item: q.item, qty: q.qty, price: q.price }));
+    },
     addSub: (v) => setSubs((a) => [...a, { id: Date.now(), ...v, paid: 0 }]),
     pay: (id, amt) => setSubs((a) => a.map((s) => (s.id === id ? addPayment(s, amt) : s))),
     editPay: (id, pid, v) => setSubs((a) => a.map((s) => (s.id === id ? editPayment(s, pid, v) : s))),
     delPay: (id, pid) => setSubs((a) => a.map((s) => (s.id === id ? removePayment(s, pid) : s))),
-    addPo: (po) => setPos((a) => [{ id: Date.now(), no: "PO-" + String(a.length + 1).padStart(3, "0"), ...po, status: "draft" }, ...a]),
+    addPo: (po) => setPos((a) => newPo(a, po)),
     poNext: (id, status) => setPos((a) => a.map((p) => (p.id === id ? { ...p, status } : p))),
   };
 }
 
 function useLiveData() {
-  const { subs, pos } = procurementRepo.use();
+  const { subs, pos, quotes } = procurementRepo.use();
+  const boq = boqRepo.use();
   const sub = (id) => subs.find((s) => s.id === id);
   return {
-    subs, pos, canUndo: false, restore: () => {},
+    subs, pos, quotes, canUndo: false, restore: () => {},
+    budget: (pid) => boqTotals(pid == null ? boq : boq.filter((i) => i.projectId === pid)).cost,
+    addQuote: (q) => procurementRepo.addQuote(q),
+    delQuote: (id) => procurementRepo.delQuote(id),
+    award: (q, group) => procurementRepo.award(q, group, pos.length),
     addSub: (v) => procurementRepo.addSub(v),
     pay: (id, amt) => sub(id) && procurementRepo.pay(sub(id), amt),
     editPay: (id, pid, v) => sub(id) && procurementRepo.editPay(sub(id), pid, v),
@@ -47,15 +65,30 @@ export default function Procurement() {
 }
 
 function ProcurementView({ data }) {
-  const { subs, pos } = data;
+  const projects = useProjectList();
+  const [pid, setPid] = useState(null); // null = all projects
+  const inP = (x) => pid == null || x.projectId === pid;
+  const subs = data.subs.filter(inP);
+  const pos = data.pos.filter(inP);
+  const quotes = (data.quotes || []).filter(inP);
   const t = procurementTotals(subs, pos);
+  const cc = committedCost(data.budget(pid), subs, pos);
+  const groups = compareQuotes(quotes);
+  const [qf, setQf] = useState({ item: "", qty: "", supplier: "", price: "", leadDays: "" });
+  const addQuote = (e) => {
+    e.preventDefault();
+    if (!qf.item.trim() || !qf.supplier.trim() || !Number(qf.qty) || qf.price === "") return;
+    data.addQuote({ projectId: pid, item: qf.item.trim(), qty: Number(qf.qty), supplier: qf.supplier.trim(), price: Number(qf.price), leadDays: qf.leadDays === "" ? null : Number(qf.leadDays) });
+    setQf({ ...qf, supplier: "", price: "", leadDays: "" });
+  };
+  const award = async (q, g) => { if (await askConfirm(T("rfq.awardConfirm", { s: E(q.supplier), t: money(q.total) }), { yes: T("rfq.award") })) data.award(q, g.quotes); };
   const [sf, setSf] = useState({ name: "", trade: "", contract: "" });
   const [pf, setPf] = useState({ supplier: "", item: "", qty: "", price: "" });
 
   const addSub = (e) => {
     e.preventDefault();
     if (!sf.name.trim() || !Number(sf.contract)) return;
-    data.addSub({ name: sf.name.trim(), trade: sf.trade.trim(), contract: Number(sf.contract) });
+    data.addSub({ name: sf.name.trim(), trade: sf.trade.trim(), contract: Number(sf.contract), projectId: pid });
     setSf({ name: "", trade: "", contract: "" });
   };
   // every payment change keeps a snapshot so the last action can be undone
@@ -69,7 +102,7 @@ function ProcurementView({ data }) {
   const addPo = (e) => {
     e.preventDefault();
     if (!pf.supplier.trim() || !pf.item.trim() || !Number(pf.qty) || !Number(pf.price)) return;
-    data.addPo({ supplier: pf.supplier.trim(), item: pf.item.trim(), qty: Number(pf.qty), price: Number(pf.price) });
+    data.addPo({ supplier: pf.supplier.trim(), item: pf.item.trim(), qty: Number(pf.qty), price: Number(pf.price), projectId: pid });
     setPf({ supplier: "", item: "", qty: "", price: "" });
   };
   const poNext = (id) => { const p = pos.find((x) => x.id === id); if (p && PO_NEXT[p.status]) data.poNext(id, PO_NEXT[p.status]); };
@@ -82,6 +115,27 @@ function ProcurementView({ data }) {
           <h1 className="text-2xl md:text-3xl font-semibold text-[#0E1A1B] flex items-center gap-2.5"><HardHat className="w-7 h-7" /><span>{T("proc.title")}</span></h1>
           <p className="text-xs md:text-sm text-[#4A5757] mt-1">{T("proc.sub")}</p>
         </div>
+
+        {projects.length > 0 && (
+          <select value={pid ?? ""} onChange={(e) => setPid(e.target.value === "" ? null : Number(e.target.value))} aria-label={T("rfq.project")} className={input + " max-w-md w-full"}>
+            <option value="">{T("rfq.allProjects")}</option>
+            {projects.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}
+          </select>
+        )}
+
+        <section className="bg-white rounded-2xl border border-[#E4DDCE] p-4 space-y-3">
+          <h2 className="text-sm font-semibold text-[#0E1A1B]">{T("cc.title")}</h2>
+          <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[["cc.budget", cc.budget], ["cc.committed", cc.committed], ["cc.spent", cc.spent], ["cc.left", cc.uncommitted]].map(([k, v]) => (
+              <div key={k} className="rounded-lg p-3 bg-[#F6F3EC] text-center">
+                <span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span>
+                <span className={`text-base md:text-lg font-semibold tabular-nums ${k === "cc.left" && v < 0 ? "text-rose-700" : "text-[#0E1A1B]"}`}>{money(v, { compact: true })}</span>
+              </div>
+            ))}
+          </div>
+          {cc.budget > 0 && <div className="h-2 rounded-full bg-[#EFE9DC] overflow-hidden"><div className={`h-full ${cc.over ? "bg-rose-600" : "bg-[#2E6F73]"}`} style={{ width: Math.min(100, cc.pct) + "%" }} /></div>}
+          <p className={`text-[11px] font-bold flex items-center gap-1.5 ${cc.over ? "text-rose-700" : "text-[#64706F]"}`}>{cc.over && <AlertTriangle className="w-4 h-4" aria-hidden="true" />}{cc.budget > 0 ? T(cc.over ? "cc.over" : "cc.pct", { n: cc.pct }) : T("cc.noBudget")}</p>
+        </section>
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">
           {[["proc.k.subs", t.subContracts], ["proc.k.subout", t.subOutstanding], ["proc.k.poopen", t.poOpen], ["proc.k.poall", t.poAll]].map(([k, v]) => (
@@ -144,6 +198,38 @@ function ProcurementView({ data }) {
             <input required type="number" min={1} placeholder={T("proc.contract")} value={sf.contract} onChange={(e) => setSf({ ...sf, contract: e.target.value })} className={input + " w-36"} />
             <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#2E6F73] cursor-pointer"><Plus className="w-4 h-4" />{T("proc.addsub")}</button>
           </form>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-base font-semibold text-[#0E1A1B] flex items-center gap-2"><Scale className="w-5 h-5" />{T("rfq.title")}</h2>
+          <p className="text-[11px] text-[#64706F]">{T("rfq.hint")}</p>
+          <form onSubmit={addQuote} className="flex flex-wrap gap-2 items-end">
+            <input required placeholder={T("proc.item")} value={qf.item} onChange={(e) => setQf({ ...qf, item: e.target.value })} className={input + " flex-1 min-w-40"} />
+            <input required type="number" min={0} step="any" placeholder={T("proc.qty")} value={qf.qty} onChange={(e) => setQf({ ...qf, qty: e.target.value })} className={input + " w-24"} />
+            <input required placeholder={T("proc.supplier")} value={qf.supplier} onChange={(e) => setQf({ ...qf, supplier: e.target.value })} className={input + " w-40"} />
+            <input required type="number" min={0} step="any" placeholder={T("proc.price")} value={qf.price} onChange={(e) => setQf({ ...qf, price: e.target.value })} className={input + " w-28"} />
+            <input type="number" min={0} placeholder={T("rfq.lead")} value={qf.leadDays} onChange={(e) => setQf({ ...qf, leadDays: e.target.value })} className={input + " w-28"} />
+            <button type="submit" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#2E6F73] hover:bg-[#245A5E] cursor-pointer"><Plus className="w-4 h-4" />{T("rfq.add")}</button>
+          </form>
+          {groups.length === 0 && <p className="text-xs text-[#64706F]">{T("rfq.none")}</p>}
+          {groups.map((g) => (
+            <div key={g.key} className="bg-white rounded-lg border border-[#E4DDCE] p-4 space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-sm font-semibold text-[#0E1A1B] flex-1">{E(g.item)} <span className="text-[11px] font-bold text-[#64706F]">· {T("rfq.count", { n: g.quotes.length })}</span></p>
+                {g.awarded && <span className="text-[10px] font-bold px-2 py-0.5 rounded-md border bg-emerald-50 text-emerald-700 border-emerald-200">{T("rfq.awardedTo", { s: E(g.awarded.supplier) })}</span>}
+              </div>
+              {g.quotes.map((q) => (
+                <div key={q.id} className={`flex flex-wrap items-center gap-2 text-xs rounded-lg p-2 ${q.status === "awarded" ? "bg-emerald-50" : q.status === "rejected" ? "opacity-60" : q.best ? "bg-[#F6F3EC]" : ""}`}>
+                  <span className="flex-1 min-w-32 font-semibold text-[#0E1A1B]">{E(q.supplier)}{q.leadDays != null && <span className="text-[11px] font-normal text-[#64706F]"> · {T("rfq.days", { n: q.leadDays })}</span>}</span>
+                  <span className="text-[#4A5757] tabular-nums">{q.qty} × {money(q.price)}</span>
+                  <span className="font-semibold tabular-nums w-24 text-end">{money(q.total)}</span>
+                  <span className={`w-40 text-end text-[11px] font-bold ${q.best ? "text-emerald-700" : "text-[#4A5757]"}`}>{[q.best ? T("rfq.best") : "+" + money(q.diff), q.status === "awarded" && T("rfq.awarded"), q.status === "rejected" && T("rfq.rejected")].filter(Boolean).join(" · ")}</span>
+                  {!g.awarded && q.status === "open" && <button type="button" onClick={() => award(q, g)} className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-bold text-white bg-[#2E6F73] cursor-pointer"><Award className="w-3.5 h-3.5" aria-hidden="true" />{T("rfq.award")}</button>}
+                  {!g.awarded && <button type="button" onClick={() => data.delQuote(q.id)} aria-label={T("proc.del")} className="p-1.5 rounded-lg text-[#64706F] hover:text-rose-700 hover:bg-rose-50 cursor-pointer"><Trash2 className="w-4 h-4" /></button>}
+                </div>
+              ))}
+            </div>
+          ))}
         </section>
 
         <section className="space-y-3">
