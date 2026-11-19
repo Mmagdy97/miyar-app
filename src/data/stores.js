@@ -83,3 +83,9 @@ export const TECH_SETTINGS_DEFAULT = {
 export const techSettingsStore = createPersistedStore("miyar:techsettings:v1", TECH_SETTINGS_DEFAULT, (x) => x);
 
 export const boqVersionsStore = createPersistedStore("miyar:boqVersions:v1", [], (x) => x);
+
+// RFI (استفسارات فنية): open -> answered -> closed.
+export const rfiStore = createPersistedStore("miyar:rfi:v1", [
+  { id: 1, projectId: 1, no: 1, title: "ارتفاع الفالس سيلينج في الريسبشن", question: "هل نخفض الفالس سيلينج 15 سم لتمرير مجرى التكييف أم نغيّر مساره؟", answer: "", due: "2026-11-17", status: "open", by: "كريم مصطفى", date: "2026-11-14" },
+  { id: 2, projectId: 1, no: 2, title: "مقاس فتحة باب الماستر", question: "المخطط يوضح 90 سم والموجود في الموقع 85 سم.", answer: "نكبّر الفتحة إلى 90 سم حسب المخطط المعتمد.", due: "2026-11-20", status: "answered", by: "كريم مصطفى", date: "2026-11-12" },
+], localize);

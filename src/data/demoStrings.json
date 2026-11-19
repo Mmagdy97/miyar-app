@@ -588,7 +588,12 @@
   "سيراميك أرضيات 60×60": "Floor ceramic 60×60",
   "الجوهرة للسيراميك": "Al-Gawhara Ceramics",
   "كليوباترا - موزع معتمد": "Cleopatra – authorised dealer",
-  "النساجون الشرقيون": "Oriental Weavers"
+  "النساجون الشرقيون": "Oriental Weavers",
+  "ارتفاع الفالس سيلينج في الريسبشن": "False ceiling height in the reception",
+  "هل نخفض الفالس سيلينج 15 سم لتمرير مجرى التكييف أم نغيّر مساره؟": "Do we drop the false ceiling 15 cm to pass the AC duct, or reroute the duct?",
+  "مقاس فتحة باب الماستر": "Master door opening size",
+  "المخطط يوضح 90 سم والموجود في الموقع 85 سم.": "The drawing shows 90 cm but the site opening is 85 cm.",
+  "نكبّر الفتحة إلى 90 سم حسب المخطط المعتمد.": "Enlarge the opening to 90 cm per the approved drawing."
  },
  "tr": {
   "سارة عامر": "Sara Amer",
@@ -1178,6 +1183,11 @@
   "سيراميك أرضيات 60×60": "Zemin seramiği 60×60",
   "الجوهرة للسيراميك": "Al-Gawhara Seramik",
   "كليوباترا - موزع معتمد": "Cleopatra – yetkili bayi",
-  "النساجون الشرقيون": "Oriental Weavers"
+  "النساجون الشرقيون": "Oriental Weavers",
+  "ارتفاع الفالس سيلينج في الريسبشن": "Resepsiyonda asma tavan yüksekliği",
+  "هل نخفض الفالس سيلينج 15 سم لتمرير مجرى التكييف أم نغيّر مساره؟": "Klima kanalı için asma tavanı 15 cm mi indirelim, yoksa kanalın güzergahını mı değiştirelim?",
+  "مقاس فتحة باب الماستر": "Ana yatak odası kapı boşluğu ölçüsü",
+  "المخطط يوضح 90 سم والموجود في الموقع 85 سم.": "Çizimde 90 cm yazıyor ancak sahadaki boşluk 85 cm.",
+  "نكبّر الفتحة إلى 90 سم حسب المخطط المعتمد.": "Boşluk onaylı çizime göre 90 cm'ye genişletilsin."
  }
 }

@@ -22,6 +22,7 @@ import {
   CalendarDays,
   ShoppingCart,
   ShieldCheck,
+  MessageCircleQuestion,
 } from "lucide-react";
 
 /**
@@ -42,6 +43,7 @@ export const ROLE_CONFIG = {
     { id: "Change Orders", name: "أوامر التغيير", label: "أوامر التغيير", icon: FilePenLine },
     { id: "Procurement", name: "الباطن والمشتريات", label: "الباطن والمشتريات", icon: Truck },
     { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
+    { id: "RFI", name: "الاستفسارات الفنية", label: "الاستفسارات الفنية (RFI)", icon: MessageCircleQuestion },
     { id: "Warranty", name: "الضمان والصيانة", label: "الضمان والصيانة", icon: ShieldCheck },
     { id: "Team", name: "فريق العمل", label: "فريق العمل", icon: Users },
     { id: "Audit Log", name: "سجل المراجعة", label: "سجل المراجعة", icon: History },
@@ -51,12 +53,14 @@ export const ROLE_CONFIG = {
     { id: "My Tasks", name: "مهامي الميدانية", label: "مهامي الميدانية", icon: ListTodo },
     { id: "Daily Reports", name: "التقارير اليومية", label: "التقارير اليومية", icon: FileText },
     { id: "Snag List", name: "قائمة الملاحظات", label: "قائمة الملاحظات (Snag List)", icon: AlertTriangle },
+    { id: "RFI", name: "الاستفسارات الفنية", label: "الاستفسارات الفنية (RFI)", icon: MessageCircleQuestion },
     { id: "Material Requests", name: "طلبات تشوين المواد", label: "طلبات تشوين المواد", icon: PackageSearch },
     { id: "Attendance", name: "الحضور والعمالة", label: "الحضور والعمالة", icon: UsersRound },
   ],
   "Technical Office": [
     { id: "Dashboard", name: "لوحة التحكم", label: "لوحة التحكم الهندسية", icon: LayoutDashboard },
     { id: "BOQ Management", name: "إدارة المقايسات", label: "إدارة المقايسات (BOQ)", icon: ClipboardCheck },
+    { id: "RFI", name: "الاستفسارات الفنية", label: "الاستفسارات الفنية (RFI)", icon: MessageCircleQuestion },
     { id: "Drawings & Docs", name: "المخططات والمستندات", label: "المخططات والمستندات", icon: FileText },
     { id: "Moodboard", name: "الموودبورد", label: "الموودبورد", icon: Palette },
     { id: "Selections", name: "الاختيارات وFF&E", label: "الاختيارات وFF&E", icon: Armchair },
