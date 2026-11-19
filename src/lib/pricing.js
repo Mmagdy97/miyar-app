@@ -9,10 +9,13 @@ export const PRICES = {
   USD: [0, 39, 89],
 };
 
+/** Monthly price of one extra active project, per market (about half the Professional price). */
+export const EXTRA_PROJECT = { EGP: 450, SAR: 75, AED: 75, KWD: 6, JOD: 13, TRY: 650, USD: 20 };
+
 export const PLANS = [
   { key: "free", n: 4, projects: 1 },
-  { key: "pro", n: 5, projects: 3, highlight: true },
-  { key: "office", n: 5, projects: 12 },
+  { key: "pro", n: 5, projects: 4, highlight: true },
+  { key: "office", n: 5, projects: 8 },
   { key: "enterprise", n: 4, projects: Infinity, custom: true },
 ];
 

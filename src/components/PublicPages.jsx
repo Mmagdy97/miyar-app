@@ -5,7 +5,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
 
-import { PRICES, PLANS, CYCLES, planPrice } from "../lib/pricing";
+import { PRICES, PLANS, CYCLES, planPrice, EXTRA_PROJECT } from "../lib/pricing";
 
 export function PricingSection({ onStart }) {
   const { t, currency } = useI18n();
@@ -90,6 +90,7 @@ export function PricingSection({ onStart }) {
             <li key={k} className="rounded-2xl bg-[#F6F3EC] p-4">
               <p className="text-sm font-semibold">{t(`addons.${k}.t`)}</p>
               <p className="mt-1 text-xs leading-relaxed text-[#4A5757]">{t(`addons.${k}.d`)}</p>
+              {k === "project" && <p className="mt-1 text-xs font-bold text-[#0E1A1B]">{t("pricing.extra", { p: formatMoney(EXTRA_PROJECT[cur], cur, intlLocale(), { compact: true }) })}</p>}
             </li>
           ))}
         </ul>

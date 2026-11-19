@@ -17,8 +17,8 @@ describe("entitlements", () => {
     expect(isTabAllowed("Dashboard")).toBe(true);
   });
   it("limits and add-ons", () => {
-    expect(orgLimit({ plan: "pro" }, "projects")).toBe(3);
-    expect(orgLimit({ plan: "pro", extra_projects: 2 }, "projects")).toBe(5);
+    expect(orgLimit({ plan: "pro" }, "projects")).toBe(4);
+    expect(orgLimit({ plan: "pro", extra_projects: 2 }, "projects")).toBe(6);
     expect(withinLimit({ plan: "free" }, "projects", 1)).toBe(false);
     expect(withinLimit({ plan: "office" }, "cashEngineers", 99)).toBe(true);
     expect(withinLimit(null, "projects", 99)).toBe(true);

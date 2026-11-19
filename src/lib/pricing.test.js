@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { PRICES, PLANS, planPrice, projectLimit } from "./pricing";
+import { EXTRA_PROJECT, PRICES, PLANS, planPrice, projectLimit } from "./pricing";
 
 describe("pricing", () => {
   it("cycles: 12 months = pay 10; 3 and 6 months discounted", () => {
@@ -18,8 +18,11 @@ describe("pricing", () => {
   });
   it("limits by active projects", () => {
     expect(projectLimit("free")).toBe(1);
-    expect(projectLimit("pro")).toBe(3);
-    expect(projectLimit("office")).toBe(12);
+    expect(projectLimit("pro")).toBe(4);
+    expect(projectLimit("office")).toBe(8);
     expect(PLANS.length).toBe(4);
+  });
+  it("extra project price exists for every market", () => {
+    for (const k of Object.keys(PRICES)) expect(EXTRA_PROJECT[k] > 0).toBe(true);
   });
 });

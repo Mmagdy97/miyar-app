@@ -24,8 +24,8 @@ export const PLAN_FEATURES = { free: [], pro: PRO, office: OFFICE, enterprise: E
 /** Numeric limits per plan. Infinity = unlimited. Exceeding one means upgrading or buying an add-on. */
 export const PLAN_LIMITS = {
   free:       { projects: 1,        cashEngineers: 1,        themes: 1,        archiveDays: 30 },
-  pro:        { projects: 3,        cashEngineers: 5,        themes: 3,        archiveDays: 365 },
-  office:     { projects: 12,       cashEngineers: Infinity, themes: Infinity, archiveDays: Infinity },
+  pro:        { projects: 4,        cashEngineers: 5,        themes: 3,        archiveDays: 365 },
+  office:     { projects: 8,        cashEngineers: Infinity, themes: Infinity, archiveDays: Infinity },
   enterprise: { projects: Infinity, cashEngineers: Infinity, themes: Infinity, archiveDays: Infinity },
 };
 
