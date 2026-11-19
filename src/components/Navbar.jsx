@@ -310,9 +310,12 @@ function Navbar({
             <p className="text-xs font-bold text-[#0E2A47] leading-tight">
               {account ? account.name : D("م. محمد أحمد")}
             </p>
-            <p className="text-[10px] text-[#475569] font-medium leading-tight mt-0.5">
-              {roleShort(currentRole)}
-            </p>
+            {/* Role shown here only when the role switcher is hidden (real accounts). */}
+            {account && (
+              <p className="text-[10px] text-[#475569] font-medium leading-tight mt-0.5">
+                {roleShort(currentRole)}
+              </p>
+            )}
           </div>
         </div>
 

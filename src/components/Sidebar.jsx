@@ -1,8 +1,8 @@
 import LogoMark from "./LogoMark";
 import { isTabAllowed } from "../lib/entitlements";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Download, Building2, X, Menu } from "lucide-react";
-import { ROLE_CONFIG, roleTitle as roleTitleOf, navLabel } from "../config/roles";
+import { ChevronLeft, ChevronRight, X, Menu } from "lucide-react";
+import { ROLE_CONFIG, navLabel } from "../config/roles";
 import { useI18n } from "../i18n";
 
 function Sidebar({
@@ -15,12 +15,9 @@ function Sidebar({
   onCloseMobile,
   onRoleChange,
   hideHeader = false,
-  isInstallable = false,
-  onInstallClick,
 }) {
   const items = (ROLE_CONFIG[currentRole] || []).filter((i) => isTabAllowed(i.id));
   const { t } = useI18n();
-  const roleTitle = roleTitleOf(currentRole) || currentRole;
   const [tooltip, setTooltip] = useState({ visible: false, text: "", top: 0 });
   const sidebarRef = useRef(null);
   const navRef = useRef(null);
@@ -100,9 +97,6 @@ function Sidebar({
             })}
             </div>
           </nav>
-          {isInstallable && (
-            <button type="button" onClick={onInstallClick} aria-label={t("pwa.install")} className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-white/80 hover:bg-white/10 cursor-pointer"><Download className="w-5 h-5" /></button>
-          )}
         </div>
         {tooltip.visible && (
           <div className="absolute start-[76px] z-50 px-3 py-1.5 text-xs font-semibold text-white bg-[var(--panel)] rounded-full shadow-md whitespace-nowrap pointer-events-none" style={{ top: tooltip.top, transform: "translateY(-50%)" }}>
@@ -167,25 +161,14 @@ function Sidebar({
         </div>
       )}
 
-      {/* Role Badge inside Sidebar (Pure White & Light Cream on Dark) */}
-      {!collapsed && (
-        <div className="mx-3 mt-1 mb-3 p-3 rounded-2xl bg-white/10">
-          <p className="text-xs text-white/60 font-medium">
-            {t("menu.currentRole")}
-          </p>
-          <p className="text-sm font-semibold text-white mt-0.5 truncate">
-            {roleTitle}
-          </p>
-        </div>
-      )}
-
       {/* Nav Items */}
       <nav ref={navRef} className="relative flex-1 ps-3 pe-0 mt-2 space-y-1 overflow-y-auto">
         <span aria-hidden="true" className="absolute start-3 end-0 rounded-s-2xl side-notch bg-[var(--paper)] pointer-events-none transition-[transform,height,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]" style={{ transform: `translateY(${ind.y}px)`, height: ind.h, opacity: ind.h ? 1 : 0 }} />
-        {items.map((item) => {
+        {items.map((item, idx) => {
           const { id, name, icon: Icon } = item;
           const label = navLabel(currentRole, item);
           const itemName = name || id;
+          const groupHead = item.group && item.group !== items[idx - 1]?.group ? item.group : null;
 
           // Robust check for active tab:
           const isItemDashboard =
@@ -200,8 +183,9 @@ function Sidebar({
             activeTab === label;
 
           return (
+            <div key={id || itemName}>
+            {groupHead && <p className={`text-[11px] font-semibold tracking-wide text-slate-400 px-3 mb-1 ${idx ? "mt-4" : "mt-1"}`}>{t("nav.g." + groupHead)}</p>}
             <button
-              key={id || itemName}
               data-tour={id}
               ref={isActive ? activeRef : null}
               onClick={() => {
@@ -231,6 +215,7 @@ function Sidebar({
                 <span className="truncate leading-normal tracking-tight">{label}</span>
               )}
             </button>
+            </div>
           );
         })}
       </nav>
@@ -243,24 +228,6 @@ function Sidebar({
         >
           {tooltip.text}
           <div className="absolute -start-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-t border-e border-[#E2E8F0] rotate-45" />
-        </div>
-      )}
-
-      {/* PWA Install Button (Visible in desktop sidebar and mobile drawer) */}
-      {isInstallable && (
-        <div className={`px-3 py-2 ${collapsed ? "flex justify-center" : ""}`}>
-          <button
-            onClick={onInstallClick}
-            onMouseEnter={(e) => handleMouseEnter(e, t("pwa.installTip"))}
-            onMouseLeave={handleMouseLeave}
-            className={`flex items-center justify-center gap-2 rounded-full bg-white/10 text-white font-medium text-xs hover:bg-white/15 transition-all cursor-pointer shadow-2xs active:scale-95 group ${
-              collapsed ? "w-10 h-10 p-0" : "w-full px-3.5 py-2.5"
-            }`}
-            title={t("pwa.installTip")}
-          >
-            <Download className="w-4 h-4 shrink-0 transition-transform group-hover:-translate-y-0.5" />
-            {!collapsed && <span>{t("pwa.install")}</span>}
-          </button>
         </div>
       )}
 
