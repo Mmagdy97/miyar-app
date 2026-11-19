@@ -38,7 +38,7 @@ function Calculator() {
       </div>
       <div className="mt-7 grid sm:grid-cols-3 gap-3">
         {rows.map(([k, d, price, me]) => (
-          <div key={k} className={`rounded-[22px] p-5 ${me ? "bg-[var(--md-primary)] text-[var(--md-on-primary)]" : "bg-[var(--paper-2)]"}`}>
+          <div key={k} className={`rounded-[22px] p-5 ${me ? "bg-[#0F3D3E] text-white" : "bg-[var(--paper-2)]"}`}>
             <p className="text-sm font-semibold opacity-90">{T(k)}</p>
             <p className="mt-2 font-display text-4xl font-semibold tabular-nums">{price}<span className="text-sm font-medium opacity-70 ms-1">{miyar === 0 && me ? "" : T("calc.per")}</span></p>
             <p className="mt-2 text-xs leading-relaxed opacity-75">{T(d)}</p>
@@ -62,11 +62,11 @@ export default function LandingWhy() {
       <div className="reveal mt-10 grid md:grid-cols-2 gap-3 sm:gap-4 text-start">
         <div className="lp-card p-5 sm:p-7">
           <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--ink-3)]">{T("why.before")}</h3>
-          <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px] text-[var(--ink-2)]"><XCircle className="w-5 h-5 shrink-0 text-[var(--md-on-surface)]" aria-hidden="true" />{T(`why.b${n}`)}</li>)}</ul>
+          <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px] text-[var(--ink-2)]"><XCircle className="w-5 h-5 shrink-0 text-[#DC2626]" aria-hidden="true" />{T(`why.b${n}`)}</li>)}</ul>
         </div>
-        <div className="rounded-[28px] p-5 sm:p-7 bg-[var(--md-primary)] text-[var(--md-on-primary)]">
-          <h3 className="text-sm font-bold uppercase tracking-wide opacity-70">{T("why.after")}</h3>
-          <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px]"><CheckCircle2 className="w-5 h-5 shrink-0 text-[var(--md-on-primary)]" aria-hidden="true" />{T(`why.a${n}`)}</li>)}</ul>
+        <div className="rounded-[28px] p-5 sm:p-7 bg-[#0F3D3E] text-white">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-[#7FB3B8]">{T("why.after")}</h3>
+          <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px]"><CheckCircle2 className="w-5 h-5 shrink-0 text-[#4ADE80]" aria-hidden="true" />{T(`why.a${n}`)}</li>)}</ul>
         </div>
       </div>
 

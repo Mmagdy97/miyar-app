@@ -2,7 +2,7 @@ import LogoMark from "./LogoMark";
 import { D } from "../data/dataI18n";
 import { PricingSection, LegalPage } from "./PublicPages";
 import { tr_ as T } from "../i18n";
-import LandingMono from "./LandingMono";
+import LandingBody from "./LandingBody";
 import SettingsSwitcher from "./SettingsSwitcher";
 import { useI18n } from "../i18n";
 import { useState } from "react";
@@ -163,10 +163,10 @@ export default function LandingAndLogin({ onLogin }) {
   return (
     <div
      
-      className="m3 mono min-h-screen w-full relative isolate flex flex-col font-ibm bg-[var(--md-surface)] text-[var(--md-on-surface)] selection:bg-[var(--md-primary)] selection:text-[var(--md-on-primary)] overflow-x-hidden"
+      className="m3 min-h-screen w-full relative isolate flex flex-col font-ibm bg-[var(--md-surface)] text-[var(--md-on-surface)] selection:bg-[var(--md-primary)] selection:text-[var(--md-on-primary)] overflow-x-hidden"
     >
 
-      {SITE === "landing" && <LandingMono openModal={openModal} openApp={openApp} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />}
+      {SITE === "landing" && <LandingBody openModal={openModal} openApp={openApp} setLegalPage={setLegalPage} scrollToSection={scrollToSection} />}
 
       {/* 6. The Login & MVP Demo Modal */}
       {isLoginModalOpen && (
