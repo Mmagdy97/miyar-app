@@ -635,6 +635,8 @@ export default {
   "office.color": "لون الهوية",
   "office.address": "العنوان",
   "office.email": "البريد الإلكتروني",
+  "pinv.export": "تصدير للمحاسب (CSV)",
+  "pinv.date": "التاريخ",
   "fc.eac": "التكلفة المتوقعة عند الإنجاز",
   "fc.toGo": "المتبقي للصرف",
   "fc.var": "الفرق عن الميزانية",

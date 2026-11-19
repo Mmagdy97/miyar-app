@@ -635,6 +635,8 @@ export default {
   "office.color": "Kurumsal renk",
   "office.address": "Adres",
   "office.email": "E-posta",
+  "pinv.export": "Muhasebeci için dışa aktar (CSV)",
+  "pinv.date": "Tarih",
   "fc.eac": "Tamamlanma tahmini maliyet",
   "fc.toGo": "Harcanacak kalan",
   "fc.var": "Bütçe farkı",

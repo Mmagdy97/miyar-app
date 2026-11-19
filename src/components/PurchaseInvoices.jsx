@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { ShoppingCart, Plus, Eye, EyeOff, Archive, FileText } from "lucide-react";
+import { ShoppingCart, Plus, Eye, EyeOff, Archive, FileText, Download } from "lucide-react";
 import EmptyState from "./EmptyState";
-import { tr_ as T, E, money } from "../i18n";
+import { tr_ as T, E, money, getCurrency } from "../i18n";
+import { officeStore, defaultVat } from "../data/office";
+import { billRows, toCsv, download, BILL_KEYS } from "../lib/accountant";
 import { useProjectList, projectsStore } from "../data/projects";
 import { purchasesRepo, purchaseFileUrl } from "../data/purchases";
 
@@ -16,6 +18,7 @@ export default function PurchaseInvoices({ role = "Admin" }) {
   const rows = purchasesRepo.use();
   const archived = purchasesRepo.useArchived();
   const [demo, setDemo] = useState([]);
+  const [office] = officeStore.use();
   const [pid, setPid] = useState(null);
   const [f, setF] = useState({ title: "", supplier: "", amount: "", file: null });
   const [busy, setBusy] = useState(false);
@@ -24,13 +27,18 @@ export default function PurchaseInvoices({ role = "Admin" }) {
   const all = live ? rows : demo;
   const mine = all.filter((i) => i.projectId === project.id && (!isClient || i.visible));
   const total = mine.reduce((s, i) => s + i.amount, 0);
+  const exportBills = () => {
+    const currency = getCurrency();
+    const rows = billRows(all, { vatRate: office.vatRate ?? defaultVat(currency), currency, projectName: (id) => E(projects.find((p) => p.id === id)?.name || "") });
+    download(`miyar-supplier-bills-${new Date().toISOString().slice(0, 10)}.csv`, toCsv([T("exp.no"), T("pinv.date"), T("pinv.supplier"), T("exp.project"), T("pinv.titlePh"), T("exp.net"), T("exp.rate"), T("exp.vat"), T("exp.gross"), T("exp.cur")], rows, BILL_KEYS), "text/csv");
+  };
   const open = async (i) => { const u = await purchaseFileUrl(i.file); if (u) window.open(u, "_blank", "noopener"); };
   const submit = async (e) => {
     e.preventDefault();
     if (!f.title.trim() || !Number(f.amount) || busy) return;
     setBusy(true);
     const v = { projectId: project.id, title: f.title.trim(), supplier: f.supplier.trim(), amount: Number(f.amount), file: f.file };
-    const ok = live ? await purchasesRepo.add(v) : (setDemo((a) => [{ id: Date.now(), ...v, file: "", visible: false }, ...a]), true);
+    const ok = live ? await purchasesRepo.add(v) : (setDemo((a) => [{ id: Date.now(), ...v, file: "", visible: false, at: new Date().toISOString() }, ...a]), true);
     setBusy(false);
     if (ok) setF({ title: "", supplier: "", amount: "", file: null });
   };
@@ -39,7 +47,10 @@ export default function PurchaseInvoices({ role = "Admin" }) {
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-24 font-ibm w-full max-w-full overflow-x-hidden">
       <div className="max-w-4xl mx-auto space-y-4">
-        <h2 className="text-xl font-semibold text-[#0E1A1B] flex items-center gap-2"><ShoppingCart className="w-6 h-6" /><span>{T("pinv.title")}</span></h2>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-xl font-semibold text-[#0E1A1B] flex items-center gap-2"><ShoppingCart className="w-6 h-6" /><span>{T("pinv.title")}</span></h2>
+          {!isClient && all.length > 0 && <button type="button" onClick={exportBills} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-[#E4DDCE] bg-white hover:bg-[#F6F3EC] text-xs font-bold cursor-pointer"><Download className="w-3.5 h-3.5" />{T("pinv.export")}</button>}
+        </div>
         {projects.length > 1 && (
           <select value={project.id} onChange={(e) => setPid(Number(e.target.value))} aria-label={T("pinv.title")} className={input + " w-full sm:w-64"}>
             {projects.map((p) => <option key={p.id} value={p.id}>{E(p.name)}</option>)}

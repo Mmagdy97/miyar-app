@@ -25,8 +25,19 @@ export function invoiceRows(invoices, { vatRate, currency, client = "", project 
 const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
 
 /** UTF-8 BOM so Excel reads Arabic/Turkish correctly. */
-export function toCsv(headers, rows) {
-  const keys = ["no", "dueDate", "client", "project", "net", "vatRate", "vat", "gross", "status", "currency"];
+export const INVOICE_KEYS = ["no", "dueDate", "client", "project", "net", "vatRate", "vat", "gross", "status", "currency"];
+export const BILL_KEYS = ["no", "date", "supplier", "project", "title", "net", "vatRate", "vat", "gross", "currency"];
+
+/** Supplier bills (purchase invoices): amounts are NET, VAT added on top, like sales invoices. */
+export function billRows(bills, { vatRate, currency, projectName = () => "" }) {
+  const cur = isSupportedCurrency(currency) ? currency : "EGP";
+  return bills.map((b) => {
+    const { net, vat, gross } = withVat(b.amount, vatRate / 100, cur);
+    return { no: `PB-${String(b.id).padStart(5, "0")}`, date: String(b.at || "").slice(0, 10), supplier: b.supplier || "", project: projectName(b.projectId), title: b.title, net, vatRate, vat, gross, currency: cur };
+  });
+}
+
+export function toCsv(headers, rows, keys = INVOICE_KEYS) {
   return "﻿" + [headers, ...rows.map((r) => keys.map((k) => r[k]))].map((r) => r.map(esc).join(",")).join("\r\n");
 }
 

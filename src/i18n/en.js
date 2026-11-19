@@ -635,6 +635,8 @@ export default {
   "office.color": "Brand colour",
   "office.address": "Address",
   "office.email": "Email",
+  "pinv.export": "Export for accountant (CSV)",
+  "pinv.date": "Date",
   "fc.eac": "Forecast at completion",
   "fc.toGo": "Still to spend",
   "fc.var": "Variance vs budget",
