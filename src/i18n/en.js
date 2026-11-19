@@ -635,6 +635,7 @@ export default {
   "office.color": "Brand colour",
   "office.address": "Address",
   "office.email": "Email",
+  "mono.invert": "invert color",
   "pinv.export": "Export for accountant (CSV)",
   "pinv.date": "Date",
   "fc.eac": "Forecast at completion",

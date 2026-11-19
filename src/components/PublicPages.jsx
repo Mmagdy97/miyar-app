@@ -29,7 +29,7 @@ export function PricingSection({ onStart }) {
             {CYCLES.map((c) => (
               <button key={c.months} onClick={() => setMonths(c.months)} aria-pressed={months === c.months} className={pill(months === c.months)}>
                 {t(`pricing.cycle.${c.months}`)}
-                {c.save > 0 && <span className={`ms-1.5 ${months === c.months ? "text-[#FDBA74]" : "text-[var(--md-primary)]"}`}>· {c.months === 12 ? t("pricing.save12") : t("pricing.save", { n: c.save })}</span>}
+                {c.save > 0 && <span className={`ms-1.5 ${months === c.months ? "text-[var(--md-on-primary)] opacity-70" : "text-[var(--md-primary)]"}`}>· {c.months === 12 ? t("pricing.save12") : t("pricing.save", { n: c.save })}</span>}
               </button>
             ))}
           </div>

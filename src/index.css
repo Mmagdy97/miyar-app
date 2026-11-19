@@ -689,3 +689,22 @@ html.dark .m3 .lp-t1 { color: var(--md-on-primary-container); } html.dark .m3 .l
 .m3 .m3-tab { height: 40px; padding-inline: 16px; border-radius: 9999px; font-weight: 600; font-size: 13px; color: var(--md-on-surface-variant); }
 .m3 .m3-tab[aria-current="true"] { background: var(--md-secondary-container); color: var(--md-on-secondary-container); }
 @media (min-width:1024px){ .m3 .lp-notch { border-end-start-radius: var(--shape-xl); } }
+
+/* ===== Monochrome Swiss scope (landing). Overrides the M3 roles with grey / black; "invert color" = dark. ===== */
+.mono { --mono-line: #d0d0d0; --md-primary: #111111; --md-on-primary: #f0f0f0; --md-primary-container: #e2e2e2; --md-on-primary-container: #111111; --md-secondary-container: #e2e2e2; --md-on-secondary-container: #111111; --md-tertiary: #111111; --md-tertiary-container: #e2e2e2; --md-on-tertiary-container: #111111; --md-surface: #f0f0f0; --md-background: #f0f0f0; --md-on-surface: #111111; --md-on-surface-variant: #555555; --md-outline: #111111; --md-outline-variant: #d0d0d0; --md-surface-container-lowest: #f8f8f8; --md-surface-container-low: #e9e9e9; --md-surface-container: #e4e4e4; --md-surface-container-high: #dedede; --md-surface-container-highest: #d6d6d6; --md-inverse-surface: #111111; --md-inverse-primary: #f0f0f0; font-family: "Helvetica Neue", Helvetica, Arial, "IBM Plex Sans Arabic", sans-serif; }
+html.dark .mono { --mono-line: #333333; --md-primary: #f0f0f0; --md-on-primary: #111111; --md-primary-container: #2a2a2a; --md-on-primary-container: #f0f0f0; --md-secondary-container: #2a2a2a; --md-on-secondary-container: #f0f0f0; --md-tertiary: #f0f0f0; --md-tertiary-container: #2a2a2a; --md-on-tertiary-container: #f0f0f0; --md-surface: #111111; --md-background: #111111; --md-on-surface: #f0f0f0; --md-on-surface-variant: #a8a8a8; --md-outline: #f0f0f0; --md-outline-variant: #333333; --md-surface-container-lowest: #0a0a0a; --md-surface-container-low: #181818; --md-surface-container: #1d1d1d; --md-surface-container-high: #232323; --md-surface-container-highest: #2a2a2a; --md-inverse-surface: #f0f0f0; --md-inverse-primary: #111111; }
+.mono [class*="rounded"], .mono .m3-btn, .mono .m3-chip, .mono .m3-tab { border-radius: 0 !important; }
+.mono .lp-card, .mono .lp-frost { box-shadow: none; }
+.mono-bar { background: color-mix(in srgb, var(--md-surface) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--mono-line); }
+.mono-grid { background-image: linear-gradient(to right, var(--mono-line) 1px, transparent 1px); background-size: 25% 100%; background-position: 0 0; opacity: .55; }
+.mono-word { font-family: "Helvetica Neue", Helvetica, Arial, "IBM Plex Sans Arabic", sans-serif; font-weight: 900; font-size: clamp(5rem, 27vw, 26rem); line-height: .8; letter-spacing: -.04em; text-transform: uppercase; padding: 1.5rem 0 0; margin: 0; overflow: hidden; white-space: nowrap; text-align: center; }
+html[dir="rtl"] .mono-word { letter-spacing: 0; line-height: 1; font-size: clamp(5rem, 24vw, 22rem); }
+.mono-h2 { font-size: clamp(2rem, 6vw, 5.5rem); line-height: 1.02; letter-spacing: -.03em; font-weight: 400; text-wrap: balance; }
+html[dir="rtl"] .mono-h2 { letter-spacing: 0; line-height: 1.25; }
+.mono-tick { position: relative; padding-bottom: 6px; }
+.mono-tick::after { content: ""; position: absolute; inset-inline-start: 0; bottom: -10px; height: 8px; width: 1px; background: currentColor; }
+.mono-row { transition: background .15s, color .15s; }
+.mono-row:hover { background: var(--md-on-surface); color: var(--md-surface); }
+.mono-row:hover span { opacity: 1; }
+.mono .lp-card, .mono .lp-t1, .mono .lp-t2, .mono .lp-t3, .mono .lp-t4, .mono .lp-frost, .mono .lp-panel, .mono details { border-radius: 0 !important; }
+.mono .text-amber-600, .mono .text-emerald-600, .mono .text-emerald-700 { color: var(--md-on-surface); }

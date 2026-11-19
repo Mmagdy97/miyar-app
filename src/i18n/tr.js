@@ -635,6 +635,7 @@ export default {
   "office.color": "Kurumsal renk",
   "office.address": "Adres",
   "office.email": "E-posta",
+  "mono.invert": "renkleri ters çevir",
   "pinv.export": "Muhasebeci için dışa aktar (CSV)",
   "pinv.date": "Tarih",
   "fc.eac": "Tamamlanma tahmini maliyet",
