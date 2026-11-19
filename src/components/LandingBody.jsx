@@ -4,6 +4,8 @@ import { ChevronDown, Lock, Smartphone, Globe, BadgeCheck, ArrowUpRight, Buildin
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import LandingWhy from "./LandingWhy";
+import LandingIntro from "./LandingIntro";
+import LandingProof from "./LandingProof";
 import ScrollArt from "./ScrollArt";
 import { PricingSection } from "./PublicPages";
 import { tr_ as T, useI18n } from "../i18n";
@@ -34,6 +36,7 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
   const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["6", "lp.st4"]];
   return (
     <>
+      <LandingIntro />
       <ScrollArt bare />
       <div className="p-3 sm:p-4 w-full">
         <section className="lp-hero">
@@ -138,6 +141,8 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
           </div>
         </section>
       </div>
+
+      <LandingProof />
 
       {/* Roles */}
       <section id="roles" className="px-5 sm:px-8 py-14 sm:py-20 max-w-6xl mx-auto w-full">

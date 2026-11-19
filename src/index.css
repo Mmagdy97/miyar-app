@@ -689,3 +689,28 @@ html.dark .m3 .lp-t1 { color: var(--md-on-primary-container); } html.dark .m3 .l
 .m3 .m3-tab { height: 40px; padding-inline: 16px; border-radius: 9999px; font-weight: 600; font-size: 13px; color: var(--md-on-surface-variant); }
 .m3 .m3-tab[aria-current="true"] { background: var(--md-secondary-container); color: var(--md-on-secondary-container); }
 @media (min-width:1024px){ .m3 .lp-notch { border-end-start-radius: var(--shape-xl); } }
+
+/* ===== Cinematic intro ===== */
+.intro { position: fixed; inset: 0; z-index: 300; background: #0b0a09; color: #f3e9e1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; overflow: hidden; transition: opacity .7s ease, visibility .7s; font-family: "IBM Plex Sans Arabic", system-ui, sans-serif; }
+.intro-out { opacity: 0; visibility: hidden; }
+.intro-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, rgba(198,96,31,.55), rgba(198,96,31,.12) 35%, transparent 60%); animation: introGlow 3.4s ease-out both; }
+.intro-line { position: absolute; top: 0; bottom: 0; inset-inline-start: 50%; width: 3px; background: linear-gradient(#0000, #ffd2b5, #0000); box-shadow: 0 0 24px 4px rgba(198,96,31,.6); animation: introLine 1.2s ease-out both, introFade .6s ease 1.3s forwards; }
+.intro-corner { position: absolute; font: 600 10px/1 ui-monospace, monospace; letter-spacing: .2em; opacity: .55; }
+.intro-stage { position: relative; width: min(54vw, 260px); aspect-ratio: 1; display: grid; place-items: center; color: #c6601f; animation: introIn 1s ease-out .6s both; }
+.intro-ring { position: absolute; inset: 0; animation: introSpin 14s linear infinite; }
+.intro-logo { filter: drop-shadow(0 0 20px rgba(198,96,31,.7)); }
+.intro-text { position: relative; text-align: center; animation: introIn 1s ease-out 1.1s both; }
+.intro-small { font: 600 11px/1.4 ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
+.intro-title { margin-top: .75rem; font-size: clamp(1.8rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: .02em; }
+.intro-title span { color: #c6601f; }
+.intro-bar { margin: 1.25rem auto 0; width: 12rem; height: 2px; background: rgba(243,233,225,.18); overflow: hidden; }
+.intro-bar i { display: block; height: 100%; background: #c6601f; transform-origin: left; animation: introBar 2.4s ease-in-out 1.2s both; }
+html[dir="rtl"] .intro-bar i { transform-origin: right; }
+.intro-skip { position: absolute; bottom: 1.5rem; inset-inline-end: 1.5rem; font-size: 12px; padding: .5rem .9rem; border: 1px solid rgba(243,233,225,.3); border-radius: 999px; cursor: pointer; display: inline-flex; gap: .5rem; align-items: center; }
+.intro-skip kbd { font: 600 10px ui-monospace, monospace; opacity: .6; }
+@keyframes introGlow { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes introLine { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes introFade { to { opacity: 0; } }
+@keyframes introIn { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes introSpin { to { transform: rotate(360deg); } }
+@keyframes introBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
