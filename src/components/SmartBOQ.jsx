@@ -1,5 +1,5 @@
 import { valueMoment } from "../lib/nudge";
-import { currencySymbol, intlLocale, currencyName, E } from "../i18n";
+import { currencySymbol, intlLocale, E } from "../i18n";
 import { localize, D, DF, pct } from "../data/dataI18n";
 import { tr_ as T } from "../i18n";
 import { boqStore } from "../data/stores";
@@ -9,6 +9,7 @@ import OfficeDetails from "./OfficeDetails";
 import QuoteSignature from "./QuoteSignature";
 import { signaturesStore, boqVersionsStore } from "../data/stores";
 import BoqVersions from "./BoqVersions";
+import { useProjectList } from "../data/projects";
 import { getCurrency } from "../i18n";
 import { useState, useMemo } from "react";
 import {
@@ -101,6 +102,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
   };
 
   const [quoteClient, setQuoteClient] = useState("");
+  const [quoteProject, setQuoteProject] = useState("");
+  const projectList = useProjectList();
   const [office] = officeStore.use();
   const vatRate = office.vatRate ?? defaultVat(getCurrency());
   const [sigs] = signaturesStore.use();
@@ -197,7 +200,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
   const categories = ["الكل", ...new Set(boqItems.map((i) => i.category))];
 
   return (
-    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-36 font-ibm w-full max-w-full overflow-x-hidden">
+    <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-transparent pb-28 font-ibm w-full max-w-full overflow-x-hidden">
       {/* Toast Notification */}
       {saveToast && (
         <div className="fixed bottom-28 end-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#0B7C79] text-white rounded-xl shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -232,8 +235,14 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           </p>
         </div>
 
-        <div className="no-print w-full basis-full grid gap-3 md:grid-cols-[1fr_16rem] items-start">
-          <OfficeDetails />
+        <div className="no-print w-full basis-full order-last grid gap-3 md:grid-cols-[16rem_16rem_1fr] items-end">
+          <label className="text-xs font-bold text-[#475569] space-y-1">
+            {T("sboq.project")}
+            <select value={quoteProject} onChange={(e) => { setQuoteProject(e.target.value); const p = projectList.find((x) => String(x.id) === e.target.value); if (p?.client) setQuoteClient(p.client); }} className="w-full rounded-xl border border-[#E2E8F0] bg-white px-3 py-2 text-sm font-semibold text-[#0E2A47]">
+              <option value="">{T("sboq.projectNone")}</option>
+              {projectList.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+            </select>
+          </label>
           <label className="text-xs font-bold text-[#475569] space-y-1">
             {T("quote.client")}
             <input
@@ -244,7 +253,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
               className="w-full rounded-xl border border-[#E2E8F0] bg-white px-3 py-2 text-sm"
             />
           </label>
-          {!restricted && <QuoteSignature quoteNo={quoteNo} total={Math.round(totalPrice * (1 + vatRate / 100))} defaultName={quoteClient} />}
+          <OfficeDetails />
+          {!restricted && <div className="md:col-span-3"><QuoteSignature quoteNo={quoteNo} total={Math.round(totalPrice * (1 + vatRate / 100))} defaultName={quoteClient} /></div>}
         </div>
 
         {/* Printed quotation header (hidden on screen) */}
@@ -567,8 +577,9 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
       {showImport && <BoqImport items={boqItems} onApply={applyImport} onClose={() => setShowImport(false)} />}
 
       {/* Floating Summary & Action Sticky Dock */}
-      <div className="mt-6 rounded-2xl md:mt-0 md:rounded-none md:sticky md:bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E2E8F0] shadow-lg px-4 md:px-8 py-4">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      {/* Floating card after the table, in the normal flow: never covers the header; pb-28 on main lets the last row scroll above it. */}
+      <div className="no-print sticky bottom-4 z-30 mt-6 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-xl px-5 py-3.5">
+        <div className="mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Summary Figures */}
           <div className="flex items-center gap-5 sm:gap-8 flex-wrap">
             {!restricted && (
@@ -610,7 +621,7 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
                 <span className="text-2xl md:text-3xl font-semibold text-[#0E2A47] tracking-tight">
                   {Math.round(totalPrice).toLocaleString(intlLocale())}
                 </span>
-                <span className="text-xs font-bold text-amber-800">{currencyName()}</span>
+                <span className="text-xs font-bold text-amber-800">{currencySymbol()}</span>
               </div>
             </div>
           </div>

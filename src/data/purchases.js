@@ -28,7 +28,7 @@ const MAX_BYTES = 8 * 1024 * 1024;
 export const purchasesRepo = {
   use: () => { const r = live.use()[0]; return useMemo(() => r.filter((i) => !i.archivedAt), [r]); },
   useArchived: () => { const r = live.use()[0]; return useMemo(() => r.filter((i) => i.archivedAt), [r]); },
-  add: async ({ projectId, title, supplier, amount, file }) => {
+  add: async ({ projectId, title, supplier, amount, file, visible = false }) => {
     let path = null;
     if (file) {
       const isPdf = file.type === "application/pdf";
@@ -39,7 +39,7 @@ export const purchasesRepo = {
       const { error } = await supabase.storage.from(BUCKET).upload(path, body, { contentType: isPdf ? "application/pdf" : "image/jpeg" });
       if (error) { fail(error); return false; }
     }
-    await run(supabase.from("purchase_invoices").insert({ org_id: orgId, project_id: projectId, title, supplier: supplier || null, amount, file_path: path }));
+    await run(supabase.from("purchase_invoices").insert({ org_id: orgId, project_id: projectId, title, supplier: supplier || null, amount, file_path: path, visible_to_client: Boolean(visible) }));
     return true;
   },
   setVisible: (id, visible) => run(supabase.from("purchase_invoices").update({ visible_to_client: visible }).eq("id", id)),

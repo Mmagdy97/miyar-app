@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { ShoppingCart, Plus, Eye, EyeOff, Archive, FileText, Download } from "lucide-react";
 import EmptyState from "./EmptyState";
-import { tr_ as T, E, money, getCurrency } from "../i18n";
+import { tr_ as T, E, money, getCurrency, intlLocale } from "../i18n";
 import { officeStore, defaultVat } from "../data/office";
 import { billRows, toCsv, download, BILL_KEYS } from "../lib/accountant";
 import { useProjectList, projectsStore } from "../data/projects";
 import { purchasesRepo, purchaseFileUrl } from "../data/purchases";
 
 const input = "px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] bg-white min-w-0";
+// Demo: a few realistic supplier bills on Villa Yasmin (project 1) so the screen matches the dashboard's spending.
+const DEMO_BILLS = [
+  { id: 9001, projectId: 1, title: "رخام كرارة للأرضيات — دفعة أولى", supplier: "مصانع الشروق للرخام", amount: 84500, file: "", visible: true, at: "2026-11-02T10:00:00Z" },
+  { id: 9002, projectId: 1, title: "كابلات ولوحات كهرباء", supplier: "السويدي للكابلات — موزّع معتمد", amount: 36200, file: "", visible: false, at: "2026-11-09T10:00:00Z" },
+  { id: 9003, projectId: 1, title: "دهانات داخلية (Jotun)", supplier: "جوتن مصر", amount: 18750, file: "", visible: true, at: "2026-11-15T10:00:00Z" },
+];
 const btn = "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] cursor-pointer";
 
 /** Supplier invoices per project. Staff upload; each invoice can be shown to the client or kept private. */
@@ -17,10 +23,10 @@ export default function PurchaseInvoices({ role = "Admin" }) {
   const live = projectsStore.isLive;
   const rows = purchasesRepo.use();
   const archived = purchasesRepo.useArchived();
-  const [demo, setDemo] = useState([]);
+  const [demo, setDemo] = useState(DEMO_BILLS);
   const [office] = officeStore.use();
   const [pid, setPid] = useState(null);
-  const [f, setF] = useState({ title: "", supplier: "", amount: "", file: null });
+  const [f, setF] = useState({ title: "", supplier: "", amount: "", file: null, visible: false });
   const [busy, setBusy] = useState(false);
   const project = projects.find((p) => p.id === pid) || projects[0];
   if (!project) return <main className="flex-1 flex items-center justify-center p-8 font-ibm"><p className="text-sm text-[#475569] bg-white rounded-xl border border-[#E2E8F0] p-8 text-center max-w-sm">{T("proj.none")}</p></main>;
@@ -37,10 +43,10 @@ export default function PurchaseInvoices({ role = "Admin" }) {
     e.preventDefault();
     if (!f.title.trim() || !Number(f.amount) || busy) return;
     setBusy(true);
-    const v = { projectId: project.id, title: f.title.trim(), supplier: f.supplier.trim(), amount: Number(f.amount), file: f.file };
-    const ok = live ? await purchasesRepo.add(v) : (setDemo((a) => [{ id: Date.now(), ...v, file: "", visible: false, at: new Date().toISOString() }, ...a]), true);
+    const v = { projectId: project.id, title: f.title.trim(), supplier: f.supplier.trim(), amount: Number(f.amount), file: f.file, visible: f.visible };
+    const ok = live ? await purchasesRepo.add(v) : (setDemo((a) => [{ id: Date.now(), ...v, file: "", at: new Date().toISOString() }, ...a]), true);
     setBusy(false);
-    if (ok) setF({ title: "", supplier: "", amount: "", file: null });
+    if (ok) setF({ title: "", supplier: "", amount: "", file: null, visible: false });
   };
   const toggle = (i) => (live ? purchasesRepo.setVisible(i.id, !i.visible) : setDemo((a) => a.map((x) => (x.id === i.id ? { ...x, visible: !x.visible } : x))));
   const arch = (i) => (live ? purchasesRepo.archive(i.id) : setDemo((a) => a.filter((x) => x.id !== i.id)));
@@ -66,6 +72,10 @@ export default function PurchaseInvoices({ role = "Admin" }) {
             <input placeholder={T("pinv.supplier")} value={f.supplier} onChange={(e) => setF({ ...f, supplier: e.target.value })} className={input + " w-36"} />
             <input required type="number" min={1} placeholder={T("inv.amount")} value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} className={input + " w-28"} />
             <label className={input + " cursor-pointer w-44 truncate"}>{f.file ? f.file.name : T("pinv.file")}<input type="file" accept="application/pdf,image/*" className="sr-only" onChange={(e) => setF({ ...f, file: e.target.files?.[0] || null })} /></label>
+            <label className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-[#E2E8F0] text-xs font-bold text-[#0E2A47] cursor-pointer select-none">
+              <input type="checkbox" checked={f.visible} onChange={(e) => setF({ ...f, visible: e.target.checked })} className="w-4 h-4 accent-[#0B7C79]" />
+              {T("pinv.showClient")}
+            </label>
             <button type="submit" disabled={busy} className={btn + " disabled:opacity-50"}><Plus className="w-4 h-4" />{T("pinv.add")}</button>
           </form>
         )}
@@ -75,9 +85,9 @@ export default function PurchaseInvoices({ role = "Admin" }) {
             <article key={i.id} className="bg-white rounded-2xl border border-[#E2E8F0] p-4 flex flex-wrap items-center gap-3">
               <div className="flex-1 min-w-40">
                 <p className="text-sm font-semibold text-[#0E2A47]">{i.title}</p>
-                {i.supplier && <p className="text-[11px] text-[#64748B]">{i.supplier}</p>}
+                <p className="text-[11px] text-[#64748B]">{[i.supplier, i.at && new Date(i.at).toLocaleDateString(intlLocale(), { day: "numeric", month: "long", year: "numeric" })].filter(Boolean).join(" · ")}</p>
               </div>
-              <span className="text-sm font-semibold tabular-nums">{money(i.amount)}</span>
+              <span dir="ltr" className="inline-block text-sm font-semibold tabular-nums">{money(i.amount)}</span>
               {i.file && <button type="button" onClick={() => open(i)} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold border border-[#E2E8F0] cursor-pointer"><FileText className="w-4 h-4" />{T("pinv.open")}</button>}
               {!isClient && (
                 <>

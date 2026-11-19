@@ -1,5 +1,5 @@
 import Photo from "./Photo";
-import { currencySymbol, intlLocale, useI18n, currencyName, E } from "../i18n";
+import { currencySymbol, intlLocale, useI18n, E } from "../i18n";
 import { toAr } from "../data/seed";
 import { useState, useMemo } from "react";
 import ProgressBar from "./ProgressBar";
@@ -26,6 +26,7 @@ import {
   DollarSign,
 } from "lucide-react";
 import { cashStore, expensesStore } from "../data/stores";
+import { toCsv, download } from "../lib/accountant";
 
 function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
   const { t } = useI18n();
@@ -101,6 +102,13 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
     expensesStore.reset();
     setToastMessage(t("fin.toastReset"));
     setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Per-engineer statement (CSV): advances given, spent, and the expenses still waiting for approval.
+  const exportStatement = (eng) => {
+    const rows = pendingExpenses.filter((x) => x.engId === eng.id).map((x) => ({ date: x.date, title: E(x.description || ""), amount: x.amount, status: t("fin.pendingShort") }));
+    rows.unshift({ date: "", title: t("fin.stmtGiven"), amount: eng.totalGiven, status: "" }, { date: "", title: t("fin.stmtSpent"), amount: eng.spent, status: "" });
+    download(`miyar-petty-cash-${eng.id}.csv`, toCsv([t("exp.date"), t("fin.stmtItem"), t("recv.amount"), t("exp.status")], rows, ["date", "title", "amount", "status"]), "text/csv");
   };
 
   // Rule: no new advance while the engineer still has unsettled (unreviewed) expenses
@@ -190,7 +198,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-semibold text-[#0E2A47] tracking-tight transition-all duration-300">
               {totalGiven.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#475569]">{currencyName()}</span>
+            <span className="text-xs font-bold text-[#475569]">{currencySymbol()}</span>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] text-[#475569]">
             <span className="font-bold text-[#0E2A47] bg-[#EEF1F5] px-2 py-0.5 rounded-md border border-[#E2E8F0]">
@@ -212,7 +220,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-semibold text-[#0E2A47] tracking-tight transition-all duration-300">
               {totalSpent.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#475569]">{currencyName()}</span>
+            <span className="text-xs font-bold text-[#475569]">{currencySymbol()}</span>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] text-[#475569]">
             <span className="font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
@@ -234,7 +242,7 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
             <span className="text-2xl md:text-3xl font-semibold text-white tracking-tight transition-all duration-300">
               {remainingInField.toLocaleString(intlLocale())}
             </span>
-            <span className="text-xs font-bold text-[#EFE7D6]/80">{currencyName()}</span>
+            <span className="text-xs font-bold text-[#EFE7D6]/80">{currencySymbol()}</span>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] text-[#EFE7D6]">
             <span className="font-bold text-white bg-white/15 px-2 py-0.5 rounded-md border border-white/20 text-white">
@@ -340,10 +348,19 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                           ratio >= 85
                             ? "bg-rose-600"
                             : ratio >= 70
-                            ? "bg-amber-600"
+                            ? "bg-amber-500"
                             : undefined
                         }
                       />
+                    </div>
+                    {/* Quick actions per engineer */}
+                    <div className="mt-3 flex flex-wrap items-center gap-2">
+                      <button type="button" onClick={() => { setTopUpEngId(eng.id); setTopUpModalOpen(true); }} className="inline-flex items-center gap-1 rounded-lg border border-teal-200 bg-teal-50 px-2.5 py-1.5 text-[11px] font-bold text-teal-700 hover:bg-teal-100 cursor-pointer">
+                        <Plus className="w-3.5 h-3.5" />{t("fin.topUpQuick")}
+                      </button>
+                      <button type="button" onClick={() => exportStatement(eng)} className="inline-flex items-center gap-1 rounded-lg border border-[#E2E8F0] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#475569] hover:bg-[#F4F5F7] cursor-pointer">
+                        <FileText className="w-3.5 h-3.5" />{t("fin.statement")}
+                      </button>
                     </div>
                   </div>
                 );
@@ -401,10 +418,10 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
 
                     {/* Amount */}
                     <div className="text-end shrink-0">
-                      <span className="text-sm md:text-base font-semibold text-rose-700 block">
+                      <span dir="ltr" className="inline-block tabular-nums text-sm md:text-base font-semibold text-[#0E2A47]">
                         {expense.amount.toLocaleString(intlLocale())}
                       </span>
-                      <span className="text-[10px] font-bold text-[#475569]">{currencyName()}</span>
+                      <span className="block text-[10px] font-bold text-[#475569]">{currencySymbol()}</span>
                     </div>
                   </div>
 
@@ -424,10 +441,10 @@ function FinancialsDashboard({ actionItems, setActionItems, setSelectedItem }) {
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleRejectExpense(expense.id)}
-                        className="p-1.5 rounded-lg text-[#475569] hover:text-rose-700 hover:bg-rose-50 transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E2E8F0] bg-white text-xs font-bold text-[#475569] hover:text-rose-700 hover:border-rose-200 hover:bg-rose-50 transition-colors cursor-pointer"
                         title={t("fin.rejectTip")}
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-3.5 h-3.5" /><span>{t("fin.rejectBtn")}</span>
                       </button>
 
                       {/* The "اعتماد" (Approve) Button */}

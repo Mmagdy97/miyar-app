@@ -12,6 +12,7 @@ const RUN = /(\(?[+\-−]?[$€£₺]?[A-Za-z0-9][A-Za-z0-9şŞıİğĞüÜöÖ�
 /** Wraps Latin/number runs of an Arabic string in LTR spans. Other languages pass through untouched. */
 export function Bidi({ children }) {
   if (typeof children !== "string" || getLocale() !== "ar") return children;
-  const parts = children.split(RUN);
+  // Drop Intl RTL marks first: they would split a sign from its number ("-\u200f40,500").
+  const parts = children.replace(MARKS, "").split(RUN);
   return parts.map((p, i) => (i % 2 ? <N key={i}>{p}</N> : p));
 }

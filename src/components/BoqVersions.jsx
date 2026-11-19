@@ -35,16 +35,19 @@ export default function BoqVersions({ items, repo, keep = new Set(), canEdit = t
   const remove = async (v) => { if (await askConfirm(T("ver.delConfirm", { name: v.label }), { yes: T("ver.del"), danger: true })) repo.remove(v.id); };
   const cur = boqTotals(items);
   return (
-    <section className="bg-white rounded-2xl border border-[#E2E8F0] p-4 space-y-3">
-      <h2 className="text-sm font-semibold text-[#0E2A47] flex items-center gap-2"><History className="w-5 h-5" aria-hidden="true" />{T("ver.title")}</h2>
-      <p className="text-[11px] text-[#64748B]">{T("ver.hint")}</p>
-      {canEdit && (
-        <form onSubmit={save} className="flex flex-wrap gap-2 items-center">
-          <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder={T("ver.default", { n: list.length + 1 })} aria-label={T("ver.label")} className={input + " flex-1 min-w-40"} />
-          <button type="submit" disabled={!items.length || busy} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] disabled:opacity-40 cursor-pointer"><Save className="w-4 h-4" aria-hidden="true" />{T("ver.save")}</button>
-        </form>
-      )}
-      {list.length === 0 && <p className="text-xs text-[#64748B]">{T("ver.none")}</p>}
+    <section className="bg-white rounded-2xl border border-[#E2E8F0] px-4 py-3 space-y-2">
+      {/* Compact single row: title, version name, save; the hint lives in the tooltip. */}
+      <div className="flex flex-wrap items-center gap-2">
+        <h2 title={T("ver.hint")} className="text-sm font-semibold text-[#0E2A47] flex items-center gap-2 me-auto"><History className="w-4 h-4" aria-hidden="true" />{T("ver.title")}
+          <span className="text-[11px] font-medium text-[#64748B]">{list.length ? T("ver.count", { n: list.length }) : T("ver.none")}</span>
+        </h2>
+        {canEdit && (
+          <form onSubmit={save} className="flex items-center gap-2 flex-1 sm:flex-none min-w-0">
+            <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder={T("ver.default", { n: list.length + 1 })} aria-label={T("ver.label")} className={input + " flex-1 sm:w-56"} />
+            <button type="submit" disabled={!items.length || busy} className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold text-white bg-[#0B7C79] hover:bg-[#086663] disabled:opacity-40 cursor-pointer whitespace-nowrap"><Save className="w-4 h-4" aria-hidden="true" />{T("ver.save")}</button>
+          </form>
+        )}
+      </div>
       <div className="space-y-2">
         {list.map((v) => {
           const d = open === v.id ? diffVersions(v.items, items) : null;

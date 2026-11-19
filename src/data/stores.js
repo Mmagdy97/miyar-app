@@ -6,6 +6,7 @@ import { TECH_DRAWINGS, TECH_RFIS } from "./techSeed";
 import { WORKERS } from "./workersSeed";
 import { INITIAL_BOQ_ITEMS } from "./boqSeed";
 import { INITIAL_ENGINEERS_CASH, INITIAL_PENDING_EXPENSES } from "./cashSeed";
+import { computeCertificate } from "../lib/hakedis";
 
 export const cashStore = createPersistedStore("miyar:cash:v1", INITIAL_ENGINEERS_CASH, localize, { onChange: audit("cash") });
 export const expensesStore = createPersistedStore("miyar:expenses:v1", INITIAL_PENDING_EXPENSES, localize, { onChange: audit("expenses") });
@@ -23,7 +24,14 @@ export const boqStore = createPersistedStore("miyar:boq:v1", INITIAL_BOQ_ITEMS, 
 export const problemsStore = createPersistedStore("miyar:problems:v1", [], (x) => x);
 
 // Progress-billing certificates (مستخلصات / hakediş). Amounts in base currency units.
-export const certsStore = createPersistedStore("miyar:certs:v1", [], (x) => x, { onChange: audit("certs") });
+// Demo: two issued certificates on Villa Yasmin (contract 5.4M, 14% VAT, 5% retention): #1 paid, #2 approved and awaiting payment.
+const c1 = computeCertificate({ contractValue: 5_400_000, cumPct: 30, retentionPct: 5, vatRate: 14 });
+const c2 = computeCertificate({ contractValue: 5_400_000, cumPct: 50, prevCumValue: c1.cumValue, retentionPct: 5, vatRate: 14 });
+const DEMO_CERTS = [
+  { id: 7001, projectId: 1, no: 1, cumPct: 30, retentionPct: 5, vatRate: 14, ...c1, date: "2026-09-28", status: "paid", retentionReleased: false },
+  { id: 7002, projectId: 1, no: 2, cumPct: 50, retentionPct: 5, vatRate: 14, ...c2, date: "2026-10-30", status: "approved", retentionReleased: false },
+];
+export const certsStore = createPersistedStore("miyar:certs:v2", DEMO_CERTS, (x) => x, { onChange: audit("certs") });
 
 // Site labour (puantaj): workers list and daily attendance { "YYYY-MM-DD": { workerId: { s, ot } } }.
 export const workersStore = createPersistedStore("miyar:workers:v1", WORKERS, localize, { onChange: audit("workers") });
