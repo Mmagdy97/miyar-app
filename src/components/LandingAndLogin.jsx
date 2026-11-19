@@ -170,7 +170,7 @@ export default function LandingAndLogin({ onLogin }) {
 
       {/* 6. The Login & MVP Demo Modal */}
       {isLoginModalOpen && (
-        <div className={`fixed inset-0 z-50 ${SITE === "landing" ? "bg-[#0F3D3E]/50 backdrop-blur-md" : "bg-[var(--md-surface)]"} flex items-center justify-center p-4 animate-in fade-in duration-200`}>
+        <div className={`fixed inset-0 z-50 ${SITE === "landing" ? "bg-[#0E2A47]/50 backdrop-blur-md" : "bg-[var(--md-surface)]"} flex items-center justify-center p-4 animate-in fade-in duration-200`}>
           <div
            
             className="bg-[var(--md-surface-container-lowest)] rounded-[32px] shadow-2xl border border-[var(--md-outline-variant)] max-w-4xl w-full max-h-[92dvh] overflow-hidden text-start animate-in zoom-in-95 duration-200 relative grid md:grid-cols-[0.8fr_1.2fr]"

@@ -64,7 +64,7 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
           <div className="relative z-10 px-5 sm:px-12 pt-7 sm:pt-16 text-start max-w-3xl hero-in">
             <p className="text-[11px] sm:text-xs tracking-[.18em] uppercase font-semibold opacity-70">{T("lp.kicker")}</p>
             <h1 className="mt-4 font-display font-semibold leading-[1.1] [text-shadow:0_2px_24px_rgba(0,0,0,.35)] text-[2.1rem] sm:text-6xl xl:text-7xl">
-              {T("lp.h1a")}<br /><span className="text-[#FFD2B5]">{T("lp.h1b")}</span>
+              {T("lp.h1a")}<br /><span className="text-[#FFB27F]">{T("lp.h1b")}</span>
             </h1>
             <p className="mt-4 max-w-lg text-sm sm:text-lg leading-relaxed opacity-80">{T("ld.5")}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3">

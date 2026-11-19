@@ -32,13 +32,13 @@ function Calculator() {
         {[[T("calc.team"), team, setTeam, 1, 30], [T("calc.proj"), proj, setProj, 1, 15]].map(([l, v, set, mn, mx]) => (
           <label key={l} className="block">
             <span className="flex justify-between text-sm font-semibold"><span>{l}</span><span className="text-[var(--md-primary)]">{v}{v === 15 ? "+" : ""}</span></span>
-            <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#2E6F73]" />
+            <input type="range" min={mn} max={mx} value={v} onChange={(e) => set(+e.target.value)} aria-label={l} className="mt-2 w-full accent-[#0E8F8C]" />
           </label>
         ))}
       </div>
       <div className="mt-7 grid sm:grid-cols-3 gap-3">
         {rows.map(([k, d, price, me]) => (
-          <div key={k} className={`rounded-[22px] p-5 ${me ? "bg-[#0F3D3E] text-white" : "bg-[var(--paper-2)]"}`}>
+          <div key={k} className={`rounded-[22px] p-5 ${me ? "bg-[#0E2A47] text-white" : "bg-[var(--paper-2)]"}`}>
             <p className="text-sm font-semibold opacity-90">{T(k)}</p>
             <p className="mt-2 font-display text-4xl font-semibold tabular-nums">{price}<span className="text-sm font-medium opacity-70 ms-1">{miyar === 0 && me ? "" : T("calc.per")}</span></p>
             <p className="mt-2 text-xs leading-relaxed opacity-75">{T(d)}</p>
@@ -64,8 +64,8 @@ export default function LandingWhy() {
           <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--ink-3)]">{T("why.before")}</h3>
           <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px] text-[var(--ink-2)]"><XCircle className="w-5 h-5 shrink-0 text-[#DC2626]" aria-hidden="true" />{T(`why.b${n}`)}</li>)}</ul>
         </div>
-        <div className="rounded-[28px] p-5 sm:p-7 bg-[#0F3D3E] text-white">
-          <h3 className="text-sm font-bold uppercase tracking-wide text-[#7FB3B8]">{T("why.after")}</h3>
+        <div className="rounded-[28px] p-5 sm:p-7 bg-[#0E2A47] text-white">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-[#7FD3D1]">{T("why.after")}</h3>
           <ul className="mt-4 space-y-3.5">{[1, 2, 3, 4, 5].map((n) => <li key={n} className="flex gap-3 text-[15px]"><CheckCircle2 className="w-5 h-5 shrink-0 text-[#4ADE80]" aria-hidden="true" />{T(`why.a${n}`)}</li>)}</ul>
         </div>
       </div>
