@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HardHat, ShoppingCart, MessageCircle, Plus, Pencil, Trash2, Undo2, Check, X, Scale, Award, AlertTriangle } from "lucide-react";
 import { tr_ as T, E, money } from "../i18n";
 import { subsStore, posStore, quotesStore, boqStore } from "../data/stores";
-import { poTotal, subBalance, procurementTotals, subPayments, addPayment, editPayment, removePayment, compareQuotes, committedCost } from "../lib/procurement";
+import { poTotal, subBalance, procurementTotals, subPayments, addPayment, editPayment, removePayment, compareQuotes, committedCost, forecastCost } from "../lib/procurement";
 import { boqRepo, boqTotals } from "../data/boq";
 import { askConfirm } from "../lib/confirm";
 import { whatsappLink } from "../lib/share";
@@ -73,6 +73,7 @@ function ProcurementView({ data }) {
   const quotes = (data.quotes || []).filter(inP);
   const t = procurementTotals(subs, pos);
   const cc = committedCost(data.budget(pid), subs, pos);
+  const fc = pid == null ? null : forecastCost({ ...cc, progress: projects.find((p) => p.id === pid)?.progress });
   const groups = compareQuotes(quotes);
   const [qf, setQf] = useState({ item: "", qty: "", supplier: "", price: "", leadDays: "" });
   const addQuote = (e) => {
@@ -135,6 +136,16 @@ function ProcurementView({ data }) {
           </div>
           {cc.budget > 0 && <div className="h-2 rounded-full bg-[#EFE9DC] overflow-hidden"><div className={`h-full ${cc.over ? "bg-rose-600" : "bg-[#2E6F73]"}`} style={{ width: Math.min(100, cc.pct) + "%" }} /></div>}
           <p className={`text-[11px] font-bold flex items-center gap-1.5 ${cc.over ? "text-rose-700" : "text-[#64706F]"}`}>{cc.over && <AlertTriangle className="w-4 h-4" aria-hidden="true" />}{cc.budget > 0 ? T(cc.over ? "cc.over" : "cc.pct", { n: cc.pct }) : T("cc.noBudget")}</p>
+          {fc && (
+            <div className="border-t border-[#ECE5D6] pt-3 space-y-1">
+              <div className="grid grid-cols-3 gap-3 text-center">
+                {[["fc.eac", fc.eac], ["fc.toGo", fc.toGo], ["fc.var", fc.variance]].map(([k, v]) => (
+                  <div key={k}><span className="text-[11px] font-bold text-[#4A5757] block mb-1">{T(k)}</span><span className={`text-base font-semibold tabular-nums ${k === "fc.var" && v < 0 ? "text-rose-700" : "text-[#0E1A1B]"}`}>{money(v, { compact: true })}</span></div>
+                ))}
+              </div>
+              <p className={`text-[11px] font-bold ${fc.over ? "text-rose-700" : "text-[#64706F]"}`}>{T(fc.over ? "fc.over" : "fc.ok", { n: fc.pct })}</p>
+            </div>
+          )}
         </section>
 
         <div className="grid stat-grid grid-cols-2 md:grid-cols-4 gap-3">

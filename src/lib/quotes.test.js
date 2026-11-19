@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { compareQuotes, committedCost } from "./procurement";
+import { compareQuotes, committedCost, forecastCost } from "./procurement";
 
 describe("supplier quotes", () => {
   const Q = [
@@ -20,5 +20,21 @@ describe("supplier quotes", () => {
     expect(c.spent).toBe(70000);
     expect(c.uncommitted).toBe(-10000);
     expect(c.over).toBe(true);
+  });
+});
+
+describe("forecastCost", () => {
+  it("extrapolates spend by progress, floored at committed", () => {
+    const f = forecastCost({ budget: 1000, committed: 500, spent: 400, progress: 50 });
+    expect(f).toMatchObject({ eac: 800, toGo: 400, variance: 200, over: false, pct: 80 });
+    expect(forecastCost({ budget: 1000, committed: 1200, spent: 100, progress: 50 }).eac).toBe(1200);
+    expect(forecastCost({ budget: 1000, committed: 0, spent: 700, progress: 50 }).over).toBe(true);
+  });
+  it("nothing recorded yet -> budget", () => {
+    expect(forecastCost({ budget: 1000, committed: 0, spent: 0, progress: 65 }).eac).toBe(1000);
+  });
+  it("no progress yet -> budget; no budget -> null", () => {
+    expect(forecastCost({ budget: 1000, committed: 200, spent: 0, progress: 0 }).eac).toBe(1000);
+    expect(forecastCost({ budget: 0, committed: 0, spent: 0, progress: 50 })).toBeNull();
   });
 });

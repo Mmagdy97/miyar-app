@@ -52,3 +52,13 @@ export function committedCost(budget, subs, pos) {
   const b = Number(budget) || 0;
   return { budget: b, committed, spent, uncommitted: b - committed, pct: b ? Math.round((committed / b) * 100) : 0, over: b > 0 && committed > b };
 }
+
+/** Forecast cost at completion: spent / progress, never below what is already committed. progress in % (0-100). */
+export function forecastCost({ budget, committed, spent, progress }) {
+  const b = Number(budget) || 0, pr = Number(progress);
+  if (!(b > 0) || !Number.isFinite(pr)) return null;
+  const run = pr > 0 ? (spent / pr) * 100 : 0;
+  let eac = Math.max(run, committed, spent);
+  if (eac === 0) eac = b; // nothing recorded yet: assume the budget
+  return { eac, toGo: eac - spent, variance: b - eac, over: eac > b, pct: Math.round((eac / b) * 100) };
+}

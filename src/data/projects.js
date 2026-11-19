@@ -99,7 +99,7 @@ export const projectsStore = {
 export function useProjectList() {
   const [rows] = projectsStore.use();
   return useMemo(() => rows.map((p) => ({
-    id: p.id, name: p.name, code: p.code || `P-${p.id}`, deadline: p.deadline || "",
+    id: p.id, name: p.name, code: p.code || `P-${p.id}`, deadline: p.deadline || "", progress: Number(p.progress) || 0,
     contractValue: p.contractValue ?? SEED.find((s) => s.id === p.id)?.contractValue ?? parseAmount(p.budget),
   })), [rows]);
 }
