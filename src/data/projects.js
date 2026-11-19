@@ -15,6 +15,7 @@ export const INITIAL_PROJECTS = SEED.map((p) => ({
   id: p.id, code: p.code, name: p.name, client: p.client, engineer: personById(p.engineerId).displayName,
   progress: p.progress, status: p.status, phase: p.phase, startDate: p.startDate, deadline: p.deadline,
   budget: formatEGP(p.contractValue), location: p.location, image: p.image,
+  category: p.category, contractValue: p.contractValue,
 }));
 
 const guest = createPersistedStore("miyar:projects:v1", INITIAL_PROJECTS);

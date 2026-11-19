@@ -7,7 +7,7 @@ const clean = (c) => (typeof c === "string" ? (/[\u0600-\u06ff]/.test(c) ? c : c
 export const N = ({ children, className = "" }) => <span dir="ltr" className={`inline-block tabular-nums ${className}`}>{clean(children)}</span>;
 
 // A run starts and ends on a Latin letter, digit, %, ² or a closing bracket; it may carry an opening bracket.
-const RUN = /(\(?[$€£₺]?[A-Za-z0-9][A-Za-z0-9şŞıİğĞüÜöÖçÇ.,/%$€£₺²×\-+ ]*[A-Za-z0-9şıüöç%²)$€£₺]\)?|\(?[A-Za-z0-9]\)?)/g;
+const RUN = /(\(?[+\-−]?[$€£₺]?[A-Za-z0-9][A-Za-z0-9şŞıİğĞüÜöÖçÇ.,/%$€£₺²×\-+ ]*[A-Za-z0-9şıüöç%²)$€£₺]\)?|\(?[+\-−]?[A-Za-z0-9]%?\)?)/g;
 
 /** Wraps Latin/number runs of an Arabic string in LTR spans. Other languages pass through untouched. */
 export function Bidi({ children }) {

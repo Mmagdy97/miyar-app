@@ -174,11 +174,10 @@ html:lang(ar) *, html[lang="ar"] * { letter-spacing: normal !important; }
 
 /* KPI strips: separate pastel tiles (Soft v4) */
 .stat-grid { gap: 12px !important; background: transparent; border: 0; }
-.stat-grid > * { border: 0 !important; border-radius: var(--r-lg) !important; box-shadow: none !important; }
-.stat-grid > *:not(.studio-card-dark):not([class*="bg-[#0E2A47]"]):nth-child(4n+1) { background-color: var(--mint) !important; }
-.stat-grid > *:not(.studio-card-dark):not([class*="bg-[#0E2A47]"]):nth-child(4n+2) { background-color: var(--peach-soft) !important; }
-.stat-grid > *:not(.studio-card-dark):not([class*="bg-[#0E2A47]"]):nth-child(4n+3) { background-color: var(--sky-soft) !important; }
-.stat-grid > *:not(.studio-card-dark):not([class*="bg-[#0E2A47]"]):nth-child(4n+4) { background-color: var(--sand) !important; }
+/* KPI cards: clean white with a hairline border; meaning comes from semantic badges/accents, not rotating pastels. */
+.stat-grid > *:not(.studio-card-dark):not([class*="bg-[#0E2A47]"]) { background-color: #fff !important; border: 1px solid rgb(226 232 240 / .8) !important; border-radius: var(--r-lg) !important; box-shadow: 0 1px 3px rgba(15,23,42,.04) !important; }
+html.dark .stat-grid > *:not(.studio-card-dark):not([class*="bg-[#0E2A47]"]) { background-color: var(--surface) !important; border-color: var(--line) !important; box-shadow: none !important; }
+.stat-grid > .studio-card-dark, .stat-grid > [class*="bg-[#0E2A47]"] { border: 0 !important; border-radius: var(--r-lg) !important; }
 
 /* Status chips: colour block + label */
 span.rounded-full[class*="border"][class*="text-"]:not([class*="w-"]):not([class*="size-"]) {

@@ -6,6 +6,7 @@ import { cashStore, cashTotals, invoicesStore } from "../data/stores";
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import ReceivablesPanel from "./ReceivablesPanel";
+import { Bidi } from "./Bidi";
 import {
   TrendingUp,
   Wallet,
@@ -175,31 +176,24 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
 
   return (
     <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-7 max-w-7xl mx-auto w-full max-w-full overflow-x-hidden">
-      {/* 1. Hero */}
-      <section className="relative isolate overflow-hidden rounded-[28px] text-white min-h-[320px] md:min-h-[380px] p-5 md:p-8 flex flex-col justify-between gap-10">
-        <img src="/landing/villa.webp" alt="" className="absolute inset-0 w-full h-full object-cover -z-20" />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
-        <div className="text-start">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full bg-white/20 backdrop-blur px-3 py-1"><Calendar className="w-3.5 h-3.5" />{todayArabic}</span>
-          <h1 className="mt-3 font-display text-3xl md:text-5xl font-semibold text-balance [text-shadow:0_2px_20px_rgba(0,0,0,.35)]">{t("adm.title")}</h1>
-          <p className="mt-2 text-sm md:text-base text-white/90 max-w-xl [&_*]:!text-white">{rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}</p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-3 sm:items-stretch text-start">
-          <div className="lp-glass rounded-[22px] px-5 py-3.5 flex-1 sm:flex-none sm:min-w-[250px]">
-            <span className="text-xs font-semibold opacity-70">{t("adm.heroOver")}</span>
-            <div className="mt-1 font-display text-2xl md:text-3xl font-semibold text-[#B23A2B]">{formatCompact(TOTALS.overdueTotal)} <span className="text-sm font-medium opacity-70">{currencySymbol()}</span></div>
+      {/* 1. Compact executive header strip */}
+      <section className="bg-white border border-[#E2E8F0] rounded-2xl p-3 md:p-4 min-h-[104px] flex flex-col md:flex-row md:items-center gap-3 md:gap-5">
+        <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
+          <img src="/landing/villa-s.webp" alt="" className="hidden sm:block w-20 h-20 rounded-xl object-cover shrink-0" />
+          <div className="min-w-0 text-start">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#64748B]"><Calendar className="w-3.5 h-3.5" />{todayArabic}</span>
+            <h1 className="mt-0.5 font-display text-xl md:text-2xl font-semibold text-[#0E2A47] truncate">{t("adm.title")}</h1>
+            <p className="text-xs md:text-sm text-[#475569] truncate">{rich(t("adm.sub", { n: toAr(TOTALS.projectCount) }))}</p>
           </div>
-          <button type="button" onClick={() => document.getElementById("adm-actions")?.scrollIntoView({ behavior: "smooth" })} className="lp-glass rounded-[22px] px-5 py-3.5 flex-1 sm:flex-none sm:min-w-[250px] flex items-center justify-between gap-3 text-start">
-            <span><span className="text-xs font-semibold opacity-70 block">{t("adm.heroGo")}</span><span className="font-display text-lg font-semibold">{t("adm.heroPend", { n: toAr(pendingCount) })}</span></span>
-            <span className="w-10 h-10 rounded-full bg-[var(--peach)] text-[var(--on-peach)] flex items-center justify-center shrink-0"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></span>
-          </button>
-          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="btn-press lp-pill-dark rounded-full px-6 h-12 sm:h-12 sm:self-end sm:ms-auto text-sm font-semibold whitespace-nowrap">{t("adm.heroProj")}</button>
+        </div>
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <span className="inline-flex items-center gap-2 rounded-xl bg-rose-50 border border-rose-200 px-3 py-2 text-xs font-semibold text-rose-700">{t("adm.heroOver")}<span className="text-sm font-bold"><Bidi>{`${formatCompact(TOTALS.overdueTotal)} ${currencySymbol()}`}</Bidi></span></span>
+          <button type="button" onClick={() => document.getElementById("adm-actions")?.scrollIntoView({ behavior: "smooth", block: "start" })} className="inline-flex items-center gap-2 rounded-xl bg-amber-50 border border-amber-200 px-3 py-2 text-xs font-semibold text-amber-700 hover:bg-amber-100">{t("adm.heroPend", { n: toAr(pendingCount) })}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
+          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="btn-press rounded-full bg-[#0E2A47] text-white px-4 h-9 text-xs font-semibold whitespace-nowrap">{t("adm.heroProj")}</button>
         </div>
       </section>
 
       <QuickActions setActiveTab={setActiveTab} compact />
-
-      <DecisionPanel projects={SEED_PROJECTS} onOpen={() => setActiveTab?.("المشاريع الجارية")} />
 
       {/* 2. Advanced KPI Cards (The Grid of 4) */}
       <div className="grid stat-grid stat-swipe grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -365,34 +359,6 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
         </div>
       </div>
 
-      {/* Projects carousel */}
-      <section className="space-y-3">
-        <div className="flex items-end justify-between gap-3">
-          <h2 className="font-display text-xl md:text-2xl font-semibold text-[#0E2A47]">{t("adm.pc.title")}</h2>
-          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="text-xs font-semibold text-[#475569] hover:underline inline-flex items-center gap-1">{t("adm.pc.all")}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
-        </div>
-        <div role="region" tabIndex={0} aria-label={t("a11y.carousel")} className="flex gap-4 overflow-x-auto snap-x pb-2 -mx-4 px-4 md:mx-0 md:px-0 rounded-2xl" style={{ scrollbarWidth: "none" }}>
-          {INITIAL_PROJECTS.map((project, pi) => {
-            const isOnTrack = project.status === "جاري العمل";
-            return (
-              <article key={project.id} className="snap-start shrink-0 w-[270px] md:w-[300px] bg-white rounded-[26px] overflow-hidden shadow-[var(--shadow-1)] border border-transparent">
-                <div className="relative h-36">
-                  <img src={`/landing/${["villa", "living", "kitchen", "office"][pi % 4]}-s.webp`} alt="" loading="lazy" className="w-full h-full object-cover" />
-                  <span className={`absolute top-3 start-3 text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur ${isOnTrack ? "bg-white/85 text-[#0E2A47]" : "bg-[#FEF3C7]/95 text-[#8A4A30]"}`}>{E(project.status)}</span>
-                </div>
-                <div className="p-4 text-start">
-                  <h3 className="font-display text-base font-semibold text-[#0E2A47] truncate">{project.name}</h3>
-                  <p className="text-xs text-[#475569] mt-0.5 truncate">{project.client} • {project.contractValue}</p>
-                  <div className="mt-3 flex items-center justify-between text-xs font-semibold"><span className="text-[#475569] truncate">{E(project.phase)}</span><span className="text-[#0E2A47] font-mono">{t("adm.complete", { p: toAr(project.progress) })}</span></div>
-                  <ProgressBar value={project.progress} isWarning={!isOnTrack} />
-                  <p className="mt-2.5 text-[11px] text-[#475569]">{t("adm.due", { d: project.dueDate })}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
       <div className="grid lg:grid-cols-[1.45fr_1fr] gap-6 items-start">
       {/* 3. Financial Chart (التقرير المالي والتدفقات النقدية) */}
       <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-5 md:p-6 min-w-0">
@@ -419,7 +385,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                 {t("adm.inflows")}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#E2E8F0]" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-slate-400" />
                 {t("adm.siteExp")}
               </span>
             </div>
@@ -473,7 +439,17 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
             )}
           </div>
 
-          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-dashed border-[#E2E8F0] pb-3`}>
+          <div className="relative mt-3 ps-16">
+          {/* Y-axis labels + horizontal gridlines (top of the plot = maxVal) */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 start-0 end-0 h-52">
+            {[1, 0.75, 0.5, 0.25, 0].map((k) => (
+              <div key={k} className="absolute start-0 end-0 flex items-center gap-2" style={{ bottom: `calc(${k} * (100% - 2.75rem) + 2.75rem)` }}>
+                <span className="w-14 shrink-0 text-end text-[10px] tabular-nums whitespace-nowrap text-[#64748B]">{formatCompact(maxVal * k * 1000)}</span>
+                <span className="flex-1 border-t border-slate-200/80" />
+              </div>
+            ))}
+          </div>
+          <div style={{ gridTemplateColumns: `repeat(${series.length}, minmax(0, 1fr))` }} className={`relative grid ${series.length > 6 ? "gap-1 sm:gap-3" : "gap-2 sm:gap-6"} items-end h-52 border-b border-[#E2E8F0] pb-3`}>
             {series.map((item, idx) => {
               const revPercent = Math.round((item.revenue / maxVal) * 100);
               const expPercent = Math.round((item.expenses / maxVal) * 100);
@@ -493,7 +469,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                     />
                     {/* Expense Bar */}
                     <div
-                      className="w-1/2 max-w-[28px] rounded-t-md bg-[#E2E8F0] group-hover:bg-[#E2E8F0] transition-colors duration-200 bar-grow"
+                      className="w-1/2 max-w-[28px] rounded-t-md bg-slate-400 group-hover:bg-slate-500 transition-colors duration-200 bar-grow"
                       style={{ height: `${expPercent}%`, animationDelay: `${idx * 60 + 40}ms` }}
                     />
                   </div>
@@ -503,6 +479,8 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
                 </div>
               );
             })}
+          </div>
+
           </div>
 
           {/* Bottom Summary Bar */}
@@ -520,7 +498,7 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
               <div className="h-6 w-px bg-[#E2E8F0]" />
               <div>
                 <span className="text-[#475569] block text-[11px] font-semibold">{t("adm.profit6")}</span>
-                <span className="font-semibold text-[#0E2A47] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
+                <span dir="ltr" className="inline-block tabular-nums font-semibold text-[#0E2A47] text-sm">+{formatNumber(series.reduce((a, x) => a + x.revenue, 0) * 1000 - series.reduce((a, x) => a + x.expenses, 0) * 1000)} {currencySymbol()}</span>
               </div>
             </div>
 
@@ -719,6 +697,36 @@ function AdminDashboard({ actionItems = [], setActionItems, setSelectedItem, set
           </div>
         </div>
       </div>
+
+      <DecisionPanel projects={SEED_PROJECTS} onOpen={() => setActiveTab?.("المشاريع الجارية")} />
+
+      {/* Projects carousel */}
+      <section className="space-y-3">
+        <div className="flex items-end justify-between gap-3">
+          <h2 className="font-display text-xl md:text-2xl font-semibold text-[#0E2A47]">{t("adm.pc.title")}</h2>
+          <button type="button" onClick={() => setActiveTab?.("المشاريع الجارية")} className="text-xs font-semibold text-[#475569] hover:underline inline-flex items-center gap-1">{t("adm.pc.all")}<ArrowUpRight className="w-3.5 h-3.5 rtl:-scale-x-100" aria-hidden="true" /></button>
+        </div>
+        <div role="region" tabIndex={0} aria-label={t("a11y.carousel")} className="flex gap-4 overflow-x-auto snap-x pb-2 -mx-4 px-4 md:mx-0 md:px-0 rounded-2xl" style={{ scrollbarWidth: "none" }}>
+          {INITIAL_PROJECTS.map((project, pi) => {
+            const isOnTrack = project.status === "جاري العمل";
+            return (
+              <article key={project.id} className="snap-start shrink-0 w-[270px] md:w-[300px] bg-white rounded-[26px] overflow-hidden shadow-[var(--shadow-1)] border border-transparent">
+                <div className="relative h-36">
+                  <img src={`/landing/${["villa", "living", "kitchen", "office"][pi % 4]}-s.webp`} alt="" loading="lazy" className="w-full h-full object-cover" />
+                  <span className={`absolute top-3 start-3 text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur ${isOnTrack ? "bg-white/85 text-[#0E2A47]" : "bg-[#FEF3C7]/95 text-[#8A4A30]"}`}>{E(project.status)}</span>
+                </div>
+                <div className="p-4 text-start">
+                  <h3 className="font-display text-base font-semibold text-[#0E2A47] truncate">{project.name}</h3>
+                  <p className="text-xs text-[#475569] mt-0.5 truncate">{project.client} • {project.contractValue}</p>
+                  <div className="mt-3 flex items-center justify-between text-xs font-semibold"><span className="text-[#475569] truncate">{E(project.phase)}</span><span className="text-[#0E2A47] font-mono">{t("adm.complete", { p: toAr(project.progress) })}</span></div>
+                  <ProgressBar value={project.progress} isWarning={!isOnTrack} />
+                  <p className="mt-2.5 text-[11px] text-[#475569]">{t("adm.due", { d: project.dueDate })}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
 
       <ReceivablesPanel />
     </main>

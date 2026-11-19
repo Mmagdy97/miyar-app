@@ -1,4 +1,6 @@
 import { useState } from "react";
+import EInvoicePanel from "./EInvoicePanel";
+import OfficeDetails from "./OfficeDetails";
 import EmptyState from "./EmptyState";
 import { useProjectList } from "../data/projects";
 import { Receipt, Lock, Unlock } from "lucide-react";
@@ -139,6 +141,13 @@ function CertificatesInner({ projects, data }) {
           </section>
         </div>
       </div>
+      {/* E-invoicing readiness lives with progress invoices (moved from the executive dashboard). */}
+      {!projectsStore.isLive && (
+        <div className="mt-6 space-y-4">
+          <EInvoicePanel />
+          <div id="office-details"><OfficeDetails /></div>
+        </div>
+      )}
     </main>
   );
 }

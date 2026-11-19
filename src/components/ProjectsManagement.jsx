@@ -28,15 +28,32 @@ import {
   ArrowUpRight,
   Sliders,
   DollarSign,
+  LayoutGrid,
+  List,
 } from "lucide-react";
+import { Bidi, N } from "./Bidi";
 import {
   PHASES as SEED_PHASES,
   PEOPLE,
   formatEGP,
+  formatDateAr,
 } from "../data/seed";
 
 // Standard Phases in Construction & Interior Design
 const PHASES = SEED_PHASES;
+
+// Demo covers matched to the project type (office image for the HQ, interior for the penthouse).
+const COVER_BY_ID = { 1: "villa", 2: "office", 3: "kitchen", 4: "living" };
+const coverOf = (p, i) => COVER_BY_ID[p.id] || ["villa", "living", "kitchen", "office", "site"][i % 5];
+const isOffice = (p) => /مكاتب|عمل|إداري|office/i.test(`${p.category || ""} ${p.spec?.type || ""} ${p.name}`);
+const fmtDate = (d) => (/^\d{4}-\d{2}-\d{2}/.test(d || "") ? formatDateAr(d) : d || "—");
+// Semantic status: delayed = rose, ahead = emerald, in progress = teal.
+const STATUS_TONE = {
+  "متأخر": ["bg-rose-50 text-rose-700 border-rose-200", "bg-rose-600"],
+  "متقدم عن الجدول": ["bg-emerald-50 text-emerald-700 border-emerald-200", "bg-emerald-600"],
+};
+const toneOf = (status) => STATUS_TONE[status] || ["bg-teal-50 text-teal-700 border-teal-200", "bg-teal-600"];
+const barOf = (status) => ({ "متأخر": "bg-rose-600", "متقدم عن الجدول": "bg-emerald-600" })[status] || "bg-[#0E2A47]";
 
 // Available Engineers for Assignment
 const ENGINEERS_LIST = PEOPLE.filter((p) => p.role !== "مدير").map(
@@ -54,6 +71,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
   const [isAddProjectOpen, setIsAddProjectOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("الكل");
+  const [view, setView] = useState("cards");
   const [toastMessage, setToastMessage] = useState(null);
   useEffect(() => {
     const h = (e) => { setToastMessage(String(e.detail)); setTimeout(() => setToastMessage(null), 5000); };
@@ -259,14 +277,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
         {/* Action Buttons */}
         <div className="flex items-center gap-2.5 flex-wrap">
-          {!projectsStore.isLive && <button
-            onClick={handleResetProjects}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-[#475569] bg-white border border-[#E2E8F0] hover:bg-[#F4F5F7] transition-colors shadow-2xs cursor-pointer"
-            title={T("proj.4")}
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>{T("proj.5")}</span>
-          </button>}
+
 
           {/* Requirement 2: Primary Button "+ إضافة مشروع جديد" */}
           <button
@@ -314,8 +325,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
         <div className="bg-white rounded-lg p-3.5 sm:p-5 border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
           <span className="text-[11px] font-bold text-[#475569] block mb-1">{T("proj.13")}</span>
           <div className="flex items-baseline justify-between">
-            <span className="text-xl md:text-2xl font-semibold text-[#0E2A47]">{pct(stats.avgProgress)}</span>
-            <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+            <N className="text-xl md:text-2xl font-semibold text-[#0E2A47]">{pct(stats.avgProgress)}</N>
+            <span className="text-[11px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200">
               {T("proj.14")}
             </span>
           </div>
@@ -351,25 +362,64 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               {E(status)}
             </button>
           ))}
+          {(searchQuery || statusFilter !== "الكل") && (
+            <button type="button" onClick={() => { setSearchQuery(""); setStatusFilter("الكل"); }} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-[#475569] border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] whitespace-nowrap cursor-pointer">
+              <RotateCcw className="w-3.5 h-3.5" />{T("proj.5")}
+            </button>
+          )}
+          {!projectsStore.isLive && (
+            <button type="button" onClick={handleResetProjects} title={T("proj.4")} aria-label={T("proj.4")} className="w-8 h-8 shrink-0 rounded-lg text-[#64748B] hover:text-[#0E2A47] hover:bg-[#F4F5F7] flex items-center justify-center cursor-pointer">
+              <Sparkles className="w-3.5 h-3.5" />
+            </button>
+          )}
+          <span className="w-px h-6 bg-[#E2E8F0] mx-1 shrink-0" />
+          <div role="tablist" aria-label={T("proj.view")} className="inline-flex shrink-0 rounded-lg bg-[#EEF1F5] p-0.5">
+            {[["cards", LayoutGrid, "proj.view.cards"], ["table", List, "proj.view.table"]].map(([v, Ic, k]) => (
+              <button key={v} type="button" role="tab" aria-selected={view === v} onClick={() => setView(v)} className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold cursor-pointer ${view === v ? "bg-white text-[#0E2A47] shadow-2xs" : "text-[#64748B]"}`}>
+                <Ic className="w-3.5 h-3.5" /><span className="hidden lg:inline">{T(k)}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
+      {view === "table" && (
+        <div className="bg-white rounded-2xl border border-[#E2E8F0] overflow-x-auto">
+          <table className="w-full text-sm keep-table">
+            <thead className="bg-[#F4F5F7] text-[11px] text-[#64748B]">
+              <tr>{["proj.t.name", "proj.t.type", "proj.t.status", "proj.t.progress", "proj.t.phase", "proj.20", "proj.21", "proj.t.value", ""].map((k, i) => <th key={i} className="text-start font-semibold px-4 py-3 whitespace-nowrap">{k ? T(k) : ""}</th>)}</tr>
+            </thead>
+            <tbody className="divide-y divide-[#E0F2F1]">
+              {filteredProjects.map((project) => {
+                const [badge, dot] = toneOf(project.status);
+                return (
+                  <tr key={project.id} className="hover:bg-slate-50">
+                    <td className="px-4 py-3 min-w-[170px]"><p className="font-semibold text-[#0E2A47]">{project.name}</p><p className="text-xs text-[#64748B]">{project.client}</p></td>
+                    <td className="px-4 py-3 text-xs text-[#475569] whitespace-nowrap">{T(isOffice(project) ? "proj.type.off" : "proj.type.res")}</td>
+                    <td className="px-4 py-3"><span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border whitespace-nowrap ${badge}`}><span className={`w-1.5 h-1.5 rounded-full ${dot}`} />{E(project.status)}</span></td>
+                    <td className="px-4 py-3 min-w-[140px]"><div className="flex items-center gap-2"><div className="flex-1"><ProgressBar value={project.progress} customFillClass={barOf(project.status)} /></div><span dir="ltr" className="inline-block tabular-nums text-xs font-bold">{project.progress}%</span></div></td>
+                    <td className="px-4 py-3 text-xs text-[#475569] whitespace-nowrap">{D(project.phase)}</td>
+                    <td className="px-4 py-3 text-xs text-[#475569] whitespace-nowrap">{project.engineer}</td>
+                    <td className="px-4 py-3 text-xs text-[#475569] whitespace-nowrap">{fmtDate(project.deadline)}</td>
+                    <td className="px-4 py-3 text-xs font-semibold text-[#0E2A47] whitespace-nowrap"><Bidi>{project.budget || ""}</Bidi></td>
+                    <td className="px-4 py-3"><button type="button" onClick={() => setSelectedProject(project)} className="rounded-full bg-[#0E2A47] text-white text-[11px] font-bold px-2.5 py-1.5 whitespace-nowrap cursor-pointer">{T("proj.22")}</button></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
       {/* Requirement 3: Projects Grid Layout (Cards in grid-cols-1 md:grid-cols-2) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-5 ${view === "table" ? "hidden" : ""}`}>
         {filteredProjects.map((project, pi) => {
           const isDelayed = project.status === "متأخر";
+          void isDelayed;
           const isAhead = project.status === "متقدم عن الجدول";
 
-          // Status Badge Styling
-          let statusBadgeClass = "bg-emerald-50 text-emerald-800 border-emerald-200";
-          let statusDotClass = "bg-emerald-600";
-          if (isDelayed) {
-            statusBadgeClass = "bg-rose-50 text-rose-800 border-rose-200 animate-pulse";
-            statusDotClass = "bg-rose-600";
-          } else if (isAhead) {
-            statusBadgeClass = "bg-amber-50 text-amber-800 border-amber-200";
-            statusDotClass = "bg-amber-700";
-          }
+          void isAhead;
+          const [statusBadgeClass, statusDotClass] = toneOf(project.status);
 
           // Active Phase Index
           const currentPhaseIndex = PHASES.indexOf(project.phase);
@@ -379,22 +429,23 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               key={project.id}
               className="bg-white rounded-[28px] border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
             >
-              <img src={`/landing/${["villa", "living", "kitchen", "office", "site"][pi % 5]}-s.webp`} alt="" loading="lazy" className="w-full h-36 sm:h-44 object-cover" />
+              <img src={`/landing/${coverOf(project, pi)}-s.webp`} alt="" loading="lazy" className="w-full h-36 object-cover" />
               {/* Card Header: Project Name & Client Name + Status Badge */}
-              <div className="p-5 md:p-6 pb-4 border-b border-[#E0F2F1] flex items-start justify-between gap-3">
+              <div className="p-4 md:px-5 pb-3 border-b border-[#E0F2F1] flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs font-bold text-[#475569] bg-[#EEF1F5] px-2 py-0.5 rounded-md border border-[#E2E8F0]">
-                      {T("proj.16")}
+                      {T(isOffice(project) ? "proj.type.off" : "proj.type.res")}
                     </span>
                   </div>
-                  <h3 className="text-base md:text-lg font-semibold text-[#0E2A47] truncate tracking-tight group-hover:text-amber-800 transition-colors">
+                  <h3 className="text-base md:text-lg font-semibold text-[#0E2A47] truncate tracking-tight group-hover:text-teal-700 transition-colors">
                     {project.name}
                   </h3>
                   <p className="text-xs text-[#475569] mt-0.5 flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-[#475569]" />
                     <span>{T("proj.17")} <strong className="text-[#475569] font-bold">{project.client}</strong></span>
                   </p>
+                  {project.budget && <p className="text-xs text-[#475569] mt-1 flex items-center gap-1.5"><DollarSign className="w-3.5 h-3.5" /><span>{T("proj.t.value")}: <strong className="text-[#0E2A47]"><Bidi>{project.budget}</Bidi></strong></span></p>}
                 </div>
 
                 {/* Status Badge + share */}
@@ -410,7 +461,7 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               {/* Card Body */}
-              <div className="p-5 md:p-6 space-y-5 flex-1">
+              <div className="p-4 md:px-5 space-y-4 flex-1">
                 {/* 1. Progress Bar */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
@@ -418,14 +469,12 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                       <TrendingUp className="w-3.5 h-3.5 text-[#0E2A47]" />
                       <span>{T("proj.18")}</span>
                     </span>
-                    <span className="text-xs font-bold text-[#0E2A47] tracking-wide font-mono">
-                      {pct(project.progress)}
-                    </span>
+                    <N className="text-xs font-bold text-[#0E2A47]">{pct(project.progress)}</N>
                   </div>
 
                   <ProgressBar
                     value={project.progress}
-                    isWarning={isDelayed}
+                    customFillClass={barOf(project.status)}
                   />
                 </div>
 
@@ -437,7 +486,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
 
                   <div className="flex items-center justify-between relative">
                     {/* Connecting line */}
-                    <div className="absolute top-1/2 start-4 end-4 -translate-y-1/2 h-0.5 bg-[#E2E8F0] z-0" />
+                    <div className="absolute top-3.5 start-4 end-4 h-0.5 bg-[#E2E8F0] z-0" />
+                    <div className="absolute top-3.5 start-4 h-0.5 bg-emerald-500 z-0 transition-all" style={{ width: `calc((100% - 2rem) * ${Math.max(0, currentPhaseIndex) / (PHASES.length - 1)})` }} />
 
                     {PHASES.map((phase, idx) => {
                       const isCompleted = idx < currentPhaseIndex;
@@ -451,9 +501,9 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                           <div
                             className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-semibold transition-all ${
                               isCompleted
-                                ? "bg-[#0B7C79] text-white shadow-xs"
+                                ? "bg-emerald-500 text-white shadow-xs"
                                 : isCurrent
-                                ? "bg-[#0B7C79] text-white ring-4 ring-[#0B7C79]/10 shadow-xs"
+                                ? "bg-[#0E2A47] text-white ring-4 ring-teal-500/25 shadow-xs"
                                 : "bg-white border-2 border-[#E2E8F0] text-[#475569]"
                             }`}
                           >
@@ -500,8 +550,8 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
                     </div>
                     <div className="min-w-0">
                       <span className="text-[10px] text-[#475569] block leading-none">{T("proj.21")}</span>
-                      <span className="font-bold text-[#0E2A47] text-[11px] truncate block mt-0.5 font-mono">
-                        {project.deadline}
+                      <span className="font-bold text-[#0E2A47] text-[11px] truncate block mt-0.5">
+                        {fmtDate(project.deadline)}
                       </span>
                     </div>
                   </div>
@@ -509,20 +559,20 @@ function ProjectsManagement({ actionItems, setActionItems, setSelectedItem }) {
               </div>
 
               {/* Card Footer (Actions): Two outline buttons */}
-              <div className="p-4 md:px-6 bg-[#F4F5F7] border-t border-[#E0F2F1] flex items-center gap-2.5">
+              <div className="p-3.5 md:px-5 bg-[#F4F5F7] border-t border-[#E0F2F1] flex items-center gap-2.5">
                 {/* Button 1: تفاصيل المشروع */}
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F4F5F7] text-[#475569] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg bg-[#0E2A47] hover:bg-[#12365C] text-white text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Building2 className="w-3.5 h-3.5 text-[#475569]" />
+                  <Building2 className="w-3.5 h-3.5" />
                   <span>{T("proj.22")}</span>
                 </button>
 
                 {/* Button 2: تعديل الجدول الزمني */}
                 <button
                   onClick={() => handleOpenTimelineModal(project)}
-                  className="flex-1 py-2 px-3 rounded-lg border border-[#CBD5E1] bg-[#EEF1F5] hover:bg-[#E2E8F0] text-[#0E2A47] text-xs font-bold transition-all shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="flex-1 py-2 px-3 rounded-lg border border-[#CBD5E1] bg-white hover:bg-[#F4F5F7] text-[#0E2A47] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sliders className="w-3.5 h-3.5 text-[#0E2A47]" />
                   <span>{T("proj.23")}</span>

@@ -1,4 +1,4 @@
-import { FolderKanban, Receipt, ClipboardCheck, Armchair, UsersRound, Users, FilePenLine, Wallet } from "lucide-react";
+import { Plus, FolderKanban, Receipt, ClipboardCheck, Armchair, UsersRound, Users, FilePenLine, Wallet } from "lucide-react";
 import { tr_ as T } from "../i18n";
 import { isTabAllowed } from "../lib/entitlements";
 
@@ -17,10 +17,12 @@ const ACTIONS = [
 export default function QuickActions({ setActiveTab, compact = false }) {
   const list = ACTIONS.filter(([id]) => isTabAllowed(id));
   if (compact) return (
-    <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1" style={{ scrollbarWidth: "none" }}>
+    <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1" style={{ scrollbarWidth: "none" }}>
+      <span className="shrink-0 text-xs font-semibold text-[#64748B] pe-1">{T("qa.quick")}</span>
       {list.map(([id, tab, key, Ic]) => (
-        <button key={id} type="button" onClick={() => setActiveTab?.(tab)} className="shrink-0 inline-flex items-center gap-2 h-10 ps-3 pe-4 rounded-full bg-white border border-[#E2E8F0] text-xs font-semibold text-[#0E2A47] hover:border-[var(--peach)] transition-colors">
-          <span className="w-6 h-6 rounded-full bg-[var(--paper-2)] flex items-center justify-center"><Ic className="w-3.5 h-3.5" aria-hidden="true" /></span>{T(key)}
+        <button key={id} type="button" onClick={() => setActiveTab?.(tab)} className="shrink-0 inline-flex items-center gap-1.5 h-9 ps-2 pe-3.5 rounded-full bg-white border border-[#E2E8F0] text-xs font-semibold text-[#0E2A47] hover:border-teal-600/40 hover:bg-teal-50/50 transition-colors">
+          <span className="w-6 h-6 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center"><Plus className="w-3.5 h-3.5" aria-hidden="true" /></span>
+          <Ic className="w-3.5 h-3.5 text-[#64748B]" aria-hidden="true" />{T(key)}
         </button>
       ))}
     </div>
