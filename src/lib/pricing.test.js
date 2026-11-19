@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { EXTRA_PROJECT, PRICES, PLANS, planPrice, projectLimit } from "./pricing";
+import { EXTRA_PROJECT, PRICES, PLANS, planPrice, projectLimit, regularPrice, launchPrice } from "./pricing";
 
 describe("pricing", () => {
   it("cycles: 12 months = pay 10; 3 and 6 months discounted", () => {
@@ -24,5 +24,20 @@ describe("pricing", () => {
   });
   it("extra project price exists for every market", () => {
     for (const k of Object.keys(PRICES)) expect(EXTRA_PROJECT[k] > 0).toBe(true);
+  });
+});
+
+describe("launch offer", () => {
+  it("regular price is double the launch list, with the cycle discount", () => {
+    expect(regularPrice("SAR", 1, 1)).toBe(298);
+    expect(regularPrice("SAR", 1, 12)).toBe(2980);
+  });
+  it("launch price is half the regular monthly price, no cycle discount", () => {
+    expect(launchPrice("SAR", 1, 1)).toBe(149);
+    expect(launchPrice("SAR", 1, 12)).toBe(149 * 12);
+    expect(launchPrice("USD", 3)).toBeNull();
+  });
+  it("launch always beats the regular price", () => {
+    for (const m of [1, 3, 6, 12]) expect(launchPrice("EGP", 2, m)).toBeLessThan(regularPrice("EGP", 2, m));
   });
 });

@@ -1,4 +1,5 @@
-// Regional price lists (fixed per market, not FX-converted). Validate with first customers.
+// Regional LAUNCH price lists (fixed per market, not FX-converted): 50% off for the first 30 offices.
+// The regular list price is LAUNCH_FACTOR x these. Validate with first customers.
 export const PRICES = {
   EGP: [0, 899, 1990],
   SAR: [0, 149, 299],
@@ -8,6 +9,9 @@ export const PRICES = {
   TRY: [0, 1290, 2790],
   USD: [0, 39, 89],
 };
+
+/** Regular price = launch price x 2 (the launch offer is 50% off). */
+export const LAUNCH_FACTOR = 2;
 
 /** Monthly price of one extra active project, per market (about half the Professional price). */
 export const EXTRA_PROJECT = { EGP: 450, SAR: 75, AED: 75, KWD: 6, JOD: 13, TRY: 650, USD: 20 };
@@ -37,4 +41,17 @@ export function planPrice(currency, index, months = 1) {
 
 export function projectLimit(planKey) {
   return PLANS.find((p) => p.key === planKey)?.projects ?? 0;
+}
+
+/** Regular (post-launch) total for one billing cycle: list x 2, with the cycle discount. */
+export function regularPrice(currency, index, months = 1) {
+  const p = planPrice(currency, index, months);
+  return p == null ? null : p * LAUNCH_FACTOR;
+}
+
+/** Launch-offer total for one billing cycle: 50% off the regular monthly price, not combined with the cycle discount. */
+export function launchPrice(currency, index, months = 1) {
+  const list = PRICES[currency];
+  if (!list || PLANS[index]?.custom) return null;
+  return list[index] * months;
 }

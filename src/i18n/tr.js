@@ -635,6 +635,7 @@ export default {
   "office.color": "Kurumsal renk",
   "office.address": "Adres",
   "office.email": "E-posta",
+  "pricing.launchTag": "Lansman fiyatı",
   "addons.theme.p": "Tek seferlik",
   "addons.app.p": "Aylık abonelik",
   "addons.project.p": "{p} / ay",
@@ -2354,7 +2355,7 @@ export default {
   "pricing.billing": "Ödeme dönemi",
   "pricing.custom": "Teklif ile",
   "pricing.contact": "Bize ulaşın",
-  "pricing.founding": "Lansman fırsatı: ilk 30 ofis, 3, 6 veya 12 aylık fark etmeksizin ilk aboneliğinde %50 indirim kazanır (dönem indirimiyle birleşmez)",
+  "pricing.founding": "Lansman fırsatı: gösterilen fiyatlar ilk 30 ofis için ilk abonelikte %50 indirimlidir; 1, 3, 6 veya 12 ay fark etmez. İlk 30 ofisten sonra normal fiyat (gösterilenin iki katı) geçerlidir. Dönem indirimiyle birleşmez.",
   "pricing.extra": "Ek proje: {p} / ay",
   "pricing.trial": "14 gün deneme, kart yok, kurulum ücreti yok · ilk ödemeden sonra 14 gün içinde tam iade",
 };
