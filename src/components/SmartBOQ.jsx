@@ -7,7 +7,8 @@ import BoqImport from "./BoqImport";
 import { officeStore, defaultVat } from "../data/office";
 import OfficeDetails from "./OfficeDetails";
 import QuoteSignature from "./QuoteSignature";
-import { signaturesStore } from "../data/stores";
+import { signaturesStore, boqVersionsStore } from "../data/stores";
+import BoqVersions from "./BoqVersions";
 import { getCurrency } from "../i18n";
 import { useState, useMemo } from "react";
 import {
@@ -103,6 +104,13 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
   const [office] = officeStore.use();
   const vatRate = office.vatRate ?? defaultVat(getCurrency());
   const [sigs] = signaturesStore.use();
+  const [versions, setVersions] = boqVersionsStore.use();
+  const versionRepo = {
+    list: versions,
+    save: (v) => setVersions((a) => [{ id: Date.now(), at: new Date().toISOString(), ...v }, ...a]),
+    remove: (id) => setVersions((a) => a.filter((x) => x.id !== id)),
+    restore: (plan) => setBoqItems((prev) => { const up = new Map(plan.update.map((i) => [i.id, i])); const gone = new Set(plan.remove.map((i) => i.id)); return [...prev.filter((i) => !gone.has(i.id)).map((i) => (up.has(i.id) ? { ...i, ...up.get(i.id) } : i)), ...plan.insert]; }),
+  };
   const quoteNo = `Q-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}`;
 
   // Export BOQ as CSV (UTF-8 BOM so Excel reads Arabic/Turkish correctly)
@@ -338,6 +346,8 @@ function SmartBOQ({ actionItems, setActionItems, setSelectedItem, restricted = f
           </div>
         </div>
       </div>
+
+      {!restricted && <div className="no-print mb-4"><BoqVersions items={boqItems} repo={versionRepo} /></div>}
 
       {/* Category Tabs Filter */}
       <div className="no-print flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">

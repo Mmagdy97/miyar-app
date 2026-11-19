@@ -9,6 +9,7 @@ import PriceList from "./PriceList";
 import { useLibrary, useLibraryItems } from "../data/library";
 import LibraryEditor from "./LibraryEditor";
 import BoqVsActual from "./BoqVsActual";
+import BoqVersions from "./BoqVersions";
 import { buildQuote, printQuote } from "../lib/quote";
 import { quoteWa } from "../lib/notify";
 import { sendQuote } from "../data/projects";
@@ -56,6 +57,8 @@ function Row({ i }) {
 export default function LiveBoq({ role = "Admin" }) {
   const projects = useProjectList();
   const all = boqRepo.use();
+  const versions = boqRepo.versions();
+  const actuals = boqRepo.actuals();
   const [pid, setPid] = useState(null);
   const [f, setF] = useState(empty);
   const prices = pricesRepo.use();
@@ -136,6 +139,10 @@ export default function LiveBoq({ role = "Admin" }) {
             <p className="basis-full text-[11px] text-[#64706F]">{T("quote.note")}</p>
             {project.quoteStatus !== "approved" && !project.clientLinked && <span className="text-[11px] text-[#64706F]">{T("quote.needClient")}</span>}
           </section>
+        )}
+        {["Admin", "Technical Office", "Accountant"].includes(role) && (
+          <BoqVersions items={rows} canEdit={role !== "Accountant"} keep={new Set(rows.filter((r) => actuals[r.id]?.length).map((r) => r.id))}
+            repo={{ list: versions.filter((v) => v.projectId === project.id), save: (v) => boqRepo.saveVersion({ projectId: project.id, ...v }), remove: boqRepo.removeVersion, restore: (plan) => boqRepo.restore(project.id, plan) }} />
         )}
         <PriceList />
         <LibraryEditor />

@@ -75,3 +75,5 @@ export const TECH_SETTINGS_DEFAULT = {
   lockBoqAfterClientApproval: false,
 };
 export const techSettingsStore = createPersistedStore("miyar:techsettings:v1", TECH_SETTINGS_DEFAULT, (x) => x);
+
+export const boqVersionsStore = createPersistedStore("miyar:boqVersions:v1", [], (x) => x);
