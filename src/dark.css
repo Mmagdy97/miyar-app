@@ -2,17 +2,17 @@
 html.dark .accent-\[\#0B7C79\]{accent-color:#5FC9C6}
 html.dark .accent-zinc-900{accent-color:#e6e6ea}
 html.dark .bg-\[\#0E2A47\]{background-color:#0B7C79}
-html.dark .bg-\[\#0E2A47\]\/40{background-color:rgb(46 111 115 / 0.4)}
-html.dark .bg-\[\#0E2A47\]\/45{background-color:rgb(46 111 115 / 0.45)}
-html.dark .bg-\[\#0E2A47\]\/50{background-color:rgb(46 111 115 / 0.5)}
-html.dark .bg-\[\#0E2A47\]\/60{background-color:rgb(46 111 115 / 0.6)}
-html.dark .bg-\[\#0E2A47\]\/70{background-color:rgb(46 111 115 / 0.7)}
-html.dark .bg-\[\#0E2A47\]\/80{background-color:rgb(46 111 115 / 0.8)}
+html.dark .bg-\[\#0E2A47\]\/40{background-color:rgb(11 124 121 / 0.4)}
+html.dark .bg-\[\#0E2A47\]\/45{background-color:rgb(11 124 121 / 0.45)}
+html.dark .bg-\[\#0E2A47\]\/50{background-color:rgb(11 124 121 / 0.5)}
+html.dark .bg-\[\#0E2A47\]\/60{background-color:rgb(11 124 121 / 0.6)}
+html.dark .bg-\[\#0E2A47\]\/70{background-color:rgb(11 124 121 / 0.7)}
+html.dark .bg-\[\#0E2A47\]\/80{background-color:rgb(11 124 121 / 0.8)}
 html.dark .bg-\[\#1F8F4E\]{background-color:#1f8f4e}
 html.dark .bg-\[\#0B7C79\]{background-color:#0B7C79}
-html.dark .bg-\[\#0B7C79\]\/10{background-color:rgb(46 111 115 / 0.1)}
-html.dark .bg-\[\#0B7C79\]\/15{background-color:rgb(46 111 115 / 0.15)}
-html.dark .bg-\[\#0B7C79\]\/5{background-color:rgb(46 111 115 / 0.05)}
+html.dark .bg-\[\#0B7C79\]\/10{background-color:rgb(11 124 121 / 0.1)}
+html.dark .bg-\[\#0B7C79\]\/15{background-color:rgb(11 124 121 / 0.15)}
+html.dark .bg-\[\#0B7C79\]\/5{background-color:rgb(11 124 121 / 0.05)}
 html.dark .bg-\[\#2E7D5B\]\/10{background-color:rgb(46 125 91 / 0.1)}
 html.dark .bg-\[\#475569\]{background-color:#475569}
 html.dark .bg-\[\#64748B\]{background-color:#64748B}
@@ -110,8 +110,8 @@ html.dark .focus\:ring-\[\#0B7C79\]:focus{--tw-ring-color:#3a8286}
 html.dark .focus\:ring-\[\#0B7C79\]\/10:focus{--tw-ring-color:rgb(58 130 134 / 0.1)}
 html.dark .focus\:ring-\[\#0B7C79\]\/30:focus{--tw-ring-color:rgb(58 130 134 / 0.3)}
 html.dark .from-\[\#0B7C79\]{--tw-gradient-from:#0B7C79}
-html.dark .from-\[\#0B7C79\]\/70{--tw-gradient-from:rgb(46 111 115 / 0.7)}
-html.dark .from-\[\#0B7C79\]\/80{--tw-gradient-from:rgb(46 111 115 / 0.8)}
+html.dark .from-\[\#0B7C79\]\/70{--tw-gradient-from:rgb(11 124 121 / 0.7)}
+html.dark .from-\[\#0B7C79\]\/80{--tw-gradient-from:rgb(11 124 121 / 0.8)}
 html.dark .from-\[\#E2E8F0\]{--tw-gradient-from:#1d2b33}
 html.dark .from-\[\#EEF1F5\]{--tw-gradient-from:#0f171c}
 html.dark .from-\[\#F4F5F7\]{--tw-gradient-from:#0a0f14}

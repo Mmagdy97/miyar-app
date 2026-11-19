@@ -34,7 +34,7 @@ export default function Tour({ role, userId }) {
   return (
     <div className="fixed inset-0 z-[400]" role="dialog" aria-modal="true" aria-label={T(k + ".t")}>
       {rect
-        ? <div className="absolute rounded-2xl pointer-events-none transition-all duration-300" style={{ top: rect.top - pad, left: rect.left - pad, width: rect.width + pad * 2, height: rect.height + pad * 2, boxShadow: "0 0 0 9999px rgba(15,61,62,0.62), 0 0 0 3px #D97706" }} />
+        ? <div className="absolute rounded-2xl pointer-events-none transition-all duration-300" style={{ top: rect.top - pad, left: rect.left - pad, width: rect.width + pad * 2, height: rect.height + pad * 2, boxShadow: "0 0 0 9999px rgba(14, 42, 71,0.62), 0 0 0 3px #D97706" }} />
         : <div className="absolute inset-0 bg-[#0E2A47]/60" />}
       <div className="absolute w-[min(22rem,calc(100vw-2rem))] bg-white rounded-2xl border border-[#E2E8F0] shadow-xl p-5 font-ibm" style={style}>
         <p className="text-[11px] font-bold text-[#64748B] tabular-nums">{i + 1} / {steps.length}</p>
