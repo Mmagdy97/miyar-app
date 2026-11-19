@@ -5,48 +5,44 @@ import { tr_ as T } from "../i18n";
 const KEY = "miyar:intro";
 const seen = () => { try { return sessionStorage.getItem(KEY) === "1"; } catch { return false; } };
 const reduced = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+// [left%, bottom%, width vw, drift direction, delay s]
+const CLOUDS = [[-10, -6, 70, 1, 0], [40, -8, 75, -1, 0.1], [10, 4, 55, -1, 0.2], [60, 2, 50, 1, 0.15], [-5, 14, 40, 1, 0.3], [70, 12, 42, -1, 0.25], [30, -14, 80, 1, 0]];
 
-/** Cinematic opening: a dimension line stretches across the page while it measures, then contracts into the Miyar mark. */
+/** Cinematic opening: a sky, the headline, and the villa rising out of the clouds as they drift apart. */
 export default function LandingIntro() {
   const [on, setOn] = useState(() => typeof window !== "undefined" && !seen() && !reduced());
   const [out, setOut] = useState(false);
-  const [m, setM] = useState(0);
   const close = () => {
     setOut(true);
     try { sessionStorage.setItem(KEY, "1"); } catch { /* storage unavailable */ }
-    setTimeout(() => setOn(false), 700);
+    setTimeout(() => setOn(false), 800);
   };
   useEffect(() => {
     if (!on) return;
     document.body.style.overflow = "hidden";
-    const id = setTimeout(close, 3700);
+    const id = setTimeout(close, 4200);
     const key = (e) => { if (e.key === "Escape" || e.key === "Enter") close(); };
     window.addEventListener("keydown", key);
-    let raf, t0;
-    const step = (t) => { t0 ??= t; const p = Math.min(1, (t - t0) / 700); setM(14.6 * (1 - Math.pow(1 - p, 3))); if (p < 1) raf = requestAnimationFrame(step); };
-    raf = requestAnimationFrame(step);
-    return () => { clearTimeout(id); cancelAnimationFrame(raf); window.removeEventListener("keydown", key); document.body.style.overflow = ""; };
+    return () => { clearTimeout(id); window.removeEventListener("keydown", key); document.body.style.overflow = ""; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [on]);
   if (!on) return null;
   return createPortal(
-    <div role="dialog" aria-label={T("ld.1")} className={`intro ${out ? "intro-out" : ""}`}>
-      <div className="intro-grid" aria-hidden="true" />
-      <div className="intro-corner start-5 top-4" aria-hidden="true">MIYAR · معيار</div>
-      <div className="intro-corner end-5 top-4" aria-hidden="true">SCALE 1:100</div>
-      <svg viewBox="-168 4 400 60" className="intro-measure" aria-hidden="true" fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <text x="32" y="45" textAnchor="middle" className="intro-num">{m.toFixed(2)} m</text>
-        <g className="intro-dimline" stroke="#F47B3B" strokeWidth="3">
-          <path d="M12 52h40" vectorEffect="non-scaling-stroke" />
-          <path d="M12 47v10M52 47v10" vectorEffect="non-scaling-stroke" />
-        </g>
-        <path d="M12 38V12l20 20 20-20v26" pathLength="1" className="intro-m" stroke="#0E2A47" strokeWidth="6" />
-      </svg>
-      <div className="intro-text">
-        <h2 className="intro-word">{T("ld.1")}</h2>
-        <p className="intro-small">{T("intro.sub")}</p>
+    <div role="dialog" aria-label={T("ld.1")} className={`sky ${out ? "sky-out" : ""}`}>
+      <div className="sky-top">
+        <span className="sky-brand">{T("ld.1")}</span>
+        <button onClick={close} className="sky-skip">{T("intro.skip")}</button>
       </div>
-      <button onClick={close} className="intro-skip">{T("intro.skip")} <kbd>ESC</kbd></button>
+      <div className="sky-head">
+        <h2>{T("lp.h1a")} {T("lp.h1b")}</h2>
+        <p>{T("intro.sub")}</p>
+      </div>
+      <img src="/landing/villa-cut.webp" alt="" className="sky-villa" />
+      <div className="sky-clouds" aria-hidden="true">
+        {CLOUDS.map(([l, b, w, dir, d], i) => (
+          <span key={i} style={{ left: `${l}%`, bottom: `${b}%`, width: `${w}vw`, "--dx": `${dir * 18}vw`, animationDelay: `${d}s` }} />
+        ))}
+      </div>
     </div>,
     document.body
   );
