@@ -27,7 +27,7 @@
   --brass: #E8692A; --brass-soft: #FEF3C7;
   --panel: #0E2A47; --panel-2: #12365C; --panel-line: #086663; --panel-ink: #F4F5F7;
   --sand: #EEF1F5; --sand-2: #E2E8F0; --sand-line: #CBD5E1; --sand-ink: #0E2A47;
-  --sky: #99D8D6; --sky-soft: #DDF2F1; --peach: #B5541A; --peach-soft: #F8E6D6; --mint: #ECE3CE; --sage: #D9D2BF; --sage-deep: #64748B;
+  --sky: #99D8D6; --sky-soft: #DDF2F1; --peach: #B5541A; --peach-soft: #F8E6D6; --mint: #E6F4F3; --sage: #DCE3EA; --sage-deep: #64748B;
   --plaster: var(--paper); --brick: var(--brand); --ink-2-legacy: #475569;
   --r-sm: 10px; --r-md: 14px; --r-lg: 22px; --r-xl: 28px;
   --shadow-1: 0 1px 2px rgba(15, 61, 62, .04), 0 6px 18px -10px rgba(15, 61, 62, .10);
@@ -298,7 +298,7 @@ div.bg-\[\#0B7C79\]:not([class*="text-white"]):is([class^="w-"],[class*=" w-"]):
 :is(div, section, aside).bg-\[\#0B7C79\]:not([class*="text-white"][class*="rounded"]:is([class^="w-"],[class*=" w-"])):not(:is([class^="w-"],[class*=" w-"]):is([class^="h-"],[class*=" h-"]):not([class*="w-full"]):not([class*="h-full"])) {
   background-color: var(--panel) !important; border-color: var(--panel-line) !important;
 }
-:is(div, section).bg-\[\#0B7C79\] .text-\[\#0B7C79\] { color: #ECE3CE !important; }
+:is(div, section).bg-\[\#0B7C79\] .text-\[\#0B7C79\] { color: #E6F4F3 !important; }
 
 /* ---------- Creative layer: blueprint + zellige + dimension lines ---------- */
 @keyframes planDraw { to { stroke-dashoffset: 0; } }
@@ -435,7 +435,7 @@ html.dark .lp-glass{background:rgba(22,43,64,.62);border-color:rgba(255,255,255,
 .lp-card{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-1);transition:transform .25s,box-shadow .25s}
 .lp-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-2)}
 .lp-ic{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.lp-t1{background:#ECE3CE;color:#0E2A47}.lp-t2{background:#FDE8D3;color:#8A4A30}.lp-t3{background:#E2F1F4;color:#2C5A66}.lp-t4{background:#EFE6D6;color:#5C4A2C}
+.lp-t1{background:#E6F4F3;color:#0E2A47}.lp-t2{background:#FDE8D3;color:#8A4A30}.lp-t3{background:#E2F1F4;color:#2C5A66}.lp-t4{background:#EEF1F5;color:#0E2A47}
 html.dark .lp-t1,html.dark .lp-t2,html.dark .lp-t3,html.dark .lp-t4{background:rgba(255,255,255,.08);color:var(--ink)}
 .lp-nav a,.lp-nav button{cursor:pointer}
 
@@ -720,3 +720,15 @@ html.dark .m3 .lp-card:hover { border-color: rgb(45 212 191 / .35); }
 @media (min-width: 1280px) { .m3 .m3-chip.lp-pill { font-size: .875rem; } }
 .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-dot::before { display: none !important; }
+
+/* ===== In-app screens: landing card + button language (light cards, hairline borders, pill buttons) ===== */
+main.font-ibm :is(div, section, article, li, a, button).bg-white:is([class*="border-[#E2E8F0]"], [class*="border-\[\#E2E8F0\]"]) { border-color: rgb(226 232 240 / .8); box-shadow: 0 1px 3px rgba(15,23,42,.04); transition: border-color .15s, box-shadow .15s, transform .15s; }
+main.font-ibm :is(a, button).bg-white.border:hover, main.font-ibm .bg-white.border.cursor-pointer:hover { border-color: rgb(11 124 121 / .3); }
+main.font-ibm :is(div, section, article).bg-white.border.rounded-lg { border-radius: 16px; }
+main.font-ibm :is(div, section, article).bg-white.border.rounded-xl { border-radius: 20px; }
+main.font-ibm :is(div, section, article).bg-white.border.rounded-2xl { border-radius: 24px; }
+/* Text buttons become pills; icon-only (fixed width/height) buttons keep their shape. */
+main.font-ibm button:is(.rounded-md, .rounded-lg, .rounded-xl)[class*="px-"]:not([class*="w-"]):not([role="tab"]):not([role="radio"]),
+main.font-ibm a:is(.rounded-md, .rounded-lg, .rounded-xl)[class*="px-"][class*="bg-"]:not([class*="w-"]) { border-radius: 999px; }
+main.font-ibm button.bg-\[\#0B7C79\]:not(:disabled):hover { background-color: #086663; }
+html.dark main.font-ibm :is(div, section, article, li, a, button).bg-white:is([class*="border-[#E2E8F0]"]) { border-color: var(--line); box-shadow: none; }
