@@ -1,5 +1,6 @@
 // Smart, low-friction contact nudge for demo visitors (no form, no login wall).
 export const SALES_WHATSAPP = "201557788744"; // +20 155 778 8744
+export const SUPPORT_EMAIL = "mohamed.m.tawfeeq1@gmail.com";
 
 const SS = "miyar:nudge:v1";
 const DONE = "miyar:nudge:done";

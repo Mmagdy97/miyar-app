@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { waLink } from "../lib/nudge";
-import { ChevronDown, Lock, Smartphone, Globe, BadgeCheck, ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Clock, Coins, FileCode, Hammer, HardHat, Heart, LogIn, MapPin, MessageCircle, Rocket, Ruler, Share2, ShieldCheck, Users, Wallet, WifiOff } from "lucide-react";
+import { ChevronDown, Lock, Smartphone, Globe, BadgeCheck, Camera, Receipt, ArrowUpRight, Building2, Calculator, CheckCheck, ClipboardCheck, ClipboardList, Clock, Coins, FileCode, HardHat, ListChecks, LogIn, Mail, MapPin, MessageCircle, RefreshCw, Rocket, Ruler, ShieldCheck, Users, Wallet, WifiOff } from "lucide-react";
 import LogoMark from "./LogoMark";
 import SettingsSwitcher from "./SettingsSwitcher";
 import LandingWhy from "./LandingWhy";
@@ -8,24 +8,29 @@ import LandingIntro from "./LandingIntro";
 import LandingProof from "./LandingProof";
 import ScrollArt from "./ScrollArt";
 import { PricingSection } from "./PublicPages";
-import { tr_ as T, useI18n } from "../i18n";
+import { tr_ as T, useI18n, intlLocale } from "../i18n";
+import { Bidi, N } from "./Bidi";
+import { useViewCurrency } from "../lib/viewCurrency";
+import { formatMoney } from "../lib/currency";
+import { PRICES } from "../lib/pricing";
+import { SUPPORT_EMAIL } from "../lib/nudge";
 
 const ROLES = [
-  { id: "Admin", key: "admin", Icon: Building2, tone: "lp-t1", img: "villa" },
-  { id: "Site Engineer", key: "site", Icon: HardHat, tone: "lp-t2", img: "site" },
+  { id: "Admin", key: "admin", Icon: Building2, tone: "lp-t1", img: "villa" }, // TODO: replace with unique asset (villa also used as hero background)
+  { id: "Site Engineer", key: "site", Icon: HardHat, tone: "lp-t2", img: "site" }, // TODO: replace with unique asset (site also used in Features f6)
   { id: "Technical Office", key: "tech", Icon: FileCode, tone: "lp-t3", img: "office" },
-  { id: "Accountant", key: "accountant", Icon: Calculator, tone: "lp-t2", img: "kitchen" },
-  { id: "Secretary", key: "secretary", Icon: ClipboardList, tone: "lp-t3", img: "living" },
+  { id: "Accountant", key: "accountant", Icon: Calculator, tone: "lp-t2", img: "kitchen" }, // TODO: replace with unique asset (kitchen also used in Features f1)
+  { id: "Secretary", key: "secretary", Icon: ClipboardList, tone: "lp-t3", img: "living" }, // TODO: replace with unique asset (living also used in Final CTA)
   { id: "Client", key: "client", Icon: ShieldCheck, tone: "lp-t4", img: "couple" },
 ];
 
 const FEATURES = [
-  { k: "f1", Icon: Calculator, tone: "lp-t1", wide: true, img: "kitchen" },
+  { k: "f1", Icon: Calculator, tone: "lp-t1", wide: true, img: "kitchen" }, // TODO: replace with unique asset (kitchen also used in Roles: Accountant)
   { k: "f2", Icon: Wallet, tone: "lp-t2" },
   { k: "f3", Icon: Coins, tone: "lp-t3" },
   { k: "f4", Icon: CheckCheck, tone: "lp-t4" },
   { k: "f5", Icon: ClipboardList, tone: "lp-t1" },
-  { k: "f6", Icon: WifiOff, tone: "lp-t2", wide: true, img: "site" },
+  { k: "f6", Icon: WifiOff, tone: "lp-t2", wide: true, img: "site" }, // TODO: replace with unique asset (site also used in Roles: Site Engineer)
 ];
 
 const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: Globe }, { n: 4, Icon: BadgeCheck }];
@@ -33,7 +38,10 @@ const TRUST = [{ n: 1, Icon: Lock }, { n: 2, Icon: Smartphone }, { n: 3, Icon: G
 export default function LandingBody({ openModal, openApp, setLegalPage, scrollToSection }) {
   const { t } = useI18n();
   const [role, setRole] = useState("Admin");
-  const stats = [["16+", "lp.st1"], ["7", "lp.st2"], ["3", "lp.st3"], ["6", "lp.st4"]];
+  const currency = useViewCurrency();
+  const cur = PRICES[currency] ? currency : "EGP";
+  // Same receipt in every market, scaled like our regional price list.
+  const receipt = formatMoney(Math.round((14500 * PRICES[cur][1]) / PRICES.EGP[1] / 10) * 10, cur, intlLocale(), { compact: true });
   return (
     <>
       <LandingIntro />
@@ -75,12 +83,12 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
 
           {/* Role strip (glass search-bar style) */}
           <div className="relative z-10 mt-8 sm:mt-10 px-4 sm:px-12">
-            <div className="lp-glass rounded-[28px] sm:rounded-full p-2.5 flex flex-col sm:flex-row sm:items-center gap-2 max-w-4xl">
+            <div className="lp-glass rounded-[28px] lg:rounded-full p-2.5 flex flex-col lg:flex-row lg:items-center gap-2 max-w-6xl">
               <span className="px-4 text-xs font-semibold opacity-70 shrink-0">{T("lp.enter")}</span>
-              <div role="radiogroup" className="flex flex-wrap gap-1.5 flex-1">
+              <div role="radiogroup" className="flex flex-nowrap gap-1.5 flex-1 min-w-0 overflow-x-auto no-scrollbar">
                 {ROLES.map((r) => (
                   <button key={r.id} role="radio" aria-checked={role === r.id} onClick={() => setRole(r.id)}
-                    className="m3-chip">
+                    className="m3-chip lp-pill shrink-0 whitespace-nowrap px-3 py-1.5 text-xs xl:text-sm">
                     {role === r.id ? <CheckCheck className="w-4 h-4" aria-hidden="true" /> : <r.Icon className="w-4 h-4" aria-hidden="true" />}{T("login.role." + r.key)}
                   </button>
                 ))}
@@ -101,34 +109,22 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
                 <button type="button" onClick={() => openApp("up")} aria-label={T("lp.n.cta")} className="w-11 h-11 shrink-0 rounded-full bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] flex items-center justify-center shadow-sm hover:rotate-12 transition-transform"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
               </div>
               <p className="mt-3 text-xs sm:text-sm leading-relaxed opacity-85">{T("lp.fp.d")}</p>
-              <div className="mt-4 flex items-end justify-between gap-3">
-                <ul className="text-xs space-y-1.5 opacity-90">
-                  <li className="flex items-center gap-1.5"><Ruler className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.area")}</li>
-                  <li className="flex items-center gap-1.5"><Hammer className="w-3.5 h-3.5" aria-hidden="true" />{T("lp.fp.phase")}</li>
-                </ul>
-                <div className="flex gap-2">
-                  {[[ClipboardCheck, "lp.fp.a1", "12"], [Heart, "lp.fp.a2", "8"], [Share2, "lp.fp.a3", ""]].map(([Icon, k, n]) => (
-                    <span key={k} className="flex flex-col items-center gap-1" title={T(k)}>
-                      <span className="w-10 h-10 rounded-full bg-white/60 border border-white/70 flex items-center justify-center"><Icon className="w-4 h-4" aria-hidden="true" /></span>
-                      <span className="text-[10px] font-semibold opacity-80 h-3">{n}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <ul className="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
+                <li className="inline-flex items-center gap-1.5 rounded-full bg-white/70 text-[var(--md-on-surface)] px-2.5 py-1.5"><ListChecks className="w-3.5 h-3.5 text-[var(--md-primary)]" aria-hidden="true" /><Bidi>{T("lp.fp.i1")}</Bidi></li>
+                <li className="inline-flex items-center gap-1.5 rounded-full bg-white/70 text-[var(--md-on-surface)] px-2.5 py-1.5"><ClipboardCheck className="w-3.5 h-3.5 text-[var(--md-tertiary)]" aria-hidden="true" /><Bidi>{T("lp.fp.i2")}</Bidi></li>
+                <li className="inline-flex items-center gap-1.5 rounded-full bg-white/70 text-[var(--md-on-surface)] px-2.5 py-1.5"><RefreshCw className="w-3.5 h-3.5 text-[var(--md-primary)]" aria-hidden="true" />{T("lp.fp.i3")}</li>
+              </ul>
+              <p className="mt-3 flex items-center gap-1.5 text-xs opacity-80"><Ruler className="w-3.5 h-3.5" aria-hidden="true" /><Bidi>{T("lp.fp.area")}</Bidi> · {T("lp.fp.phase")}</p>
               <div className="mt-3 flex items-center gap-2">
                 <div className="flex-1 h-2 rounded-full bg-black/10 overflow-hidden"><div className="h-full w-[65%] rounded-full bg-[var(--brand)]" /></div>
-                <span className="text-xs font-bold">65%</span>
+                <N className="text-xs font-bold">65%</N>
               </div>
             </article>
 
             <div className="lp-notch w-full lg:w-[460px] px-5 pt-5 pb-5 sm:px-7 sm:pt-7 sm:pb-8">
               <h3 className="font-display text-lg sm:text-xl font-semibold">{T("lp.n.t")}</h3>
               <p className="mt-1.5 text-sm text-[var(--md-on-surface-variant)] leading-relaxed max-w-sm">{T("lp.n.d")}</p>
-              <div className="mt-5 flex items-center justify-between gap-3">
-                <div>
-                  <div className="font-display text-4xl sm:text-5xl font-semibold leading-none">16+</div>
-                  <div className="mt-1 text-xs text-[var(--md-on-surface-variant)]">{T("lp.st1")}</div>
-                </div>
+              <div className="mt-5 flex items-center justify-end gap-3">
                 <div className="flex items-center">
                   <span className="flex -space-x-3 rtl:space-x-reverse">
                     {["site", "office", "couple"].map((im) => <img key={im} src={`/landing/${im}-s.webp`} alt="" loading="lazy" className="w-11 h-11 rounded-full object-cover border-[3px] border-[var(--paper)]" />)}
@@ -136,7 +132,6 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
                   <button type="button" onClick={() => scrollToSection("roles")} aria-label={T("lp.n.cta")} className="ms-1 w-11 h-11 rounded-full border border-[var(--md-outline-variant)] bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] flex items-center justify-center hover:bg-[var(--md-surface)]"><ArrowUpRight className="w-4 h-4 rtl:-scale-x-100" aria-hidden="true" /></button>
                 </div>
               </div>
-              <p className="mt-4 text-xs text-[var(--md-on-surface-variant)]">{stats.slice(1).map(([n, k]) => `${n} ${T(k)}`).join(" · ")}</p>
             </div>
           </div>
         </section>
@@ -177,7 +172,7 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
               {f.img && <><img src={`/landing/${f.img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" /></>}
               <span className={f.img ? "lp-ic bg-white/25 backdrop-blur text-white" : `lp-ic ${f.tone}`}><f.Icon className="w-5 h-5" aria-hidden="true" /></span>
               <h3 className={`mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold ${f.img ? "" : "text-[var(--md-on-surface)]"}`}>{T(`lp.${f.k}.t`)}</h3>
-              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[var(--md-on-surface-variant)]"}`}>{T(`lp.${f.k}.d`)}</p>
+              <p className={`mt-1.5 text-xs sm:text-base leading-relaxed ${f.img ? "opacity-90" : "text-[var(--md-on-surface-variant)]"}`}><Bidi>{T(`lp.${f.k}.d`)}</Bidi></p>
             </div>
           ))}
         </div>
@@ -210,22 +205,30 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
               <button onClick={() => openApp("up")} className="m3-btn m3-filled">{T("ld.6")}<ArrowUpRight className="w-[18px] h-[18px] rtl:-scale-x-100" aria-hidden="true" /></button>
             </div>
           </div>
-          <div className="reveal relative isolate overflow-hidden rounded-[34px] min-h-[320px] lg:min-h-0 text-white p-5 sm:p-8 flex flex-col justify-between text-start">
-            <div aria-hidden="true" className="absolute inset-0 -z-10 lp-panel" />
-            <span className="self-start lp-glass rounded-full px-4 py-2 text-sm font-semibold">{T("lp.how.badge")}</span>
-            <div className="mt-8 rounded-[26px] bg-[var(--md-surface-container-lowest)] text-[var(--md-on-surface)] p-5 sm:p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,.6)]">
-              <div className="flex items-center justify-between text-sm font-semibold"><span>{T("lp.how.setup")}</span><span className="text-[var(--md-primary)] tabular-nums">3/3</span></div>
-              <ul className="mt-4 space-y-3">
-                {[[1, Building2], [2, Users], [3, Rocket]].map(([n, Icon]) => (
-                  <li key={n} className="flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-xl bg-[var(--md-surface-container-high)] flex items-center justify-center shrink-0"><Icon className="w-5 h-5 text-[var(--md-primary)]" aria-hidden="true" /></span>
-                    <span className="flex-1 min-w-0 text-sm font-medium truncate">{T(`lp.how${n}.t`)}</span>
-                    <CheckCheck className="w-5 h-5 text-[var(--md-primary)] shrink-0" aria-hidden="true" />
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-5 h-2 rounded-full bg-[var(--md-surface-container-high)] overflow-hidden"><div className="h-full w-full rounded-full bg-[var(--md-primary)]" /></div>
-              <p className="mt-3 text-xs text-[var(--md-on-surface-variant)]">{T("lp.how.ready")}</p>
+          {/* Live mini dashboard preview */}
+          <div className="reveal relative overflow-hidden rounded-[34px] bg-gradient-to-br from-teal-700 via-teal-800 to-slate-900 text-white p-5 sm:p-8 flex flex-col gap-5 text-start">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="flex items-center gap-2 text-sm sm:text-base font-semibold">
+                <span className="relative flex w-2.5 h-2.5"><span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" /><span className="relative w-2.5 h-2.5 rounded-full bg-emerald-400" /></span>
+                {T("dash.title")}
+              </span>
+              <span className="no-dot rounded-full bg-white/15 border border-white/20 px-3 py-1 text-xs font-semibold">{T("dash.margin", { n: "" })}<N>24%</N></span>
+            </div>
+            <ul className="space-y-3">
+              {[["a1", Camera, "bg-teal-50 text-teal-700 border-teal-100"], ["a2", Receipt, "bg-amber-50 text-amber-700 border-amber-100"], ["a3", BadgeCheck, "bg-emerald-50 text-emerald-700 border-emerald-100"]].map(([k, Icon, badge]) => (
+                <li key={k} className="flex items-start gap-3 rounded-2xl bg-white text-slate-900 p-3.5 sm:p-4 shadow-[0_10px_30px_-18px_rgba(0,0,0,.6)]">
+                  <span className="w-10 h-10 shrink-0 rounded-xl bg-slate-100 text-teal-700 flex items-center justify-center"><Icon className="w-5 h-5" aria-hidden="true" /></span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold leading-snug">{T(`dash.${k}.t`)}</p>
+                    <p className="mt-0.5 text-xs text-slate-500 leading-relaxed"><Bidi>{T(`dash.${k}.d`, { p: receipt })}</Bidi></p>
+                  </div>
+                  <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap ${badge}`}>{T(`dash.${k}.b`)}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-auto rounded-2xl bg-white/10 border border-white/15 p-4">
+              <div className="flex items-center justify-between text-sm font-semibold"><span>{T("dash.ready")}</span><N>100%</N></div>
+              <div className="mt-3 h-2 rounded-full bg-white/15 overflow-hidden"><div className="h-full w-full rounded-full bg-gradient-to-r from-teal-300 to-emerald-300" /></div>
             </div>
           </div>
         </div>
@@ -238,12 +241,12 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
         <h2 className="reveal text-start max-w-2xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-[var(--md-on-surface)] text-balance">{T("lp.tr.t")}</h2>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {TRUST.map(({ n, Icon, img }, i) => (
-            <div key={n} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 min-h-[200px] sm:min-h-[240px] flex flex-col justify-between ${img ? "text-white" : "lp-card"}`}>
+            <div key={n} style={{ transitionDelay: `${i * 60}ms` }} className={`reveal relative isolate overflow-hidden text-start rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-start items-start gap-5 ${img ? "text-white" : "lp-card"}`}>
               {img && <><img src={`/landing/${img}-s.webp`} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade-card" /></>}
-              <span className={img ? "lp-ic bg-white/25 backdrop-blur text-white" : "lp-ic lp-t1"}><Icon className="w-5 h-5" aria-hidden="true" /></span>
+              <span className={img ? "lp-ic bg-white/25 backdrop-blur text-white" : "lp-ic !bg-teal-50 !text-teal-700 border border-teal-100"}><Icon className="w-5 h-5" aria-hidden="true" /></span>
               <div>
                 <h3 className="font-display text-base sm:text-xl font-semibold">{T(`lp.tr${n}.t`)}</h3>
-                <p className={`mt-1.5 text-xs sm:text-sm leading-relaxed ${img ? "opacity-85" : "text-[var(--ink-2)]"}`}>{T(`lp.tr${n}.d`)}</p>
+                <p className={`mt-1.5 text-xs sm:text-sm leading-relaxed ${img ? "opacity-85" : "text-[var(--ink-2)]"}`}><Bidi>{T(`lp.tr${n}.d`)}</Bidi></p>
               </div>
             </div>
           ))}
@@ -261,7 +264,7 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
               <summary className="flex items-center justify-between gap-4 py-4 sm:py-5 cursor-pointer list-none font-semibold text-base sm:text-lg">
                 {T(`lp.q${n}`)}<span className="w-8 h-8 shrink-0 rounded-full bg-[var(--paper-2)] flex items-center justify-center"><ChevronDown className="w-4 h-4 text-[var(--ink-2)] transition-transform group-open:rotate-180" aria-hidden="true" /></span>
               </summary>
-              <p className="pb-5 text-[15px] sm:text-base leading-relaxed text-[var(--ink-2)]">{T(`lp.a${n}`)}</p>
+              <p className="pb-5 text-[15px] sm:text-base leading-relaxed text-[var(--ink-2)]"><Bidi>{T(`lp.a${n}`)}</Bidi></p>
             </details>
           ))}
         </div>
@@ -270,9 +273,10 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
       {/* CTA */}
       <section id="cta" className="px-4 sm:px-8 pb-16 sm:pb-24 max-w-6xl mx-auto w-full">
         <div className="lp-hero !min-h-0 px-6 sm:px-14 py-12 sm:py-16 text-start">
-          <img src="/landing/living.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 lp-shade" />
+          {/* TODO: replace with unique asset (living also used in Roles: Secretary) */}
+          <img src="/landing/living.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover -z-20" /><div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r rtl:bg-gradient-to-l from-slate-950/90 via-slate-950/65 to-slate-950/20" />
           <h2 className="max-w-3xl font-display text-3xl sm:text-5xl font-semibold leading-tight text-balance">{T("ld.139")}</h2>
-          <p className="mt-4 max-w-xl text-base sm:text-lg opacity-80 leading-relaxed">{T("ld.140")}</p>
+          <p className="mt-4 max-w-xl text-base sm:text-lg text-white/90 leading-relaxed">{T("ld.140")}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <button onClick={() => openApp("up")} className="m3-btn m3-filled">{T("ld.141")}<ArrowUpRight className="w-[18px] h-[18px] rtl:-scale-x-100" aria-hidden="true" /></button>
             <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="m3-btn m3-tonal"><MessageCircle className="w-4 h-4" aria-hidden="true" />{T("nudge.cta")}</a>
@@ -293,6 +297,12 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
             <button onClick={() => openApp("in")} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.clientPortal")}</button>
             <button onClick={() => { setLegalPage("privacy"); window.scrollTo(0, 0); }} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.privacy")}</button>
             <button onClick={() => { setLegalPage("terms"); window.scrollTo(0, 0); }} className="hover:text-[var(--md-on-surface)] cursor-pointer">{t("landing.terms")}</button>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
+            <span className="text-xs font-semibold text-[var(--md-on-surface-variant)]">{T("foot.contact")}</span>
+            <a href={waLink(T("nudge.msgLanding"))} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-[var(--md-outline-variant)] px-3 py-1.5 font-semibold text-[var(--md-on-surface)] hover:border-teal-600/40"><MessageCircle className="w-4 h-4 text-[var(--md-primary)]" aria-hidden="true" />{T("foot.wa")}</a>
+            <a href={`mailto:${SUPPORT_EMAIL}`} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--md-outline-variant)] px-3 py-1.5 font-semibold text-[var(--md-on-surface)] hover:border-teal-600/40"><Mail className="w-4 h-4 text-[var(--md-primary)]" aria-hidden="true" />{T("foot.email")}</a>
+            <SettingsSwitcher />
           </div>
           <p className="text-xs text-[var(--md-outline)]">{T("ld.143")}</p>
         </div>

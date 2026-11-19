@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { tr_ as T } from "../i18n";
+import { Bidi, N } from "./Bidi";
 
 const STATS = [[16, "lp.st1", "+"], [7, "lp.st2"], [3, "lp.st3"], [6, "lp.st4"]];
 
@@ -29,7 +30,7 @@ export default function LandingProof() {
       <dl className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-[28px] overflow-hidden bg-[var(--md-outline-variant)] border border-[var(--md-outline-variant)]">
         {STATS.map(([n, k, plus]) => (
           <div key={k} className="bg-[var(--md-surface-container-low)] p-5 sm:p-8 text-start">
-            <dd className="font-display text-5xl sm:text-7xl font-semibold text-[var(--md-primary)] tabular-nums leading-none"><Count to={n} />{plus && <span className="text-[var(--md-tertiary)]">{plus}</span>}</dd>
+            <dd className="font-display text-5xl sm:text-7xl font-semibold text-[var(--md-primary)] tabular-nums leading-none"><N><Count to={n} />{plus && <span className="text-[var(--md-tertiary)]">{plus}</span>}</N></dd>
             <dt className="mt-3 text-sm sm:text-base text-[var(--md-on-surface-variant)]">{T(k)}</dt>
           </div>
         ))}
@@ -40,7 +41,7 @@ export default function LandingProof() {
           {[1, 2, 3, 4].map((n) => (
             <li key={n} className="grid md:grid-cols-2 gap-x-10 gap-y-2 py-6 border-b border-[var(--md-outline-variant)]">
               <p className="font-display text-xl sm:text-2xl font-semibold text-[var(--md-on-surface)]"><span className="text-[var(--md-tertiary)] tabular-nums me-3 text-base">0{n}</span>{T("proof.q" + n)}</p>
-              <p className="text-base leading-relaxed text-[var(--md-on-surface-variant)]">{T("proof.a" + n)}</p>
+              <p className="text-base leading-relaxed text-[var(--md-on-surface-variant)]"><Bidi>{T("proof.a" + n)}</Bidi></p>
             </li>
           ))}
         </ul>

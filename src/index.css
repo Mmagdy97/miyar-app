@@ -711,3 +711,12 @@ html[dir="rtl"] .intro-skip { transform: translateX(-50%); }
 @keyframes introDraw { to { stroke-dashoffset: 0; } }
 @keyframes introFadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes introIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+/* ===== Landing refactor: unified light cards, compact role pills ===== */
+.m3 .lp-card { background: #fff; border: 1px solid rgb(226 232 240 / .8); box-shadow: 0 1px 3px rgba(15,23,42,.04); transition: border-color .15s, background-color .15s; }
+.m3 .lp-card:hover { background: #fff; border-color: rgb(13 148 136 / .3); }
+html.dark .m3 .lp-card, html.dark .m3 .lp-card:hover { background: var(--md-surface-container-low); border-color: var(--md-outline-variant); }
+html.dark .m3 .lp-card:hover { border-color: rgb(45 212 191 / .35); }
+.m3 .m3-chip.lp-pill { height: auto; padding: .375rem .75rem; font-size: .75rem; }
+@media (min-width: 1280px) { .m3 .m3-chip.lp-pill { font-size: .875rem; } }
+.no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+.no-dot::before { display: none !important; }

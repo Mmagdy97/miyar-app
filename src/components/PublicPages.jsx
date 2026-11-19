@@ -4,12 +4,17 @@ import { localize } from "../data/dataI18n";
 import { Check, ArrowRight } from "lucide-react";
 import { formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
+import { Bidi, N } from "./Bidi";
+import { useViewCurrency, setViewCurrency } from "../lib/viewCurrency";
 
 import { PRICES, PLANS, CYCLES, planPrice, EXTRA_PROJECT } from "../lib/pricing";
 
 export function PricingSection({ onStart }) {
-  const { t, currency } = useI18n();
-  const [cur, setCur] = useState(PRICES[currency] ? currency : "EGP");
+  // Same currency as the navbar switcher and the savings calculator.
+  const { t } = useI18n();
+  const currency = useViewCurrency();
+  const cur = PRICES[currency] ? currency : "EGP";
+  const setCur = setViewCurrency;
   const [months, setMonths] = useState(1);
   const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[var(--md-primary)] text-white" : "text-[var(--md-on-surface-variant)] hover:bg-[var(--md-surface-container-high)]"}`;
   return (
@@ -35,6 +40,10 @@ export function PricingSection({ onStart }) {
           </div>
         </div>
       </div>
+      <div className="mb-8 rounded-2xl border border-[var(--md-primary)]/30 bg-[var(--md-primary)]/5 p-4 text-center">
+        <p className="text-sm font-bold text-[var(--md-on-surface)]">{t("pricing.founding")}</p>
+        <p className="text-xs text-[var(--md-on-surface-variant)] mt-1">{t("pricing.trial")}</p>
+      </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
         {PLANS.map((p, i) => {
           const price = planPrice(cur, i, months);
@@ -53,7 +62,7 @@ export function PricingSection({ onStart }) {
                   <span className={`font-display text-3xl font-semibold text-[var(--md-on-surface)]`}>{t("pricing.custom")}</span>
                 ) : (
                   <>
-                    <span className={`font-display text-3xl font-semibold tabular-nums text-[var(--md-on-surface)]`}>{formatMoney(price, cur, intlLocale(), { compact: true })}</span>{" "}
+                    <span className={`font-display text-3xl font-semibold tabular-nums text-[var(--md-on-surface)]`}><N>{formatMoney(price, cur, intlLocale(), { compact: true })}</N></span>{" "}
                     {price > 0 && <span className={`text-sm font-semibold text-[var(--md-on-surface-variant)]`}>{t(`pricing.per.${months}`)}</span>}
                     {months > 1 && price > 0 && <span className="block mt-1 text-xs text-[var(--md-outline)] tabular-nums">{t("pricing.eq", { p: formatMoney(Math.round(price / months), cur, intlLocale(), { compact: true }) })}</span>}
                   </>
@@ -62,7 +71,7 @@ export function PricingSection({ onStart }) {
               <ul className="space-y-2.5 mb-6 flex-1">
                 {Array.from({ length: p.n }, (_, k) => t(`plan.${p.key}.f${k + 1}`)).map((f) => (
                   <li key={f} className={`flex items-start gap-2 text-sm text-[var(--md-on-surface)]`}>
-                    <Check className={`w-4 h-4 mt-0.5 shrink-0 text-[var(--md-primary)]`} /> {f}
+                    <Check className={`w-4 h-4 mt-0.5 shrink-0 text-[var(--md-primary)]`} /> <span><Bidi>{f}</Bidi></span>
                   </li>
                 ))}
               </ul>
@@ -76,19 +85,19 @@ export function PricingSection({ onStart }) {
           );
         })}
       </div>
-      <div className="mt-6 rounded-2xl border border-[var(--md-primary)]/30 bg-[var(--md-primary)]/5 p-4 text-center">
-        <p className="text-sm font-bold text-[var(--md-on-surface)]">{t("pricing.founding")}</p>
-        <p className="text-xs text-[var(--md-on-surface-variant)] mt-1">{t("pricing.trial")}</p>
-      </div>
       <div className="mt-6 rounded-[28px] border border-[var(--md-outline-variant)] bg-[var(--md-surface-container-lowest)] p-5 sm:p-7 text-start">
         <h3 className="font-display text-xl sm:text-2xl font-semibold">{t("addons.t")}</h3>
         <p className="mt-1 text-sm text-[var(--md-on-surface-variant)]">{t("addons.d")}</p>
         <ul className="mt-4 grid sm:grid-cols-2 gap-3">
           {["theme", "app", "project", "struct"].map((k) => (
-            <li key={k} className="rounded-2xl bg-[var(--md-surface)] p-4">
-              <p className="text-sm font-semibold">{t(`addons.${k}.t`)}</p>
-              <p className="mt-1 text-xs leading-relaxed text-[var(--md-on-surface-variant)]">{t(`addons.${k}.d`)}</p>
-              {k === "project" && <p className="mt-1 text-xs font-bold text-[var(--md-on-surface)]">{t("pricing.extra", { p: formatMoney(EXTRA_PROJECT[cur], cur, intlLocale(), { compact: true }) })}</p>}
+            <li key={k} className="lp-card !rounded-2xl p-4 flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold">{t(`addons.${k}.t`)}</p>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--md-on-surface-variant)]"><Bidi>{t(`addons.${k}.d`)}</Bidi></p>
+              </div>
+              <span className="no-dot shrink-0 rounded-full bg-teal-50 text-teal-700 border border-teal-100 px-3 py-1 text-xs font-semibold whitespace-nowrap">
+                {k === "project" ? <><N>{formatMoney(EXTRA_PROJECT[cur], cur, intlLocale(), { compact: true })}</N> {t("addons.project.p", { p: "" }).trim()}</> : t(`addons.${k}.p`)}
+              </span>
             </li>
           ))}
         </ul>
