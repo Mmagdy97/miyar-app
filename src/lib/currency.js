@@ -8,6 +8,7 @@ export const CURRENCIES = {
   JOD: { code: "JOD", name: "دينار أردني", symbol: "د.أ", minor: 3, country: "JO" },
   TRY: { code: "TRY", name: "ليرة تركية", symbol: "₺", minor: 2, country: "TR" },
   USD: { code: "USD", name: "دولار أمريكي", symbol: "$", minor: 2, country: "US" },
+  EUR: { code: "EUR", name: "يورو", symbol: "€", minor: 2, country: "IT" },
 };
 
 export const isSupportedCurrency = (code) => Object.hasOwn(CURRENCIES, code);

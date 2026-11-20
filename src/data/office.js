@@ -15,5 +15,5 @@ export const officeStore = createPersistedStore("miyar:office:v1", {
   type: "architectural",
 });
 
-export const DEFAULT_VAT = { EGP: 14, SAR: 15, AED: 5, TRY: 20, JOD: 16, KWD: 0, USD: 0 };
+export const DEFAULT_VAT = { EGP: 14, SAR: 15, AED: 5, TRY: 20, JOD: 16, KWD: 0, USD: 0, EUR: 22 };
 export const defaultVat = (currency) => DEFAULT_VAT[currency] ?? 0;

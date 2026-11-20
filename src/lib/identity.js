@@ -1,7 +1,7 @@
 // Login id = email OR mobile number. A mobile number maps to a private email-shaped id so Supabase email+password auth
 // handles both (no SMS provider). Confirm-email must be OFF in Supabase for phone accounts.
 const DOMAIN = import.meta.env.VITE_PHONE_AUTH_DOMAIN || "phone.miyarapp.com";
-const CC = { EGP: "20", SAR: "966", AED: "971", TRY: "90", USD: "20" };
+const CC = { EGP: "20", SAR: "966", AED: "971", TRY: "90", USD: "20", EUR: "39" };
 
 const defaultCc = () => {
   try { return CC[JSON.parse(localStorage.getItem("miyar:settings:v1")).currency] || "20"; } catch { return "20"; }

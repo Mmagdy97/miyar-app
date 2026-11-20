@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { tr_ as T } from "../i18n";
 import { Bidi, N } from "./Bidi";
 
-const STATS = [[16, "lp.st1", "+"], [7, "lp.st2"], [3, "lp.st3"], [6, "lp.st4"]];
+const STATS = [[16, "lp.st1", "+"], [8, "lp.st2"], [3, "lp.st3"], [6, "lp.st4"]];
 
 function Count({ to }) {
   const ref = useRef(null);

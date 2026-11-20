@@ -8,13 +8,15 @@ export const PRICES = {
   JOD: [0, 25, 55],
   TRY: [0, 1290, 2790],
   USD: [0, 39, 89],
+  // Europe (Italy first): ~2% of the average monthly wage, in line with the Gulf; regular price is double.
+  EUR: [0, 49, 109],
 };
 
 /** Regular price = launch price x 2 (the launch offer is 50% off). */
 export const LAUNCH_FACTOR = 2;
 
 /** Monthly price of one extra active project, per market (about half the Professional price). */
-export const EXTRA_PROJECT = { EGP: 450, SAR: 75, AED: 75, KWD: 6, JOD: 13, TRY: 650, USD: 20 };
+export const EXTRA_PROJECT = { EGP: 450, SAR: 75, AED: 75, KWD: 6, JOD: 13, TRY: 650, USD: 20, EUR: 25 };
 
 export const PLANS = [
   { key: "free", n: 4, projects: 1 },

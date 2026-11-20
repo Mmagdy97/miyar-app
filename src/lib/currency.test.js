@@ -32,7 +32,8 @@ describe("formatMoney", () => {
     expect(() => formatMoney(1, "XXX")).toThrow();
     expect(() => formatMoney(NaN, "EGP")).toThrow();
     expect(isSupportedCurrency("USD")).toBe(true);
-    expect(isSupportedCurrency("EUR")).toBe(false);
+    expect(isSupportedCurrency("EUR")).toBe(true);
+    expect(isSupportedCurrency("GBP")).toBe(false);
   });
 });
 
