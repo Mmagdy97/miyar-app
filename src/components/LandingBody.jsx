@@ -215,14 +215,14 @@ export default function LandingBody({ openModal, openApp, setLegalPage, scrollTo
               <span className="no-dot rounded-full bg-white/15 border border-white/20 px-3 py-1 text-xs font-semibold">{T("dash.margin", { n: "" })}<N>24%</N></span>
             </div>
             <ul className="space-y-3">
-              {[["a1", Camera, "bg-teal-50 text-teal-700 border-teal-100"], ["a2", Receipt, "bg-amber-50 text-amber-700 border-amber-100"], ["a3", BadgeCheck, "bg-emerald-50 text-emerald-700 border-emerald-100"]].map(([k, Icon, badge]) => (
-                <li key={k} className="flex items-start gap-3 rounded-2xl bg-white text-slate-900 p-3.5 sm:p-4 shadow-[0_10px_30px_-18px_rgba(0,0,0,.6)]">
-                  <span className="w-10 h-10 shrink-0 rounded-xl bg-slate-100 text-teal-700 flex items-center justify-center"><Icon className="w-5 h-5" aria-hidden="true" /></span>
+              {[["a1", Camera, ["#E6F6F5", "#0B7C79", "#B8E3E1"]], ["a2", Receipt, ["#FFF4E5", "#B45309", "#FCD9A8"]], ["a3", BadgeCheck, ["#E8F7EE", "#15803D", "#BDE8CD"]]].map(([k, Icon, [bbg, bfg, bbd]]) => (
+                <li key={k} style={{ backgroundColor: "#fff", color: "#0F172A" }} className="flex items-start gap-3 rounded-2xl p-3.5 sm:p-4 shadow-[0_10px_30px_-18px_rgba(0,0,0,.6)]">
+                  <span style={{ backgroundColor: "#F1F5F9", color: "#0B7C79" }} className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center"><Icon className="w-5 h-5" aria-hidden="true" /></span>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold leading-snug">{T(`dash.${k}.t`)}</p>
                     <p className="mt-0.5 text-xs text-slate-500 leading-relaxed"><Bidi>{T(`dash.${k}.d`, { p: receipt })}</Bidi></p>
                   </div>
-                  <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap ${badge}`}>{T(`dash.${k}.b`)}</span>
+                  <span style={{ backgroundColor: bbg, color: bfg, borderColor: bbd }} className="shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap">{T(`dash.${k}.b`)}</span>
                 </li>
               ))}
             </ul>
