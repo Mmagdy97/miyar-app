@@ -1,9 +1,11 @@
 import { Component } from "react";
 import { tr_ as T } from "../i18n";
+import { reportError } from "../lib/monitor";
 
 export default class ErrorBoundary extends Component {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch(error, info) { reportError(error, { componentStack: info?.componentStack }); }
   render() {
     if (!this.state.failed) return this.props.children;
     return (

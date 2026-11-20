@@ -1,4 +1,5 @@
 import { SESSION_KEY, SITE, goApp } from "./lib/site";
+import { setMonitorContext } from "./lib/monitor";
 import { tr_ as T } from "./i18n";
 import { flushSync } from "react-dom";
 import { initMotion, withTransition } from "./lib/motion";
@@ -150,6 +151,7 @@ function App() {
 
   useEffect(() => watchTableLabels(), []);
   const liveOrg = isAuthenticated && authMode === "user" ? account?.orgId : null;
+  useEffect(() => { setMonitorContext({ role: currentRole, orgId: liveOrg }); }, [currentRole, liveOrg]);
   useEffect(() => { noticesRepo.attach(Boolean(liveOrg)); attachPrices(liveOrg); attachLibrary(liveOrg); attachReports(liveOrg); return () => { noticesRepo.attach(false); attachPrices(null); attachLibrary(null); attachReports(null); }; }, [liveOrg]);
   // Restore a real account after reload; drop the session if it expired.
   useEffect(() => {

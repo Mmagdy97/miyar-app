@@ -8,6 +8,9 @@ import ErrorBoundary from './components/ErrorBoundary.jsx'
 import CookieBanner from './components/CookieBanner.jsx'
 import ConfirmHost from './components/ConfirmHost.jsx'
 import SharedView from './components/SharedView.jsx'
+import { initMonitoring } from './lib/monitor'
+
+initMonitoring()
 
 // Public client link: /?share=<snapshot> renders a read-only page, no login and no app shell.
 const sharePayload = new URLSearchParams(window.location.search).get('share')
