@@ -2,21 +2,21 @@
 // The regular list price is LAUNCH_FACTOR x these. Validate with first customers.
 export const PRICES = {
   EGP: [0, 899, 1990],
-  SAR: [0, 149, 299],
-  AED: [0, 149, 299],
-  KWD: [0, 12, 25],
+  SAR: [0, 199, 399],
+  AED: [0, 199, 399],
+  KWD: [0, 16, 33],
   JOD: [0, 25, 55],
   TRY: [0, 1290, 2790],
-  USD: [0, 39, 89],
-  // Europe (Italy first): ~2% of the average monthly wage, in line with the Gulf; regular price is double.
-  EUR: [0, 49, 109],
+  USD: [0, 49, 119],
+  // Gulf, USD and Europe raised ~33% (Nov 2026); Egypt, Jordan and Turkey unchanged (already high vs local income).
+  EUR: [0, 65, 145],
 };
 
 /** Regular price = launch price x 2 (the launch offer is 50% off). */
 export const LAUNCH_FACTOR = 2;
 
 /** Monthly price of one extra active project, per market (about half the Professional price). */
-export const EXTRA_PROJECT = { EGP: 450, SAR: 75, AED: 75, KWD: 6, JOD: 13, TRY: 650, USD: 20, EUR: 25 };
+export const EXTRA_PROJECT = { EGP: 450, SAR: 99, AED: 99, KWD: 8, JOD: 13, TRY: 650, USD: 25, EUR: 33 };
 
 export const PLANS = [
   { key: "free", n: 4, projects: 1 },
