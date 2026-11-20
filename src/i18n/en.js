@@ -635,6 +635,7 @@ export default {
   "office.color": "Brand colour",
   "office.address": "Address",
   "office.email": "Email",
+  "pricing.geo": "Prices shown for your country: {country}",
   "pinv.showClient": "Show to client in portal",
   "sboq.project": "Project",
   "sboq.projectNone": "No project selected",

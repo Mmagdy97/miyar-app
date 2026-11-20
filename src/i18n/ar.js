@@ -635,6 +635,7 @@ export default {
   "office.color": "لون الهوية",
   "office.address": "العنوان",
   "office.email": "البريد الإلكتروني",
+  "pricing.geo": "الأسعار المعروضة خاصة ببلدك: {country}",
   "pinv.showClient": "إظهار للعميل في البوابة",
   "sboq.project": "المشروع",
   "sboq.projectNone": "بدون مشروع محدد",

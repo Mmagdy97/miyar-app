@@ -5,7 +5,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { formatMoney } from "../lib/currency";
 import { useI18n, intlLocale } from "../i18n";
 import { Bidi, N } from "./Bidi";
-import { useViewCurrency, setViewCurrency } from "../lib/viewCurrency";
+import { useViewCurrency, setViewCurrency, usePriceGeo } from "../lib/viewCurrency";
 
 import { PRICES, PLANS, CYCLES, launchPrice, regularPrice, launchApplies, EXTRA_PROJECT } from "../lib/pricing";
 
@@ -15,6 +15,9 @@ export function PricingSection({ onStart }) {
   const currency = useViewCurrency();
   const cur = PRICES[currency] ? currency : "EGP";
   const setCur = setViewCurrency;
+  const geo = usePriceGeo();
+  let countryName = geo.country;
+  try { countryName = new Intl.DisplayNames(intlLocale(), { type: "region" }).of(geo.country); } catch { /* old browsers */ }
   const [months, setMonths] = useState(1);
   const pill = (on) => `px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${on ? "bg-[var(--md-primary)] text-white" : "text-[var(--md-on-surface-variant)] hover:bg-[var(--md-surface-container-high)]"}`;
   return (
@@ -23,6 +26,11 @@ export function PricingSection({ onStart }) {
         <h2 className="font-display text-3xl sm:text-[2.4rem] font-semibold text-[var(--md-on-surface)] mb-3">{t("pricing.title")}</h2>
         <p className="text-[var(--md-on-surface-variant)] mb-6">{t("pricing.sub")}</p>
         <div className="flex flex-wrap justify-center gap-3">
+          {geo.currency ? (
+            <p className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)] text-sm font-semibold text-[var(--md-on-surface)]">
+              {t("pricing.geo", { country: countryName })}
+            </p>
+          ) : (
           <div role="group" aria-label={t("settings.currency")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)]">
             {Object.keys(PRICES).map((k) => (
               <button key={k} onClick={() => setCur(k)} aria-pressed={cur === k} className={pill(cur === k)}>
@@ -30,6 +38,7 @@ export function PricingSection({ onStart }) {
               </button>
             ))}
           </div>
+          )}
           <div role="group" aria-label={t("pricing.billing")} className="inline-flex flex-wrap gap-1 p-1 rounded-xl bg-[var(--md-surface-container-lowest)] border border-[var(--md-outline-variant)]">
             {CYCLES.map((c) => (
               <button key={c.months} onClick={() => setMonths(c.months)} aria-pressed={months === c.months} className={pill(months === c.months)}>

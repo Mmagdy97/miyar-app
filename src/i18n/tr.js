@@ -635,6 +635,7 @@ export default {
   "office.color": "Kurumsal renk",
   "office.address": "Adres",
   "office.email": "E-posta",
+  "pricing.geo": "Ülkenize özel fiyatlar: {country}",
   "pinv.showClient": "Portalda müşteriye göster",
   "sboq.project": "Proje",
   "sboq.projectNone": "Proje seçilmedi",

@@ -1,5 +1,5 @@
 importScripts('/push-sw.js');
-const CACHE_NAME = 'miyar-v8';
+const CACHE_NAME = 'miyar-v9';
 
 // Core static assets to pre-cache on install
 const PRECACHE_ASSETS = [
@@ -43,6 +43,8 @@ self.addEventListener('fetch', (event) => {
   if (!url.protocol.startsWith('http')) return;
   // Let the browser load third-party files (photos, fonts) directly; caching them here can break images
   if (url.origin !== self.location.origin) return;
+  // Never cache API answers (e.g. /api/geo must reflect the visitor's current country)
+  if (url.pathname.startsWith('/api/')) return;
 
   // Navigation requests (HTML documents)
   if (event.request.mode === 'navigate') {
